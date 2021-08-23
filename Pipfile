@@ -1,0 +1,33 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "==0.68.0"
+cryptography = "==3.4.7"
+httpx = "==0.19.0"
+aioredis = "==2.0.0"
+passlib = "==1.7.4"
+itsdangerous = "==2.0.1"
+bcrypt = "==3.2.0"
+orjson = "==3.6.3"
+email-validator = "==1.1.3"
+motor = "==2.5.1"
+aiosmtplib = "==1.1.6"
+PyJWT = "==2.1.0"
+
+[dev-packages]
+flake8 = "==3.8.4"
+pytest = "==6.1.1"
+isort = "==5.6.4"
+autoflake = "==1.4"
+black = "==19.10b0"
+pytest-asyncio = "==0.14.0"
+pytest-cov = "==2.10.1"
+mypy = "==0.790"
+requests = "==2.23.0"
+pylint = "*"
+
+[requires]
+python_version = "3.8"
