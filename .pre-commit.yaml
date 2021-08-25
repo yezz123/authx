@@ -1,0 +1,38 @@
+default_language_version:
+  python: python3
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.2.3
+    hooks:
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-symlinks
+      - id: check-yaml
+      - id: trailing-whitespace
+      - id: check-json
+      - id: debug-statements
+      - id: pretty-format-json
+        args: ["--autofix", "--allow-missing-credentials"]
+        exclude: Pipfile.lock
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: "3.7.9"
+    hooks:
+      - id: flake8
+        files: '\.py$'
+        additional_dependencies:
+          [
+            "-e",
+            "git+https://github.com/pycqa/pyflakes@1911c20#egg=pyflakes",
+            "-e",
+            "git+https://github.com/pycqa/pycodestyle@d219c68#egg=pycodestyle",
+          ]
+        args:
+          - --select=F401,F403,F406,F821
+  - repo: https://github.com/humitos/mirrors-autoflake
+    rev: v1.3
+    hooks:
+      - id: autoflake
+        files: '\.py$'
+        exclude: '^\..*'
+        args: ["--in-place", "--remove-all-unused-imports"]
