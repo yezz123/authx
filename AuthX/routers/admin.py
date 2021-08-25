@@ -1,12 +1,14 @@
 from typing import Callable
 
+from fastapi import APIRouter, Depends
+
 from AuthX.api import UsersRepo
 from AuthX.services import AdminService
-from fastapi import APIRouter, Depends
 
 
 def get_router(
-    repo: UsersRepo, admin_required: Callable,
+    repo: UsersRepo,
+    admin_required: Callable,
 ):
 
     AdminService.setup(repo)
