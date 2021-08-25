@@ -3,6 +3,8 @@ import re
 from datetime import datetime
 from typing import Iterable, Optional, Tuple
 
+from email_validator import EmailNotValidError, validate_email
+
 from AuthX.core.config import (
     EMAIL_CONFIRMATION_MAX,
     EMAIL_CONFIRMATION_TIMEOUT,
@@ -13,7 +15,6 @@ from AuthX.core.config import (
 )
 from AuthX.core.logger import logger
 from AuthX.database import MongoDBBackend, RedisBackend
-from email_validator import EmailNotValidError, validate_email
 
 
 class Base:

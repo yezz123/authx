@@ -8,7 +8,8 @@ from AuthX.core.config import (
 
 class ErrorMessages:
     def __init__(
-        self, language: str,
+        self,
+        language: str,
     ):
         if language == "en":
             self._full_messages = {

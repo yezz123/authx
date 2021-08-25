@@ -1,5 +1,8 @@
 from typing import Optional
 
+from fastapi import HTTPException
+from pydantic import ValidationError
+
 from AuthX.api.users import UsersRepo
 from AuthX.core.email import EmailClient
 from AuthX.core.jwt import JWTBackend
@@ -13,8 +16,6 @@ from AuthX.models.user import (
 )
 from AuthX.resources.error_messages import get_error_message
 from AuthX.utils.strings import create_random_string, hash_string
-from fastapi import HTTPException
-from pydantic import ValidationError
 
 
 class PasswordService:

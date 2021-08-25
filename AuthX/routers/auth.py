@@ -1,11 +1,12 @@
 from typing import Callable, Dict
 
+from fastapi import APIRouter, Body, Depends, Request, Response
+from fastapi.exceptions import HTTPException
+
 from AuthX.api import UsersRepo
 from AuthX.core.jwt import JWTBackend
 from AuthX.core.user import User
 from AuthX.services import AuthService
-from fastapi import APIRouter, Body, Depends, Request, Response
-from fastapi.exceptions import HTTPException
 
 """
 POST /register
@@ -112,7 +113,9 @@ def get_router(
 
     @router.post("/token/refresh", name="auth:refresh_access_token")
     async def refresh_access_token(
-        *, request: Request, response: Response,
+        *,
+        request: Request,
+        response: Response,
     ):
         service = AuthService()
         refresh_token = request.cookies.get(refresh_cookie_name)
