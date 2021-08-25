@@ -4,7 +4,7 @@ from aioredis import Redis
 from AuthX.api import UsersRepo
 from AuthX.core.jwt import JWTBackend
 from AuthX.core.user import User
-from AuthX.db.backend import MongoDBBackend, RedisBackend
+from AuthX.database import MongoDBBackend, RedisBackend
 from AuthX.routers import (
     get_admin_router,
     get_auth_router,
