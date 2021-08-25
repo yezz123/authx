@@ -37,7 +37,7 @@ packaging==21.0
 passlib==1.7.4
 pathspec==0.9.0
 platformdirs==2.2.0
-pluggy==0.13.1
+pluggy==1.0.0
 py==1.10.0
 pycodestyle==2.7.0
 pycparser==2.20
