@@ -1,0 +1,8 @@
+#!/bin/bash -e
+
+export PREFIX="pipenv run"
+export SOURCE_FILES="../tests"
+
+set -x
+
+${PREFIX} pytest $SOURCE_FILES --cov=AuthX --cov-report=html

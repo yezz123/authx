@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export PREFIX="pipenv run"
+export SOURCE_FILES="../AuthX"
+
+set -x
+
+${PREFIX} flake8 $SOURCE_FILES --ignore=E501,E722 --exclude=__init__.py
+${PREFIX} black --check --diff --target-version=py38 $SOURCE_FILES
+${PREFIX} mypy $SOURCE_FILES
