@@ -1,4 +1,4 @@
-MONGODB_CONTAINER_NAME := fastapi-users-test-mongo
+MONGODB_CONTAINER_NAME := AuthX-MongoDB
 
 isort-src:
 	isort ./AuthX ./tests
