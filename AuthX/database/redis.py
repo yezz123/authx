@@ -33,9 +33,6 @@ class RedisBackend:
     async def incr(self, key: str) -> str:
         return await self._redis.incr(key)
 
-    # async def incrby(self, key: str, i: int) -> str:
-    #     return await self._redis.incrby(key, i)
-
     async def dispatch_action(self, channel: str, action: str, payload: dict) -> None:
         await self._redis.publish_json(channel, {"action": action, "payload": payload})
         return None

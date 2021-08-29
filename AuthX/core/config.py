@@ -19,8 +19,6 @@ PASSWORD_RESET_TIMEOUT: int = config("PASSWORD_RESET_TIMEOUT", cast=int, default
 PASSWORD_RESET_MAX: int = config("PASSWORD_RESET_MAX", cast=int, default=2)
 PASSWORD_RESET_LIFETIME: int = config("PASSWORD_RESET_LIFETIME", cast=int, default=7200)
 
-# validation
-
 USERNAME_MIN_LENGTH: int = config("USERNAME_MIN_LENGTH", cast=int, default=3)
 USERNAME_MAX_LENGTH: int = config("USERNAME_MAX_LENGTH", cast=int, default=20)
 
