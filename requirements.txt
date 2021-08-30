@@ -8,7 +8,7 @@ atomicwrites==1.4.0
 attrs==21.2.0
 autoflake==1.4
 bcrypt==3.2.0
-black==21.7b0
+black==21.8b0
 certifi==2021.5.30
 cffi==1.14.6
 charset-normalizer==2.0.4
