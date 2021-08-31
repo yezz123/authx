@@ -58,6 +58,6 @@ sniffio==1.2.0
 starlette==0.14.2
 toml==0.10.2
 tomli==1.2.1
-typing-extensions==3.10.0.0
+typing-extensions==3.10.0.2
 urllib3==1.26.6
 wrapt==1.12.1
