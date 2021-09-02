@@ -3,8 +3,8 @@ MONGODB_CONTAINER_NAME := AuthX-MongoDB
 isort-src:
 	isort ./AuthX ./tests
 
-format: isort-src isort-docs
-	black .
+format: isort-src
+	black ./AuthX ./tests
 
 test:
 	docker stop $(MONGODB_CONTAINER_NAME) || true
