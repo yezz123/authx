@@ -1,8 +1,9 @@
 from unittest import mock
 
-from AuthX.routers import get_password_router
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
+
+from AuthX.routers import get_password_router
 
 from .utils import MockAuthBackend, mock_get_authenticated_user, private_key, public_key
 
@@ -10,7 +11,11 @@ app = FastAPI()
 
 router = get_password_router(
     None,
-    MockAuthBackend("RS256", private_key, public_key,),
+    MockAuthBackend(
+        "RS256",
+        private_key,
+        public_key,
+    ),
     mock_get_authenticated_user,
     True,
     "http://127.0.0.1",
@@ -34,7 +39,12 @@ def test_forgot_password():
         "AuthX.routers.password.PasswordService.forgot_password",
         mock.AsyncMock(return_value=None),
     ) as mock_method:
-        response = test_client.post(url, json={"email": "user@gmail.com",},)
+        response = test_client.post(
+            url,
+            json={
+                "email": "user@gmail.com",
+            },
+        )
         mock_method.assert_awaited_once()
     assert response.status_code == 200
 
@@ -58,7 +68,11 @@ def test_password_set():
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.post(
-            url, json={"password1": "12345678", "password2": "12345678",},
+            url,
+            json={
+                "password1": "12345678",
+                "password2": "12345678",
+            },
         )
 
         mock_method.assert_awaited_once()
@@ -73,7 +87,11 @@ def test_password_reset():
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.post(
-            url, json={"password1": "12345678", "password2": "12345678",},
+            url,
+            json={
+                "password1": "12345678",
+                "password2": "12345678",
+            },
         )
 
         mock_method.assert_awaited_once()

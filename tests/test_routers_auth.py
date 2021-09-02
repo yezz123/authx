@@ -1,8 +1,9 @@
 from unittest import mock
 
-from AuthX.routers import get_auth_router
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
+
+from AuthX.routers import get_auth_router
 
 from .utils import (
     ACCESS_COOKIE_NAME,
@@ -17,7 +18,11 @@ app = FastAPI()
 
 router = get_auth_router(
     None,
-    MockAuthBackend("RS256", private_key, public_key,),
+    MockAuthBackend(
+        "RS256",
+        private_key,
+        public_key,
+    ),
     mock_get_authenticated_user,
     True,
     "http://127.0.0.1",
@@ -55,7 +60,10 @@ def test_register():
         "password1": "12345678",
         "password2": "12345678",
     }
-    response = test_client.post(url, json=data,)
+    response = test_client.post(
+        url,
+        json=data,
+    )
 
     assert test_client.cookies.get(ACCESS_COOKIE_NAME) == ACCESS_TOKEN
     assert test_client.cookies.get(REFRESH_COOKIE_NAME) == REFRESH_TOKEN

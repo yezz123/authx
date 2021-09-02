@@ -1,4 +1,5 @@
 import pytest
+
 from AuthX.core.jwt import JWTBackend
 from AuthX.core.user import User
 
