@@ -19,3 +19,5 @@ jobs:
         run: make build
       - name: Test code format -- pre-commit
         run: make lint
+      - name: pytest
+        run: make test
