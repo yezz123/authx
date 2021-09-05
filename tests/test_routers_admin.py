@@ -9,10 +9,7 @@ from .utils import mock_admin_required
 
 app = FastAPI()
 
-router = get_admin_router(
-    None,
-    mock_admin_required,
-)
+router = get_admin_router(None, mock_admin_required,)
 
 
 app.include_router(router)
@@ -98,8 +95,7 @@ def test_get_id_by_username():
 def test_kick():
     url = app.url_path_for("admin:kick", id="5")
     with mock.patch(
-        "AuthX.routers.admin.AdminService.kick",
-        mock.AsyncMock(return_value=None),
+        "AuthX.routers.admin.AdminService.kick", mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.post(url)
         mock_method.assert_awaited_once_with(5)

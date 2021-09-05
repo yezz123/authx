@@ -142,12 +142,7 @@ async def test_login(login: str, password: str):
 async def test_refresh_access_token() -> str:
     auth_service = AuthService()
     refresh_token = auth_backend.create_refresh_token(
-        {
-            "id": 1,
-            "username": "admin",
-            "permissions": [],
-            "type": "refresh",
-        }
+        {"id": 1, "username": "admin", "permissions": [], "type": "refresh",}
     )
     access_token = await auth_service.refresh_access_token(refresh_token)
     assert isinstance(access_token, str)
@@ -157,16 +152,8 @@ async def test_refresh_access_token() -> str:
 @pytest.mark.parametrize(
     "user,email,confirmed",
     [
-        (
-            User(2, "user", False),
-            "user@gmail.com",
-            True,
-        ),
-        (
-            User(3, "anotheruser", False),
-            "anotheruser@gmail.com",
-            False,
-        ),
+        (User(2, "user", False), "user@gmail.com", True,),
+        (User(3, "anotheruser", False), "anotheruser@gmail.com", False,),
     ],
 )
 async def test_get_email_confirmation_status(user: User, email: str, confirmed: bool):
