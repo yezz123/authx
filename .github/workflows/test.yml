@@ -1,28 +1,21 @@
-name: Test
+name: build and test
 
 on:
   push:
-    branches:
-      - "*"
+    branches-ignore:
+      - master
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.8, 3.9]
-
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Test with pytest & generate coverage report
-        run: |
-          pytest --cov=./ --cov-report=xml
+      - uses: actions/checkout@v1
+      - name: pull latest
+        run: make pull
+      - uses: satackey/action-docker-layer-caching@v0.0.8
+        continue-on-error: true
+      - name: Build image
+        run: make build
+      - name: Test code format -- pre-commit
+        run: make lint

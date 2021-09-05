@@ -217,14 +217,3 @@ class UsersManagementMixin(Base):
 
     async def set_permissions(self) -> None:
         pass
-
-
-class UsersRepo(
-    UsersCRUDMixin,
-    UsersConfirmMixin,
-    UsersPasswordMixin,
-    UsersUsernameMixin,
-    UsersProtectionMixin,
-    UsersManagementMixin,
-):
-    pass

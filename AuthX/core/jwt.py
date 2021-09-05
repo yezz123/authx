@@ -47,10 +47,7 @@ class JWTBackend:
         if token:
             try:
                 payload = jwt.decode(
-                    token,
-                    self._public_key,
-                    leeway=leeway,
-                    algorithms=JWT_ALGORITHM,
+                    token, self._public_key, leeway=leeway, algorithms=JWT_ALGORITHM,
                 )
                 id = payload.get("id")
                 iat = datetime.utcfromtimestamp(int(payload.get("iat")))

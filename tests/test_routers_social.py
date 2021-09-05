@@ -1,10 +1,11 @@
 from unittest import mock
 
 import pytest
-from AuthX.routers import get_social_router
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from starlette.middleware.sessions import SessionMiddleware
+
+from AuthX.routers import get_social_router
 
 from .utils import ACCESS_COOKIE_NAME, REFRESH_COOKIE_NAME, MockAuthBackend
 

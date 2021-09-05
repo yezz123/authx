@@ -28,9 +28,7 @@ class MongoDBBackend:
 
     async def _increment_id(self) -> int:
         ret = await self._counters.find_one_and_update(
-            {"name": "users"},
-            {"$inc": {"c": 1}},
-            return_document=ReturnDocument.AFTER,
+            {"name": "users"}, {"$inc": {"c": 1}}, return_document=ReturnDocument.AFTER,
         )
         return ret.get("c")
 

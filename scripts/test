@@ -1,7 +1,0 @@
-#!/bin/bash -e
-
-export SOURCE_FILES="../tests"
-
-set -x
-
-pytest $SOURCE_FILES --cov=AuthX --cov-report=html

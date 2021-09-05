@@ -1,13 +1,26 @@
-MONGODB_CONTAINER_NAME := AuthX-MongoDB
-
-isort-src:
-	isort ./AuthX ./tests
-
-format: isort-src isort-docs
-	black .
+help:
+	@echo "Targets:"
+	@echo "    make test"
+	@echo "    make start"
+	@echo "    make down"
+	@echo "    make pull"
+	@echo "    make build"
+	@echo "    make lint"
 
 test:
-	docker stop $(MONGODB_CONTAINER_NAME) || true
-	docker run -d --rm --name $(MONGODB_CONTAINER_NAME) -p 27017:27017 mongo:4.2
-	pytest --cov=AuthX/ --cov-report=term-missing --cov-fail-under=100
-	docker stop $(MONGODB_CONTAINER_NAME)
+	docker-compose run --rm authx pytest --cov=AuthX --cov-report=html
+
+start:
+	docker-compose up -d
+
+down:
+	docker-compose down
+
+pull:
+	docker-compose pull
+
+build:
+	docker-compose build
+
+lint:
+	docker-compose run --rm authx pre-commit run --all-files

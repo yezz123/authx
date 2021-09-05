@@ -1,6 +1,7 @@
 from datetime import datetime
 
 import pytest
+
 from AuthX.core.jwt import JWTBackend
 
 from .utils import MockCacheBackend, private_key, public_key
