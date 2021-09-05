@@ -183,9 +183,7 @@ class MockCacheBackend:
             self._db[key] = int(v) + 1
 
     async def dispatch_action(self, channel: str, action: str, payload: str) -> None:
-        print("Dispatching action")
-        print(action)
-        print(payload)
+        return action, payload
 
 
 class MockAuthBackend:
