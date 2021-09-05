@@ -1,0 +1,21 @@
+version: "3.3"
+services:
+  mongo:
+    image: mongo:4.2
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: authenticationx
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - /data/db:/data/db
+  authx:
+    depends_on:
+      - mongo
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    image: authx
