@@ -3,15 +3,17 @@ from unittest import mock
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from AuthX.routers import get_password_router
-
-from .utils import MockAuthBackend, mock_get_authenticated_user, private_key, public_key
+from AuthX.routers.password import get_router as get_password_router
+from tests.utils import (
+    MockAuthBackend,
+    mock_get_authenticated_user,
+)
 
 app = FastAPI()
 
 router = get_password_router(
     None,
-    MockAuthBackend("RS256", private_key, public_key,),
+    MockAuthBackend("RS256"),
     mock_get_authenticated_user,
     True,
     "http://127.0.0.1",

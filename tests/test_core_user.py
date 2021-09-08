@@ -2,10 +2,9 @@ import pytest
 
 from AuthX.core.jwt import JWTBackend
 from AuthX.core.user import User
+from tests.utils import MockCacheBackend
 
-from .utils import MockCacheBackend, private_key, public_key
-
-jwt_backend = JWTBackend(MockCacheBackend(), private_key, public_key, 60, 60 * 10)
+jwt_backend = JWTBackend(MockCacheBackend(), 60, 60 * 10)
 ID = 1
 USERNAME = "admin"
 PERMISSIONS = ["admin"]

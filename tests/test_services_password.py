@@ -3,7 +3,7 @@ from unittest import mock
 import pytest
 from fastapi import HTTPException
 
-from AuthX.api import UsersRepo
+from AuthX.api.users import UsersRepo
 from AuthX.services import PasswordService
 from AuthX.utils.strings import create_random_string, hash_string
 
@@ -14,8 +14,6 @@ from .utils import (
     MockEmailClient,
     User,
     mock_verify_password,
-    private_key,
-    public_key,
 )
 
 admin = User(1, "admin", True)
@@ -25,7 +23,7 @@ non_existing = User(999, "nonexisting", False)
 
 RECAPTCHA_SECRET = "RECAPTCHA_SECRET"
 
-auth_backend = MockAuthBackend("RS256", private_key, public_key)
+auth_backend = MockAuthBackend("RS256")
 
 
 @pytest.fixture(autouse=True)

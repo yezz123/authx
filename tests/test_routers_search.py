@@ -3,9 +3,8 @@ from unittest import mock
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from AuthX.routers import get_search_router
-
-from .utils import mock_admin_required
+from AuthX.routers.search import get_router as get_search_router
+from tests.utils import mock_admin_required
 
 app = FastAPI()
 
