@@ -11,7 +11,7 @@ from tests.utils import (
     MockCacheBackend,
     MockDatabaseBackend,
     User,
-    mock_verify_password
+    mock_verify_password,
 )
 
 admin = User(1, "admin", True)

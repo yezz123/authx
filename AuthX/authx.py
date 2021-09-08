@@ -29,10 +29,7 @@ class Auth:
 
         self._cache_backend = RedisBackend()
         self._auth_backend = JWTBackend(
-            self._cache_backend,
-            None,
-            access_expiration,
-            refresh_expiration,
+            self._cache_backend, None, access_expiration, refresh_expiration,
         )
 
     def set_cache(self, client: Redis) -> None:
@@ -106,9 +103,7 @@ class AuthApp(Auth):
         self._cache_backend = RedisBackend()
 
         self._auth_backend = JWTBackend(
-            self._cache_backend,
-            access_expiration,
-            refresh_expiration,
+            self._cache_backend, access_expiration, refresh_expiration,
         )
 
         self._users_repo = UsersRepo(

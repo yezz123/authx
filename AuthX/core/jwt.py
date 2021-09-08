@@ -42,9 +42,7 @@ class JWTBackend:
     async def decode_token(self, token: str, leeway: int = 0) -> Optional[dict]:
         if token:
             try:
-                payload = jwt.decode(
-                    token, leeway=leeway, algorithms=JWT_ALGORITHM,
-                )
+                payload = jwt.decode(token, leeway=leeway, algorithms=JWT_ALGORITHM,)
                 id = payload.get("id")
                 iat = datetime.utcfromtimestamp(int(payload.get("iat")))
                 checks = await asyncio.gather(

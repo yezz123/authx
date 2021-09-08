@@ -4,10 +4,7 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
 from AuthX.routers.password import get_router as get_password_router
-from tests.utils import (
-    MockAuthBackend,
-    mock_get_authenticated_user,
-)
+from tests.utils import MockAuthBackend, mock_get_authenticated_user
 
 app = FastAPI()
 

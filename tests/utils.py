@@ -189,10 +189,7 @@ class MockCacheBackend:
 class MockAuthBackend:
     @classmethod
     def create(
-        cls,
-        jwt_algorithm: str,
-        access_expiration: int,
-        refresh_expiration: int,
+        cls, jwt_algorithm: str, access_expiration: int, refresh_expiration: int,
     ) -> None:
         pass
 
@@ -222,9 +219,7 @@ class MockAuthBackend:
 
         payload.update({"iat": iat, "exp": exp, "type": token_type})
 
-        return jwt.encode(
-            payload, algorithm=self._jwt_algorithm
-        ).decode()
+        return jwt.encode(payload, algorithm=self._jwt_algorithm).decode()
 
     def create_access_token(self, payload: dict) -> str:
         return self._create_token(payload, "access", 60 * 5)
