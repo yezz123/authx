@@ -20,8 +20,8 @@ formatter = logging.Formatter("%(asctime)s %(message)s")
 if DEBUG:
     log_info = logging.StreamHandler()
 else:
-    log_info = logging.handlers.RotatingFileHandler(
-        "/var/log/web/users/info.log", maxBytes=1 * 10, backupCount=15
+    log_info = logging.handlers.TimedRotatingFileHandler(
+        "logs/info.log", when="midnight", backupCount=7
     )
 
 log_info.addFilter(LevelFilter(logging.INFO))  # type: ignore

@@ -4,9 +4,9 @@ from typing import Dict, Optional, Tuple
 import jwt
 from httpx import AsyncClient
 
-from AuthX.api import UsersRepo
+from AuthX.api.users import UsersRepo
 from AuthX.core.jwt import JWTBackend
-from AuthX.errors import SocialException
+from AuthX.errors.social import SocialException
 from AuthX.models.social import SocialInCreate
 from AuthX.models.user import UserPayload
 

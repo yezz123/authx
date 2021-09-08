@@ -5,10 +5,10 @@ from typing import Iterable, Optional
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 
-from AuthX.api import UsersRepo
+from AuthX.api.users import UsersRepo
 from AuthX.core.jwt import JWTBackend
 from AuthX.errors.social import SocialException
-from AuthX.services import SocialService
+from AuthX.services.social import SocialService
 
 
 def check_state(query: str, session: str) -> bool:

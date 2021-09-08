@@ -5,21 +5,17 @@ from typing import Optional
 import jwt
 
 from AuthX.core.config import JWT_ALGORITHM
-from AuthX.database import RedisBackend
+from AuthX.database.redis import RedisBackend
 
 
 class JWTBackend:
     def __init__(
         self,
         cache_backend: RedisBackend,
-        private_key: Optional[bytes],
-        public_key: bytes,
         access_expiration: int,
         refresh_expiration: int,
     ) -> None:
         self._cache = cache_backend
-        self._private_key = private_key
-        self._public_key = public_key
         self._access_expiration = access_expiration
         self._refresh_expiration = refresh_expiration
 
@@ -47,7 +43,7 @@ class JWTBackend:
         if token:
             try:
                 payload = jwt.decode(
-                    token, self._public_key, leeway=leeway, algorithms=JWT_ALGORITHM,
+                    token, leeway=leeway, algorithms=JWT_ALGORITHM,
                 )
                 id = payload.get("id")
                 iat = datetime.utcfromtimestamp(int(payload.get("iat")))
@@ -77,7 +73,7 @@ class JWTBackend:
 
         payload.update({"iat": iat, "exp": exp, "type": token_type})
 
-        return jwt.encode(payload, self._private_key, algorithm=JWT_ALGORITHM).decode()
+        return jwt.encode(payload, algorithm=JWT_ALGORITHM).decode()
 
     def create_access_token(self, payload: dict) -> str:
         return self._create_token(payload, "access", self._access_expiration)

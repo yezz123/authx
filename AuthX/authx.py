@@ -4,17 +4,16 @@ from aioredis import Redis
 from fastapi import APIRouter, HTTPException, Request
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from AuthX.api import UsersRepo
+from AuthX.api.users import UsersRepo
 from AuthX.core.jwt import JWTBackend
 from AuthX.core.user import User
-from AuthX.database import MongoDBBackend, RedisBackend
-from AuthX.routers import (
-    get_admin_router,
-    get_auth_router,
-    get_password_router,
-    get_search_router,
-    get_social_router,
-)
+from AuthX.database.mongodb import MongoDBBackend
+from AuthX.database.redis import RedisBackend
+from AuthX.routers.admin import get_router as get_admin_router
+from AuthX.routers.auth import get_router as get_auth_router
+from AuthX.routers.password import get_router as get_password_router
+from AuthX.routers.search import get_router as get_search_router
+from AuthX.routers.social import get_router as get_social_router
 
 
 class Auth:
@@ -22,7 +21,6 @@ class Auth:
         self,
         access_cookie_name: str,
         refresh_cookie_name: str,
-        public_key: bytes,
         access_expiration: int,
         refresh_expiration: int,
     ) -> None:
@@ -33,7 +31,6 @@ class Auth:
         self._auth_backend = JWTBackend(
             self._cache_backend,
             None,
-            public_key,
             access_expiration,
             refresh_expiration,
         )
@@ -76,8 +73,6 @@ class AuthApp(Auth):
         callbacks: Iterable,
         access_cookie_name: str,
         refresh_cookie_name: str,
-        private_key: bytes,
-        public_key: bytes,
         access_expiration: int,
         refresh_expiration: int,
         smtp_username: str,
@@ -96,8 +91,6 @@ class AuthApp(Auth):
         self._database_name = database_name
         self._access_cookie_name = access_cookie_name
         self._refresh_cookie_name = refresh_cookie_name
-        self._private_key = private_key
-        self._public_key = public_key
         self._access_expiration = access_expiration
         self._refresh_expiration = refresh_expiration
         self._smtp_username = smtp_username
@@ -114,8 +107,6 @@ class AuthApp(Auth):
 
         self._auth_backend = JWTBackend(
             self._cache_backend,
-            private_key,
-            public_key,
             access_expiration,
             refresh_expiration,
         )
