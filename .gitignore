@@ -111,3 +111,4 @@ venv.bak/
 
 # Project
 postgres-data
+.DS_Store
