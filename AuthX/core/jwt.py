@@ -71,10 +71,10 @@ class JWTBackend:
 
         payload.update({"iat": iat, "exp": exp, "type": token_type})
 
-        return jwt.encode(payload, algorithm=JWT_ALGORITHM).decode()
+        return jwt.encode(payload, algorithm=JWT_ALGORITHM, key=None).decode()
 
     def create_access_token(self, payload: dict) -> str:
-        return self._create_token(payload, "access", self._access_expiration)
+        return self._create_token(payload, self._access_expiration, "access")
 
     def create_refresh_token(self, payload: dict) -> str:
         return self._create_token(payload, "refresh", self._refresh_expiration)
