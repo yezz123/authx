@@ -6,7 +6,6 @@ from fastapi import HTTPException
 from AuthX.api.users import UsersRepo
 from AuthX.services.password import PasswordService
 from AuthX.utils.strings import create_random_string, hash_string
-
 from tests.utils import (
     MockAuthBackend,
     MockCacheBackend,
