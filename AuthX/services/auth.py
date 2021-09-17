@@ -6,7 +6,7 @@ from email_validator import EmailNotValidError, validate_email
 from fastapi import HTTPException
 from pydantic.error_wrappers import ValidationError
 
-from AuthX.api import UsersRepo
+from AuthX.api.users import UsersRepo
 from AuthX.core.email import EmailClient
 from AuthX.core.jwt import JWTBackend
 from AuthX.core.logger import logger

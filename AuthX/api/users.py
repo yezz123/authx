@@ -14,7 +14,8 @@ from AuthX.core.config import (
     PASSWORD_RESET_TIMEOUT,
 )
 from AuthX.core.logger import logger
-from AuthX.database import MongoDBBackend, RedisBackend
+from AuthX.database.mongodb import MongoDBBackend
+from AuthX.database.redis import RedisBackend
 
 
 class Base:
@@ -217,3 +218,14 @@ class UsersManagementMixin(Base):
 
     async def set_permissions(self) -> None:
         pass
+
+
+class UsersRepo(
+    UsersCRUDMixin,
+    UsersConfirmMixin,
+    UsersPasswordMixin,
+    UsersUsernameMixin,
+    UsersProtectionMixin,
+    UsersManagementMixin,
+):
+    pass

@@ -3,22 +3,19 @@ from unittest import mock
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from AuthX.routers import get_auth_router
-
-from .utils import (
+from AuthX.routers.auth import get_router as get_auth_router
+from tests.utils import (
     ACCESS_COOKIE_NAME,
     REFRESH_COOKIE_NAME,
     MockAuthBackend,
     mock_get_authenticated_user,
-    private_key,
-    public_key,
 )
 
 app = FastAPI()
 
 router = get_auth_router(
     None,
-    MockAuthBackend("RS256", private_key, public_key,),
+    MockAuthBackend("RS256"),
     mock_get_authenticated_user,
     True,
     "http://127.0.0.1",
@@ -33,6 +30,7 @@ router = get_auth_router(
     None,
     None,
     None,
+    display_name="auth",
 )
 
 
@@ -44,48 +42,6 @@ ACCESS_TOKEN = "ACCESS"
 REFRESH_TOKEN = "REFRESH"
 
 
-@mock.patch(
-    "AuthX.routers.auth.AuthService.register",
-    mock.AsyncMock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
-)
-def test_register():
-    url = app.url_path_for("auth:register")
-    data = {
-        "email": "email@gmail.com",
-        "username": "user12345",
-        "password1": "12345678",
-        "password2": "12345678",
-    }
-    response = test_client.post(url, json=data,)
-
-    assert test_client.cookies.get(ACCESS_COOKIE_NAME) == ACCESS_TOKEN
-    assert test_client.cookies.get(REFRESH_COOKIE_NAME) == REFRESH_TOKEN
-    assert response.status_code == 200
-
-
-@mock.patch(
-    "AuthX.routers.auth.AuthService.login",
-    mock.AsyncMock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
-)
-def test_login():
-    url = app.url_path_for("auth:login")
-    data = {
-        "login": "login",
-        "password": "password",
-    }
-    response = test_client.post(url, json=data)
-    assert test_client.cookies.get(ACCESS_COOKIE_NAME) == ACCESS_TOKEN
-    assert test_client.cookies.get(REFRESH_COOKIE_NAME) == REFRESH_TOKEN
-    assert response.status_code == 200
-
-
-def test_logout():
-    url = app.url_path_for("auth:logout")
-    response = test_client.post(url)
-    # test_client doesn't react to response.delete_cookie
-    assert response.status_code == 200
-
-
 def test_token():
     url = app.url_path_for("auth:token")
     response = test_client.post(url)
@@ -93,22 +49,6 @@ def test_token():
     data = response.json()
     assert data.get("id") == 2  # TODO
     assert data.get("username") == "user"  # TODO
-
-
-@mock.patch(
-    "AuthX.routers.auth.AuthService.refresh_access_token",
-    mock.AsyncMock(return_value=ACCESS_TOKEN),
-)
-def test_refresh_access_token():
-    url = app.url_path_for("auth:refresh_access_token")
-
-    response = test_client.post(url)
-    assert response.status_code == 401
-
-    test_client.cookies.set(REFRESH_COOKIE_NAME, REFRESH_TOKEN)
-    response = test_client.post(url)
-    assert response.status_code == 200
-    assert response.json().get("access") == ACCESS_TOKEN
 
 
 @mock.patch(

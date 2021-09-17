@@ -13,9 +13,9 @@ jobs:
       - uses: actions/checkout@v1
       - name: pull latest
         run: make pull
-      - uses: satackey/action-docker-layer-caching@v0.0.8
-        continue-on-error: true
       - name: Build image
         run: make build
       - name: Test code format -- pre-commit
         run: make lint
+      - name: pytest
+        run: make test
