@@ -6,13 +6,7 @@ from fastapi import HTTPException
 from AuthX.api.users import UsersRepo
 from AuthX.services.auth import AuthService
 from AuthX.utils.strings import create_random_string, hash_string
-from tests.utils import (
-    MockAuthBackend,
-    MockCacheBackend,
-    MockDatabaseBackend,
-    User,
-    mock_verify_password,
-)
+from tests.utils import MockAuthBackend, MockCacheBackend, MockDatabaseBackend, User
 
 admin = User(1, "admin", True)
 user = User(2, "user", False)
@@ -115,9 +109,11 @@ async def test_register(
         await mock_validate_captcha.assert_awaited_once_with(captcha, RECAPTCHA_SECRET)
     # TODO: data
 
+
 # TODO :
 # - Create a Test for login
 # - Create a Test for refresh token access
+
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
