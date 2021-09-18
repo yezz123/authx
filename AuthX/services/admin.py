@@ -3,7 +3,7 @@ from typing import Optional
 
 from fastapi import HTTPException
 
-from AuthX.api.users import UsersRepo
+from AuthX.api import UsersRepo
 
 
 class AdminService:

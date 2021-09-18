@@ -3,6 +3,12 @@ from typing import Iterable, Optional, Tuple, Union
 
 import jwt
 
+with open("tests/private_key", "rb") as f:
+    private_key = f.read()
+
+with open("tests/public_key", "rb") as f:
+    public_key = f.read()
+
 ACCESS_COOKIE_NAME = "access"
 REFRESH_COOKIE_NAME = "refresh"
 
@@ -183,29 +189,42 @@ class MockCacheBackend:
             self._db[key] = int(v) + 1
 
     async def dispatch_action(self, channel: str, action: str, payload: str) -> None:
-        return action, payload
+        print("Dispatching action")
+        print(action)
+        print(payload)
 
 
 class MockAuthBackend:
     @classmethod
     def create(
-        cls, jwt_algorithm: str, access_expiration: int, refresh_expiration: int,
+        cls,
+        jwt_algorithm: str,
+        private_key: bytes,
+        public_key: bytes,
+        access_expiration: int,
+        refresh_expiration: int,
     ) -> None:
         pass
 
     def __init__(
         self,
         jwt_algorithm: str,
+        private_key: bytes,
+        public_key: bytes,
         access_expiration: int = 60 * 5,
         refresh_expiration: int = 60 * 10,
     ):
         self._jwt_algorithm = jwt_algorithm
+        self._private_key = private_key
+        self._public_key = public_key
         self._access_expiration = access_expiration
         self._refresh_expiration = refresh_expiration
+        self._private_key = private_key
+        self._public_key = public_key
 
     async def decode_token(self, token: str, leeway: int = 0) -> Optional[dict]:
         if token:
-            return jwt.decode(token, algorithms="RS256")
+            return jwt.decode(token, key=self._public_key, algorithms="RS256")
         return None
 
     def _create_token(
@@ -219,7 +238,9 @@ class MockAuthBackend:
 
         payload.update({"iat": iat, "exp": exp, "type": token_type})
 
-        return jwt.encode(payload, algorithm=self._jwt_algorithm).decode()
+        return jwt.encode(
+            payload, self._private_key, algorithm=self._jwt_algorithm
+        ).decode()
 
     def create_access_token(self, payload: dict) -> str:
         return self._create_token(payload, "access", 60 * 5)

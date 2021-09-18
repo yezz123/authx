@@ -4,23 +4,26 @@ from aioredis import Redis
 from fastapi import APIRouter, HTTPException, Request
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from AuthX.api.users import UsersRepo
+from AuthX.api import UsersRepo
 from AuthX.core.jwt import JWTBackend
 from AuthX.core.user import User
 from AuthX.database.mongodb import MongoDBBackend
 from AuthX.database.redis import RedisBackend
-from AuthX.routers.admin import get_router as get_admin_router
-from AuthX.routers.auth import get_router as get_auth_router
-from AuthX.routers.password import get_router as get_password_router
-from AuthX.routers.search import get_router as get_search_router
-from AuthX.routers.social import get_router as get_social_router
+from AuthX.routers import (
+    get_admin_router,
+    get_auth_router,
+    get_password_router,
+    get_search_router,
+    get_social_router,
+)
 
 
-class Auth:
+class AuthX:
     def __init__(
         self,
         access_cookie_name: str,
         refresh_cookie_name: str,
+        public_key: bytes,
         access_expiration: int,
         refresh_expiration: int,
     ) -> None:
@@ -29,7 +32,11 @@ class Auth:
 
         self._cache_backend = RedisBackend()
         self._auth_backend = JWTBackend(
-            self._cache_backend, None, access_expiration, refresh_expiration,
+            self._cache_backend,
+            None,
+            public_key,
+            access_expiration,
+            refresh_expiration,
         )
 
     def set_cache(self, client: Redis) -> None:
@@ -59,17 +66,18 @@ class Auth:
         raise HTTPException(403)
 
 
-class AuthApp(Auth):
+class Authentication(AuthX):
     def __init__(
         self,
         debug: bool,
-        language: str,
         base_url: str,
         site: str,
         database_name: str,
         callbacks: Iterable,
         access_cookie_name: str,
         refresh_cookie_name: str,
+        private_key: bytes,
+        public_key: bytes,
         access_expiration: int,
         refresh_expiration: int,
         smtp_username: str,
@@ -82,12 +90,13 @@ class AuthApp(Auth):
         social_creds: Optional[dict],
     ) -> None:
         self._debug = debug
-        self._language = language
         self._base_url = base_url
         self._site = site
         self._database_name = database_name
         self._access_cookie_name = access_cookie_name
         self._refresh_cookie_name = refresh_cookie_name
+        self._private_key = private_key
+        self._public_key = public_key
         self._access_expiration = access_expiration
         self._refresh_expiration = refresh_expiration
         self._smtp_username = smtp_username
@@ -103,7 +112,11 @@ class AuthApp(Auth):
         self._cache_backend = RedisBackend()
 
         self._auth_backend = JWTBackend(
-            self._cache_backend, access_expiration, refresh_expiration,
+            self._cache_backend,
+            private_key,
+            public_key,
+            access_expiration,
+            refresh_expiration,
         )
 
         self._users_repo = UsersRepo(
@@ -117,7 +130,6 @@ class AuthApp(Auth):
             self._auth_backend,
             self.get_authenticated_user,
             self._debug,
-            self._language,
             self._base_url,
             self._site,
             self._access_cookie_name,
@@ -139,7 +151,6 @@ class AuthApp(Auth):
             self._auth_backend,
             self.get_authenticated_user,
             self._debug,
-            self._language,
             self._base_url,
             self._site,
             self._recaptcha_secret,
@@ -156,7 +167,6 @@ class AuthApp(Auth):
             self._users_repo,
             self._auth_backend,
             self._debug,
-            self._language,
             self._base_url,
             self._access_cookie_name,
             self._refresh_cookie_name,

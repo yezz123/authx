@@ -3,10 +3,10 @@ from typing import Callable, Dict
 from fastapi import APIRouter, Body, Depends, Request, Response
 from fastapi.exceptions import HTTPException
 
-from AuthX.api.users import UsersRepo
+from AuthX.api import UsersRepo
 from AuthX.core.jwt import JWTBackend
 from AuthX.core.user import User
-from AuthX.services.auth import AuthService
+from AuthX.services import AuthService
 
 """
 POST /register
@@ -25,7 +25,6 @@ def get_router(
     auth_backend: JWTBackend,
     get_authenticated_user: Callable,
     debug: bool,
-    language: str,
     base_url: str,
     site: str,
     access_cookie_name: str,
@@ -44,7 +43,6 @@ def get_router(
         repo,
         auth_backend,
         debug,
-        language,
         base_url,
         site,
         recaptcha_secret,

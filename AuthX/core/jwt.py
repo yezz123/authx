@@ -5,17 +5,19 @@ from typing import Optional
 import jwt
 
 from AuthX.core.config import JWT_ALGORITHM
+from AuthX.database.redis import RedisBackend
 
 
 class JWTBackend:
     def __init__(
         self,
+        cache_backend: RedisBackend,
         private_key: Optional[bytes],
         public_key: bytes,
         access_expiration: int,
         refresh_expiration: int,
     ) -> None:
-
+        self._cache = cache_backend
         self._private_key = private_key
         self._public_key = public_key
         self._access_expiration = access_expiration

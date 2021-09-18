@@ -1,6 +1,8 @@
 import logging
 import logging.handlers
 
+from AuthX.core.config import DEBUG
+
 
 class LevelFilter:
     def __init__(self, level):
@@ -15,9 +17,12 @@ logger.setLevel(logging.INFO)
 
 formatter = logging.Formatter("%(asctime)s %(message)s")
 
-
-log_info = logging.StreamHandler()
-
+if DEBUG:
+    log_info = logging.handlers.TimedRotatingFileHandler(
+        "logs/info.log", when="midnight", backupCount=7
+    )
+else:
+    log_info = logging.StreamHandler()
 
 log_info.addFilter(LevelFilter(logging.INFO))  # type: ignore
 

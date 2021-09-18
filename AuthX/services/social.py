@@ -4,9 +4,9 @@ from typing import Dict, Optional, Tuple
 import jwt
 from httpx import AsyncClient
 
-from AuthX.api.users import UsersRepo
+from AuthX.api import UsersRepo
 from AuthX.core.jwt import JWTBackend
-from AuthX.errors.social import SocialException
+from AuthX.errors import SocialException
 from AuthX.models.social import SocialInCreate
 from AuthX.models.user import UserPayload
 
@@ -22,11 +22,10 @@ class SocialService:
         cls,
         repo: UsersRepo,
         auth_backend: JWTBackend,
-        language: str,
         base_url: str,
         options: Optional[dict],
     ) -> None:
-        SocialException.setup(language, base_url)
+        SocialException.setup(base_url)
         cls._repo = repo
         cls._auth_backend = auth_backend
         cls._base_url = base_url

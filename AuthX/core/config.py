@@ -3,12 +3,16 @@ from typing import List
 
 from starlette.config import Config
 
+"""
+    Config class for AuthX.
+"""
+
 JWT_ALGORITHM = "RS256"
 
 config = Config()
 DEBUG: bool = config("DEBUG", cast=bool, default=False)
 
-LOGIN_RATELIMIT: int = config("LOGIN_RATELIMIT", cast=int, default=30)  # per minute
+LOGIN_RATELIMIT: int = config("LOGIN_RATELIMIT", cast=int, default=30)
 
 EMAIL_CONFIRMATION_TIMEOUT: int = config(
     "EMAIL_CONFIRMATION_TIMEOUT", cast=int, default=1800
@@ -27,6 +31,7 @@ PASSWORD_MAX_LENGTH: int = config("PASSWORD_MAX_LENGTH", cast=int, default=32)
 
 
 TIME_DELTA: int = 3
+
 
 USERNAME_CHARS = "".join([ascii_letters, digits, " -_"])
 PASSWORD_CHARS = "".join([ascii_letters, digits, punctuation])
