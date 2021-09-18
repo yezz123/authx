@@ -3,7 +3,7 @@ from unittest import mock
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from AuthX.routers.admin import get_router as get_admin_router
+from AuthX.routers import get_admin_router
 from tests.utils import mock_admin_required
 
 app = FastAPI()
@@ -15,8 +15,8 @@ app.include_router(router)
 
 test_client = TestClient(app)
 
-ACCESS_TOKEN = "ACCESS"
-REFRESH_TOKEN = "REFRESH"
+ACCESS_TOKEN = "access_token"
+REFRESH_TOKEN = "refresh_token"
 
 
 def test_get_blacklist():

@@ -3,8 +3,8 @@ from unittest import mock
 import pytest
 from fastapi import HTTPException
 
-from AuthX.api.users import UsersRepo
-from AuthX.services.password import PasswordService
+from AuthX.api import UsersRepo
+from AuthX.services import PasswordService
 from AuthX.utils.strings import create_random_string, hash_string
 from tests.utils import (
     MockAuthBackend,
@@ -13,6 +13,8 @@ from tests.utils import (
     MockEmailClient,
     User,
     mock_verify_password,
+    private_key,
+    public_key,
 )
 
 admin = User(1, "admin", True)
@@ -20,9 +22,9 @@ user = User(2, "user", False)
 social_user = User(5, "socialuser", False)
 non_existing = User(999, "nonexisting", False)
 
-RECAPTCHA_SECRET = "RECAPTCHA_SECRET"
+RECAPTCHA_SECRET = "recaptcha_secret"
 
-auth_backend = MockAuthBackend("RS256")
+auth_backend = MockAuthBackend("RS256", private_key, public_key)
 
 
 @pytest.fixture(autouse=True)
@@ -39,7 +41,6 @@ def password_service_setup():
         None,
         None,
         None,
-        display_name="Test_password_service",
     )
 
 
@@ -50,7 +51,7 @@ CAPTCHA = "CAPTCHA"
 @mock.patch("AuthX.services.password.EmailClient", MockEmailClient)
 async def test_forgot_password():
     service = PasswordService()
-    # TODO: errors
+    # TODO: exceptions
 
     await service.forgot_password({"email": "admin@gmail.com"}, "127.0.0.1")
 
@@ -58,7 +59,7 @@ async def test_forgot_password():
 @pytest.mark.asyncio
 async def test_password_status():
     service = PasswordService(user)
-    # TODO: errors
+    # TODO: exceptions
     # TODO: social
     res = await service.password_status()
     assert isinstance(res, dict)

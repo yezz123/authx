@@ -3,17 +3,25 @@ from unittest import mock
 import pytest
 from fastapi import HTTPException
 
-from AuthX.api.users import UsersRepo
-from AuthX.services.auth import AuthService
+from AuthX.api import UsersRepo
+from AuthX.services import AuthService
 from AuthX.utils.strings import create_random_string, hash_string
-from tests.utils import MockAuthBackend, MockCacheBackend, MockDatabaseBackend, User
+from tests.utils import (
+    MockAuthBackend,
+    MockCacheBackend,
+    MockDatabaseBackend,
+    User,
+    mock_verify_password,
+    private_key,
+    public_key,
+)
 
 admin = User(1, "admin", True)
 user = User(2, "user", False)
 
-RECAPTCHA_SECRET = "RECAPTCHA_SECRET"
+RECAPTCHA_SECRET = "recaptcha_secret"
 
-auth_backend = MockAuthBackend("RS256")
+auth_backend = MockAuthBackend("RS256", private_key, public_key)
 
 
 @pytest.fixture(autouse=True)
@@ -30,7 +38,6 @@ def auth_service_setup():
         None,
         None,
         None,
-        display_name="auth_service",
     )
 
 
@@ -41,15 +48,6 @@ CAPTCHA = "CAPTCHA"
 @pytest.mark.parametrize(
     "email,username,password1,password2,valid_data,captcha,valid_captcha",
     [
-        (
-            "newuser1@gmail.com",
-            "newuser1",
-            "12345678",
-            "12345678",
-            True,
-            CAPTCHA,
-            True,
-        ),
         (
             "newuser2@gmail.com",
             "newuser2",
@@ -106,13 +104,38 @@ async def test_register(
             assert isinstance(res.get("access"), str)
             assert isinstance(res.get("refresh"), str)
 
-        await mock_validate_captcha.assert_awaited_once_with(captcha, RECAPTCHA_SECRET)
+        mock_validate_captcha.assert_awaited_once_with(captcha, RECAPTCHA_SECRET)
     # TODO: data
 
 
-# TODO :
-# - Create a Test for login
-# - Create a Test for refresh token access
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "login,password",
+    [
+        ("user", "12345678"),
+        ("admin", "12345678"),
+        ("user@gmail.com", "12345678"),
+        ("admin@gmail.com", "12345678"),
+    ],
+)
+@mock.patch("AuthX.services.auth.verify_password", mock_verify_password)
+async def test_login(login: str, password: str):
+    auth_service = AuthService()
+    tokens = await auth_service.login(
+        {"login": login, "password": password}, "127.0.0.1"
+    )
+    # TODO
+    assert isinstance(tokens, dict)
+
+
+@pytest.mark.asyncio
+async def test_refresh_access_token() -> str:
+    auth_service = AuthService()
+    refresh_token = auth_backend.create_refresh_token(
+        {"id": 1, "username": "admin", "permissions": [], "type": "refresh",}
+    )
+    access_token = await auth_service.refresh_access_token(refresh_token)
+    assert isinstance(access_token, str)
 
 
 @pytest.mark.asyncio
@@ -177,27 +200,3 @@ async def test_confirm_email():
 
     item = await auth_service._repo.get_by_email(email)
     assert item.get("confirmed")
-
-
-@pytest.mark.asyncio
-async def test_change_username():
-    auth_service = AuthService(User(1, "admin", True))
-    await auth_service.change_username(2, "newusername")  # admin
-    assert await auth_service._repo.get_by_username("newusername") is not None
-    assert await auth_service._repo.get_by_username("username") is None
-
-    with pytest.raises(HTTPException) as e:
-        await auth_service.change_username(2, "admin")  # exists
-
-    assert e.type is HTTPException
-    assert e.value.args[0] == 400
-
-    with pytest.raises(HTTPException) as e:
-        await auth_service.change_username(1, "admin")  # same
-
-    assert e.type is HTTPException
-    assert e.value.args[0] == 400
-
-    await auth_service.change_username(1, "newadmin")  # own
-    assert await auth_service._repo.get_by_username("newadmin") is not None
-    assert await auth_service._repo.get_by_username("admin") is None
