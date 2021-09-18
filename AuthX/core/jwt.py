@@ -5,17 +5,19 @@ from typing import Optional
 import jwt
 
 from AuthX.core.config import JWT_ALGORITHM
-from AuthX.database.redis import RedisBackend
 
 
 class JWTBackend:
     def __init__(
         self,
-        cache_backend: RedisBackend,
+        private_key: Optional[bytes],
+        public_key: bytes,
         access_expiration: int,
         refresh_expiration: int,
     ) -> None:
-        self._cache = cache_backend
+
+        self._private_key = private_key
+        self._public_key = public_key
         self._access_expiration = access_expiration
         self._refresh_expiration = refresh_expiration
 
@@ -42,7 +44,9 @@ class JWTBackend:
     async def decode_token(self, token: str, leeway: int = 0) -> Optional[dict]:
         if token:
             try:
-                payload = jwt.decode(token, leeway=leeway, algorithms=JWT_ALGORITHM,)
+                payload = jwt.decode(
+                    token, self._public_key, leeway=leeway, algorithms=JWT_ALGORITHM,
+                )
                 id = payload.get("id")
                 iat = datetime.utcfromtimestamp(int(payload.get("iat")))
                 checks = await asyncio.gather(
@@ -71,10 +75,10 @@ class JWTBackend:
 
         payload.update({"iat": iat, "exp": exp, "type": token_type})
 
-        return jwt.encode(payload, algorithm=JWT_ALGORITHM, key=None).decode()
+        return jwt.encode(payload, self._private_key, algorithm=JWT_ALGORITHM).decode()
 
     def create_access_token(self, payload: dict) -> str:
-        return self._create_token(payload, self._access_expiration, "access")
+        return self._create_token(payload, "access", self._access_expiration)
 
     def create_refresh_token(self, payload: dict) -> str:
         return self._create_token(payload, "refresh", self._refresh_expiration)
