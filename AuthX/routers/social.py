@@ -5,10 +5,10 @@ from typing import Iterable, Optional
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 
-from AuthX.api.users import UsersRepo
+from AuthX.api import UsersRepo
 from AuthX.core.jwt import JWTBackend
-from AuthX.errors.social import SocialException
-from AuthX.services.social import SocialService
+from AuthX.errors import SocialException
+from AuthX.services import SocialService
 
 
 def check_state(query: str, session: str) -> bool:
@@ -19,7 +19,6 @@ def get_router(
     repo: UsersRepo,
     auth_backend: JWTBackend,
     debug: bool,
-    language: str,
     base_url: str,
     access_cookie_name: str,
     refresh_cookie_name: str,
@@ -29,7 +28,7 @@ def get_router(
     social_creds: Optional[dict],
 ):
 
-    SocialService.setup(repo, auth_backend, language, base_url, social_creds)
+    SocialService.setup(repo, auth_backend, base_url, social_creds)
 
     router = APIRouter()
 
