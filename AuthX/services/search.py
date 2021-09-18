@@ -2,7 +2,7 @@ from typing import Optional
 
 from fastapi import HTTPException
 
-from AuthX.api.users import UsersRepo
+from AuthX.api import UsersRepo
 from AuthX.models.user import UserPrivateInfo
 
 

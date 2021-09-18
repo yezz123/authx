@@ -3,7 +3,7 @@ from typing import Optional
 from fastapi import HTTPException
 from pydantic import ValidationError
 
-from AuthX.api.users import UsersRepo
+from AuthX.api import UsersRepo
 from AuthX.core.email import EmailClient
 from AuthX.core.jwt import JWTBackend
 from AuthX.core.logger import logger
@@ -14,6 +14,7 @@ from AuthX.models.user import (
     UserInForgotPassword,
     UserInSetPassword,
 )
+from AuthX.resources.error_messages import get_error_message
 from AuthX.utils.strings import create_random_string, hash_string
 
 
@@ -21,7 +22,6 @@ class PasswordService:
     _repo: UsersRepo
     _auth_backend: JWTBackend
     _debug: bool
-    _language: str
     _base_url: str
     _site: str
     _recaptcha_secret: str
@@ -40,7 +40,6 @@ class PasswordService:
         repo,
         auth_backend,
         debug: bool,
-        language: str,
         base_url: str,
         site: str,
         recaptcha_secret: str,
@@ -58,7 +57,6 @@ class PasswordService:
         cls._smtp_password = smtp_password
         cls._smtp_host = smtp_host
         cls._smtp_tls = smtp_tls
-        cls._language = language
         cls._base_url = base_url
         cls._site = site
         cls._display_name = display_name
@@ -69,7 +67,6 @@ class PasswordService:
             self._smtp_host,
             self._smtp_password,
             self._smtp_tls,
-            self._language,
             self._base_url,
             self._site,
             self._display_name,
@@ -80,7 +77,7 @@ class PasswordService:
             return model(**data)
         except ValidationError as e:
             msg = e.errors()[0].get("msg")
-            raise HTTPException(400, detail=msg)
+            raise HTTPException(400, detail=get_error_message(msg))
 
     async def forgot_password(self, data: dict, ip: str) -> None:
         """POST /forgot_password
@@ -102,12 +99,12 @@ class PasswordService:
         try:
             email = UserInForgotPassword(**data).email
         except ValidationError:
-            raise HTTPException(400, detail="forgot password validation error")
+            raise HTTPException(400, detail=get_error_message("validation"))
 
         item = await self._repo.get_by_email(email)
 
         if item is None:
-            raise HTTPException(404, detail="forgot password email not found")
+            raise HTTPException(404, detail=get_error_message("email not found"))
 
         if item.get("password") is None:
             raise HTTPException(406)
@@ -115,7 +112,7 @@ class PasswordService:
         id = item.get("id")
 
         if not await self._repo.is_password_reset_available(id):
-            raise HTTPException(400, detail="password reset already available")
+            raise HTTPException(400, detail=get_error_message("reset before"))
         logger.info(f"forgot_password ip={ip} email={email}")
 
         token = create_random_string()
@@ -135,13 +132,13 @@ class PasswordService:
 
     async def password_set(self, data: dict) -> None:
         item = await self._repo.get(self._user.id)
-        if item.get("provider") is None or item.get("password") is not None:
-            raise HTTPException(400, detail="password already set")
-
-        user_model = self._validate_user_model(UserInSetPassword, data)
-        password_hash = get_password_hash(user_model.password1)
-        await self._repo.set_password(self._user.id, password_hash)
-        return None
+        if item.get("provider") is not None and item.get("password") is None:
+            user_model = self._validate_user_model(UserInSetPassword, data)
+            password_hash = get_password_hash(user_model.password1)
+            await self._repo.set_password(self._user.id, password_hash)
+            return None
+        else:
+            raise HTTPException(400, get_error_message("password already exists"))
 
     async def password_reset(self, data: dict, token: str) -> None:
         token_hash = hash_string(token)
@@ -162,7 +159,7 @@ class PasswordService:
         item = await self._repo.get(self._user.id)
 
         if not verify_password(user_model.old_password, item.get("password")):
-            raise HTTPException(400, detail="old password is incorrect")
+            raise HTTPException(400, detail=get_error_message("password invalid"))
 
         password_hash = get_password_hash(user_model.password1)
         await self._repo.set_password(self._user.id, password_hash)

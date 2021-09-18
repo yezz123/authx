@@ -6,7 +6,7 @@ from email_validator import EmailNotValidError, validate_email
 from fastapi import HTTPException
 from pydantic.error_wrappers import ValidationError
 
-from AuthX.api.users import UsersRepo
+from AuthX.api import UsersRepo
 from AuthX.core.email import EmailClient
 from AuthX.core.jwt import JWTBackend
 from AuthX.core.logger import logger
@@ -19,6 +19,7 @@ from AuthX.models.user import (
     UserInRegister,
     UserPayload,
 )
+from AuthX.resources.error_messages import get_error_message
 from AuthX.utils.captcha import validate_captcha
 from AuthX.utils.strings import create_random_string, hash_string
 
@@ -27,7 +28,6 @@ class AuthService:
     _repo: UsersRepo
     _auth_backend: JWTBackend
     _debug: bool
-    _language: str
     _base_url: str
     _site: str
     _recaptcha_secret: str
@@ -46,7 +46,6 @@ class AuthService:
         repo: UsersRepo,
         auth_backend: JWTBackend,
         debug: bool,
-        language: str,
         base_url: str,
         site: str,
         recaptcha_secret: str,
@@ -64,7 +63,6 @@ class AuthService:
         cls._smtp_password = smtp_password
         cls._smtp_host = smtp_host
         cls._smtp_tls = smtp_tls
-        cls._language = language
         cls._base_url = base_url
         cls._site = site
         cls._display_name = display_name
@@ -72,8 +70,9 @@ class AuthService:
     def _validate_user_model(self, model, data: dict):
         try:
             return model(**data)
-        except ValidationError:
-            raise HTTPException(400)
+        except ValidationError as e:
+            msg = e.errors()[0].get("msg")
+            raise HTTPException(400, detail=get_error_message(msg))
 
     async def _email_exists(self, email: str) -> bool:
         return await self._repo.get_by_email(email) is not None
@@ -87,7 +86,6 @@ class AuthService:
             self._smtp_host,
             self._smtp_password,
             self._smtp_tls,
-            self._language,
             self._base_url,
             self._site,
             self._display_name,
@@ -117,14 +115,15 @@ class AuthService:
         if not self._debug:
             captcha = data.get("captcha")
             if not await validate_captcha(captcha, self._recaptcha_secret):
-                raise HTTPException(400)
+                raise HTTPException(400, detail=get_error_message("captcha"))
+
         user = self._validate_user_model(UserInRegister, data)
 
         if await self._email_exists(user.email):
-            raise HTTPException(400)
+            raise HTTPException(400, detail=get_error_message("existing email"))
 
         if await self._username_exists(user.username):
-            raise HTTPException(400)
+            raise HTTPException(400, detail=get_error_message("existing username"))
 
         new_user = UserInCreate(
             **user.dict(), password=get_password_hash(user.password1)
@@ -133,7 +132,7 @@ class AuthService:
         try:
             validate_email(new_user.get("email"), timeout=5)
         except EmailNotValidError:
-            raise HTTPException(status_code=400, detail="Email is not valid")
+            raise HTTPException(400, detail=get_error_message("try another email"))
 
         new_user_id = await self._repo.create(new_user)
 
@@ -167,21 +166,21 @@ class AuthService:
         try:
             user = UserInLogin(**data)
         except ValidationError:
-            raise HTTPException(status_code=400)
+            raise HTTPException(400)
 
         if await self._is_bruteforce(ip, user.login):
-            raise HTTPException(status_code=429, detail="Too many requests")
+            raise HTTPException(429, detail="Too many requests")
 
         item = await self._repo.get_by_login(user.login)
 
         if item is None:
-            raise HTTPException(status_code=404)
+            raise HTTPException(404)
 
         if not item.get("active"):
-            raise HTTPException(status_code=400)
+            raise HTTPException(400, detail=get_error_message("ban"))
 
         if not verify_password(user.password, item.get("password")):
-            raise HTTPException(status_code=401)
+            raise HTTPException(401)
 
         await self._update_last_login(item.get("id"))
 
@@ -209,11 +208,11 @@ class AuthService:
             refresh_token_payload is None
             or refresh_token_payload.get("type") != "refresh"
         ):
-            raise HTTPException(status_code=401)
+            raise HTTPException(401)
 
         item = await self._repo.get(refresh_token_payload.get("id"))
         if item is None or not item.get("active"):
-            raise HTTPException(status_code=401)
+            raise HTTPException(401)
 
         payload = UserPayload(**item).dict()
         return self._auth_backend.create_access_token(payload)
@@ -280,12 +279,12 @@ class AuthService:
         item = await self._repo.get(id)
         old_username = item.get("username")
         if old_username == new_username:
-            raise HTTPException(400)
+            raise HTTPException(400, detail=get_error_message("username change same"))
 
         existing_user = await self._repo.get_by_username(new_username)
 
         if existing_user is not None:
-            raise HTTPException(400)
+            raise HTTPException(400, detail=get_error_message("existing username"))
 
         logger.info(
             f"change_username id={id} old_username={old_username} new_username={new_username}"
