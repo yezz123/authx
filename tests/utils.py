@@ -3,8 +3,8 @@ from typing import Iterable, Optional, Tuple, Union
 
 import jwt
 
-ACCESS_COOKIE_NAME = "access"
-REFRESH_COOKIE_NAME = "refresh"
+ACCESS_COOKIE_NAME = "access_token"
+REFRESH_COOKIE_NAME = "refresh_token"
 
 
 class User:

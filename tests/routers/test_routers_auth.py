@@ -38,8 +38,54 @@ app.include_router(router)
 
 test_client = TestClient(app)
 
-ACCESS_TOKEN = "ACCESS"
-REFRESH_TOKEN = "REFRESH"
+ACCESS_TOKEN = "access_token"
+REFRESH_TOKEN = "refresh_token"
+
+
+@mock.patch(
+    "AuthX.routers.auth.AuthService.register",
+    mock.AsyncMock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
+)
+def test_register():
+    url = app.url_path_for("auth:register")
+    response = test_client.post(
+        url,
+        json={
+            "email": "admin@admin.com",
+            "username": "user",
+            "password1": "password",
+            "password2": "password",
+        },
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data.get("access") == ACCESS_TOKEN
+    assert data.get("refresh") == REFRESH_TOKEN
+
+
+@mock.patch(
+    "AuthX.routers.auth.AuthService.login",
+    mock.AsyncMock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
+)
+def test_login():
+    url = app.url_path_for("auth:login")
+    data = {
+        "email": "yezz123@gmail.com",
+        "password": "12345678",
+    }
+    response = test_client.post(url, json=data)
+
+    assert test_client.cookies.get(ACCESS_COOKIE_NAME) == ACCESS_TOKEN
+    assert test_client.cookies.get(REFRESH_COOKIE_NAME) == REFRESH_TOKEN
+    assert response.status_code == 200
+
+
+def test_logout():
+    url = app.url_path_for("auth:logout")
+    response = test_client.post(url)
+    assert response.status_code == 200
+    assert not test_client.cookies.get(ACCESS_COOKIE_NAME)
+    assert not test_client.cookies.get(REFRESH_COOKIE_NAME)
 
 
 def test_token():
@@ -49,6 +95,19 @@ def test_token():
     data = response.json()
     assert data.get("id") == 2  # TODO
     assert data.get("username") == "user"  # TODO
+
+
+@mock.patch(
+    "AuthX.routers.auth.AuthService.refresh_access_token",
+    mock.AsyncMock(return_value=ACCESS_TOKEN),
+)
+def test_refresh_access_token():
+    url = app.url_path_for("auth:refresh_access_token")
+    response = test_client.post(url)
+    assert response.status_code == 200
+    data = response.json()
+    assert data.get("access") == ACCESS_TOKEN
+    assert data.get("refresh") == REFRESH_TOKEN
 
 
 @mock.patch(
