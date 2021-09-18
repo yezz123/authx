@@ -26,7 +26,7 @@ repos:
             additional_dependencies: [flake8-print]
             files: '\.py$'
             args:
-                - --select=F401,F403,F406,F821,T001,T003
+                - --select=F401,F403,F406,F821,T003
     - repo: https://github.com/humitos/mirrors-autoflake
       rev: v1.3
       hooks:
