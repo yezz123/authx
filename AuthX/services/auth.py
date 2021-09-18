@@ -19,7 +19,6 @@ from AuthX.models.user import (
     UserInRegister,
     UserPayload,
 )
-from AuthX.resources.error_messages import get_error_message
 from AuthX.utils.captcha import validate_captcha
 from AuthX.utils.strings import create_random_string, hash_string
 
@@ -73,9 +72,8 @@ class AuthService:
     def _validate_user_model(self, model, data: dict):
         try:
             return model(**data)
-        except ValidationError as e:
-            msg = e.errors()[0].get("msg")
-            raise HTTPException(400, detail=get_error_message(msg, self._language))
+        except ValidationError:
+            raise HTTPException(400)
 
     async def _email_exists(self, email: str) -> bool:
         return await self._repo.get_by_email(email) is not None
@@ -119,20 +117,14 @@ class AuthService:
         if not self._debug:
             captcha = data.get("captcha")
             if not await validate_captcha(captcha, self._recaptcha_secret):
-                raise HTTPException(
-                    400, detail=get_error_message("captcha", self._language)
-                )  # raise HTTPException(400, detail=message)
+                raise HTTPException(400)
         user = self._validate_user_model(UserInRegister, data)
 
         if await self._email_exists(user.email):
-            raise HTTPException(
-                400, detail=get_error_message("existing email", self._language)
-            )
+            raise HTTPException(400)
 
         if await self._username_exists(user.username):
-            raise HTTPException(
-                400, detail=get_error_message("existing username", self._language)
-            )
+            raise HTTPException(400)
 
         new_user = UserInCreate(
             **user.dict(), password=get_password_hash(user.password1)
@@ -141,9 +133,7 @@ class AuthService:
         try:
             validate_email(new_user.get("email"), timeout=5)
         except EmailNotValidError:
-            raise HTTPException(
-                400, detail=get_error_message("try another email", self._language)
-            )
+            raise HTTPException(status_code=400, detail="Email is not valid")
 
         new_user_id = await self._repo.create(new_user)
 
@@ -177,21 +167,21 @@ class AuthService:
         try:
             user = UserInLogin(**data)
         except ValidationError:
-            raise HTTPException(400)
+            raise HTTPException(status_code=400)
 
         if await self._is_bruteforce(ip, user.login):
-            raise HTTPException(429, detail="Too many requests")
+            raise HTTPException(status_code=429, detail="Too many requests")
 
         item = await self._repo.get_by_login(user.login)
 
         if item is None:
-            raise HTTPException(404)
+            raise HTTPException(status_code=404)
 
         if not item.get("active"):
-            raise HTTPException(400, detail=get_error_message("ban", self._language))
+            raise HTTPException(status_code=400)
 
         if not verify_password(user.password, item.get("password")):
-            raise HTTPException(401)
+            raise HTTPException(status_code=401)
 
         await self._update_last_login(item.get("id"))
 
@@ -219,11 +209,11 @@ class AuthService:
             refresh_token_payload is None
             or refresh_token_payload.get("type") != "refresh"
         ):
-            raise HTTPException(401)
+            raise HTTPException(status_code=401)
 
         item = await self._repo.get(refresh_token_payload.get("id"))
         if item is None or not item.get("active"):
-            raise HTTPException(401)
+            raise HTTPException(status_code=401)
 
         payload = UserPayload(**item).dict()
         return self._auth_backend.create_access_token(payload)
@@ -290,16 +280,12 @@ class AuthService:
         item = await self._repo.get(id)
         old_username = item.get("username")
         if old_username == new_username:
-            raise HTTPException(
-                400, detail=get_error_message("username change same", self._language)
-            )
+            raise HTTPException(400)
 
         existing_user = await self._repo.get_by_username(new_username)
 
         if existing_user is not None:
-            raise HTTPException(
-                400, detail=get_error_message("existing username", self._language)
-            )
+            raise HTTPException(400)
 
         logger.info(
             f"change_username id={id} old_username={old_username} new_username={new_username}"
