@@ -3,14 +3,13 @@ from datetime import datetime, timedelta
 from typing import Optional
 
 import jwt
-from AuthX.core.config import JWT_ALGORITHM
 
+from AuthX.core.config import JWT_ALGORITHM
 
 
 class JWTBackend:
     def __init__(
         self,
-
         private_key: Optional[bytes],
         public_key: bytes,
         access_expiration: int,
