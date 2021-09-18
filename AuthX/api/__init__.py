@@ -1,1 +1,3 @@
-# Path: AuthX/api/users.py
+from AuthX.api.users import UsersRepo
+
+__all__ = ["UsersRepo"]
