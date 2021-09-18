@@ -4,11 +4,11 @@ from aioredis import Redis
 from fastapi import APIRouter, HTTPException, Request
 from motor.motor_asyncio import AsyncIOMotorClient
 
+from AuthX.api import UsersRepo
 from AuthX.core.jwt import JWTBackend
 from AuthX.core.user import User
 from AuthX.database.mongodb import MongoDBBackend
 from AuthX.database.redis import RedisBackend
-from AuthX.api import UsersRepo
 from AuthX.routers import (
     get_admin_router,
     get_auth_router,
@@ -49,10 +49,7 @@ class AuthX:
         else:
             return User()
 
-    async def get_authenticated_user(
-        self,
-        request: Request,
-    ) -> User:
+    async def get_authenticated_user(self, request: Request,) -> User:
         access_token = request.cookies.get(self._access_cookie_name)
         if access_token:
             return await User.create(access_token, self._auth_backend)
