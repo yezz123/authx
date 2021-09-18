@@ -6,9 +6,7 @@ astroid
 async-timeout
 atomicwrites
 attrs
-autoflake
 bcrypt
-black
 certifi
 cffi
 charset-normalizer
@@ -19,7 +17,6 @@ cryptography
 dnspython
 email-validator
 fastapi
-flake8
 h11
 httpcore
 httpx
