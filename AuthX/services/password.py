@@ -14,7 +14,6 @@ from AuthX.models.user import (
     UserInForgotPassword,
     UserInSetPassword,
 )
-from AuthX.resources.error_messages import get_error_message
 from AuthX.utils.strings import create_random_string, hash_string
 
 
@@ -81,7 +80,7 @@ class PasswordService:
             return model(**data)
         except ValidationError as e:
             msg = e.errors()[0].get("msg")
-            raise HTTPException(400, detail=get_error_message(msg, self._language))
+            raise HTTPException(400, detail=msg)
 
     async def forgot_password(self, data: dict, ip: str) -> None:
         """POST /forgot_password
@@ -103,16 +102,12 @@ class PasswordService:
         try:
             email = UserInForgotPassword(**data).email
         except ValidationError:
-            raise HTTPException(
-                400, detail=get_error_message("validation", self._language)
-            )
+            raise HTTPException(400, detail="forgot password validation error")
 
         item = await self._repo.get_by_email(email)
 
         if item is None:
-            raise HTTPException(
-                404, detail=get_error_message("email not found", self._language)
-            )
+            raise HTTPException(404, detail="forgot password email not found")
 
         if item.get("password") is None:
             raise HTTPException(406)
@@ -120,9 +115,7 @@ class PasswordService:
         id = item.get("id")
 
         if not await self._repo.is_password_reset_available(id):
-            raise HTTPException(
-                400, detail=get_error_message("reset before", self._language)
-            )
+            raise HTTPException(400, detail="password reset already available")
         logger.info(f"forgot_password ip={ip} email={email}")
 
         token = create_random_string()
@@ -143,9 +136,7 @@ class PasswordService:
     async def password_set(self, data: dict) -> None:
         item = await self._repo.get(self._user.id)
         if item.get("provider") is None or item.get("password") is not None:
-            raise HTTPException(
-                400, get_error_message("password already exists", self._language)
-            )
+            raise HTTPException(400, detail="password already set")
 
         user_model = self._validate_user_model(UserInSetPassword, data)
         password_hash = get_password_hash(user_model.password1)
@@ -171,9 +162,7 @@ class PasswordService:
         item = await self._repo.get(self._user.id)
 
         if not verify_password(user_model.old_password, item.get("password")):
-            raise HTTPException(
-                400, detail=get_error_message("password invalid", self._language)
-            )
+            raise HTTPException(400, detail="old password is incorrect")
 
         password_hash = get_password_hash(user_model.password1)
         await self._repo.set_password(self._user.id, password_hash)
