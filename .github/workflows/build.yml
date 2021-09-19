@@ -1,4 +1,4 @@
-name: Build
+name: Build AuthX
 
 on: [push, pull_request]
 
@@ -7,32 +7,24 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: [3.7, 3.8, 3.9]
-
-    services:
-      mongo:
-        image: mongo:4.2
-        ports:
-          - 27017:27017
-
+        python_version: [3.9]
     steps:
       - uses: actions/checkout@v1
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
           python-version: ${{ matrix.python_version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.dev.txt
-      - name: Test with pytest
+      - name: pull image
+        run: make pull
+      - name: build image
+        run: make build
+      - name: lint image
+        run: make lint
+      - name: test image
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
-          pytest --cov=AuthX/
-          codecov
+          make test
       - name: Build and install it on system host
         run: |
-          flit build
-          flit install --python $(which python)
-          python build.py
+          make flit
