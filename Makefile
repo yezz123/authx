@@ -41,4 +41,6 @@ clean-test:
 	rm -fr .pytest_cache
 
 flit:
-	docker-compose run --rm authx flit build && flit install && python build.py
+	docker-compose run --rm authx flit build
+	docker-compose run --rm authx flit install --python 3.9
+	docker-compose run --rm authx python build.py
