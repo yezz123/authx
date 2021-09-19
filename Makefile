@@ -8,9 +8,10 @@ help:
 	@echo "    make lint"
 	@echo "    make clean"
 	@echo "    make clean-test"
+	@echo "    make flit"
 
 test:
-	docker-compose run --rm authx pytest --cov=AuthX --cov-report=html
+	docker-compose run --rm authx pytest --cov=AuthX && codecov --token=${CODECOV_TOKEN}
 
 start:
 	docker-compose up -d
@@ -38,3 +39,6 @@ clean-test:
 	rm -f .coverage
 	rm -fr htmlcov/
 	rm -fr .pytest_cache
+
+flit:
+	docker-compose run --rm authx flit build && flit install --force && python build.py
