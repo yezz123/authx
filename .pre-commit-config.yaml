@@ -33,7 +33,7 @@ repos:
           - id: autoflake
             files: '\.py$'
             exclude: '^\..*'
-            args: ["--in-place", "--remove-all-unused-imports"]
+            args: ["--in-place"]
     - repo: https://github.com/psf/black
       rev: 19.10b0
       hooks:
