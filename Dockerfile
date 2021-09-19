@@ -7,7 +7,7 @@ ENV PYTHONUNBUFFERED 1
 
 COPY . /app/
 
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.dev.txt
 
 
 ENV PYTHONPATH=/app
