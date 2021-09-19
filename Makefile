@@ -11,7 +11,7 @@ help:
 	@echo "    make flit"
 
 test:
-	docker-compose run --rm authx pytest --cov=AuthX && codecov --token=${CODECOV_TOKEN}
+	docker-compose run --rm authx pytest --cov=AuthX
 
 start:
 	docker-compose up -d
@@ -41,4 +41,4 @@ clean-test:
 	rm -fr .pytest_cache
 
 flit:
-	docker-compose run --rm authx flit build && flit install --force && python build.py
+	docker-compose run --rm authx flit build && flit install --python=python3.9 && python build.py

@@ -21,8 +21,6 @@ jobs:
       - name: lint image
         run: make lint
       - name: test image
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
           make test
       - name: Build and install it on system host
