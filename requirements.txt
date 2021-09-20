@@ -8,7 +8,7 @@ itsdangerous == 1.1.0
 bcrypt == 3.2.0
 orjson == 3.4.0
 email-validator == 1.1.1
-motor == 2.3.0
+motor == 2.5.1
 aiosmtplib == 1.1.4
 pytest == 6.1.1
 pytest-asyncio == 0.14.0
