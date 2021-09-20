@@ -32,7 +32,7 @@ $ virtualenv venv
 $ source venv/bin/activate
 
 # install all dependencies
-$ pip install -r requirements.txt
+$ pip install -r requirements.dev.txt
 ```
 
 ## Running the Docker Container
