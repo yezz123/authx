@@ -1,28 +1,27 @@
-name: Build AuthX
+name: Upload Python Package
 
-on: [push, pull_request]
+on:
+  release:
+    types: [published]
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python_version: [3.9]
+
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Set up Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python_version }}
-      - name: pull image
-        run: make pull
-      - name: build image
-        run: make build
-      - name: lint image
-        run: make lint
-      - name: test image
+          python-version: "3.9"
+      - name: Install dependencies
         run: |
-          make test
-      - name: Build and install it on system host
+          python -m pip install --upgrade pip
+          pip install setuptools wheel twine
+      - name: Build and publish
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         run: |
-          make flit
+          python setup.py sdist bdist_wheel
+          twine upload dist/*
