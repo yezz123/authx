@@ -1,4 +1,8 @@
 class User:
+    """
+    Setup the user object
+    """
+
     def __init__(self, data=None):
         self.data = data
         if data is None:
