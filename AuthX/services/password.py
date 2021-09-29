@@ -126,8 +126,7 @@ class PasswordService:
 
         return None
 
-    async def password_status(self) -> dict:
-        """post /password_status
+    """post /password_status
         Only for accounts with password.
 
         Returns:
@@ -141,7 +140,13 @@ class PasswordService:
             HTTPException:
                 400 - validation or timeout.
                 404 - token not found.
-        """
+"""
+
+    async def password_status(self) -> dict:
+        status = await self._repo.get_password_status(self._user.id)
+        return {"status": status}
+
+    async def password_set(self, data: dict) -> None:
         item = await self._repo.get(self._user.id)
         return {
             "password": item.get("password") is not None,
