@@ -19,6 +19,11 @@ from AuthX.routers import (
 
 
 class AuthX:
+    """
+    Here we define the routers for the API.
+    This is AuthX specific, so we can't use the fastapi router.
+    """
+
     def __init__(
         self,
         access_cookie_name: str,
@@ -67,6 +72,14 @@ class AuthX:
 
 
 class Authentication(AuthX):
+    """
+    Here we define the routers for the API.
+    Authentication the based class where we can define the routers relate to AuthX.
+
+    Args:
+        AuthX: The base class for the routers.
+    """
+
     def __init__(
         self,
         debug: bool,
