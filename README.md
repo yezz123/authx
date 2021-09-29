@@ -1,9 +1,8 @@
 # AuthX
 
-![authx](.github/header.svg)
+![authx](https://user-images.githubusercontent.com/52716203/135356258-b4c2caa8-4996-40f8-951d-d50a4ba049f9.png)
 
 [![Downloads](https://pepy.tech/badge/authx/month)](https://pepy.tech/project/authx)
-[![Testing on Docker](https://github.com/yezz123/AuthX/actions/workflows/docker.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/docker.yml)
 [![PyPI version](https://badge.fury.io/py/AuthX.svg)](https://badge.fury.io/py/AuthX)
 
 - Ready to use and customizable Authentications and Oauth2 management for FastAPI ⚡
@@ -26,25 +25,25 @@ __Note__: This is a **beta** version of AuthX.
 
 ## Features
 
-- [X] Extensible base user model
-- [X] Ready-to-use register, login, reset password and verify e-mail routes.
-- [X] Ready to use Social login and Oauth2 routes. (now with Google, Facebook)
-  - [ ] Soon with Microsoft, Twitter, Github, etc.
-- [X] Ready-to-use social OAuth2 login flow
-- [X] Tested Project on [Docker](https://docker.com/).
-- [X] Dependency callable to inject current user in route
-- [X] Pluggable password validation
-- [X] Using Captcha Service.
-- [X] Using Email Service. (SMTP)
-- [X] Extensible Error Handling
-- [X] High level API to manage users, roles and permissions
-- [X] Using Redis as a session store & cache.
-- [X] Customizable database backend
-  - [X] MongoDB async backend included thanks to [mongodb/motor](https://github.com/mongodb/motor)
-- [X] Multiple customizable authentication backend
-  - [X] JWT authentication backend included
-  - [ ] Soon to be included Cookie authentication backend
-- [X] Full OpenAPI schema support, even with several authentication backend.
+- Extensible base user model.
+- Ready-to-use register, login, reset password and verify e-mail routes.
+- Ready to use Social login and Oauth2 routes. (now with Google, Facebook)
+  - Soon with Microsoft, Twitter, Github, etc.
+  - Ready-to-use social OAuth2 login flow
+- Tested Project on [Docker](https://docker.com/).
+- Dependency callable to inject current user in route
+- Pluggable password validation
+  - Using Captcha Service.
+- Using Email Service. (SMTP)
+- Extensible Error Handling
+- High level API to manage users, roles and permissions
+- Using Redis as a session store & cache.
+- Customizable database backend:
+  - MongoDB async backend included thanks to [mongodb/motor](https://github.com/mongodb/motor)
+- Multiple customizable authentication backend:
+  - JWT authentication backend included
+  - Soon to be included Cookie authentication backend
+- Full OpenAPI schema support, even with several authentication backend.
 
 ## Project using
 
