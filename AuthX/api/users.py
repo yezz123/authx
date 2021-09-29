@@ -19,6 +19,17 @@ from AuthX.database.redis import RedisBackend
 
 
 class Base:
+    """
+    Initialize the API with the database and cache.
+
+    :param database: The database to use.
+    :param cache: The cache to use.
+    :param callbacks: The callbacks to use.
+    :param access_expiration: The expiration time for access tokens.
+
+    :return: None
+    """
+
     def __init__(
         self,
         database: MongoDBBackend,
@@ -26,6 +37,14 @@ class Base:
         callbacks: Iterable,
         access_expiration: int = 60 * 60 * 6,
     ):
+        """ Initialize the API with the database and cache.
+
+        Args:
+            database (MongoDBBackend): The database to use.
+            cache (RedisBackend): The cache to use.
+            callbacks (Iterable): The callbacks to use.
+            access_expiration (int, optional): The expiration time for access tokens. Defaults to 60 * 60 * 6.
+        """
         self._database: Optional[MongoDBBackend] = database
         self._cache: Optional[RedisBackend] = cache
         self._callbacks = callbacks
@@ -33,6 +52,12 @@ class Base:
 
 
 class UsersCRUDMixin(Base):
+    """ User CRUD MIXIN
+
+    Args:
+        Create all the Common CRUDS GET, POST, PUT, DELETE methods.
+    """
+
     async def get(self, id: int) -> Optional[dict]:
         return await self._database.get(id)
 
@@ -79,6 +104,12 @@ class UsersCRUDMixin(Base):
 
 
 class UsersProtectionMixin(Base):
+    """ User Protection MIXIN
+
+    Args:
+        Create all the Common Protection GET, POST, PUT, DELETE methods.
+    """
+
     async def _check_timeout_and_incr(self, key: str, max: int, timeout: int) -> bool:
         count = await self._cache.get(key)
         if count is not None:
@@ -115,6 +146,12 @@ class UsersProtectionMixin(Base):
 
 
 class UsersConfirmMixin(Base):
+    """ User Confirmation MIXIN
+
+    Args:
+        Create all the Common Confirmation GET, POST, PUT, DELETE methods.
+    """
+
     async def is_email_confirmation_available(self, id: int) -> bool:
         key = f"users:confirm:count:{id}"
         return await self._check_timeout_and_incr(
@@ -130,6 +167,12 @@ class UsersConfirmMixin(Base):
 
 
 class UsersUsernameMixin(Base):
+    """ User Username MIXIN
+
+    Args:
+        Create all the Common Username GET, POST, PUT, DELETE methods.
+    """
+
     async def change_username(self, id: int, new_username: str) -> None:
         await self.update(id, {"username": new_username})
         for callback in self._callbacks:
@@ -146,6 +189,12 @@ class UsersUsernameMixin(Base):
 
 
 class UsersPasswordMixin(Base):
+    """ User Password MIXIN
+
+    Args:
+        Create all the Common Password GET, POST, PUT, DELETE methods.
+    """
+
     async def get_password_status(self, id: int) -> str:
         item = await self.get(id)
         if item.get("provider") is not None and item.get("password") is None:
@@ -175,6 +224,12 @@ class UsersPasswordMixin(Base):
 
 
 class UsersManagementMixin(Base):
+    """ User Management MIXIN
+
+    Args:
+        Create all the Common Management GET, POST, PUT, DELETE methods.
+    """
+
     async def get_blacklist(self) -> dict:
         blacklist_db = await self._database.get_blacklist()
         blacklist_cache = await self._cache.keys("users:blacklist:*")
@@ -228,4 +283,13 @@ class UsersRepo(
     UsersProtectionMixin,
     UsersManagementMixin,
 ):
-    pass
+    """ User Repository
+
+    Args:
+        UsersCRUDMixin: CRUD methods
+        UsersConfirmMixin: Confirmation methods
+        UsersPasswordMixin: Password methods
+        UsersUsernameMixin: Username methods
+        UsersProtectionMixin: Protection methods
+        UsersManagementMixin: Management methods
+    """
