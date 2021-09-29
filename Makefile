@@ -8,7 +8,9 @@ help:
 	@echo "    make lint"
 	@echo "    make clean"
 	@echo "    make clean-test"
-
+	@echo "    make bumpversion-major"
+	@echo "    make bumpversion-minor"
+	@echo "    make bumpversion-patch"
 test:
 	docker-compose run --rm authx pytest --cov=./  --cov-report=xml
 
@@ -38,3 +40,12 @@ clean-test:
 	rm -f .coverage
 	rm -fr htmlcov/
 	rm -fr .pytest_cache
+
+bumpversion-major:
+	bumpversion major --allow-dirty
+
+bumpversion-minor:
+	bumpversion minor
+
+bumpversion-patch:
+	bumpversion patch
