@@ -4,6 +4,13 @@ from aioredis import Redis
 
 
 class RedisBackend:
+    """
+    Setup the Redis connection for the backend using aioredis.
+
+    Returns:
+        None
+    """
+
     _redis: Optional[Redis] = None
 
     def set_client(self, redis: Redis) -> None:
