@@ -19,3 +19,5 @@ jobs:
         run: make lint
       - name: pytest
         run: make test
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v2

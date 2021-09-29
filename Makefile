@@ -10,7 +10,7 @@ help:
 	@echo "    make clean-test"
 
 test:
-	docker-compose run --rm authx pytest --cov=AuthX
+	docker-compose run --rm authx pytest --cov=./  --cov-report=xml
 
 start:
 	docker-compose up -d
