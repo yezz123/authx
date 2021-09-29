@@ -11,14 +11,40 @@ def convert_field_to_camel_case(string: str) -> str:
 
 
 def set_created_at(v):
+    """
+    Set created_at field to current datetime
+
+    Args:
+        v (object): pydantic model object
+
+    Returns:
+        datetime: current datetime
+    """
     return datetime.utcnow()
 
 
 def set_last_login(v, values):
+    """
+    Set last_login field to current datetime
+
+    Args:
+        v (object): pydantic model object
+        values (dict): values to be set
+
+    Returns:
+        datetime: current datetime
+    """
     return values.get("created_at")
 
 
 class DefaultModel(BaseModel):
     class Config(BaseConfig):
+        """
+        Config for pydantic models
+
+        Args:
+            BaseConfig: pydantic config
+        """
+
         allow_population_by_field_name = True
         alias_generator = convert_field_to_camel_case
