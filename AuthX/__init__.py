@@ -1,6 +1,6 @@
 """Ready to use and customizable Authentications and Oauth2 management for FastAPI"""
 
-__version__ = "1.0.0"
+__version__ = "0.0.4"
 
 from AuthX.main import Authentication, AuthX, User
 
