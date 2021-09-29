@@ -1,4 +1,8 @@
 class SocialErrorMessages:
+    """
+    Create SocialErrorMessages object
+    """
+
     def __init__(self, base_url: str):
         self._full_messages = {
             "email facebook error": f"""<p>We can't get your email. Please, check <a href=\"https://facebook.com/settings\">your facebook settings</a>. Make sure you have email there.</p>

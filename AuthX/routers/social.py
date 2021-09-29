@@ -27,7 +27,28 @@ def get_router(
     social_providers: Iterable[str],
     social_creds: Optional[dict],
 ):
+    """
+    Returns a router with all social providers.
 
+    Args:
+        repo (UsersRepo): Users repository.
+        auth_backend (JWTBackend): JWT backend.
+        debug (bool): Debug mode.
+        base_url (str): Base URL.
+        access_cookie_name (str): Access token cookie name.
+        refresh_cookie_name (str): Refresh token cookie name.
+        access_expiration (int): Access token expiration.
+        refresh_expiration (int): Refresh token expiration.
+        social_providers (Iterable[str]): List of social providers.
+        social_creds (Optional[dict]): Social credentials.
+
+    Raises:
+        HTTPException: If the social provider is not supported.
+        HTTPException: If the social provider is not configured.
+
+    Returns:
+        APIRouter: Social router.
+    """
     SocialService.setup(repo, auth_backend, base_url, social_creds)
 
     router = APIRouter()
@@ -38,6 +59,16 @@ def get_router(
 
     @router.get("/{provider}", name="social:login")
     async def login(*, provider: str, request: Request):
+        """
+        Redirects to the social provider login page.
+
+        Args:
+            provider (str): Social provider.
+            request (Request): FastAPI request.
+
+        Returns:
+            RedirectResponse: Redirects to the social provider login page.
+        """
         check_provider(provider)
         service = SocialService()
         method = getattr(service, f"login_{provider}")
@@ -50,6 +81,19 @@ def get_router(
 
     @router.get("/{provider}/callback", name="social:callback")
     async def callback(*, provider: str, request: Request):
+        """
+        Handles the social provider callback.
+
+        Args:
+            provider (str): Social provider.
+            request (Request): FastAPI request.
+
+        Raises:
+            HTTPException: If the social provider is not supported.
+
+        Returns:
+            HTMLResponse: Redirects to the home page.
+        """
         check_provider(provider)
 
         state_query = request.query_params.get("state")

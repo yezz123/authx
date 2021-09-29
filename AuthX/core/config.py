@@ -44,3 +44,9 @@ WRONG_USERNAMES: List[str] = [
     "messages",
     "change_info",
 ]
+""" The Global Configuration for AuthX.
+
+Keyword arguments:
+argument -- The argument to be checked.
+Return: True if the argument is valid, False otherwise.
+"""

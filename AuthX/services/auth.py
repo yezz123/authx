@@ -36,6 +36,18 @@ class AuthService:
     _smtp_host: str
     _smtp_tls: int
     _display_name: str
+    """ POST /logout
+
+    Args:
+        access_token: access token.
+
+    Returns:
+        None.
+
+    Raises:
+        HTTPException:
+            401 - invalid access token.
+    """
 
     def __init__(self, user: Optional[User] = None) -> None:
         self._user = user

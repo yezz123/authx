@@ -5,6 +5,10 @@ from AuthX.core.config import DEBUG
 
 
 class LevelFilter:
+    """
+    Create a logger with the given name.
+    """
+
     def __init__(self, level):
         self._level = level
 
@@ -18,6 +22,9 @@ logger.setLevel(logging.INFO)
 formatter = logging.Formatter("%(asctime)s %(message)s")
 
 if DEBUG:
+    """
+        Log to console
+    """
     log_info = logging.handlers.TimedRotatingFileHandler(
         "logs/info.log", when="midnight", backupCount=7
     )

@@ -10,6 +10,8 @@ from AuthX.errors import SocialException
 from AuthX.models.social import SocialInCreate
 from AuthX.models.user import UserPayload
 
+"""Social Service for authentication and authorization"""
+
 
 class SocialService:
     _repo: UsersRepo
@@ -29,19 +31,36 @@ class SocialService:
         cls._repo = repo
         cls._auth_backend = auth_backend
         cls._base_url = base_url
-
         if options is not None:
             for key, value in options.items():
                 setattr(cls, f"{key}_id", value.get("id"))
                 setattr(cls, f"{key}_secret", value.get("secret"))
 
     def _create_redirect_uri(self, provider: str) -> str:
+        """
+        Create redirect uri for social login
+
+        :param provider: social provider
+        :return: redirect uri
+        """
         return f"{self._base_url}/auth/{provider}/callback"
 
     async def _update_last_login(self, id: int) -> None:
+        """
+        Update last login time
+
+        :param id: user id
+        :return: None
+        """
         await self._repo.update(id, {"last_login": datetime.utcnow()})
 
     def login_google(self, state: str) -> str:
+        """
+        Login with google
+
+        :param state: state
+        :return: redirect uri
+        """
         redirect_uri = self._create_redirect_uri("google")
         return f"https://accounts.google.com/o/oauth2/v2/auth?scope=email%20profile&response_type=code&state={state}&redirect_uri={redirect_uri}&client_id={self.google_id}"
 
