@@ -1,60 +1,52 @@
 # AuthX
 
+![authx](.github/header.svg)
+
+[![Downloads](https://pepy.tech/badge/authx/month)](https://pepy.tech/project/authx)
+[![Testing on Docker](https://github.com/yezz123/AuthX/actions/workflows/docker.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/docker.yml)
+[![PyPI version](https://badge.fury.io/py/AuthX.svg)](https://badge.fury.io/py/AuthX)
+
 - Ready to use and customizable Authentications and Oauth2 management for FastAPI ⚡
 
-## Getting Started
+---
 
-### Prerequisites
+**Source Code**: <https://github.com/yezz123/AuthX>
 
-- Python 3.9
-- FastAPI
-- Docker
+**Project Board**: <https://trello.com/b/0NNZMP8T>
 
-### Project setup
+**Documentation**: Working on it...
 
-```sh
-# clone the repo
-$ git clone https://github.com/yezz123/AuthX.git
+---
 
-# move to the project folder
-$ cd DogeAPI
-```
+Add a Fully registration and authentication or authorization system to your [FastAPI](https://fastapi.tiangolo.com/) project. **AuthX** is designed to be as customizable and adaptable as possible.
 
-### Creating virtual environment
+__Note__: This is a **beta** version of AuthX.
 
-- Create a virtual environment using virtualenv.
+- This Project is inspired from [fastapi-users](https://github.com/fastapi-users/fastapi-users) - Ready-to-use and customizable users management for FastAPI.
 
-```shell
-# creating virtual environment
-$ virtualenv venv
+## Features
 
-# activate virtual environment
-$ source venv/bin/activate
+- [X] Extensible base user model
+- [X] Ready-to-use register, login, reset password and verify e-mail routes.
+- [X] Ready to use Social login and Oauth2 routes. (now with Google, Facebook)
+  - [ ] Soon with Microsoft, Twitter, Github, etc.
+- [X] Ready-to-use social OAuth2 login flow
+- [X] Tested Project on [Docker](https://docker.com/).
+- [X] Dependency callable to inject current user in route
+- [X] Pluggable password validation
+- [X] Using Captcha Service.
+- [X] Using Email Service. (SMTP)
+- [X] Extensible Error Handling
+- [X] High level API to manage users, roles and permissions
+- [X] Using Redis as a session store & cache.
+- [X] Customizable database backend
+  - [X] MongoDB async backend included thanks to [mongodb/motor](https://github.com/mongodb/motor)
+- [X] Multiple customizable authentication backend
+  - [X] JWT authentication backend included
+  - [ ] Soon to be included Cookie authentication backend
+- [X] Full OpenAPI schema support, even with several authentication backend.
 
-# install all dependencies
-$ pip install -r requirements.dev.txt
-```
-
-## Running the Docker Container
-
-- We have the Dockerfile created in above section. Now, we will use the Dockerfile to create the image of the FastAPI app and then start the FastAPI app container.
-- Using a preconfigured `Makefile` tor run the Docker Compose:
-
-```sh
-# Pull the latest image
-$ make pull
-
-# Build the image
-$ make build
-
-# test the image
-$ make test
-
-```
-
-##
-
-Project using :
+## Project using
 
 ```python
 # auth.py
@@ -120,3 +112,63 @@ auth = AuthX(...)
 auth.set_cache(cache) # aioredis
 ...
 ```
+
+## Development
+
+### Setup environment
+
+You should create a virtual environment and activate it:
+
+```bash
+python -m venv venv/
+```
+
+```bash
+source venv/bin/activate
+```
+
+And then install the development dependencies:
+
+```bash
+pip install -r requirements.dev.txt
+```
+
+### Run tests
+
+You can run all the tests with:
+
+```bash
+make test
+```
+
+The command will start a MongoDB container for the related unit tests. So you should have [Docker](https://www.docker.com/get-started) installed.
+
+Alternatively, you can run `pytest` yourself. The MongoDB unit tests will be skipped if no server is available on your local machine:
+
+```bash
+pytest
+```
+
+### Format the code
+
+Execute the following command to apply `pre-commit` formatting:
+
+```bash
+make lint
+```
+
+## Contributing
+
+As you see the Package still under development, you can contribute to it, also its a closed source project.
+
+- Then how i can contribute? 🤔
+  - You could contact the Maintainer of this project on :
+    - [Email](mailto:yasserth19@gmail.com)
+    - [Twitter](https://twitter.com/THyasser1)
+    - [telegram](https://t.me/yezz123)
+- Where i can see the Project Roadmap? 🤔
+  - I use to manage AuthX on [Trello](https://trello.com/b/0NNZMP8T), you could check and see all the tasks if you could help me to do it.
+
+## License
+
+This project is licensed under the terms of the Apache-2.0 License.
