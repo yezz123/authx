@@ -23,7 +23,7 @@ setuptools.setup(
     ],
     python_requires=">=3.9",
     install_requires=[
-        "fastapi==0.61.1",
+        "fastapi==0.68.2",
         "PyJWT==1.7.1",
         "cryptography==35.0.0",
         "httpx==0.16.1",
