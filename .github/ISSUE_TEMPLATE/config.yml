@@ -1,4 +1,4 @@
 contact_links:
   - name: I have a question 🤔
     url: https://github.com/yezz123/AuthX/discussions
-    about: If you have any question about the usage of FastAPI Users that's not clearly a bug, please open a discussion first.
+    about: If you have any question about the usage of AuthX that's not clearly a bug, please open a discussion first.
