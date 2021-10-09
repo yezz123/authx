@@ -1,13 +1,13 @@
 import setuptools
 
-VERSION = "0.0.5"
+__version__ = "0.0.5"
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="AuthX",
-    version=VERSION,
+    version=__version__,
     author="Yasser Tahiri",
     author_email="yasserth19@gmail.com",
     description="Ready to use and customizable Authentications and Oauth2 management for FastAPI",
@@ -17,9 +17,14 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     include_package_data=True,
     classifiers=[
-        "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3 :: Only",
+        "Topic :: Internet :: WWW/HTTP :: Session",
     ],
     python_requires=">=3.9",
     install_requires=[
