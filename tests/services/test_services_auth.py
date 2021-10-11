@@ -26,6 +26,9 @@ auth_backend = MockAuthBackend("RS256", private_key, public_key)
 
 @pytest.fixture(autouse=True)
 def auth_service_setup():
+    """
+    Setup the auth service
+    """
     AuthService.setup(
         UsersRepo(MockDatabaseBackend("test"), MockCacheBackend(), []),
         auth_backend,
@@ -72,6 +75,17 @@ async def test_register(
     captcha: str,
     valid_captcha: bool,
 ):
+    """
+    Test register
+    Args:
+        email (str): email
+        username (str): username
+        password1 (str): password
+        password2 (str): password
+        valid_data (bool): valid data
+        captcha (str): captcha
+        valid_captcha (bool): valid captcha
+    """
     auth_service = AuthService()
     with mock.patch(
         "AuthX.services.auth.validate_captcha",
@@ -120,11 +134,17 @@ async def test_register(
 )
 @mock.patch("AuthX.services.auth.verify_password", mock_verify_password)
 async def test_login(login: str, password: str):
+    """
+    Test login
+    Args:
+        login (str): login
+        password (str): password
+    """
     auth_service = AuthService()
     tokens = await auth_service.login(
         {"login": login, "password": password}, "127.0.0.1"
     )
-    # TODO
+    # TODO check tokens
     assert isinstance(tokens, dict)
 
 
@@ -134,6 +154,7 @@ async def test_refresh_access_token() -> str:
     refresh_token = auth_backend.create_refresh_token(
         {"id": 1, "username": "admin", "permissions": [], "type": "refresh",}
     )
+    # TODO: check refresh token
     access_token = await auth_service.refresh_access_token(refresh_token)
     assert isinstance(access_token, str)
 
@@ -184,6 +205,9 @@ async def test_request_email_confirmation():
 
 @pytest.mark.asyncio
 async def test_confirm_email():
+    """
+
+    """
     auth_service = AuthService()
     email = "anotheruser@gmail.com"
     token = create_random_string()
