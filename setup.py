@@ -30,7 +30,7 @@ setuptools.setup(
     install_requires=[
         "fastapi==0.61.1",
         "PyJWT==1.7.1",
-        "cryptography==3.1.1",
+        "cryptography==35.0.0",
         "httpx==0.16.1",
         "aioredis==1.3.1",
         "passlib==1.7.4",
