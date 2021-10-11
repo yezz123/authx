@@ -1,6 +1,6 @@
 # AuthX
 
-![authx](https://user-images.githubusercontent.com/52716203/135356258-b4c2caa8-4996-40f8-951d-d50a4ba049f9.png)
+![authx](https://user-images.githubusercontent.com/52716203/136656260-41e4dfd6-a20b-4cc9-bef8-66d8137607fe.png)
 
 [![Downloads](https://pepy.tech/badge/authx/month)](https://pepy.tech/project/authx)
 [![PyPI version](https://badge.fury.io/py/AuthX.svg)](https://badge.fury.io/py/AuthX)

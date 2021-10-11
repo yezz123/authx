@@ -12,7 +12,7 @@ help:
 	@echo "    make bumpversion-minor"
 	@echo "    make bumpversion-patch"
 test:
-	docker-compose run --rm authx pytest --cov=./  --cov-report=xml
+	docker-compose run --rm authx pytest --cov=AuthX/
 
 start:
 	docker-compose up -d
