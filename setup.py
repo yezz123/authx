@@ -1,6 +1,6 @@
 import setuptools
 
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
@@ -13,24 +13,32 @@ setuptools.setup(
     description="Ready to use and customizable Authentications and Oauth2 management for FastAPI",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yezz123/AuthX",
+    project_urls={
+        "Source Code": "https://github.com/yezz123/AuthX",
+        "Bug Tracker": "https://github.com/yezz123/AuthX/issues",
+    },
     packages=setuptools.find_packages(),
     include_package_data=True,
     classifiers=[
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
         "Intended Audience :: Developers",
+        "Development Status :: 4 - Beta",
+        "Natural Language :: English",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3 :: Only",
         "Topic :: Internet :: WWW/HTTP :: Session",
+        "Topic :: Utilities",
+        "Typing :: Typed",
     ],
-    python_requires=">=3.9",
+    python_requires=">=3.7",
     install_requires=[
-        "fastapi==0.61.1",
+        "fastapi==0.70.0",
         "PyJWT==1.7.1",
-        "cryptography==3.1.1",
+        "cryptography==35.0.0",
         "httpx==0.16.1",
         "aioredis==1.3.1",
         "passlib==1.7.4",
