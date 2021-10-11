@@ -48,6 +48,9 @@ REFRESH_TOKEN = "refresh_token"
     mock.AsyncMock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
 )
 def test_register():
+    """
+    Test register
+    """
     url = app.url_path_for("auth:register")
     data = {
         "email": "email@gmail.com",
@@ -67,6 +70,9 @@ def test_register():
     mock.AsyncMock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
 )
 def test_login():
+    """
+    test login
+    """
     url = app.url_path_for("auth:login")
     data = {
         "login": "login",
@@ -79,13 +85,20 @@ def test_login():
 
 
 def test_logout():
+    """
+    test logout
+    """
     url = app.url_path_for("auth:logout")
     response = test_client.post(url)
     # test_client doesn't react to response.delete_cookie
+    # TODO fix test_client
     assert response.status_code == 200
 
 
 def test_token():
+    """
+    test token
+    """
     url = app.url_path_for("auth:token")
     response = test_client.post(url)
     assert response.status_code == 200
@@ -99,11 +112,14 @@ def test_token():
     mock.AsyncMock(return_value=ACCESS_TOKEN),
 )
 def test_refresh_access_token():
+    """
+    test refresh access token
+    """
     url = app.url_path_for("auth:refresh_access_token")
 
     response = test_client.post(url)
     assert response.status_code == 401
-
+    # TODO test_client doesn't react to response.delete_cookie
     test_client.cookies.set(REFRESH_COOKIE_NAME, REFRESH_TOKEN)
     response = test_client.post(url)
     assert response.status_code == 200
@@ -115,6 +131,9 @@ def test_refresh_access_token():
     mock.AsyncMock(return_value=None),
 )
 def test_get_email_confirmation_status():
+    """
+    test get email confirmation status
+    """
     url = app.url_path_for("auth:get_email_confirmation_status")
     response = test_client.get(url)
     assert response.status_code == 200
@@ -125,12 +144,18 @@ def test_get_email_confirmation_status():
     mock.AsyncMock(return_value=None),
 )
 def test_request_email_confirmation():
+    """
+    test request email confirmation
+    """
     url = app.url_path_for("auth:request_email_confirmation")
     response = test_client.post(url)
     assert response.status_code == 200
 
 
 def test_confirm_email():
+    """
+    test confirm email
+    """
     TOKEN = "123"
     url = app.url_path_for("auth:confirm_email", token=TOKEN)
     with mock.patch(
@@ -143,7 +168,9 @@ def test_confirm_email():
 
 
 def test_change_username():  # TODO
-
+    """
+    test change username
+    """
     id = 2
     new_username = "new_username"
     url = app.url_path_for("auth:change_username", id=id)
