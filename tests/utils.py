@@ -17,6 +17,7 @@ class User:
     """
     Setup a user object with the given id, username and admin status.
     """
+
     def __init__(self, id: int, username: str, admin: bool):
         self.id = id
         self.username = username
@@ -31,6 +32,7 @@ def mock_get_authenticated_user():
     Returns:
         User: A user object.
     """
+
     class User:
         def __init__(self):
             """
@@ -48,6 +50,7 @@ class MockDatabaseBackend:
     """
     Mock the get_authenticated_user function to return a user object.
     """
+
     def __init__(self, database_name):
         self._incr = 5
         self._users = [
@@ -212,6 +215,7 @@ class MockCacheBackend:
     """
     mock the cache backend.
     """
+
     def __init__(self) -> None:
         self._db = {}
 
@@ -324,13 +328,11 @@ class MockEmailClient:
         """
         Send a confirmation email.
         """
-        pass
 
     async def send_forgot_password_email(self, *args):
         """
         Send a forgot password email.
         """
-        pass
 
 
 def mock_verify_password(password: str, db_password: str) -> bool:
