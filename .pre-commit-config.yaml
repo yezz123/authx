@@ -8,7 +8,6 @@ repos:
           - id: check-added-large-files
           - id: check-ast
           - id: check-symlinks
-          - id: check-yaml
           - id: trailing-whitespace
           - id: check-json
           - id: debug-statements
