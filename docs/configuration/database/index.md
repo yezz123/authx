@@ -28,7 +28,7 @@ Notice that we pass a reference to your [Model](models.md).
 !!! warning
     **AuthX** will use its defined [`id`](models.md) as unique identifier for the user, rather than the builtin MongoDB `_id`.
 
-## Check also:
+## Check also
 
 A Basics Functions that Motor & MongoDB provide.
 
