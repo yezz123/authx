@@ -4,6 +4,7 @@ from pydantic import BaseConfig, BaseModel
 
 
 def convert_field_to_camel_case(string: str) -> str:
+    # TODO: implement
     return "".join(
         word if index == 0 else word.capitalize()
         for index, word in enumerate(string.split("_"))
@@ -38,6 +39,13 @@ def set_last_login(v, values):
 
 
 class DefaultModel(BaseModel):
+    """
+    Base model for all models
+
+    Args:
+        BaseModel (pydantic.BaseModel): Base model for all models
+    """
+
     class Config(BaseConfig):
         """
         Config for pydantic models

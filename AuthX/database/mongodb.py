@@ -14,9 +14,11 @@ class MongoDBBackend:
     """
 
     def __init__(self, database_name: str = "test") -> None:
+        # TODO: Add support for multiple databases
         self._database_name = database_name
 
     def set_client(self, client: AsyncIOMotorClient) -> None:
+        # TODO: Add support for multiple databases
         self._client = client
         self.init()
 

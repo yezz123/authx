@@ -18,6 +18,7 @@ from AuthX.routers import (
 )
 
 
+# TODO: Invalid DOCS for this file >> Try to use only Postman for testing
 class AuthX:
     """
     Here we define the routers for the API.
@@ -32,6 +33,7 @@ class AuthX:
         access_expiration: int,
         refresh_expiration: int,
     ) -> None:
+        # TODO: Fix Issue relate to OpenAPI
         self._access_cookie_name = access_cookie_name
         self._refresh_cookie_name = refresh_cookie_name
 
@@ -45,6 +47,7 @@ class AuthX:
         )
 
     def set_cache(self, client: Redis) -> None:
+        # TODO: Fix issue relate to Docs
         self._cache_backend.set_client(client)
 
     async def get_user(self, request: Request) -> User:
@@ -69,6 +72,9 @@ class AuthX:
                 return
 
         raise HTTPException(403)
+
+
+# TODO: Fix issue relate to OpenAPI
 
 
 class Authentication(AuthX):
@@ -137,6 +143,7 @@ class Authentication(AuthX):
         )
 
     @property
+    # TODO: After running Uvicorn, the SwaggerUI don't work, show only the interface without playground.
     def auth_router(self) -> APIRouter:
         return get_auth_router(
             self._users_repo,

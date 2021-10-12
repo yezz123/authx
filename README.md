@@ -44,6 +44,7 @@ __Note__: This is a **beta** version of AuthX.
   - JWT authentication backend included
   - Soon to be included Cookie authentication backend
 - Full OpenAPI schema support, even with several authentication backend.
+- Provide a Docstring for each class and function.
 
 ## Project using
 
