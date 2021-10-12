@@ -3,6 +3,7 @@
 ![authx](https://user-images.githubusercontent.com/52716203/136656260-41e4dfd6-a20b-4cc9-bef8-66d8137607fe.png)
 
 [![Downloads](https://pepy.tech/badge/authx/month)](https://pepy.tech/project/authx)
+[![MIT licensed](https://img.shields.io/github/license/yezz123/AuthX)](https://raw.githubusercontent.com/yezz123/AuthX/main/LICENSE)
 [![PyPI version](https://badge.fury.io/py/AuthX.svg)](https://badge.fury.io/py/AuthX)
 
 - Ready to use and customizable Authentications and Oauth2 management for FastAPI ⚡
@@ -87,8 +88,8 @@ from .auth import auth
 
 router = APIRouter()
 
-@router.get("/anonim")
-def anonim_test(user: User = Depends(auth.get_user)):
+@router.get("/anonym")
+def anonym_test(user: User = Depends(auth.get_user)):
   ...
 
 @router.get("/user")
