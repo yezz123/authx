@@ -14,6 +14,7 @@ class RedisBackend:
     _redis: Optional[Redis] = None
 
     def set_client(self, redis: Redis) -> None:
+        # TODO: Check if redis is a Redis instance
         self._redis = redis
 
     async def get(self, key: str) -> str:
@@ -33,11 +34,13 @@ class RedisBackend:
         return None
 
     async def setnx(self, key: str, value: Union[str, bytes, int], expire: int) -> None:
+        # TODO: Check if key exists
         await self._redis.setnx(key, value)
         await self._redis.expire(key, expire)
         return None
 
     async def incr(self, key: str) -> str:
+        # TODO: Check if key exists
         return await self._redis.incr(key)
 
     async def dispatch_action(self, channel: str, action: str, payload: dict) -> None:

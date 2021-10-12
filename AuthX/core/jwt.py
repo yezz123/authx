@@ -73,6 +73,7 @@ class JWTBackend:
     def _create_token(
         self, payload: dict, token_type: str, expiration_delta: Optional[int] = None
     ) -> str:
+        # TODO add leeway
         iat = datetime.utcnow()
         if expiration_delta:
             exp = datetime.utcnow() + timedelta(seconds=expiration_delta)
