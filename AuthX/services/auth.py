@@ -284,6 +284,20 @@ class AuthService:
         return None
 
     async def change_username(self, id: int, username: str) -> None:
+        """
+        Change username, is a function of user id and username.
+
+        Args:
+            id (int): user id.
+            username (str): new username.
+
+        Raises:
+            HTTPException: 400 - username already exists.
+            HTTPException: 404 - user not found.
+
+        Returns:
+            None
+        """
         new_username = self._validate_user_model(
             UserInChangeUsername, {"username": username}
         ).username

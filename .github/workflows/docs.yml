@@ -1,0 +1,15 @@
+name: Deploy Documentation
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - run: pip install mkdocs>=1.1.2  mkdocs-material>=6.1.5 mkdocs-markdownextradata-plugin>=0.1.9
+      - run: mkdocs gh-deploy --force

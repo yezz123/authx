@@ -21,7 +21,7 @@ router = get_social_router(
     REFRESH_COOKIE_NAME,
     None,
     None,
-    ["google", "facebook", "vk"],
+    ["google", "facebook"],
     {
         "google": {"id": "id", "secret": "secret",},
         "facebook": {"id": "id", "secret": "secret",},

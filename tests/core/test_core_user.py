@@ -27,12 +27,12 @@ async def test_user():
 
 
 @pytest.mark.asyncio
-async def test_anonim_user():
+async def test_anonym_user():
     """
     test anonim user creation
     """
-    anonim_user = await User.create(None, jwt_backend)
-    assert not anonim_user.is_authenticated
-    assert anonim_user.id is None
-    assert anonim_user.username is None
-    assert not anonim_user.is_admin
+    anonym_user = await User.create(None, jwt_backend)
+    assert not anonym_user.is_authenticated
+    assert anonym_user.id is None
+    assert anonym_user.username is None
+    assert not anonym_user.is_admin

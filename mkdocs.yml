@@ -1,0 +1,98 @@
+site_name: AuthenticationX
+site_description: Ready to use and customizable Authentications and Oauth2 management for FastAPI ⚡
+site_url: #{site_url}
+
+theme:
+  name: 'material'
+  palette:
+    - scheme: default
+      primary: teal
+      accent: amber
+      toggle:
+          icon: material/lightbulb
+          name: Switch to dark mode
+    - scheme: slate
+      primary: teal
+      accent: amber
+      toggle:
+          icon: material/lightbulb-outline
+          name: Switch to light mode
+  icon:
+    logo: material/rocket
+  favicon: favicon.png
+
+
+markdown_extensions:
+  - markdown_include.include:
+      base_path: docs
+  - toc:
+      permalink: true
+  - admonition
+  - codehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid
+  - pymdownx.tasklist
+  - pymdownx.tabbed
+
+plugins:
+  - search
+  - mermaid2:
+      arguments:
+        theme: |
+          ^(JSON.parse(window.localStorage.getItem('/.__palette')).index == 1) ? 'dark' : 'light'
+extra_javascript:
+    - https://unpkg.com/mermaid/dist/mermaid.min.js
+
+nav:
+  - About: index.md
+  - installation.md
+  - Configuration:
+    - configuration/Get-Started.md
+    - Models:
+      - Introduction: configuration/models/index.md
+      - configuration/models/base.md
+      - configuration/models/social.md
+      - configuration/models/properties.md
+    - Database Provider:
+      - Introduction: configuration/database/index.md
+      - configuration/database/functions.md
+    - Cache Provider:
+      - Introduction: configuration/cache/index.md
+      - configuration/cache/functions.md
+    - Authentication backends:
+      - Introduction: configuration/auth/index.md
+      - configuration/auth/jwt.md
+    - Social Authentication:
+      - Introduction: configuration/social/index.md
+      - configuration/social/facebook.md
+      - configuration/social/google.md
+      - configuration/social/addons.md
+    - UserManager Provider:
+      - Introduction: configuration/core/index.md
+      - configuration/core/user_manager.md
+    - Routers:
+      - Introduction: configuration/routers/index.md
+      - configuration/routers/authentication.md
+      - configuration/routers/administration.md
+      - configuration/routers/password.md
+      - configuration/routers/social.md
+      - configuration/routers/search.md
+  - Help AuthX - Get Help: help.md
+  - Development - Contributing: contributing.md
+  - Frequently Asked Questions: faq.md
+
+extra:
+  social:
+  - icon: fontawesome/brands/github-alt
+    link: https://github.com/yezz123
+  - icon: fontawesome/brands/discord
+    link: https://discord.gg/2hdSWVgNPH
+  - icon: fontawesome/brands/twitter
+    link: https://twitter.com/THyasser1
+  - icon: fontawesome/brands/linkedin
+    link: https://www.linkedin.com/in/yezz123
+  - icon: fontawesome/solid/globe
+    link: https://yezz.me

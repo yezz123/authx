@@ -147,6 +147,16 @@ class PasswordService:
         return {"status": status}
 
     async def password_set(self, data: dict) -> None:
+        """
+        POST /password_set
+        Only for accounts with password.
+
+        Args:
+            data (dict): {password1: "password", password2: "password"}
+
+        Returns:
+            None
+        """
         item = await self._repo.get(self._user.id)
         return {
             "password": item.get("password") is not None,

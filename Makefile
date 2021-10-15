@@ -11,8 +11,9 @@ help:
 	@echo "    make bumpversion-major"
 	@echo "    make bumpversion-minor"
 	@echo "    make bumpversion-patch"
+	@echo "    make mkdocs"
 test:
-	docker-compose run --rm authx pytest --cov=AuthX/
+	docker-compose run --rm authx pytest --cov=AuthX/ --cov-report=html
 
 start:
 	docker-compose up -d
@@ -49,3 +50,6 @@ bumpversion-minor:
 
 bumpversion-patch:
 	bumpversion patch
+
+mkdocs:
+	docker-compose run --rm authx mkdocs serve --livereload
