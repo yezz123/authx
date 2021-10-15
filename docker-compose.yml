@@ -10,9 +10,15 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
       - /data/db:/data/db
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - 6379:6379
   authx:
     depends_on:
       - mongo
+      - redis
     build:
       context: .
       dockerfile: Dockerfile
