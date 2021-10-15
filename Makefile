@@ -12,6 +12,8 @@ help:
 	@echo "    make bumpversion-minor"
 	@echo "    make bumpversion-patch"
 	@echo "    make mkdocs"
+	@echo "    make gh-deploy"
+
 test:
 	docker-compose run --rm authx pytest --cov=AuthX/ --cov-report=html
 
@@ -53,3 +55,6 @@ bumpversion-patch:
 
 mkdocs:
 	docker-compose run --rm authx mkdocs serve --livereload
+
+gh-deploy:
+	mkdocs gh-deploy --force

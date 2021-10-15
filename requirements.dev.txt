@@ -13,4 +13,4 @@ mkdocs == 1.2.2
 mkdocs-material == 7.2.6
 mkdocs-markdownextradata-plugin == 0.2.4
 mkdocs-mermaid2-plugin
-
+mdx-include

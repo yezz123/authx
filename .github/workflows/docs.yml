@@ -12,4 +12,12 @@ jobs:
         with:
           python-version: 3.9
       - run: pip install -r requirements.dev.txt
-      - run: mkdocs gh-deploy --force
+      - name: Build
+        run: mkdocs build
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          folder: ./site
+          message: "💫 Build Documentation"
+
