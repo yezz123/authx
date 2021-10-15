@@ -6,13 +6,12 @@
     <em>Ready to use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
 </p>
 
-[![Testing on Docker](https://github.com/yezz123/AuthX/actions/workflows/docker.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/docker.yml)
-[![Upload Python Package](https://github.com/yezz123/AuthX/actions/workflows/build.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/build.yml)
-[![MIT licensed](https://img.shields.io/github/license/yezz123/AuthX)](https://raw.githubusercontent.com/yezz123/AuthX/main/LICENSE)
+[![Docker Build](https://github.com/yezz123/AuthX/actions/workflows/docker.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/docker.yml)
+[![Python Package](https://github.com/yezz123/AuthX/actions/workflows/build.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/build.yml)
 [![PyPI version](https://badge.fury.io/py/AuthX.svg)](https://badge.fury.io/py/AuthX)
 [![Downloads](https://pepy.tech/badge/authx/month)](https://pepy.tech/project/authx)
 [![Downloads](https://pepy.tech/badge/authx/week)](https://pepy.tech/project/authx)
-[![Lang](https://img.shields.io/badge/Language-Python-green?style)](https://github.com/yezz123)
+[![Language](https://img.shields.io/badge/Language-Python-green?style)](https://github.com/yezz123)
 [![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
 [![Star Badge](https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flatcolor=BC4E99)](https://github.com/yezz123/AuthX)
 [![Pypi](https://img.shields.io/pypi/pyversions/AuthX.svg?color=%2334D058)](https://pypi.org/project/AuthX)
@@ -21,7 +20,7 @@
 
 **Source Code**: <https://github.com/yezz123/AuthX>
 
-**Get Started**: `pip install AuthX`
+**Documentation**: <https://Authx.yezz.codes>
 
 ---
 
@@ -61,6 +60,7 @@ from AuthX import Authentication
 app = FastAPI()
 auth = Authentication()
 
+# Define your routes here
 app.include_router(auth.auth_router, prefix="/api/users")
 app.include_router(auth.social_router, prefix="/auth")
 app.include_router(auth.password_router, prefix="/api/users")
