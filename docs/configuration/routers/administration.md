@@ -12,19 +12,22 @@ The Admin router will generate a set of endpoints for Administration permissions
 
 ## Setup The Administration Router
 
-To Setup the Admin service, you will need to add all requirements to the object `get_router`.
+To Setup the Admin service, you will need to add all requirements to the object `AdminService`.
 
 ```py
-def get_router(
-    repo: UsersRepo,
-    admin_required: Callable
-):
-AdminService.setup(repo)
+from typing import Callable, Optional
+from AuthX.services.admin import AdminService
+from AuthX.api import UsersRepo
+
+AdminService.setup(
+        repo = UserRepo,
+        admin_required = Callable
+    )
 ```
 
 This one gonna help use to use the setup repository and the `admin_required`.
 
-Let's Provide the `admin_router`:
+Let's Provide the `AdminService`:
 
 ```py
 from AuthX import Authentication

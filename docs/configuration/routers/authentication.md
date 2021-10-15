@@ -17,11 +17,13 @@ The auth router will generate a set of endpoints for authenticating users.
 To Setup the authentication service, you will need to add all requirements to the object `AuthService`.
 
 ```py
-from AuthX.services import AuthService
+from AuthX.services.auth import AuthService
+from AuthX.api import UsersRepo
+from AuthX.core.jwt import JWTBackend
 
 AuthService.setup(
-        repo = 'AuthX.repositories.UserRepository',
-        auth_backend = 'AuthX.backends.JWTBackend',
+        repo = UsersRepo,
+        auth_backend = JWTBackend,
         debug = True,
         base_url = 'http://localhost:8000',
         site = 'AuthX',
