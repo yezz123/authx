@@ -14,8 +14,8 @@ app.include_router(auth.admin_router, prefix="/api/users")
 app.include_router(auth.search_router, prefix="/api/users")
 
 # Set MongoDB and Redis Cache
-auth.set_cache(cache)  # aioredis client
-auth.set_database(database)  # motor client
+auth.set_cache()  # aioredis client
+auth.set_database()  # motor client
 
 # Set Anonymous User
 @router.get("/anonym")

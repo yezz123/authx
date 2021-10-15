@@ -63,7 +63,7 @@ __Note__: This is a **beta** version of AuthX.
 
 ### Dependency injections
 
-```py hl_lines="1-2 7 21-23 26-28 31-33"
+```py hl_lines="1 3 7 21-23 27-29 33-35"
 {!src/main.py!}
 ```
 
