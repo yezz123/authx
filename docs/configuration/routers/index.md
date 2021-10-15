@@ -56,6 +56,5 @@ This helper class will let you generate useful routers to setup the authenticati
 * [Password](password.md): Provides `/forgot` and `/reset` and `/set` endpoints to reset the password.
 * [social](social.md): Provides `/social` and `/social/callback` endpoints to login with social networks, relate to [Social Provider](../social/index.md).
 * [Search](search.md): Provides `/search` endpoint to search users.
-* [Tests](tests.md): Here we show how to test the authentication system.
 
 You should check out each of them to understand how to use them.

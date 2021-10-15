@@ -173,4 +173,4 @@ except SocialException as e:
 ```
 
 !!! Info
-    Also, an [Addons](addons.md) is available to add some utility functions to the social login, for example captcha, email verification, etc.
+    Also, an [Addons](../social/addons.md) is available to add some utility functions to the social login, for example captcha, email verification, etc.

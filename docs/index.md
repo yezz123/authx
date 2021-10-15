@@ -1,14 +1,21 @@
-# AuthX
+# AuthenticationX 💫
 
 ![authx](https://user-images.githubusercontent.com/52716203/136962014-280d82b0-0640-4ee5-9a11-b451b338f6d8.png)
+
+<p align="center">
+    <em>Ready to use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
+</p>
 
 [![Testing on Docker](https://github.com/yezz123/AuthX/actions/workflows/docker.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/docker.yml)
 [![Upload Python Package](https://github.com/yezz123/AuthX/actions/workflows/build.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/build.yml)
 [![MIT licensed](https://img.shields.io/github/license/yezz123/AuthX)](https://raw.githubusercontent.com/yezz123/AuthX/main/LICENSE)
 [![PyPI version](https://badge.fury.io/py/AuthX.svg)](https://badge.fury.io/py/AuthX)
 [![Downloads](https://pepy.tech/badge/authx/month)](https://pepy.tech/project/authx)
-
-- Ready to use and customizable Authentications and Oauth2 management for FastAPI ⚡
+[![Downloads](https://pepy.tech/badge/authx/week)](https://pepy.tech/project/authx)
+[![Lang](https://img.shields.io/badge/Language-Python-green?style)](https://github.com/yezz123)
+[![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
+[![Star Badge](https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flat color=BC4E99)](https://github.com/yezz123/AuthX)
+[![Pypi](https://img.shields.io/pypi/pyversions/AuthX.svg?color=%2334D058)](https://pypi.org/project/AuthX)
 
 ---
 
@@ -44,6 +51,35 @@ __Note__: This is a **beta** version of AuthX.
     - Soon to be included Cookie authentication backend
 - Full OpenAPI schema support, even with several authentication backend.
 - Provide a Docstring for each class and function.
+
+## Project using
+
+```py hl_lines="1 3 5 6 10-14"
+{!src/main.py!}
+```
+
+### Startup
+
+```py hl_lines="17-18"
+{!src/main.py!}
+```
+
+### Dependency injections
+
+```py hl_lines="1-2 7 21-23 26-28 31-33"
+{!src/main.py!}
+```
+
+### Dependency injections only
+
+```python
+from AuthX import AuthX
+
+auth = AuthX(#Provide Config)
+
+# startup
+auth.set_cache(cache) # aioredis
+```
 
 ## License
 
