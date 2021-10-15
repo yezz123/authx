@@ -18,7 +18,7 @@
 
 **Source Code**: <https://github.com/yezz123/AuthX>
 
-**Get Started**: `pip install AuthX`
+**Get Started**: <https://yezz123.github.io/AuthX/>
 
 ---
 

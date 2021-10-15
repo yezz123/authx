@@ -1,6 +1,6 @@
 import setuptools
 
-__version__ = "0.0.6"
+__version__ = "0.0.7"
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
@@ -14,6 +14,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     project_urls={
+        "Documentation": "https://yezz123.github.io/AuthX/",
         "Source Code": "https://github.com/yezz123/AuthX",
         "Bug Tracker": "https://github.com/yezz123/AuthX/issues",
     },
@@ -49,5 +50,5 @@ setuptools.setup(
         "aiosmtplib==1.1.4",
         "pydantic==1.8.2",
     ],
-    extras_require={"dev": ["requests == 2.25.1" "uvicorn"]},
+    extras_require={"dev": ["requests == 2.25.1", "uvicorn"]},
 )
