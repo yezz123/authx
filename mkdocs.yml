@@ -1,6 +1,6 @@
 site_name: AuthenticationX
 site_description: Ready to use and customizable Authentications and Oauth2 management for FastAPI ⚡
-site_url: #{site_url}
+site_url: https://yezz123.github.io/AuthX/
 
 theme:
   name: 'material'

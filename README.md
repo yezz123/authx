@@ -20,7 +20,7 @@
 
 **Source Code**: <https://github.com/yezz123/AuthX>
 
-**Documentation**: <https://Authx.yezz.codes>
+**Documentation**: <https://yezz123.github.io/AuthX/>
 
 ---
 
@@ -28,7 +28,7 @@ Add a Fully registration and authentication or authorization system to your [Fas
 
 __Note__: This is a **beta** version of AuthX.
 
-## Features
+## Features 🔧
 
 - Extensible base user model.
 - Ready-to-use register, login, reset password and verify e-mail routes.
@@ -51,7 +51,7 @@ __Note__: This is a **beta** version of AuthX.
 - Full OpenAPI schema support, even with several authentication backend.
 - Provide a Docstring for each class and function.
 
-## Project using
+## Project using 🚀
 
 ```python
 from fastapi import FastAPI
@@ -69,7 +69,7 @@ app.include_router(auth.search_router, prefix="/api/users")
 ...
 ```
 
-### Startup
+### Startup 🏁
 
 ```python
 from fastapi import FastAPI
@@ -89,7 +89,7 @@ auth.set_cache(cache) # aioredis client
 auth.set_database(database) # motor client
 ```
 
-### Dependency injections
+### Dependency injections 📦
 
 ```python
 from fastapi import FastAPI,APIRouter, Depends
@@ -128,7 +128,7 @@ def admin_test():
 
 ```
 
-### Dependency injections only
+### Dependency injections only 📦
 
 ```python
 from AuthX import AuthX
@@ -139,9 +139,9 @@ auth = AuthX(#Provide Config)
 auth.set_cache(cache) # aioredis
 ```
 
-## Development
+## Development 🚧
 
-### Setup environment
+### Setup environment 📦
 
 You should create a virtual environment and activate it:
 
@@ -159,7 +159,7 @@ And then install the development dependencies:
 pip install -r requirements.dev.txt
 ```
 
-### Run tests
+### Run tests 🌝
 
 You can run all the tests with:
 
@@ -175,7 +175,7 @@ Alternatively, you can run `pytest` yourself. The MongoDB unit tests will be ski
 pytest
 ```
 
-### Format the code
+### Format the code 🍂
 
 Execute the following command to apply `pre-commit` formatting:
 
@@ -183,7 +183,7 @@ Execute the following command to apply `pre-commit` formatting:
 make lint
 ```
 
-## Contributing
+## Contributing 🌙
 
 As you see the Package still under development, you can contribute to it, also its a closed source project.
 
@@ -195,6 +195,6 @@ As you see the Package still under development, you can contribute to it, also i
 - Where i can see the Project Roadmap? 🤔
   - I use to manage AuthX on [Trello](https://trello.com/b/0NNZMP8T), you could check and see all the tasks if you could help me to do it.
 
-## License
+## License 📝
 
 This project is licensed under the terms of the Apache-2.0 License.
