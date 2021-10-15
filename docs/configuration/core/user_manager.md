@@ -1,4 +1,4 @@
-# What's Next
+# Testing
 
 After taking a look at the configuration, you should now have a good idea of what you can do with the UserManager.
 
@@ -24,7 +24,7 @@ Also all of this is asynchronous with Redis & MongoDB, also we use a logger to s
 
 ## Testing
 
-Let's try to test a Usermanager & Creator based on this:
+Let's try to test a `Usermanager` & Creator based on this:
 
 ```py
 import pytest
@@ -53,3 +53,51 @@ async def test_user():
 ```
 
 This Example show how we can create a user using a pre-configured JWTBackend and Functionality based on the UserManager.
+
+### MockCacheBackend
+
+As we Need we don't need to provide a Redis Service to the UserManager, we can use a MockCacheBackend to test the UserManager.
+
+This Class Implements the CacheBackend Interface, and is used to mock the Redis Service.
+
+```py
+class MockCacheBackend:
+    def __init__(self) -> None:
+        self._db = {}
+
+    async def get(self, key: str) -> Optional[str]:
+        return self._db.get(key)
+
+    async def delete(self, key: str) -> None:
+        try:
+            self._db.pop(key)
+        except KeyError:
+            pass
+
+    async def keys(self, match: str) -> Iterable[str]:
+        return {}
+
+    async def set(
+        self, key: str,
+        value: Union[str, bytes, int],
+        expire: int) -> None:
+        self._db[key] = value
+
+    async def setnx(self, key: str,
+        value: Union[str, bytes, int],
+        expire: int) -> None:
+        v = self._db.get(key)
+        if v is None:
+            self._db[key] = value
+
+    async def incr(self, key: str) -> str:
+        v = self._db.get(key)
+        if v is not None:
+            self._db[key] = int(v) + 1
+
+    async def dispatch_action(self, channel: str,
+        action: str, payload: str) -> None:
+        print("Dispatching action")
+        print(action)
+        print(payload)
+```

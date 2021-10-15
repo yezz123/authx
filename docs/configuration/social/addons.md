@@ -1,4 +1,4 @@
-# What's Next
+# Utilities
 
 After Providing some Ways of Social Authentication, we can also made this more strong by adding an email verification process, or a captcha to the login form.
 
