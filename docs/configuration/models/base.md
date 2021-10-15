@@ -1,3 +1,5 @@
+# Base Models
+
 ## Define your Base models
 
 There are four Pydantic models variations provided as mixins:

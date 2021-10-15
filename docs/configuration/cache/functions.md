@@ -1,4 +1,4 @@
-## Redis Provider
+# Redis Provider
 
 ## Initial the Redis Class
 

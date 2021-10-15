@@ -1,6 +1,6 @@
-## MongoDB Provider
+# MongoDB Provider
 
-### Initial and Setup Class
+## Initial and Setup Class
 
 As we know that the database provider is the most important part of the configuration, we will start with the initial and setup class.
 

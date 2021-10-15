@@ -1,3 +1,5 @@
+# Social Models
+
 ## Define your Social Models
 
 There are one Pydantic model variation provided as mixin:
