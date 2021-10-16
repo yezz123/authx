@@ -6,7 +6,7 @@ app = FastAPI()
 auth = Authentication()
 router = APIRouter()
 
-
+# Set up Pre-configured Routes
 app.include_router(auth.auth_router, prefix="/api/users")
 app.include_router(auth.social_router, prefix="/auth")
 app.include_router(auth.password_router, prefix="/api/users")
@@ -29,7 +29,7 @@ def user_test(user: User = Depends(auth.get_authenticated_user)):
     pass
 
 
-#
+# Set Admin User
 @router.get("/admin", dependencies=[Depends(auth.admin_required)])
 def admin_test():
     pass

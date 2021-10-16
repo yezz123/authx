@@ -52,6 +52,18 @@ Managing the project during my Work was somehow Hard for me, cause as many know 
 
 I Use a Trello Board to Manage my Projects, and i use Trello Cards to Manage my Work, check it here [https://trello.com/b/0NNZMP8T/authx](https://trello.com/b/0NNZMP8T/authx).
 
+## Supporting Other Database Provider & ORM?
+
+Until now, AuthX support only MongoDB, but i will try to support other Database Provider and ORM in the future, and i will try to provide a way to integrate Piccolo ORM also in the future.
+
+## How to Support Project?
+
+You can also financially support the author (me) through <a href="https://paypal.me/yassertahiri?locale.x=en_US" class="external-link" target="_blank">Paypal sponsors</a>.
+
+There you could buy me a [coffee ☕️](https://www.buymeacoffee.com/tahiri) to say thanks. 😄
+
+And you can also become a Silver or Gold sponsor for AuthX. 🏅🎉
+
 ### Reference
 
 I use The Following Reference to Get The package Done:
