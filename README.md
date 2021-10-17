@@ -197,4 +197,4 @@ As you see the Package still under development, you can contribute to it, also i
 
 ## License 📝
 
-This project is licensed under the terms of the Apache-2.0 License.
+This project is licensed under the terms of the MIT License.

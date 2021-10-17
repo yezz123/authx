@@ -80,4 +80,4 @@ auth.set_cache(cache) # aioredis
 
 ## License
 
-This project is licensed under the terms of the [Apache-2.0 License](license.md).
+This project is licensed under the terms of the [MIT License](license.md).
