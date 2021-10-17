@@ -83,6 +83,8 @@ nav:
   - Help AuthX - Get Help: help.md
   - Development - Contributing: contributing.md
   - Frequently Asked Questions: faq.md
+  - Code of Conduct: code_of_conduct.md
+  - License: license.md
 
 extra:
   social:

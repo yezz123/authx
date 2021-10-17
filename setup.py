@@ -17,6 +17,7 @@ setuptools.setup(
         "Documentation": "https://yezz123.github.io/AuthX/",
         "Source Code": "https://github.com/yezz123/AuthX",
         "Bug Tracker": "https://github.com/yezz123/AuthX/issues",
+        "Funding": "https://opencollective.com/yezz123",
     },
     packages=setuptools.find_packages(),
     include_package_data=True,

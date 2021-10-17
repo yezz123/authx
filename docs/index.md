@@ -16,7 +16,7 @@
 
 ---
 
-**Source Code**: <https://github.com/yezz123/AuthX>
+**Source Code**: <https://github.com/yezz123/AuthX> (Closed-Source)
 
 **Get Started**: <https://yezz123.github.io/AuthX/>
 
@@ -80,4 +80,4 @@ auth.set_cache(cache) # aioredis
 
 ## License
 
-This project is licensed under the terms of the Apache-2.0 License.
+This project is licensed under the terms of the [Apache-2.0 License](license.md).
