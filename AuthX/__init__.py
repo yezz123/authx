@@ -2,6 +2,8 @@
 
 __version__ = "0.0.7"
 
+__license__ = "MIT"
+
 __author__ = "Yezz123"
 
 __author_email__ = "yasserth19@gmail.com"
