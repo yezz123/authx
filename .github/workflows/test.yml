@@ -1,4 +1,4 @@
-name: Test Project Linting
+name: Local tests
 
 on: [push, pull_request]
 
