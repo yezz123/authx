@@ -48,7 +48,7 @@ This book covers the following exciting features:
 
 If you feel this book is for you, get your [copy](https://amzn.to/3kTvgjG) today!
 
-## How You Manage Your Projects?
+## How Did You Manage AuthX?
 
 Managing the project during my Work was somehow Hard for me, cause as many know I start this project after i finish my ex. Job, and i start working on it even if i joined my new Job as a Backend Developer for [@Obytes](https://obytes.com).
 

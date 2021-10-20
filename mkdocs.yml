@@ -85,6 +85,7 @@ nav:
   - Frequently Asked Questions: faq.md
   - Code of Conduct: code_of_conduct.md
   - License: license.md
+  - Release Notes: release.md
 
 extra:
   social:

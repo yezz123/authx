@@ -194,6 +194,7 @@ As you see the Package still under development, you can contribute to it, also i
     - [telegram](https://t.me/yezz123)
 - Where i can see the Project Roadmap? 🤔
   - I use to manage AuthX on [Trello](https://trello.com/b/0NNZMP8T), you could check and see all the tasks if you could help me to do it.
+- Check Also [Release Notes](https://yezz123.github.io/AuthX/release/).
 
 ## License 📝
 
