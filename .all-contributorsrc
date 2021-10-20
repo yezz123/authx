@@ -1,0 +1,13 @@
+{
+    "files": [
+        "README.md"
+    ],
+    "imageSize": 100,
+    "commit": false,
+    "contributorsPerLine": 7,
+    "projectName": "AuthX",
+    "projectOwner": "yezz123",
+    "repoType": "github",
+    "repoHost": "https://github.com",
+    "skipCi": true
+}
