@@ -86,9 +86,10 @@ __Notes__: For testing this and create a TestCases always assert a `payload.get`
 The Revoke Token is used to revoke the access token, and is used to generate a new access token, this one is based more on the cache backend.
 
 ```py
+from datetime import datetime
+from AuthX.core.jwt import JWTBackend
+
 def logout():
-    from datetime import datetime
-    from AuthX.core.jwt import JWTBackend
 
     key = # Key to revoke
     epoch = datetime.utcfromtimestamp(0)
