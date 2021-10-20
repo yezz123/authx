@@ -18,6 +18,7 @@ class RedisBackend:
         self._redis = redis
 
     async def get(self, key: str) -> str:
+        # TODO: Check if key exists
         return await self._redis.get(key)
 
     async def delete(self, key: str) -> None:

@@ -19,6 +19,20 @@ from AuthX.utils.strings import create_random_string, hash_string
 
 
 class PasswordService:
+    """
+    Password Service
+
+    Raises:
+        HTTPException: 400 - validation or timeout.
+        HTTPException: 404 - token not found.
+        HTTPException: 406 - password already exists.
+        HTTPException: 409 - password reset before.
+        HTTPException: 500 - email not sent.
+
+    Returns:
+        None
+    """
+
     _repo: UsersRepo
     _auth_backend: JWTBackend
     _debug: bool
@@ -73,6 +87,19 @@ class PasswordService:
         )
 
     def _validate_user_model(self, model, data):
+        """
+        Validate user model.
+
+        Args:
+            model (UserInSetPassword): UserInSetPassword
+            data (dict): {password1: "password", password2: "password"}
+
+        Raises:
+            HTTPException: 400 - validation or timeout.
+
+        Returns:
+            UserInSetPassword: UserInSetPassword
+        """
         try:
             return model(**data)
         except ValidationError as e:
@@ -143,6 +170,12 @@ class PasswordService:
 """
 
     async def password_status(self) -> dict:
+        """
+        POST /password_status
+
+        Returns:
+            dict: password_status
+        """
         status = await self._repo.get_password_status(self._user.id)
         return {"status": status}
 
