@@ -9,7 +9,7 @@
 [![PyPI version](https://badge.fury.io/py/AuthX.svg)](https://badge.fury.io/py/AuthX)
 [![Downloads](https://pepy.tech/badge/authx/month)](https://pepy.tech/project/authx)
 [![Downloads](https://pepy.tech/badge/authx/week)](https://pepy.tech/project/authx)
-[![Lang](https://img.shields.io/badge/Language-Python-green?style)](https://github.com/yezz123)
+[![Lang](https://img.shields.io/badge/Language-Python-green?style)](https://www.python.org/)
 [![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
 [![Star Badge](https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flatcolor=BC4E99)](https://github.com/yezz123/AuthX)
 [![Pypi](https://img.shields.io/pypi/pyversions/AuthX.svg?color=%2334D058)](https://pypi.org/project/AuthX)

@@ -121,7 +121,7 @@ def anonym_test(user: User = Depends(auth.get_user)):
 def user_test(user: User = Depends(auth.get_authenticated_user)):
     pass
 
-#
+# Set Admin User
 @router.get("/admin", dependencies=[Depends(auth.admin_required)])
 def admin_test():
     pass

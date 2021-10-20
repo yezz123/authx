@@ -1,5 +1,7 @@
 # Frequently Asked Questions 🍂
 
+![image](header.svg)
+
 ## What is the purpose of this project?
 
 - This Project is an Authentication Package helping to Add a Fully registration and authentication or authorization system to your FastAPI project. Is designed to be as customizable and adaptable as possible, so that you can use it as you want.
@@ -64,7 +66,7 @@ There you could buy me a [coffee ☕️](https://www.buymeacoffee.com/tahiri) to
 
 And you can also become a Silver or Gold sponsor for AuthX. 🏅🎉
 
-### Reference
+### Basic References
 
 I use The Following Reference to Get The package Done:
 
