@@ -1,6 +1,6 @@
 """Ready to use and customizable Authentications and Oauth2 management for FastAPI"""
 
-__version__ = "0.0.8"
+__version__ = "0.0.9"
 
 __license__ = "MIT"
 

@@ -68,7 +68,7 @@ app.include_router(auth.social_router, prefix="/auth")
 app.include_router(auth.password_router, prefix="/api/users")
 app.include_router(auth.admin_router, prefix="/api/users")
 app.include_router(auth.search_router, prefix="/api/users")
-...
+
 ```
 
 ### Startup 🏁
