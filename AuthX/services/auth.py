@@ -25,6 +25,7 @@ from AuthX.utils.strings import create_random_string, hash_string
 
 
 class AuthService:
+
     _repo: UsersRepo
     _auth_backend: JWTBackend
     _debug: bool
@@ -80,6 +81,19 @@ class AuthService:
         cls._display_name = display_name
 
     def _validate_user_model(self, model, data: dict):
+        """
+        Validate user model.
+
+        Args:
+            model (UserInRegister): UserInRegister model.
+            data (dict): data.
+
+        Raises:
+            HTTPException: 400 - validation error.
+
+        Returns:
+            UserInRegister: UserInRegister model.
+        """
         try:
             return model(**data)
         except ValidationError as e:
@@ -87,9 +101,27 @@ class AuthService:
             raise HTTPException(400, detail=get_error_message(msg))
 
     async def _email_exists(self, email: str) -> bool:
+        """
+        Check if email exists.
+
+        Args:
+            email (str): email.
+
+        Returns:
+            bool: True if email exists.
+        """
         return await self._repo.get_by_email(email) is not None
 
     async def _username_exists(self, username: str) -> bool:
+        """
+        Check if username exists.
+
+        Args:
+            username (str): username.
+
+        Returns:
+            bool: True if username exists.
+        """
         return await self._repo.get_by_username(username) is not None
 
     def _create_email_client(self) -> EmailClient:
@@ -154,9 +186,25 @@ class AuthService:
         return self._auth_backend.create_tokens(payload)
 
     async def _is_bruteforce(self, ip: str, login: str) -> bool:
+        """
+        Check if user is bruteforce.
+
+        Args:
+            ip (str): ip.
+            login (str): login.
+
+        Returns:
+            bool: True if user is bruteforce.
+        """
         return await self._repo.is_bruteforce(ip, login)
 
     async def _update_last_login(self, id: int) -> None:
+        """
+        Update last login.
+
+        Args:
+            id (int): id.
+        """
         await self._repo.update(id, {"last_login": datetime.utcnow()})
 
     async def login(self, data: dict, ip: str) -> Dict[str, str]:
@@ -198,8 +246,6 @@ class AuthService:
 
         payload = UserPayload(**item).dict()
         return self._auth_backend.create_tokens(payload)
-
-    # async def token(self) -> dict:
 
     async def refresh_access_token(self, refresh_token: str) -> str:
         """POST /token/refresh

@@ -7,6 +7,16 @@ from AuthX.models.user import UserPrivateInfo
 
 
 class SearchService:
+    """
+    Private
+
+    Raises:
+        HTTPException: If the user does not exist.
+
+    Returns:
+        The user.
+    """
+
     _repo: UsersRepo
 
     @classmethod

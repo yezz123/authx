@@ -14,6 +14,18 @@ from AuthX.models.user import UserPayload
 
 
 class SocialService:
+    """
+    Social Service
+
+    Raises:
+        SocialException: social error
+        SocialException: email exists
+        SocialException: ban
+
+    Returns:
+        Tuple[str, str]: access token, refresh token
+    """
+
     _repo: UsersRepo
     _auth_backend: JWTBackend
     _base_url: str
