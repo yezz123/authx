@@ -54,6 +54,8 @@ __Note__: This is a **beta** version of AuthX.
 - Full OpenAPI schema support, even with several authentication backend.
 - Provide a Docstring for each class and function.
 
+__Note:__ Check [Release Notes](https://yezz123.github.io/AuthX/release/).
+
 ## Project using 🚀
 
 ```python
@@ -197,7 +199,6 @@ As you see the Package still under development, you can contribute to it, also i
     - [telegram](https://t.me/yezz123)
 - Where i can see the Project Roadmap? 🤔
   - I use to manage AuthX on [Trello](https://trello.com/b/0NNZMP8T), you could check and see all the tasks if you could help me to do it.
-- Check Also [Release Notes](https://yezz123.github.io/AuthX/release/).
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
