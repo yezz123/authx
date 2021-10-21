@@ -7,6 +7,7 @@
 </p>
 
 [![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b510202495654916843956856fd9a1f6)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yezz123/AuthX&amp;utm_campaign=Badge_Grade)
 [![PyPI version](https://badge.fury.io/py/AuthX.svg)](https://badge.fury.io/py/AuthX)
 [![Downloads](https://pepy.tech/badge/authx/month)](https://pepy.tech/project/authx)
 [![Downloads](https://pepy.tech/badge/authx/week)](https://pepy.tech/project/authx)
