@@ -30,6 +30,7 @@ __Note__: This is a **beta** version of AuthX.
 
 ## Features
 
+- Support Python 3.8+.
 - Extensible base user model.
 - Ready-to-use register, login, reset password and verify e-mail routes.
 - Ready to use Social login and Oauth2 routes. (now with Google, Facebook)
