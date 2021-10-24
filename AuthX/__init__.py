@@ -4,7 +4,7 @@ __version__ = "0.0.9"
 
 __license__ = "MIT"
 
-__author__ = "Yezz123"
+__author__ = "Yasser Tahiri"
 
 __author_email__ = "yasserth19@gmail.com"
 
