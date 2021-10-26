@@ -3,7 +3,7 @@
 ![authx](https://user-images.githubusercontent.com/52716203/136962014-280d82b0-0640-4ee5-9a11-b451b338f6d8.png)
 
 <p align="center">
-    <em>Ready to use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
+    <em>Ready-to-use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
 </p>
 
 [![Docker Build](https://github.com/yezz123/AuthX/actions/workflows/docker.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/docker.yml)
@@ -36,7 +36,7 @@ __Note__: This is a **beta** version of AuthX.
 - Support Python 3.8+.
 - Extensible base user model.
 - Ready-to-use register, login, reset password and verify e-mail routes.
-- Ready to use Social login and Oauth2 routes. (now with Google, Facebook)
+- Ready-to-use Social login and Oauth2 routes. (now with Google, Facebook)
     - Soon with Microsoft, Twitter, Github, etc.
     - Ready-to-use social OAuth2 login flow
 - Tested Project on [Docker](https://docker.com/).
@@ -80,6 +80,7 @@ app.include_router(auth.search_router, prefix="/api/users")
 ```python
 from fastapi import FastAPI
 from AuthX import Authentication
+from AuthX.database import MongoDBBackend, RedisBackend
 
 app = FastAPI()
 auth = Authentication()
@@ -91,16 +92,16 @@ app.include_router(auth.admin_router, prefix="/api/users")
 app.include_router(auth.search_router, prefix="/api/users")
 
 # Set MongoDB and Redis Cache
-auth.set_cache(cache) # aioredis client
-auth.set_database(database) # motor client
+auth.set_cache(RedisBackend) # aioredis client
+auth.set_database(MongoDBBackend) # motor client
 ```
 
 ### Dependency injections 📦
 
 ```python
 from fastapi import FastAPI,APIRouter, Depends
-from AuthX import User
-from AuthX import Authentication
+from AuthX import User, Authentication
+from AuthX.database import MongoDBBackend, RedisBackend
 
 app = FastAPI()
 auth = Authentication()
@@ -114,8 +115,8 @@ app.include_router(auth.admin_router, prefix="/api/users")
 app.include_router(auth.search_router, prefix="/api/users")
 
 # Set MongoDB and Redis Cache
-auth.set_cache(cache) # aioredis client
-auth.set_database(database) # motor client
+auth.set_cache(RedisBackend) # aioredis client
+auth.set_database(MongoDBBackend) # motor client
 
 # Set Anonymous User
 @router.get("/anonym")
@@ -138,11 +139,12 @@ def admin_test():
 
 ```python
 from AuthX import AuthX
+from AuthX.database import RedisBackend
 
 auth = AuthX(#Provide Config)
 
 # startup
-auth.set_cache(cache) # aioredis
+auth.set_cache(RedisBackend) # aioredis
 ```
 
 ## Development 🚧

@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, FastAPI
 
 from AuthX import Authentication, User
+from AuthX.database import MongoDBBackend, RedisBackend
 
 app = FastAPI()
 auth = Authentication()
@@ -14,8 +15,8 @@ app.include_router(auth.admin_router, prefix="/api/users")
 app.include_router(auth.search_router, prefix="/api/users")
 
 # Set MongoDB and Redis Cache
-auth.set_cache()  # aioredis client
-auth.set_database()  # motor client
+auth.set_cache(RedisBackend)  # aioredis client
+auth.set_database(MongoDBBackend)  # motor client
 
 # Set Anonymous User
 @router.get("/anonym")
