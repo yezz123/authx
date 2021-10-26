@@ -1,12 +1,12 @@
 # Json Web Token
 
-At this part of the configuration, you can configure the Json Web Token authentication, which is used to authenticate the user, and to generate the token, also stored in the cache.
+At this part of the configuration, you can configure the JSON Web Token authentication, which is used to authenticate, generate the token, with a cache the data.
 
-using [`pyjwt`](https://pyjwt.readthedocs.io/en/stable/) a Python library which allows you to encode and decode JSON Web Tokens (JWT).
+using [`pyjwt`](https://pyjwt.readthedocs.io/en/stable/) a python library which allows you to encode and decode JSON Web Tokens (JWTs).
 
 ## Encode & Decode JWT
 
-We Gonna create a Function used to Create access tokens, and a Function used to decode access tokens, also create a refresh token used
+We Gonna create a function used to Create access tokens, and a Function used to decode access tokens, also create a refresh token used
 as a logout mechanism.
 
 ```py
@@ -37,7 +37,7 @@ async def create_token():
     payload = await jwt_backend.decode_token(token)
 ```
 
-__Notes:__ : For testing this function, you can Mock the `cache_backend` & assert the payload, to understand you can check the Tests [core/jwt.py](https://github.com/yezz123/AuthX/blob/main/tests/core/test_core_jwt.py).
+__Notes:__ : For testing this function, you can mock the `cache_backend` and assert the payload, to understand you can check the Tests [core/jwt.py](https://github.com/yezz123/AuthX/blob/main/tests/core/test_core_jwt.py).
 
 Now, lets create the Function used to decode access tokens.
 

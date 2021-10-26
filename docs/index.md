@@ -3,7 +3,7 @@
 ![authx](https://user-images.githubusercontent.com/52716203/136962014-280d82b0-0640-4ee5-9a11-b451b338f6d8.png)
 
 <p align="center">
-    <em>Ready to use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
+    <em>Ready-to-use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
 </p>
 
 [![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
@@ -31,13 +31,13 @@ __Note__: This is a **beta** version of AuthX.
 ## Features
 
 - Support Python 3.8+.
+- Fully OpenAPI schema support.
 - Extensible base user model.
 - Ready-to-use register, login, reset password and verify e-mail routes.
-- Ready to use Social login and Oauth2 routes. (now with Google, Facebook)
+- Ready-to-use Social login and Oauth2 routes. (now with Google, Facebook)
     - Soon with Microsoft, Twitter, Github, etc.
     - Ready-to-use social OAuth2 login flow
-- Tested Project on [Docker](https://docker.com/).
-- Dependency callable to inject current user in route
+- Dependency callable to inject current user into route
 - Pluggable password validation
     - Using Captcha Service.
 - Using Email Service. (SMTP)
@@ -46,10 +46,9 @@ __Note__: This is a **beta** version of AuthX.
 - Using Redis as a session store & cache.
 - Customizable database backend:
     - MongoDB async backend included thanks to [mongodb/motor](https://github.com/mongodb/motor)
-- Multiple customizable authentication backend:
+- Multiple authentication strategies:
     - JWT authentication backend included
-    - Soon to be included Cookie authentication backend
-- Full OpenAPI schema support, even with several authentication backend.
+    - Cookie based authentication (coming soon)
 - Provide a Docstring for each class and function.
 
 ## Project using

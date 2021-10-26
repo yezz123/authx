@@ -26,7 +26,7 @@ Notice that we pass a reference to your [Model](models.md).
     The database adapter will automatically create a [unique index](https://docs.mongodb.com/manual/core/index-unique/) on `id` and `email`.
 
 !!! warning
-    **AuthX** will use its defined [`id`](models.md) as unique identifier for the user, rather than the builtin MongoDB `_id`.
+    **AuthX** will use its defined [`id`](models.md) as unique identifier for the user, rather than the built-in MongoDB `_id`.
 
 ## Check also
 

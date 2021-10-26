@@ -4,7 +4,7 @@ First, you might want to see the basic ways to [help AuthX and get help](help.md
 
 ## Developing
 
-If you already cloned the repository and you know that you need to deep dive in the code, here are some guidelines to set up your environment.
+If you already cloned the repository and you know that you need to deep dive into the code, here is a guideline to set up your environment:
 
 ### Virtual environment with `venv`
 
@@ -18,7 +18,7 @@ $ python -m venv env
 
 </div>
 
-That will create a directory `./env/` with the Python binaries and then you will be able to install packages for that isolated environment.
+That will create a directory `./env/` with the python binaries and then you will be able to install packages for that isolated environment.
 
 ### Activate the environment
 
@@ -130,7 +130,7 @@ For Providing a good and consistent experience, we recommend using [pre-commit](
 
 First you need to install the [pre-commit](https://pre-commit.com/) tool, which is installed before with the Dev Dependencies.
 
-Now, Install pre-commit hooks in your `.git/hooks/` directory:
+Now, install the pre-commit hooks in your `.git/hooks/` directory:
 
 <div class="termy">
 
@@ -140,11 +140,11 @@ $ pre-commit install
 
 </div>
 
-This One will provide a Linting Test before you commit your code.
+This one will provide a linting check before you commit your code.
 
 #### Including
 
-The `.pre-commit-config.yaml` Contains the following configuration with the Linting Packages.
+The `.pre-commit-config.yaml` contains the following configuration with the linting packages.
 
 * `pre-commit-hooks` - Some out-of-the-box hooks for pre-commit.
 * `isort` - A tool to sort imports.
@@ -152,7 +152,7 @@ The `.pre-commit-config.yaml` Contains the following configuration with the Lint
 * `mirrors-autoflake` - Mirror of the autoflake package for pre-commit.
 * `black` - A tool to format Python code.
 
-## Docs
+## Documentation
 
 First, make sure you set up your environment as described above, that will install all the requirements.
 
@@ -174,7 +174,7 @@ Help with translations is VERY MUCH appreciated! And it can't be done without th
 
 Here are the steps to help with translations.
 
-#### Tips and guidelines
+#### Tips and guideline
 
 * Check the currently <a href="https://github.com/yezz123/AuthX/pulls" class="external-link" target="_blank">existing pull requests</a> for your language and add reviews requesting changes or approving them.
 
@@ -224,11 +224,11 @@ $ pytest --cov=AuthX/ --cov-report=html
 
 ## Docker Build
 
-As you know i provide all actions to build the project in Docker, so you can use it to run the project in a container.
+As you know I provide all actions to build the project in Docker, so you can use it to run the project in a container.
 
 ### Commands
 
-Using a Pre-configured Makefile, you can run the following commands:
+Using a pre-configured Makefile, you can run the following commands:
 
 * `make build` - Build the project.
 * `make pull` - Pull the latest changes from the repository, relate to `MongoDB` & `Redis`.

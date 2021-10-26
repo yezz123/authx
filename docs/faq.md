@@ -10,22 +10,20 @@
 
 ## How to use this project?
 
-- Reading the documentation is the best way to get started, but if you have any questions, please feel free to contact me, I will try as much as possible to provide some real life example helping you to get started.
-
-    For The Pythonist Reading the Code is the best way to understand it and Helping the maintainer to improve it. 🦉
+- Reading the documentation is the best way to get started, but if you have any questions, please feel free to contact me, I will try as much as I can to help and provide some real world example.
 
 ## What is the difference between the [FastAPI-User](https://github.com/fastapi-users/fastapi-users) & AuthenticationX?
 
-- First, i would like to thanks [François Voron](https://github.com/frankie567) For his FastAPI-Users Project he helped me to understand Multiple things relate to Authentication Systems, and Building a good, fast, stable and scalable FastAPI application.
+- First, I would like to thanks [François Voron](https://github.com/frankie567) For his FastAPI-Users Project he helped me to understand various things relate to authentication Systems, and Building a good, fast, scalable FastAPI application.
 
-    Now for the difference, Here i provide more things that FastAPI-User have, for example:
+    Now for the difference, Here I provide more things that FastAPI-User have, for example:
 
     * Cache Services Using `Redis`.
     * Managing Social Authentication Using `httpX`.
     * Building a Helpful Addons like Captcha & String Checker.
     * Provide MongoDB as a Database.
 
-    Lately, I see that FastAPI User Provide more Databases Services and ORM For example `SQLAlchemy` and `MongoDB` and `PostgreSQL`.
+    Lately, I see that FastAPI-User Provide more Databases Services and ORM For example `SQLAlchemy` and `MongoDB` and `PostgreSQL`.
 
     Anyway, Both Projects are very similar, but FastAPI-User is more customizable and easy to use, and AuthenticationX is more customizable and but it is more complex to use 🦥.
 
@@ -50,17 +48,15 @@ If you feel this book is for you, get your [copy](https://amzn.to/3kTvgjG) today
 
 ## How Did You Manage AuthX?
 
-Managing the project during my Work was somehow Hard for me, cause as many know I start this project after i finish my ex. Job, and i start working on it even if i joined my new Job as a Backend Developer for [@Obytes](https://obytes.com).
-
-I Use a Trello Board to Manage my Projects, and i use Trello Cards to Manage my Work, check it here [https://trello.com/b/0NNZMP8T/authx](https://trello.com/b/0NNZMP8T/authx).
+I use Trello Cards to Manage my work, check it here [https://trello.com/b/0NNZMP8T/authx](https://trello.com/b/0NNZMP8T/authx).
 
 ## Supporting Other Database Provider & ORM?
 
-Until now, AuthX support only MongoDB, but i will try to support other Database Provider and ORM in the future, and i will try to provide a way to integrate Piccolo ORM also in the future.
+Until now, AuthX support only MongoDB, but I will work to support other database providers and ORM in the future, and I will try to provide a way to integrate Piccolo ORM also in the future.
 
 ## How to Support Project?
 
-You can also financially support the author (me) through <a href="https://paypal.me/yassertahiri?locale.x=en_US" class="external-link" target="_blank">Paypal sponsors</a>.
+You can financially support the author (me) through <a href="https://paypal.me/yassertahiri?locale.x=en_US" class="external-link" target="_blank">Paypal sponsors</a>.
 
 There you could buy me a [coffee ☕️](https://www.buymeacoffee.com/tahiri) to say thanks. 😄
 
@@ -68,7 +64,7 @@ And you can also become a Silver or Gold sponsor for AuthX. 🏅🎉
 
 ### Basic References
 
-I use The Following Reference to Get The package Done:
+I use the following reference to get The package done:
 
 * <https://fastapi.tiangolo.com/>
 * <https://frankie567.github.io/fastapi-users/>
@@ -81,4 +77,4 @@ I use The Following Reference to Get The package Done:
 
 ## License
 
-This project is licensed under the terms of the Apache-2.0 License.
+This project is licensed under the terms of the MIT License.

@@ -13,18 +13,18 @@ async def get_by_login(self, login: str) -> Optional[dict]:
             return await self.get_by_username(login)
 ```
 
-This One Show how we can use GET to get a user by login.
+This one shows how we can use `GET` to fetch a user by login.
 
-__Note__: All of this Functions and Configurations have a one Require file called config where we add all parms for example :
+__Note__: All of this functions and configurations have a required file called config where we add all params for example :
 
 - `Password_reset_lifetime`: How long a password reset token is valid.
 - `Password_reset_max`: How many password reset tokens can be generated per user.
 
-Also all of this is asynchronous with Redis & MongoDB, also we use a logger to set the log level & Formatter.
+Also all of this is asynchronous with Redis and MongoDB, also we use a logger to set the log level and formatter.
 
 ## Testing
 
-Let's try to test a `Usermanager` & Creator based on this:
+Let's try to test a `Usermanager` & creator based on this:
 
 ```py
 import pytest
@@ -52,13 +52,13 @@ async def test_user():
     assert user.is_admin
 ```
 
-This Example show how we can create a user using a pre-configured JWTBackend and Functionality based on the UserManager.
+This example show how we can create a user using a pre-configured JWTBackend and functionality based on the UserManager.
 
 ### MockCacheBackend
 
-As we Need we don't need to provide a Redis Service to the UserManager, we can use a MockCacheBackend to test the UserManager.
+As we need we don't need to provide a Redis Service to the UserManager, we can use a MockCacheBackend to test the UserManager.
 
-This Class Implements the CacheBackend Interface, and is used to mock the Redis Service.
+This class implements the CacheBackend interface, and is used to mock the Redis Service.
 
 ```py
 class MockCacheBackend:

@@ -19,7 +19,7 @@ There is also a Social User model that is a class of the AuthX User model.
 
 ## Get Started
 
-Start using the Defined models in your application, by reading:
+Start using the defined models in your application, by reading:
 
 * [Base Models](base.md)
 * [Social Models](social.md)

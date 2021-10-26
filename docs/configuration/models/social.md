@@ -4,7 +4,7 @@
 
 There are one Pydantic model variation provided as mixin:
 
-* `SocialInCreate` – Social User model for creating.
+* `SocialInCreate` – social user model for creating.
 
 You should define it, inheriting from the mixin:
 

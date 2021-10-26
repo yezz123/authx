@@ -67,6 +67,4 @@ The `UsersRepo` is a general class with multiple classes, that allow us to perfo
     * `set_permissions`: Set the permissions of a user.
 
 !!! warning
-    This One Relate to the Admin Route, and is not available in the User Route.
-
-
+    This one relate to the Admin route, and is not available in the User route too.
