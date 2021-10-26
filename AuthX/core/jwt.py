@@ -5,7 +5,7 @@ from typing import Optional
 import jwt
 
 from AuthX.core.config import JWT_ALGORITHM
-from AuthX.database.redis import RedisBackend
+from AuthX.database import RedisBackend
 
 
 class JWTBackend:
