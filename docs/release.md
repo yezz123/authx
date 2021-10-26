@@ -1,5 +1,23 @@
 # Release Notes 🎞
 
+## 0.1.1
+
+* Kuddos to [@AbderrahimSoubaiElidrissi](https://github.com/AbderrahimSoubaiElidrissi) for fixing multiple issues in docs ✨
+* Fix Database partial router.
+* Now we can call the `cache` or `mongo` only from a partial router.
+
+### Example
+
+<img width="654" alt="main py" src="https://user-images.githubusercontent.com/52716203/138797035-549804e4-0609-46aa-ba2f-e1b1f8757f59.png">
+
+## What's Changed
+
+* Add a partial router to Database ✨ by @yezz123 in <https://github.com/yezz123/AuthX/pull/97>
+* Docs: Update documentation by @yezz123 in <https://github.com/yezz123/AuthX/pull/98>
+* Bump from 0.1.0 to 0.1.1 ✨ by @yezz123 in <https://github.com/yezz123/AuthX/pull/99>
+
+**Full Changelog**: <https://github.com/yezz123/AuthX/compare/0.1.0...0.1.1>
+
 ## 0.1.0
 
 * Provide a full support for python 3.10 after adding a testcase (workflow), and fix the version of pytest.
