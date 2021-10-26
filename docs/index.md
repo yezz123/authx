@@ -53,19 +53,19 @@ __Note__: This is a **beta** version of AuthX.
 
 ## Project using
 
-```py hl_lines="1 3 5 6 10-14"
+```py hl_lines="1 3 6 7 11-15"
 {!src/main.py!}
 ```
 
 ### Startup
 
-```py hl_lines="17-18"
+```py hl_lines="4 18-19"
 {!src/main.py!}
 ```
 
 ### Dependency injections
 
-```py hl_lines="1 3 7 21-23 27-29 33-35"
+```py hl_lines="1 3 7 22-24 28-30 34-36"
 {!src/main.py!}
 ```
 
@@ -73,11 +73,12 @@ __Note__: This is a **beta** version of AuthX.
 
 ```python
 from AuthX import AuthX
+from AuthX.database import RedisBackend
 
-auth = AuthX(#Provide Config)
+auth = AuthX()
 
 # startup
-auth.set_cache(cache) # aioredis
+auth.set_cache(RedisBackend) # aioredis
 ```
 
 ## License
