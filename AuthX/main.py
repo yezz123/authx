@@ -7,8 +7,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from AuthX.api import UsersRepo
 from AuthX.core.jwt import JWTBackend
 from AuthX.core.user import User
-from AuthX.database.mongodb import MongoDBBackend
-from AuthX.database.redis import RedisBackend
+from AuthX.database import MongoDBBackend, RedisBackend
 from AuthX.routers import (
     get_admin_router,
     get_auth_router,

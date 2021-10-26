@@ -14,8 +14,7 @@ from AuthX.core.config import (
     PASSWORD_RESET_TIMEOUT,
 )
 from AuthX.core.logger import logger
-from AuthX.database.mongodb import MongoDBBackend
-from AuthX.database.redis import RedisBackend
+from AuthX.database import MongoDBBackend, RedisBackend
 
 
 class Base:
