@@ -1,0 +1,27 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "yezz123",
+      "name": "Yasser Tahiri",
+      "avatar_url": "https://avatars.githubusercontent.com/u/52716203?v=4",
+      "profile": "http://yezz.me",
+      "contributions": [
+        "code",
+        "doc",
+        "maintenance",
+        "infra"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "AuthX",
+  "projectOwner": "yezz123",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
