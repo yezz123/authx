@@ -18,12 +18,13 @@
 [![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
 [![Star Badge](https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flatcolor=BC4E99)](https://github.com/yezz123/AuthX)
 [![Pypi](https://img.shields.io/pypi/pyversions/AuthX.svg?color=%2334D058)](https://pypi.org/project/AuthX)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/pypi/AuthX)
 
 ---
 
 **Source Code**: <https://github.com/yezz123/AuthX>
 
-**Documentation**: <https://yezz123.github.io/AuthX/>
+**Documentation**: <https://authx.yezz.codes/>
 
 ---
 
@@ -190,18 +191,6 @@ Execute the following command to apply `pre-commit` formatting:
 ```bash
 make lint
 ```
-
-## Contributing 🌙
-
-As you see the Package still under development, you can contribute to it, also its a closed source project.
-
-- Then how i can contribute? 🤔
-  - You could contact the Maintainer of this project on :
-    - [Email](mailto:yasserth19@gmail.com)
-    - [Twitter](https://twitter.com/THyasser1)
-    - [telegram](https://t.me/yezz123)
-- Where i can see the Project Roadmap? 🤔
-  - I use to manage AuthX on [Trello](https://trello.com/b/0NNZMP8T), you could check and see all the tasks if you could help me to do it.
 
 ## License 📝
 
