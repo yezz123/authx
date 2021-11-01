@@ -6,21 +6,22 @@
     <em>Ready-to-use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
 </p>
 
+[![Tests](https://github.com/yezz123/AuthX/actions/workflows/test.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b510202495654916843956856fd9a1f6)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yezz123/AuthX&amp;utm_campaign=Badge_Grade)
 [![PyPI version](https://badge.fury.io/py/AuthX.svg)](https://badge.fury.io/py/AuthX)
+[![Downloads](https://pepy.tech/badge/authx)](https://pepy.tech/project/authx)
 [![Downloads](https://pepy.tech/badge/authx/month)](https://pepy.tech/project/authx)
-[![Downloads](https://pepy.tech/badge/authx/week)](https://pepy.tech/project/authx)
 [![Lang](https://img.shields.io/badge/Language-Python-green?style)](https://www.python.org/)
 [![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
-[![Star Badge](https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flatcolor=BC4E99)](https://github.com/yezz123/AuthX)
 [![Pypi](https://img.shields.io/pypi/pyversions/AuthX.svg?color=%2334D058)](https://pypi.org/project/AuthX)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/pypi/AuthX)](https://github.com/yezz123/AuthX/blob/main/requirements.txt)
 
 ---
 
-**Source Code**: <https://github.com/yezz123/AuthX> (Closed-Source)
+**Source Code**: <https://github.com/yezz123/AuthX>
 
-**Get Started**: <https://yezz123.github.io/AuthX/>
+**Get Started**: <https://authx.yezz.codes/>
 
 ---
 

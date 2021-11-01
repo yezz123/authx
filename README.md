@@ -6,24 +6,24 @@
     <em>Ready-to-use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
 </p>
 
-[![Docker Build](https://github.com/yezz123/AuthX/actions/workflows/docker.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/docker.yml)
-[![Python Package](https://github.com/yezz123/AuthX/actions/workflows/build.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/build.yml)
-[![Local tests](https://github.com/yezz123/AuthX/actions/workflows/test.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/test.yml)
+[![Tests](https://github.com/yezz123/AuthX/actions/workflows/test.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/test.yml)
+[![Docker Tests](https://github.com/yezz123/AuthX/actions/workflows/docker.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/docker.yml)
 [![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b510202495654916843956856fd9a1f6)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yezz123/AuthX&amp;utm_campaign=Badge_Grade)
 [![PyPI version](https://badge.fury.io/py/AuthX.svg)](https://badge.fury.io/py/AuthX)
+[![Downloads](https://pepy.tech/badge/authx)](https://pepy.tech/project/authx)
 [![Downloads](https://pepy.tech/badge/authx/month)](https://pepy.tech/project/authx)
-[![Downloads](https://pepy.tech/badge/authx/week)](https://pepy.tech/project/authx)
 [![Language](https://img.shields.io/badge/Language-Python-green?style)](https://github.com/yezz123)
 [![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
 [![Star Badge](https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flatcolor=BC4E99)](https://github.com/yezz123/AuthX)
 [![Pypi](https://img.shields.io/pypi/pyversions/AuthX.svg?color=%2334D058)](https://pypi.org/project/AuthX)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/pypi/AuthX)
 
 ---
 
 **Source Code**: <https://github.com/yezz123/AuthX>
 
-**Documentation**: <https://yezz123.github.io/AuthX/>
+**Documentation**: <https://authx.yezz.codes/>
 
 ---
 
@@ -191,17 +191,20 @@ Execute the following command to apply `pre-commit` formatting:
 make lint
 ```
 
-## Contributing 🌙
+## Contributors and sponsors ✨☕️
 
-As you see the Package still under development, you can contribute to it, also its a closed source project.
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
-- Then how i can contribute? 🤔
-  - You could contact the Maintainer of this project on :
-    - [Email](mailto:yasserth19@gmail.com)
-    - [Twitter](https://twitter.com/THyasser1)
-    - [telegram](https://t.me/yezz123)
-- Where i can see the Project Roadmap? 🤔
-  - I use to manage AuthX on [Trello](https://trello.com/b/0NNZMP8T), you could check and see all the tasks if you could help me to do it.
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 ## License 📝
 

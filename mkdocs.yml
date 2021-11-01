@@ -3,6 +3,8 @@ site_description: Ready to use and customizable Authentications and Oauth2 manag
 site_url: https://yezz123.github.io/AuthX/
 
 theme:
+  features:
+    - header.autohide
   name: 'material'
   palette:
     - scheme: default
@@ -17,10 +19,16 @@ theme:
       toggle:
           icon: material/lightbulb-outline
           name: Switch to light mode
-  icon:
-    logo: material/rocket
   favicon: favicon.png
-
+  features:
+  - search.suggest
+  - search.highlight
+  - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github
+repo_name: Yezz123/AuthX
+repo_url: https://github.com/yezz123/AuthX
+edit_uri: ""
 
 markdown_extensions:
   - markdown_include.include:
@@ -99,3 +107,5 @@ extra:
     link: https://www.linkedin.com/in/yezz123
   - icon: fontawesome/solid/globe
     link: https://yezz.me
+  - icon: fontawesome/brands/product-hunt
+    link: https://producthunt.com/posts/authx
