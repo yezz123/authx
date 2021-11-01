@@ -10,7 +10,7 @@ bumpversion
 codecov
 pytest-cov
 mkdocs == 1.2.3
-mkdocs-material == 7.3.5
+mkdocs-material == 7.3.6
 mkdocs-markdownextradata-plugin == 0.2.4
 mkdocs-mermaid2-plugin
 markdown-include
