@@ -27,25 +27,6 @@
 
     Anyway, Both Projects are very similar, but FastAPI-User is more customizable and easy to use, and AuthenticationX is more customizable and but it is more complex to use 🦥.
 
-__Note:__ 📚 Discover [François Voron](https://github.com/frankie567) book: *Building Data Science Applications with FastAPI*
-
-<img src="https://static.packt-cdn.com/products/9781801079211/cover/smaller" alt="Building Data Science Applications with FastAPI" height="256px" align="right">
-
-**Develop, manage, and deploy efficient machine learning applications with Python**
-
-### What is this book about?
-
-This book covers the following exciting features:
-
-* Explore the basics of modern Python and async I/O programming
-* Get to grips with basic and advanced concepts of the FastAPI framework
-* Implement a FastAPI dependency to efficiently run a machine learning model
-* Integrate a simple face detection algorithm in a FastAPI backend
-* Integrate common Python data science libraries in a web backend
-* Deploy a performant and reliable web backend for a data science application
-
-If you feel this book is for you, get your [copy](https://amzn.to/3kTvgjG) today!
-
 ## How Did You Manage AuthX?
 
 I use Trello Cards to Manage my work, check it here [https://trello.com/b/0NNZMP8T/authx](https://trello.com/b/0NNZMP8T/authx).
