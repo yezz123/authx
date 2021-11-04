@@ -16,4 +16,3 @@ jobs:
         run: make lint
       - name: pytest
         run: make test
-      # try to get the Coverage From Docker by adding pytest command

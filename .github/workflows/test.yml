@@ -27,15 +27,3 @@ jobs:
         run: |
           python -m pytest --cov=AuthX/ --cov-report=html
           codecov
-
-  docs:
-    runs-on: ubuntu-latest
-    name: Build Documentation
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - run: pip install -r requirements.dev.txt
-      - name: Build
-        run: mkdocs build

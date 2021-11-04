@@ -20,4 +20,3 @@ jobs:
           branch: gh-pages
           folder: ./site
           message: "💫 Build Documentation"
-
