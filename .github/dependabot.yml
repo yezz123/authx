@@ -4,8 +4,6 @@ updates:
   directory: "/"
   schedule:
     interval: daily
-    time: "02:00"
-  open-pull-requests-limit: 10
   reviewers:
   - yezz123
 - package-ecosystem: "docker"
