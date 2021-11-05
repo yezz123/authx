@@ -3,10 +3,10 @@ from typing import Iterable, Optional, Tuple, Union
 
 import jwt
 
-with open("tests/private_key", "rb") as f:
+with open("tests/key/private_key", "rb") as f:
     private_key = f.read()
 
-with open("tests/public_key", "rb") as f:
+with open("tests/key/public_key", "rb") as f:
     public_key = f.read()
 
 ACCESS_COOKIE_NAME = "access"
