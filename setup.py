@@ -42,7 +42,9 @@ setuptools.setup(
         "Intended Audience :: Customer Service",
         "Development Status :: 4 - Beta",
         "Natural Language :: English",
-        "Framework :: aiohttp",
+        # Waiting For this PR to Merged for adding FastAPI
+        # https://github.com/pypa/trove-classifiers/pull/80
+        # "Framework :: FastAPI",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
