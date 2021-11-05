@@ -26,7 +26,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     project_urls={
-        "Documentation": "https://yezz123.github.io/AuthX/",
+        "Documentation": "https://authx.yezz.codes/",
         "Source Code": "https://github.com/yezz123/AuthX",
         "Bug Tracker": "https://github.com/yezz123/AuthX/issues",
         "Funding": "https://opencollective.com/yezz123",
