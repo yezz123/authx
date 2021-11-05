@@ -132,7 +132,7 @@ class MockDatabaseBackend:
 
     async def create(self, obj: dict) -> int:
         id = self._increment_id()
-        obj.update({"id": id})
+        obj["id"] = id
         self._users.append(obj)
         return id
 
