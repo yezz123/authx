@@ -4,7 +4,7 @@ cryptography == 35.0.0
 httpx == 0.20.0
 aioredis==2.0.0
 passlib == 1.7.4
-itsdangerous == 1.1.0
+itsdangerous==2.0.1
 bcrypt == 3.2.0
 email-validator == 1.1.1
 motor == 2.3.0
