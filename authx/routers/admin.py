@@ -1,8 +1,9 @@
 from typing import Callable
 
+from fastapi import APIRouter, Depends
+
 from authx.api import UsersRepo
 from authx.services import AdminService
-from fastapi import APIRouter, Depends
 
 
 def get_router(

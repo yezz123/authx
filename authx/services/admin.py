@@ -1,8 +1,9 @@
 from datetime import datetime
 from typing import Optional
 
-from authx.api import UsersRepo
 from fastapi import HTTPException
+
+from authx.api import UsersRepo
 
 
 class AdminService:

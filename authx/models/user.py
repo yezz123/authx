@@ -2,6 +2,8 @@ from datetime import datetime, timedelta
 from string import ascii_letters
 from typing import List, Optional, Union
 
+from pydantic import BaseModel, EmailStr, validator
+
 from authx.core.config import (
     PASSWORD_CHARS,
     PASSWORD_MAX_LENGTH,
@@ -13,7 +15,6 @@ from authx.core.config import (
     WRONG_USERNAMES,
 )
 from authx.models.common import DefaultModel, set_created_at, set_last_login
-from pydantic import BaseModel, EmailStr, validator
 
 """
     Function to check if the username is correct.

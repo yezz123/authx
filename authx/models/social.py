@@ -1,8 +1,9 @@
 from datetime import datetime
 from typing import Optional
 
-from authx.models.common import set_created_at, set_last_login
 from pydantic import BaseModel, EmailStr, validator
+
+from authx.models.common import set_created_at, set_last_login
 
 
 class SocialInCreate(BaseModel):

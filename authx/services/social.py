@@ -2,12 +2,13 @@ from datetime import datetime
 from typing import Dict, Optional, Tuple
 
 import jwt
+from httpx import AsyncClient
+
 from authx.api import UsersRepo
 from authx.core.jwt import JWTBackend
 from authx.errors import SocialException
 from authx.models.social import SocialInCreate
 from authx.models.user import UserPayload
-from httpx import AsyncClient
 
 """Social Service for authentication and authorization"""
 

@@ -1,6 +1,9 @@
 from typing import Iterable, Optional
 
 from aioredis import Redis
+from fastapi import APIRouter, HTTPException, Request
+from motor.motor_asyncio import AsyncIOMotorClient
+
 from authx.api import UsersRepo
 from authx.core.jwt import JWTBackend
 from authx.core.user import User
@@ -12,8 +15,6 @@ from authx.routers import (
     get_search_router,
     get_social_router,
 )
-from fastapi import APIRouter, HTTPException, Request
-from motor.motor_asyncio import AsyncIOMotorClient
 
 
 # TODO: Invalid DOCS for this file >> Try to use only Postman for testing
