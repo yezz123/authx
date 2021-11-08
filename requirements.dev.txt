@@ -7,7 +7,7 @@ uvicorn==0.15.0
 pre-commit==2.15.0
 asynctest==0.13.0
 bumpversion==0.6.0
-codecov
+codecov==2.1.12
 pytest-cov
 mkdocs == 1.2.3
 mkdocs-material == 7.3.6
