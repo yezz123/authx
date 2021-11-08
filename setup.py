@@ -3,7 +3,7 @@ import typing as t
 
 import setuptools
 
-from AuthX import __author__, __author_email__, __license__, __version__
+from authx import __author__, __author_email__, __license__, __version__
 
 directory = os.path.abspath(os.path.dirname(__file__))
 
@@ -18,7 +18,7 @@ def parse_requirement(req_path: str) -> t.List[str]:
 
 
 setuptools.setup(
-    name="AuthX",
+    name="authx",
     version=__version__,
     author=__author__,
     platforms=["any"],

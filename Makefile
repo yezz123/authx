@@ -15,7 +15,7 @@ help:
 	@echo "    make gh-deploy"
 
 test:
-	docker-compose run --rm authx pytest --cov=AuthX/ --cov-report=html
+	docker-compose run --rm authx pytest --cov=authx/ --cov-report=html
 
 start:
 	docker-compose up -d

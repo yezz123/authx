@@ -10,7 +10,7 @@ from pymongo import ReturnDocument
 
 class MongoDBBackend:
     """
-    Setup Database for AuthX using MongoDB & Motor
+    Setup Database for authx using MongoDB & Motor
     """
 
     def __init__(self, database_name: str = "test") -> None:

@@ -1,4 +1,4 @@
-from AuthX.resources.social_messages import get_error_message
+from authx.resources.social_messages import get_error_message
 
 
 class SocialException(Exception):

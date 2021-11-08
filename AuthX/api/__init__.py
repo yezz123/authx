@@ -1,4 +1,4 @@
-from AuthX.api.users import UsersRepo
+from authx.api.users import UsersRepo
 
 """
     Get The API Repositories

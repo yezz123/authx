@@ -3,9 +3,9 @@ from unittest import mock
 import pytest
 from fastapi import HTTPException
 
-from AuthX.api import UsersRepo
-from AuthX.services import AuthService
-from AuthX.utils.strings import create_random_string, hash_string
+from authx.api import UsersRepo
+from authx.services import AuthService
+from authx.utils.strings import create_random_string, hash_string
 from tests.utils import (
     MockAuthBackend,
     MockCacheBackend,
@@ -63,7 +63,7 @@ CAPTCHA = "CAPTCHA"
     ],
 )
 @mock.patch(
-    "AuthX.services.auth.AuthService._request_email_confirmation",
+    "authx.services.auth.AuthService._request_email_confirmation",
     mock.AsyncMock(return_value=None),
 )
 async def test_register(
@@ -88,7 +88,7 @@ async def test_register(
     """
     auth_service = AuthService()
     with mock.patch(
-        "AuthX.services.auth.validate_captcha",
+        "authx.services.auth.validate_captcha",
         mock.AsyncMock(return_value=valid_captcha),
     ) as mock_validate_captcha:
         if not valid_captcha:
@@ -132,7 +132,7 @@ async def test_register(
         ("admin@gmail.com", "12345678"),
     ],
 )
-@mock.patch("AuthX.services.auth.verify_password", mock_verify_password)
+@mock.patch("authx.services.auth.verify_password", mock_verify_password)
 async def test_login(login: str, password: str):
     """
     Test login
@@ -193,7 +193,7 @@ async def test_request_email_confirmation_confirmed():
 
 @pytest.mark.asyncio
 @mock.patch(
-    "AuthX.services.auth.AuthService._request_email_confirmation",
+    "authx.services.auth.AuthService._request_email_confirmation",
     mock.AsyncMock(return_value=None),
 )
 async def test_request_email_confirmation():

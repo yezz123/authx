@@ -1,7 +1,7 @@
 import logging
 import logging.handlers
 
-from AuthX.core.config import DEBUG
+from authx.core.config import DEBUG
 
 
 class LevelFilter:

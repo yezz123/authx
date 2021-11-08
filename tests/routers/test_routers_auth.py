@@ -3,7 +3,7 @@ from unittest import mock
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from AuthX.routers import get_auth_router
+from authx.routers import get_auth_router
 from tests.utils import (
     ACCESS_COOKIE_NAME,
     REFRESH_COOKIE_NAME,
@@ -44,7 +44,7 @@ REFRESH_TOKEN = "refresh_token"
 
 
 @mock.patch(
-    "AuthX.routers.auth.AuthService.register",
+    "authx.routers.auth.AuthService.register",
     mock.AsyncMock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
 )
 def test_register():
@@ -66,7 +66,7 @@ def test_register():
 
 
 @mock.patch(
-    "AuthX.routers.auth.AuthService.login",
+    "authx.routers.auth.AuthService.login",
     mock.AsyncMock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
 )
 def test_login():
@@ -108,7 +108,7 @@ def test_token():
 
 
 @mock.patch(
-    "AuthX.routers.auth.AuthService.refresh_access_token",
+    "authx.routers.auth.AuthService.refresh_access_token",
     mock.AsyncMock(return_value=ACCESS_TOKEN),
 )
 def test_refresh_access_token():
@@ -127,7 +127,7 @@ def test_refresh_access_token():
 
 
 @mock.patch(
-    "AuthX.routers.auth.AuthService.get_email_confirmation_status",
+    "authx.routers.auth.AuthService.get_email_confirmation_status",
     mock.AsyncMock(return_value=None),
 )
 def test_get_email_confirmation_status():
@@ -140,7 +140,7 @@ def test_get_email_confirmation_status():
 
 
 @mock.patch(
-    "AuthX.routers.auth.AuthService.request_email_confirmation",
+    "authx.routers.auth.AuthService.request_email_confirmation",
     mock.AsyncMock(return_value=None),
 )
 def test_request_email_confirmation():
@@ -159,7 +159,7 @@ def test_confirm_email():
     TOKEN = "123"
     url = app.url_path_for("auth:confirm_email", token=TOKEN)
     with mock.patch(
-        "AuthX.routers.auth.AuthService.confirm_email",
+        "authx.routers.auth.AuthService.confirm_email",
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.post(url)
@@ -175,7 +175,7 @@ def test_change_username():  # TODO
     new_username = "new_username"
     url = app.url_path_for("auth:change_username", id=id)
     with mock.patch(
-        "AuthX.routers.auth.AuthService.change_username",
+        "authx.routers.auth.AuthService.change_username",
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.post(url, json={"username": new_username})

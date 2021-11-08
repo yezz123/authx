@@ -3,7 +3,7 @@ from typing import Optional
 
 from pydantic import BaseModel, EmailStr, validator
 
-from AuthX.models.common import set_created_at, set_last_login
+from authx.models.common import set_created_at, set_last_login
 
 
 class SocialInCreate(BaseModel):

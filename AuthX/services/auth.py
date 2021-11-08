@@ -6,22 +6,22 @@ from email_validator import EmailNotValidError, validate_email
 from fastapi import HTTPException
 from pydantic.error_wrappers import ValidationError
 
-from AuthX.api import UsersRepo
-from AuthX.core.email import EmailClient
-from AuthX.core.jwt import JWTBackend
-from AuthX.core.logger import logger
-from AuthX.core.password import get_password_hash, verify_password
-from AuthX.core.user import User
-from AuthX.models.user import (
+from authx.api import UsersRepo
+from authx.core.email import EmailClient
+from authx.core.jwt import JWTBackend
+from authx.core.logger import logger
+from authx.core.password import get_password_hash, verify_password
+from authx.core.user import User
+from authx.models.user import (
     UserInChangeUsername,
     UserInCreate,
     UserInLogin,
     UserInRegister,
     UserPayload,
 )
-from AuthX.resources.error_messages import get_error_message
-from AuthX.utils.captcha import validate_captcha
-from AuthX.utils.strings import create_random_string, hash_string
+from authx.resources.error_messages import get_error_message
+from authx.utils.captcha import validate_captcha
+from authx.utils.strings import create_random_string, hash_string
 
 
 class AuthService:

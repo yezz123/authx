@@ -5,7 +5,7 @@ from typing import Iterable, Optional, Tuple
 
 from email_validator import EmailNotValidError, validate_email
 
-from AuthX.core.config import (
+from authx.core.config import (
     EMAIL_CONFIRMATION_MAX,
     EMAIL_CONFIRMATION_TIMEOUT,
     LOGIN_RATELIMIT,
@@ -13,8 +13,8 @@ from AuthX.core.config import (
     PASSWORD_RESET_MAX,
     PASSWORD_RESET_TIMEOUT,
 )
-from AuthX.core.logger import logger
-from AuthX.database import MongoDBBackend, RedisBackend
+from authx.core.logger import logger
+from authx.database import MongoDBBackend, RedisBackend
 
 
 class Base:

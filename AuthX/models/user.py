@@ -4,7 +4,7 @@ from typing import List, Optional, Union
 
 from pydantic import BaseModel, EmailStr, validator
 
-from AuthX.core.config import (
+from authx.core.config import (
     PASSWORD_CHARS,
     PASSWORD_MAX_LENGTH,
     PASSWORD_MIN_LENGTH,
@@ -14,7 +14,7 @@ from AuthX.core.config import (
     USERNAME_MIN_LENGTH,
     WRONG_USERNAMES,
 )
-from AuthX.models.common import DefaultModel, set_created_at, set_last_login
+from authx.models.common import DefaultModel, set_created_at, set_last_login
 
 """
     Function to check if the username is correct.

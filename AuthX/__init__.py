@@ -8,6 +8,6 @@ __author__ = "Yasser Tahiri"
 
 __author_email__ = "yasserth19@gmail.com"
 
-from AuthX.main import Authentication, AuthX, User
+from authx.main import Authentication, User, authx
 
-__all__ = ["AuthX", "Authentication", "User"]
+__all__ = ["authx", "Authentication", "User"]
