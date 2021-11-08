@@ -11,7 +11,7 @@ as a logout mechanism.
 
 ```py
 # jwt.py
-from AuthX.core.jwt import JWTBackend
+from authx.core.jwt import JWTBackend
 
 cache_backend = # Redis Configuration
 access_expiration = # Access Token Expiration
@@ -37,7 +37,7 @@ async def create_token():
     payload = await jwt_backend.decode_token(token)
 ```
 
-__Notes:__ : For testing this function, you can mock the `cache_backend` and assert the payload, to understand you can check the Tests [core/jwt.py](https://github.com/yezz123/AuthX/blob/main/tests/core/test_core_jwt.py).
+__Notes:__ : For testing this function, you can mock the `cache_backend` and assert the payload, to understand you can check the Tests [core/jwt.py](https://github.com/yezz123/authx/blob/main/tests/core/test_core_jwt.py).
 
 Now, lets create the Function used to decode access tokens.
 
@@ -87,7 +87,7 @@ The Revoke Token is used to revoke the access token, and is used to generate a n
 
 ```py
 from datetime import datetime
-from AuthX.core.jwt import JWTBackend
+from authx.core.jwt import JWTBackend
 
 def logout():
 

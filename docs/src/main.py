@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, FastAPI
 
-from AuthX import Authentication, User
-from AuthX.database import MongoDBBackend, RedisBackend
+from authx import Authentication, User
+from authx.database import MongoDBBackend, RedisBackend
 
 app = FastAPI()
 auth = Authentication()
