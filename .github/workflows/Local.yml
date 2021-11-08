@@ -25,5 +25,5 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
-          python -m pytest --cov=AuthX/ --cov-report=html
+          python -m pytest --cov=authx/ --cov-report=html
           codecov

@@ -1,8 +1,8 @@
-from AuthX.services.admin import AdminService
-from AuthX.services.auth import AuthService
-from AuthX.services.password import PasswordService
-from AuthX.services.search import SearchService
-from AuthX.services.social import SocialService
+from authx.services.admin import AdminService
+from authx.services.auth import AuthService
+from authx.services.password import PasswordService
+from authx.services.search import SearchService
+from authx.services.social import SocialService
 
 """
     Initialize all services

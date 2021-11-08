@@ -3,7 +3,7 @@ from unittest import mock
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from AuthX.routers import get_password_router
+from authx.routers import get_password_router
 from tests.utils import (
     MockAuthBackend,
     mock_get_authenticated_user,
@@ -39,7 +39,7 @@ def test_forgot_password():
     """
     url = app.url_path_for("auth:forgot_password")
     with mock.patch(
-        "AuthX.routers.password.PasswordService.forgot_password",
+        "authx.routers.password.PasswordService.forgot_password",
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.post(url, json={"email": "user@gmail.com",},)
@@ -53,7 +53,7 @@ def test_password_status():
     """
     url = app.url_path_for("auth:password_status")
     with mock.patch(
-        "AuthX.routers.password.PasswordService.password_status",
+        "authx.routers.password.PasswordService.password_status",
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.get(url)
@@ -68,7 +68,7 @@ def test_password_set():
     """
     url = app.url_path_for("auth:password_set")
     with mock.patch(
-        "AuthX.routers.password.PasswordService.password_set",
+        "authx.routers.password.PasswordService.password_set",
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.post(
@@ -86,7 +86,7 @@ def test_password_reset():
     """
     url = app.url_path_for("auth:password_reset", token="TOKEN")
     with mock.patch(
-        "AuthX.routers.password.PasswordService.password_reset",
+        "authx.routers.password.PasswordService.password_reset",
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.post(
@@ -104,7 +104,7 @@ def test_password_change():
     """
     url = app.url_path_for("auth:password_change")
     with mock.patch(
-        "AuthX.routers.password.PasswordService.password_change",
+        "authx.routers.password.PasswordService.password_change",
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.put(

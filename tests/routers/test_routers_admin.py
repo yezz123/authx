@@ -3,7 +3,7 @@ from unittest import mock
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from AuthX.routers import get_admin_router
+from authx.routers import get_admin_router
 from tests.utils import mock_admin_required
 
 app = FastAPI()
@@ -25,7 +25,7 @@ def test_get_blacklist():
     """
     url = app.url_path_for("admin:get_blacklist")
     with mock.patch(
-        "AuthX.routers.admin.AdminService.get_blacklist",
+        "authx.routers.admin.AdminService.get_blacklist",
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.get(url)
@@ -40,7 +40,7 @@ def test_toggle_blacklist():
     """
     url = app.url_path_for("admin:toggle_blacklist", id="5")
     with mock.patch(
-        "AuthX.routers.admin.AdminService.toggle_blacklist",
+        "authx.routers.admin.AdminService.toggle_blacklist",
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.post(url)
@@ -55,7 +55,7 @@ def test_get_blackout():
     """
     url = app.url_path_for("admin:get_blackout")
     with mock.patch(
-        "AuthX.routers.admin.AdminService.get_blackout",
+        "authx.routers.admin.AdminService.get_blackout",
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.get(url)
@@ -70,7 +70,7 @@ def test_set_blackout():
     """
     url = app.url_path_for("admin:set_blackout")
     with mock.patch(
-        "AuthX.routers.admin.AdminService.set_blackout",
+        "authx.routers.admin.AdminService.set_blackout",
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.post(url)
@@ -85,7 +85,7 @@ def test_delete_blackout():
     """
     url = app.url_path_for("admin:delete_blackout")
     with mock.patch(
-        "AuthX.routers.admin.AdminService.delete_blackout",
+        "authx.routers.admin.AdminService.delete_blackout",
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.delete(url)
@@ -100,7 +100,7 @@ def test_get_id_by_username():
     """
     url = app.url_path_for("admin:get_id_by_username")
     with mock.patch(
-        "AuthX.routers.admin.AdminService.get_id_by_username",
+        "authx.routers.admin.AdminService.get_id_by_username",
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.get(f"{url}?username=admin")
@@ -115,7 +115,7 @@ def test_kick():
     """
     url = app.url_path_for("admin:kick", id="5")
     with mock.patch(
-        "AuthX.routers.admin.AdminService.kick", mock.AsyncMock(return_value=None),
+        "authx.routers.admin.AdminService.kick", mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.post(url)
         mock_method.assert_awaited_once_with(5)

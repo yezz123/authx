@@ -2,10 +2,10 @@ from typing import Callable
 
 from fastapi import APIRouter, Depends, Request
 
-from AuthX.api import UsersRepo
-from AuthX.core.jwt import JWTBackend
-from AuthX.core.user import User
-from AuthX.services import PasswordService
+from authx.api import UsersRepo
+from authx.core.jwt import JWTBackend
+from authx.core.user import User
+from authx.services import PasswordService
 
 
 def get_router(

@@ -3,7 +3,7 @@ from unittest import mock
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from AuthX.routers import get_search_router
+from authx.routers import get_search_router
 from tests.utils import mock_admin_required
 
 app = FastAPI()
@@ -25,7 +25,7 @@ def test_get_user():
     """
     url = app.url_path_for("auth:get_user", id="1")
     with mock.patch(
-        "AuthX.routers.search.SearchService.get_user",
+        "authx.routers.search.SearchService.get_user",
         mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.get(url)
@@ -40,7 +40,7 @@ def test_search():
     """
     url = app.url_path_for("auth:search")
     with mock.patch(
-        "AuthX.routers.search.SearchService.search", mock.AsyncMock(return_value=None),
+        "authx.routers.search.SearchService.search", mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.get(f"{url}?id=1&username=admin&p=1")
         mock_method.assert_awaited_once_with(1, "admin", 1)

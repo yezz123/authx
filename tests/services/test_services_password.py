@@ -3,9 +3,9 @@ from unittest import mock
 import pytest
 from fastapi import HTTPException
 
-from AuthX.api import UsersRepo
-from AuthX.services import PasswordService
-from AuthX.utils.strings import create_random_string, hash_string
+from authx.api import UsersRepo
+from authx.services import PasswordService
+from authx.utils.strings import create_random_string, hash_string
 from tests.utils import (
     MockAuthBackend,
     MockCacheBackend,
@@ -51,7 +51,7 @@ CAPTCHA = "CAPTCHA"
 
 
 @pytest.mark.asyncio
-@mock.patch("AuthX.services.password.EmailClient", MockEmailClient)
+@mock.patch("authx.services.password.EmailClient", MockEmailClient)
 async def test_forgot_password():
     """
     Test forgot password.
@@ -113,7 +113,7 @@ async def test_password_reset():
 
 
 @pytest.mark.asyncio
-@mock.patch("AuthX.services.password.verify_password", mock_verify_password)
+@mock.patch("authx.services.password.verify_password", mock_verify_password)
 async def test_password_change():
     """
     Test password change.

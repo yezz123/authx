@@ -4,7 +4,7 @@ from typing import List
 from starlette.config import Config
 
 """
-    Config class for AuthX.
+    Config class for authx.
 """
 
 JWT_ALGORITHM = "RS256"
@@ -44,7 +44,7 @@ WRONG_USERNAMES: List[str] = [
     "messages",
     "change_info",
 ]
-""" The Global Configuration for AuthX.
+""" The Global Configuration for authx.
 
 Keyword arguments:
 argument -- The argument to be checked.

@@ -4,11 +4,11 @@ from typing import Dict, Optional, Tuple
 import jwt
 from httpx import AsyncClient
 
-from AuthX.api import UsersRepo
-from AuthX.core.jwt import JWTBackend
-from AuthX.errors import SocialException
-from AuthX.models.social import SocialInCreate
-from AuthX.models.user import UserPayload
+from authx.api import UsersRepo
+from authx.core.jwt import JWTBackend
+from authx.errors import SocialException
+from authx.models.social import SocialInCreate
+from authx.models.user import UserPayload
 
 """Social Service for authentication and authorization"""
 

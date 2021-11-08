@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from starlette.middleware.sessions import SessionMiddleware
 
-from AuthX.routers import get_social_router
+from authx.routers import get_social_router
 from tests.utils import ACCESS_COOKIE_NAME, REFRESH_COOKIE_NAME, MockAuthBackend
 
 app = FastAPI()
@@ -47,7 +47,7 @@ def test_login(provider: str):
     """
     url = app.url_path_for("social:login", provider=provider)
     with mock.patch(
-        f"AuthX.routers.social.SocialService.login_{provider}",
+        f"authx.routers.social.SocialService.login_{provider}",
         mock.Mock(return_value="/"),
     ) as mock_method:
         # TODO: add test for redirect_url
@@ -59,7 +59,7 @@ def test_login(provider: str):
 
 @pytest.mark.parametrize("provider", ["google", "facebook"])
 @mock.patch(
-    "AuthX.routers.social.check_state", mock.Mock(return_value=True),
+    "authx.routers.social.check_state", mock.Mock(return_value=True),
 )
 def test_callback(provider: str):
     """
@@ -68,12 +68,12 @@ def test_callback(provider: str):
         provider (str): social provider
     """
     patcher_callback = mock.patch(
-        f"AuthX.routers.social.SocialService.callback_{provider}",
+        f"authx.routers.social.SocialService.callback_{provider}",
         mock.AsyncMock(return_value=(None, None,)),
     )
     mock_callback = patcher_callback.start()
     patcher_resolve_user = mock.patch(
-        "AuthX.routers.social.SocialService.resolve_user",
+        "authx.routers.social.SocialService.resolve_user",
         mock.AsyncMock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
     )
     # TODO: add test for redirect_url

@@ -2,8 +2,8 @@ from typing import Optional
 
 from fastapi import HTTPException
 
-from AuthX.api import UsersRepo
-from AuthX.models.user import UserPrivateInfo
+from authx.api import UsersRepo
+from authx.models.user import UserPrivateInfo
 
 
 class SearchService:

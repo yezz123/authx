@@ -29,7 +29,7 @@ class User:
 
         Args:
             token (str): The token to create the user object from
-            backend (AuthX): The backend to use to create the user object
+            backend (authx): The backend to use to create the user object
         Returns:
             User: The user object
         """

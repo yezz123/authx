@@ -4,11 +4,11 @@ from aioredis import Redis
 from fastapi import APIRouter, HTTPException, Request
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from AuthX.api import UsersRepo
-from AuthX.core.jwt import JWTBackend
-from AuthX.core.user import User
-from AuthX.database import MongoDBBackend, RedisBackend
-from AuthX.routers import (
+from authx.api import UsersRepo
+from authx.core.jwt import JWTBackend
+from authx.core.user import User
+from authx.database import MongoDBBackend, RedisBackend
+from authx.routers import (
     get_admin_router,
     get_auth_router,
     get_password_router,
@@ -18,10 +18,10 @@ from AuthX.routers import (
 
 
 # TODO: Invalid DOCS for this file >> Try to use only Postman for testing
-class AuthX:
+class authx:
     """
     Here we define the routers for the API.
-    This is AuthX specific, so we can't use the fastapi router.
+    This is authx specific, so we can't use the fastapi router.
     """
 
     def __init__(
@@ -76,13 +76,13 @@ class AuthX:
 # TODO: Fix issue relate to OpenAPI
 
 
-class Authentication(AuthX):
+class Authentication(authx):
     """
     Here we define the routers for the API.
-    Authentication the based class where we can define the routers relate to AuthX.
+    Authentication the based class where we can define the routers relate to authx.
 
     Args:
-        AuthX: The base class for the routers.
+        authx: The base class for the routers.
     """
 
     def __init__(
