@@ -10,9 +10,9 @@ The Social router will generate a set of endpoints for [Social Authentication](.
 To Setup the Social authentication service, you will need to add all requirements to the object `SocialService`.
 
 ```py
-from AuthX.services import SocialService
-from AuthX.api import UsersRepo
-from AuthX.core.jwt import JWTBackend
+from authx.services import SocialService
+from authx.api import UsersRepo
+from authx.core.jwt import JWTBackend
 
 SocialService.setup(
         repo = UserRepo,
@@ -25,7 +25,7 @@ SocialService.setup(
 This one gonna help use to use the authentication service, that we provide.
 
 ```py
-from AuthX import Authentication
+from authx import Authentication
 from fastapi import FastAPI
 
 app = FastAPI()

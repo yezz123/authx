@@ -11,8 +11,8 @@ To Setup the Search service, you will need to add all requirements to the object
 
 ```py
 from typing import Callable, Optional
-from AuthX.services.search import SearchService
-from AuthX.api import UsersRepo
+from authx.services.search import SearchService
+from authx.api import UsersRepo
 
 SearchService.setup(
         repo = UserRepo,
@@ -23,7 +23,7 @@ SearchService.setup(
 This one gonna help use to use the Search service, that we provide.
 
 ```py
-from AuthX import Authentication
+from authx import Authentication
 from fastapi import FastAPI
 
 app = FastAPI()

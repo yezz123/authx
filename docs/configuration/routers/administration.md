@@ -16,8 +16,8 @@ To Setup the Admin service, you will need to add all requirements to the object 
 
 ```py
 from typing import Callable, Optional
-from AuthX.services.admin import AdminService
-from AuthX.api import UsersRepo
+from authx.services.admin import AdminService
+from authx.api import UsersRepo
 
 AdminService.setup(
         repo = UserRepo,
@@ -30,7 +30,7 @@ This one gonna help use to use the setup repository and the `admin_required`.
 Let's Provide the `AdminService`:
 
 ```py
-from AuthX import Authentication
+from authx import Authentication
 from fastapi import FastAPI
 
 app = FastAPI()

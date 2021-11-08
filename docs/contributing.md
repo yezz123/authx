@@ -217,7 +217,7 @@ If you want to generate the test report:
 <div class="termy">
 
 ```console
-$ pytest --cov=AuthX/ --cov-report=html
+$ pytest --cov=authx/ --cov-report=html
 ```
 
 </div>
@@ -230,7 +230,4 @@ As you know I provide all actions to build the project in Docker, so you can use
 
 Using a pre-configured Makefile, you can run the following commands:
 
-* `make build` - Build the project.
-* `make pull` - Pull the latest changes from the repository, relate to `MongoDB` & `Redis`.
-* `make test` - Run the tests in the container.
-* `make lint` - Run the linting tests (`pre-commit`) in the container.
+* `make docker-test` - Run the tests in the container.

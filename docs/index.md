@@ -75,10 +75,10 @@ __Note__: This is a **beta** version of AuthX.
 ### Dependency injections only
 
 ```python
-from AuthX import AuthX
-from AuthX.database import RedisBackend
+from authx import authx
+from authx.database import RedisBackend
 
-auth = AuthX()
+auth = authx()
 
 # startup
 auth.set_cache(RedisBackend) # aioredis
