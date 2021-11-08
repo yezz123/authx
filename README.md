@@ -61,7 +61,7 @@ __Note:__ Check [Release Notes](https://yezz123.github.io/AuthX/release/).
 
 ```python
 from fastapi import FastAPI
-from AuthX import Authentication
+from authx import Authentication
 
 app = FastAPI()
 auth = Authentication()
@@ -79,8 +79,8 @@ app.include_router(auth.search_router, prefix="/api/users")
 
 ```python
 from fastapi import FastAPI
-from AuthX import Authentication
-from AuthX.database import MongoDBBackend, RedisBackend
+from authx import Authentication
+from authx.database import MongoDBBackend, RedisBackend
 
 app = FastAPI()
 auth = Authentication()
@@ -100,8 +100,8 @@ auth.set_database(MongoDBBackend) # motor client
 
 ```python
 from fastapi import FastAPI,APIRouter, Depends
-from AuthX import User, Authentication
-from AuthX.database import MongoDBBackend, RedisBackend
+from authx import User, Authentication
+from authx.database import MongoDBBackend, RedisBackend
 
 app = FastAPI()
 auth = Authentication()
@@ -138,10 +138,10 @@ def admin_test():
 ### Dependency injections only 📦
 
 ```python
-from AuthX import AuthX
-from AuthX.database import RedisBackend
+from authx import authx
+from authx.database import RedisBackend
 
-auth = AuthX(#Provide Config)
+auth = authx(#Provide Config)
 
 # startup
 auth.set_cache(RedisBackend) # aioredis
@@ -172,7 +172,7 @@ pip install -r requirements.dev.txt
 You can run all the tests with:
 
 ```bash
-make test
+make docker-test
 ```
 
 The command will start a MongoDB container for the related unit tests. So you should have [Docker](https://www.docker.com/get-started) installed.
