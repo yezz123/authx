@@ -29,7 +29,13 @@ class Base:
     :return: None
     """
 
-    def __init__(self, database: MongoDBBackend, cache: RedisBackend, callbacks: Iterable, access_expiration: int = 60**2 * 6):
+    def __init__(
+        self,
+        database: MongoDBBackend,
+        cache: RedisBackend,
+        callbacks: Iterable,
+        access_expiration: int = 60 ** 2 * 6,
+    ):
         """ Initialize the API with the database and cache.
 
         Args:
