@@ -56,7 +56,7 @@ class MongoDBBackend:
         async with await self._client.start_session() as session:
             async with session.start_transaction():
                 id = await self._increment_id()
-                obj.update({"id": id})
+                obj["id"] = id
                 await self._users.insert_one(obj)
         return id
 
