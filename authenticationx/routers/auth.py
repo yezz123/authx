@@ -1,12 +1,11 @@
 from typing import Callable, Dict
 
-from fastapi import APIRouter, Body, Depends, Request, Response
-from fastapi.exceptions import HTTPException
-
 from authx.api import UsersRepo
 from authx.core.jwt import JWTBackend
 from authx.core.user import User
 from authx.services import AuthService
+from fastapi import APIRouter, Body, Depends, Request, Response
+from fastapi.exceptions import HTTPException
 
 """
 POST /register

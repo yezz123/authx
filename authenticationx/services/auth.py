@@ -2,10 +2,6 @@ import asyncio
 from datetime import datetime
 from typing import Dict, Optional
 
-from email_validator import EmailNotValidError, validate_email
-from fastapi import HTTPException
-from pydantic.error_wrappers import ValidationError
-
 from authx.api import UsersRepo
 from authx.core.email import EmailClient
 from authx.core.jwt import JWTBackend
@@ -22,6 +18,9 @@ from authx.models.user import (
 from authx.resources.error_messages import get_error_message
 from authx.utils.captcha import validate_captcha
 from authx.utils.strings import create_random_string, hash_string
+from email_validator import EmailNotValidError, validate_email
+from fastapi import HTTPException
+from pydantic.error_wrappers import ValidationError
 
 
 class AuthService:

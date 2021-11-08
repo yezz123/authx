@@ -3,7 +3,6 @@ from datetime import datetime, timedelta
 from typing import Optional
 
 import jwt
-
 from authx.core.config import JWT_ALGORITHM
 from authx.database import RedisBackend
 
