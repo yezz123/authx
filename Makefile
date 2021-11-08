@@ -1,36 +1,22 @@
 help:
 	@echo "Targets:"
-	@echo "    make test"
-	@echo "    make start"
-	@echo "    make down"
-	@echo "    make pull"
-	@echo "    make build"
+	@echo "    make docker-test"
 	@echo "    make lint"
+	@echo "    make mkdocs"
 	@echo "    make clean"
 	@echo "    make clean-test"
 	@echo "    make bumpversion-major"
 	@echo "    make bumpversion-minor"
 	@echo "    make bumpversion-patch"
-	@echo "    make mkdocs"
-	@echo "    make gh-deploy"
 
-test:
+docker-test:
 	docker-compose run --rm authx pytest --cov=authx/ --cov-report=html
 
-start:
-	docker-compose up -d
-
-down:
-	docker-compose down
-
-pull:
-	docker-compose pull
-
-build:
-	docker-compose build
-
 lint:
-	docker-compose run --rm authx pre-commit run --all-files
+	pre-commit run --all-files
+
+mkdocs:
+	mkdocs serve --livereload
 
 clean:
 	find . -name '*.pyc' -exec rm -f {} +
@@ -52,9 +38,3 @@ bumpversion-minor:
 
 bumpversion-patch:
 	bumpversion patch
-
-mkdocs:
-	docker-compose run --rm authx mkdocs serve --livereload
-
-gh-deploy:
-	mkdocs gh-deploy --force
