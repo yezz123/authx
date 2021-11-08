@@ -10,30 +10,31 @@ After this discussion #124 with [@stephane](https://github.com/stephane) we need
 
 ## What's Changed
 
-* Bump mkdocs-material from 7.2.6 to 7.3.5 by @dependabot in https://github.com/yezz123/authx/pull/101
-* Docs: Prepare Project for Being Public ✨ by @yezz123 in https://github.com/yezz123/authx/pull/102
-* Bump mkdocs-material from 7.3.5 to 7.3.6 by @dependabot in https://github.com/yezz123/authx/pull/103
-* Bump python from 3.9.2 to 3.10.0 by @dependabot in https://github.com/yezz123/authx/pull/104
-* docs: add yezz123 as a contributor for code, doc, maintenance, infra by @allcontributors in https://github.com/yezz123/authx/pull/105
-* docs: add AbderrahimSoubaiElidrissi as a contributor for review, doc by @allcontributors in https://github.com/yezz123/authx/pull/106
-* CI: Delete Docs Build ✨ by @yezz123 in https://github.com/yezz123/authx/pull/108
-* Docs: Delete a part of FAQ ✨ by @yezz123 in https://github.com/yezz123/authx/pull/109
-* chore: Fix workflows ✨ by @yezz123 in https://github.com/yezz123/authx/pull/112
-* chore: Rename Website name & Fix Build Issue 🚀 by @yezz123 in https://github.com/yezz123/authx/pull/113
-* Chore: Delete `aiohttp`  by @yezz123 in https://github.com/yezz123/authx/pull/114
-* WIP: Add Code owner 🖇 by @yezz123 in https://github.com/yezz123/authx/pull/117
-* Chore: Fix Key Directory 🔑  by @yezz123 in https://github.com/yezz123/authx/pull/115
-* Configure `.pyup` ✨ by @yezz123 in https://github.com/yezz123/authx/pull/120
-* pep-0008: Fix Package and Module Names✨ by @yezz123 in https://github.com/yezz123/authx/pull/126
-* chore: Change project Name by @yezz123 in https://github.com/yezz123/authx/pull/128
-* chore: fix dockerfile commands by @yezz123 in https://github.com/yezz123/authx/pull/130
-* Chore: change Name from `AuthX` to `authx` ✨ by @yezz123 in https://github.com/yezz123/authx/pull/131
-* Bump version from 0.1.1 to 0.1.2 ✨ by @yezz123 in https://github.com/yezz123/authx/pull/132
+* Bump mkdocs-material from 7.2.6 to 7.3.5 by @dependabot in <https://github.com/yezz123/authx/pull/101>
+* Docs: Prepare Project for Being Public ✨ by @yezz123 in <https://github.com/yezz123/authx/pull/102>
+* Bump mkdocs-material from 7.3.5 to 7.3.6 by @dependabot in <https://github.com/yezz123/authx/pull/103>
+* Bump python from 3.9.2 to 3.10.0 by @dependabot in <https://github.com/yezz123/authx/pull/104>
+* docs: add yezz123 as a contributor for code, doc, maintenance, infra by @allcontributors in <https://github.com/yezz123/authx/pull/105>
+* docs: add AbderrahimSoubaiElidrissi as a contributor for review, doc by @allcontributors in <https://github.com/yezz123/authx/pull/106>
+* CI: Delete Docs Build ✨ by @yezz123 in <https://github.com/yezz123/authx/pull/108>
+* Docs: Delete a part of FAQ ✨ by @yezz123 in <https://github.com/yezz123/authx/pull/109>
+* chore: Fix workflows ✨ by @yezz123 in <https://github.com/yezz123/authx/pull/112>
+* chore: Rename Website name & Fix Build Issue 🚀 by @yezz123 in <https://github.com/yezz123/authx/pull/113>
+* Chore: Delete `aiohttp`  by @yezz123 in <https://github.com/yezz123/authx/pull/114>
+* WIP: Add Code owner 🖇 by @yezz123 in <https://github.com/yezz123/authx/pull/117>
+* Chore: Fix Key Directory 🔑  by @yezz123 in <https://github.com/yezz123/authx/pull/115>
+* Configure `.pyup` ✨ by @yezz123 in <https://github.com/yezz123/authx/pull/120>
+* pep-0008: Fix Package and Module Names✨ by @yezz123 in <https://github.com/yezz123/authx/pull/126>
+* chore: Change project Name by @yezz123 in <https://github.com/yezz123/authx/pull/128>
+* chore: fix dockerfile commands by @yezz123 in <https://github.com/yezz123/authx/pull/130>
+* Chore: change Name from `AuthX` to `authx` ✨ by @yezz123 in <https://github.com/yezz123/authx/pull/131>
+* Bump version from 0.1.1 to 0.1.2 ✨ by @yezz123 in <https://github.com/yezz123/authx/pull/132>
 
 ## New Contributors
-* @allcontributors made their first contribution in https://github.com/yezz123/authx/pull/105
 
-**Full Changelog**: https://github.com/yezz123/authx/compare/0.1.1...0.1.2
+* @allcontributors made their first contribution in <https://github.com/yezz123/authx/pull/105>
+
+**Full Changelog**: <https://github.com/yezz123/authx/compare/0.1.1...0.1.2>
 
 ## 0.1.1
 
