@@ -7,8 +7,10 @@ from motor.motor_asyncio import (
 )
 from pymongo import ReturnDocument
 
+from authx.database import BaseDBBackend
 
-class MongoDBBackend:
+
+class MongoDBBackend(BaseDBBackend):
     """
     Setup Database for authx using MongoDB & Motor
     """
