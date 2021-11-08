@@ -2,13 +2,12 @@ import hashlib
 import os
 from typing import Iterable, Optional
 
-from fastapi import APIRouter, HTTPException, Request
-from fastapi.responses import HTMLResponse, RedirectResponse
-
 from authx.api import UsersRepo
 from authx.core.jwt import JWTBackend
 from authx.errors import SocialException
 from authx.services import SocialService
+from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import HTMLResponse, RedirectResponse
 
 
 def check_state(query: str, session: str) -> bool:
