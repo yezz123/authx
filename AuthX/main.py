@@ -2,12 +2,11 @@ from typing import Iterable, Optional
 
 from aioredis import Redis
 from fastapi import APIRouter, HTTPException, Request
-from motor.motor_asyncio import AsyncIOMotorClient
 
 from AuthX.api import UsersRepo
 from AuthX.core.jwt import JWTBackend
 from AuthX.core.user import User
-from AuthX.database import MongoDBBackend, RedisBackend
+from AuthX.database import BaseDBBackend, RedisBackend
 from AuthX.routers import (
     get_admin_router,
     get_auth_router,
@@ -56,7 +55,10 @@ class AuthX:
         else:
             return User()
 
-    async def get_authenticated_user(self, request: Request,) -> User:
+    async def get_authenticated_user(
+        self,
+        request: Request,
+    ) -> User:
         access_token = request.cookies.get(self._access_cookie_name)
         if access_token:
             return await User.create(access_token, self._auth_backend)
@@ -90,7 +92,7 @@ class Authentication(AuthX):
         debug: bool,
         base_url: str,
         site: str,
-        database_name: str,
+        database_backend: BaseDBBackend,
         callbacks: Iterable,
         access_cookie_name: str,
         refresh_cookie_name: str,
@@ -110,7 +112,6 @@ class Authentication(AuthX):
         self._debug = debug
         self._base_url = base_url
         self._site = site
-        self._database_name = database_name
         self._access_cookie_name = access_cookie_name
         self._refresh_cookie_name = refresh_cookie_name
         self._private_key = private_key
@@ -126,7 +127,7 @@ class Authentication(AuthX):
         self._social_providers = social_providers
         self._social_creds = social_creds
 
-        self._database_backend = MongoDBBackend(self._database_name)
+        self._database_backend = database_backend
         self._cache_backend = RedisBackend()
 
         self._auth_backend = JWTBackend(
@@ -202,9 +203,6 @@ class Authentication(AuthX):
     @property
     def search_router(self) -> APIRouter:
         return get_search_router(self._users_repo, self.admin_required)
-
-    def set_database(self, database_client: AsyncIOMotorClient) -> None:
-        self._database_backend.set_client(database_client)
 
     def set_cache(self, cache_client: Redis) -> None:
         self._cache_backend.set_client(cache_client)
