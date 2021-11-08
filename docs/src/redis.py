@@ -2,7 +2,7 @@ import asyncio
 
 import aioredis
 
-from AuthX import Authentication
+from authx import Authentication
 
 
 async def cache():

@@ -13,9 +13,9 @@ The password router is a router use to provide different state of passwords, for
 To Setup the Password service, you will need to add all requirements to the object `PasswordService`:
 
 ```py
-from AuthX.services.password import PasswordService
-from AuthX.api import UsersRepo
-from AuthX.core.jwt import JWTBackend
+from authx.services.password import PasswordService
+from authx.api import UsersRepo
+from authx.core.jwt import JWTBackend
 
 PasswordService.setup(
         repo = UsersRepo,
@@ -28,14 +28,14 @@ PasswordService.setup(
         smtp_password= None,
         smtp_host= None,
         smtp_tls= None,
-        display_name= "AuthX",
+        display_name= "authx",
     )
 ```
 
 This one gonna help use to use the Password service, that we provide.
 
 ```py
-from AuthX import Authentication
+from authx import Authentication
 from fastapi import FastAPI
 
 app = FastAPI()

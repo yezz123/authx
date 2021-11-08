@@ -9,7 +9,7 @@ There are one Pydantic model variation provided as mixin:
 You should define it, inheriting from the mixin:
 
 ```py
-from AuthX.models import social
+from authx.models import social
 
 class Create(social.SocialInCreate):
     pass

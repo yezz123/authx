@@ -17,7 +17,7 @@ There are four Pydantic models variations provided as mixins:
 You should define each of those variations, inheriting from each mixin:
 
 ```py
-from AuthX.models import user
+from authx.models import user
 
 
 class register(user.UserInRegister):
@@ -41,7 +41,7 @@ class private(user.UserPrivateInfo):
 You can of course add your own properties there to fit to your needs. In the example below, we add a required string property, `first_name`, and an optional string property, `phone`.
 
 ```py
-from AuthX.models import user
+from authx.models import user
 
 
 class register(user.UserInRegister):

@@ -9,10 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: pull latest
-        run: make pull
+        run: docker-compose pull
       - name: Build image
-        run: make build
-      - name: Test code format -- pre-commit
-        run: make lint
-      - name: pytest
-        run: make test
+        run: docker-compose build
+      - name: Test image
+        run: docker-compose run --rm authx pytest --cov=authx/ --cov-report=html

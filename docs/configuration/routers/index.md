@@ -1,10 +1,10 @@
 # Routers
 
-We're almost there! The last step is to configure the `AuthX` object that will wire the user manager, the authentication classes and let us generate the actual **API routes**.
+We're almost there! The last step is to configure the `authx` object that will wire the user manager, the authentication classes and let us generate the actual **API routes**.
 
-## Configure `AuthX`
+## Configure `authx`
 
-Configure `AuthX` object with all the elements we defined before. More precisely:
+Configure `authx` object with all the elements we defined before. More precisely:
 
 * `UserManager`: Dependency callable getter to inject the
     user manager class instance. See [UserManager](../core/index.md).
@@ -17,7 +17,7 @@ Configure `AuthX` object with all the elements we defined before. More precisely
 * `SocialInCreate` – Social User model for creating.
 
 ```py
-from AuthX import Authentication
+from authx import Authentication
 
 Authentication = Authentication(
     debug=True,
@@ -35,7 +35,7 @@ Authentication = Authentication(
     smtp_host=None,
     smtp_password=None,
     smtp_tls=False,
-    display_name="AuthX",
+    display_name="authx",
     recaptcha_secret=None,
     social_creds=None,
     social_providers=None,
@@ -45,7 +45,7 @@ Authentication = Authentication(
 __Note:__ We gonna discuss what we define in `Authentication` Next.
 
 !!! info
-    We Have also an other configuration option, `AuthX` and `User`.
+    We Have also an other configuration option, `authx` and `User`.
 
 ## Available routers
 

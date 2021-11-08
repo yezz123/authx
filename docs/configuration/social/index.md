@@ -16,7 +16,7 @@ For Now, we have only two social providers:
 Also, an [Addons](addons.md) is available to add some utility functions to the social login, for example captcha, email verification, etc.
 
 ```py
-from AuthX import Authentication
+from authx import Authentication
 from fastapi import FastAPI
 
 auth = Authentication()
