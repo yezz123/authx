@@ -57,5 +57,5 @@ setuptools.setup(
     ],
     python_requires=">=3.8",
     install_requires=parse_requirement("requirements.txt"),
-    extras_require={"dev": ["requests == 2.25.1", "uvicorn"]},
+    extras_require={"dev": ["requests == 2.26.1", "uvicorn"]},
 )
