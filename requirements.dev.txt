@@ -3,7 +3,7 @@
 pytest==6.2.5
 pytest-asyncio == 0.16.0
 requests == 2.26.0
-uvicorn
+uvicorn==0.15.0
 pre-commit
 asynctest
 bumpversion
