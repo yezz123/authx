@@ -9,8 +9,7 @@
 [![Local Tests](https://github.com/yezz123/AuthX/actions/workflows/Local.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/Local.yml)
 [![Docker Tests](https://github.com/yezz123/AuthX/actions/workflows/docker.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/docker.yml)
 [![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b510202495654916843956856fd9a1f6)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yezz123/AuthX&amp;utm_campaign=Badge_Grade)
-[![PyPI version](https://badge.fury.io/py/AuthX.svg)](https://badge.fury.io/py/AuthX)
+[![PyPI version](https://badge.fury.io/py/authx.svg)](https://badge.fury.io/py/authx)
 [![Downloads](https://pepy.tech/badge/authx)](https://pepy.tech/project/authx)
 [![Downloads](https://pepy.tech/badge/authx/month)](https://pepy.tech/project/authx)
 [![Language](https://img.shields.io/badge/Language-Python-green?style)](https://github.com/yezz123)
@@ -55,7 +54,7 @@ __Note__: This is a **beta** version of AuthX.
 - Full OpenAPI schema support, even with several authentication backend.
 - Provide a Docstring for each class and function.
 
-__Note:__ Check [Release Notes](https://yezz123.github.io/AuthX/release/).
+__Note:__ Check [Release Notes](docs/release.md).
 
 ## Project using 🚀
 
