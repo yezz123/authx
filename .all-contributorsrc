@@ -26,10 +26,20 @@
         "review",
         "doc"
       ]
+    },
+    {
+      "login": "smakosh",
+      "name": "Ismail Ghallou ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20082141?v=4",
+      "profile": "https://smakosh.com",
+      "contributions": [
+        "code",
+        "security"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "projectName": "AuthX",
+  "projectName": "authx",
   "projectOwner": "yezz123",
   "repoType": "github",
   "repoHost": "https://github.com",
