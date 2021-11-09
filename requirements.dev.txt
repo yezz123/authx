@@ -1,18 +1,18 @@
 -r requirements.txt
 
-pytest
+pytest==6.2.5
 pytest-asyncio == 0.16.0
 requests == 2.26.0
-uvicorn
-pre-commit
-asynctest
-bumpversion
-codecov
-pytest-cov
+uvicorn==0.15.0
+pre-commit==2.15.0
+asynctest==0.13.0
+bumpversion==0.6.0
+codecov==2.1.12
+pytest-cov==3.0.0
 mkdocs == 1.2.3
 mkdocs-material == 7.3.6
 mkdocs-markdownextradata-plugin == 0.2.4
-mkdocs-mermaid2-plugin
-markdown-include
-pymdown-extensions
-mdx-include
+mkdocs-mermaid2-plugin==0.5.2
+markdown-include==0.6.0
+pymdown-extensions==9.0
+mdx-include==1.4.1
