@@ -12,7 +12,7 @@ pytest-cov==3.0.0
 mkdocs == 1.2.3
 mkdocs-material == 7.3.6
 mkdocs-markdownextradata-plugin == 0.2.4
-mkdocs-mermaid2-plugin
+mkdocs-mermaid2-plugin==0.5.2
 markdown-include
 pymdown-extensions
 mdx-include
