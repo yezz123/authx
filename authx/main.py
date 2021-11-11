@@ -17,7 +17,7 @@ from authx.routers import (
 )
 
 
-# TODO: Invalid DOCS for this file >> Try to use only Postman for testing
+# FIXME: Error while using Swagger UI or Redoc
 class authx:
     """
     Here we define the routers for the API.
@@ -46,7 +46,6 @@ class authx:
         )
 
     def set_cache(self, client: Redis) -> None:
-        # TODO: Fix issue relate to Docs
         self._cache_backend.set_client(client)
 
     async def get_user(self, request: Request) -> User:
@@ -71,9 +70,6 @@ class authx:
                 return
 
         raise HTTPException(403)
-
-
-# TODO: Fix issue relate to OpenAPI
 
 
 class Authentication(authx):
@@ -142,7 +138,6 @@ class Authentication(authx):
         )
 
     @property
-    # TODO: After running Uvicorn, the SwaggerUI don't work, show only the interface without playground.
     def auth_router(self) -> APIRouter:
         return get_auth_router(
             self._users_repo,
