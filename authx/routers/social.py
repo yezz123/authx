@@ -117,7 +117,7 @@ def get_router(
                 secure=not debug,
                 httponly=True,
                 max_age=access_expiration,
-                samesite="lax"
+                samesite="lax",
             )
             response.set_cookie(
                 key=refresh_cookie_name,
@@ -125,7 +125,7 @@ def get_router(
                 secure=not debug,
                 httponly=True,
                 max_age=refresh_expiration,
-                samesite="lax"
+                samesite="lax",
             )
             return response
         except SocialException as e:

@@ -73,7 +73,6 @@ class JWTBackend:
     def _create_token(
         self, payload: dict, token_type: str, expiration_delta: Optional[int] = None
     ) -> str:
-        # TODO add leeway
         iat = datetime.utcnow()
         if expiration_delta:
             exp = datetime.utcnow() + timedelta(seconds=expiration_delta)
@@ -81,7 +80,7 @@ class JWTBackend:
             exp = datetime.utcnow() + timedelta(seconds=60)
 
         payload.update({"iat": iat, "exp": exp, "type": token_type})
-
+        # TODO Bump to the last version of PyJWT
         return jwt.encode(payload, self._private_key, algorithm=JWT_ALGORITHM).decode()
 
     def create_access_token(self, payload: dict) -> str:

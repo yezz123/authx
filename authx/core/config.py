@@ -3,13 +3,14 @@ from typing import List
 
 from starlette.config import Config
 
-"""
-    Config class for authx.
+""" The Global Configuration for authx.
 """
 
-JWT_ALGORITHM = "RS256"
 
 config = Config()
+
+JWT_ALGORITHM: str = config("JWT_ALGORITHM", cast=str, default="RS256")
+
 DEBUG: bool = config("DEBUG", cast=bool, default=False)
 
 LOGIN_RATELIMIT: int = config("LOGIN_RATELIMIT", cast=int, default=30)
@@ -30,7 +31,7 @@ PASSWORD_MIN_LENGTH: int = config("PASSWORD_MIN_LENGTH", cast=int, default=6)
 PASSWORD_MAX_LENGTH: int = config("PASSWORD_MAX_LENGTH", cast=int, default=32)
 
 
-TIME_DELTA: int = 3
+TIME_DELTA: int = config("TIME_DELTA", cast=int, default=3)
 
 
 USERNAME_CHARS = "".join([ascii_letters, digits, " -_"])
@@ -44,9 +45,3 @@ WRONG_USERNAMES: List[str] = [
     "messages",
     "change_info",
 ]
-""" The Global Configuration for authx.
-
-Keyword arguments:
-argument -- The argument to be checked.
-Return: True if the argument is valid, False otherwise.
-"""
