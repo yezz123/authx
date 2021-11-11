@@ -36,6 +36,24 @@
         "code",
         "security"
       ]
+    },
+    {
+      "login": "talentuno",
+      "name": "talentuno LLC",
+      "avatar_url": "https://talentuno.com/assets/img/talentuno/mm/mm-letsdoit_num1.png",
+      "profile": "https://talentuno.com/en/matchmakers",
+      "contributions": [
+        "financial"
+      ]
+    },
+    {
+      "login": "Cactus",
+      "name": "Cactus LLC",
+      "avatar_url": "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/v1492757324/sdovorqhcnnkgybhf05h.jpg",
+      "profile": "https://www.stryker.com/us/en/index.html",
+      "contributions": [
+        "financial"
+      ]
     }
   ],
   "contributorsPerLine": 7,
