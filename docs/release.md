@@ -1,5 +1,31 @@
 # Release Notes 🎞
 
+## 0.1.3
+
+* Fix the issue relate to PyJWT (Bumping version #151 )
+* Add `sameSite` to Cookies metadata ( #134)
+
+## What's Changed
+
+* chore: add sameSite attribute to the http only cookie by @smakosh in <https://github.com/yezz123/authx/pull/134>
+* docs: add smakosh as a contributor for code, security by @allcontributors in <https://github.com/yezz123/authx/pull/138>
+* chore: update Requirements ✨ by @yezz123 in <https://github.com/yezz123/authx/pull/139>
+* CI: Add Code Security Analyse ✨ by @yezz123 in <https://github.com/yezz123/authx/pull/140>
+* empty Scheduled daily dependency update on Tuesday by @pyup-bot in <https://github.com/yezz123/authx/pull/141>
+* chore: Add JWT Algorithm Choices ✨ by @yezz123 in <https://github.com/yezz123/authx/pull/143>
+* Docs: Add financial Supporters ✨ by @yezz123 in <https://github.com/yezz123/authx/pull/144>
+* Bump PyJWT version from 1.7.1 to 2.3.0 by @MojixCoder in <https://github.com/yezz123/authx/pull/151>
+* docs: add MojixCoder as a contributor for code, bug by @allcontributors in <https://github.com/yezz123/authx/pull/152>
+* chore: Remove Todos assign 🖇 by @yezz123 in <https://github.com/yezz123/authx/pull/153>
+* Upgrade `pre-commit` requirements ✨ by @yezz123 in <https://github.com/yezz123/authx/pull/154>
+
+## New Contributors
+
+* @smakosh made their first contribution in <https://github.com/yezz123/authx/pull/134>
+* @MojixCoder made their first contribution in <https://github.com/yezz123/authx/pull/151>
+
+**Full Changelog**: <https://github.com/yezz123/authx/compare/0.1.2...0.1.3>
+
 ## 0.1.2
 
 After this discussion #124 with [@stephane](https://github.com/stephane) we need to change the package name that what pep's rules provide.
