@@ -90,8 +90,6 @@ def test_logout():
     """
     url = app.url_path_for("auth:logout")
     response = test_client.post(url)
-    # test_client doesn't react to response.delete_cookie
-    # TODO fix test_client
     assert response.status_code == 200
 
 
@@ -103,8 +101,8 @@ def test_token():
     response = test_client.post(url)
     assert response.status_code == 200
     data = response.json()
-    assert data.get("id") == 2  # TODO
-    assert data.get("username") == "user"  # TODO
+    assert data.get("id") == 2
+    assert data.get("username") == "user"
 
 
 @mock.patch(
@@ -167,7 +165,7 @@ def test_confirm_email():
     assert response.status_code == 200
 
 
-def test_change_username():  # TODO
+def test_change_username():
     """
     test change username
     """

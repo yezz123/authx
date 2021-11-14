@@ -57,7 +57,6 @@ async def test_forgot_password():
     Test forgot password.
     """
     service = PasswordService()
-    # TODO: exceptions
 
     await service.forgot_password({"email": "admin@gmail.com"}, "127.0.0.1")
 
@@ -68,8 +67,6 @@ async def test_password_status():
     Test password status.
     """
     service = PasswordService(user)
-    # TODO: exceptions
-    # TODO: social
     res = await service.password_status()
     assert isinstance(res, dict)
     assert res.get("status") == "change"
@@ -128,7 +125,6 @@ async def test_password_change():
                 "password2": "87654321",
             }
         )
-        # TODO: exceptions
     assert e.type is HTTPException
     assert e.value.args[0] == 400
 

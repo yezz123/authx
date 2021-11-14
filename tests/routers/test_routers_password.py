@@ -117,5 +117,4 @@ def test_password_change():
         )
 
         mock_method.assert_awaited_once()
-    # TODO: Check response
     assert response.status_code == 200

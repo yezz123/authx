@@ -147,7 +147,7 @@ class PasswordService:
 
         await self._repo.set_password_reset_token(id, token_hash)
 
-        # if not self._debug:  # TODO
+        # if not self._debug:  # TODO: check if email is valid
         email_client = self._create_email_client()
         await email_client.send_forgot_password_email(email, token)
 
