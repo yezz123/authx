@@ -56,7 +56,7 @@ class SearchService:
 
             Returns:
                 The users.
-            """
+        """
         PAGE_SIZE = 20
         items, count = await self._repo.search(id, username, p, PAGE_SIZE)
         div = count // PAGE_SIZE

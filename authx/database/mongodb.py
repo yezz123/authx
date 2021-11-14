@@ -37,7 +37,9 @@ class MongoDBBackend:
 
     async def _increment_id(self) -> int:
         ret = await self._counters.find_one_and_update(
-            {"name": "users"}, {"$inc": {"c": 1}}, return_document=ReturnDocument.AFTER,
+            {"name": "users"},
+            {"$inc": {"c": 1}},
+            return_document=ReturnDocument.AFTER,
         )
         return ret.get("c")
 
@@ -64,7 +66,7 @@ class MongoDBBackend:
         return id
 
     async def update(self, id: int, obj: dict) -> bool:
-        """ Update user object
+        """Update user object
 
         Args:
             id (int): User ID
@@ -77,7 +79,7 @@ class MongoDBBackend:
         return bool(res.matched_count)
 
     async def delete(self, id: int) -> bool:
-        """ Delete user object
+        """Delete user object
 
         Args:
             id (int): User ID
@@ -89,7 +91,7 @@ class MongoDBBackend:
         return bool(res.deleted_count)
 
     async def count(self, query: Optional[dict] = None) -> int:
-        """ Count users
+        """Count users
 
         Args:
             query (Optional[dict], optional): Query. Defaults to None.
@@ -100,7 +102,7 @@ class MongoDBBackend:
         return await self._users.count_documents(query)
 
     async def request_email_confirmation(self, email: str, token_hash: str) -> None:
-        """ Request email confirmation
+        """Request email confirmation
 
         Args:
             email (str): Email
@@ -115,7 +117,7 @@ class MongoDBBackend:
         return None
 
     async def confirm_email(self, token_hash: str) -> bool:
-        """ Confirm email
+        """Confirm email
 
         Args:
             token_hash (str): Token hash
@@ -137,7 +139,7 @@ class MongoDBBackend:
             return False
 
     async def get_blacklist(self) -> Iterable[dict]:
-        """ Get blacklist
+        """Get blacklist
 
         Returns:
             Iterable[dict]: Blacklist
@@ -145,7 +147,7 @@ class MongoDBBackend:
         return await self._users.find({"active": False}, {"_id": 0}).to_list(None)
 
     async def search(self, f: dict, p: int, size: int) -> Tuple[dict, int]:
-        """ Search users
+        """Search users
 
         Args:
             f (dict): Filter

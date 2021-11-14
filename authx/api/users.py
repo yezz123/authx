@@ -36,7 +36,7 @@ class Base:
         callbacks: Iterable,
         access_expiration: int = 60 ** 2 * 6,
     ):
-        """ Initialize the API with the database and cache.
+        """Initialize the API with the database and cache.
 
         Args:
             database (MongoDBBackend): The database to use.
@@ -51,7 +51,7 @@ class Base:
 
 
 class UsersCRUDMixin(Base):
-    """ User CRUD MIXIN
+    """User CRUD MIXIN
 
     Args:
         Create all the Common CRUDS GET, POST, PUT, DELETE methods.
@@ -195,7 +195,7 @@ class UsersCRUDMixin(Base):
 
 
 class UsersProtectionMixin(Base):
-    """ User Protection MIXIN
+    """User Protection MIXIN
 
     Args:
         Create all the Common Protection GET, POST, PUT, DELETE methods.
@@ -258,7 +258,7 @@ class UsersProtectionMixin(Base):
 
 
 class UsersConfirmMixin(Base):
-    """ User Confirmation MIXIN
+    """User Confirmation MIXIN
 
     Args:
         Create all the Common Confirmation GET, POST, PUT, DELETE methods.
@@ -307,7 +307,7 @@ class UsersConfirmMixin(Base):
 
 
 class UsersUsernameMixin(Base):
-    """ User Username MIXIN
+    """User Username MIXIN
 
     Args:
         Create all the Common Username GET, POST, PUT, DELETE methods.
@@ -336,7 +336,7 @@ class UsersUsernameMixin(Base):
 
 
 class UsersPasswordMixin(Base):
-    """ User Password MIXIN
+    """User Password MIXIN
 
     Args:
         Create all the Common Password GET, POST, PUT, DELETE methods.
@@ -412,7 +412,7 @@ class UsersPasswordMixin(Base):
 
 
 class UsersManagementMixin(Base):
-    """ User Management MIXIN
+    """User Management MIXIN
 
     Args:
         Create all the Common Management GET, POST, PUT, DELETE methods.
@@ -509,7 +509,7 @@ class UsersRepo(
     UsersProtectionMixin,
     UsersManagementMixin,
 ):
-    """ User Repository
+    """User Repository
 
     Args:
         UsersCRUDMixin: CRUD methods

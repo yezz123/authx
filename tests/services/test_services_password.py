@@ -79,13 +79,19 @@ async def test_password_set():
     """
     service = PasswordService(social_user)
     await service.password_set(
-        {"password1": "12345678", "password2": "12345678",}
+        {
+            "password1": "12345678",
+            "password2": "12345678",
+        }
     )
 
     service = PasswordService(user)
     with pytest.raises(HTTPException) as e:
         await service.password_set(
-            {"password1": "12345678", "password2": "12345678",}
+            {
+                "password1": "12345678",
+                "password2": "12345678",
+            }
         )
     assert e.type is HTTPException
     assert e.value.args[0] == 400
@@ -102,7 +108,11 @@ async def test_password_reset():
     await service._repo.set_password_reset_token(1, token_hash)
 
     await service.password_reset(
-        {"password1": "87654321", "password2": "87654321",}, token,
+        {
+            "password1": "87654321",
+            "password2": "87654321",
+        },
+        token,
     )
 
     item = await service._repo.get(1)
@@ -129,7 +139,11 @@ async def test_password_change():
     assert e.value.args[0] == 400
 
     await service.password_change(
-        {"old_password": "12345678", "password1": "87654321", "password2": "87654321",}
+        {
+            "old_password": "12345678",
+            "password1": "87654321",
+            "password2": "87654321",
+        }
     )
     item = await service._repo.get(user.id)
     assert item.get("password") != "12345678"

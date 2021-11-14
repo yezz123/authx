@@ -11,7 +11,9 @@ class ErrorMessages:
     Setup Error Messages for Services & routers (for example: "password mismatch")
     """
 
-    def __init__(self,):
+    def __init__(
+        self,
+    ):
         """
         Initialize Error Messages
         """

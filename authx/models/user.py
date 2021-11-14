@@ -325,7 +325,7 @@ class UserPrivateInfo(DefaultModel):
     @validator("created_at", "last_login")
     def set_format(cls, v):
         """
-            Check if the created_at or last_login is wrong.
+        Check if the created_at or last_login is wrong.
         """
         d = v + timedelta(hours=TIME_DELTA)
         return d.strftime("%-d %B %Y, %H:%M")

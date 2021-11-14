@@ -148,7 +148,9 @@ def get_router(
 
     @router.post("/token/refresh", name="auth:refresh_access_token")
     async def refresh_access_token(
-        *, request: Request, response: Response,
+        *,
+        request: Request,
+        response: Response,
     ):
         """
         refresh an access token

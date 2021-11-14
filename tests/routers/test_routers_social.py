@@ -23,8 +23,14 @@ router = get_social_router(
     None,
     ["google", "facebook"],
     {
-        "google": {"id": "id", "secret": "secret",},
-        "facebook": {"id": "id", "secret": "secret",},
+        "google": {
+            "id": "id",
+            "secret": "secret",
+        },
+        "facebook": {
+            "id": "id",
+            "secret": "secret",
+        },
     },
 )
 
@@ -58,7 +64,8 @@ def test_login(provider: str):
 
 @pytest.mark.parametrize("provider", ["google", "facebook"])
 @mock.patch(
-    "authx.routers.social.check_state", mock.Mock(return_value=True),
+    "authx.routers.social.check_state",
+    mock.Mock(return_value=True),
 )
 def test_callback(provider: str):
     """
@@ -68,7 +75,12 @@ def test_callback(provider: str):
     """
     patcher_callback = mock.patch(
         f"authx.routers.social.SocialService.callback_{provider}",
-        mock.AsyncMock(return_value=(None, None,)),
+        mock.AsyncMock(
+            return_value=(
+                None,
+                None,
+            )
+        ),
     )
     mock_callback = patcher_callback.start()
     patcher_resolve_user = mock.patch(

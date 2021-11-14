@@ -55,7 +55,10 @@ class authx:
         else:
             return User()
 
-    async def get_authenticated_user(self, request: Request,) -> User:
+    async def get_authenticated_user(
+        self,
+        request: Request,
+    ) -> User:
         access_token = request.cookies.get(self._access_cookie_name)
         if access_token:
             return await User.create(access_token, self._auth_backend)
