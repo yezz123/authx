@@ -325,7 +325,7 @@ class AuthService:
         """
         token_hash = hash_string(token)
         if not await self._repo.confirm_email(token_hash):
-            raise HTTPException(403)  # TODO: ??? 400 maybe, change frontend too
+            raise HTTPException(403)  # TODO: 400 maybe, change frontend too
 
         return None
 

@@ -119,7 +119,6 @@ async def test_register(
             assert isinstance(res.get("refresh"), str)
 
         mock_validate_captcha.assert_awaited_once_with(captcha, RECAPTCHA_SECRET)
-    # TODO: data
 
 
 @pytest.mark.asyncio
@@ -144,7 +143,6 @@ async def test_login(login: str, password: str):
     tokens = await auth_service.login(
         {"login": login, "password": password}, "127.0.0.1"
     )
-    # TODO check tokens
     assert isinstance(tokens, dict)
 
 
@@ -154,7 +152,6 @@ async def test_refresh_access_token() -> str:
     refresh_token = auth_backend.create_refresh_token(
         {"id": 1, "username": "admin", "permissions": [], "type": "refresh",}
     )
-    # TODO: check refresh token
     access_token = await auth_service.refresh_access_token(refresh_token)
     assert isinstance(access_token, str)
 
@@ -218,7 +215,7 @@ async def test_confirm_email():
         await auth_service.confirm_email("wrongtoken")
 
     assert e.type is HTTPException
-    assert e.value.args[0] == 403  # TODO: 400 maybe
+    assert e.value.args[0] == 403  # TODO: 400 maybe?
 
     await auth_service.confirm_email(token)
 

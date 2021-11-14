@@ -50,7 +50,6 @@ def test_login(provider: str):
         f"authx.routers.social.SocialService.login_{provider}",
         mock.Mock(return_value="/"),
     ) as mock_method:
-        # TODO: add test for redirect_url
         response = test_client.get(url, allow_redirects=False)
         mock_method.assert_called_once()
 
@@ -76,7 +75,6 @@ def test_callback(provider: str):
         "authx.routers.social.SocialService.resolve_user",
         mock.AsyncMock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
     )
-    # TODO: add test for redirect_url
     mock_resolve_user = patcher_resolve_user.start()
     url = app.url_path_for("social:callback", provider=provider)
     response = test_client.get(url, allow_redirects=False)

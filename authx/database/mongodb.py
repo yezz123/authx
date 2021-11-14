@@ -7,6 +7,10 @@ from motor.motor_asyncio import (
 )
 from pymongo import ReturnDocument
 
+# Based on this Fork by Webstack:
+# https://github.com/webstack/AuthX/tree/stephane/encode-database
+# I guess its a good one to add as for using SQL databases
+
 
 class MongoDBBackend:
     """
@@ -18,7 +22,6 @@ class MongoDBBackend:
         self._database_name = database_name
 
     def set_client(self, client: AsyncIOMotorClient) -> None:
-        # TODO: Add support for multiple databases
         self._client = client
         self.init()
 

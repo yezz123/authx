@@ -229,7 +229,7 @@ class MockCacheBackend:
             pass
 
     async def keys(self, match: str) -> Iterable[str]:
-        return {}  # TODO
+        return {}
 
     async def set(self, key: str, value: Union[str, bytes, int], expire: int) -> None:
         self._db[key] = value

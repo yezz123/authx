@@ -321,7 +321,7 @@ class UserPrivateInfo(DefaultModel):
     confirmed: bool
     created_at: datetime
     last_login: datetime
-
+    # TODO: Invalid format string
     @validator("created_at", "last_login")
     def set_format(cls, v):
         """
