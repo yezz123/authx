@@ -80,8 +80,12 @@ class JWTBackend:
             exp = datetime.utcnow() + timedelta(seconds=60)
 
         payload.update({"iat": iat, "exp": exp, "type": token_type})
-        # TODO Bump to the last version of PyJWT
-        return jwt.encode(payload, self._private_key, algorithm=JWT_ALGORITHM).decode()
+        token = jwt.encode(payload, self._private_key, algorithm=JWT_ALGORITHM)
+        if isinstance(token, bytes):
+            # For PyJWT <= 1.7.1
+            return token.decode("utf-8")
+        # For PyJWT >= 2.0.0a1
+        return token
 
     def create_access_token(self, payload: dict) -> str:
         return self._create_token(payload, "access", self._access_expiration)
