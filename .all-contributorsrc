@@ -54,6 +54,16 @@
       "contributions": [
         "financial"
       ]
+    },
+    {
+      "login": "MojixCoder",
+      "name": "MojixCoder",
+      "avatar_url": "https://avatars.githubusercontent.com/u/76670309?v=4",
+      "profile": "https://github.com/MojixCoder",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
