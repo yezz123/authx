@@ -38,14 +38,14 @@ formatter = logging.Formatter("%(asctime)s %(message)s")
 
 if DEBUG:
     """
-        Log to console
+    Log to console
     """
     log_info = logging.handlers.TimedRotatingFileHandler(
         "logs/info.log", when="midnight", backupCount=7
     )
 else:
     """
-        Log to file
+    Log to file
     """
     log_info = logging.StreamHandler()
 

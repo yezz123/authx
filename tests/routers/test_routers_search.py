@@ -8,7 +8,10 @@ from tests.utils import mock_admin_required
 
 app = FastAPI()
 
-router = get_search_router(None, mock_admin_required,)
+router = get_search_router(
+    None,
+    mock_admin_required,
+)
 
 
 app.include_router(router, prefix="/api")
@@ -40,7 +43,8 @@ def test_search():
     """
     url = app.url_path_for("auth:search")
     with mock.patch(
-        "authx.routers.search.SearchService.search", mock.AsyncMock(return_value=None),
+        "authx.routers.search.SearchService.search",
+        mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.get(f"{url}?id=1&username=admin&p=1")
         mock_method.assert_awaited_once_with(1, "admin", 1)

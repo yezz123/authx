@@ -7,7 +7,8 @@ from authx.services import AdminService
 
 
 def get_router(
-    repo: UsersRepo, admin_required: Callable,
+    repo: UsersRepo,
+    admin_required: Callable,
 ):
     """
     Returns a router for the admin endpoints.
