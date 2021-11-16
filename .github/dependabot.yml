@@ -1,16 +1,10 @@
 version: 2
 updates:
-- package-ecosystem: pip
-  directory: "/"
-  schedule:
-    interval: daily
-  reviewers:
-  - yezz123
 - package-ecosystem: "docker"
   # Look for a `Dockerfile` in the `root` directory
   directory: "/"
   # Check for updates once a week
   schedule:
-      interval: "weekly"
+      interval: "daily"
   reviewers:
   - yezz123
