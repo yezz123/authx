@@ -221,13 +221,3 @@ $ pytest --cov=authx/ --cov-report=html
 ```
 
 </div>
-
-## Docker Build
-
-As you know I provide all actions to build the project in Docker, so you can use it to run the project in a container.
-
-### Commands
-
-Using a pre-configured Makefile, you can run the following commands:
-
-* `make docker-test` - Run the tests in the container.

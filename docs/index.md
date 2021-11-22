@@ -6,17 +6,15 @@
     <em>Ready-to-use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
 </p>
 
-[![Local Tests](https://github.com/yezz123/AuthX/actions/workflows/Local.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/Local.yml)
 [![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
 [![PyPI version](https://badge.fury.io/py/authx.svg)](https://badge.fury.io/py/authx)
 [![Downloads](https://pepy.tech/badge/authx)](https://pepy.tech/project/authx)
-[![Downloads](https://pepy.tech/badge/authx/month)](https://pepy.tech/project/authx)
 [![Lang](https://img.shields.io/badge/Language-Python-green?style)](https://www.python.org/)
 [![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
 [![Pypi](https://img.shields.io/pypi/pyversions/AuthX.svg?color=%2334D058)](https://pypi.org/project/AuthX)
-[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/pypi/AuthX)](https://github.com/yezz123/AuthX/blob/main/requirements.txt)
 
 <a href="https://www.producthunt.com/posts/authx?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-authx" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=318189&theme=light" alt="AuthX - A FastAPI package for Auth made by a human not an AI | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+<a href="https://www.buymeacoffee.com/tahiri" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ---
 

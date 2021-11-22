@@ -1,4 +1,5 @@
 name: Publish docs to Netlify
+
 on:
   push:
     branches:
@@ -15,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
+          python-version: "3.9"
 
       - name: Cache pip
         uses: actions/cache@v2
