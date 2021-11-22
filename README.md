@@ -6,17 +6,13 @@
     <em>Ready-to-use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
 </p>
 
-[![Local Tests](https://github.com/yezz123/AuthX/actions/workflows/Local.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/Local.yml)
-[![Docker Tests](https://github.com/yezz123/AuthX/actions/workflows/docker.yml/badge.svg)](https://github.com/yezz123/AuthX/actions/workflows/docker.yml)
 [![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
 [![PyPI version](https://badge.fury.io/py/authx.svg)](https://badge.fury.io/py/authx)
 [![Downloads](https://pepy.tech/badge/authx)](https://pepy.tech/project/authx)
-[![Downloads](https://pepy.tech/badge/authx/month)](https://pepy.tech/project/authx)
 [![Language](https://img.shields.io/badge/Language-Python-green?style)](https://github.com/yezz123)
 [![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
 [![Star Badge](https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flatcolor=BC4E99)](https://github.com/yezz123/AuthX)
 [![Pypi](https://img.shields.io/pypi/pyversions/AuthX.svg?color=%2334D058)](https://pypi.org/project/AuthX)
-![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/pypi/AuthX)
 
 ---
 
@@ -38,7 +34,6 @@ __Note__: This is a **beta** version of AuthX.
 - Ready-to-use Social login and Oauth2 routes. (now with Google, Facebook)
     - Soon with Microsoft, Twitter, Github, etc.
     - Ready-to-use social OAuth2 login flow
-- Tested Project on [Docker](https://docker.com/).
 - Dependency callable to inject current user in route
 - Pluggable password validation
     - Using Captcha Service.
@@ -168,18 +163,10 @@ pip install -r requirements.dev.txt
 
 ### Run tests 🌝
 
-You can run all the tests with:
+I use Pytest to run the tests, you can run this by using a shortcut command in the `Makefile`:
 
 ```bash
-make docker-test
-```
-
-The command will start a MongoDB container for the related unit tests. So you should have [Docker](https://www.docker.com/get-started) installed.
-
-Alternatively, you can run `pytest` yourself. The MongoDB unit tests will be skipped if no server is available on your local machine:
-
-```bash
-pytest
+make test
 ```
 
 ### Format the code 🍂
@@ -228,6 +215,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 <a href="https://www.producthunt.com/posts/authx?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-authx" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=318189&theme=dark" alt="AuthX - A FastAPI package for Auth made by a human not an AI | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+<a href="https://www.buymeacoffee.com/tahiri" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ## License 📝
 
