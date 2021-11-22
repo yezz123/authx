@@ -1,6 +1,6 @@
 help:
 	@echo "Targets:"
-	@echo "    make docker-test"
+	@echo "    make test"
 	@echo "    make lint"
 	@echo "    make mkdocs"
 	@echo "    make clean"
@@ -9,8 +9,8 @@ help:
 	@echo "    make bumpversion-minor"
 	@echo "    make bumpversion-patch"
 
-docker-test:
-	docker-compose run --rm authx pytest --cov=authx/ --cov-report=html
+test:
+	pytest --cov=authx/ --cov-report=html
 
 lint:
 	pre-commit run --all-files
