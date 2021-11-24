@@ -53,7 +53,7 @@ setuptools.setup(
         "Topic :: Utilities",
         "Typing :: Typed",
     ],
-    python_requires=">=3.8",
+    python_requires=">=3.7",
     install_requires=parse_requirement("requirements.txt"),
     extras_require={"dev": ["requests == 2.26.1", "uvicorn"]},
 )
