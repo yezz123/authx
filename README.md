@@ -6,6 +6,7 @@
     <em>Ready-to-use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
 </p>
 
+[![Test](https://github.com/yezz123/authx/actions/workflows/build.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/build.yml)
 [![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
 [![PyPI version](https://badge.fury.io/py/authx.svg)](https://badge.fury.io/py/authx)
 [![Downloads](https://pepy.tech/badge/authx)](https://pepy.tech/project/authx)
@@ -49,7 +50,7 @@ __Note__: This is a **beta** version of AuthX.
 - Full OpenAPI schema support, even with several authentication backend.
 - Provide a Docstring for each class and function.
 
-__Note:__ Check [Release Notes](docs/release.md).
+__Note:__ Check [Release Notes](https://authx.yezz.codes/release/).
 
 ## Project using 🚀
 

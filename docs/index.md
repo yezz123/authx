@@ -6,6 +6,7 @@
     <em>Ready-to-use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
 </p>
 
+[![Test](https://github.com/yezz123/authx/actions/workflows/build.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/build.yml)
 [![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
 [![PyPI version](https://badge.fury.io/py/authx.svg)](https://badge.fury.io/py/authx)
 [![Downloads](https://pepy.tech/badge/authx)](https://pepy.tech/project/authx)
