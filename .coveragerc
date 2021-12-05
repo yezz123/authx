@@ -6,3 +6,8 @@ omit =
     authx/utils/*
     authx/errors/*
     authx/database/*
+    authx/services/*
+
+[report]
+exclude_lines =
+    pragma: no cover
