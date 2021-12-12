@@ -1,5 +1,26 @@
 # Release Notes 🎞
 
+## 0.1.4
+
+## What's Changed
+
+* Chore(deps-dev): Bump pymdown-extensions from 9.0 to 9.1 by @dependabot in <https://github.com/yezz123/authx/pull/155>
+* empty Scheduled daily dependency update on Monday by @pyup-bot in <https://github.com/yezz123/authx/pull/156>
+* empty Scheduled daily dependency update on Tuesday by @pyup-bot in <https://github.com/yezz123/authx/pull/157>
+* chore: add FastAPI to Classifiers by @yezz123 in <https://github.com/yezz123/authx/pull/163>
+* Chore: Fix CI & Delete Docker Configuration ✨ by @yezz123 in <https://github.com/yezz123/authx/pull/165>
+* empty Scheduled daily dependency update on Monday by @pyup-bot in <https://github.com/yezz123/authx/pull/166>
+* empty Scheduled daily dependency update on Monday by @pyup-bot in <https://github.com/yezz123/authx/pull/167>
+* CI: Ignore some Directories 🪨  by @yezz123 in <https://github.com/yezz123/authx/pull/168>
+* empty Scheduled daily dependency update on Wednesday by @pyup-bot in <https://github.com/yezz123/authx/pull/169>
+* empty Scheduled daily dependency update on Thursday by @pyup-bot in <https://github.com/yezz123/authx/pull/170>
+* empty Scheduled daily dependency update on Saturday by @pyup-bot in <https://github.com/yezz123/authx/pull/171>
+* empty Scheduled daily dependency update on Wednesday by @pyup-bot in <https://github.com/yezz123/authx/pull/172>
+* empty Scheduled daily dependency update on Friday by @pyup-bot in <https://github.com/yezz123/authx/pull/173>
+* empty Scheduled daily dependency update on Sunday by @pyup-bot in <https://github.com/yezz123/authx/pull/174>
+
+**Full Changelog**: <https://github.com/yezz123/authx/compare/0.1.3...0.1.4>
+
 ## 0.1.3
 
 * Fix the issue relate to PyJWT (Bumping version #151 )
