@@ -1,6 +1,6 @@
 fastapi==0.70.1
 PyJWT == 2.3.0
-cryptography==36.0.0
+cryptography==36.0.1
 httpx==0.21.1
 aioredis == 2.0.0
 passlib == 1.7.4
