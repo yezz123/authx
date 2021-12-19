@@ -191,7 +191,7 @@ class MockDatabaseBackend:
         Returns:
             bool: True if the email was confirmed, False otherwise.
         """
-        for i, item in enumerate(self._email_confirmations):
+        for item in self._email_confirmations:
             if item.get("token") == token_hash:
                 user = self._get("email", item.get("email"))
                 await self.update(user.get("id"), {"confirmed": True})
