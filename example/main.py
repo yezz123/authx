@@ -2,6 +2,7 @@ from decouple import config
 from fastapi import APIRouter, Depends, FastAPI
 
 from authx import Authentication, User
+from authx.api.users import UsersRepo
 from authx.database import MongoDBBackend, RedisBackend
 
 app = FastAPI(
@@ -14,6 +15,13 @@ auth = Authentication(
     debug=config("DEBUG", default=False, cast=bool),
     base_url=config("BASE_URL", default="http://localhost:8000"),
     site=config("SITE", default="authx"),
+    # TODO: Fix {TypeError: 'MongoDBBackend' object is not subscriptable}
+    # https://stackoverflow.com/questions/54805511/typeerror-mongoengine-object-is-not-subscriptable
+    # https://docs.python.org/3/library/typing.html#type-aliases
+    # https://motor.readthedocs.io/en/stable/tutorial-asyncio.html#creating-a-client
+    callbacks=[
+        UsersRepo(MongoDBBackend("authx"), RedisBackend(), []),
+    ],
     database_name=config("DATABASE_NAME", default="authx"),
     access_cookie_name=config("ACCESS_COOKIE_NAME", default="access_token"),
     refresh_cookie_name=config("REFRESH_COOKIE_NAME", default="refresh_token"),
@@ -28,8 +36,9 @@ auth = Authentication(
     display_name=config("DISPLAY_NAME", default="AuthX"),
     recaptcha_secret=config("RECAPTCHA_SECRET", default="secret"),
     social_providers=[],
-    social_creds={},
+    social_creds=None,
 )
+
 router = APIRouter()
 
 
@@ -39,8 +48,9 @@ app.include_router(auth.password_router, prefix="/api/users")
 app.include_router(auth.admin_router, prefix="/api/users")
 app.include_router(auth.search_router, prefix="/api/users")
 
+# Set MongoDB and Redis Cache
 auth.set_cache(RedisBackend)  # aioredis client
-auth.set_database(MongoDBBackend)  # motor client
+auth.set_database(MongoDBBackend())  # motor client
 
 # Set Anonymous User
 @router.get("/anonym")
