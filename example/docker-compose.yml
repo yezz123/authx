@@ -1,15 +1,16 @@
 version: "3.3"
 services:
-  mongo:
-    image: mongo:4.2
-    restart: always
-    ports:
-      - 27017:27017
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: unless-stopped
+    command: mongod --auth
     environment:
-      MONGO_INITDB_ROOT_USERNAME: authenticationx
-      MONGO_INITDB_ROOT_PASSWORD: password
-    volumes:
-      - /data/db:/data/db
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: authx
+      MONGODB_DATA_DIR: /data/db
+      MONDODB_LOG_DIR: /dev/null
   redis:
     image: redis:latest
     restart: always

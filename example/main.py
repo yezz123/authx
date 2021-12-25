@@ -1,8 +1,9 @@
+import motor.motor_asyncio
+from db import db
 from decouple import config
 from fastapi import APIRouter, Depends, FastAPI
 
 from authx import Authentication, User
-from authx.api.users import UsersRepo
 from authx.database import MongoDBBackend, RedisBackend
 
 app = FastAPI(
@@ -15,14 +16,8 @@ auth = Authentication(
     debug=config("DEBUG", default=False, cast=bool),
     base_url=config("BASE_URL", default="http://localhost:8000"),
     site=config("SITE", default="authx"),
-    # TODO: Fix {TypeError: 'MongoDBBackend' object is not subscriptable}
-    # https://stackoverflow.com/questions/54805511/typeerror-mongoengine-object-is-not-subscriptable
-    # https://docs.python.org/3/library/typing.html#type-aliases
-    # https://motor.readthedocs.io/en/stable/tutorial-asyncio.html#creating-a-client
-    callbacks=[
-        UsersRepo(MongoDBBackend("authx"), RedisBackend(), []),
-    ],
-    database_name=config("DATABASE_NAME", default="authx"),
+    database_name=config(db, default="authx"),
+    callbacks=[],
     access_cookie_name=config("ACCESS_COOKIE_NAME", default="access_token"),
     refresh_cookie_name=config("REFRESH_COOKIE_NAME", default="refresh_token"),
     private_key=config("PRIVATE_KEY", default="private_key"),
@@ -42,15 +37,19 @@ auth = Authentication(
 router = APIRouter()
 
 
-app.include_router(auth.auth_router, prefix="/api/users")
-app.include_router(auth.social_router, prefix="/auth")
-app.include_router(auth.password_router, prefix="/api/users")
-app.include_router(auth.admin_router, prefix="/api/users")
-app.include_router(auth.search_router, prefix="/api/users")
+app.include_router(auth.auth_router, prefix="/api/auth", tags=["auth"])
+app.include_router(auth.password_router, prefix="/api/password", tags=["password"])
+app.include_router(auth.admin_router, prefix="/api/admin", tags=["admin"])
+app.include_router(auth.search_router, prefix="/api/search", tags=["search"])
+
+# TODO: Fix {TypeError: 'MongoDBBackend' object is not subscriptable}
+# https://stackoverflow.com/questions/54805511/typeerror-mongoengine-object-is-not-subscriptable
+# https://docs.python.org/3/library/typing.html#type-aliases
+# https://motor.readthedocs.io/en/stable/tutorial-asyncio.html#creating-a-client
 
 # Set MongoDB and Redis Cache
-auth.set_cache(RedisBackend)  # aioredis client
-auth.set_database(MongoDBBackend())  # motor client
+auth.set_cache(RedisBackend())  # aioredis client
+auth.set_database(MongoDBBackend(database_name=auth.database_name))  # motor client
 
 # Set Anonymous User
 @router.get("/anonym")
