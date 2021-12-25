@@ -64,7 +64,7 @@ CAPTCHA = "CAPTCHA"
 )
 @mock.patch(
     "authx.services.auth.AuthService._request_email_confirmation",
-    mock.AsyncMock(return_value=None),
+    mock.Mock(return_value=None),
 )
 async def test_register(
     email: str,
@@ -89,7 +89,7 @@ async def test_register(
     auth_service = AuthService()
     with mock.patch(
         "authx.services.auth.validate_captcha",
-        mock.AsyncMock(return_value=valid_captcha),
+        mock.Mock(return_value=valid_captcha),
     ) as mock_validate_captcha:
         if not valid_captcha:
             with pytest.raises(HTTPException) as e:
@@ -204,7 +204,7 @@ async def test_request_email_confirmation_confirmed():
 @pytest.mark.asyncio
 @mock.patch(
     "authx.services.auth.AuthService._request_email_confirmation",
-    mock.AsyncMock(return_value=None),
+    mock.Mock(return_value=None),
 )
 async def test_request_email_confirmation():
     auth_service = AuthService()

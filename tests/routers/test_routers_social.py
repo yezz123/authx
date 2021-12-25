@@ -75,7 +75,7 @@ def test_callback(provider: str):
     """
     patcher_callback = mock.patch(
         f"authx.routers.social.SocialService.callback_{provider}",
-        mock.AsyncMock(
+        mock.Mock(
             return_value=(
                 None,
                 None,
@@ -85,7 +85,7 @@ def test_callback(provider: str):
     mock_callback = patcher_callback.start()
     patcher_resolve_user = mock.patch(
         "authx.routers.social.SocialService.resolve_user",
-        mock.AsyncMock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
+        mock.Mock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
     )
     mock_resolve_user = patcher_resolve_user.start()
     url = app.url_path_for("social:callback", provider=provider)

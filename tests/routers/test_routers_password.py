@@ -44,7 +44,7 @@ def test_forgot_password():
     url = app.url_path_for("auth:forgot_password")
     with mock.patch(
         "authx.routers.password.PasswordService.forgot_password",
-        mock.AsyncMock(return_value=None),
+        mock.Mock(return_value=None),
     ) as mock_method:
         response = test_client.post(
             url,
@@ -63,7 +63,7 @@ def test_password_status():
     url = app.url_path_for("auth:password_status")
     with mock.patch(
         "authx.routers.password.PasswordService.password_status",
-        mock.AsyncMock(return_value=None),
+        mock.Mock(return_value=None),
     ) as mock_method:
         response = test_client.get(url)
 
@@ -78,7 +78,7 @@ def test_password_set():
     url = app.url_path_for("auth:password_set")
     with mock.patch(
         "authx.routers.password.PasswordService.password_set",
-        mock.AsyncMock(return_value=None),
+        mock.Mock(return_value=None),
     ) as mock_method:
         response = test_client.post(
             url,
@@ -100,7 +100,7 @@ def test_password_reset():
     url = app.url_path_for("auth:password_reset", token="TOKEN")
     with mock.patch(
         "authx.routers.password.PasswordService.password_reset",
-        mock.AsyncMock(return_value=None),
+        mock.Mock(return_value=None),
     ) as mock_method:
         response = test_client.post(
             url,
@@ -122,7 +122,7 @@ def test_password_change():
     url = app.url_path_for("auth:password_change")
     with mock.patch(
         "authx.routers.password.PasswordService.password_change",
-        mock.AsyncMock(return_value=None),
+        mock.Mock(return_value=None),
     ) as mock_method:
         response = test_client.put(
             url,

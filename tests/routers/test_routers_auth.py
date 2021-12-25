@@ -49,7 +49,7 @@ REFRESH_TOKEN = "refresh_token"
 
 @mock.patch(
     "authx.routers.auth.AuthService.register",
-    mock.AsyncMock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
+    mock.Mock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
 )
 def test_register():
     """
@@ -74,7 +74,7 @@ def test_register():
 
 @mock.patch(
     "authx.routers.auth.AuthService.login",
-    mock.AsyncMock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
+    mock.Mock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
 )
 def test_login():
     """
@@ -114,7 +114,7 @@ def test_token():
 
 @mock.patch(
     "authx.routers.auth.AuthService.refresh_access_token",
-    mock.AsyncMock(return_value=ACCESS_TOKEN),
+    mock.Mock(return_value=ACCESS_TOKEN),
 )
 def test_refresh_access_token():
     """
@@ -133,7 +133,7 @@ def test_refresh_access_token():
 
 @mock.patch(
     "authx.routers.auth.AuthService.get_email_confirmation_status",
-    mock.AsyncMock(return_value=None),
+    mock.Mock(return_value=None),
 )
 def test_get_email_confirmation_status():
     """
@@ -146,7 +146,7 @@ def test_get_email_confirmation_status():
 
 @mock.patch(
     "authx.routers.auth.AuthService.request_email_confirmation",
-    mock.AsyncMock(return_value=None),
+    mock.Mock(return_value=None),
 )
 def test_request_email_confirmation():
     """
@@ -165,7 +165,7 @@ def test_confirm_email():
     url = app.url_path_for("auth:confirm_email", token=TOKEN)
     with mock.patch(
         "authx.routers.auth.AuthService.confirm_email",
-        mock.AsyncMock(return_value=None),
+        mock.Mock(return_value=None),
     ) as mock_method:
         response = test_client.post(url)
         mock_method.assert_awaited_once_with(TOKEN)
@@ -181,7 +181,7 @@ def test_change_username():
     url = app.url_path_for("auth:change_username", id=id)
     with mock.patch(
         "authx.routers.auth.AuthService.change_username",
-        mock.AsyncMock(return_value=None),
+        mock.Mock(return_value=None),
     ) as mock_method:
         response = test_client.post(url, json={"username": new_username})
         mock_method.assert_awaited_once_with(id, new_username)

@@ -29,7 +29,7 @@ def test_get_user():
     url = app.url_path_for("auth:get_user", id="1")
     with mock.patch(
         "authx.routers.search.SearchService.get_user",
-        mock.AsyncMock(return_value=None),
+        mock.Mock(return_value=None),
     ) as mock_method:
         response = test_client.get(url)
         mock_method.assert_awaited_once_with(1)
@@ -44,7 +44,7 @@ def test_search():
     url = app.url_path_for("auth:search")
     with mock.patch(
         "authx.routers.search.SearchService.search",
-        mock.AsyncMock(return_value=None),
+        mock.Mock(return_value=None),
     ) as mock_method:
         response = test_client.get(f"{url}?id=1&username=admin&p=1")
         mock_method.assert_awaited_once_with(1, "admin", 1)
