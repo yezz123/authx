@@ -1,3 +1,7 @@
+import backports.unittest_mock
+
+backports.unittest_mock.install()
+
 from unittest import mock
 
 import pytest
@@ -6,7 +10,7 @@ from authx.core.email import EmailClient
 
 
 @pytest.mark.asyncio
-@mock.patch("aiosmtplib.send", mock.Mock(return_value=None))
+@mock.patch("aiosmtplib.send", mock.AsyncMock(return_value=None))
 async def test_email_client():
     """
     test email client

@@ -1,3 +1,8 @@
+import backports.unittest_mock
+
+backports.unittest_mock.install()
+
+
 from unittest import mock
 
 import pytest
@@ -54,7 +59,7 @@ def test_login(provider: str):
     url = app.url_path_for("social:login", provider=provider)
     with mock.patch(
         f"authx.routers.social.SocialService.login_{provider}",
-        mock.Mock(return_value="/"),
+        mock.AsyncMock(return_value="/"),
     ) as mock_method:
         response = test_client.get(url, allow_redirects=False)
         mock_method.assert_called_once()
@@ -65,7 +70,7 @@ def test_login(provider: str):
 @pytest.mark.parametrize("provider", ["google", "facebook"])
 @mock.patch(
     "authx.routers.social.check_state",
-    mock.Mock(return_value=True),
+    mock.AsyncMock(return_value=True),
 )
 def test_callback(provider: str):
     """
@@ -75,7 +80,7 @@ def test_callback(provider: str):
     """
     patcher_callback = mock.patch(
         f"authx.routers.social.SocialService.callback_{provider}",
-        mock.Mock(
+        mock.AsyncMock(
             return_value=(
                 None,
                 None,
@@ -85,7 +90,7 @@ def test_callback(provider: str):
     mock_callback = patcher_callback.start()
     patcher_resolve_user = mock.patch(
         "authx.routers.social.SocialService.resolve_user",
-        mock.Mock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
+        mock.AsyncMock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
     )
     mock_resolve_user = patcher_resolve_user.start()
     url = app.url_path_for("social:callback", provider=provider)

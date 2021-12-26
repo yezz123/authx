@@ -1,3 +1,8 @@
+import backports.unittest_mock
+
+backports.unittest_mock.install()
+
+
 from unittest import mock
 
 from fastapi import FastAPI
@@ -49,7 +54,7 @@ REFRESH_TOKEN = "refresh_token"
 
 @mock.patch(
     "authx.routers.auth.AuthService.register",
-    mock.Mock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
+    mock.AsyncMock(return_value={"access": ACCESS_TOKEN, "refresh": REFRESH_TOKEN}),
 )
 def test_register():
     """
@@ -181,7 +186,7 @@ def test_change_username():
     url = app.url_path_for("auth:change_username", id=id)
     with mock.patch(
         "authx.routers.auth.AuthService.change_username",
-        mock.Mock(return_value=None),
+        mock.AsyncMock(return_value=None),
     ) as mock_method:
         response = test_client.post(url, json={"username": new_username})
         mock_method.assert_awaited_once_with(id, new_username)
