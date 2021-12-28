@@ -8,6 +8,21 @@ You can add AuthX to your FastAPI project in a few easy steps. First of all, ins
 pip install authx
 ```
 
+## Install from source 📦
+
+You can also install AuthX from source, by cloning the repository and running the following command:
+
+```shell
+git clone https://github.com/yezz123/AuthX
+
+make install
+```
+
+!!! info
+    The `make install` command will install AuthX in the current directory.
+
+    Run directly `python setup.py sdist bdist_wheel` and generate the project in the current directory.
+
 ## What AuthX includes
 
 - `fastapi` : a fast, modern, and feature-rich framework for building APIs.
