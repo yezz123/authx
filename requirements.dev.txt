@@ -16,3 +16,6 @@ mkdocs-mermaid2-plugin==0.5.2
 markdown-include==0.6.0
 pymdown-extensions==9.1
 mdx-include==1.4.1
+SQLAlchemy==1.4.29
+uvloop==0.16.0
+websockets==10.1
