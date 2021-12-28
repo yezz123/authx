@@ -40,6 +40,12 @@ This `UserManager` object should be provided through a `FastAPI` dependency.
 
 ## AuthX & Routers
 
-Finally, AuthX object is the main class from which you'll be able to generate routers for classic routes like registration, login or logout but also get the `current_user` dependency factory to inject the authenticated user in your own routes.
+AuthX object is the main class from which you'll be able to generate routers for classic routes like registration, login or logout but also get the `current_user` dependency factory to inject the authenticated user in your own routes.
 
 ➡️ [Configure the Routers](routers/index.md)
+
+## Middleware
+
+Supporting OAuth2 is one of the most important feature of AuthX. We provide a middleware to handle the OAuth2 flow for both FastAPI app and Starlette app that could help you to integrate AuthX with your existing app.
+
+➡️ [Configure the OAuth2 Middleware](middlewares/index.md)
