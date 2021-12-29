@@ -1,0 +1,12 @@
+version: "3.3"
+services:
+  middleware:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python -m app
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./.env.sample
+    image: authx

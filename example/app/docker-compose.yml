@@ -1,0 +1,31 @@
+version: "3.3"
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: unless-stopped
+    command: mongod --auth
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: authx
+      MONGODB_DATA_DIR: /data/db
+      MONDODB_LOG_DIR: /dev/null
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - 6379:6379
+  authx:
+    depends_on:
+      - mongo
+      - redis
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: uvicorn main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env.sample
+    image: authx
