@@ -3,6 +3,7 @@ help:
 	@echo "    make test"
 	@echo "    make lint"
 	@echo "    make mkdocs"
+	@echo "    make install"
 	@echo "    make clean"
 	@echo "    make clean-test"
 	@echo "    make bumpversion-major"
@@ -17,6 +18,9 @@ lint:
 
 mkdocs:
 	mkdocs serve --livereload
+
+install:
+	pip install setuptools wheel twine && python setup.py sdist bdist_wheel
 
 clean:
 	find . -name '*.pyc' -exec rm -f {} +
