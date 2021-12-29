@@ -16,7 +16,7 @@ auth = Authentication(
     debug=config("DEBUG", default=False, cast=bool),
     base_url=config("BASE_URL", default="http://localhost:8000"),
     site=config("SITE", default="authx"),
-    database_name=config(db, default="authx"),
+    database_name=db,
     callbacks=[],
     access_cookie_name=config("ACCESS_COOKIE_NAME", default="access_token"),
     refresh_cookie_name=config("REFRESH_COOKIE_NAME", default="refresh_token"),
@@ -49,7 +49,7 @@ app.include_router(auth.search_router, prefix="/api/search", tags=["search"])
 
 # Set MongoDB and Redis Cache
 auth.set_cache(RedisBackend())  # aioredis client
-auth.set_database(MongoDBBackend(database_name=auth.database_name))  # motor client
+auth.set_database(MongoDBBackend(database_name=db))  # motor client
 
 # Set Anonymous User
 @router.get("/anonym")
