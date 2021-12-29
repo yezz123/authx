@@ -88,9 +88,9 @@ nav:
       - configuration/routers/password.md
       - configuration/routers/social.md
       - configuration/routers/search.md
-    - Oauth2:
+    - Middlewares:
       - Introduction: configuration/middlewares/index.md
-      - configuration/middlewares/Middlewares.md
+      - configuration/middlewares/example.md
   - Help AuthX - Get Help: help.md
   - Development - Contributing: contributing.md
   - Frequently Asked Questions: faq.md
