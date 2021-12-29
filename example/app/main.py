@@ -1,4 +1,3 @@
-import motor.motor_asyncio
 from db import db
 from decouple import config
 from fastapi import APIRouter, Depends, FastAPI
