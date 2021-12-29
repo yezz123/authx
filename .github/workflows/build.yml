@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.9"]
 
     steps:
       - uses: actions/checkout@v2
@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.dev.txt
+          pip install -r requirements-dev.txt
       - name: Lint
         run: make lint
 
@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.9"]
 
     steps:
       - uses: actions/checkout@v2
@@ -41,7 +41,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.dev.txt
+          pip install -r requirements-dev.txt
       - name: Build
         run: mkdocs build
 
@@ -62,7 +62,7 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -r requirements.dev.txt
+          python -m pip install -r requirements-dev.txt
       - name: Test Project
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

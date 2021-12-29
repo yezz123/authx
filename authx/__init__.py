@@ -9,5 +9,6 @@ __author__ = "Yasser Tahiri"
 __author_email__ = "yasserth19@gmail.com"
 
 from authx.main import Authentication, User, authx
+from authx.middleware import MiddlewareOauth2
 
-__all__ = ["authx", "Authentication", "User"]
+__all__ = ["authx", "Authentication", "User", "MiddlewareOauth2"]
