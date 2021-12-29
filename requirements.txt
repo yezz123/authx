@@ -1,4 +1,5 @@
 fastapi==0.70.1
+Authlib==0.15.5
 PyJWT == 2.3.0
 cryptography==36.0.1
 httpx==0.21.1
