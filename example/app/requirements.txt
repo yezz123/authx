@@ -1,4 +1,4 @@
-aioredis==2.0.0
+aioredis==2.0.1
 aiosmtplib==1.1.6
 anyio==3.4.0
 async-timeout==4.0.1
