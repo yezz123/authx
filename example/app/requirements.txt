@@ -1,7 +1,7 @@
 aioredis==2.0.1
 aiosmtplib==1.1.6
 anyio==3.4.0
-async-timeout==4.0.1
+async-timeout==4.0.2
 authx==0.1.4
 bcrypt==3.2.0
 certifi==2021.10.8
