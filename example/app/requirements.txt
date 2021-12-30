@@ -26,5 +26,5 @@ python-decouple==3.5
 rfc3986==1.5.0
 six==1.16.0
 sniffio==1.2.0
-starlette==0.16.0
+starlette==0.17.1
 typing_extensions==4.0.1
