@@ -7,7 +7,7 @@ bcrypt==3.2.0
 certifi==2021.10.8
 cffi==1.15.0
 charset-normalizer==2.0.9
-cryptography==36.0.0
+cryptography==36.0.1
 dnspython==2.1.0
 email-validator==1.1.3
 fastapi==0.70.1
