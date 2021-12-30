@@ -19,9 +19,9 @@ from authx.routers import (
 
 # FIXME: Error while using Swagger UI or Redoc
 class authx:
-    """
-    Here we define the routers for the API.
-    This is authx specific, so we can't use the fastapi router.
+    """Authx is a fastapi application that provides a simple way to authenticate users.
+    Using this application, you can easily create a user management system that allows users to register,
+    login, and logout, and also allows admins to manage users.
     """
 
     def __init__(
@@ -76,12 +76,11 @@ class authx:
 
 
 class Authentication(authx):
-    """
-    Here we define the routers for the API.
-    Authentication the based class where we can define the routers relate to authx.
-
-    Args:
-        authx: The base class for the routers.
+    """Authentication is the Class that handles all the authentication routes, such as login, register,
+    and logout, and Support all AuthX Features such as Social Authentication, Password Reset, and Admin,
+    and also provides a simple way to create a user management system.
+    You Can Add Also the Support to other Authentication Providers such as Google, Facebook.
+    Supporting Cache, JWT, and MongoDB.
     """
 
     def __init__(

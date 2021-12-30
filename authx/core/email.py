@@ -5,16 +5,7 @@ import aiosmtplib
 
 
 class EmailClient:
-    """
-    Create an EmailClient instance with the following parameters:
-    username: str
-    host: str
-    password: str
-    tls: int
-    base_url: str
-    site: str
-    display_name: str
-    """
+    """EmailClient, Native Email Client using aiosmtplib, help to send emails, and confirm emails, also if the user forgot his password."""
 
     def __init__(
         self,

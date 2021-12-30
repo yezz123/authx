@@ -101,7 +101,6 @@ def get_router(
 
         if not check_state(state_query, state_session):
             raise HTTPException(403)
-        # TODO: Check if the user is already logged in.
         code = request.query_params.get("code")
         service = SocialService()
         method = getattr(service, f"callback_{provider}")
