@@ -19,18 +19,12 @@ from authx.utils.strings import create_random_string, hash_string
 
 
 class PasswordService:
-    """
-    Password Service
+    """Class PasswordService
 
-    Raises:
-        HTTPException: 400 - validation or timeout.
-        HTTPException: 404 - token not found.
-        HTTPException: 406 - password already exists.
-        HTTPException: 409 - password reset before.
-        HTTPException: 500 - email not sent.
-
-    Returns:
-        None
+    This Class depend on:
+        - UsersRepo
+        - JWTBackend
+        - EmailClient
     """
 
     _repo: UsersRepo
@@ -76,6 +70,7 @@ class PasswordService:
         cls._display_name = display_name
 
     def _create_email_client(self) -> EmailClient:
+        """Create EmailClient, with SMTP settings."""
         return EmailClient(
             self._smtp_username,
             self._smtp_host,
@@ -114,9 +109,6 @@ class PasswordService:
         Args:
             data: {email: "email@email.com"}
             ip: ip from request
-
-        Returns:
-            None
 
         Raises:
             HTTPException:
@@ -182,13 +174,11 @@ class PasswordService:
     async def password_set(self, data: dict) -> None:
         """
         POST /password_set
+
         Only for accounts with password.
 
         Args:
             data (dict): {password1: "password", password2: "password"}
-
-        Returns:
-            None
         """
         item = await self._repo.get(self._user.id)
         return {
@@ -205,9 +195,6 @@ class PasswordService:
 
         Args:
             data: {password1: "password", password2: "password"}
-
-        Returns:
-            None
 
         Raises:
             HTTPException:
@@ -230,9 +217,6 @@ class PasswordService:
         Args:
             data: {password1: "password", password2: "password"}
             token: token from email
-
-        Returns:
-            None
 
         Raises:
             HTTPException:
@@ -258,9 +242,6 @@ class PasswordService:
 
         Args:
             data: {password1: "password", password2: "password"}
-
-        Returns:
-            None
 
         Raises:
             HTTPException:

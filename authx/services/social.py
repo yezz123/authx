@@ -14,16 +14,8 @@ from authx.models.user import UserPayload
 
 
 class SocialService:
-    """
-    Social Service
-
-    Raises:
-        SocialException: social error
-        SocialException: email exists
-        SocialException: ban
-
-    Returns:
-        Tuple[str, str]: access token, refresh token
+    """Social Service is a service for social login and authorization, it is used by the API and Provide all the
+    necessary methods for the social login and authorization.
     """
 
     _repo: UsersRepo
@@ -49,34 +41,20 @@ class SocialService:
                 setattr(cls, f"{key}_secret", value.get("secret"))
 
     def _create_redirect_uri(self, provider: str) -> str:
-        """
-        Create redirect uri for social login
-
-        :param provider: social provider
-        :return: redirect uri
-        """
+        """Create redirect uri for social login and authorization"""
         return f"{self._base_url}/auth/{provider}/callback"
 
     async def _update_last_login(self, id: int) -> None:
-        """
-        Update last login time
-
-        :param id: user id
-        :return: None
-        """
+        """Update last login time for user"""
         await self._repo.update(id, {"last_login": datetime.utcnow()})
 
     def login_google(self, state: str) -> str:
-        """
-        Login with google
-
-        :param state: state
-        :return: redirect uri
-        """
+        """Login with google, and Redirect the User to the Google login page."""
         redirect_uri = self._create_redirect_uri("google")
         return f"https://accounts.google.com/o/oauth2/v2/auth?scope=email%20profile&response_type=code&state={state}&redirect_uri={redirect_uri}&client_id={self.google_id}"
 
     async def callback_google(self, code: str) -> Tuple[str, str]:
+        """Callback for google login, and return the user token."""
         redirect_uri = self._create_redirect_uri("google")
         async with AsyncClient() as client:
             response = await client.post(
@@ -98,10 +76,12 @@ class SocialService:
         return sid, email
 
     def login_facebook(self, state: str) -> str:
+        """Login with facebook, and Redirect the User to the Facebook login page."""
         redirect_uri = self._create_redirect_uri("facebook")
         return f"https://www.facebook.com/v8.0/dialog/oauth?client_id={self.facebook_id}&redirect_uri={redirect_uri}&state={state}&scope=email"
 
     async def callback_facebook(self, code: str) -> Tuple[str, str]:
+        """Callback for facebook login, and return the user token."""
         redirect_uri = self._create_redirect_uri("facebook")
 
         async with AsyncClient() as client:
@@ -127,6 +107,7 @@ class SocialService:
         return sid, email
 
     async def resolve_user(self, provider: str, sid: str, email: str) -> Dict[str, str]:
+        """Resolver is an asynchrone function that is used to resolve the user from the social login."""
         if email is None:
             raise SocialException(f"email {provider} error", 400)
 

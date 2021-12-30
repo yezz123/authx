@@ -8,17 +8,6 @@ from authx.core.jwt import JWTBackend
 from authx.core.user import User
 from authx.services import AuthService
 
-"""
-POST /register
-POST /login
-POST /logout
-POST /token
-POST /token/refresh
-GET /confirm
-POST /confirm
-POST /confirm/{token}
-"""
-
 
 def get_router(
     repo: UsersRepo,

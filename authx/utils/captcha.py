@@ -4,26 +4,14 @@ from httpx import AsyncClient
 
 
 async def validate_captcha(captcha: Optional[str], recaptcha_secret: str):
-    """
-    Validate a captcha.
-
-    Args:
-        captcha (Optional[str]): The captcha to validate.
-        recaptcha_secret (str): The recaptcha secret.
-
-    Returns:
-        bool: Whether the captcha is valid.
+    """Validate a captcha an Asynchrounous Captcha Validator based on the
+    HTTPX AsyncClient, thats give us the ability to make requests to the
+    Google Recaptcha API.
     """
     if captcha is None:
         # TODO: If there is a possibility of a captcha being required.
         return False
     async with AsyncClient(base_url="https://www.google.com") as client:
-        """
-        The Google API for validating a captcha.
-
-        Returns:
-            bool: Whether the captcha is valid.
-        """
         payload = {
             "secret": recaptcha_secret,
             "response": captcha,

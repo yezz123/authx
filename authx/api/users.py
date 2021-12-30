@@ -20,13 +20,6 @@ from authx.database import MongoDBBackend, RedisBackend
 class Base:
     """
     Initialize the API with the database and cache.
-
-    :param database: The database to use.
-    :param cache: The cache to use.
-    :param callbacks: The callbacks to use.
-    :param access_expiration: The expiration time for access tokens.
-
-    :return: None
     """
 
     def __init__(
@@ -143,9 +136,6 @@ class UsersCRUDMixin(Base):
         Args:
             id (int): The id of the user.
             obj (dict): The user to update.
-
-        Returns:
-            None
         """
         await self._database.update(id, obj)
         return None
@@ -156,9 +146,6 @@ class UsersCRUDMixin(Base):
 
         Args:
             id (int): The id of the user.
-
-        Returns:
-            None
         """
         await self._database.delete(id)  # pragma: no cover
         return None  # pragma: no cover
@@ -448,12 +435,6 @@ class UsersManagementMixin(Base):
     async def toggle_blacklist(self, id: int) -> None:
         """
         Toggle the blacklist of a user.
-
-        Args:
-            id (int): The id of the user.
-
-        Returns:
-            None
         """
         item = await self.get(id)  # pragma: no cover
         active = item.get("active")  # pragma: no cover

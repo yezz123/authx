@@ -1,6 +1,6 @@
 class User:
     """
-    Setup the user object
+    Setup the user object, this is called by the authx framework, you can override this method to setup your own user object
     """
 
     def __init__(self, data=None):
