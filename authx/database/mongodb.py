@@ -7,10 +7,6 @@ from motor.motor_asyncio import (
 )
 from pymongo import ReturnDocument
 
-# Based on this Fork by Webstack:
-# https://github.com/webstack/AuthX/tree/stephane/encode-database
-# I guess its a good one to add as for using SQL databases
-
 
 class MongoDBBackend:
     """

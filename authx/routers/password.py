@@ -23,20 +23,8 @@ def get_router(
     display_name: str,
 ):
     """
-    Setup The Password requirements Router
-    Args:
-        repo (UsersRepo): The Users Repository
-        auth_backend (JWTBackend): The JWT Backend
-        get_authenticated_user (Callable): The Authenticated User
-        debug (bool): The Debug Mode
-        base_url (str): The Base URL
-        site (str): The Site Name
-        recaptcha_secret (str): The Recaptcha Secret
-        smtp_username (str): The SMTP Username
-        smtp_password (str): The SMTP Password
-        smtp_host (str): The SMTP Host
-        smtp_tls (int): The SMTP TLS
-        display_name (str): The Display Name
+    Setup The Password requirements Router, for handling password related requests, such as resetting passwords,
+    changing passwords, etc.
 
     Returns:
         APIRouter: The Password Router

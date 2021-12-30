@@ -25,6 +25,13 @@ from authx.utils.strings import create_random_string, hash_string
 
 
 class AuthService:
+    """Class AuthService, methods for login, logout, refresh, change password, change username
+
+    This Class Depend on:
+        - JWTBackend
+        - UsersRepo
+        - EmailClient
+    """
 
     _repo: UsersRepo
     _auth_backend: JWTBackend
@@ -37,18 +44,6 @@ class AuthService:
     _smtp_host: str
     _smtp_tls: int
     _display_name: str
-    """ POST /logout
-
-    Args:
-        access_token: access token.
-
-    Returns:
-        None.
-
-    Raises:
-        HTTPException:
-            401 - invalid access token.
-    """
 
     def __init__(self, user: Optional[User] = None) -> None:
         self._user = user
@@ -291,9 +286,6 @@ class AuthService:
 
         If there is no timeout, send email.
 
-        Returns:
-            None
-
         Raises:
             HTTPException:
                 400 - confirmed is already True.
@@ -316,9 +308,6 @@ class AuthService:
 
         Hashes token, looks up hash in db, updates "confirmed" to True for email in a row.
 
-        Returns:
-            None
-
         Raises:
             HTTPException:
                 403 - no hash in db.
@@ -340,9 +329,6 @@ class AuthService:
         Raises:
             HTTPException: 400 - username already exists.
             HTTPException: 404 - user not found.
-
-        Returns:
-            None
         """
         new_username = self._validate_user_model(
             UserInChangeUsername, {"username": username}
