@@ -19,6 +19,6 @@ mdx-include==1.4.1
 SQLAlchemy==1.4.29
 uvloop==0.16.0
 websockets==10.1
-setuptools == 60.1.0
+setuptools==60.2.0
 wheel == 0.37.1
 twine == 3.7.1
