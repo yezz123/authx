@@ -19,7 +19,7 @@ itsdangerous==2.0.1
 motor==2.5.1
 passlib==1.7.4
 pycparser==2.21
-pydantic==1.8.2
+pydantic==1.9.0
 PyJWT==2.3.0
 pymongo==4.0.1
 python-decouple==3.5
