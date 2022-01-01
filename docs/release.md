@@ -1,5 +1,32 @@
 # Release Notes 🎞
 
+## 0.2.0
+
+## What's Changed
+
+### Middleware - Oauth2
+
+The OAuth 2.0 authorization framework is a protocol that allows a user to grant a third-party website or application access to the user's protected resources, without necessarily revealing their long-term credentials or even their identity.
+
+Starlette middleware for authentication through oauth2's via a secret key, which is often used to add authentication and authorization to a web application that interacts with an API on behalf of the user.
+
+That's why AuthX provides a Configuration `MiddlewareOauth2` to configure the OAuth2 middleware.
+
+```py
+from authx import MiddlewareOauth2
+
+class AuthenticateMiddleware(MiddlewareOauth2):
+    PUBLIC_PATHS = {"/public"}
+```
+
+### Code Enhancement
+
+* Remove unnecessary calls to `enumerate` when the index variable is not used. by @yezz123 in <https://github.com/yezz123/authx/pull/179>
+* chore: Create a Basic Example to serve the utility of AuthX by @yezz123 in <https://github.com/yezz123/authx/pull/178>
+* Clean DocString & Define Functions by @yezz123 in <https://github.com/yezz123/authx/pull/189>
+
+**Full Changelog**: <https://github.com/yezz123/authx/compare/0.1.4...0.2.0>
+
 ## 0.1.4
 
 ## What's Changed
