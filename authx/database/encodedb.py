@@ -42,7 +42,7 @@ class EncodeDBBackend(BaseDBBackend):
 
     async def create(self, obj: dict) -> UUID:
         uuid = uuid4()
-        obj.update({id: uuid})
+        obj[id] = uuid
         query = self.users.insert()
         await self.database.execute(query=query, values=obj)
         return uuid

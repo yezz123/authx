@@ -14,7 +14,7 @@ from authx.core.config import (
     PASSWORD_RESET_TIMEOUT,
 )
 from authx.core.logger import logger
-from authx.database import MongoDBBackend, RedisBackend
+from authx.database import BaseDBBackend, RedisBackend
 
 
 class Base:
@@ -24,7 +24,7 @@ class Base:
 
     def __init__(
         self,
-        database: MongoDBBackend,
+        database: BaseDBBackend,
         cache: RedisBackend,
         callbacks: Iterable,
         access_expiration: int = 60 ** 2 * 6,
@@ -37,7 +37,7 @@ class Base:
             callbacks (Iterable): The callbacks to use.
             access_expiration (int, optional): The expiration time for access tokens. Defaults to 60 * 60 * 6.
         """
-        self._database: Optional[MongoDBBackend] = database
+        self._database: Optional[BaseDBBackend] = database
         self._cache: Optional[RedisBackend] = cache
         self._callbacks = callbacks
         self._access_expiration = access_expiration
