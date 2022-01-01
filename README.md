@@ -49,6 +49,7 @@ __Note__: This is a **beta** version of AuthX.
     - Soon to be included Cookie authentication backend
 - Full OpenAPI schema support, even with several authentication backend.
 - Provide a Docstring for each class and function.
+- Middleware Support for Oauth2 using `Authlib` and Starlette.
 
 __Note:__ Check [Release Notes](https://authx.yezz.codes/release/).
 

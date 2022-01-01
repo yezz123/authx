@@ -28,3 +28,4 @@ six==1.16.0
 sniffio==1.2.0
 starlette==0.17.1
 typing_extensions==4.0.1
+authx == 0.2.0
