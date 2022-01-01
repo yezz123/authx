@@ -9,7 +9,6 @@ async def validate_captcha(captcha: Optional[str], recaptcha_secret: str):
     Google Recaptcha API.
     """
     if captcha is None:
-        # TODO: If there is a possibility of a captcha being required.
         return False
     async with AsyncClient(base_url="https://www.google.com") as client:
         payload = {

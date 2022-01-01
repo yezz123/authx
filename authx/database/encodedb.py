@@ -10,7 +10,7 @@ from authx.database import BaseDBBackend
 
 class EncodeDBBackend(BaseDBBackend):
     """
-    Setup Database for AuthX using Encode Database (SQLAlchemy Core)
+    Setup Database for authx using Encode Database (SQLAlchemy Core)
     """
 
     def __init__(

@@ -16,7 +16,6 @@ from authx.routers import (
 )
 
 
-# FIXME: Error while using Swagger UI or Redoc
 class authx:
     """Authx is a fastapi application that provides a simple way to authenticate users.
     Using this application, you can easily create a user management system that allows users to register,
@@ -31,7 +30,6 @@ class authx:
         access_expiration: int,
         refresh_expiration: int,
     ) -> None:
-        # TODO: Fix Issue relate to OpenAPI
         self._access_cookie_name = access_cookie_name
         self._refresh_cookie_name = refresh_cookie_name
 

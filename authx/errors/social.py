@@ -14,11 +14,9 @@ class SocialException(Exception):
 
     @classmethod
     def setup(cls, base_url: str) -> None:
-        # TODO: Add a setup method to set the base url
         cls._base_url = base_url
 
     def __init__(self, msg: str, status_code: int, *args):
-        # TODO: Add a __init__ method to set the message and status code
         self.content = get_error_message(msg, self._base_url)
         """
         The content that will be sent to the user

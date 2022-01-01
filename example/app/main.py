@@ -41,11 +41,6 @@ app.include_router(auth.password_router, prefix="/api/password", tags=["password
 app.include_router(auth.admin_router, prefix="/api/admin", tags=["admin"])
 app.include_router(auth.search_router, prefix="/api/search", tags=["search"])
 
-# TODO: Fix {TypeError: 'MongoDBBackend' object is not subscriptable}
-# https://stackoverflow.com/questions/54805511/typeerror-mongoengine-object-is-not-subscriptable
-# https://docs.python.org/3/library/typing.html#type-aliases
-# https://motor.readthedocs.io/en/stable/tutorial-asyncio.html#creating-a-client
-
 # Set MongoDB and Redis Cache
 auth.set_cache(RedisBackend())  # aioredis client
 auth.set_database(MongoDBBackend(database_name=db))  # motor client

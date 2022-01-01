@@ -226,7 +226,7 @@ async def test_confirm_email():
         await auth_service.confirm_email("wrongtoken")
 
     assert e.type is HTTPException
-    assert e.value.args[0] == 403  # TODO: 400 maybe?
+    assert e.value.args[0] == 403
 
     await auth_service.confirm_email(token)
 

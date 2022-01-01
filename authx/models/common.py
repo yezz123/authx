@@ -4,7 +4,6 @@ from pydantic import BaseConfig, BaseModel
 
 
 def convert_field_to_camel_case(string: str) -> str:
-    # TODO: implement
     return "".join(
         word if index == 0 else word.capitalize()
         for index, word in enumerate(string.split("_"))
