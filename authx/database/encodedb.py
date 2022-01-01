@@ -1,11 +1,11 @@
+from typing import Iterable, Optional
+from uuid import UUID, uuid4
+
 import sqlalchemy as sa
-from sqlalchemy.dialects.postgresql import insert as pg_insert
 from databases import Database
+from sqlalchemy.dialects.postgresql import insert as pg_insert
+
 from authx.database import BaseDBBackend
-
-from typing import Optional, Iterable
-
-from uuid import uuid4, UUID
 
 
 class EncodeDBBackend(BaseDBBackend):
