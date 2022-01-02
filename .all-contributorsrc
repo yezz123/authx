@@ -64,6 +64,16 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "stephane",
+      "name": "Stéphane Raimbault",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1815?v=4",
+      "profile": "http://sralab.com",
+      "contributions": [
+        "code",
+        "plugin"
+      ]
     }
   ],
   "contributorsPerLine": 7,
