@@ -17,5 +17,4 @@ def hash_string(s: str) -> str:
 
 
 def check_signature(s: str, signature: str, key: str) -> bool:
-    # TODO: Check if signature is valid
     return signature == hmac.new(key.encode(), s.encode(), hashlib.sha256).hexdigest()

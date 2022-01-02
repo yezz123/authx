@@ -31,7 +31,6 @@ from authx.models.common import DefaultModel, set_created_at, set_last_login
 
 
 def check_username(v: str) -> str:
-    # TODO: Check if the username is correct.
     v = v.strip()
     if len(v) < USERNAME_MIN_LENGTH or len(v) > USERNAME_MAX_LENGTH:
         raise ValueError("username length")
@@ -67,7 +66,6 @@ def check_username(v: str) -> str:
 
 
 def check_password(v: str, values) -> str:
-    # TODO: Check if the password is correct.
     if " " in v:
         raise ValueError("password space")
     if len(v) < PASSWORD_MIN_LENGTH or len(v) > PASSWORD_MAX_LENGTH:
@@ -321,7 +319,7 @@ class UserPrivateInfo(DefaultModel):
     confirmed: bool
     created_at: datetime
     last_login: datetime
-    # TODO: Invalid format string
+
     @validator("created_at", "last_login")
     def set_format(cls, v):
         """

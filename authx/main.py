@@ -2,12 +2,11 @@ from typing import Iterable, Optional
 
 from aioredis import Redis
 from fastapi import APIRouter, HTTPException, Request
-from motor.motor_asyncio import AsyncIOMotorClient
 
 from authx.api import UsersRepo
 from authx.core.jwt import JWTBackend
 from authx.core.user import User
-from authx.database import MongoDBBackend, RedisBackend
+from authx.database import BaseDBBackend, RedisBackend
 from authx.routers import (
     get_admin_router,
     get_auth_router,
@@ -17,7 +16,6 @@ from authx.routers import (
 )
 
 
-# FIXME: Error while using Swagger UI or Redoc
 class authx:
     """Authx is a fastapi application that provides a simple way to authenticate users.
     Using this application, you can easily create a user management system that allows users to register,
@@ -32,7 +30,6 @@ class authx:
         access_expiration: int,
         refresh_expiration: int,
     ) -> None:
-        # TODO: Fix Issue relate to OpenAPI
         self._access_cookie_name = access_cookie_name
         self._refresh_cookie_name = refresh_cookie_name
 
@@ -88,7 +85,7 @@ class Authentication(authx):
         debug: bool,
         base_url: str,
         site: str,
-        database_name: str,
+        database_backend: BaseDBBackend,
         callbacks: Iterable,
         access_cookie_name: str,
         refresh_cookie_name: str,
@@ -108,7 +105,6 @@ class Authentication(authx):
         self._debug = debug
         self._base_url = base_url
         self._site = site
-        self._database_name = database_name
         self._access_cookie_name = access_cookie_name
         self._refresh_cookie_name = refresh_cookie_name
         self._private_key = private_key
@@ -124,7 +120,7 @@ class Authentication(authx):
         self._social_providers = social_providers
         self._social_creds = social_creds
 
-        self._database_backend = MongoDBBackend(self._database_name)
+        self._database_backend = database_backend
         self._cache_backend = RedisBackend()
 
         self._auth_backend = JWTBackend(
@@ -199,9 +195,6 @@ class Authentication(authx):
     @property
     def search_router(self) -> APIRouter:
         return get_search_router(self._users_repo, self.admin_required)
-
-    def set_database(self, database_client: AsyncIOMotorClient) -> None:
-        self._database_backend.set_client(database_client)
 
     def set_cache(self, cache_client: Redis) -> None:
         self._cache_backend.set_client(cache_client)

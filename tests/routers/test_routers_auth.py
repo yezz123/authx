@@ -124,7 +124,6 @@ def test_refresh_access_token():
 
     response = test_client.post(url)
     assert response.status_code == 401
-    # TODO test_client doesn't react to response.delete_cookie
     test_client.cookies.set(REFRESH_COOKIE_NAME, REFRESH_TOKEN)
     response = test_client.post(url)
     assert response.status_code == 200

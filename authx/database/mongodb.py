@@ -7,14 +7,15 @@ from motor.motor_asyncio import (
 )
 from pymongo import ReturnDocument
 
+from authx.database import BaseDBBackend
 
-class MongoDBBackend:
+
+class MongoDBBackend(BaseDBBackend):
     """
     Setup Database for authx using MongoDB & Motor
     """
 
     def __init__(self, database_name: str = "test") -> None:
-        # TODO: Add support for multiple databases
         self._database_name = database_name
 
     def set_client(self, client: AsyncIOMotorClient) -> None:
