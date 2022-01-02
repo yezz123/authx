@@ -1,2 +1,2 @@
-authx
+authx==0.2.0
 starlette
