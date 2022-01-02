@@ -1,9 +1,7 @@
-from db import db
-from decouple import config
 from fastapi import APIRouter, Depends, FastAPI
+from starlette.config import Config
 
 from authx import Authentication, User
-from authx.database import MongoDBBackend, RedisBackend
 
 app = FastAPI(
     title="AuthX",
@@ -11,11 +9,13 @@ app = FastAPI(
     version="0.1.0",
 )
 
+config = Config(".env")
+
 auth = Authentication(
     debug=config("DEBUG", default=False, cast=bool),
     base_url=config("BASE_URL", default="http://localhost:8000"),
     site=config("SITE", default="authx"),
-    database_name=db,
+    database_backend=config("DATABASE_BACKEND", default="sqlite"),
     callbacks=[],
     access_cookie_name=config("ACCESS_COOKIE_NAME", default="access_token"),
     refresh_cookie_name=config("REFRESH_COOKIE_NAME", default="refresh_token"),
@@ -40,10 +40,6 @@ app.include_router(auth.auth_router, prefix="/api/auth", tags=["auth"])
 app.include_router(auth.password_router, prefix="/api/password", tags=["password"])
 app.include_router(auth.admin_router, prefix="/api/admin", tags=["admin"])
 app.include_router(auth.search_router, prefix="/api/search", tags=["search"])
-
-# Set MongoDB and Redis Cache
-auth.set_cache(RedisBackend())  # aioredis client
-auth.set_database(MongoDBBackend(database_name=db))  # motor client
 
 # Set Anonymous User
 @router.get("/anonym")
