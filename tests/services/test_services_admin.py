@@ -28,53 +28,53 @@ def admin_service_setup():
 
 
 @pytest.mark.asyncio
-async def test_get_blacklist(admin_service):
-    blacklist = await admin_service.get_blacklist()
+async def test_get_blacklist(admin_service_setup):
+    blacklist = await admin_service_setup.get_blacklist()
     assert blacklist == []
 
 
 @pytest.mark.asyncio
-async def test_toggle_blacklist(admin_service):
-    await admin_service.toggle_blacklist(1)
-    blacklist = await admin_service.get_blacklist()
+async def test_toggle_blacklist(admin_service_setup):
+    await admin_service_setup.toggle_blacklist(1)
+    blacklist = await admin_service_setup.get_blacklist()
     assert blacklist == [1]
 
 
 @pytest.mark.asyncio
-async def test_get_blackout(admin_service):
-    ts = await admin_service.get_blackout()
+async def test_get_blackout(admin_service_setup):
+    ts = await admin_service_setup.get_blackout()
     assert ts is None
 
 
 @pytest.mark.asyncio
-async def test_set_blackout(admin_service):
-    await admin_service.set_blackout(1)
-    ts = await admin_service.get_blackout()
+async def test_set_blackout(admin_service_setup):
+    await admin_service_setup.set_blackout(1)
+    ts = await admin_service_setup.get_blackout()
     assert ts == 1
 
 
 @pytest.mark.asyncio
-async def test_delete_blackout(admin_service):
-    await admin_service.set_blackout(1)
-    await admin_service.delete_blackout()
-    ts = await admin_service.get_blackout()
+async def test_delete_blackout(admin_service_setup):
+    await admin_service_setup.set_blackout(1)
+    await admin_service_setup.delete_blackout()
+    ts = await admin_service_setup.get_blackout()
     assert ts is None
 
 
 @pytest.mark.asyncio
-async def get_id_by_username(admin_service):
-    id = await admin_service.get_id_by_username("admin")
+async def get_id_by_username(admin_service_setup):
+    id = await admin_service_setup.get_id_by_username("admin")
     assert id == 1
 
 
 @pytest.mark.asyncio
-async def get_permissions_by_username(admin_service):
-    permissions = await admin_service.get_permissions_by_username("admin")
+async def get_permissions_by_username(admin_service_setup):
+    permissions = await admin_service_setup.get_permissions_by_username("admin")
     assert permissions == ["admin"]
 
 
 @pytest.mark.asyncio
-async def update_permissions(admin_service):
-    await admin_service.update_permissions("admin", ["admin", "user"])
-    permissions = await admin_service.get_permissions_by_username("admin")
+async def update_permissions(admin_service_setup):
+    await admin_service_setup.update_permissions("admin", ["admin", "user"])
+    permissions = await admin_service_setup.get_permissions_by_username("admin")
     assert permissions == ["admin", "user"]
