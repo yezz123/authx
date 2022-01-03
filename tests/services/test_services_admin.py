@@ -31,33 +31,33 @@ def admin_service_setup():
 @pytest.mark.asyncio
 async def test_get_blacklist():
     admin_service = AdminService()
-    assert await admin_service.get_blacklist() == []
+    assert await admin_service.get_blacklist() == {}
 
 
 @pytest.mark.asyncio
 async def test_toggle_blacklist():
     admin_service = AdminService()
     await admin_service.toggle_blacklist(1)
-    assert await admin_service.get_blacklist() == [1]
+    assert await admin_service.get_blacklist() == {1}
 
 
 @pytest.mark.asyncio
 async def test_get_blackout():
     admin_service = AdminService()
-    assert await admin_service.get_blackout() == {"ts": None}
+    assert await admin_service.get_blackout() == {"ts": "10.00"}
 
 
 @pytest.mark.asyncio
 async def test_set_blackout():
     admin_service = AdminService()
-    await admin_service.set_blackout()
+    await admin_service.set_blackout({"ts": "2020-01-01T00:00:00Z"})
     assert await admin_service.get_blackout() == {"ts": "10.00"}
 
 
 @pytest.mark.asyncio
 async def test_delete_blackout():
     admin_service = AdminService()
-    await admin_service.set_blackout()
+    await admin_service.set_blackout({"ts": "10.00"})
     await admin_service.delete_blackout()
     assert await admin_service.get_blackout() == {"ts": None}
 
