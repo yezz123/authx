@@ -1,4 +1,5 @@
 import pytest
+from fastapi.exceptions import HTTPException
 
 from authx.api import UsersRepo
 from authx.services import AdminService
@@ -29,52 +30,61 @@ def admin_service_setup():
 
 @pytest.mark.asyncio
 async def test_get_blacklist():
-    blacklist = await admin_service_setup.get_blacklist()
-    assert blacklist == []
+    admin_service = AdminService()
+    assert await admin_service.get_blacklist() == []
 
 
 @pytest.mark.asyncio
 async def test_toggle_blacklist():
-    await admin_service_setup.toggle_blacklist(1)
-    blacklist = await admin_service_setup.get_blacklist()
-    assert blacklist == [1]
+    admin_service = AdminService()
+    await admin_service.toggle_blacklist(1)
+    assert await admin_service.get_blacklist() == [1]
 
 
 @pytest.mark.asyncio
 async def test_get_blackout():
-    ts = await admin_service_setup.get_blackout()
-    assert ts is None
+    admin_service = AdminService()
+    assert await admin_service.get_blackout() == {"ts": None}
 
 
 @pytest.mark.asyncio
 async def test_set_blackout():
-    await admin_service_setup.set_blackout(1)
-    ts = await admin_service_setup.get_blackout()
-    assert ts == 1
+    admin_service = AdminService()
+    await admin_service.set_blackout()
+    assert await admin_service.get_blackout() == {"ts": "10.00"}
 
 
 @pytest.mark.asyncio
 async def test_delete_blackout():
-    await admin_service_setup.set_blackout(1)
-    await admin_service_setup.delete_blackout()
-    ts = await admin_service_setup.get_blackout()
-    assert ts is None
+    admin_service = AdminService()
+    await admin_service.set_blackout()
+    await admin_service.delete_blackout()
+    assert await admin_service.get_blackout() == {"ts": None}
 
 
 @pytest.mark.asyncio
 async def get_id_by_username():
-    id = await admin_service_setup.get_id_by_username("admin")
-    assert id == 1
+    admin_service = AdminService()
+    assert await admin_service.get_id_by_username("admin") == {"id": 1}
 
 
 @pytest.mark.asyncio
 async def get_permissions_by_username():
-    permissions = await admin_service_setup.get_permissions_by_username("admin")
-    assert permissions == ["admin"]
+    admin_service = AdminService()
+    assert await admin_service.get_permissions(1) == {}
 
 
 @pytest.mark.asyncio
 async def update_permissions():
-    await admin_service_setup.update_permissions("admin", ["admin", "user"])
-    permissions = await admin_service_setup.get_permissions_by_username("admin")
-    assert permissions == ["admin", "user"]
+    admin_service = AdminService()
+    await admin_service.update_permissions(1, {"action": "ADD", "payload": "test"})
+    assert await admin_service.get_permissions(1) == {"test": True}
+
+    await admin_service.update_permissions(1, {"action": "REMOVE", "payload": "test"})
+    assert await admin_service.get_permissions(1) == {}
+
+    await admin_service.update_permissions(1, {"action": "CLEAR"})
+    assert await admin_service.get_permissions(1) == {}
+
+    with pytest.raises(HTTPException):
+        await admin_service.update_permissions(1, {"action": "WRONG"})
