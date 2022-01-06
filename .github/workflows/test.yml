@@ -40,6 +40,6 @@ jobs:
       - name: Install Testing Tools
         run: flit install --deps production --extras test
       - name: Test
-        run: |
-          pytest --cov=authx/
-          codecov
+        run: bash scripts/test.sh
+      - name: Upload coverage
+        uses: codecov/codecov-action@v1
