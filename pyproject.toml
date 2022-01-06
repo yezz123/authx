@@ -1,0 +1,82 @@
+[build-system]
+requires = ["flit"]
+build-backend = "flit.buildapi"
+
+[tool.flit.metadata]
+module = "authx"
+dist-name = "authx"
+author = "Yasser Tahiri"
+author-email = "yasserth19@gmail.com"
+home-page = "https://github.com/yezz123/authx"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Development Status :: 4 - Beta",
+    "Framework :: FastAPI",
+    "Framework :: AsyncIO",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Internet :: WWW/HTTP :: Session",
+    "Typing :: Typed",
+]
+description-file = "README.md"
+requires-python = ">=3.7"
+requires = [
+    "fastapi >=0.65.2,<0.71.0",
+    "passlib ==1.7.4",
+    "bcrypt ==3.2.0",
+    "email-validator >=1.1.0,<1.2",
+    "pyjwt ==2.3.0",
+    "cryptography==36.0.1",
+    "httpx==0.21.1",
+    "itsdangerous == 2.0.1",
+    "aiosmtplib == 1.1.6",
+    "pydantic==1.9.0",
+]
+
+[tool.flit.metadata.requires-extra]
+lint = [
+    "pre-commit==2.16.0",
+]
+test = [
+    "pytest==6.2.5",
+    "pytest-asyncio == 0.16.0",
+    "requests==2.27.0",
+    "uvicorn==0.16.0",
+    "asynctest==0.13.0",
+    "codecov==2.1.12",
+    "pytest-cov==3.0.0",
+    "SQLAlchemy==1.4.29",
+    "uvloop==0.16.0",
+    "websockets==10.1",
+]
+docs = [
+    "mkdocs == 1.2.3",
+    "mkdocs-material==8.1.4",
+    "mkdocs-markdownextradata-plugin==0.2.5",
+    "mkdocs-mermaid2-plugin==0.5.2",
+    "markdown-include==0.6.0",
+    "pymdown-extensions==9.1",
+    "mdx-include==1.4.1",
+]
+encodedb = [
+    "databases == 0.5.3",
+]
+mongo = [
+    "motor == 2.5.1",
+]
+oauth = [
+    "Authlib==0.15.5",
+
+]
+redis = [
+    "aioredis >=2.0.1,<2.1.0",
+]
+
+[tool.flit.metadata.urls]
+Documentation = "https://authx.yezz.codes/"

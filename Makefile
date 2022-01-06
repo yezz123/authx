@@ -19,9 +19,6 @@ lint:
 mkdocs:
 	mkdocs serve --livereload
 
-install:
-	pip install setuptools wheel twine && python setup.py sdist bdist_wheel
-
 clean:
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
@@ -33,12 +30,3 @@ clean-test:
 	rm -f .coverage
 	rm -fr htmlcov/
 	rm -fr .pytest_cache
-
-bumpversion-major:
-	bumpversion major --allow-dirty
-
-bumpversion-minor:
-	bumpversion minor
-
-bumpversion-patch:
-	bumpversion patch

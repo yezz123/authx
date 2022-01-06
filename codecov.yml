@@ -1,0 +1,7 @@
+ignore:
+  - "authx/core/config.py"
+  - "authx/main.py"
+  - "authx/utils/**"
+  - "authx/errors/**"
+  - "authx/database/**"
+  - "authx/services/**"
