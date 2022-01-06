@@ -32,13 +32,9 @@ jobs:
       - name: Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: flit install --symlink
-      - name: Install Linting Tools
-        run: flit install --deps production --extras lint
       - name: Lint
         if: ${{ matrix.python-version != '3.9' }}
         run: pre-commit run --all-files
-      - name: Install Testing Tools
-        run: flit install --deps production --extras test
       - name: Test
         run: bash scripts/test.sh
       - name: Upload coverage

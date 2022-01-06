@@ -3,5 +3,4 @@
 set -e
 set -x
 
-export PYTHONPATH=./authx
 pytest --cov=authx --cov=tests
