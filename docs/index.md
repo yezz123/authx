@@ -6,14 +6,13 @@
     <em>Ready-to-use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
 </p>
 
-[![Test](https://github.com/yezz123/authx/actions/workflows/build.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/build.yml)
+[![Test](https://github.com/yezz123/authx/actions/workflows/test.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
-[![PyPI version](https://badge.fury.io/py/authx.svg)](https://badge.fury.io/py/authx)
+[![PyPI](https://badge.fury.io/py/authx.svg)](https://badge.fury.io/py/authx)
 [![Downloads](https://pepy.tech/badge/authx)](https://pepy.tech/project/authx)
-[![Lang](https://img.shields.io/badge/Language-Python-green?style)](https://www.python.org/)
 [![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
 [![Pypi](https://img.shields.io/pypi/pyversions/AuthX.svg?color=%2334D058)](https://pypi.org/project/AuthX)
-
+<!--  -->
 <a href="https://www.producthunt.com/posts/authx?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-authx" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=318189&theme=light" alt="AuthX - A FastAPI package for Auth made by a human not an AI | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 <a href="https://www.buymeacoffee.com/tahiri" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
@@ -27,30 +26,31 @@
 
 Add a Fully registration and authentication or authorization system to your [FastAPI](https://fastapi.tiangolo.com/) project. **AuthX** is designed to be as customizable and adaptable as possible.
 
-__Note__: This is a **beta** version of AuthX.
-
 ## Features
 
-- Support Python 3.8+.
-- Fully OpenAPI schema support.
-- Extensible base user model.
-- Ready-to-use register, login, reset password and verify e-mail routes.
-- Ready-to-use Social login and Oauth2 routes. (now with Google, Facebook)
-    - Soon with Microsoft, Twitter, Github, etc.
-    - Ready-to-use social OAuth2 login flow
-- Dependency callable to inject current user into route
-- Pluggable password validation
-    - Using Captcha Service.
-- Using Email Service. (SMTP)
-- Extensible Error Handling
-- High level API to manage users, roles and permissions
-- Using Redis as a session store & cache.
-- Customizable database backend:
-    - MongoDB async backend included thanks to [mongodb/motor](https://github.com/mongodb/motor)
-- Multiple authentication strategies:
-    - JWT authentication backend included
-    - Cookie based authentication (coming soon)
-- Provide a Docstring for each class and function.
+- [x] Support Python 3.8+.
+- [x] Extensible base user model.
+- [x] Ready-to-use register, login, reset password and verify e-mail routes.
+- [x] Ready-to-use Social login and Oauth2 routes.
+    - [X] Full Configuration and customization.
+    - [x] Ready-to-use social OAuth2 login flow.
+- [x] Middleware Support for Oauth2 using `Authlib` and Starlette.
+- [x] Dependency callable to inject current user in route.
+- [x] Pluggable password validation
+    - [x] Using Captcha Service.
+    - [x] Implements the `HMAC` algorithm And `Hashlib` library.
+- [x] Using Email Service. (SMTP)
+- [x] Extensible Error Handling
+- [x] High level API to manage users, roles and permissions
+- [x] Using Redis as a session store & cache.
+- [x] Customizable database backend:
+    - [x] MongoDB async backend included thanks to [mongodb/motor](https://github.com/mongodb/motor)
+    - [x] SQLAlchemy backend included thanks to [Encode/Databases](https://github.com/encode/databases)
+- [x] Multiple customizable authentication backend:
+    - [x] JWT authentication backend included
+    - [x] Cookie authentication backend included
+- [x] Full OpenAPI schema support, even with several authentication backend.
+- [x] Provide a Docstring for each class and function.
 
 ## Project using
 
@@ -60,13 +60,13 @@ __Note__: This is a **beta** version of AuthX.
 
 ### Startup
 
-```py hl_lines="4 18-19"
+```py hl_lines="4 7 18"
 {!src/main.py!}
 ```
 
 ### Dependency injections
 
-```py hl_lines="1 3 7 22-24 28-30 34-36"
+```py hl_lines="1 3 8 22-24 28-30 34-36"
 {!src/main.py!}
 ```
 
