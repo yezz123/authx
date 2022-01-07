@@ -4,9 +4,10 @@ from aioredis import Redis
 from fastapi import APIRouter, HTTPException, Request
 
 from authx.api import UsersRepo
+from authx.cache import RedisBackend
 from authx.core.jwt import JWTBackend
 from authx.core.user import User
-from authx.database import BaseDBBackend, RedisBackend
+from authx.database import BaseDBBackend
 from authx.routers import (
     get_admin_router,
     get_auth_router,
