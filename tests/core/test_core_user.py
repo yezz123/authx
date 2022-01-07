@@ -1,7 +1,6 @@
 import pytest
 
-from authx.core.jwt import JWTBackend
-from authx.core.user import User
+from authx import JWTBackend, User
 from tests.utils import MockCacheBackend, private_key, public_key
 
 jwt_backend = JWTBackend(MockCacheBackend(), private_key, public_key, 60, 60 * 10)

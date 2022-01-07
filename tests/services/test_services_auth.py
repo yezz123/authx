@@ -3,8 +3,7 @@ from unittest import mock
 import pytest
 from fastapi import HTTPException
 
-from authx.api import UsersRepo
-from authx.services import AuthService
+from authx import AuthService, UsersRepo
 from authx.utils.strings import create_random_string, hash_string
 from tests.utils import (
     MockAuthBackend,

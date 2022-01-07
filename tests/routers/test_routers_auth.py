@@ -3,7 +3,7 @@ from unittest import mock
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from authx.routers import get_auth_router
+from authx import get_auth_router
 from tests.utils import (
     ACCESS_COOKIE_NAME,
     REFRESH_COOKIE_NAME,
