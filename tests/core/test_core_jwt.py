@@ -2,7 +2,7 @@ from datetime import datetime
 
 import pytest
 
-from authx.core.jwt import JWTBackend
+from authx import JWTBackend
 from tests.utils import MockCacheBackend, private_key, public_key
 
 jwt_backend = JWTBackend(MockCacheBackend(), private_key, public_key, 60, 60 * 10)

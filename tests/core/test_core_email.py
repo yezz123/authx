@@ -2,7 +2,7 @@ from unittest import mock
 
 import pytest
 
-from authx.core.email import EmailClient
+from authx import EmailClient
 
 
 @pytest.mark.asyncio

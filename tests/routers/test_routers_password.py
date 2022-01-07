@@ -3,7 +3,7 @@ from unittest import mock
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from authx.routers import get_password_router
+from authx import get_password_router
 from tests.utils import (
     MockAuthBackend,
     mock_get_authenticated_user,
