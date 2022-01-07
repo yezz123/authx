@@ -18,13 +18,15 @@
 
 ---
 
-**Source Code**: <https://github.com/yezz123/AuthX>
+**Source Code**: <https://github.com/yezz123/authx>
 
 **Get Started**: <https://authx.yezz.codes/>
 
 ---
 
-Add a Fully registration and authentication or authorization system to your [FastAPI](https://fastapi.tiangolo.com/) project. **AuthX** is designed to be as customizable and adaptable as possible.
+Add a Fully registration and authentication or authorization system to your [FastAPI](https://fastapi.tiangolo.com/) project. **Authx** is designed to be as customizable and adaptable as possible.
+
+Authx is a fast, flexible and easy to use authentication and authorization library for FastAPI. It is built on top of [FastAPI](https://fastapi.tiangolo.com/) and [starlette](https://www.starlette.io/).
 
 ## Features
 
@@ -54,32 +56,26 @@ Add a Fully registration and authentication or authorization system to your [Fas
 
 ## Project using
 
-```py hl_lines="1 3 6 7 11-15"
-{!src/main.py!}
-```
-
 ### Startup
 
-```py hl_lines="4 7 18"
+```py hl_lines="1 3 5-7 10-14 17"
 {!src/main.py!}
 ```
 
 ### Dependency injections
 
-```py hl_lines="1 3 8 22-24 28-30 34-36"
+```py hl_lines="20-22 26-28 32-34"
 {!src/main.py!}
 ```
 
 ### Dependency injections only
 
 ```python
-from authx import authx
-from authx.database import RedisBackend
+from authx import authx, RedisBackend
 
 auth = authx()
 
-# startup
-auth.set_cache(RedisBackend) # aioredis
+auth.set_cache(RedisBackend)
 ```
 
 ## License

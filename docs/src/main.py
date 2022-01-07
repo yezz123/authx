@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, FastAPI
 
-from authx import Authentication, User
-from authx.database import BaseDBBackend, RedisBackend
+from authx import Authentication, BaseDBBackend, RedisBackend, User
 
 app = FastAPI()
 auth = Authentication(database_backend=BaseDBBackend())
