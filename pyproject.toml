@@ -72,7 +72,7 @@ mongo = [
 ]
 oauth2 = [
     "Authlib==0.15.5",
-    "starlette==0.17.1",
+    "starlette >=0.14.02,<0.16.0",
 
 ]
 redis = [
