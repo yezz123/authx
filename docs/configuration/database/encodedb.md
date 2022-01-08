@@ -33,7 +33,7 @@ auth = Authentication(
 )
 ```
 
-Here we Present a simple PostgreSQL Database example on how to use the `EncodeDBBackend`.
+Here we present a simple PostgreSQL database example on how to use the `EncodeDBBackend`.
 
 ### Create/Update/Delete Functions
 
