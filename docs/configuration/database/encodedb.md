@@ -8,7 +8,7 @@ Databases is suitable for integrating against any async Web framework, such as `
 
 You could check the [documentation](https://www.encode.io/databases/) for more information.
 
-- Check that you Install requirements:
+- Check that you install requirements:
 
 ```shell
 pip install authx[encodedb]
