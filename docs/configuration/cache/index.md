@@ -23,6 +23,5 @@ redis = aioredis.from_url("redis://localhost/1")
 auth.set_cache(RedisBackend=RedisBackend(redis=redis))
 ```
 
-Redis cache is a good choice for caching, that why we need to use it to store the token or users data some configuration relate to cache.
 
 - [Operations Provided by Redis](redis.md)
