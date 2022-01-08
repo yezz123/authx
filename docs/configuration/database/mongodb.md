@@ -6,7 +6,7 @@ As we know that the database provider is the most important part of the configur
 
 using [MongoDB/Motor](https://motor.readthedocs.io/en/stable/) as an Asynchronous Driver.
 
-First take care that you installed the driver, and you have the driver installed in your environment.
+First, make sure that you installed the driver, and you have the driver installed in your environment.
 
 ```shell
 pip install authx[mongodb]
