@@ -11,7 +11,7 @@ Right Now we Support the following Databases:
 - [x] NoSQL Databases:
     - [x] MongoDB
 
-Maybe in the future we will add more Databases, but right now we support only some most common Databases.
+In the future, we will add more databases, but right now we support only the most common ones.
 
 Even that Most Of Functionality work also without using Database at all. `BaseDBBackend`.
 
