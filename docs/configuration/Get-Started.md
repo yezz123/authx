@@ -8,9 +8,9 @@ Pydantic models represent the data structure of a user. Base classes are provide
 
 ## Database
 
-AuthX is compatible with provides the necessary tools to work with SQL databases thanks to the [Encode/Databases](https://www.encode.io/databases/) library.
+AuthX is compatible with MongoDB (other ORMs & providers coming soon). To build the interface between the database tool and the library, we provide a database adapter class that you need to instantiate and configure.
 
-We provide a ready-to-use MongoDB backend thanks to [mongodb/motor](https://motor.readthedocs.io/).
+AuthX is compatible and extendible with the necessary tools to work with SQL databases thanks to the [Encode/Databases](https://www.encode.io/databases/) library.
 
 ➡️ [Database](database/index.md)
 
