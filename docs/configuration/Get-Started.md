@@ -34,7 +34,7 @@ Helping Developers to create, read, update and delete data is a common task. Aut
 
 ## Services
 
-Styling and Configuring your API is a very important part of the development process. We provide a Strong CRUD Functional API to manage your API configuration.
+Designing and configuring your API is a very important part of the development process. We provide a strong CRUD functional API to manage your API.
 
 ➡️ [Services](services/index.md)
 
