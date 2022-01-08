@@ -19,7 +19,7 @@ Even that most of the functionality work also without using a database at all. `
 
 All the operations are async functions, and they are going to return a boolean, and the boolean is going to be True if the operation was successful, and False if not.
 
-Thats why when we will be using the Normal Dependency Injection, we will add only the `BaseDBBackend` as a dependency, and we will use the `Database` as a dependency.
+That's why when we will be using the normal dependency injection (DI), we will add only the `BaseDBBackend` as a dependency, and we will use the `Database`.
 
 ```py
 from fastapi import FastAPI
