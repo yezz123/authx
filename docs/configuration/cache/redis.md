@@ -8,7 +8,7 @@ In Python we use [`aioredis`](https://aioredis.readthedocs.io/en/stable/) librar
 
 ### Redis CRUD Operations
 
-Redis CRUD is a simple CRUD operation, we can use it to store the data in Redis. we need to create some methods. (Get Key Value, Set Key Value, Delete Key, etc.)
+Redis CRUD is a simple CRUD operation, we can use it to store the data in Redis. we need to create some methods. (Get Key-Value, Set Key-Value, Delete Key, etc.)
 
 ```py
 async def get(self, key: str) -> str:
