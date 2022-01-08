@@ -2,7 +2,7 @@
 
 ## Models
 
-Pydantic models representing the data structure of a user. Base classes are provided with the required fields to make authentication work. You should sub-class each of them and add your own fields there.
+Pydantic models represent the data structure of a user. Base classes are provided with the required fields to make authentication work. You should sub-class each of them and add your own fields there.
 
 ➡️ [Models](models/index.md)
 
