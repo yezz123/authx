@@ -13,7 +13,7 @@ Right Now we Support the following Databases:
 
 In the future, we will add more databases, but right now we support only the most common ones.
 
-Even that Most Of Functionality work also without using Database at all. `BaseDBBackend`.
+Even that most of the functionality work also without using a database at all. `BaseDBBackend`.
 
 ## Operations
 
