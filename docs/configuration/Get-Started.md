@@ -16,7 +16,7 @@ We provide a ready-to-use MongoDB backend thanks to [mongodb/motor](https://moto
 
 ## Cache
 
-AuthX provide Redis cache, is a fast and reliable cache provider that can be used to cache the authentication results, and to store the user data. This one is based on `aioredis` a pure Python asynchronous Redis client.
+AuthX provides Redis cache, a fast and reliable cache provider that can be used to cache the authentication results and store the user data. This one is based on `aioredis` a pure Python asynchronous Redis client.
 
 ➡️ [Cache](cache/index.md)
 
