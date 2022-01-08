@@ -2,7 +2,7 @@
 
 Encode Database is a database that gives you simple `asyncio` support for a range of databases.
 
-It allows you to make queries using the powerful `SQLAlchemy Core` expression language, and provides support for `PostgreSQL`, `MySQL`, and `SQLite`.
+It allows you to make queries using the powerful `SQLAlchemy Core` expression language and provides support for `PostgreSQL`, `MySQL`, and `SQLite`.
 
 Databases is suitable for integrating against any async Web framework, such as `Starlette`, `Sanic`, `Responder`, `Quart`, `aiohttp`, `Tornado`, or `FastAPI`.
 
