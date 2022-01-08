@@ -57,34 +57,39 @@ extra_javascript:
 nav:
   - About: index.md
   - installation.md
+  - configuration/Get-Started.md
   - Configuration:
-    - configuration/Get-Started.md
     - Models:
       - Introduction: configuration/models/index.md
       - configuration/models/base.md
       - configuration/models/social.md
       - configuration/models/properties.md
-    - Database Provider:
+    - Database:
       - Introduction: configuration/database/index.md
-      - configuration/database/functions.md
-    - Cache Provider:
+      - configuration/database/encodedb.md
+      - configuration/database/mongodb.md
+    - Cache:
       - Introduction: configuration/cache/index.md
-      - configuration/cache/functions.md
-    - Authentication backends:
-      - Introduction: configuration/auth/index.md
-      - configuration/auth/jwt.md
-    - Social Authentication:
-      - Introduction: configuration/social/index.md
-      - configuration/social/facebook.md
-      - configuration/social/google.md
-      - configuration/social/addons.md
-    - UserManager Provider:
-      - Introduction: configuration/core/index.md
-      - configuration/core/user_manager.md
+      - configuration/cache/redis.md
+    - Security:
+      - Introduction: configuration/security/index.md
+      - configuration/security/jwt.md
+      - configuration/security/email.md
+      - configuration/security/captcha.md
+      - configuration/security/hashing.md
+    - Operations:
+      - Introduction: configuration/crud/index.md
+    - Services:
+      - Introduction: configuration/services/index.md
+      - configuration/services/authentication.md
+      - configuration/services/admin.md
+      - configuration/services/password.md
+      - configuration/services/social-authentication.md
+      - configuration/services/search.md
     - Routers:
       - Introduction: configuration/routers/index.md
       - configuration/routers/authentication.md
-      - configuration/routers/administration.md
+      - configuration/routers/admin.md
       - configuration/routers/password.md
       - configuration/routers/social.md
       - configuration/routers/search.md

@@ -1,30 +1,34 @@
-# MongoDB Provider
+# MongoDB
 
-## Initial and setup class
+## Initialize and setup
 
 As we know that the database provider is the most important part of the configuration, we will start with the initial and setup class.
 
 using [MongoDB/Motor](https://motor.readthedocs.io/en/stable/) as an Asynchronous Driver.
 
+First, make sure that you installed the driver, and you have the driver installed in your environment.
+
+```shell
+pip install authx[mongodb]
+```
+
+- Then Setup the database, and we will use the `MongoDBBackend` as a dependency.
+
 ```py
+from authx import Authentication, MongoDBBackend
+import motor.motor_asyncio
+import asyncio
 
-class MongoDBBackend:
-    def __init__(self, database_name: str = "test") -> None:
-        self._database_name = database_name
-
-    def set_client(self, client: AsyncIOMotorClient) -> None:
-        self._client = client
-        self.init()
-
-    def init(self) -> None:
-        self._db: AsyncIOMotorDatabase = self._client[self._database_name]
-        self._users: AsyncIOMotorCollection = self._db["users"]
-        self._email_confirmations: AsyncIOMotorCollection = self._db[
-            "email_confirmations"
-        ]
-        self._counters: AsyncIOMotorCollection = self._db["counters"]
-
-        self._settings: AsyncIOMotorCollection = self._db["settings"]
+auth = Authentication(
+    backend=MongoDBBackend(
+        client=motor.motor_asyncio.AsyncIOMotorClient(
+            'mongodb://localhost:27017',
+            io_loop=asyncio.get_event_loop()
+        ),
+        database='authx',
+        collection='users'
+    )
+)
 ```
 
 Here we are initializing the database, and assigning the collections to the database, also adding a counter collection, with a default settings.
@@ -32,6 +36,8 @@ Here we are initializing the database, and assigning the collections to the data
 ### Create/Update/Delete Functions
 
 Here we are creating the functions that will be used to create and update the database,based on the request.
+
+- Create:
 
 ```py
     async def create(self, obj: dict) -> int:
@@ -47,6 +53,8 @@ Here we give the user a unique id, and then we insert the user into the database
 
 For the update function, we are using the same logic, but we are updating the user instead of inserting it, as an argument, we give the ID, and the object, this gonna return a boolean.
 
+- Update:
+
 ```py
 async def update(self, id: int, obj: dict) -> bool:
         res = await self._users.update_one({"id": id}, {"$set": obj})
@@ -54,6 +62,8 @@ async def update(self, id: int, obj: dict) -> bool:
 ```
 
 To Delete a user we just give the ID as an argument, and return a boolean.
+
+- Delete:
 
 ```py
 async def delete(self, id: int) -> bool:

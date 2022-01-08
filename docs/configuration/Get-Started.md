@@ -2,50 +2,50 @@
 
 ## Models
 
-Pydantic models representing the data structure of a user. Base classes are provided with the required fields to make authentication work. You should sub-class each of them and add your own fields there.
+Pydantic models represent the data structure of a user. Base classes are provided with the required fields to make authentication work. You should sub-class each of them and add your own fields there.
 
-➡️ [Configure the Models](models/index.md)
+➡️ [Models](models/index.md)
 
-## Database Provider
+## Database
 
-AuthX is compatible with MongoDB (other ORM & provider Soon...). To build the interface between the database tool and the library, we provide database adapter class that you need to instantiate and configure.
+AuthX is compatible with MongoDB (other ORMs & providers coming soon). To build the interface between the database tool and the library, we provide a database adapter class that you need to instantiate and configure.
 
-➡️ [Configure the Database](database/index.md)
+AuthX is compatible and extendible with the necessary tools to work with SQL databases thanks to the [Encode/Databases](https://www.encode.io/databases/) library.
 
-## Cache Provider
+➡️ [Database](database/index.md)
 
-AuthX provide Redis cache, is a fast and reliable cache provider that can be used to cache the authentication results, and to store the user data. This one is based on `aioredis` a pure Python asynchronous Redis client.
+## Cache
 
-➡️ [Configure the Cache](cache/index.md)
+AuthX provides Redis cache, a fast and reliable cache provider that can be used to cache the authentication results and store the user data. This one is based on `aioredis` a pure Python asynchronous Redis client.
 
-## Authentication Provider
+➡️ [Cache](cache/index.md)
 
-Authentication backends define the way users sessions are managed in your app, like access tokens or cookies, and Admin Manager.
+## Security
 
-➡️ [Configure the Authentication](auth/index.md)
+AuthX provides strong Utils to work with while developing your API. JWT is a simple and secure way to authenticate users; Captcha is a simple way to protect your API from bots;  `Hmac` and `Hashlib` to generate a strong password hash.
 
-## Social Authentication Provider
+➡️ [Security](security/index.md)
 
-Social authentication backends define the way users are authenticated with social networks like Google, Facebook, etc.
+## CRUD
 
-➡️ [Configure the Social Authentication](social/index.md)
+Helping Developers to create, read, update and delete data is a common task. AuthX provides an Extensible CRUD API Helping you integrate it with your existing code.
 
-## UserManager Provider
+➡️ [CRUD](crud/index.md)
 
-The UserManager object bears most of the logic of AuthX: registration, verification, password reset, Captcha... We provide a `BaseUserManager` with this common logic; which you should overload to define how to validate passwords or handle events.
+## Services
 
-This `UserManager` object should be provided through a `FastAPI` dependency.
+Designing and configuring your API is a very important part of the development process. We provide a strong CRUD functional API to manage your API.
 
-➡️ [Configure the UserManager](core/index.md)
+➡️ [Services](services/index.md)
 
-## AuthX & Routers
+## Routers
 
 AuthX object is the main class from which you'll be able to generate routers for classic routes like registration, login or logout but also get the `current_user` dependency factory to inject the authenticated user in your own routes.
 
-➡️ [Configure the Routers](routers/index.md)
+➡️ [Routers](routers/index.md)
 
 ## Middleware
 
 Supporting OAuth2 is one of the most important feature of AuthX. We provide a middleware to handle the OAuth2 flow for both FastAPI app and Starlette app that could help you to integrate AuthX with your existing app.
 
-➡️ [Configure the OAuth2 Middleware](middlewares/index.md)
+➡️ [Middleware](middleware/index.md)

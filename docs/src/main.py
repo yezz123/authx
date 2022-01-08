@@ -1,10 +1,9 @@
 from fastapi import APIRouter, Depends, FastAPI
 
-from authx import Authentication, User
-from authx.database import MongoDBBackend, RedisBackend
+from authx import Authentication, BaseDBBackend, RedisBackend, User
 
 app = FastAPI()
-auth = Authentication()
+auth = Authentication(database_backend=BaseDBBackend())
 router = APIRouter()
 
 # Set up Pre-configured Routes
@@ -14,9 +13,8 @@ app.include_router(auth.password_router, prefix="/api/users")
 app.include_router(auth.admin_router, prefix="/api/users")
 app.include_router(auth.search_router, prefix="/api/users")
 
-# Set MongoDB and Redis Cache
-auth.set_cache(RedisBackend)  # aioredis client
-auth.set_database(MongoDBBackend)  # motor client
+# Set Redis Cache
+auth.set_cache(RedisBackend)
 
 # Set Anonymous User
 @router.get("/anonym")

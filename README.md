@@ -6,13 +6,11 @@
     <em>Ready-to-use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
 </p>
 
-[![Test](https://github.com/yezz123/authx/actions/workflows/build.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/build.yml)
+[![Test](https://github.com/yezz123/authx/actions/workflows/test.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
-[![PyPI version](https://badge.fury.io/py/authx.svg)](https://badge.fury.io/py/authx)
+[![PyPI](https://badge.fury.io/py/authx.svg)](https://badge.fury.io/py/authx)
 [![Downloads](https://pepy.tech/badge/authx)](https://pepy.tech/project/authx)
-[![Language](https://img.shields.io/badge/Language-Python-green?style)](https://github.com/yezz123)
 [![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
-[![Star Badge](https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flatcolor=BC4E99)](https://github.com/yezz123/AuthX)
 [![Pypi](https://img.shields.io/pypi/pyversions/AuthX.svg?color=%2334D058)](https://pypi.org/project/AuthX)
 
 ---
@@ -25,122 +23,79 @@
 
 Add a Fully registration and authentication or authorization system to your [FastAPI](https://fastapi.tiangolo.com/) project. **AuthX** is designed to be as customizable and adaptable as possible.
 
-__Note__: This is a **beta** version of AuthX.
-
 ## Features 🔧
 
-- Support Python 3.8+.
-- Extensible base user model.
-- Ready-to-use register, login, reset password and verify e-mail routes.
-- Ready-to-use Social login and Oauth2 routes. (now with Google, Facebook)
-    - Soon with Microsoft, Twitter, Github, etc.
-    - Ready-to-use social OAuth2 login flow
-- Dependency callable to inject current user in route
-- Pluggable password validation
-    - Using Captcha Service.
-- Using Email Service. (SMTP)
-- Extensible Error Handling
-- High level API to manage users, roles and permissions
-- Using Redis as a session store & cache.
-- Customizable database backend:
-    - MongoDB async backend included thanks to [mongodb/motor](https://github.com/mongodb/motor)
-- Multiple customizable authentication backend:
-    - JWT authentication backend included
-    - Soon to be included Cookie authentication backend
-- Full OpenAPI schema support, even with several authentication backend.
-- Provide a Docstring for each class and function.
-- Middleware Support for Oauth2 using `Authlib` and Starlette.
+- [x] Support Python 3.8+.
+- [x] Extensible base user model.
+- [x] Ready-to-use register, login, reset password and verify e-mail routes.
+- [x] Ready-to-use Social login and Oauth2 routes.
+  - [X] Full Configuration and customization.
+  - [x] Ready-to-use social OAuth2 login flow.
+- [x] Middleware Support for Oauth2 using `Authlib` and Starlette.
+- [x] Dependency callable to inject current user in route.
+- [x] Pluggable password validation
+  - [x] Using Captcha Service.
+  - [x] Implements the `HMAC` algorithm And `Hashlib` library.
+- [x] Using Email Service. (SMTP)
+- [x] Extensible Error Handling
+- [x] High level API to manage users, roles and permissions
+- [x] Using Redis as a session store & cache.
+- [x] Customizable database backend:
+  - [x] MongoDB async backend included thanks to [mongodb/motor](https://github.com/mongodb/motor)
+  - [x] SQLAlchemy backend included thanks to [Encode/Databases](https://github.com/encode/databases)
+- [x] Multiple customizable authentication backend:
+  - [x] JWT authentication backend included
+  - [x] Cookie authentication backend included
+- [x] Full OpenAPI schema support, even with several authentication backend.
+- [x] Provide a Docstring for each class and function.
 
 __Note:__ Check [Release Notes](https://authx.yezz.codes/release/).
 
 ## Project using 🚀
 
 ```python
-from fastapi import FastAPI
-from authx import Authentication
+from fastapi import APIRouter, Depends, FastAPI
+from authx import Authentication, User, BaseDBBackend, RedisBackend
 
 app = FastAPI()
-auth = Authentication()
-
-# Define your routes here
-app.include_router(auth.auth_router, prefix="/api/users")
-app.include_router(auth.social_router, prefix="/auth")
-app.include_router(auth.password_router, prefix="/api/users")
-app.include_router(auth.admin_router, prefix="/api/users")
-app.include_router(auth.search_router, prefix="/api/users")
-
-```
-
-### Startup 🏁
-
-```python
-from fastapi import FastAPI
-from authx import Authentication
-from authx.database import MongoDBBackend, RedisBackend
-
-app = FastAPI()
-auth = Authentication()
-
-app.include_router(auth.auth_router, prefix="/api/users")
-app.include_router(auth.social_router, prefix="/auth")
-app.include_router(auth.password_router, prefix="/api/users")
-app.include_router(auth.admin_router, prefix="/api/users")
-app.include_router(auth.search_router, prefix="/api/users")
-
-# Set MongoDB and Redis Cache
-auth.set_cache(RedisBackend) # aioredis client
-auth.set_database(MongoDBBackend) # motor client
-```
-
-### Dependency injections 📦
-
-```python
-from fastapi import FastAPI,APIRouter, Depends
-from authx import User, Authentication
-from authx.database import MongoDBBackend, RedisBackend
-
-app = FastAPI()
-auth = Authentication()
+auth = Authentication(database_backend=BaseDBBackend())
 router = APIRouter()
 
-
+# Set up Pre-configured Routes
 app.include_router(auth.auth_router, prefix="/api/users")
 app.include_router(auth.social_router, prefix="/auth")
 app.include_router(auth.password_router, prefix="/api/users")
 app.include_router(auth.admin_router, prefix="/api/users")
 app.include_router(auth.search_router, prefix="/api/users")
 
-# Set MongoDB and Redis Cache
-auth.set_cache(RedisBackend) # aioredis client
-auth.set_database(MongoDBBackend) # motor client
+# Set Redis Cache
+auth.set_cache(RedisBackend)
 
 # Set Anonymous User
 @router.get("/anonym")
 def anonym_test(user: User = Depends(auth.get_user)):
     pass
 
+
 # Set Authenticated User
 @router.get("/user")
 def user_test(user: User = Depends(auth.get_authenticated_user)):
     pass
 
+
 # Set Admin User
 @router.get("/admin", dependencies=[Depends(auth.admin_required)])
 def admin_test():
     pass
-
 ```
 
 ### Dependency injections only 📦
 
 ```python
-from authx import authx
-from authx.database import RedisBackend
+from authx import authx, RedisBackend
 
-auth = authx(#Provide Config)
-
-# startup
-auth.set_cache(RedisBackend) # aioredis
+auth = authx()
+auth.set_cache(RedisBackend)
 ```
 
 ## Development 🚧
@@ -216,9 +171,6 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-<a href="https://www.producthunt.com/posts/authx?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-authx" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=318189&theme=dark" alt="AuthX - A FastAPI package for Auth made by a human not an AI | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-<a href="https://www.buymeacoffee.com/tahiri" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ## License 📝
 
