@@ -42,6 +42,7 @@ requires = [
 [tool.flit.metadata.requires-extra]
 lint = [
     "pre-commit==2.16.0",
+    "mypy==0.931",
 ]
 test = [
     "pytest==6.2.5",
@@ -81,6 +82,26 @@ redis = [
 session = [
     "redis==3.5.3"
 ]
+
+[tool.mypy]
+disallow_any_generics = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+implicit_reexport = false
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = "authx.tests.*"
+ignore_missing_imports = true
+check_untyped_defs = true
 
 [tool.flit.metadata.urls]
 Documentation = "https://authx.yezz.codes/"

@@ -35,6 +35,9 @@ jobs:
       - name: Lint
         if: ${{ matrix.python-version != '3.9' }}
         run: pre-commit run --all-files
+      - name: Check Optional static typing
+        if: ${{ matrix.python-version != '3.9' }}
+        run: bash scripts/lint.sh
       - name: Test
         run: bash scripts/test.sh
       - name: Upload coverage
