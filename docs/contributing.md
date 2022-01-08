@@ -13,7 +13,7 @@ You can create a virtual environment in a directory using Python's `venv` module
 <div class="termy">
 
 ```console
-$ python -m venv env
+python -m venv env
 ```
 
 </div>
@@ -85,17 +85,18 @@ If it shows the `pip` binary at `env/bin/pip` then it worked. 🎉
 
     This makes sure that if you use a terminal program installed by that package (like `pre-commit`), you use the one from your local environment and not any other that could be installed globally.
 
-### Setuptools and wheel | Twine
+### Setup Flit
 
-**AuthX** use Traditional Methods <a href="https://packaging.python.org/tutorials/packaging-projects/" class="external-link" target="_blank">packaging-projects</a> to build, package and publish the project.
+Flit is a simple way to put Python packages and modules on PyPI. It tries to require less thought about packaging and help you avoid common mistakes.
 
-After activating the environment as described above, install the `setuptools` and `wheel` and `Twine` packages:
+It’s easy to underestimate the challenges involved in distributing and installing code, because it seems like you just need to copy some files into the right place. There’s a whole lot of metadata and tooling that has to work together around that fundamental step. But with the right tooling, a developer who wants to release their code doesn’t need to know about most of that.
 
 <div class="termy">
 
 ```console
-$ pip install setuptools wheel twine
+pip install flit
 ```
+
 </div>
 
 ### Development Dependencies
@@ -107,7 +108,7 @@ Now lets install all the package that you need to develop AuthX:
     <div class="termy">
 
     ```console
-    $ pip install -r requirements.dev.txt
+    $ flit install --symlink
     ```
     </div>
 
@@ -115,12 +116,9 @@ It will install all the dependencies in your local environment.
 
 #### Including
 
-The `requirements.dev.txt` file contains all the dependencies that you need to develop AuthX, which are:
+The Dependencies file contains all the dependencies that you need to develop AuthX, which are:
 
-* The Base Dependencies (`requirements.txt`) - the ones that are needed to run AuthX. [See Installation](installation.md).
-* This one include also:
-    * `uvicorn` - the web server that runs AuthX.
-    * `bumpversion` - the tool that helps you to bump the version of AuthX.
+* The Base Dependencies - the ones that are needed to run AuthX. [See Installation](installation.md).
 
 ### Format
 
@@ -135,7 +133,7 @@ Now, install the pre-commit hooks in your `.git/hooks/` directory:
 <div class="termy">
 
 ```console
-$ pre-commit install
+pre-commit install
 ```
 
 </div>
@@ -199,7 +197,7 @@ For the languages I don't speak, I'll wait for several others to review the tran
 
 ## Testing
 
-The `requirements.dev.txt` file contains all the dependencies that you need to test AuthX, which are:
+all the dependencies that you need to test AuthX, which are:
 
 ### Including
 
@@ -217,7 +215,7 @@ If you want to generate the test report:
 <div class="termy">
 
 ```console
-$ pytest --cov=authx/ --cov-report=html
+bash scripts/test.sh
 ```
 
 </div>
