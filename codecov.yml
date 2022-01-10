@@ -1,8 +1,8 @@
-ignore:
-  - "authx/core/config.py"
-  - "authx/main.py"
-  - "authx/utils/**"
-  - "authx/errors/**"
-  - "authx/database/**"
-  - "authx/cache/**"
-  - "authx/services/**"
+coverage:
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 1%
+
+comment: false
