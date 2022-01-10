@@ -5,7 +5,7 @@ from unittest import mock
 from authx.cache import basicConfig, config
 
 
-@mock.patch("authx.cache.config.uuid4")
+@mock.patch("config.uuid4")
 def testConfig(mock_uuid4):
     config.genSessionId()
     mock_uuid4.assert_called_once_with()

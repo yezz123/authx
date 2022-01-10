@@ -18,7 +18,7 @@ from authx.core import (
 
 @pytest.fixture
 def sessionStorage():
-    with mock.patch("authx.core..session.SessionStorage") as mockClass:
+    with mock.patch("authx.core.session.SessionStorage") as mockClass:
         mockStorage = mock.Mock(spec=SessionStorage)
         mockStorage.__setitem__ = mock.Mock()
         mockStorage.__getitem__ = mock.Mock()
