@@ -4,7 +4,7 @@ from typing import Any, Generator
 from fastapi import Depends, Request, Response
 from redis import Redis
 
-from .config import config
+from authx.cache.config import config
 
 
 class SessionStorage:
