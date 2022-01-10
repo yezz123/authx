@@ -79,7 +79,7 @@ redis = [
     "aioredis >=2.0.1,<2.1.0",
 ]
 session = [
-    "redis =^3.5.3"
+    "redis==3.5.3"
 ]
 
 [tool.flit.metadata.urls]
