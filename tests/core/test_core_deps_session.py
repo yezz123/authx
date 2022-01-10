@@ -5,8 +5,8 @@ import pytest
 from fastapi import Depends, FastAPI, Request, Response
 from fastapi.testclient import TestClient
 
-from authx.cache import config
-from authx.core import (
+from authx.cache.config import config
+from authx.core.session import (
     SessionStorage,
     deleteSession,
     getSession,

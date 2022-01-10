@@ -2,10 +2,10 @@ import random
 from datetime import timedelta
 from unittest import mock
 
-from authx.cache import basicConfig, config
+from authx.cache.config import basicConfig, config
 
 
-@mock.patch("config.uuid4")
+@mock.patch("authx.cache.config.uuid4")
 def testConfig(mock_uuid4):
     config.genSessionId()
     mock_uuid4.assert_called_once_with()

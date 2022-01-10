@@ -5,7 +5,7 @@ from unittest import mock
 import pytest
 from redis import Redis
 
-from authx.core import SessionStorage
+from authx.core.session import SessionStorage
 
 
 @pytest.fixture
