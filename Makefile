@@ -3,12 +3,8 @@ help:
 	@echo "    make test"
 	@echo "    make lint"
 	@echo "    make mkdocs"
-	@echo "    make install"
 	@echo "    make clean"
 	@echo "    make clean-test"
-	@echo "    make bumpversion-major"
-	@echo "    make bumpversion-minor"
-	@echo "    make bumpversion-patch"
 
 test:
 	pytest --cov=authx/ --cov-report=html
