@@ -74,6 +74,7 @@ nav:
     - Security:
       - Introduction: configuration/security/index.md
       - configuration/security/jwt.md
+      - configuration/security/session.md
       - configuration/security/email.md
       - configuration/security/captcha.md
       - configuration/security/hashing.md
