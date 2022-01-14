@@ -53,6 +53,7 @@ Authx is a fast, flexible and easy to use authentication and authorization libra
     - [x] Cookie authentication backend included
 - [x] Full OpenAPI schema support, even with several authentication backend.
 - [x] Provide a Docstring for each class and function.
+- [X] Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
 
 ## Project using
 

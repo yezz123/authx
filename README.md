@@ -48,8 +48,10 @@ Add a Fully registration and authentication or authorization system to your [Fas
   - [x] Cookie authentication backend included
 - [x] Full OpenAPI schema support, even with several authentication backend.
 - [x] Provide a Docstring for each class and function.
+- [X] Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
 
 __Note:__ Check [Release Notes](https://authx.yezz.codes/release/).
+__Note:__ Check [Examples](https://github.com/yezz123/authx/tree/main/example).
 
 ## Project using 🚀
 
