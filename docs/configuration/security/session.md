@@ -2,6 +2,16 @@
 
 This a supported Redis Based Session Storage for you FastAPI Application, you can use it with any Session Backend.
 
+Before doing that check that you install the pre-built requirements.
+
+We use `redis-py` a Python client for Redis, you can install it with:
+
+```sh
+pip install authx[session]
+```
+
+__Note__: The requirements in `authx[redis]` are not the same using in Sessions features.
+
 ## Features
 
 --------
