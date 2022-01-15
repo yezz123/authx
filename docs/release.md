@@ -1,5 +1,65 @@
 # Release Notes 🎞
 
+## 0.3.1
+
+### Session
+
+This is a supported Redis Based Session Storage for your FastAPI Application, you can use it with any Session Backend.
+
+```sh
+pip install authx[session]
+```
+
+__Note__: The requirements in `authx[redis]` are not the same used in Sessions features.
+
+#### Features
+
+--------
+
+- [x] Dependency injection to protect routes
+- [x] Compatible with FastAPI's auto-generated docs
+- [x] Pydantic models for verifying session data
+- [x] Abstract session backend so you can build one that fits your needs
+- [x] Abstract frontends to choose how you extract the session ids (cookies, header, etc.)
+- [x] Create verifiers based on the session data.
+- [x] Compatible with any Redis Configuration.
+
+##### Redis Configuration
+
+Before setting up our Sessions Storage and our CRUD Backend, we need to configure our Redis Instance.
+
+`BasicConfig` is a function that helps us set up the Instance Information like Redis Link Connection or ID Name or Expiration Time.
+
+###### Default Config
+
+- [x] url of Redis: `redis://localhost:6379/0`
+- [x] name of sessionId: `ssid`
+- [x] generator function of `sessionId`: `lambda :uuid.uuid4().hex`
+- [x] expire time of session in redis: `6 hours`
+
+```py
+import random
+from datetime import timedelta
+from authx.cache import basicConfig
+
+basicConfig(
+    redisURL="redis://localhost:6379/1",
+    sessionIdName="sessionId",
+    sessionIdGenerator=lambda: str(random.randint(1000, 9999)),
+    expireTime=timedelta(days=1),
+)
+```
+
+- Read the Changelog <https://authx.yezz.codes/release/>
+
+## What's Changed
+
+- chore(dev): Add Sessions Requirements by @yezz123 in <https://github.com/yezz123/authx/pull/207>
+
+- chore(docs): Documented the Functionality of Session Storing by @yezz123 in <https://github.com/yezz123/authx/pull/208>
+
+**Full Changelog**: <https://github.com/yezz123/authx/compare/0.3.0...0.3.1>
+
 ## 0.3.0
 
 ## What's Changed
