@@ -33,3 +33,9 @@ pip install authx[oauth2]
 ```shell
 pip install authx[redis]
 ```
+
+### Session Dependency
+
+```shell
+pip install authx[session]
+```
