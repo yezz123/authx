@@ -22,7 +22,7 @@ AuthX provides Redis cache, a fast and reliable cache provider that can be used 
 
 ## Security
 
-AuthX provides strong Utils to work with while developing your API. JWT is a simple and secure way to authenticate users; Captcha is a simple way to protect your API from bots;  `Hmac` and `Hashlib` to generate a strong password hash.
+AuthX provides strong Utils to work with while developing your API. JWT is a simple and secure way to authenticate users, Now also we Have a supportable Sessions based on Redis; Captcha is a simple way to protect your API from bots;  `Hmac` and `Hashlib` to generate a strong password hash.
 
 ➡️ [Security](security/index.md)
 

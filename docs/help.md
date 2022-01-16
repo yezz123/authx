@@ -16,13 +16,13 @@ And there are several ways to get help too.
 
 ## Star **AuthX** in GitHub
 
-You can "star" AuthX in GitHub (clicking the star button at the top right): <a href="https://github.com/yezz123/AuthX" class="external-link" target="_blank">https://github.com/yezz123/AuthX</a>. ⭐️
+You can "star" AuthX in GitHub (clicking the star button at the top right): <a href="<https://github.com/yezz123/AuthX>" class="external-link" target="_blank">https://github.com/yezz123/AuthX</a>. ⭐️
 
 By adding a star, other users will be able to find it more easily and see that it has been already useful for others.
 
 ## Watch the GitHub repository for releases
 
-You can "watch" AuthX in GitHub (clicking the "watch" button at the top right): <a href="https://github.com/yezz123/AuthX" class="external-link" target="_blank">https://github.com/yezz123/AuthX</a>. 👀
+You can "watch" AuthX in GitHub (clicking the "watch" button at the top right): <a href="<https://github.com/yezz123/AuthX>" class="external-link" target="_blank">https://github.com/yezz123/AuthX</a>. 👀
 
 There you can select __"Releases only"__.
 
@@ -34,7 +34,7 @@ You can see <a href="https://github.com/yezz123/AuthX/issues" class="external-li
 
 ## Watch the GitHub repository
 
-You can "watch" AuthX in GitHub (clicking the "watch" button at the top right): <a href="https://github.com/yezz123/AuthX" class="external-link" target="_blank">https://github.com/yezz123/AuthX</a>. 👀
+You can "watch" AuthX in GitHub (clicking the "watch" button at the top right): <a href="<https://github.com/yezz123/AuthX>" class="external-link" target="_blank">https://github.com/yezz123/AuthX</a>. 👀
 
 If you select "Watching" instead of "Releases only" you will receive notifications when someone creates a new issue.
 
@@ -55,7 +55,7 @@ You can [contribute](contributing.md) to the source code with Pull Requests, for
 
 * To fix a typo you found on the documentation.
 * To help [translate the documentation](contributing.md) to your language.
-    * You can also help to review the translations created by others.
+  * You can also help to review the translations created by others.
 * To propose new documentation sections.
 * To fix an existing issue/bug.
 * To add a new feature.

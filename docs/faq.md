@@ -18,10 +18,10 @@
 
     Now for the difference, Here I provide more things that FastAPI-User have, for example:
 
-    * Cache Services Using `Redis`.
-    * Managing Social Authentication Using `httpX`.
-    * Building a Helpful Addons like Captcha & String Checker.
-    * Provide MongoDB as a Database.
+  - Cache Services Using `Redis`.
+  - Managing Social Authentication Using `httpX`.
+  - Building a Helpful Addons like Captcha & String Checker.
+  - Provide MongoDB as a Database.
 
     Lately, I see that FastAPI-User Provide more Databases Services and ORM For example `SQLAlchemy` and `MongoDB` and `PostgreSQL`.
 
@@ -30,10 +30,6 @@
 ## How Did You Manage AuthX?
 
 I use Trello Cards to Manage my work, check it here [https://trello.com/b/0NNZMP8T/authx](https://trello.com/b/0NNZMP8T/authx).
-
-## Supporting Other Database Provider & ORM?
-
-Until now, AuthX support only MongoDB, but I will work to support other database providers and ORM in the future, and I will try to provide a way to integrate Piccolo ORM also in the future.
 
 ## How to Support Project?
 
@@ -47,14 +43,14 @@ And you can also become a Silver or Gold sponsor for AuthX. 🏅🎉
 
 I use the following reference to get The package done:
 
-* <https://fastapi.tiangolo.com/>
-* <https://frankie567.github.io/fastapi-users/>
-* <https://indominusbyte.github.io/fastapi-jwt-auth/>
-* <https://fastapi-crudrouter.awtkns.com/>
-* <https://camillovisini.com/article/abstracting-fastapi-services/>
-* <https://motor.readthedocs.io/en/stable/>
-* <https://pyjwt.readthedocs.io/en/latest/>
-* <https://aioredis.readthedocs.io/en/latest/>
+- <https://fastapi.tiangolo.com/>
+- <https://frankie567.github.io/fastapi-users/>
+- <https://indominusbyte.github.io/fastapi-jwt-auth/>
+- <https://fastapi-crudrouter.awtkns.com/>
+- <https://camillovisini.com/article/abstracting-fastapi-services/>
+- <https://motor.readthedocs.io/en/stable/>
+- <https://pyjwt.readthedocs.io/en/latest/>
+- <https://aioredis.readthedocs.io/en/latest/>
 
 ## License
 
