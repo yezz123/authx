@@ -89,6 +89,7 @@ async def update_permissions():
     with pytest.raises(HTTPException):
         await admin_service.update_permissions(1, {"action": "WRONG"})
 
+
 async def test_get_blacklist(admin_service):
     blacklist = await admin_service.get_blacklist()
     assert blacklist == []
