@@ -108,11 +108,7 @@ class MockDatabaseBackend:
         return self._incr
 
     def _get(self, field: str, value) -> Optional[dict]:
-        for item in self._users:
-            if item.get(field) == value:
-                return item
-
-        return None
+        return next((item for item in self._users if item.get(field) == value), None)
 
     async def get(self, id: int) -> Optional[dict]:
         return self._get("id", id)
@@ -124,11 +120,14 @@ class MockDatabaseBackend:
         return self._get("username", username)
 
     async def get_by_social(self, provider: str, sid: str) -> Optional[dict]:
-        for item in self._users:
-            if item.get("provider") == provider and item.get("sid") == sid:
-                return item
-
-        return None
+        return next(
+            (
+                item
+                for item in self._users
+                if item.get("provider") == provider and item.get("sid") == sid
+            ),
+            None,
+        )
 
     async def create(self, obj: dict) -> int:
         id = self._increment_id()
