@@ -397,10 +397,7 @@ class UsersPasswordMixin(Base):
             Optional[int]: The id for the token.
         """
         id = await self._cache.get(f"users:reset:token:{token_hash}")
-        if id is not None:
-            return int(id)
-        else:
-            return None  # pragma: no cover
+        return int(id) if id is not None else None
 
 
 class UsersManagementMixin(Base):

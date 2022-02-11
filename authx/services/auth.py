@@ -93,7 +93,7 @@ class AuthService:
             return model(**data)
         except ValidationError as e:
             msg = e.errors()[0].get("msg")
-            raise HTTPException(400, detail=get_error_message(msg))
+            raise HTTPException(400, detail=get_error_message(msg)) from e
 
     async def _email_exists(self, email: str) -> bool:
         """
@@ -170,8 +170,10 @@ class AuthService:
 
         try:
             validate_email(new_user.get("email"), timeout=5)
-        except EmailNotValidError:
-            raise HTTPException(400, detail=get_error_message("try another email"))
+        except EmailNotValidError as e:
+            raise HTTPException(
+                400, detail=get_error_message("try another email")
+            ) from e
 
         new_user_id = await self._repo.create(new_user)
 
@@ -220,8 +222,8 @@ class AuthService:
         """
         try:
             user = UserInLogin(**data)
-        except ValidationError:
-            raise HTTPException(400)
+        except ValidationError as e:
+            raise HTTPException(400) from e
 
         if await self._is_bruteforce(ip, user.login):
             raise HTTPException(429, detail="Too many requests")

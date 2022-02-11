@@ -33,8 +33,7 @@ class SessionStorage:
 
 
 def getSessionStorage() -> Generator:
-    storage = SessionStorage()
-    yield storage
+    yield SessionStorage()
 
 
 def getSession(
