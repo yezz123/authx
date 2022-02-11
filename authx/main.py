@@ -47,8 +47,7 @@ class authx:
         self._cache_backend.set_client(client)
 
     async def get_user(self, request: Request) -> User:
-        access_token = request.cookies.get(self._access_cookie_name)
-        if access_token:
+        if access_token := request.cookies.get(self._access_cookie_name):
             return await User.create(access_token, self._auth_backend)
         else:
             return User()
@@ -57,15 +56,13 @@ class authx:
         self,
         request: Request,
     ) -> User:
-        access_token = request.cookies.get(self._access_cookie_name)
-        if access_token:
+        if access_token := request.cookies.get(self._access_cookie_name):
             return await User.create(access_token, self._auth_backend)
         else:
             raise HTTPException(401)
 
     async def admin_required(self, request: Request) -> None:
-        access_token = request.cookies.get(self._access_cookie_name)
-        if access_token:
+        if access_token := request.cookies.get(self._access_cookie_name):
             user = await User.create(access_token, self._auth_backend)
             if user.is_admin:
                 return

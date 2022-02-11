@@ -99,7 +99,7 @@ class PasswordService:
             return model(**data)
         except ValidationError as e:
             msg = e.errors()[0].get("msg")
-            raise HTTPException(400, detail=get_error_message(msg))
+            raise HTTPException(400, detail=get_error_message(msg)) from e
 
     async def forgot_password(self, data: dict, ip: str) -> None:
         """POST /forgot_password
@@ -117,8 +117,8 @@ class PasswordService:
         """
         try:
             email = UserInForgotPassword(**data).email
-        except ValidationError:
-            raise HTTPException(400, detail=get_error_message("validation"))
+        except ValidationError as e:
+            raise HTTPException(400, detail=get_error_message("validation")) from e
 
         item = await self._repo.get_by_email(email)
 
