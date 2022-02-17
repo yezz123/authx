@@ -16,15 +16,15 @@ And there are several ways to get help too.
 
 ## Star **AuthX** in GitHub
 
-You can "star" AuthX in GitHub (clicking the star button at the top right): <a href="<https://github.com/yezz123/AuthX>" class="external-link" target="_blank">https://github.com/yezz123/AuthX</a>. ⭐️
+You can "star" AuthX in GitHub (clicking the star button at the top right): <a href="<<<https://github.com/yezz123/AuthX>>>" class="external-link" target="_blank">https://github.com/yezz123/AuthX</a>. ⭐️
 
 By adding a star, other users will be able to find it more easily and see that it has been already useful for others.
 
 ## Watch the GitHub repository for releases
 
-You can "watch" AuthX in GitHub (clicking the "watch" button at the top right): <a href="<https://github.com/yezz123/AuthX>" class="external-link" target="_blank">https://github.com/yezz123/AuthX</a>. 👀
+You can "watch" AuthX in GitHub (clicking the "watch" button at the top right): <a href="<<<https://github.com/yezz123/AuthX>>>" class="external-link" target="_blank">https://github.com/yezz123/AuthX</a>. 👀
 
-There you can select __"Releases only"__.
+There you can select **"Releases only"**.
 
 By doing it, you will receive notifications (in your email) whenever there's a new release (a new version) of **AuthX** with bug fixes and new features.
 
@@ -34,7 +34,7 @@ You can see <a href="https://github.com/yezz123/AuthX/issues" class="external-li
 
 ## Watch the GitHub repository
 
-You can "watch" AuthX in GitHub (clicking the "watch" button at the top right): <a href="<https://github.com/yezz123/AuthX>" class="external-link" target="_blank">https://github.com/yezz123/AuthX</a>. 👀
+You can "watch" AuthX in GitHub (clicking the "watch" button at the top right): <a href="<<<https://github.com/yezz123/AuthX>>>" class="external-link" target="_blank">https://github.com/yezz123/AuthX</a>. 👀
 
 If you select "Watching" instead of "Releases only" you will receive notifications when someone creates a new issue.
 
@@ -67,6 +67,9 @@ You can also financially support the author (me) through <a href="https://paypal
 There you could buy me a [coffee ☕️](https://www.buymeacoffee.com/tahiri) to say thanks. 😄
 
 And you can also become a Silver or Gold sponsor for AuthX. 🏅🎉
+
+<a href="https://www.producthunt.com/posts/authx?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-authx" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=318189&theme=light" alt="AuthX - A FastAPI package for Auth made by a human not an AI | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+<a href="https://www.buymeacoffee.com/tahiri" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ## Sponsor the tools that power AuthX
 
