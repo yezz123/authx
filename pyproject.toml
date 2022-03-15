@@ -12,11 +12,9 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Intended Audience :: Developers",
-    "Development Status :: 4 - Beta",
     "Framework :: FastAPI",
     "Framework :: AsyncIO",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -25,7 +23,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 description-file = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 requires = [
     "fastapi >=0.65.2,<0.71.0",
     "passlib ==1.7.4",
