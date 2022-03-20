@@ -29,7 +29,7 @@ Add a Fully registration and authentication or authorization system to your [Fas
 - [x] Extensible base user model.
 - [x] Ready-to-use register, login, reset password and verify e-mail routes.
 - [x] Ready-to-use Social login and Oauth2 routes.
-  - [X] Full Configuration and customization.
+  - [x] Full Configuration and customization.
   - [x] Ready-to-use social OAuth2 login flow.
 - [x] Middleware Support for Oauth2 using `Authlib` and Starlette.
 - [x] Dependency callable to inject current user in route.
@@ -40,6 +40,7 @@ Add a Fully registration and authentication or authorization system to your [Fas
 - [x] Extensible Error Handling
 - [x] High level API to manage users, roles and permissions
 - [x] Using Redis as a session store & cache.
+- [x] Support HTTPCache.
 - [x] Customizable database backend:
   - [x] MongoDB async backend included thanks to [mongodb/motor](https://github.com/mongodb/motor)
   - [x] SQLAlchemy backend included thanks to [Encode/Databases](https://github.com/encode/databases)
@@ -48,10 +49,11 @@ Add a Fully registration and authentication or authorization system to your [Fas
   - [x] Cookie authentication backend included
 - [x] Full OpenAPI schema support, even with several authentication backend.
 - [x] Provide a Docstring for each class and function.
-- [X] Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
+- [x] Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
 
-__Note:__ Check [Release Notes](https://authx.yezz.codes/release/).
-__Note:__ Check [Examples](https://github.com/yezz123/authx/tree/main/example).
+**Note:** Check [Release Notes](https://authx.yezz.codes/release/).
+
+**Note:** Check [Examples](https://github.com/yezz123/authx/tree/main/example).
 
 ## Project using 🚀
 
@@ -89,15 +91,6 @@ def user_test(user: User = Depends(auth.get_authenticated_user)):
 @router.get("/admin", dependencies=[Depends(auth.admin_required)])
 def admin_test():
     pass
-```
-
-### Dependency injections only 📦
-
-```python
-from authx import authx, RedisBackend
-
-auth = authx()
-auth.set_cache(RedisBackend)
 ```
 
 ## Development 🚧

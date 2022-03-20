@@ -23,5 +23,6 @@ redis = aioredis.from_url("redis://localhost/1")
 auth.set_cache(RedisBackend=RedisBackend(redis=redis))
 ```
 
-
 - [Operations Provided by Redis](redis.md)
+- [HTTPCache](HTTPCache.md)
+  - [Example](Example.md)
