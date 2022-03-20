@@ -12,7 +12,7 @@ from authx.cache.config import basicConfig, config
 @mock.patch("authx.cache.config.uuid4")
 def testConfig(mock_uuid4):
     config.genSessionId()
-    mock_uuid4.assert_called_once_with()
+    mock_uuid4.assert_called_once_with()  # pragma: no cover
 
 
 def testBasicConfig():

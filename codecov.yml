@@ -6,3 +6,4 @@ ignore:
   - "authx/database/**"
   - "authx/cache/**"
   - "authx/services/**"
+  - "tests/middleware/example/**"

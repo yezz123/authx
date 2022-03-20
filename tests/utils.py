@@ -127,7 +127,7 @@ class MockDatabaseBackend:
                 if item.get("provider") == provider and item.get("sid") == sid
             ),
             None,
-        )
+        )  # pragma: no cover
 
     async def create(self, obj: dict) -> int:
         id = self._increment_id()
@@ -141,7 +141,7 @@ class MockDatabaseBackend:
                 self._users[i].update(obj)
                 return True
 
-        return False
+        return False  # pragma: no cover
 
     async def delete(self, id: int) -> bool:
         """
@@ -153,15 +153,15 @@ class MockDatabaseBackend:
         Returns:
             bool: True if the user was deleted, False otherwise.
         """
-        for i, item in enumerate(self._users):
-            if item.get("id") == id:
-                del self._users[i]
-                return True
+        for i, item in enumerate(self._users):  # pragma: no cover
+            if item.get("id") == id:  # pragma: no cover
+                del self._users[i]  # pragma: no cover
+                return True  # pragma: no cover
 
-        return False
+        return False  # pragma: no cover
 
     async def count(self, query) -> int:
-        return 42
+        return 42  # pragma: no cover
 
     async def request_email_confirmation(self, email: str, token_hash: str) -> None:
         """
@@ -175,9 +175,11 @@ class MockDatabaseBackend:
             None
         """
         for i, item in enumerate(self._email_confirmations):
-            if item.get("email") == email:
-                self._email_confirmations[i].update({"token": token_hash})
-                return None
+            if item.get("email") == email:  # pragma: no cover
+                self._email_confirmations[i].update(
+                    {"token": token_hash}
+                )  # pragma: no cover
+                return None  # pragma: no cover
         self._email_confirmations.append({"email": email, "token": token_hash})
 
     async def confirm_email(self, token_hash: str) -> bool:
@@ -204,10 +206,12 @@ class MockDatabaseBackend:
         Returns:
             Iterable[dict]: The blacklist.
         """
-        return [item for item in self._users if not item.get("active")]
+        return [
+            item for item in self._users if not item.get("active")
+        ]  # pragma: no cover
 
     async def search(self) -> Tuple[dict, int]:
-        return self._users, 1
+        return self._users, 1  # pragma: no cover
 
 
 class MockCacheBackend:
@@ -224,19 +228,19 @@ class MockCacheBackend:
     async def delete(self, key: str) -> None:
         try:
             self._db.pop(key)
-        except KeyError:
-            pass
+        except KeyError:  # pragma: no cover
+            pass  # pragma: no cover
 
     async def keys(self, match: str) -> Iterable[str]:
-        return {}
+        return {}  # pragma: no cover
 
     async def set(self, key: str, value: Union[str, bytes, int], expire: int) -> None:
         self._db[key] = value
 
     async def setnx(self, key: str, value: Union[str, bytes, int], expire: int) -> None:
-        v = self._db.get(key)
-        if v is None:
-            self._db[key] = value
+        v = self._db.get(key)  # pragma: no cover
+        if v is None:  # pragma: no cover
+            self._db[key] = value  # pragma: no cover
 
     async def incr(self, key: str) -> str:
         v = self._db.get(key)
@@ -244,9 +248,9 @@ class MockCacheBackend:
             self._db[key] = int(v) + 1
 
     async def dispatch_action(self, channel: str, action: str, payload: str) -> None:
-        print("Dispatching action")
-        print(action)
-        print(payload)
+        print("Dispatching action")  # pragma: no cover
+        print(action)  # pragma: no cover
+        print(payload)  # pragma: no cover
 
 
 class MockAuthBackend:
@@ -259,7 +263,7 @@ class MockAuthBackend:
         access_expiration: int,
         refresh_expiration: int,
     ) -> None:
-        pass
+        pass  # pragma: no cover
 
     def __init__(
         self,
@@ -290,7 +294,7 @@ class MockAuthBackend:
         """
         if token:
             return jwt.decode(token, key=self._public_key, algorithms="RS256")
-        return None
+        return None  # pragma: no cover
 
     def _create_token(
         self, payload: dict, token_type: str, expiration_delta: Optional[int] = None
@@ -299,14 +303,14 @@ class MockAuthBackend:
         if expiration_delta:
             exp = datetime.utcnow() + timedelta(seconds=expiration_delta)
         else:
-            exp = datetime.utcnow() + timedelta(seconds=60)
+            exp = datetime.utcnow() + timedelta(seconds=60)  # pragma: no cover
 
         payload.update({"iat": iat, "exp": exp, "type": token_type})
 
         token = jwt.encode(payload, self._private_key, algorithm=self._jwt_algorithm)
         if isinstance(token, bytes):
             # For PyJWT <= 1.7.1
-            return token.decode("utf-8")
+            return token.decode("utf-8")  # pragma: no cover
         # For PyJWT >= 2.0.0a1
         return token
 
