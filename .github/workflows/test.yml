@@ -44,7 +44,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: flit install --symlink
       - name: Lint
-        if: ${{ magtrix.python-version != '3.9' }}
+        if: ${{ matrix.python-version != '3.9' }}
         run: pre-commit run --all-files
       - name: Test
         run: bash scripts/test.sh
