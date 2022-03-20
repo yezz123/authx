@@ -74,6 +74,15 @@
         "code",
         "plugin"
       ]
+    },
+    {
+      "login": "theoohoho",
+      "name": "theoohoho",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31537466?v=4",
+      "profile": "https://github.com/theoohoho",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
