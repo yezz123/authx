@@ -71,6 +71,8 @@ nav:
     - Cache:
       - Introduction: configuration/cache/index.md
       - configuration/cache/redis.md
+      - configuration/cache/HTTPCache.md
+      - configuration/cache/Example.md
     - Security:
       - Introduction: configuration/security/index.md
       - configuration/security/jwt.md

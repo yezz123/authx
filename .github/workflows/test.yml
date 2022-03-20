@@ -10,6 +10,17 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     strategy:
       matrix:
         python-version: [3.9, 3.10.0]
@@ -36,6 +47,9 @@ jobs:
         if: ${{ matrix.python-version != '3.9' }}
         run: pre-commit run --all-files
       - name: Test
+        env:
+          ENV: test
+          REDIS_URL: "redis://0.0.0.0:6379"
         run: bash scripts/test.sh
       - name: Upload coverage
         uses: codecov/codecov-action@v1
