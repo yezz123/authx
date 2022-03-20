@@ -1,5 +1,65 @@
 # Release Notes 🎞
 
+## 0.4.0
+
+## HTTPCache
+
+### Overview
+
+HTTP caching occurs when the browser stores local copies of web resources for faster retrieval the next time the resource is required. As your application serves resources it can attach cache headers to the response specifying the desired cache behavior.
+
+![Overview](https://devcenter1.assets.heroku.com/article-images/782-imported-1443570279-782-imported-1443554749-55-original.jpg)
+
+When an item is fully cached, the browser may choose to not contact the server at all and simply use its cached copy:
+
+![Overview](https://devcenter1.assets.heroku.com/article-images/782-imported-1443570282-782-imported-1443554751-54-original.jpg)
+
+### HTTP cache headers
+
+There are two primary cache headers, `Cache-Control` and `Expires`.
+
+#### Cache-Control
+
+The `Cache-Control` header is the most important header to set as it effectively `switches on` caching in the browser. With this header in place, and set with a value that enables caching, the browser will cache the file for as long as specified. Without this header, the browser will re-request the file on each subsequent request.
+
+#### Expires
+
+When accompanying the `Cache-Control` header, Expires simply sets a date from which the cached resource should no longer be considered valid. From this date forward the browser will request a fresh copy of the resource.
+
+> This Introduction to HTTP Caching is based on the [HTTP Caching Guide](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching).
+
+AuthX provides a simple HTTP caching model designed to work with [FastAPI](https://fastapi.tiangolo.com/),
+
+### Initialize the cache
+
+```python
+from authx import HTTPCache
+from pytz import timezone
+
+africa_Casablanca = timezone('Africa/Casablanca')
+HTTPCache.init(redis_url=REDIS_URL, namespace='test_namespace', tz=africa_Casablanca)
+```
+
+- Read More in the New Documentation: <https://authx.yezz.codes/configuration/cache/httpcache/>
+
+### What's Changed
+
+- chore(docs): Improve Documentation by @yezz123 in <https://github.com/yezz123/authx/pull/209>
+- chore(dev): refactor code & improve some exceptions  ✨ by @yezz123 in <https://github.com/yezz123/authx/pull/212>
+- ref: Use the built-in function `next` instead of a for-loop. by @yezz123 in <https://github.com/yezz123/authx/pull/213>
+- chore(docs): add New Sponsors ✨❤️ by @yezz123 in <https://github.com/yezz123/authx/pull/214>
+- docs(mkdocs.yml): Change name from `middlewares` to `middleware` by @theoohoho in <https://github.com/yezz123/authx/pull/215>
+- chore(f/l): Integrate `Pyupgrade` to AuthX Environment  by @yezz123 in <https://github.com/yezz123/authx/pull/216>
+- chore(feat): Integrate HTTP Caching Model for authx ✨  by @yezz123 in <https://github.com/yezz123/authx/pull/217>
+- docs: add theoohoho as a contributor for doc by @allcontributors in <https://github.com/yezz123/authx/pull/218>
+- chore(Example): Provide New Cache Example✨  by @yezz123 in <https://github.com/yezz123/authx/pull/219>
+
+### New Contributors
+
+- @theoohoho made their first contribution in <https://github.com/yezz123/authx/pull/215>
+
+**Full Changelog**: <https://github.com/yezz123/authx/compare/0.3.1...0.4.0>
+
 ## 0.3.1
 
 ### Session
@@ -10,7 +70,7 @@ This is a supported Redis Based Session Storage for your FastAPI Application, yo
 pip install authx[session]
 ```
 
-__Note__: The requirements in `authx[redis]` are not the same used in Sessions features.
+**Note**: The requirements in `authx[redis]` are not the same used in Sessions features.
 
 #### Features
 
@@ -88,7 +148,7 @@ from authx import MongoDBBackend
 from authx import EncodeDBBackend
 ```
 
-__Note__: Don't forget to set up the database connection as a client that will be functioned under pre-built Methods.
+**Note**: Don't forget to set up the database connection as a client that will be functioned under pre-built Methods.
 
 - Improve the package by Switching to `flit` to build the package.
   - Improve Workflow and integrate `codecov.yml`.
