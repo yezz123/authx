@@ -97,7 +97,6 @@ def test_invalidate_multiple():
             "X-Product-Id": "0fb6a4d4-ae65-4f18-be44-edb9ace6b5bb",
         },
     )
-
     response2 = client.get(
         "/b/profile",
         headers={
@@ -106,7 +105,6 @@ def test_invalidate_multiple():
         },
     )
     assert response2.status_code == 200
-
     response2 = client.get(
         "/b/profile",
         headers={
@@ -114,8 +112,7 @@ def test_invalidate_multiple():
             "X-Product-Id": "0fb6a4d4-ae65-4f18-be44-edb9ace6b5bb",
         },
     )
-    assert response2.headers["authx-hit"] == "True"
-
+    assert response2.headers["Cache-hit"] == "true"
     response3 = client.post(
         "/b/invalidate_multiple",
         headers={
@@ -146,7 +143,7 @@ def test_home_cached_response():
             "X-Product-Id": "0fb6a4d4-ae65-4f18-be44-edb9ace6b5bb",
         },
     )
-    assert response.headers["authx-hit"] == "true"
+    assert response.headers["Cache-hit"] == "true"
 
 
 def test_with_ttl_callable():
@@ -169,7 +166,7 @@ def test_with_ttl_callable():
             "X-Product-Id": "0fb6a4d4-ae65-4f18-be44-edb9ace6b5bb",
         },
     )
-    assert response.headers["authx-hit"] == "true"
+    assert response.headers["Cache-hit"] == "true"
     assert (
         pytest.approx(
             redis_client.ttl("test_namespace:b.ttl_callable_expiry"), rel=1e-3
@@ -198,7 +195,7 @@ def test_home_cached_with_current_user():
             "X-Product-Id": "0fb6a4d4-ae65-4f18-be44-edb9ace6b5bb",
         },
     )
-    assert response.headers["authx-hit"] == "true"
+    assert response.headers["Cache-hit"] == "true"
     assert response.status_code == 200
     value = redis_client.get("test_namespace:b.logged_in.112358")
     assert value is not None
@@ -224,7 +221,7 @@ def test_cache_invalidation():
             "X-Product-Id": "0fb6a4d4-ae65-4f18-be44-edb9ace6b5bb",
         },
     )
-    assert response.headers["authx-hit"] == "true"
+    assert response.headers["Cache-hit"] == "true"
     assert response.status_code == 200
     value = redis_client.get("test_namespace:b.logged_in.112358")
     assert value is not None
@@ -244,4 +241,4 @@ def test_cache_invalidation():
             "X-Product-Id": "0fb6a4d4-ae65-4f18-be44-edb9ace6b5bb",
         },
     )
-    assert response.headers.get("authx-hit", None) is None
+    assert response.headers.get("Cache-hit", None) is None
