@@ -1,5 +1,13 @@
 version: "3.3"
 services:
+  redis:
+    image: redis:alpine
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - "../redis_data:/data"
+      - "./redis.conf:/redis.conf"
+    command: [ "redis-server", "/redis.conf" ]
   example:
     build:
       context: .
@@ -9,4 +17,6 @@ services:
       - "8000:8000"
     env_file:
       - ./docker-compose.env
+    depends_on:
+      - redis
     image: authx
