@@ -2,9 +2,6 @@
 
 __version__ = "0.3.1"
 
-from middleware.service import cache as cache
-from middleware.service import invalidate_cache as invalidate_cache
-
 from authx.api import UsersRepo as UsersRepo
 from authx.cache import RedisBackend as RedisBackend
 from authx.core import EmailClient as EmailClient
@@ -16,6 +13,8 @@ from authx.database import MongoDBBackend as MongoDBBackend
 from authx.main import Authentication as Authentication
 from authx.main import authx as authx
 from authx.middleware import MiddlewareOauth2 as MiddlewareOauth2
+from authx.middleware.service import cache as cache
+from authx.middleware.service import invalidate_cache as invalidate_cache
 from authx.models.cache import HTTPCache as HTTPCache
 from authx.routers import get_admin_router as get_admin_router
 from authx.routers import get_auth_router as get_auth_router
