@@ -114,7 +114,7 @@ def test_invalidate_multiple():
             "X-Product-Id": "0fb6a4d4-ae65-4f18-be44-edb9ace6b5bb",
         },
     )
-    assert response2.headers["HTTPCache-hit"] == "true"
+    assert response2.headers["authx-hit"] == "True"
 
     response3 = client.post(
         "/b/invalidate_multiple",
@@ -146,7 +146,7 @@ def test_home_cached_response():
             "X-Product-Id": "0fb6a4d4-ae65-4f18-be44-edb9ace6b5bb",
         },
     )
-    assert response.headers["HTTPCache-hit"] == "true"
+    assert response.headers["authx-hit"] == "true"
 
 
 def test_with_ttl_callable():
@@ -169,7 +169,7 @@ def test_with_ttl_callable():
             "X-Product-Id": "0fb6a4d4-ae65-4f18-be44-edb9ace6b5bb",
         },
     )
-    assert response.headers["HTTPCache-hit"] == "true"
+    assert response.headers["authx-hit"] == "true"
     assert (
         pytest.approx(
             redis_client.ttl("test_namespace:b.ttl_callable_expiry"), rel=1e-3
@@ -198,7 +198,7 @@ def test_home_cached_with_current_user():
             "X-Product-Id": "0fb6a4d4-ae65-4f18-be44-edb9ace6b5bb",
         },
     )
-    assert response.headers["HTTPCache-hit"] == "true"
+    assert response.headers["authx-hit"] == "true"
     assert response.status_code == 200
     value = redis_client.get("test_namespace:b.logged_in.112358")
     assert value is not None
@@ -224,7 +224,7 @@ def test_cache_invalidation():
             "X-Product-Id": "0fb6a4d4-ae65-4f18-be44-edb9ace6b5bb",
         },
     )
-    assert response.headers["HTTPCache-hit"] == "true"
+    assert response.headers["authx-hit"] == "true"
     assert response.status_code == 200
     value = redis_client.get("test_namespace:b.logged_in.112358")
     assert value is not None
@@ -244,4 +244,4 @@ def test_cache_invalidation():
             "X-Product-Id": "0fb6a4d4-ae65-4f18-be44-edb9ace6b5bb",
         },
     )
-    assert response.headers.get("HTTPCache-hit", None) is None
+    assert response.headers.get("authx-hit", None) is None
