@@ -105,7 +105,7 @@ def IST_time():
 
 
 def tz_now(tz: pytz = utc):
-    dt = datetime.utcnow()
+    dt = datetime.now(tz.utc)
     return dt.replace(tzinfo=tz)
 
 

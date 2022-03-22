@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Optional, Tuple
 
 import jwt
@@ -46,7 +46,7 @@ class SocialService:
 
     async def _update_last_login(self, id: int) -> None:
         """Update last login time for user"""
-        await self._repo.update(id, {"last_login": datetime.utcnow()})
+        await self._repo.update(id, {"last_login": datetime.now(timezone.utc)})
 
     def login_google(self, state: str) -> str:
         """Login with google, and Redirect the User to the Google login page."""

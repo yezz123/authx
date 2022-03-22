@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 import pytest
 
@@ -87,7 +87,7 @@ async def test_blackout():
     """
     key = "users:blackout"
     epoch = datetime.utcfromtimestamp(0)
-    ts = int((datetime.utcnow() - epoch).total_seconds()) + 10
+    ts = int((datetime.now(timezone.utc) - epoch).total_seconds()) + 10
     await jwt_backend._cache.set(key, ts, 10)
     payload = await jwt_backend.decode_token(sample_access_token)
     assert payload is None
@@ -101,7 +101,7 @@ async def test_logout():
     """
     key = "users:kick:1"
     epoch = datetime.utcfromtimestamp(0)
-    ts = int((datetime.utcnow() - epoch).total_seconds()) + 10
+    ts = int((datetime.now(timezone.utc) - epoch).total_seconds()) + 10
     await jwt_backend._cache.set(key, ts, 10)
     payload = await jwt_backend.decode_token(sample_access_token)
     assert payload is None

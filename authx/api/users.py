@@ -98,9 +98,7 @@ class UsersCRUDMixin(Base):
         Returns:
             Optional[dict]: The user.
         """
-        return await self._database.get_by_social(
-            provider, str(sid)
-        )  # pragma: no cover
+        return await self._database.get_by_social(provider, sid)
 
     async def get_by_login(self, login: str) -> Optional[dict]:
         """

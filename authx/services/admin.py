@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 
 from fastapi import HTTPException
@@ -40,7 +40,7 @@ class AdminService:
 
     async def set_blackout(self) -> None:
         epoch = datetime.utcfromtimestamp(0)
-        ts = int((datetime.utcnow() - epoch).total_seconds()) + 10
+        ts = int((datetime.now(timezone.utc) - epoch).total_seconds()) + 10
         await self._repo.set_blackout(ts)
         return None
 

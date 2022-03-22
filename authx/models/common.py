@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from pydantic import BaseConfig, BaseModel
 
@@ -20,7 +20,7 @@ def set_created_at(v):
     Returns:
         datetime: current datetime
     """
-    return datetime.utcnow()
+    return datetime.now(timezone.utc)
 
 
 def set_last_login(v, values):

@@ -1,5 +1,5 @@
 import asyncio
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 import jwt
@@ -76,11 +76,11 @@ class JWTBackend:
     def _create_token(
         self, payload: dict, token_type: str, expiration_delta: Optional[int] = None
     ) -> str:
-        iat = datetime.utcnow()
+        iat = datetime.now(timezone.utc)
         if expiration_delta:
-            exp = datetime.utcnow() + timedelta(seconds=expiration_delta)
+            exp = datetime.now(timezone.utc) + timedelta(seconds=expiration_delta)
         else:
-            exp = datetime.utcnow() + timedelta(seconds=60)
+            exp = datetime.now(timezone.utc) + timedelta(seconds=60)
 
         payload.update({"iat": iat, "exp": exp, "type": token_type})
         token = jwt.encode(payload, self._private_key, algorithm=JWT_ALGORITHM)

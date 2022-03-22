@@ -1,4 +1,5 @@
-from datetime import datetime, timedelta
+import contextlib
+from datetime import datetime, timedelta, timezone
 from typing import Iterable, Optional, Tuple, Union
 
 import jwt
@@ -226,10 +227,8 @@ class MockCacheBackend:
         return self._db.get(key)
 
     async def delete(self, key: str) -> None:
-        try:
+        with contextlib.suppress(KeyError):
             self._db.pop(key)
-        except KeyError:  # pragma: no cover
-            pass  # pragma: no cover
 
     async def keys(self, match: str) -> Iterable[str]:
         return {}  # pragma: no cover
@@ -299,11 +298,11 @@ class MockAuthBackend:
     def _create_token(
         self, payload: dict, token_type: str, expiration_delta: Optional[int] = None
     ) -> str:
-        iat = datetime.utcnow()
+        iat = datetime.now(timezone.utc)
         if expiration_delta:
-            exp = datetime.utcnow() + timedelta(seconds=expiration_delta)
+            exp = datetime.now(timezone.utc) + timedelta(seconds=expiration_delta)
         else:
-            exp = datetime.utcnow() + timedelta(seconds=60)  # pragma: no cover
+            exp = datetime.now(timezone.utc) + timedelta(seconds=60)
 
         payload.update({"iat": iat, "exp": exp, "type": token_type})
 
