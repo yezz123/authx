@@ -2,7 +2,7 @@ from typing import Callable
 
 from fastapi import APIRouter, Depends, Request
 
-from authx.api import UsersRepo
+from authx.backend import UsersRepo
 from authx.core.jwt import JWTBackend
 from authx.core.user import User
 from authx.services import PasswordService

@@ -2,7 +2,7 @@ from typing import Callable, Optional
 
 from fastapi import APIRouter, Depends
 
-from authx.api import UsersRepo
+from authx.backend import UsersRepo
 from authx.services import SearchService
 
 
