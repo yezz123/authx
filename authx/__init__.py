@@ -2,7 +2,7 @@
 
 __version__ = "0.4.0"
 
-from authx.api import UsersRepo as UsersRepo
+from authx.backend import UsersRepo as UsersRepo
 from authx.cache import RedisBackend as RedisBackend
 from authx.core import EmailClient as EmailClient
 from authx.core import JWTBackend as JWTBackend

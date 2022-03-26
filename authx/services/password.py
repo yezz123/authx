@@ -3,7 +3,7 @@ from typing import Optional
 from fastapi import HTTPException
 from pydantic import ValidationError
 
-from authx.api import UsersRepo
+from authx.backend import UsersRepo
 from authx.core.email import EmailClient
 from authx.core.jwt import JWTBackend
 from authx.core.logger import logger

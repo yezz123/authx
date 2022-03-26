@@ -3,7 +3,7 @@ from typing import Iterable, Optional
 from aioredis import Redis
 from fastapi import APIRouter, HTTPException, Request
 
-from authx.api import UsersRepo
+from authx.backend import UsersRepo
 from authx.cache import RedisBackend
 from authx.core.jwt import JWTBackend
 from authx.core.user import User
