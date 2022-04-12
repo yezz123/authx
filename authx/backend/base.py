@@ -14,7 +14,7 @@ class Base:
         database: BaseDBBackend,
         cache: RedisBackend,
         callbacks: Iterable,
-        access_expiration: int = 60 ** 2 * 6,
+        access_expiration: int = 60**2 * 6,
     ):
         """Initialize the API with the database and cache.
 

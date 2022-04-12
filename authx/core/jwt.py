@@ -69,7 +69,7 @@ class JWTBackend:
                     return None
 
                 return payload
-            except:  # noqa E722
+            except Exception:
                 return None
         return None
 

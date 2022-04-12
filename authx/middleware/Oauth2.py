@@ -33,8 +33,8 @@ class MiddlewareOauth2:
 
         self._client = starlette_client.StarletteRemoteApp(
             starlette_client.StartletteIntegration("starlette"),
-            client_id=str(client_id),
-            client_secret=str(client_secret),
+            client_id=client_id,
+            client_secret=client_secret,
             server_metadata_url=server_metadata_url,
             client_kwargs={"scope": "openid email profile"},
         )
@@ -44,7 +44,7 @@ class MiddlewareOauth2:
         The URI of the redirect path. This should be registered on whatever provider is declared.
         """
         port = request.url.port
-        port = "" if port is None else ":" + str(port)
+        port = "" if port is None else f":{str(port)}"
         scheme = request.url.scheme
         if scheme == "http" and self._force_https_redirect:  # pragma: no cover
             scheme = "https"  # pragma: no cover

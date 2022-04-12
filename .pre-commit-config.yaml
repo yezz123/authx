@@ -1,6 +1,6 @@
 repos:
     - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v4.1.0
+      rev: v4.2.0
       hooks:
           - id: check-merge-conflict
           - id: check-added-large-files
@@ -16,7 +16,7 @@ repos:
       hooks:
           - id: isort
             args: ["--profile", "black"]
-    - repo: https://gitlab.com/pycqa/flake8
+    - repo: https://github.com/PyCQA/flake8
       rev: 4.0.1
       hooks:
           - id: flake8
@@ -33,7 +33,7 @@ repos:
             exclude: '^\..*'
             args: ["--in-place"]
     - repo: https://github.com/psf/black
-      rev: 21.12b0
+      rev: 22.3.0
       hooks:
           - id: black
             args: ["--target-version", "py38"]

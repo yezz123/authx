@@ -1,3 +1,4 @@
+import contextlib
 from datetime import datetime, timedelta
 from typing import Iterable, Optional, Tuple, Union
 
@@ -226,10 +227,8 @@ class MockCacheBackend:
         return self._db.get(key)
 
     async def delete(self, key: str) -> None:
-        try:
+        with contextlib.suppress(KeyError):
             self._db.pop(key)
-        except KeyError:  # pragma: no cover
-            pass  # pragma: no cover
 
     async def keys(self, match: str) -> Iterable[str]:
         return {}  # pragma: no cover

@@ -8,6 +8,7 @@
 
 [![Test](https://github.com/yezz123/authx/actions/workflows/test.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/test.yml)
 [![Publish](https://github.com/yezz123/authx/actions/workflows/release.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/release.yml)
+[![Pypi](https://img.shields.io/pypi/pyversions/AuthX.svg?color=%2334D058)](https://pypi.org/project/AuthX)
 [![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
 [![PyPI](https://badge.fury.io/py/authx.svg)](https://badge.fury.io/py/authx)
 [![Downloads](https://pepy.tech/badge/authx)](https://pepy.tech/project/authx)

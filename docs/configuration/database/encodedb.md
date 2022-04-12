@@ -8,13 +8,9 @@ Databases is suitable for integrating against any async Web framework, such as `
 
 You could check the [documentation](https://www.encode.io/databases/) for more information.
 
-- Check that you install requirements:
+- Check that you install requirements
 
-```shell
-pip install authx[encodedb]
-```
-
-Setup the database, and we will use the `EncodeDBBackend` as a dependency.
+- Setup the database, and we will use the `EncodeDBBackend` as a dependency.
 
 ```py
 import databases

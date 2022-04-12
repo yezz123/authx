@@ -8,10 +8,6 @@ using [MongoDB/Motor](https://motor.readthedocs.io/en/stable/) as an Asynchronou
 
 First, make sure that you installed the driver, and you have the driver installed in your environment.
 
-```shell
-pip install authx[mongodb]
-```
-
 - Then Setup the database, and we will use the `MongoDBBackend` as a dependency.
 
 ```py

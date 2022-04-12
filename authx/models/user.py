@@ -249,7 +249,7 @@ class UserInChangePassword(UserInSetPassword):
     old_password: str
 
     @validator("old_password")
-    def check_old_password(cls, v, values):
+    def check_old_password(self, v, values):
         """
         Check if the old password is correct.
 
@@ -321,7 +321,7 @@ class UserPrivateInfo(DefaultModel):
     last_login: datetime
 
     @validator("created_at", "last_login")
-    def set_format(cls, v):
+    def set_format(self, v):
         """
         Check if the created_at or last_login is wrong.
         """

@@ -4,23 +4,11 @@ from authx.core.logger import logger
 
 
 class UsersProtectionMixin(Base):
-    """User Protection MIXIN
-
-    Args:
-        Create all the Common Protection GET, POST, PUT, DELETE methods.
-    """
+    """User Protection MIXIN"""
 
     async def _check_timeout_and_incr(self, key: str, max: int, timeout: int) -> bool:
         """
         Check if the timeout is expired and increment the counter.
-
-        Args:
-            key (str): The key to check.
-            max (int): The maximum number of requests.
-            timeout (int): The timeout in seconds.
-
-        Returns:
-            bool: True if the timeout is expired.
         """
         count = await self._cache.get(key)
         if count is not None:
@@ -36,13 +24,6 @@ class UsersProtectionMixin(Base):
     async def is_bruteforce(self, ip: str, login: str) -> bool:
         """
         Check if the ip is in the bruteforce list.
-
-        Args:
-            ip (str): The ip to check.
-            login (str): The login to check.
-
-        Returns:
-            bool: True if the ip is in the bruteforce list.
         """
         timeout_key = f"users:login:timeout:{ip}"
         timeout = await self._cache.get(timeout_key)
