@@ -16,19 +16,6 @@ from authx.core.config import (
 )
 from authx.models.common import DefaultModel, set_created_at, set_last_login
 
-"""
-    Function to check if the username is correct.
-
-    Args:
-        v (str): The username.
-
-    Returns:
-        str: The username.
-
-    Raises:
-        ValueError: If the username is wrong.
-"""
-
 
 def check_username(v: str) -> str:
     v = v.strip()
@@ -41,28 +28,7 @@ def check_username(v: str) -> str:
         raise ValueError("username wrong")
     if any(letter in ascii_letters for letter in v):
         raise ValueError("username different letters")
-    """
-    Check if the username wrong or have some special characters.
-
-    Returns:
-        str: The username.
-    """
     return v
-
-
-"""
-    Function Check the Password
-
-    Args:
-        v: The password.
-        values: The values.
-
-    Returns:
-        str: The password.
-
-    Raises:
-        ValueError: If the password is wrong.
-"""
 
 
 def check_password(v: str, values) -> str:
@@ -75,31 +41,12 @@ def check_password(v: str, values) -> str:
     for letter in v:
         if letter not in PASSWORD_CHARS:
             raise ValueError("password special")
-    """
-    Check if the password is wrong or have some special characters.
-
-    Returns:
-        str: The password.
-    """
     return v
 
 
 class UserInRegister(BaseModel):
     """
     Class to check the user in the register.
-
-    Args:
-        username: The username.
-        password1: The password.
-        password2: The password.
-        email: The email.
-
-    Raises:
-        ValueError: If the username is wrong.
-        ValueError: If the password is wrong.
-
-    Returns:
-        UserInRegister: The user in the register.
     """
 
     email: EmailStr
@@ -115,24 +62,6 @@ class UserInRegister(BaseModel):
 class UserInCreate(BaseModel):
     """
     Class to check the user in the create.
-
-    Args:
-        username: The username.
-        password: The password.
-        email: The email.
-        active: The active.
-        confirmed: The confirmed.
-        permissions: The permissions.
-        info: The info.
-        created_at: The created_at. [optional]
-        last_login: The last_login. [optional]
-
-    Raises:
-        ValueError: If the username is wrong.
-        ValueError: If the password is wrong.
-
-    Returns:
-        UserInCreate: The user in the create.
     """
 
     email: EmailStr
@@ -156,17 +85,6 @@ class UserInCreate(BaseModel):
 class UserInLogin(BaseModel):
     """
     Class to check the user in the login.
-
-    Args:
-        login: Email or username.
-        password: The password.
-
-    Raises:
-        ValueError: If the login is wrong.
-        ValueError: If the password is wrong.
-
-    Returns:
-        UserInLogin: The user in the login.
     """
 
     login: Union[EmailStr, str]
@@ -176,15 +94,6 @@ class UserInLogin(BaseModel):
 class UserInForgotPassword(BaseModel):
     """
     Class to check the user in the forgot password.
-
-    Args:
-        email: The email.
-
-    Raises:
-        ValueError: If the email is wrong.
-
-    Returns:
-        UserInForgotPassword: The user in the forgot password.
     """
 
     email: EmailStr
@@ -193,17 +102,6 @@ class UserInForgotPassword(BaseModel):
 class UserPayload(BaseModel):
     """
     Class to check the user payload.
-
-    Args:
-        id: The id.
-        username: The username.
-        permissions: The permissions.
-
-    Returns:
-        UserPayload: The user payload.
-
-    Raises:
-        ValueError: If the id is wrong.
     """
 
     id: int
@@ -214,16 +112,6 @@ class UserPayload(BaseModel):
 class UserInSetPassword(DefaultModel):
     """
     Class to check the user in the set password.
-
-    Args:
-        password1: The password.
-        password2: The password.
-
-    Raises:
-        ValueError: If the password is wrong.
-
-    Returns:
-        UserInSetPassword: The user in the set password.
     """
 
     password1: str
@@ -235,15 +123,6 @@ class UserInSetPassword(DefaultModel):
 class UserInChangePassword(UserInSetPassword):
     """
     Class to check the user in the change password.
-
-    Args:
-        old_password: The old password.
-
-    Raises:
-        ValueError: If the old password is wrong.
-
-    Returns:
-        UserInChangePassword: The user in the change password.
     """
 
     old_password: str
@@ -252,16 +131,6 @@ class UserInChangePassword(UserInSetPassword):
     def check_old_password(cls, v, values):
         """
         Check if the old password is correct.
-
-        Args:
-            v: The old password.
-            values: The values.
-
-        Raises:
-            ValueError: If the old password is wrong.
-
-        Returns:
-            str: The old password.
         """
         if v == values.get("password1"):
             raise ValueError("password same")
@@ -271,15 +140,6 @@ class UserInChangePassword(UserInSetPassword):
 class UserInChangeUsername(DefaultModel):
     """
     Class to check the user in the change username.
-
-    Args:
-        username: The username.
-
-    Raises:
-        ValueError: If the username is wrong.
-
-    Returns:
-        UserInChangeUsername: The user in the change username.
     """
 
     username: str
@@ -290,24 +150,6 @@ class UserInChangeUsername(DefaultModel):
 class UserPrivateInfo(DefaultModel):
     """
     Class to check the user private info.
-
-    Args:
-        id: The id.
-        username: The username.
-        email: The email.
-        active: The active.
-        confirmed: The confirmed.
-        created_at: The created_at.
-        last_login: The last_login.
-        sid: The sid. [optional]
-        provider: The provider. [optional]
-
-    Raises:
-        ValueError: If the username is wrong.
-        ValueError: If the password is wrong.
-
-    Returns:
-        UserPrivateInfo: The user private info.
     """
 
     id: int
@@ -321,7 +163,7 @@ class UserPrivateInfo(DefaultModel):
     last_login: datetime
 
     @validator("created_at", "last_login")
-    def set_format(self, v):
+    def set_format(cls, v):
         """
         Check if the created_at or last_login is wrong.
         """
