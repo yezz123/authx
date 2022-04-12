@@ -9,6 +9,7 @@
 [![Test](https://github.com/yezz123/authx/actions/workflows/test.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/test.yml)
 [![Build Docs](https://github.com/yezz123/authx/actions/workflows/documentation.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/documentation.yml)
 [![Publish](https://github.com/yezz123/authx/actions/workflows/release.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/release.yml)
+[![Pypi](https://img.shields.io/pypi/pyversions/AuthX.svg?color=%2334D058)](https://pypi.org/project/AuthX)
 [![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
 [![Downloads](https://pepy.tech/badge/authx)](https://pepy.tech/project/authx)
 [![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
@@ -93,42 +94,6 @@ def admin_test():
     pass
 ```
 
-## Development 🚧
-
-### Setup environment 📦
-
-You should create a virtual environment and activate it:
-
-```bash
-python -m venv venv/
-```
-
-```bash
-source venv/bin/activate
-```
-
-And then install the development dependencies:
-
-```bash
-pip install -r requirements.dev.txt
-```
-
-### Run tests 🌝
-
-I use Pytest to run the tests, you can run this by using a shortcut command in the `Makefile`:
-
-```bash
-make test
-```
-
-### Format the code 🍂
-
-Execute the following command to apply `pre-commit` formatting:
-
-```bash
-make lint
-```
-
 ## Contributors and sponsors ✨☕️
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
@@ -169,6 +134,16 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## Links 🚧
+
+- [Homepage](https://authx.yezz.codes/)
+- [FAQ](https://authx.yezz.codes/faq/)
+- [Release - AuthX](https://authx.yezz.codes/release/)
+- [MIT License](https://authx.yezz.codes/license/)
+- [Code of Conduct](https://authx.yezz.codes/code_of_conduct/)
+- [Contributing](https://authx.yezz.codes/contributing/)
+- [Help - Sponsors](https://authx.yezz.codes/help/)
 
 ## License 📝
 

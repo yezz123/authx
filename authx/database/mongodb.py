@@ -51,7 +51,7 @@ class MongoDBBackend(BaseDBBackend):
 
     async def get_by_social(self, provider: str, sid: str) -> Optional[dict]:
         return await self._users.find_one(
-            {"provider": provider, "sid": str(sid)}, {"_id": 0}
+            {"provider": provider, "sid": sid}, {"_id": 0}
         )
 
     async def create(self, obj: dict) -> int:

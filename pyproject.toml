@@ -35,6 +35,14 @@ requires = [
     "itsdangerous == 2.0.1",
     "aiosmtplib == 1.1.6",
     "pydantic==1.9.0",
+    "databases == 0.5.3",
+    "motor == 2.5.1",
+    "Authlib==0.15.5",
+    "starlette >=0.14.02,<0.16.0",
+    "aioredis >=2.0.1,<2.1.0",
+    "redis==3.5.3",
+    "pytz==2021.3",
+    "python-dateutil==2.8.2"
 ]
 
 [tool.flit.metadata.requires-extra]
@@ -61,26 +69,6 @@ docs = [
     "markdown-include==0.6.0",
     "pymdown-extensions==9.1",
     "mdx-include==1.4.1",
-]
-encodedb = [
-    "databases == 0.5.3",
-]
-mongo = [
-    "motor == 2.5.1",
-]
-oauth2 = [
-    "Authlib==0.15.5",
-    "starlette >=0.14.02,<0.16.0",
-
-]
-redis = [
-    "aioredis >=2.0.1,<2.1.0",
-    "redis==3.5.3",
-    "pytz==2021.3",
-    "python-dateutil==2.8.2"
-]
-session = [
-    "redis==3.5.3"
 ]
 
 [tool.flit.metadata.urls]

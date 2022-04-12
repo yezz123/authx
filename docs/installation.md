@@ -10,32 +10,4 @@ You can add AuthX to your FastAPI project in a few easy steps. First of all, ins
 pip install authx
 ```
 
-### EncodeDB Dependency
-
-```shell
-pip install authx[encodedb]
-```
-
-### MongoDB Dependency
-
-```shell
-pip install authx[mongo]
-```
-
-### Oauth2 Dependency
-
-```shell
-pip install authx[oauth2]
-```
-
-### Redis Dependency
-
-```shell
-pip install authx[redis]
-```
-
-### Session Dependency
-
-```shell
-pip install authx[session]
-```
+- While Installing AuthX, you will install all the dependencies that require all the functionality ex. `EncodeDB, MongoDB, OAuth2, Redis and more`.

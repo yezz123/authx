@@ -4,13 +4,9 @@
 
 Setting up the Redis cache is very simple, we just need to create a new instance of the Redis class and pass it to the `set_redis` method.
 
-But first check that you install the required packages:
+- But first check that you install the required packages
 
-```shell
-pip install authx[redis]
-```
-
-Then create a new instance of the Redis class and pass it to the `set_redis` method.
+- Then create a new instance of the Redis class and pass it to the `set_redis` method.
 
 ```python
 from authx import authx, RedisBackend

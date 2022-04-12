@@ -69,7 +69,7 @@ class JWTBackend:
                     return None
 
                 return payload
-            except:  # noqa E722
+            except Exception:
                 return None
         return None
 
@@ -82,7 +82,7 @@ class JWTBackend:
         else:
             exp = datetime.utcnow() + timedelta(seconds=60)
 
-        payload.update({"iat": iat, "exp": exp, "type": token_type})
+        payload |= {"iat": iat, "exp": exp, "type": token_type}
         token = jwt.encode(payload, self._private_key, algorithm=JWT_ALGORITHM)
         if isinstance(token, bytes):
             # For PyJWT <= 1.7.1
