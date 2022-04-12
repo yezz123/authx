@@ -69,6 +69,7 @@ docs = [
     "markdown-include==0.6.0",
     "pymdown-extensions==9.1",
     "mdx-include==1.4.1",
+    "jinja2==3.0.3"
 ]
 
 [tool.flit.metadata.urls]
