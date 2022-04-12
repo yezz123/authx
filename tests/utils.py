@@ -304,7 +304,7 @@ class MockAuthBackend:
         else:
             exp = datetime.utcnow() + timedelta(seconds=60)  # pragma: no cover
 
-        payload.update({"iat": iat, "exp": exp, "type": token_type})
+        payload |= {"iat": iat, "exp": exp, "type": token_type}
 
         token = jwt.encode(payload, self._private_key, algorithm=self._jwt_algorithm)
         if isinstance(token, bytes):
