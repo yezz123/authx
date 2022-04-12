@@ -249,7 +249,7 @@ class UserInChangePassword(UserInSetPassword):
     old_password: str
 
     @validator("old_password")
-    def check_old_password(self, v, values):
+    def check_old_password(cls, v, values):
         """
         Check if the old password is correct.
 
