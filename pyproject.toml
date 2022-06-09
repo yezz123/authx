@@ -37,7 +37,7 @@ requires = [
     "pydantic==1.9.1",
     "databases == 0.6.0",
     "motor == 3.0.0",
-    "Authlib==1.0.1",
+    "Authlib==0.15.5",
     "starlette >=0.14.02,<0.20.1",
     "aioredis >=2.0.1,<2.1.0",
     "redis==4.3.3",
