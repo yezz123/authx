@@ -2,6 +2,7 @@ from typing import Union
 
 import socketio
 from fastapi import FastAPI
+from socketio.asyncio_manager import AsyncManager
 
 
 class Socket:
@@ -12,9 +13,12 @@ class Socket:
         socketio_path: str = "socket.io",
         cors_allowed_origins: Union[str, list] = "*",
         async_mode: str = "asgi",
+        client_manager=None,
     ) -> None:
         self._socket = socketio.AsyncServer(
-            async_mode=async_mode, cors_allowed_origins=cors_allowed_origins
+            async_mode=async_mode,
+            cors_allowed_origins=cors_allowed_origins,
+            client_manager=client_manager,
         )
         self._app = socketio.ASGIApp(
             socketio_server=self._socket, socketio_path=socketio_path
@@ -85,3 +89,7 @@ class Socket:
     @property
     def leave_room(self):
         return self._socket.leave_room
+
+    @property
+    def rooms(self):
+        return self._socket.rooms
