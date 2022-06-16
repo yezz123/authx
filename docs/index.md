@@ -20,7 +20,7 @@
 
 **Source Code**: <https://github.com/yezz123/authx>
 
-**Get Started**: <https://authx.yezz.codes/>
+**Get Started**: <https://authx.yezz.me/>
 
 ---
 

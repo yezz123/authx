@@ -73,4 +73,4 @@ docs = [
 ]
 
 [tool.flit.metadata.urls]
-Documentation = "https://authx.yezz.codes/"
+Documentation = "https://authx.yezz.me/"

@@ -40,7 +40,7 @@ africa_Casablanca = timezone('Africa/Casablanca')
 HTTPCache.init(redis_url=REDIS_URL, namespace='test_namespace', tz=africa_Casablanca)
 ```
 
-- Read More in the New Documentation: <https://authx.yezz.codes/configuration/cache/httpcache/>
+- Read More in the New Documentation: <https://authx.yezz.me/configuration/cache/httpcache/>
 
 ### What's Changed
 
@@ -110,7 +110,7 @@ basicConfig(
 )
 ```
 
-- Read the Changelog <https://authx.yezz.codes/release/>
+- Read the Changelog <https://authx.yezz.me/release/>
 
 ## What's Changed
 
