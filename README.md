@@ -18,7 +18,7 @@
 
 **Source Code**: <https://github.com/yezz123/AuthX>
 
-**Documentation**: <https://authx.yezz.codes/>
+**Documentation**: <https://authx.yezz.me/>
 
 ---
 
@@ -52,7 +52,7 @@ Add a Fully registration and authentication or authorization system to your [Fas
 - [x] Provide a Docstring for each class and function.
 - [x] Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
 
-**Note:** Check [Release Notes](https://authx.yezz.codes/release/).
+**Note:** Check [Release Notes](https://authx.yezz.me/release/).
 
 **Note:** Check [Examples](https://github.com/yezz123/authx/tree/main/example).
 
@@ -137,13 +137,13 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## Links 🚧
 
-- [Homepage](https://authx.yezz.codes/)
-- [FAQ](https://authx.yezz.codes/faq/)
-- [Release - AuthX](https://authx.yezz.codes/release/)
-- [MIT License](https://authx.yezz.codes/license/)
-- [Code of Conduct](https://authx.yezz.codes/code_of_conduct/)
-- [Contributing](https://authx.yezz.codes/contributing/)
-- [Help - Sponsors](https://authx.yezz.codes/help/)
+- [Homepage](https://authx.yezz.me/)
+- [FAQ](https://authx.yezz.me/faq/)
+- [Release - AuthX](https://authx.yezz.me/release/)
+- [MIT License](https://authx.yezz.me/license/)
+- [Code of Conduct](https://authx.yezz.me/code_of_conduct/)
+- [Contributing](https://authx.yezz.me/contributing/)
+- [Help - Sponsors](https://authx.yezz.me/help/)
 
 ## License 📝
 
