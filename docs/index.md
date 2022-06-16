@@ -34,7 +34,7 @@ Authx is a fast, flexible and easy to use authentication and authorization libra
 - [x] Extensible base user model.
 - [x] Ready-to-use register, login, reset password and verify e-mail routes.
 - [x] Ready-to-use Social login and Oauth2 routes.
-    - [X] Full Configuration and customization.
+    - [x] Full Configuration and customization.
     - [x] Ready-to-use social OAuth2 login flow.
 - [x] Middleware Support for Oauth2 using `Authlib` and Starlette.
 - [x] Dependency callable to inject current user in route.
@@ -53,7 +53,8 @@ Authx is a fast, flexible and easy to use authentication and authorization libra
     - [x] Cookie authentication backend included
 - [x] Full OpenAPI schema support, even with several authentication backend.
 - [x] Provide a Docstring for each class and function.
-- [X] Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
+- [x] Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
+- [x] Support SocketIO.
 
 ## Project using
 

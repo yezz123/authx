@@ -51,6 +51,7 @@ Add a Fully registration and authentication or authorization system to your [Fas
 - [x] Full OpenAPI schema support, even with several authentication backend.
 - [x] Provide a Docstring for each class and function.
 - [x] Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
+- [x] Support SocketIO.
 
 **Note:** Check [Release Notes](https://authx.yezz.me/release/).
 
