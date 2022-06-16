@@ -8,6 +8,7 @@ from authx.core.session import (
     getSessionStorage,
     setSession,
 )
+from authx.core.socket import Socket as AuthXSocket
 from authx.core.user import User
 
 __all__ = [
@@ -20,4 +21,5 @@ __all__ = [
     "getSessionId",
     "getSessionStorage",
     "setSession",
+    "AuthXSocket",
 ]

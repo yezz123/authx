@@ -99,6 +99,8 @@ nav:
     - Middleware:
       - Introduction: configuration/middleware/index.md
       - configuration/middleware/example.md
+    - Socket:
+      - Introduction: configuration/socket/index.md
   - Help AuthX - Get Help: help.md
   - Development - Contributing: contributing.md
   - Frequently Asked Questions: faq.md

@@ -4,6 +4,7 @@ __version__ = "0.4.0"
 
 from authx.backend import UsersRepo as UsersRepo
 from authx.cache import RedisBackend as RedisBackend
+from authx.core import AuthXSocket as AuthXSocket
 from authx.core import EmailClient as EmailClient
 from authx.core import JWTBackend as JWTBackend
 from authx.core import User as User

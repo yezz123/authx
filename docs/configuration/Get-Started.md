@@ -49,3 +49,9 @@ AuthX object is the main class from which you'll be able to generate routers for
 Supporting OAuth2 is one of the most important feature of AuthX. We provide a middleware to handle the OAuth2 flow for both FastAPI app and Starlette app that could help you to integrate AuthX with your existing app.
 
 ➡️ [Middleware](middleware/index.md)
+
+## SocketIO
+
+AuthX provides a Socket.IO server that can be used to communicate with your API.
+
+➡️ [SocketIO](socket/index.md)
