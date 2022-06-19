@@ -26,7 +26,7 @@ def check_username(v: str) -> str:
             raise ValueError("username special characters")
     if v in WRONG_USERNAMES:
         raise ValueError("username wrong")
-    if any(letter in ascii_letters for letter in v):
+    if any(letter not in ascii_letters for letter in v):
         raise ValueError("username different letters")
     return v
 
