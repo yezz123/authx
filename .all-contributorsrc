@@ -83,6 +83,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "YogeshUpdhyay",
+      "name": "Yogesh Upadhyay",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53992168?v=4",
+      "profile": "https://yogeshupadhyay.netlify.app/",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
