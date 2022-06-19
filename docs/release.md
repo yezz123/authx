@@ -1,5 +1,19 @@
 # Release Notes 🎞
 
+## 0.5.1
+
+Fix Wrong `username` validation `UserInRegister` model #237, Thanks to [@YogeshUpdhyay](https://yogeshupadhyay.netlify.app/) 🙏🏻
+
+### What's Changed
+
+* Username Validation Fixed by [@YogeshUpdhyay](https://yogeshupadhyay.netlify.app/) in <https://github.com/yezz123/authx/pull/238>
+
+### New Contributors
+
+* [@YogeshUpdhyay](https://yogeshupadhyay.netlify.app/) made their first contribution in <https://github.com/yezz123/authx/pull/238>
+
+**Full Changelog**: <https://github.com/yezz123/authx/compare/0.5.0...0.5.1>
+
 ## 0.5.0
 
 Supporting SocketIO that's allows bi-directional communication between client and server. Bi-directional communications are enabled when a client has Socket.IO in the browser, and a server has also integrated the Socket.IO package. While data can be sent in a number of forms, JSON is the simplest.
