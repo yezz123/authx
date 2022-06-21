@@ -7,7 +7,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.testclient import TestClient
 
-from authx.middleware.profiler import ProfilerMiddleware
+from authx import ProfilerMiddleware
 
 
 class ConsoleOutputRedirect:
