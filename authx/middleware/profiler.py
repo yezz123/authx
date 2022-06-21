@@ -1,8 +1,9 @@
+import codecs
 import time
 from logging import getLogger
 from typing import Optional
 
-from pyinstrument import Profiler
+from pyinstrument import Profiler, renderers
 from starlette.requests import Request
 from starlette.routing import Router
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
@@ -32,7 +33,7 @@ class ProfilerMiddleware:
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
         # register an event handler for profiler stop
         if self._server_app is not None:
-            self._server_app.add_event_handler("shutdown", self.get_profiler_result)
+            self._server_app.add_event_handler("shutdown", self.get_result)
 
         if scope["type"] != "http":
             await self.app(scope, receive, send)
@@ -69,3 +70,27 @@ class ProfilerMiddleware:
                         f"Status: {status_code}"
                     )
                     print(self._profiler.output_text(**self._profiler_kwargs))
+
+    async def get_result(self):
+        if self._output_type == "text":
+            print(self._profiler.output_text(**self._profiler_kwargs))
+        elif self._output_type == "html":
+            html_name = self._profiler_kwargs.get("html_file_name")
+            if html_name is None:
+                html_name = "authx_profiling_results.html"
+        elif self._output_type == "json":
+            json_name = self._profiler_kwargs.get("json_file_name")
+            if json_name is None:
+                json_name = "authx_profiling_results.json"
+
+            html_code = renderers.HTMLRenderer().render(
+                session=self._profiler.last_session
+            )
+            with codecs.open(html_name, "w", "utf-8") as f:
+                f.write(html_code)
+
+            json_code = renderers.JSONRenderer().render(
+                session=self._profiler.last_session
+            )
+            with codecs.open(json_name, "w", "utf-8") as f:
+                f.write(json_code)
