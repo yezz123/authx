@@ -52,7 +52,7 @@ class TestProfilerMiddleware:
         stdout_redirect.fp = StringIO()
         temp_stdout, sys.stdout = sys.stdout, stdout_redirect
 
-        request_path = "/test"
+        request_path = "/tests/middleware"
         client.get(request_path)
 
         sys.stdout = temp_stdout
