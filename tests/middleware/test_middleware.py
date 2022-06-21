@@ -60,30 +60,13 @@ class TestProfilerMiddleware:
         assert f"Path: {request_path}" in stdout_redirect.fp.getvalue()
 
     def test_profiler_export_to_html(self, test_middleware):
-        full_path = f"{os.getcwd()}/authx_results.html"
+        full_path = f"{os.getcwd()}/authx_profiling_results.html"
 
         with TestClient(
             test_middleware(
                 profiler_output_type="html",
                 is_print_each_request=False,
                 html_file_name=full_path,
-            )
-        ) as client:
-            # request
-            request_path = "/tests/middleware"
-            client.get(request_path)
-
-        with open(full_path) as f:
-            assert "profiler.py" in f.read()
-
-    def test_profiler_export_to_json(self, test_middleware):
-        full_path = f"{os.getcwd()}/authx_results.json"
-
-        with TestClient(
-            test_middleware(
-                profiler_output_type="json",
-                is_print_each_request=False,
-                json_file_name=full_path,
             )
         ) as client:
             # request

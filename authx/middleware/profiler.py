@@ -74,10 +74,6 @@ class ProfilerMiddleware:
     async def get_result(self):
         if self._output_type == "text":
             print(self._profiler.output_text(**self._profiler_kwargs))
-        if self._output_type == "json":
-            json_name = self._profiler_kwargs.get("json_file_name")
-            if json_name is None:
-                json_name = "authx_profiling_results.json"
 
         elif self._output_type == "html":
             html_name = self._profiler_kwargs.get("html_file_name")
@@ -89,9 +85,3 @@ class ProfilerMiddleware:
             )
             with codecs.open(html_name, "w", "utf-8") as f:
                 f.write(html_code)
-
-            json_code = renderers.JSONRenderer().render(
-                session=self._profiler.last_session
-            )
-            with codecs.open(json_name, "w", "utf-8") as f:
-                f.write(json_code)
