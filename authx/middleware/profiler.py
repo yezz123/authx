@@ -85,3 +85,14 @@ class ProfilerMiddleware:
             )
             with codecs.open(html_name, "w", "utf-8") as f:
                 f.write(html_code)
+
+        elif self._output_type == "json":
+            json_name = self._profiler_kwargs.get("json_file_name")
+            if json_name is None:
+                json_name = "authx_profiling_results.json"
+
+            json_code = renderers.JSONRenderer().render(
+                session=self._profiler.last_session
+            )
+            with codecs.open(json_name, "w", "utf-8") as f:
+                f.write(json_code)
