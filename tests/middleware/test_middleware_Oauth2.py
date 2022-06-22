@@ -1,4 +1,3 @@
-import unittest
 from unittest import TestCase
 
 from starlette.config import environ
@@ -6,9 +5,6 @@ from starlette.datastructures import URL
 from starlette.testclient import TestClient
 
 
-@unittest.skip(
-    "Improve this test later while getting issues after adding the container of Redis to Github Workflow"
-)
 class Test(TestCase):
     @classmethod
     def setUpClass(cls):
@@ -21,9 +17,9 @@ class Test(TestCase):
             "CLIENT_SECRET"
         ] = "0000000000000000000000000000000000000000000000000000000000000000"
 
-        import example.app
+        import tests.middleware.example.app as Testapp
 
-        app = example.app.app
+        app = Testapp.app
 
         cls.client = TestClient(app)
 
