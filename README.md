@@ -52,6 +52,7 @@ Add a Fully registration and authentication or authorization system to your [Fas
 - [x] Provide a Docstring for each class and function.
 - [x] Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
 - [x] Support SocketIO.
+- [x] Support Middleware of [pyinstrument](https://pyinstrument.readthedocs.io/) to check your service performance.
 
 **Note:** Check [Release Notes](https://authx.yezz.me/release/).
 

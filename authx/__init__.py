@@ -14,6 +14,7 @@ from authx.database import MongoDBBackend as MongoDBBackend
 from authx.main import Authentication as Authentication
 from authx.main import authx as authx
 from authx.middleware import MiddlewareOauth2 as MiddlewareOauth2
+from authx.middleware import ProfilerMiddleware as ProfilerMiddleware
 from authx.middleware.service import cache as cache
 from authx.middleware.service import invalidate_cache as invalidate_cache
 from authx.models.cache import HTTPCache as HTTPCache

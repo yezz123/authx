@@ -43,7 +43,8 @@ requires = [
     "redis==4.3.3",
     "pytz==2022.1",
     "python-dateutil==2.8.2",
-    "python-socketio>=4.6.0"
+    "python-socketio>=4.6.0",
+    "pyinstrument==4.1.1"
 ]
 
 [tool.flit.metadata.requires-extra]

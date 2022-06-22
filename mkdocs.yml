@@ -98,6 +98,7 @@ nav:
       - configuration/routers/search.md
     - Middleware:
       - Introduction: configuration/middleware/index.md
+      - configuration/middleware/service-performance.md
       - configuration/middleware/example.md
     - Socket:
       - Introduction: configuration/socket/index.md
