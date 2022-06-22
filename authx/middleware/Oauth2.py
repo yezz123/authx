@@ -31,8 +31,8 @@ class MiddlewareOauth2:
         self.db = db
         self._force_https_redirect = force_https_redirect
 
-        self._client = starlette_client.OAuth(
-            starlette_client.StarletteRemoteApp("starlette"),
+        self._client = starlette_client.StarletteRemoteApp(
+            starlette_client.StartletteIntegration("starlette"),
             client_id=client_id,
             client_secret=client_secret,
             server_metadata_url=server_metadata_url,
