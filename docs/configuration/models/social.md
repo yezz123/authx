@@ -4,7 +4,7 @@
 
 There are one Pydantic model variation provided as mixin:
 
-* `SocialInCreate` – social user model for creating.
+- `SocialInCreate` – social user model for creating.
 
 You should define it, inheriting from the mixin:
 
@@ -18,12 +18,14 @@ class login(social.SocialInCreate):
     pass
 ```
 
-!!! warning
-    Take Care! you can't add any field to the model, because it's relate to the third party of the Provider (ex. Facebook, Google, etc.)
+!!! warning Take Care! you can't add any field to the model, because it's relate
+to the third party of the Provider (ex. Facebook, Google, etc.)
 
-Check the [pydantic documentation](https://pydantic-docs.helpmanual.io/usage/models/) for more information.
+Check the
+[pydantic documentation](https://pydantic-docs.helpmanual.io/usage/models/) for
+more information.
 
 Check also:
 
-* [Base Models](base.md)
-* [properties](properties.md)
+- [Base Models](base.md)
+- [properties](properties.md)

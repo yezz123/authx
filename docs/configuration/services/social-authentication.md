@@ -1,6 +1,7 @@
 # Social Authentication
 
-the Main Class `SocialService` is the main class that is used to perform all Social Authentication operations.
+the Main Class `SocialService` is the main class that is used to perform all
+Social Authentication operations.
 
 ```py
 from authx import SocialService, UsersRepo, JWTBackend

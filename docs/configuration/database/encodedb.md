@@ -1,12 +1,16 @@
 # EncodeDB
 
-Encode Database is a database that gives you simple `asyncio` support for a range of databases.
+Encode Database is a database that gives you simple `asyncio` support for a
+range of databases.
 
-It allows you to make queries using the powerful `SQLAlchemy Core` expression language and provides support for `PostgreSQL`, `MySQL`, and `SQLite`.
+It allows you to make queries using the powerful `SQLAlchemy Core` expression
+language and provides support for `PostgreSQL`, `MySQL`, and `SQLite`.
 
-Databases is suitable for integrating against any async Web framework, such as `Starlette`, `Sanic`, `Responder`, `Quart`, `aiohttp`, `Tornado`, or `FastAPI`.
+Databases is suitable for integrating against any async Web framework, such as
+`Starlette`, `Sanic`, `Responder`, `Quart`, `aiohttp`, `Tornado`, or `FastAPI`.
 
-You could check the [documentation](https://www.encode.io/databases/) for more information.
+You could check the [documentation](https://www.encode.io/databases/) for more
+information.
 
 - Check that you install requirements
 
@@ -29,11 +33,13 @@ auth = Authentication(
 )
 ```
 
-Here we present a simple PostgreSQL database example on how to use the `EncodeDBBackend`.
+Here we present a simple PostgreSQL database example on how to use the
+`EncodeDBBackend`.
 
 ### Create/Update/Delete Functions
 
-Here we are creating the functions that will be used to create and update the database,based on the request.
+Here we are creating the functions that will be used to create and update the
+database,based on the request.
 
 - Create:
 
@@ -76,7 +82,8 @@ async def delete(self, id: UUID) -> bool:
 
 ### Complex Functions
 
-After you have created the database, you can use the following functions to create, update, and delete users.
+After you have created the database, you can use the following functions to
+create, update, and delete users.
 
 - request Email Confirmation:
 
@@ -117,4 +124,5 @@ async def confirm_email(self, token_hash: str) -> bool:
         return False
 ```
 
-Here we Present different functions to create, update, and delete users, also some complex functions to use it if you would like to extend the functionality.
+Here we Present different functions to create, update, and delete users, also
+some complex functions to use it if you would like to extend the functionality.

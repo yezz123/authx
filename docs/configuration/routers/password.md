@@ -1,16 +1,18 @@
 # Password Router
 
-The password router is a router use to provide different state of passwords, for example forget password, reset password, etc.
+The password router is a router use to provide different state of passwords, for
+example forget password, reset password, etc.
 
-* POST `/forgot_password`
-* GET `/password`
-* POST `password`
-* POST `/password/{token}`
-* PUT `/password`
+- POST `/forgot_password`
+- GET `/password`
+- POST `password`
+- POST `/password/{token}`
+- PUT `/password`
 
 ## Setup the Password Service
 
-To Setup the Password service, you will need to add all requirements to the object `PasswordService`:
+To Setup the Password service, you will need to add all requirements to the
+object `PasswordService`:
 
 ```py
 from authx.services.password import PasswordService
@@ -46,7 +48,9 @@ app.include_router(auth.password_router, prefix="/api/users")
 
 ### Forgot Password
 
-This is a `POST` request to `/forgot_password` that will send a request getting the Data(Login, Password) and IP address of the user, this one work only for accounts with a pre-configured password.
+This is a `POST` request to `/forgot_password` that will send a request getting
+the Data(Login, Password) and IP address of the user, this one work only for
+accounts with a pre-configured password.
 
 ```py
 @router.post("/forgot_password", name="auth:forgot_password")
@@ -57,10 +61,13 @@ This is a `POST` request to `/forgot_password` that will send a request getting 
         return await service.forgot_password(data, ip)
 ```
 
-Now lets try to understand the concept that we have in `service.forgot_password`:
+Now lets try to understand the concept that we have in
+`service.forgot_password`:
 
-* This one return a `Response` object, that we can use to send a response to the user.
-* If the user is not found, we will raise an HTTPException with the status code 404, we could get also `400` if the data is not valid or time is expired.
+- This one return a `Response` object, that we can use to send a response to the
+  user.
+- If the user is not found, we will raise an HTTPException with the status code
+  404, we could get also `400` if the data is not valid or time is expired.
 
 ```py
 async def forgot_password(self, data: dict, ip: str) -> None:
@@ -96,7 +103,8 @@ async def forgot_password(self, data: dict, ip: str) -> None:
 
 ### Password Status
 
-Using a `GET` Method to get the status of the password, based on the logged user.
+Using a `GET` Method to get the status of the password, based on the logged
+user.
 
 ```py
 @router.get("/password", name="auth:password_status")
@@ -105,7 +113,8 @@ Using a `GET` Method to get the status of the password, based on the logged user
         return await service.password_status()
 ```
 
-This one gonna return a dict where the response gonna show up the status of the password.
+This one gonna return a dict where the response gonna show up the status of the
+password.
 
 `Service.password_status` will return a dict with the following keys:
 
@@ -119,7 +128,10 @@ This one also relate to the `UsersPasswordMixin` Class.
 
 ### Password Set
 
-To Set a Password that require a `POST` request to `/password` that will send a request with the token and the new password, here we use as a parameter the request where we have the token and also the Authenticated User (Optional for Admins).
+To Set a Password that require a `POST` request to `/password` that will send a
+request with the token and the new password, here we use as a parameter the
+request where we have the token and also the Authenticated User (Optional for
+Admins).
 
 ```py
 @router.post("/password", name="auth:password_set")
@@ -132,9 +144,10 @@ To Set a Password that require a `POST` request to `/password` that will send a 
         return await service.password_set(data)
 ```
 
-As always we use a Pre-configured Services (`Service.password_set`) where we have 2 ways to set the password.
+As always we use a Pre-configured Services (`Service.password_set`) where we
+have 2 ways to set the password.
 
-* First Example:
+- First Example:
 
 ```py
 async def password_set(self, data: dict) -> None:
@@ -148,7 +161,7 @@ async def password_set(self, data: dict) -> None:
         }
 ```
 
-* Second Example:
+- Second Example:
 
 ```py
 async def password_set(self, data: dict) -> None:
@@ -162,11 +175,14 @@ async def password_set(self, data: dict) -> None:
             raise HTTPException(400, get_error_message("password already exists"))
 ```
 
-Both of them gonna return a `Response` object, that we can use to send a response to the user.
+Both of them gonna return a `Response` object, that we can use to send a
+response to the user.
 
 ### Password Reset
 
-Reset the password using a `POST` request to `/password/{token}` that will send a request with the new password, here we use as a parameter the request and a string token.
+Reset the password using a `POST` request to `/password/{token}` that will send
+a request with the new password, here we use as a parameter the request and a
+string token.
 
 ```py
 @router.post(
@@ -184,7 +200,8 @@ To reset the password we pass data under this format:
 data: {password1: "password", password2: "password"}
 ```
 
-with the token that we have in the `forgot_password` request, to validate and reset the password.
+with the token that we have in the `forgot_password` request, to validate and
+reset the password.
 
 ```py
 async def password_reset(self, data: dict, token: str) -> None:
@@ -202,15 +219,16 @@ async def password_reset(self, data: dict, token: str) -> None:
         return None
 ```
 
-!!! Warning
-    You could get the HTTPException if:
+!!! Warning You could get the HTTPException if:
 
     * `404` : The token is not found.
     * `400` : Token Validation Error.
 
 ### Password Change
 
-After Passing all this steps, Now we can use `PUT` to change the password of the user, this one will send a request with the new password, here we use as a parameter the request and User (Defaults to Depends `get_authenticated_user`).
+After Passing all this steps, Now we can use `PUT` to change the password of the
+user, this one will send a request with the new password, here we use as a
+parameter the request and User (Defaults to Depends `get_authenticated_user`).
 
 ```py
 @router.put("/password", name="auth:password_change")
@@ -224,7 +242,8 @@ After Passing all this steps, Now we can use `PUT` to change the password of the
     return router
 ```
 
-Equivalent to `password_set` but with the `PUT` request, we pass the data under the same format.
+Equivalent to `password_set` but with the `PUT` request, we pass the data under
+the same format.
 
 ```py
 async def password_change(self, data: dict) -> None:
@@ -239,8 +258,7 @@ async def password_change(self, data: dict) -> None:
         return None
 ```
 
-!!! Warning
-    You could get the HTTPException if:
+!!! Warning You could get the HTTPException if:
 
     * `404` : The token is not found.
     * `400` : Token Validation Error.

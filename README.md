@@ -22,7 +22,9 @@
 
 ---
 
-Add a Fully registration and authentication or authorization system to your [FastAPI](https://fastapi.tiangolo.com/) project. **AuthX** is designed to be as customizable and adaptable as possible.
+Add a Fully registration and authentication or authorization system to your
+[FastAPI](https://fastapi.tiangolo.com/) project. **AuthX** is designed to be as
+customizable and adaptable as possible.
 
 ## Features 🔧
 
@@ -43,16 +45,20 @@ Add a Fully registration and authentication or authorization system to your [Fas
 - [x] Using Redis as a session store & cache.
 - [x] Support HTTPCache.
 - [x] Customizable database backend:
-  - [x] MongoDB async backend included thanks to [mongodb/motor](https://github.com/mongodb/motor)
-  - [x] SQLAlchemy backend included thanks to [Encode/Databases](https://github.com/encode/databases)
+  - [x] MongoDB async backend included thanks to
+        [mongodb/motor](https://github.com/mongodb/motor)
+  - [x] SQLAlchemy backend included thanks to
+        [Encode/Databases](https://github.com/encode/databases)
 - [x] Multiple customizable authentication backend:
   - [x] JWT authentication backend included
   - [x] Cookie authentication backend included
 - [x] Full OpenAPI schema support, even with several authentication backend.
 - [x] Provide a Docstring for each class and function.
-- [x] Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
+- [x] Support Sessions and Pre-built CRUD functions and Instance to launch
+      Redis.
 - [x] Support SocketIO.
-- [x] Support Middleware of [pyinstrument](https://pyinstrument.readthedocs.io/) to check your service performance.
+- [x] Support Middleware of [pyinstrument](https://pyinstrument.readthedocs.io/)
+      to check your service performance.
 
 **Note:** Check [Release Notes](https://authx.yezz.me/release/).
 
@@ -99,10 +105,14 @@ def admin_test():
 ## Contributors and sponsors ✨☕️
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks goes to these wonderful people
+([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
@@ -136,7 +146,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+This project follows the
+[all-contributors](https://github.com/all-contributors/all-contributors)
+specification. Contributions of any kind welcome!
 
 ## Links 🚧
 

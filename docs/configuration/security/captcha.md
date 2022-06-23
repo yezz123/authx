@@ -1,6 +1,7 @@
 # Captcha
 
-CAPTCHA (Completely Automated Public Turing test to tell Computers and Humans Apart) is a type of security measure known as challenge-response authentication.
+CAPTCHA (Completely Automated Public Turing test to tell Computers and Humans
+Apart) is a type of security measure known as challenge-response authentication.
 
 Using `HTTPX` we can easily send a captcha to the user and verify it.
 

@@ -1,6 +1,7 @@
 # Search
 
-the Main Class `SearchService` is the main class that is used to perform all search operations.
+the Main Class `SearchService` is the main class that is used to perform all
+search operations.
 
 ```py
 from authx import SearchService, UsersRepo, BaseDBBackend, RedisBackend

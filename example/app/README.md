@@ -1,8 +1,10 @@
 # AuthX - Example
 
-AuthX is a library for building authentication and authorization systems, using FastAPI & Starlette Dependency
+AuthX is a library for building authentication and authorization systems, using
+FastAPI & Starlette Dependency
 
-In this example, we will use AuthX to build a simple authentication and authorization system, with multiple routes.
+In this example, we will use AuthX to build a simple authentication and
+authorization system, with multiple routes.
 
 ## Setup
 
@@ -24,7 +26,8 @@ pip install -r requirements.txt
 cp .env.sample .env
 ```
 
-__Note__: If the pre-added configuration doesn't fit you, you could change it manually.
+**Note**: If the pre-added configuration doesn't fit you, you could change it
+manually.
 
 - Now you could run the Project locally
 
@@ -34,7 +37,8 @@ uvicorn main:app --reload
 
 ### Docker Usage
 
-If you would like to not setup everything locally and run the project on Docker, you can use the following commands:
+If you would like to not setup everything locally and run the project on Docker,
+you can use the following commands:
 
 ```shell
 # Build the image

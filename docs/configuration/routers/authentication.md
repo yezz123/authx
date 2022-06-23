@@ -2,19 +2,20 @@
 
 The auth router will generate a set of endpoints for authenticating users.
 
-* POST `/register`
-* POST `/login`
-* POST `/logout`
-* POST `/token`
-* POST `/token/refresh`
-* GET `/confirm`
-* POST `/confirm`
-* POST `/confirm/{token}`
-* POST `/{id}/change_username`
+- POST `/register`
+- POST `/login`
+- POST `/logout`
+- POST `/token`
+- POST `/token/refresh`
+- GET `/confirm`
+- POST `/confirm`
+- POST `/confirm/{token}`
+- POST `/{id}/change_username`
 
 ## Setup The Authentication service
 
-To Setup the authentication service, you will need to add all requirements to the object `AuthService`.
+To Setup the authentication service, you will need to add all requirements to
+the object `AuthService`.
 
 ```py
 from authx.services.auth import AuthService
@@ -50,7 +51,8 @@ app.include_router(auth.auth_router, prefix="/api/users")
 
 ### Register
 
-As we know we will use the `POST` method to register a new user, also a callback method.
+As we know we will use the `POST` method to register a new user, also a callback
+method.
 
 This Route is based on:
 
@@ -65,14 +67,15 @@ This Route is based on:
         return None
 ```
 
-The `Service.register` method will return the Access and Refresh tokens, and if we have a validation error it will return the error `400`.
+The `Service.register` method will return the Access and Refresh tokens, and if
+we have a validation error it will return the error `400`.
 
 ### Login
 
 Same logical way as [register](#register), we use the same Authentication route.
 
-!!! info
-    `app.include_router(auth.auth_router, prefix="/api/users")` include all authentication routers.
+!!! info `app.include_router(auth.auth_router, prefix="/api/users")` include all
+authentication routers.
 
 ```py
 @router.post("/login", name="auth:login")
@@ -87,20 +90,24 @@ Same logical way as [register](#register), we use the same Authentication route.
 
 For the `login` Service we provide some params:
 
-* `data`: The data that we will use to login. (login, password).
-* `ip`: The IP of the client.
+- `data`: The data that we will use to login. (login, password).
+- `ip`: The IP of the client.
 
-if the `data` is not valid, we will return the error `400`, if the `data` is valid, we will return the tokens (access and refresh).
+if the `data` is not valid, we will return the error `400`, if the `data` is
+valid, we will return the tokens (access and refresh).
 
-!!! info
-    There is also an `HTTPException` relate to `404` if the user is not found, also the `429` relate to brute force attempts.
+!!! info There is also an `HTTPException` relate to `404` if the user is not
+found, also the `429` relate to brute force attempts.
 
-!!! info
-    The HTTP `429` Too Many Requests response status code indicates the user has sent too many requests in a given amount of time ("rate limiting"). A Retry-After header might be included to this response indicating how long to wait before making a new request.
+!!! info The HTTP `429` Too Many Requests response status code indicates the
+user has sent too many requests in a given amount of time ("rate limiting"). A
+Retry-After header might be included to this response indicating how long to
+wait before making a new request.
 
 ### Logout
 
-As we know `logout` always mean that we will remove the `access_cookies_name` and `refresh_cookies_name` from the response.
+As we know `logout` always mean that we will remove the `access_cookies_name`
+and `refresh_cookies_name` from the response.
 
 ```py
 @router.post("/logout", name="auth:logout")
@@ -110,11 +117,15 @@ As we know `logout` always mean that we will remove the `access_cookies_name` an
         return None
 ```
 
-The `response.delete_cookie` is a function in the `starlette` a lightweight ASGI framework/toolkit, which is ideal for building high performance asyncio services.
+The `response.delete_cookie` is a function in the `starlette` a lightweight ASGI
+framework/toolkit, which is ideal for building high performance asyncio
+services.
 
 ### Token
 
-After login and all the steps we have a function relate to get a new token based on `user` a class that initalize the user object and use `data` (login, password) as an argument.
+After login and all the steps we have a function relate to get a new token based
+on `user` a class that initalize the user object and use `data` (login,
+password) as an argument.
 
 ```py
 @router.post("/token", name="auth:token")
@@ -141,7 +152,10 @@ def __init__(self, data=None):
 
 #### Refresh Token
 
-We have also a way to get a new refresh token, this is the same as the `token` method, but we will use the `refresh_token` instead of `access_token`, it take `request` & `response` as arguments, use also `starlette` to set the `refresh_cookie_name` in the response.
+We have also a way to get a new refresh token, this is the same as the `token`
+method, but we will use the `refresh_token` instead of `access_token`, it take
+`request` & `response` as arguments, use also `starlette` to set the
+`refresh_cookie_name` in the response.
 
 ```py
 @router.post("/token/refresh", name="auth:refresh_access_token")
@@ -158,33 +172,27 @@ We have also a way to get a new refresh token, this is the same as the `token` m
         return {"access": access_token}
 ```
 
-- The `service.refresh_access_token` will return the new access token, or it will raise;
-    - `401`: if the refresh token is not valid. (Refresh or Ban).
-    - `500`: if the refresh token is expired.
+- The `service.refresh_access_token` will return the new access token, or it
+  will raise;
+  - `401`: if the refresh token is not valid. (Refresh or Ban).
+  - `500`: if the refresh token is expired.
 
-!!! info
-    `set_access_token_in_response` take the `response` and the `token` as arguments, also set :
-    ```py
-        response.set_cookie(
-                key=refresh_cookie_name,
-                value=token,
-                secure=not debug,
-                httponly=True,
-                max_age=refresh_expiration,
-            )
-    ```
+!!! info `set_access_token_in_response` take the `response` and the `token` as
+arguments, also set :
+`py response.set_cookie( key=refresh_cookie_name, value=token, secure=not debug, httponly=True, max_age=refresh_expiration, ) `
 
 ### Confirm
 
 We have 3 steps for the Email confirmation:
 
-* [get_email_confirmation_status](#ConfirmationStatus)
-* [request_email_confirmation](#RequestConfirmation)
-* [confirm_email](#Confirmation)
+- [get_email_confirmation_status](#ConfirmationStatus)
+- [request_email_confirmation](#RequestConfirmation)
+- [confirm_email](#Confirmation)
 
 #### ConfirmationStatus
 
-For the `get_email_confirmation_status` we will use the `GET` method, and we will return the status of the email confirmation.
+For the `get_email_confirmation_status` we will use the `GET` method, and we
+will return the status of the email confirmation.
 
 ```py
 @router.get("/confirm", name="auth:get_email_confirmation_status")
@@ -195,7 +203,8 @@ For the `get_email_confirmation_status` we will use the `GET` method, and we wil
         return await service.get_email_confirmation_status()
 ```
 
-The `service.get_email_confirmation_status()` gonna return the status of the email confirmation. `{"email": sample@sample.com, "confirmed": True}`
+The `service.get_email_confirmation_status()` gonna return the status of the
+email confirmation. `{"email": sample@sample.com, "confirmed": True}`
 
 ```py
 async def get_email_confirmation_status(self) -> dict:
@@ -205,7 +214,9 @@ async def get_email_confirmation_status(self) -> dict:
 
 #### RequestConfirmation
 
-for the `request_email_confirmation` we will use the `POST` method, and we will return the status of the email confirmation, its take the `user` as an arguments or by default its depend on `get_authenticated_user`.
+for the `request_email_confirmation` we will use the `POST` method, and we will
+return the status of the email confirmation, its take the `user` as an arguments
+or by default its depend on `get_authenticated_user`.
 
 ```py
 @router.post("/confirm", name="auth:request_email_confirmation")
@@ -215,7 +226,10 @@ for the `request_email_confirmation` we will use the `POST` method, and we will 
         return await service.request_email_confirmation()
 ```
 
-the `service.request_email_confirmation()` check the email if is confirmed or not, for example if is not confirmed its return a link to confirm this email, if confirmed raise an HTTPException `400` with the message `Email already confirmed`, also can show the timeout exception.
+the `service.request_email_confirmation()` check the email if is confirmed or
+not, for example if is not confirmed its return a link to confirm this email, if
+confirmed raise an HTTPException `400` with the message
+`Email already confirmed`, also can show the timeout exception.
 
 ```py
 async def request_email_confirmation(self) -> None:
@@ -231,7 +245,8 @@ async def request_email_confirmation(self) -> None:
 
 #### Confirmation
 
-For the `confirm_email` function we will use the `POST` method, and it will return a response with a token to verify, its take the `token` as an arguments.
+For the `confirm_email` function we will use the `POST` method, and it will
+return a response with a token to verify, its take the `token` as an arguments.
 
 ```py
 @router.post("/confirm/{token}", name="auth:confirm_email")
@@ -240,7 +255,9 @@ For the `confirm_email` function we will use the `POST` method, and it will retu
         return await service.confirm_email(token)
 ```
 
-The `service.confirm_email` hash the token, or looks up hash in db to update the confirmed row to row (Default is `false`), this could raise also `403` an HTTPException that show if there is no hash in database.
+The `service.confirm_email` hash the token, or looks up hash in db to update the
+confirmed row to row (Default is `false`), this could raise also `403` an
+HTTPException that show if there is no hash in database.
 
 ```py
 async def confirm_email(self, token: str) -> None:
@@ -252,7 +269,9 @@ async def confirm_email(self, token: str) -> None:
 
 ### Change Username
 
-At the last point of authentication we have a function to change the username, it take `id`, `username`, `user` as arguments, and return a response with the new username.
+At the last point of authentication we have a function to change the username,
+it take `id`, `username`, `user` as arguments, and return a response with the
+new username.
 
 ```py
 @router.post("/{id}/change_username", name="auth:change_username")
@@ -269,9 +288,8 @@ At the last point of authentication we have a function to change the username, i
     return router
 ```
 
-The `service.change_username` will return the new username, or it will raise;
-    - `400`: Username already exists.
-    - `404`: user not found.
+The `service.change_username` will return the new username, or it will raise; -
+`400`: Username already exists. - `404`: user not found.
 
 ```py
 async def change_username(self, id: int, username: str) -> None:
