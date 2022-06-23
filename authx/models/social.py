@@ -7,9 +7,7 @@ from authx.models.common import set_created_at, set_last_login
 
 
 class SocialInCreate(BaseModel):
-    """
-    SocialInCreate is a model for the input of the Social model.
-    """
+    """SocialInCreate is a model for the input of the Social model."""
 
     email: EmailStr
     username: str

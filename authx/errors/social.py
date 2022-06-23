@@ -2,13 +2,7 @@ from authx.resources.social_messages import get_error_message
 
 
 class SocialException(Exception):
-    """
-    This class is used to handle exceptions that are raised when a social
-
-    Args:
-        msg: The message that will be displayed to the user
-        status_code: The status code that will be sent to the user
-    """
+    """This class is used to handle exceptions that are raised when a social"""
 
     _base_url: str
 
@@ -18,11 +12,5 @@ class SocialException(Exception):
 
     def __init__(self, msg: str, status_code: int, *args):
         self.content = get_error_message(msg, self._base_url)
-        """
-        The content that will be sent to the user
-        """
         self.status_code = status_code
-        """
-        The status code that will be sent to the user
-        """
         super().__init__(*args)

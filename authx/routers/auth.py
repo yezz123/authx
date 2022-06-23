@@ -70,15 +70,6 @@ def get_router(
 
     @router.post("/register", name="auth:register")
     async def register(*, request: Request, response: Response):
-        """
-        register a new user
-        Args:
-            request: Request
-            response: Response
-
-        Returns:
-            Response
-        """
         data = await request.json()
         service = AuthService()
 
@@ -88,16 +79,6 @@ def get_router(
 
     @router.post("/login", name="auth:login")
     async def login(*, request: Request, response: Response):
-        """
-        login a user
-
-        Args:
-            request (Request): Request
-            response (Response): Response
-
-        Returns:
-            Response
-        """
         data = await request.json()
         service = AuthService()
 
@@ -109,30 +90,12 @@ def get_router(
 
     @router.post("/logout", name="auth:logout")
     async def logout(*, response: Response):
-        """
-        logout a user
-
-        Args:
-            response (Response): Response
-
-        Returns:
-            Response
-        """
         response.delete_cookie(access_cookie_name)
         response.delete_cookie(refresh_cookie_name)
         return None
 
     @router.post("/token", name="auth:token")
     async def token(*, user: User = Depends(get_authenticated_user)):
-        """
-        get a new token
-
-        Args:
-            user (User, optional): User. Defaults to None.
-
-        Returns:
-            Response
-        """
         return user.data
 
     @router.post("/token/refresh", name="auth:refresh_access_token")
@@ -141,19 +104,6 @@ def get_router(
         request: Request,
         response: Response,
     ):
-        """
-        refresh an access token
-
-        Args:
-            request (Request): Request
-            response (Response): Response
-
-        Raises:
-            HTTPException: HTTPException
-
-        Returns:
-            Response
-        """
         service = AuthService()
         refresh_token = request.cookies.get(refresh_cookie_name)
         if refresh_token is None:
@@ -167,15 +117,6 @@ def get_router(
     async def get_email_confirmation_status(
         *, user: User = Depends(get_authenticated_user)
     ):
-        """
-        get the email confirmation status of a user
-
-        Args:
-            user (User, optional): User. Defaults to Depends(get_authenticated_user).
-
-        Returns:
-            Response
-        """
         service = AuthService(user)
         return await service.get_email_confirmation_status()
 
@@ -183,29 +124,11 @@ def get_router(
     async def request_email_confirmation(
         *, user: User = Depends(get_authenticated_user)
     ):
-        """
-        request an email confirmation
-
-        Args:
-            user (User, optional): User. Defaults to Depends(get_authenticated_user).
-
-        Returns:
-            Response
-        """
         service = AuthService(user)
         return await service.request_email_confirmation()
 
     @router.post("/confirm/{token}", name="auth:confirm_email")
     async def confirm_email(*, token: str):
-        """
-        confirm an email
-
-        Args:
-            token (str): token
-
-        Returns:
-            Response
-        """
         service = AuthService()
         return await service.confirm_email(token)
 
@@ -216,20 +139,6 @@ def get_router(
         username: str = Body("", embed=True),
         user: User = Depends(get_authenticated_user),
     ):
-        """
-        change the username of a user
-
-        Args:
-            id (int): id
-            username (str, optional): username. Defaults to Body("", embed=True).
-            user (User, optional): User. Defaults to Depends(get_authenticated_user).
-
-        Raises:
-            HTTPException: HTTPException
-
-        Returns:
-            Response
-        """
         service = AuthService(user)
         if user.id == id or user.is_admin:
             return await service.change_username(id, username)

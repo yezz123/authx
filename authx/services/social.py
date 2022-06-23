@@ -10,8 +10,6 @@ from authx.errors import SocialException
 from authx.models.social import SocialInCreate
 from authx.models.user import UserPayload
 
-"""Social Service for authentication and authorization"""
-
 
 class SocialService:
     """Social Service is a service for social login and authorization, it is used by the API and Provide all the

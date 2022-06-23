@@ -4,10 +4,6 @@ from authx.services.password import PasswordService
 from authx.services.search import SearchService
 from authx.services.social import SocialService
 
-"""
-    Initialize all services
-"""
-
 __all__ = [
     "AdminService",
     "AuthService",

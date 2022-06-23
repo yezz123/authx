@@ -15,9 +15,7 @@ REFRESH_COOKIE_NAME = "refresh"
 
 
 class User:
-    """
-    Setup a user object with the given id, username and admin status.
-    """
+    """Setup a user object with the given id, username and admin status."""
 
     def __init__(self, id: int, username: str, admin: bool):
         self.id = id
@@ -27,13 +25,6 @@ class User:
 
 
 def mock_get_authenticated_user():
-    """
-    Mock the get_authenticated_user function to return a user object.
-
-    Returns:
-        User: A user object.
-    """
-
     class User:
         def __init__(self):
             """
@@ -48,9 +39,7 @@ def mock_get_authenticated_user():
 
 
 class MockDatabaseBackend:
-    """
-    Mock the get_authenticated_user function to return a user object.
-    """
+    """Mock the get_authenticated_user function to return a user object."""
 
     def __init__(self, database_name):
         self._incr = 5
@@ -145,15 +134,6 @@ class MockDatabaseBackend:
         return False  # pragma: no cover
 
     async def delete(self, id: int) -> bool:
-        """
-        Delete a user.
-
-        Args:
-            id (int): The user id to delete.
-
-        Returns:
-            bool: True if the user was deleted, False otherwise.
-        """
         for i, item in enumerate(self._users):  # pragma: no cover
             if item.get("id") == id:  # pragma: no cover
                 del self._users[i]  # pragma: no cover
@@ -165,16 +145,6 @@ class MockDatabaseBackend:
         return 42  # pragma: no cover
 
     async def request_email_confirmation(self, email: str, token_hash: str) -> None:
-        """
-        Add a new email confirmation to the list.
-
-        Args:
-            email (str): The email address to confirm.
-            token_hash (str): The token hash to confirm.
-
-        Returns:
-            None
-        """
         for i, item in enumerate(self._email_confirmations):
             if item.get("email") == email:  # pragma: no cover
                 self._email_confirmations[i].update(
@@ -184,15 +154,7 @@ class MockDatabaseBackend:
         self._email_confirmations.append({"email": email, "token": token_hash})
 
     async def confirm_email(self, token_hash: str) -> bool:
-        """
-        Confirm an email address.
 
-        Args:
-            token_hash (str): The token hash to confirm.
-
-        Returns:
-            bool: True if the email was confirmed, False otherwise.
-        """
         for item in self._email_confirmations:
             if item.get("token") == token_hash:
                 user = self._get("email", item.get("email"))
@@ -201,12 +163,6 @@ class MockDatabaseBackend:
         return False
 
     async def get_blacklist(self) -> Iterable[dict]:
-        """
-        Get the blacklist.
-
-        Returns:
-            Iterable[dict]: The blacklist.
-        """
         return [
             item for item in self._users if not item.get("active")
         ]  # pragma: no cover
@@ -216,9 +172,7 @@ class MockDatabaseBackend:
 
 
 class MockCacheBackend:
-    """
-    mock the cache backend.
-    """
+    """Mock Cache Backend"""
 
     def __init__(self) -> None:
         self._db = {}
@@ -253,6 +207,8 @@ class MockCacheBackend:
 
 
 class MockAuthBackend:
+    """Mock Auth Backend"""
+
     @classmethod
     def create(
         cls,
@@ -281,16 +237,6 @@ class MockAuthBackend:
         self._public_key = public_key
 
     async def decode_token(self, token: str, leeway: int = 0) -> Optional[dict]:
-        """
-        Decode a JWT token.
-
-        Args:
-            token (str): The JWT token to decode.
-            leeway (int, optional): The leeway to use when decoding the token. Defaults to 0.
-
-        Returns:
-            Optional[dict]: The decoded token.
-        """
         if token:
             return jwt.decode(token, key=self._public_key, algorithms="RS256")
         return None  # pragma: no cover
@@ -326,18 +272,16 @@ class MockAuthBackend:
 
 
 class MockEmailClient:
+    """Mock Email Client"""
+
     def __init__(self, *args):
         pass
 
     async def send_confirmation_email(self, *args):
-        """
-        Send a confirmation email.
-        """
+        pass
 
     async def send_forgot_password_email(self, *args):
-        """
-        Send a forgot password email.
-        """
+        pass
 
 
 def mock_verify_password(password: str, db_password: str) -> bool:

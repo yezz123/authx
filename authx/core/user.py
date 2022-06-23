@@ -1,15 +1,7 @@
 class User:
-    """
-    Setup the user object, this is called by the authx framework, you can override this method to setup your own user object
-    """
+    """Setup the user object, this is called by the authx framework, you can override this method to setup your own user object"""
 
     def __init__(self, data=None):
-        """
-        Initialize the user object
-
-        Args:
-            data (dict): A dictionary containing the user's data
-        """
         self.data = data
         if data is None:
             self.is_authenticated = False
@@ -24,14 +16,5 @@ class User:
 
     @classmethod
     async def create(cls, token: str, backend):
-        """
-        Create a user object from a token
-
-        Args:
-            token (str): The token to create the user object from
-            backend (authx): The backend to use to create the user object
-        Returns:
-            User: The user object
-        """
         data = await backend.decode_token(token)
         return cls(data)

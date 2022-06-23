@@ -3,8 +3,7 @@ from typing import List
 
 from starlette.config import Config
 
-""" The Global Configuration for authx.
-"""
+"""The Global Configuration for authx."""
 
 
 config = Config()

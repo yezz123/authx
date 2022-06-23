@@ -7,9 +7,6 @@ class UsersProtectionMixin(Base):
     """User Protection MIXIN"""
 
     async def _check_timeout_and_incr(self, key: str, max: int, timeout: int) -> bool:
-        """
-        Check if the timeout is expired and increment the counter.
-        """
         count = await self._cache.get(key)
         if count is not None:
             count = int(count)  # pragma: no cover
@@ -22,9 +19,6 @@ class UsersProtectionMixin(Base):
         return True
 
     async def is_bruteforce(self, ip: str, login: str) -> bool:
-        """
-        Check if the ip is in the bruteforce list.
-        """
         timeout_key = f"users:login:timeout:{ip}"
         timeout = await self._cache.get(timeout_key)
 

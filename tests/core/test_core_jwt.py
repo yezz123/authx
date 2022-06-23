@@ -16,9 +16,6 @@ sample_expired_refresh_token = jwt_backend._create_token({}, "refresh", -60)
 
 @pytest.mark.asyncio
 async def test_create_token():
-    """
-    Test that the create_token method returns a token
-    """
     token = jwt_backend._create_token({}, "access")
     payload = await jwt_backend.decode_token(token)
     assert int(payload.get("exp")) - int(payload.get("iat")) == 60  # ???
@@ -26,9 +23,6 @@ async def test_create_token():
 
 @pytest.mark.asyncio
 async def test_decode_token():
-    """
-    Test that the decode_token method returns a payload
-    """
     payload = await jwt_backend.decode_token(None)
     assert payload is None
 
@@ -50,9 +44,6 @@ async def test_decode_token():
 
 @pytest.mark.asyncio
 async def test_create_access_token():
-    """
-    Test that the create_access_token method returns a token
-    """
     access_token = jwt_backend.create_access_token({})
     payload = await jwt_backend.decode_token(access_token)
     assert int(payload.get("iat")) < int(payload.get("exp"))
@@ -61,9 +52,6 @@ async def test_create_access_token():
 
 @pytest.mark.asyncio
 async def test_create_refresh_token():
-    """
-    Test that the create_refresh_token method returns a token
-    """
     refresh_token = jwt_backend.create_refresh_token({})
     payload = await jwt_backend.decode_token(refresh_token)
     assert int(payload.get("iat")) < int(payload.get("exp"))
@@ -71,9 +59,6 @@ async def test_create_refresh_token():
 
 
 def test_create_tokens():
-    """
-    Test that the create_tokens method returns a token
-    """
     tokens = jwt_backend.create_tokens({})
 
     assert tokens.get("access") is not None
@@ -82,9 +67,6 @@ def test_create_tokens():
 
 @pytest.mark.asyncio
 async def test_blackout():
-    """
-    Test that the blackout method returns a token
-    """
     key = "users:blackout"
     epoch = datetime.utcfromtimestamp(0)
     ts = int((datetime.utcnow() - epoch).total_seconds()) + 10
@@ -96,9 +78,6 @@ async def test_blackout():
 
 @pytest.mark.asyncio
 async def test_logout():
-    """
-    Test that the logout method returns a token
-    """
     key = "users:kick:1"
     epoch = datetime.utcfromtimestamp(0)
     ts = int((datetime.utcnow() - epoch).total_seconds()) + 10

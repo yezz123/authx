@@ -28,9 +28,6 @@ auth_backend = MockAuthBackend("RS256", private_key, public_key)
 
 @pytest.fixture(autouse=True)
 def password_service_setup():
-    """
-    Setup for password service tests.
-    """
     PasswordService.setup(
         UsersRepo(MockDatabaseBackend("test"), MockCacheBackend(), []),
         auth_backend,
@@ -52,9 +49,6 @@ CAPTCHA = "CAPTCHA"
 @pytest.mark.asyncio
 @mock.patch("authx.services.password.EmailClient", MockEmailClient)
 async def test_forgot_password():
-    """
-    Test forgot password.
-    """
     service = PasswordService()
 
     await service.forgot_password({"email": "admin@gmail.com"}, "127.0.0.1")
@@ -62,9 +56,6 @@ async def test_forgot_password():
 
 @pytest.mark.asyncio
 async def test_password_status():
-    """
-    Test password status.
-    """
     service = PasswordService(user)
     res = await service.password_status()
     assert isinstance(res, dict)
@@ -73,9 +64,6 @@ async def test_password_status():
 
 @pytest.mark.asyncio
 async def test_password_set():
-    """
-    Test password set.
-    """
     service = PasswordService(social_user)
     await service.password_set(
         {
@@ -98,9 +86,6 @@ async def test_password_set():
 
 @pytest.mark.asyncio
 async def test_password_reset():
-    """
-    Test password reset.
-    """
     token = create_random_string()
     token_hash = hash_string(token)
     service = PasswordService()
@@ -121,9 +106,6 @@ async def test_password_reset():
 @pytest.mark.asyncio
 @mock.patch("authx.services.password.verify_password", mock_verify_password)
 async def test_password_change():
-    """
-    Test password change.
-    """
     service = PasswordService(user)
     item = await service._repo.get(user.id)
     with pytest.raises(HTTPException) as e:

@@ -38,9 +38,6 @@ test_client = TestClient(app)
 
 
 def test_forgot_password():
-    """
-    test forgot password
-    """
     url = app.url_path_for("auth:forgot_password")
     with mock.patch(
         "authx.routers.password.PasswordService.forgot_password",
@@ -57,9 +54,6 @@ def test_forgot_password():
 
 
 def test_password_status():
-    """
-    test password status
-    """
     url = app.url_path_for("auth:password_status")
     with mock.patch(
         "authx.routers.password.PasswordService.password_status",
@@ -72,9 +66,6 @@ def test_password_status():
 
 
 def test_password_set():
-    """
-    test password set
-    """
     url = app.url_path_for("auth:password_set")
     with mock.patch(
         "authx.routers.password.PasswordService.password_set",
@@ -94,9 +85,6 @@ def test_password_set():
 
 
 def test_password_reset():
-    """
-    Test password reset
-    """
     url = app.url_path_for("auth:password_reset", token="TOKEN")
     with mock.patch(
         "authx.routers.password.PasswordService.password_reset",
@@ -116,9 +104,6 @@ def test_password_reset():
 
 
 def test_password_change():
-    """
-    test password change
-    """
     url = app.url_path_for("auth:password_change")
     with mock.patch(
         "authx.routers.password.PasswordService.password_change",

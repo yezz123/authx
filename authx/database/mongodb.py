@@ -11,9 +11,7 @@ from authx.database import BaseDBBackend
 
 
 class MongoDBBackend(BaseDBBackend):
-    """
-    Setup Database for authx using MongoDB & Motor
-    """
+    """Setup Database for authx using MongoDB & Motor"""
 
     def __init__(self, database_name: str = "test") -> None:
         self._database_name = database_name
@@ -63,65 +61,23 @@ class MongoDBBackend(BaseDBBackend):
         return id
 
     async def update(self, id: int, obj: dict) -> bool:
-        """Update user object
-
-        Args:
-            id (int): User ID
-            obj (dict): User object
-
-        Returns:
-            bool: True if user was updated, False otherwise
-        """
         res = await self._users.update_one({"id": id}, {"$set": obj})
         return bool(res.matched_count)
 
     async def delete(self, id: int) -> bool:
-        """Delete user object
-
-        Args:
-            id (int): User ID
-
-        Returns:
-            bool: True if user was deleted, False otherwise
-        """
         res = await self._users.delete_one({"id": id})
         return bool(res.deleted_count)
 
     async def count(self, query: Optional[dict] = None) -> int:
-        """Count users
-
-        Args:
-            query (Optional[dict], optional): Query. Defaults to None.
-
-        Returns:
-            int: Count of users
-        """
         return await self._users.count_documents(query)
 
     async def request_email_confirmation(self, email: str, token_hash: str) -> None:
-        """Request email confirmation
-
-        Args:
-            email (str): Email
-            token_hash (str): Token hash
-
-        Returns:
-            [type]: If user was found Send email confirmation , False otherwise.
-        """
         await self._email_confirmations.update_one(
             {"email": email}, {"$set": {"token": token_hash}}, upsert=True
         )
         return None
 
     async def confirm_email(self, token_hash: str) -> bool:
-        """Confirm email
-
-        Args:
-            token_hash (str): Token hash
-
-        Returns:
-            bool: True if email was confirmed, False otherwise
-        """
         ec = await self._email_confirmations.find_one({"token": token_hash})
         if ec is not None:
             email = ec.get("email")
@@ -136,24 +92,9 @@ class MongoDBBackend(BaseDBBackend):
             return False
 
     async def get_blacklist(self) -> Iterable[dict]:
-        """Get blacklist
-
-        Returns:
-            Iterable[dict]: Blacklist
-        """
         return await self._users.find({"active": False}, {"_id": 0}).to_list(None)
 
     async def search(self, f: dict, p: int, size: int) -> Tuple[dict, int]:
-        """Search users
-
-        Args:
-            f (dict): Filter
-            p (int): Page
-            size (int): Size
-
-        Returns:
-            Tuple[dict, int]: Users, Total count
-        """
         count = await self._users.count_documents(f)
         items = (
             await self._users.find(f, {"_id": 0})

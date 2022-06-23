@@ -9,9 +9,7 @@ from authx.core.config import JWT_ALGORITHM
 
 
 class JWTBackend:
-    """
-    Setup the JWT Backend with the given cache backend and private key.
-    """
+    """Setup the JWT Backend with the given cache backend and private key."""
 
     def __init__(
         self,

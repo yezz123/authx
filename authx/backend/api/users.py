@@ -7,9 +7,6 @@ class UsersUsernameMixin(Base):
     """User Username MIXIN"""
 
     async def change_username(self, id: int, new_username: str) -> None:
-        """
-        Change the username of a user.
-        """
         await self.update(id, {"username": new_username})  # pragma: no cover
         for callback in self._callbacks:  # pragma: no cover
             if isinstance(callback, str):  # pragma: no cover

@@ -7,20 +7,12 @@ from authx.core.config import (
 
 
 class ErrorMessages:
-    """
-    Setup Error Messages for Services & routers (for example: "password mismatch")
-    """
+    """Setup Error Messages for Services & routers (for example: "password mismatch")"""
 
     def __init__(
         self,
     ):
-        """
-        Initialize Error Messages
-        """
         self._full_messages = {
-            """
-        Create Error Messages for Services & models.
-        """
             # models
             "username length": f"Username must contain from {USERNAME_MIN_LENGTH} to {USERNAME_MAX_LENGTH} symbols",
             "username special characters": "Username must not contain special characters",
@@ -43,9 +35,6 @@ class ErrorMessages:
             "server error": "Unknown error",
             "try another email": "Try another email",
         }
-        """
-        Create a Server Error Message
-        """
         self._server_error = "Unknown error"
 
     def get_error_message(self, msg: str) -> str:
