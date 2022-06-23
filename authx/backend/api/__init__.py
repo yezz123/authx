@@ -14,13 +14,4 @@ class UsersRepo(
     UsersProtectionMixin,
     UsersManagementMixin,
 ):
-    """User Repository
-
-    Args:
-        UsersCRUDMixin: CRUD methods
-        UsersConfirmMixin: Confirmation methods
-        UsersPasswordMixin: Password methods
-        UsersUsernameMixin: Username methods
-        UsersProtectionMixin: Protection methods
-        UsersManagementMixin: Management methods
-    """
+    """User Repository"""

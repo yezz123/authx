@@ -9,9 +9,7 @@ from authx.database import BaseDBBackend
 
 
 class EncodeDBBackend(BaseDBBackend):
-    """
-    Setup Database for authx using Encode Database (SQLAlchemy Core)
-    """
+    """Setup Database for authx using Encode Database (SQLAlchemy Core)"""
 
     def __init__(
         self, database: Database, users: sa.Table, email_confirmations: sa.Table
@@ -48,14 +46,7 @@ class EncodeDBBackend(BaseDBBackend):
         return uuid
 
     async def update(self, id: UUID, obj: dict) -> bool:
-        """Update user object
-        Args:
-            id (UUID): User ID
-            obj (dict): User object
-        Returns:
-            bool: True if user was updated, False otherwise
-        """
-        # Take care to remove any existing ID
+        # TODO: Take care to remove any existing ID
         obj.pop("id", None)
 
         query = (
@@ -68,12 +59,6 @@ class EncodeDBBackend(BaseDBBackend):
         return bool(res)
 
     async def delete(self, id: UUID) -> bool:
-        """Delete user object
-        Args:
-            id (UUID): User ID
-        Returns:
-            bool: True if user was deleted, False otherwise
-        """
         query = (
             sa.delete(self.users)
             .where(self.users.c.id == id)
@@ -83,24 +68,11 @@ class EncodeDBBackend(BaseDBBackend):
         return bool(res)
 
     async def count(self, query: Optional[dict] = None) -> int:
-        """Count users
-        Args:
-            query (Optional[dict], optional): Query. Defaults to None.
-        Returns:
-            int: Count of users
-        """
-        # FIXME Query is ignored
+        # TODO: Fix Query is ignored
         query = sa.select(sa.func.count()).select_from(self.users)
         return await self.database.fetch_one(query)
 
     async def request_email_confirmation(self, email: str, token_hash: str) -> None:
-        """Request email confirmation
-        Args:
-            email (str): Email
-            token_hash (str): Token hash
-        Returns:
-            [type]: If user was found Send email confirmation, False otherwise.
-        """
         query = (
             pg_insert(self.email_confirmations)
             .values(email=email, token=token_hash)
@@ -110,12 +82,6 @@ class EncodeDBBackend(BaseDBBackend):
         return None
 
     async def confirm_email(self, token_hash: str) -> bool:
-        """Confirm email
-        Args:
-            token_hash (str): Token hash
-        Returns:
-            bool: True if email was confirmed, False otherwise
-        """
         query = sa.select(self.email_confirmations).where(
             self.email_confirmations.c.token == token_hash
         )
@@ -138,24 +104,12 @@ class EncodeDBBackend(BaseDBBackend):
             return False
 
     async def get_blacklist(self) -> Iterable[dict]:
-        """Get blacklist
-        Returns:
-            Iterable[dict]: Blacklist
-        """
         query = sa.select(self.users).where(self.users.c.active == False)
         return await self.database.fetch_all(query)
 
     async def search(self, f: dict, p: int, size: int) -> tuple[dict, int]:
-        """Search users
-        Args:
-            f (dict): Filter
-            p (int): Page
-            size (int): Size
-        Returns:
-            Tuple[dict, int]: Users, Total count
-        """
         count = self.count(f)
-        # FIXME Query is ignored
+        # TODO: FIX Query is ignored
         query = sa.select(self.users).offset((p - 1) * size).limit(size)
         users = await self.database.fetch_all(query)
         return users, count

@@ -8,9 +8,6 @@ class UsersManagementMixin(Base):
     """User Management MIXIN"""
 
     async def get_blacklist(self) -> dict:
-        """
-        Get the blacklist.
-        """
         blacklist_db = await self._database.get_blacklist()  # pragma: no cover
         blacklist_cache = await self._cache.keys(
             "users:blacklist:*"
@@ -28,9 +25,6 @@ class UsersManagementMixin(Base):
         }  # pragma: no cover
 
     async def toggle_blacklist(self, id: int) -> None:
-        """
-        Toggle the blacklist of a user.
-        """
         item = await self.get(id)  # pragma: no cover
         active = item.get("active")  # pragma: no cover
         await self.update(id, {"active": not active})  # pragma: no cover
@@ -44,9 +38,6 @@ class UsersManagementMixin(Base):
         return None  # pragma: no cover
 
     async def kick(self, id: int) -> None:
-        """
-        Kick a user.
-        """
         key = f"users:kick:{id}"  # pragma: no cover
         now = int(datetime.utcnow().timestamp())  # pragma: no cover
 
@@ -55,24 +46,13 @@ class UsersManagementMixin(Base):
         )  # pragma: no cover
 
     async def get_blackout(self) -> Optional[str]:
-        """
-        Get the blackout.
-        """
         return await self._cache.get("users:blackout")  # pragma: no cover
 
     async def set_blackout(self, ts: int) -> None:
-        """
-        Set the blackout.
-        """
         await self._cache.set("users:blackout", ts)  # pragma: no cover
 
     async def delete_blackout(self) -> None:
-        """
-        Delete the blackout.
-        """
         await self._cache.delete("users:blackout")  # pragma: no cover
 
     async def set_permissions(self) -> None:
-        """
-        Set the permissions.
-        """
+        pass

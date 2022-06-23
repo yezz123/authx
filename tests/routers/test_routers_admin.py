@@ -23,9 +23,6 @@ REFRESH_TOKEN = "refresh_token"
 
 
 def test_get_blacklist():
-    """
-    test_get_blacklist
-    """
     url = app.url_path_for("admin:get_blacklist")
     with mock.patch(
         "authx.routers.admin.AdminService.get_blacklist",
@@ -38,9 +35,6 @@ def test_get_blacklist():
 
 
 def test_toggle_blacklist():
-    """
-    test_toggle_blacklist
-    """
     url = app.url_path_for("admin:toggle_blacklist", id="5")
     with mock.patch(
         "authx.routers.admin.AdminService.toggle_blacklist",
@@ -53,9 +47,6 @@ def test_toggle_blacklist():
 
 
 def test_get_blackout():
-    """
-    test_get_blackout
-    """
     url = app.url_path_for("admin:get_blackout")
     with mock.patch(
         "authx.routers.admin.AdminService.get_blackout",
@@ -68,9 +59,6 @@ def test_get_blackout():
 
 
 def test_set_blackout():
-    """
-    test set_blackout
-    """
     url = app.url_path_for("admin:set_blackout")
     with mock.patch(
         "authx.routers.admin.AdminService.set_blackout",
@@ -83,9 +71,6 @@ def test_set_blackout():
 
 
 def test_delete_blackout():
-    """
-    test_delete_blackout
-    """
     url = app.url_path_for("admin:delete_blackout")
     with mock.patch(
         "authx.routers.admin.AdminService.delete_blackout",
@@ -98,9 +83,6 @@ def test_delete_blackout():
 
 
 def test_get_id_by_username():
-    """
-    test_get_id_by_username
-    """
     url = app.url_path_for("admin:get_id_by_username")
     with mock.patch(
         "authx.routers.admin.AdminService.get_id_by_username",
@@ -113,9 +95,6 @@ def test_get_id_by_username():
 
 
 def test_kick():
-    """
-    test_kick
-    """
     url = app.url_path_for("admin:kick", id="5")
     with mock.patch(
         "authx.routers.admin.AdminService.kick",

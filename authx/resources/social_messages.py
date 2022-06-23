@@ -1,7 +1,5 @@
 class SocialErrorMessages:
-    """
-    Create SocialErrorMessages object
-    """
+    """Create SocialErrorMessages object"""
 
     def __init__(self, base_url: str):
         self._full_messages = {

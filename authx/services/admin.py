@@ -7,16 +7,7 @@ from authx.backend import UsersRepo
 
 
 class AdminService:
-    """Create the Admin Service
-
-    Raises:
-        HTTPException: if the service could not be created properly (e.g. if the database could not be accessed)
-
-        HTTPException: if the service could not be created because the repo could not be created properly (e.g. if the database could not be accessed)
-
-    Returns:
-        AdminService: the created service
-    """
+    """Create the Admin Service"""
 
     _repo: UsersRepo
 

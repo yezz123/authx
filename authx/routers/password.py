@@ -22,13 +22,8 @@ def get_router(
     smtp_tls: int,
     display_name: str,
 ):
-    """
-    Setup The Password requirements Router, for handling password related requests, such as resetting passwords,
-    changing passwords, etc.
-
-    Returns:
-        APIRouter: The Password Router
-    """
+    """Setup The Password requirements Router, for handling password related requests, such as resetting passwords,
+    changing passwords, etc."""
     PasswordService.setup(
         repo,
         auth_backend,
@@ -47,15 +42,6 @@ def get_router(
 
     @router.post("/forgot_password", name="auth:forgot_password")
     async def forgot_password(*, request: Request):
-        """
-        Forgot Password
-
-        Args:
-            request (Request): The Request
-
-        Returns:
-            dict: The Response
-        """
         data = await request.json()
         ip = request.client.host
         service = PasswordService()
@@ -63,15 +49,6 @@ def get_router(
 
     @router.get("/password", name="auth:password_status")
     async def password_status(*, user: User = Depends(get_authenticated_user)):
-        """
-        Password Status
-
-        Args:
-            user (User, optional): The Authenticated User. Defaults to None.
-
-        Returns:
-            dict: The Response
-        """
         service = PasswordService(user)
         return await service.password_status()
 
@@ -79,32 +56,12 @@ def get_router(
     async def password_set(
         *, request: Request, user: User = Depends(get_authenticated_user)
     ):
-        """
-        Set Password
-
-        Args:
-            request (Request): The Request
-            user (User, optional): The Authenticated User. Defaults to None.
-
-        Returns:
-            dict: The Response
-        """
         data = await request.json()
         service = PasswordService(user)
         return await service.password_set(data)
 
     @router.post("/password/{token}", name="auth:password_reset")
     async def password_reset(*, token: str, request: Request):
-        """
-        Reset Password
-
-        Args:
-            token (str): The Token
-            request (Request): The Request
-
-        Returns:
-            dict: The Response
-        """
         data = await request.json()
         service = PasswordService()
         return await service.password_reset(data, token)
@@ -113,16 +70,6 @@ def get_router(
     async def password_change(
         *, request: Request, user: User = Depends(get_authenticated_user)
     ):
-        """
-        Change Password
-
-        Args:
-            request (Request): The Request
-            user (User, optional): The Authenticated User. Defaults to Depends(get_authenticated_user).
-
-        Returns:
-            dict: The Response
-        """
         data = await request.json()
         service = PasswordService(user)
         return await service.password_change(data)

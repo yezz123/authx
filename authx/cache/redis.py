@@ -4,9 +4,7 @@ from aioredis import Redis
 
 
 class RedisBackend:
-    """
-    Setup the Redis connection for the backend using aioredis.
-    """
+    """Setup the Redis connection for the backend using aioredis"""
 
     _redis: Optional[Redis] = None
 

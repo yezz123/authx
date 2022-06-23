@@ -25,13 +25,7 @@ from authx.utils.strings import create_random_string, hash_string
 
 
 class AuthService:
-    """Class AuthService, methods for login, logout, refresh, change password, change username
-
-    This Class Depend on:
-        - JWTBackend
-        - UsersRepo
-        - EmailClient
-    """
+    """Class AuthService, methods for login, logout, refresh, change password, change username"""
 
     _repo: UsersRepo
     _auth_backend: JWTBackend
@@ -76,19 +70,6 @@ class AuthService:
         cls._display_name = display_name
 
     def _validate_user_model(self, model, data: dict):
-        """
-        Validate user model.
-
-        Args:
-            model (UserInRegister): UserInRegister model.
-            data (dict): data.
-
-        Raises:
-            HTTPException: 400 - validation error.
-
-        Returns:
-            UserInRegister: UserInRegister model.
-        """
         try:
             return model(**data)
         except ValidationError as e:
@@ -96,27 +77,9 @@ class AuthService:
             raise HTTPException(400, detail=get_error_message(msg)) from e
 
     async def _email_exists(self, email: str) -> bool:
-        """
-        Check if email exists.
-
-        Args:
-            email (str): email.
-
-        Returns:
-            bool: True if email exists.
-        """
         return await self._repo.get_by_email(email) is not None
 
     async def _username_exists(self, username: str) -> bool:
-        """
-        Check if username exists.
-
-        Args:
-            username (str): username.
-
-        Returns:
-            bool: True if username exists.
-        """
         return await self._repo.get_by_username(username) is not None
 
     def _create_email_client(self) -> EmailClient:
@@ -183,16 +146,6 @@ class AuthService:
         return self._auth_backend.create_tokens(payload)
 
     async def _is_bruteforce(self, ip: str, login: str) -> bool:
-        """
-        Check if user is bruteforce.
-
-        Args:
-            ip (str): ip.
-            login (str): login.
-
-        Returns:
-            bool: True if user is bruteforce.
-        """
         return await self._repo.is_bruteforce(ip, login)
 
     async def _update_last_login(self, id: int) -> None:
@@ -205,21 +158,6 @@ class AuthService:
         await self._repo.update(id, {"last_login": datetime.utcnow()})
 
     async def login(self, data: dict, ip: str) -> Dict[str, str]:
-        """POST /login
-
-        Args:
-            data: login, password.
-            ip: for bruteforce check.
-
-        Returns:
-            Access and refresh tokens.
-
-        Raises:
-            HTTPException:
-                400 - validation error or ban.
-                404 - user doesn't exist.
-                429 - bruteforce attempt.
-        """
         try:
             user = UserInLogin(**data)
         except ValidationError as e:
@@ -245,19 +183,6 @@ class AuthService:
         return self._auth_backend.create_tokens(payload)
 
     async def refresh_access_token(self, refresh_token: str) -> str:
-        """POST /token/refresh
-
-        Args:
-            refresh_token: refresh_token from cookies.
-
-        Returns:
-            Access token.
-
-        Raises:
-            HTTPException:
-                401 - type != refresh or ban.
-                500 - ttt
-        """
         refresh_token_payload = await self._auth_backend.decode_token(refresh_token)
         if (
             refresh_token_payload is None
@@ -273,26 +198,11 @@ class AuthService:
         return self._auth_backend.create_access_token(payload)
 
     async def get_email_confirmation_status(self) -> dict:
-        """GET /confirm
-
-        Returns:
-            Email as str and status as bool in a dict.
-            Example: {"email": sample@sample.com, "confirmed": True}
-        """
         item = await self._repo.get(self._user.id)
 
         return {"email": item.get("email"), "confirmed": item.get("confirmed")}
 
     async def request_email_confirmation(self) -> None:
-        """POST /confirm
-
-        If there is no timeout, send email.
-
-        Raises:
-            HTTPException:
-                400 - confirmed is already True.
-                429 - timeout.
-        """
         item = await self._repo.get(self._user.id)
         if item.get("confirmed"):
             raise HTTPException(400)
@@ -306,14 +216,6 @@ class AuthService:
         return None
 
     async def confirm_email(self, token: str) -> None:
-        """POST /confirm/{token}
-
-        Hashes token, looks up hash in db, updates "confirmed" to True for email in a row.
-
-        Raises:
-            HTTPException:
-                403 - no hash in db.
-        """
         token_hash = hash_string(token)
         if not await self._repo.confirm_email(token_hash):
             raise HTTPException(403)
@@ -321,17 +223,6 @@ class AuthService:
         return None
 
     async def change_username(self, id: int, username: str) -> None:
-        """
-        Change username, is a function of user id and username.
-
-        Args:
-            id (int): user id.
-            username (str): new username.
-
-        Raises:
-            HTTPException: 400 - username already exists.
-            HTTPException: 404 - user not found.
-        """
         new_username = self._validate_user_model(
             UserInChangeUsername, {"username": username}
         ).username

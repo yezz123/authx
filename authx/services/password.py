@@ -19,13 +19,7 @@ from authx.utils.strings import create_random_string, hash_string
 
 
 class PasswordService:
-    """Class PasswordService
-
-    This Class depend on:
-        - UsersRepo
-        - JWTBackend
-        - EmailClient
-    """
+    """Class PasswordService"""
 
     _repo: UsersRepo
     _auth_backend: JWTBackend
@@ -82,19 +76,6 @@ class PasswordService:
         )
 
     def _validate_user_model(self, model, data):
-        """
-        Validate user model.
-
-        Args:
-            model (UserInSetPassword): UserInSetPassword
-            data (dict): {password1: "password", password2: "password"}
-
-        Raises:
-            HTTPException: 400 - validation or timeout.
-
-        Returns:
-            UserInSetPassword: UserInSetPassword
-        """
         try:
             return model(**data)
         except ValidationError as e:
@@ -102,19 +83,6 @@ class PasswordService:
             raise HTTPException(400, detail=get_error_message(msg)) from e
 
     async def forgot_password(self, data: dict, ip: str) -> None:
-        """POST /forgot_password
-
-        Only for accounts with password.
-
-        Args:
-            data: {email: "email@email.com"}
-            ip: ip from request
-
-        Raises:
-            HTTPException:
-                400 - validation or timeout.
-                404 - email not found.
-        """
         try:
             email = UserInForgotPassword(**data).email
         except ValidationError as e:
@@ -144,41 +112,11 @@ class PasswordService:
 
         return None
 
-    """post /password_status
-        Only for accounts with password.
-
-        Returns:
-            {
-                "password": "",
-                "provider": "",
-                "reset_available": True,
-            }
-
-        Raises:
-            HTTPException:
-                400 - validation or timeout.
-                404 - token not found.
-"""
-
     async def password_status(self) -> dict:
-        """
-        POST /password_status
-
-        Returns:
-            dict: password_status
-        """
         status = await self._repo.get_password_status(self._user.id)
         return {"status": status}
 
     async def password_set(self, data: dict) -> None:
-        """
-        POST /password_set
-
-        Only for accounts with password.
-
-        Args:
-            data (dict): {password1: "password", password2: "password"}
-        """
         item = await self._repo.get(self._user.id)
         return {
             "password": item.get("password") is not None,
@@ -189,17 +127,6 @@ class PasswordService:
         }
 
     async def password_set(self, data: dict) -> None:
-        """POST /password_set
-        Only for accounts with password.
-
-        Args:
-            data: {password1: "password", password2: "password"}
-
-        Raises:
-            HTTPException:
-                400 - validation or timeout.
-                404 - token not found.
-        """
         item = await self._repo.get(self._user.id)
         if item.get("provider") is not None and item.get("password") is None:
             user_model = self._validate_user_model(UserInSetPassword, data)
@@ -210,18 +137,6 @@ class PasswordService:
             raise HTTPException(400, get_error_message("password already exists"))
 
     async def password_reset(self, data: dict, token: str) -> None:
-        """POST /password_reset
-        Only for accounts with password.
-
-        Args:
-            data: {password1: "password", password2: "password"}
-            token: token from email
-
-        Raises:
-            HTTPException:
-                400 - validation or timeout.
-                404 - token not found.
-        """
         token_hash = hash_string(token)
 
         id = await self._repo.get_id_for_password_reset(token_hash)
@@ -236,17 +151,6 @@ class PasswordService:
         return None
 
     async def password_change(self, data: dict) -> None:
-        """POST /password_change
-        Only for accounts with password.
-
-        Args:
-            data: {password1: "password", password2: "password"}
-
-        Raises:
-            HTTPException:
-                400 - validation or timeout.
-                404 - token not found.
-        """
         user_model = self._validate_user_model(UserInChangePassword, data)
         item = await self._repo.get(self._user.id)
 

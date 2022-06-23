@@ -6,6 +6,8 @@ from socketio.asyncio_manager import AsyncManager
 
 
 class Socket:
+    """Class Socket is a wrapper for socketio.AsyncServer."""
+
     def __init__(
         self,
         app: FastAPI,

@@ -15,9 +15,6 @@ sample_access_token = jwt_backend.create_access_token(
 
 @pytest.mark.asyncio
 async def test_user():
-    """
-    Test user creation
-    """
     user = await User.create(sample_access_token, jwt_backend)
     assert user.is_authenticated
     assert user.id == ID
@@ -27,9 +24,6 @@ async def test_user():
 
 @pytest.mark.asyncio
 async def test_anonym_user():
-    """
-    test anonim user creation
-    """
     anonym_user = await User.create(None, jwt_backend)
     assert not anonym_user.is_authenticated
     assert anonym_user.id is None

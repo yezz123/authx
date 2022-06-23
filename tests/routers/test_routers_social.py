@@ -45,12 +45,6 @@ REFRESH_TOKEN = "REFRESH"
 
 @pytest.mark.parametrize("provider", ["google", "facebook"])
 def test_login(provider: str):
-    """
-    Test login with social provider
-
-    Args:
-        provider (str): social provider
-    """
     url = app.url_path_for("social:login", provider=provider)
     with mock.patch(
         f"authx.routers.social.SocialService.login_{provider}",
@@ -68,11 +62,6 @@ def test_login(provider: str):
     mock.Mock(return_value=True),
 )
 def test_callback(provider: str):
-    """
-    Test callback with social provider
-    Args:
-        provider (str): social provider
-    """
     patcher_callback = mock.patch(
         f"authx.routers.social.SocialService.callback_{provider}",
         mock.AsyncMock(

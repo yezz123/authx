@@ -23,9 +23,6 @@ REFRESH_TOKEN = "REFRESH"
 
 
 def test_get_user():
-    """
-    test get user
-    """
     url = app.url_path_for("auth:get_user", id="1")
     with mock.patch(
         "authx.routers.search.SearchService.get_user",
@@ -38,9 +35,6 @@ def test_get_user():
 
 
 def test_search():
-    """
-    test search
-    """
     url = app.url_path_for("auth:search")
     with mock.patch(
         "authx.routers.search.SearchService.search",

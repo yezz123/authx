@@ -45,9 +45,7 @@ def check_password(v: str, values) -> str:
 
 
 class UserInRegister(BaseModel):
-    """
-    Class to check the user in the register.
-    """
+    """Class to check the user in the register"""
 
     email: EmailStr
     username: str
@@ -60,9 +58,7 @@ class UserInRegister(BaseModel):
 
 
 class UserInCreate(BaseModel):
-    """
-    Class to check the user in the create.
-    """
+    """Class to check the user in the create."""
 
     email: EmailStr
     username: str
@@ -83,26 +79,20 @@ class UserInCreate(BaseModel):
 
 
 class UserInLogin(BaseModel):
-    """
-    Class to check the user in the login.
-    """
+    """Class to check the user in the login."""
 
     login: Union[EmailStr, str]
     password: str
 
 
 class UserInForgotPassword(BaseModel):
-    """
-    Class to check the user in the forgot password.
-    """
+    """Class to check the user in the forgot password."""
 
     email: EmailStr
 
 
 class UserPayload(BaseModel):
-    """
-    Class to check the user payload.
-    """
+    """Class to check the user payload."""
 
     id: int
     username: str
@@ -110,9 +100,7 @@ class UserPayload(BaseModel):
 
 
 class UserInSetPassword(DefaultModel):
-    """
-    Class to check the user in the set password.
-    """
+    """Class to check the user in the set password."""
 
     password1: str
     password2: str
@@ -121,26 +109,19 @@ class UserInSetPassword(DefaultModel):
 
 
 class UserInChangePassword(UserInSetPassword):
-    """
-    Class to check the user in the change password.
-    """
+    """Class to check the user in the change password."""
 
     old_password: str
 
     @validator("old_password")
     def check_old_password(cls, v, values):
-        """
-        Check if the old password is correct.
-        """
         if v == values.get("password1"):
             raise ValueError("password same")
         return v
 
 
 class UserInChangeUsername(DefaultModel):
-    """
-    Class to check the user in the change username.
-    """
+    """Class to check the user in the change username."""
 
     username: str
 
@@ -148,9 +129,7 @@ class UserInChangeUsername(DefaultModel):
 
 
 class UserPrivateInfo(DefaultModel):
-    """
-    Class to check the user private info.
-    """
+    """Class to check the user private info."""
 
     id: int
     username: str
@@ -164,8 +143,5 @@ class UserPrivateInfo(DefaultModel):
 
     @validator("created_at", "last_login")
     def set_format(cls, v):
-        """
-        Check if the created_at or last_login is wrong.
-        """
         d = v + timedelta(hours=TIME_DELTA)
         return d.strftime("%-d %B %Y, %H:%M")
