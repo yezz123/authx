@@ -1,13 +1,15 @@
 # Social Router
 
-The Social router will generate a set of endpoints for [Social Authentication](../social/index.md) users.
+The Social router will generate a set of endpoints for
+[Social Authentication](../social/index.md) users.
 
-* GET `/{provider}`
-* GET `/{provider}/callback`
+- GET `/{provider}`
+- GET `/{provider}/callback`
 
 ## Setup the Social Router
 
-To Setup the Social authentication service, you will need to add all requirements to the object `SocialService`.
+To Setup the Social authentication service, you will need to add all
+requirements to the object `SocialService`.
 
 ```py
 from authx.services import SocialService
@@ -34,12 +36,14 @@ auth = Authentication()
 app.include_router(auth.social_router, prefix="/auth")
 ```
 
-!!! info
-    We describe the `SocialService` object in the [Social Service](../social/index.md) documentation.
+!!! info We describe the `SocialService` object in the
+[Social Service](../social/index.md) documentation.
 
 ### Login
 
-Using `GET` Method to login, after provide all parameters like the `provider` (ex. Facebook,Google,etc), `request`, all of that gonna return a `RedirectResponse where we gonna redirect the user to the provider.
+Using `GET` Method to login, after provide all parameters like the `provider`
+(ex. Facebook,Google,etc), `request`, all of that gonna return a
+`RedirectResponse where we gonna redirect the user to the provider.
 
 ```py
 @router.get("/{provider}", name="social:login")
@@ -55,7 +59,8 @@ Using `GET` Method to login, after provide all parameters like the `provider` (e
         return RedirectResponse(redirect_uri)
 ```
 
-Before, send the request to the provider, we gonna check if the provider is valid.
+Before, send the request to the provider, we gonna check if the provider is
+valid.
 
 ```py
 def check_provider(provider):
@@ -63,19 +68,22 @@ def check_provider(provider):
             raise HTTPException(404)
 ```
 
-!!! info
-    Until Now AuthX Support the following providers:
+!!! info Until Now AuthX Support the following providers:
 
     * Facebook : [Read More](../social/facebook.md)
     * Google : [Read More](../social/google.md)
 
-After checking the Provider, we gonna check if the SocialService is setup, and then the method `login_{provider}` is available.
+After checking the Provider, we gonna check if the SocialService is setup, and
+then the method `login_{provider}` is available.
 
 ### Callback
 
-Same as the `login` method, the Callback is based on `GET` method, with the same Arguments, but with a different return, cause here we gonna return an `HTMLResponse` that gonna redirect the user to the home page.
+Same as the `login` method, the Callback is based on `GET` method, with the same
+Arguments, but with a different return, cause here we gonna return an
+`HTMLResponse` that gonna redirect the user to the home page.
 
-As always, we gonna check first if the `provider` is valid, and then we gonna check if the `state` is valid.
+As always, we gonna check first if the `provider` is valid, and then we gonna
+check if the `state` is valid.
 
 ```py
 @router.get("/{provider}/callback", name="social:callback")
@@ -89,10 +97,12 @@ As always, we gonna check first if the `provider` is valid, and then we gonna ch
             raise HTTPException(403)
 ```
 
-!!! Warning
-    if The stale is not valid we gonna raise an HTTPException with a status code of 403.
+!!! Warning if The stale is not valid we gonna raise an HTTPException with a
+status code of 403.
 
-Now we gonna Create `code` where we gonna get a `query_params` with the `code` from the provider, without forgetting the `SocialService`, and the Method where we gonna callback the provider.
+Now we gonna Create `code` where we gonna get a `query_params` with the `code`
+from the provider, without forgetting the `SocialService`, and the Method where
+we gonna callback the provider.
 
 ```py
 code = request.query_params.get("code")
@@ -102,7 +112,8 @@ method = getattr(service, f"callback_{provider}")
 sid, email = await method(code)
 ```
 
-Now, lets try to create the token and redirect the user to the home page, the response use `set_cookie` to set the token in the cookie.
+Now, lets try to create the token and redirect the user to the home page, the
+response use `set_cookie` to set the token in the cookie.
 
 ```py
 response.set_cookie(
@@ -121,7 +132,8 @@ response.set_cookie(
 )
 ```
 
-Now if the user is not logged in, we gonna redirect a `SocialException` as an `HTMLReponse` with a `status_code`.
+Now if the user is not logged in, we gonna redirect a `SocialException` as an
+`HTMLReponse` with a `status_code`.
 
 ```py
     return response
@@ -171,5 +183,5 @@ except SocialException as e:
     return router
 ```
 
-!!! Info
-    Also, an [Addons](../social/addons.md) is available to add some utility functions to the social login, for example captcha, email verification, etc.
+!!! Info Also, an [Addons](../social/addons.md) is available to add some utility
+functions to the social login, for example captcha, email verification, etc.

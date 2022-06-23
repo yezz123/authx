@@ -1,6 +1,7 @@
 # Password
 
-the Main Class `PasswordService` is the main class that is used to perform all password operations.
+the Main Class `PasswordService` is the main class that is used to perform all
+password operations.
 
 ```py
 from authx import PasswordService, UsersRepo, JWTBackend

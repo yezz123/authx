@@ -45,7 +45,7 @@ jobs:
         run: flit install --symlink
       - name: Lint
         if: ${{ matrix.python-version != '3.9' }}
-        run: pre-commit run --all-files
+        run: pre-commit run --all-files --verbose --show-diff-on-failure
       - name: Test
         env:
           ENV: test

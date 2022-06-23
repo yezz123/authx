@@ -1,12 +1,16 @@
 # Redis
 
-**AuthX** provides the necessary tools to work with Redis as a cache thanks to [aio-libs/aioredis-py](https://github.com/aio-libs/aioredis-py) package for full async support.
+**AuthX** provides the necessary tools to work with Redis as a cache thanks to
+[aio-libs/aioredis-py](https://github.com/aio-libs/aioredis-py) package for full
+async support.
 
-Setting up the Redis cache is very simple, we just need to create a new instance of the Redis class and pass it to the `set_redis` method.
+Setting up the Redis cache is very simple, we just need to create a new instance
+of the Redis class and pass it to the `set_redis` method.
 
 - But first check that you install the required packages
 
-- Then create a new instance of the Redis class and pass it to the `set_redis` method.
+- Then create a new instance of the Redis class and pass it to the `set_redis`
+  method.
 
 ```python
 from authx import authx, RedisBackend

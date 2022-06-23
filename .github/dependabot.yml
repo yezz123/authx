@@ -1,8 +1,17 @@
 version: 2
+
 updates:
-- package-ecosystem: pip
-  directory: "/"
-  schedule:
-    interval: daily
-  reviewers:
-  - yezz123
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    reviewers:
+    - yezz123
+
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: monthly
+    reviewers:
+    - yezz123

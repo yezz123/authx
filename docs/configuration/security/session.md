@@ -1,28 +1,33 @@
 # Session
 
-This a supported Redis Based Session Storage for you FastAPI Application, you can use it with any Session Backend.
+This a supported Redis Based Session Storage for you FastAPI Application, you
+can use it with any Session Backend.
 
 Before doing that check that you install the pre-built requirements.
 
-We use `redis-py` a Python client for Redis that is built on top of the Redis server.
+We use `redis-py` a Python client for Redis that is built on top of the Redis
+server.
 
 ## Features
 
---------
+---
 
 - [x] Dependency injection to protect routes
 - [x] Compatible with FastAPI's auto generated docs
 - [x] Pydantic models for verifying session data
 - [x] Abstract session backend so you can build one that fits your needs
-- [x] Abstract frontends to choose how you extract the session ids (cookies, header, etc.)
+- [x] Abstract frontends to choose how you extract the session ids (cookies,
+      header, etc.)
 - [x] Create verifiers based on the session data.
 - [x] Compatible with any Redis Configuration.
 
 ### Redis Configuration
 
-Before setting up our Sessions Storage and our CRUD Backend, we need to configure our Redis Instance.
+Before setting up our Sessions Storage and our CRUD Backend, we need to
+configure our Redis Instance.
 
-`BasicConfig` is a function help us setting up the Instance Information like Redis Link Connection or ID Name or Expiration Time.
+`BasicConfig` is a function help us setting up the Instance Information like
+Redis Link Connection or ID Name or Expiration Time.
 
 #### Default Config
 
@@ -46,11 +51,14 @@ basicConfig(
 
 ### Sessions Functions
 
-When it come to way of storing our sessions, we need to create a function that will be used to store our sessions.
+When it come to way of storing our sessions, we need to create a function that
+will be used to store our sessions.
 
-Authx give the developer the choice of using between a pre setting Crud Functionalities like `getSession` or `deleteSession`..
+Authx give the developer the choice of using between a pre setting Crud
+Functionalities like `getSession` or `deleteSession`..
 
-Also a `SessionStorage` Class where we initial the connections and the functions to store and get or delete our sessions.
+Also a `SessionStorage` Class where we initial the connections and the functions
+to store and get or delete our sessions.
 
 ```py
 from typing import Any

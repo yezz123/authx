@@ -1,8 +1,10 @@
 # Authentication
 
-Using the Service and Crud Operations thats coded in Authx natively thats could be used with different routers.
+Using the Service and Crud Operations thats coded in Authx natively thats could
+be used with different routers.
 
-the Main Class `AuthService` is the main class that is used to authenticate users.
+the Main Class `AuthService` is the main class that is used to authenticate
+users.
 
 ```py
 from authx import AuthService, UsersRepo, JWTBackend

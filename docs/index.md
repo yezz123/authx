@@ -24,9 +24,14 @@
 
 ---
 
-Add a Fully registration and authentication or authorization system to your [FastAPI](https://fastapi.tiangolo.com/) project. **Authx** is designed to be as customizable and adaptable as possible.
+Add a Fully registration and authentication or authorization system to your
+[FastAPI](https://fastapi.tiangolo.com/) project. **Authx** is designed to be as
+customizable and adaptable as possible.
 
-Authx is a fast, flexible and easy to use authentication and authorization library for FastAPI. It is built on top of [FastAPI](https://fastapi.tiangolo.com/) and [starlette](https://www.starlette.io/).
+Authx is a fast, flexible and easy to use authentication and authorization
+library for FastAPI. It is built on top of
+[FastAPI](https://fastapi.tiangolo.com/) and
+[starlette](https://www.starlette.io/).
 
 ## Features
 
@@ -45,16 +50,22 @@ Authx is a fast, flexible and easy to use authentication and authorization libra
 - [x] Extensible Error Handling
 - [x] High level API to manage users, roles and permissions
 - [x] Using Redis as a session store & cache.
+- [x] Support HTTPCache.
 - [x] Customizable database backend:
-    - [x] MongoDB async backend included thanks to [mongodb/motor](https://github.com/mongodb/motor)
-    - [x] SQLAlchemy backend included thanks to [Encode/Databases](https://github.com/encode/databases)
+    - [x] MongoDB async backend included thanks to
+          [mongodb/motor](https://github.com/mongodb/motor)
+    - [x] SQLAlchemy backend included thanks to
+          [Encode/Databases](https://github.com/encode/databases)
 - [x] Multiple customizable authentication backend:
     - [x] JWT authentication backend included
     - [x] Cookie authentication backend included
 - [x] Full OpenAPI schema support, even with several authentication backend.
 - [x] Provide a Docstring for each class and function.
-- [x] Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
+- [x] Support Sessions and Pre-built CRUD functions and Instance to launch
+      Redis.
 - [x] Support SocketIO.
+- [x] Support Middleware of [pyinstrument](https://pyinstrument.readthedocs.io/)
+      to check your service performance.
 
 ## Project using
 

@@ -1,6 +1,7 @@
 # Admin
 
-the Main Class `AdminService` is the main class that is used to perform all admins operations.
+the Main Class `AdminService` is the main class that is used to perform all
+admins operations.
 
 ```py
 from authx import AdminService, UsersRepo, BaseDBBackend, RedisBackend

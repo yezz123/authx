@@ -2,11 +2,15 @@
 
 ## Overview
 
-HTTP caching occurs when the browser stores local copies of web resources for faster retrieval the next time the resource is required. As your application serves resources it can attach cache headers to the response specifying the desired cache behavior.
+HTTP caching occurs when the browser stores local copies of web resources for
+faster retrieval the next time the resource is required. As your application
+serves resources it can attach cache headers to the response specifying the
+desired cache behavior.
 
 ![Overview](https://devcenter1.assets.heroku.com/article-images/782-imported-1443570279-782-imported-1443554749-55-original.jpg)
 
-When an item is fully cached, the browser may choose to not contact the server at all and simply use its own cached copy:
+When an item is fully cached, the browser may choose to not contact the server
+at all and simply use its own cached copy:
 
 ![Overview](https://devcenter1.assets.heroku.com/article-images/782-imported-1443570282-782-imported-1443554751-54-original.jpg)
 
@@ -16,15 +20,23 @@ There are two primary cache headers, `Cache-Control` and `Expires`.
 
 ### Cache-Control
 
-The `Cache-Control` header is the most important header to set as it effectively `switches on` caching in the browser. With this header in place, and set with a value that enables caching, the browser will cache the file for as long as specified. Without this header the browser will re-request the file on each subsequent request.
+The `Cache-Control` header is the most important header to set as it effectively
+`switches on` caching in the browser. With this header in place, and set with a
+value that enables caching, the browser will cache the file for as long as
+specified. Without this header the browser will re-request the file on each
+subsequent request.
 
 ### Expires
 
-When accompanying the `Cache-Control` header, Expires simply sets a date from which the cached resource should no longer be considered valid. From this date forward the browser will request a fresh copy of the resource.
+When accompanying the `Cache-Control` header, Expires simply sets a date from
+which the cached resource should no longer be considered valid. From this date
+forward the browser will request a fresh copy of the resource.
 
-> This Introduction to HTTP Caching is based on the [HTTP Caching Guide](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching).
+> This Introduction to HTTP Caching is based on the
+> [HTTP Caching Guide](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching).
 
-AuthX provide a simple HTTP caching model designed to work with [FastAPI](https://fastapi.tiangolo.com/),
+AuthX provide a simple HTTP caching model designed to work with
+[FastAPI](https://fastapi.tiangolo.com/),
 
 ## Initialize the cache
 
@@ -36,11 +48,14 @@ africa_Casablanca = timezone('Africa/Casablanca')
 HTTPCache.init(redis_url=REDIS_URL, namespace='test_namespace', tz=africa_Casablanca)
 ```
 
-The `tz` attribute becomes import when the `cache` decorator relies on the `expire_end_of_day` and `expire_end_of_week` attributes to expire the cache key.
+The `tz` attribute becomes import when the `cache` decorator relies on the
+`expire_end_of_day` and `expire_end_of_week` attributes to expire the cache key.
 
 ## Define your controllers
 
-The `ttl_in_seconds` expires the cache in 180 seconds. There are other approaches to take with helpers like `expire_end_of_day` and `expires_end_of_week`
+The `ttl_in_seconds` expires the cache in 180 seconds. There are other
+approaches to take with helpers like `expire_end_of_day` and
+`expires_end_of_week`
 
 ```python
 
@@ -63,7 +78,10 @@ async def home(request: Request, response: Response):
 
 ### Building keys from parameter objects
 
-While it's always possible to explicitly pass keys onto the `key` attribute, there are scenarios where the keys need to be built based on the parameters received by the controller method. For instance, in an authenticated API where the `user_id` is fetched as a controller `Depends` argument.
+While it's always possible to explicitly pass keys onto the `key` attribute,
+there are scenarios where the keys need to be built based on the parameters
+received by the controller method. For instance, in an authenticated API where
+the `user_id` is fetched as a controller `Depends` argument.
 
 ```python
 @app.get("/b/logged-in")
@@ -74,7 +92,9 @@ async def logged_in(request: Request, response: Response, user=user):
     )
 ```
 
-In the example above, the key allows room for a dynamic attribute fetched from the object `user`. The key eventually becomes `b.logged_in.112358` if the `user.id` returns `112358`
+In the example above, the key allows room for a dynamic attribute fetched from
+the object `user`. The key eventually becomes `b.logged_in.112358` if the
+`user.id` returns `112358`
 
 ### Explicitly invalidating the cache
 
@@ -93,7 +113,9 @@ async def post_logged_in(request: Request, response: Response, user=user):
 
 ### Invalidating more than one key at a time
 
-The cache invalidation decorator allows for multiple keys to be invalidated in the same call. However, the it assumes that the object attributes generated apply all keys.
+The cache invalidation decorator allows for multiple keys to be invalidated in
+the same call. However, the it assumes that the object attributes generated
+apply all keys.
 
 ```python
 @app.post("/b/logged-in")
@@ -108,7 +130,8 @@ async def post_logged_in(request: Request, response: Response, user=user):
 
 ## Computing `ttl` dynamically for cache keys using a `Callable`
 
-A callable can be passed as part of the decorator to dynamically compute what the ttl for a cache key should be. For example
+A callable can be passed as part of the decorator to dynamically compute what
+the ttl for a cache key should be. For example
 
 ```python
 async def my_ttl_callable() -> int:
@@ -126,7 +149,8 @@ The `ttl_func` is always assumed to be an **async** method
 
 ## Caching methods that aren't controllers
 
-HTTPCache works exactly the same way with regular methods. The example below explains usage of the cache in service objects and application services.
+HTTPCache works exactly the same way with regular methods. The example below
+explains usage of the cache in service objects and application services.
 
 ```py
 import os

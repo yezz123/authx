@@ -1,12 +1,21 @@
 # Service Performance
 
-Pyinstrument is a statistical python profiler which records call stack every 1 ms rather than recording the whole trace. This is done in order to avoid profiling overhead which can increase a lot if some functions are getting called many times and not taking that much time to complete.
+Pyinstrument is a statistical python profiler which records call stack every 1
+ms rather than recording the whole trace. This is done in order to avoid
+profiling overhead which can increase a lot if some functions are getting called
+many times and not taking that much time to complete.
 
-This kind of behavior can even distort results by highlighting part of the code/function which might not be slow but getting called many times completing faster. In a way it kind of tries to avoid profiling noise by removing profiling information of faster parts of code.
+This kind of behavior can even distort results by highlighting part of the
+code/function which might not be slow but getting called many times completing
+faster. In a way it kind of tries to avoid profiling noise by removing profiling
+information of faster parts of code.
 
-This kind of behavior also has a drawback that some of the function calls which ran quite fast will not be recorded but they are already fast.
+This kind of behavior also has a drawback that some of the function calls which
+ran quite fast will not be recorded but they are already fast.
 
-Pyinstrument uses an OS feature called signals to ask OS to send a signal and handle signals using a python signal handler (PyEval_SetProfile) for recording every 1 ms.
+Pyinstrument uses an OS feature called signals to ask OS to send a signal and
+handle signals using a python signal handler (PyEval_SetProfile) for recording
+every 1 ms.
 
 ## Example
 
@@ -31,7 +40,10 @@ if __name__ == "__main__":
     l = get_sum_of_list()
 ```
 
-- Below we have profiled script using Pyinstrument without default options. Please make a note that we are using the ! symbol which lets us execute a shell command from Jupyter Notebook. This command can be run exactly the same way from a shell.
+- Below we have profiled script using Pyinstrument without default options.
+  Please make a note that we are using the ! symbol which lets us execute a
+  shell command from Jupyter Notebook. This command can be run exactly the same
+  way from a shell.
 
 > `!pyinstrument profiling_examples/pyinstrument_ex1.py`
 
@@ -62,11 +74,13 @@ To view this report with different options, run:
     pyinstrument --load-prev 2020-11-12T16-39-21 [options]
 ```
 
-> Reference: [pyinstrument-statistical-profiler-for-python-code](https://coderzcolumn.com/tutorials/python/pyinstrument-statistical-profiler-for-python-code)
+> Reference:
+> [pyinstrument-statistical-profiler-for-python-code](https://coderzcolumn.com/tutorials/python/pyinstrument-statistical-profiler-for-python-code)
 
 ## AuthX Support
 
-AuthX Support it using a Class called `ProfilerMiddleware` which is a middleware that can be used to profile the code.
+AuthX Support it using a Class called `ProfilerMiddleware` which is a middleware
+that can be used to profile the code.
 
 for example:
 
@@ -93,7 +107,9 @@ if __name__ == "__main__":
     uvicorn.run(app=f"{app_name}:app", host="0.0.0.0", port=8080, workers=1)
 ```
 
-- This class to have 3 functions that expose the profiling information, one is to get the profiling information, one is to get the profiling information in a JSON format and one is to get the profiling information in a HTML format.
+- This class to have 3 functions that expose the profiling information, one is
+  to get the profiling information, one is to get the profiling information in a
+  JSON format and one is to get the profiling information in a HTML format.
 
 ```python
 app.add_middleware(PyInstrumentProfilerMiddleware, profiler_output_type="html", is_print_each_request=False, html_file_name="profiling.html")

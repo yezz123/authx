@@ -2,13 +2,16 @@
 
 ## Initial Redis Class
 
-Redis is a good choice for caching, that why we need to use it to store the token or users data some configuration relate to cache.
+Redis is a good choice for caching, that why we need to use it to store the
+token or users data some configuration relate to cache.
 
-In Python we use [`aioredis`](https://aioredis.readthedocs.io/en/stable/) library to connect to Redis.
+In Python we use [`aioredis`](https://aioredis.readthedocs.io/en/stable/)
+library to connect to Redis.
 
 ### Redis CRUD Operations
 
-Redis CRUD is a simple CRUD operation, we can use it to store the data in Redis. we need to create some methods. (Get Key-Value, Set Key-Value, Delete Key, etc.)
+Redis CRUD is a simple CRUD operation, we can use it to store the data in Redis.
+we need to create some methods. (Get Key-Value, Set Key-Value, Delete Key, etc.)
 
 ```py
 async def get(self, key: str) -> str:
@@ -34,8 +37,8 @@ async def set(
     return None
 ```
 
-!!! warning
-    It is very important not to `await` buffered command (ie `self._redis.set('foo', '123')`) as it will block forever.
+!!! warning It is very important not to `await` buffered command (ie
+`self._redis.set('foo', '123')`) as it will block forever.
 
 #### Set String Value
 
@@ -55,7 +58,8 @@ async def incr(self, key: str) -> str:
 
 #### Dispatch Action
 
-After we have the client we need to dispatch the action to the client, this gonna help to publish `.json` file to the client.
+After we have the client we need to dispatch the action to the client, this
+gonna help to publish `.json` file to the client.
 
 ```py
 async def dispatch_action(
