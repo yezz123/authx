@@ -1,7 +1,6 @@
 # AuthenticationX 💫
 
 ![authx](https://user-images.githubusercontent.com/52716203/136962014-280d82b0-0640-4ee5-9a11-b451b338f6d8.png)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fyezz123%2Fauthx.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fyezz123%2Fauthx?ref=badge_shield)
 
 <p align="center">
     <em>Ready-to-use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
@@ -14,6 +13,7 @@
 [![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
 [![Downloads](https://pepy.tech/badge/authx)](https://pepy.tech/project/authx)
 [![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fyezz123%2Fauthx.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fyezz123%2Fauthx?ref=badge_shield)
 
 ---
 
@@ -164,6 +164,5 @@ specification. Contributions of any kind welcome!
 ## License 📝
 
 This project is licensed under the terms of the MIT License.
-
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fyezz123%2Fauthx.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fyezz123%2Fauthx?ref=badge_large)
