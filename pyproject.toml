@@ -74,6 +74,9 @@ docs = [
     "pymdown-extensions==9.1",
     "jinja2==3.0.3"
 ]
+prisma = [
+    "prisma==0.4.3",
+]
 
 [tool.flit.metadata.urls]
 Documentation = "https://authx.yezz.me/"
