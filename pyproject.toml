@@ -25,12 +25,12 @@ classifiers = [
 description-file = "README.md"
 requires-python = ">=3.8"
 requires = [
-    "fastapi >=0.65.2,<0.78.0",
+    "fastapi >=0.65.2,<0.79.0",
     "passlib ==1.7.4",
     "bcrypt ==3.2.2",
     "email-validator >=1.1.0,<1.2.1",
     "pyjwt ==2.4.0",
-    "cryptography==37.0.2",
+    "cryptography==37.0.4",
     "httpx==0.23.0",
     "itsdangerous == 2.1.2",
     "aiosmtplib == 1.1.6",
@@ -38,13 +38,14 @@ requires = [
     "databases == 0.6.0",
     "motor == 3.0.0",
     "Authlib==0.15.5",
-    "starlette >=0.14.02,<0.20.1",
+    "starlette >=0.14.02,<0.20.4",
     "aioredis >=2.0.1,<2.1.0",
-    "redis==4.3.3",
+    "redis >=4.3.3,<4.3.4",
     "pytz==2022.1",
     "python-dateutil==2.8.2",
-    "python-socketio>=4.6.0",
-    "pyinstrument==4.1.1"
+    "python-socketio >=4.6.0,<5.7.1",
+    "pyinstrument >=4.1.1,<4.2.0",
+    "SQLAlchemy >=1.4.37,<1.4.39",
 ]
 
 [tool.flit.metadata.requires-extra]
