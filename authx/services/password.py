@@ -9,12 +9,12 @@ from authx.core.jwt import JWTBackend
 from authx.core.logger import logger
 from authx.core.password import get_password_hash, verify_password
 from authx.core.user import User
+from authx.handler.errors import get_error_message
 from authx.models.user import (
     UserInChangePassword,
     UserInForgotPassword,
     UserInSetPassword,
 )
-from authx.resources.error_messages import get_error_message
 from authx.utils.strings import create_random_string, hash_string
 
 
