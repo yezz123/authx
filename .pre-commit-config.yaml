@@ -33,7 +33,7 @@ repos:
             exclude: '^\..*'
             args: ["--in-place"]
     - repo: https://github.com/psf/black
-      rev: 22.6.0
+      rev: 22.8.0
       hooks:
           - id: black
             args: ["--target-version", "py39"]
@@ -42,22 +42,4 @@ repos:
       hooks:
           - id: pyupgrade
             args: [--py37-plus]
-    - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-      rev: "v9.0.0"
-      hooks:
-          - id: commitlint
-            stages: [commit-msg]
-            additional_dependencies: ['@commitlint/config-conventional']
-    - repo: https://github.com/DavidAnson/markdownlint-cli2
-      rev: "v0.4.0"
-      hooks:
-          - id: markdownlint-cli2
-            name: markdownlint-cli2
-            exclude: docs/
-    - repo: https://github.com/pre-commit/mirrors-prettier
-      rev: "v2.6.2"
-      hooks:
-          - id: prettier
-            args: [--prose-wrap, always]
-            types: [markdown]
-            exclude: docs/index.md
+
