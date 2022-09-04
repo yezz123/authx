@@ -1,5 +1,0 @@
-fastapi
-authx
-docker
-aiodocker
-uvicorn

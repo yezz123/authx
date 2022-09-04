@@ -1,4 +1,4 @@
-name: Test
+name: Lint and Format
 
 on:
   push:
@@ -8,22 +8,11 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
-    services:
-      redis:
-        image: redis
-        ports:
-          - 6379:6379
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
     strategy:
       matrix:
-        python-version: ["3.9", "3.10.0"]
+        python-version: ["3.10.0"]
       fail-fast: false
 
     steps:
@@ -43,10 +32,5 @@ jobs:
       - name: Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: flit install --symlink
-      - name: Test
-        env:
-          ENV: test
-          REDIS_URL: "redis://0.0.0.0:6379"
-        run: bash scripts/test.sh
-      - name: Upload coverage
-        uses: codecov/codecov-action@v3
+      - name: Lint
+        run: bash scripts/format.sh
