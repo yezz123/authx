@@ -29,7 +29,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: python3.9 -m flit install --deps production --extras docs
       - name: Build docs
-        run: mkdocs build -d build
+        run: bash scripts/docs_build.sh
 
       - name: Deploy docs
         uses: jsmrcaga/action-netlify-deploy@v1.1.0
