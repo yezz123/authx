@@ -1,9 +1,0 @@
-Authlib==0.15.5
-SQLAlchemy==1.4.29
-uvloop==0.16.0
-websockets==10.1
-starlette==0.17.1
-httpx==0.23.0
-itsdangerous == 2.0.1
-python-decouple == 3.5
-authx == 0.2.0
