@@ -74,8 +74,10 @@ we have a validation error it will return the error `400`.
 
 Same logical way as [register](#register), we use the same Authentication route.
 
-!!! info `app.include_router(auth.auth_router, prefix="/api/users")` include all
-authentication routers.
+!!! info
+
+    `app.include_router(auth.auth_router, prefix="/api/users")` include all
+    authentication routers.
 
 ```py
 @router.post("/login", name="auth:login")
@@ -96,13 +98,17 @@ For the `login` Service we provide some params:
 if the `data` is not valid, we will return the error `400`, if the `data` is
 valid, we will return the tokens (access and refresh).
 
-!!! info There is also an `HTTPException` relate to `404` if the user is not
-found, also the `429` relate to brute force attempts.
+!!! info
 
-!!! info The HTTP `429` Too Many Requests response status code indicates the
-user has sent too many requests in a given amount of time ("rate limiting"). A
-Retry-After header might be included to this response indicating how long to
-wait before making a new request.
+    There is also an `HTTPException` relate to `404` if the user is not
+    found, also the `429` relate to brute force attempts.
+
+!!! info
+
+    The HTTP `429` Too Many Requests response status code indicates the
+    user has sent too many requests in a given amount of time ("rate limiting"). A
+    Retry-After header might be included to this response indicating how long to
+    wait before making a new request.
 
 ### Logout
 
@@ -124,7 +130,7 @@ services.
 ### Token
 
 After login and all the steps we have a function relate to get a new token based
-on `user` a class that initalize the user object and use `data` (login,
+on `user` a class that initialize the user object and use `data` (login,
 password) as an argument.
 
 ```py
@@ -177,9 +183,11 @@ method, but we will use the `refresh_token` instead of `access_token`, it take
   - `401`: if the refresh token is not valid. (Refresh or Ban).
   - `500`: if the refresh token is expired.
 
-!!! info `set_access_token_in_response` take the `response` and the `token` as
-arguments, also set :
-`py response.set_cookie( key=refresh_cookie_name, value=token, secure=not debug, httponly=True, max_age=refresh_expiration, ) `
+!!! info
+
+    `set_access_token_in_response` take the `response` and the `token` as
+    arguments, also set :
+    `py response.set_cookie( key=refresh_cookie_name, value=token, secure=not debug, httponly=True, max_age=refresh_expiration, ) `
 
 ### Confirm
 

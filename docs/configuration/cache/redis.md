@@ -37,8 +37,10 @@ async def set(
     return None
 ```
 
-!!! warning It is very important not to `await` buffered command (ie
-`self._redis.set('foo', '123')`) as it will block forever.
+!!! warning
+
+        It is very important not to `await` buffered command (ie
+        `self._redis.set('foo', '123')`) as it will block forever.
 
 #### Set String Value
 

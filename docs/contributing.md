@@ -84,42 +84,26 @@ To check it worked, use:
 
 If it shows the `pip` binary at `env/bin/pip` then it worked. 🎉
 
-!!! tip Every time you install a new package with `pip` under that environment,
-activate the environment again.
+!!! tip
+
+    Every time you install a new package with `pip` under that environment,
+    activate the environment again.
 
     This makes sure that if you use a terminal program installed by that package (like `pre-commit`), you use the one from your local environment and not any other that could be installed globally.
 
-### Setup Flit
+### pip
 
-Flit is a simple way to put Python packages and modules on PyPI. It tries to
-require less thought about packaging and help you avoid common mistakes.
-
-It’s easy to underestimate the challenges involved in distributing and
-installing code, because it seems like you just need to copy some files into the
-right place. There’s a whole lot of metadata and tooling that has to work
-together around that fundamental step. But with the right tooling, a developer
-who wants to release their code doesn’t need to know about most of that.
+After activating the environment as described above, Now lets install all the package that you need to develop Ormdantic:
 
 <div class="termy">
 
 ```console
-pip install flit
+$ pip install -e .[test,lint,docs]
+
+---> 100%
 ```
 
 </div>
-
-### Development Dependencies
-
-Now lets install all the package that you need to develop AuthX:
-
-=== "Terminal"
-
-    <div class="termy">
-
-    ```console
-    $ flit install --symlink
-    ```
-    </div>
 
 It will install all the dependencies in your local environment.
 
@@ -199,10 +183,11 @@ Here are the steps to help with translations.
   approving them.
 
 !!! tip You can
-<a href="https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/commenting-on-a-pull-request" class="external-link" target="_blank">add
-comments with change suggestions</a> to existing pull requests.
 
-    Check the docs about <a href="https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-reviews" class="external-link" target="_blank">adding a pull request review</a> to approve it or request changes.
+      <a href="https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/commenting-on-a-pull-request" class="external-link" target="_blank">add
+      comments with change suggestions</a> to existing pull requests.
+
+      Check the docs about <a href="https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-reviews" class="external-link" target="_blank">adding a pull request review</a> to approve it or request changes.
 
 - Check in the
   <a href="https://github.com/yezz123/AuthX/issues" class="external-link" target="_blank">issues</a>

@@ -48,7 +48,9 @@ Authentication = Authentication(
 
 **Note:** We gonna discuss what we define in `Authentication` Next.
 
-!!! info We Have also an other configuration option, `authx` and `User`.
+!!! info
+
+    We Have also an other configuration option, `authx` and `User`.
 
 ## Available routers
 

@@ -36,8 +36,10 @@ auth = Authentication()
 app.include_router(auth.social_router, prefix="/auth")
 ```
 
-!!! info We describe the `SocialService` object in the
-[Social Service](../social/index.md) documentation.
+!!! info
+
+        We describe the `SocialService` object in the
+        [Social Service](../social/index.md) documentation.
 
 ### Login
 
@@ -68,10 +70,12 @@ def check_provider(provider):
             raise HTTPException(404)
 ```
 
-!!! info Until Now AuthX Support the following providers:
+!!! info
 
-    * Facebook : [Read More](../social/facebook.md)
-    * Google : [Read More](../social/google.md)
+        Until Now AuthX Support the following providers:
+
+            * Facebook : [Read More](../social/facebook.md)
+            * Google : [Read More](../social/google.md)
 
 After checking the Provider, we gonna check if the SocialService is setup, and
 then the method `login_{provider}` is available.
@@ -97,8 +101,10 @@ check if the `state` is valid.
             raise HTTPException(403)
 ```
 
-!!! Warning if The stale is not valid we gonna raise an HTTPException with a
-status code of 403.
+!!! Warning
+
+        if The stale is not valid we gonna raise an HTTPException with a
+        status code of 403.
 
 Now we gonna Create `code` where we gonna get a `query_params` with the `code`
 from the provider, without forgetting the `SocialService`, and the Method where
@@ -183,5 +189,7 @@ except SocialException as e:
     return router
 ```
 
-!!! Info Also, an [Addons](../social/addons.md) is available to add some utility
-functions to the social login, for example captcha, email verification, etc.
+!!! Info
+
+        Also, an [Addons](../social/addons.md) is available to add some utility
+        functions to the social login, for example captcha, email verification, etc.
