@@ -2,4 +2,4 @@ import authx
 
 
 def test_version():
-    assert authx.__version__ == "0.6.1"
+    assert authx.__version__ == "0.7.0"
