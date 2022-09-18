@@ -26,11 +26,8 @@ jobs:
         with:
           path: ${{ env.pythonLocation }}
           key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}-test
-      - name: Install Flit
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: pip install flit
       - name: Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: flit install --symlink
+        run: pip install -e .[lint]
       - name: Lint
         run: bash scripts/format.sh

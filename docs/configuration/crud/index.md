@@ -82,5 +82,7 @@ perform the following actions:
   - `delete_blackout`: Delete the blackout of a user.
   - `set_permissions`: Set the permissions of a user.
 
-!!! warning This one relate to the Admin route, and is not available in the User
-route too.
+!!! warning
+
+    This one relate to the Admin route, and is not available in the User
+    route too.

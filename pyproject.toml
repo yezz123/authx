@@ -1,13 +1,17 @@
 [build-system]
-requires = ["flit"]
-build-backend = "flit.buildapi"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.flit.metadata]
-module = "authx"
-dist-name = "authx"
-author = "Yasser Tahiri"
-author-email = "yasserth19@gmail.com"
-home-page = "https://github.com/yezz123/authx"
+[project]
+name = "authx"
+description = "Ready to use and customizable Authentications and Oauth2 management for FastAPI"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [
+    { name = "Yasser Tahiri", email = "hello@yezz.me" },
+]
+
 classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
@@ -22,9 +26,8 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP :: Session",
     "Typing :: Typed",
 ]
-description-file = "README.md"
-requires-python = ">=3.8"
-requires = [
+
+dependencies = [
     "fastapi >=0.65.2,<=0.81.0",
     "passlib ==1.7.4",
     "bcrypt ==3.2.2",
@@ -48,7 +51,14 @@ requires = [
     "SQLAlchemy >=1.4.37,<=1.4.40",
 ]
 
-[tool.flit.metadata.requires-extra]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/yezz123/authx"
+Documentation = "https://authx.yezz.me/"
+Funding = 'https://github.com/sponsors/yezz123'
+
+[project.optional-dependencies]
 lint = [
     "pre-commit==2.20.0",
 ]
@@ -74,5 +84,5 @@ docs = [
     "jinja2==3.0.3"
 ]
 
-[tool.flit.metadata.urls]
-Documentation = "https://authx.yezz.me/"
+[tool.hatch.version]
+path = "authx/__init__.py"

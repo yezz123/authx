@@ -219,10 +219,12 @@ async def password_reset(self, data: dict, token: str) -> None:
         return None
 ```
 
-!!! Warning You could get the HTTPException if:
+!!! Warning
 
-    * `404` : The token is not found.
-    * `400` : Token Validation Error.
+        You could get the HTTPException if:
+
+            * `404` : The token is not found.
+            * `400` : Token Validation Error.
 
 ### Password Change
 
@@ -258,7 +260,9 @@ async def password_change(self, data: dict) -> None:
         return None
 ```
 
-!!! Warning You could get the HTTPException if:
+!!! Warning
 
-    * `404` : The token is not found.
-    * `400` : Token Validation Error.
+        You could get the HTTPException if:
+
+            * `404` : The token is not found.
+            * `400` : Token Validation Error.

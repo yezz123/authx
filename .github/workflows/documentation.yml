@@ -16,18 +16,15 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.9"
+          python-version: "3.10"
       - uses: actions/cache@v3
         id: cache
         with:
           path: ${{ env.pythonLocation }}
           key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}-docs
-      - name: Install Flit
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: python3.9 -m pip install flit
       - name: Install docs extras
         if: steps.cache.outputs.cache-hit != 'true'
-        run: python3.9 -m flit install --deps production --extras docs
+        run: pip install -e .[docs]
       - name: Build docs
         run: bash scripts/docs_build.sh
 

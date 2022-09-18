@@ -172,8 +172,10 @@ async def delete_blackout(self) -> None:
 
 At this point, the blackout will be deleted from the `redis` cache.
 
-!!! info All of this is set on `redis` cache, so you need to configure your
-[redis](https://redis.io/) server.
+!!! info
+
+    All of this is set on `redis` cache, so you need to configure your
+    [redis](https://redis.io/) server.
 
 ### Get ID By Username
 
@@ -234,5 +236,7 @@ user is not found, we will raise an exception (404).
 Also, this need the Key relate to cache, and the `_access_expiration` is the
 time that the user will be kicked.
 
-!!! Warning Configure your [redis](https://redis.io/) server, or check this
-[redis Configuration](../cache/index.md).
+!!! Warning
+
+    Configure your [redis](https://redis.io/) server, or check this
+    [redis Configuration](../cache/index.md).

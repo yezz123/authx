@@ -81,7 +81,9 @@ by ID, username or both.
 - `username`: The username of the user.
 - `p`: The page number.
 
-!!! info The P parameter is used to paginate the results. (`PAGE_SIZE = 20`)
+!!! info
+
+        The P parameter is used to paginate the results. (`PAGE_SIZE = 20`)
 
 ```py
 async def search(
