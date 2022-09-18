@@ -1,5 +1,31 @@
 # Release Notes 🎞
 
+## 0.6.1
+
+Fix Client issue for launching both the client and database_name in `MongoDBBackend`.
+
+```py
+from authx import Authentication
+from authx.database import MongoDBBackend
+from motor.motor_asyncio import AsyncIOMotorClient
+
+
+authx = Authentication(
+     database_backend=MongoDBBackend(
+          client=AsyncIOMotorClient("mongodb://localhost:27017"),
+          database_name="test",
+     )
+)
+```
+
+### What's Changed
+
+* 🛠 chore(refactor): Improve Errors  by @yezz123 in [#257](https://github.com/yezz123/authx/pull/257)
+* 🔊 Update Dependencies by @yezz123 in [#259](https://github.com/yezz123/authx/pull/259)
+* :bug: [WIP] fix client issue by @yezz123 in [#260](https://github.com/yezz123/authx/pull/260)
+
+**Full Changelog**: https://github.com/yezz123/authx/compare/0.6.0...0.6.1
+
 ## 0.6.0
 
 ### Idea
