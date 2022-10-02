@@ -59,6 +59,7 @@ customizable and adaptable as possible.
 - [x] Support SocketIO.
 - [x] Support Middleware of [pyinstrument](https://pyinstrument.readthedocs.io/)
       to check your service performance.
+- [x] Support Middleware for collecting and exposing [Prometheus](https://prometheus.io/) metrics.
 
 **Note:** Check [Release Notes](https://authx.yezz.me/release/).
 

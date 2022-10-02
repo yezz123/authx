@@ -49,6 +49,7 @@ dependencies = [
     "python-socketio >=4.6.0,<5.7.1",
     "pyinstrument >=4.1.1,<4.2.0",
     "SQLAlchemy >=1.4.37,<=1.4.40",
+    "prometheus-client",
 ]
 
 dynamic = ["version"]
