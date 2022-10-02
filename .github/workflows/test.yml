@@ -23,7 +23,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ["3.9", "3.10.0", "3.11-dev"]
+        python-version: ["3.9", "3.10.0", "3.11.0-rc.1gi"]
       fail-fast: false
 
     steps:
