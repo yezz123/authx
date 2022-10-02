@@ -101,6 +101,7 @@ nav:
       - configuration/middleware/service-performance.md
       - configuration/middleware/example.md
       - configuration/middleware/profiling.md
+      - configuration/middleware/metrics.md
     - Socket:
       - Introduction: configuration/socket/index.md
   - Help AuthX - Get Help: help.md
