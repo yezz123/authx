@@ -26,15 +26,15 @@ def cache(
         async def inner(*args, **kwargs):
             try:
                 # extracts the `id` attribute from the `obj_attr` parameter passed to the `@cache` method
-                _obj = kwargs.get(f"{obj}", None)
+                _obj = kwargs.get(f"{obj}")
                 _key = await HTTPKeys.generate_key(
                     key=key, config=HTTPCache, obj=_obj, obj_attr=obj_attr
                 )
                 _cache = HTTPCacheBackend(
                     redis=HTTPCache.redis_client, namespace=namespace
                 )
-                _request = kwargs.get("request", None)
-                _response = kwargs.get("response", None)
+                _request = kwargs.get("request")
+                _response = kwargs.get("response")
 
                 # check cache and return if value is present
                 ttl, response = await _cache.get(key=_key)
@@ -91,7 +91,7 @@ def invalidate_cache(
         async def inner(*args, **kwargs):
             try:
                 # extracts the `id` attribute from the `obj_attr` giparameter passed to the `@cache` method
-                _obj = kwargs.get(f"{obj}", None)
+                _obj = kwargs.get(f"{obj}")
                 _keys = await HTTPKeys.generate_keys(
                     keys=keys, config=HTTPCache, obj=_obj, obj_attr=obj_attr
                 )
