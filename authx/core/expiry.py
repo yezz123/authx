@@ -27,9 +27,7 @@ class HTTPExpiry:
         if end_of_day:
             return await HTTPExpiry.expires_end_of_day(tz=tz)
 
-        if end_of_week:
-            return await HTTPExpiry.expires_end_of_week(tz=tz)
-        return 86400
+        return await HTTPExpiry.expires_end_of_week(tz=tz) if end_of_week else 86400
 
     @staticmethod
     async def expires_end_of_week(tz=utc) -> int:
