@@ -1,5 +1,36 @@
 # Release Notes 🎞
 
+## 0.8.0
+
+### Implementation in FastAPI applications
+
+Thats Work by adding a Middleware to your FastAPI application, work on collecting prometheus metrics for each request, and then to handle that we need a function `get_metrics` work on handling exposing the prometheus metrics into `/metrics` endpoint.
+
+```python
+from fastapi import FastAPI
+from authx.middleware import MetricsMiddleware, get_metrics
+
+app = FastAPI()
+app.add_middleware(MetricsMiddleware)
+app.add_route("/metrics", get_metrics)
+```
+
+### What's Changed
+
+- :construction_worker: chore(dev): Support middleware for Prometheus metrics by @yezz123 in <https://github.com/yezz123/authx/pull/262>
+
+**Full Changelog**: <https://github.com/yezz123/authx/compare/0.7.0...0.8.0>
+
+## 0.7.0
+
+- 🔧 Update package metadata and move build internals from Flit to Hatch.
+
+### What's Changed
+
+- Migrate to Hatchling by @yezz123 in <https://github.com/yezz123/authx/pull/261>
+
+**Full Changelog**: <https://github.com/yezz123/authx/compare/0.6.1...0.7.0>
+
 ## 0.6.1
 
 Fix Client issue for launching both the client and database_name in `MongoDBBackend`.
@@ -20,11 +51,11 @@ authx = Authentication(
 
 ### What's Changed
 
-* 🛠 chore(refactor): Improve Errors  by @yezz123 in [#257](https://github.com/yezz123/authx/pull/257)
-* 🔊 Update Dependencies by @yezz123 in [#259](https://github.com/yezz123/authx/pull/259)
-* :bug: [WIP] fix client issue by @yezz123 in [#260](https://github.com/yezz123/authx/pull/260)
+- 🛠 chore(refactor): Improve Errors  by @yezz123 in [#257](https://github.com/yezz123/authx/pull/257)
+- 🔊 Update Dependencies by @yezz123 in [#259](https://github.com/yezz123/authx/pull/259)
+- :bug: [WIP] fix client issue by @yezz123 in [#260](https://github.com/yezz123/authx/pull/260)
 
-**Full Changelog**: https://github.com/yezz123/authx/compare/0.6.0...0.6.1
+**Full Changelog**: <https://github.com/yezz123/authx/compare/0.6.0...0.6.1>
 
 ## 0.6.0
 
@@ -452,7 +483,7 @@ class AuthenticateMiddleware(MiddlewareOauth2):
 
 ## 0.1.4
 
-## What's Changed
+### What's Changed
 
 - Chore(deps-dev): Bump pymdown-extensions from 9.0 to 9.1 by @dependabot in
   <https://github.com/yezz123/authx/pull/155>
@@ -490,7 +521,7 @@ class AuthenticateMiddleware(MiddlewareOauth2):
 - Fix the issue relate to PyJWT (Bumping version #151 )
 - Add `sameSite` to Cookies metadata ( #134)
 
-## What's Changed
+### What's Changed
 
 - chore: add sameSite attribute to the http only cookie by @smakosh in
   <https://github.com/yezz123/authx/pull/134>
