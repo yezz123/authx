@@ -28,7 +28,7 @@ customizable and adaptable as possible.
 
 ## Features 🔧
 
-- [x] Support Python 3.8+.
+- [x] Support Python 3.9+.
 - [x] Extensible base user model.
 - [x] Ready-to-use register, login, reset password and verify e-mail routes.
 - [x] Ready-to-use Social login and Oauth2 routes.
