@@ -1,5 +1,18 @@
 # Release Notes 🎞
 
+## 0.8.1
+
+### What's Changed
+
+- increment postfix to find the possible username to use by @iftenet in <https://github.com/yezz123/authx/pull/266>
+- docs: add @iftenet as a contributor for bug by @allcontributors in <https://github.com/yezz123/authx/pull/267>
+
+### New Contributors
+
+- @iftenet made their first contribution in <https://github.com/yezz123/authx/pull/266>
+
+**Full Changelog**: <https://github.com/yezz123/authx/compare/0.8.0...0.8.1>
+
 ## 0.8.0
 
 ### Implementation in FastAPI applications
