@@ -42,7 +42,7 @@ dependencies = [
     "Authlib==0.15.5",
     "starlette >=0.14.02,<0.20.4",
     "aioredis >=2.0.1,<2.1.0",
-    "redis >=4.3.3,<4.3.4",
+    "redis >=4.3.3,<4.3.5",
     "pytz==2022.6",
     "python-dateutil==2.8.2",
     "python-socketio >=4.6.0,<5.7.1",
