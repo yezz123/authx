@@ -253,11 +253,7 @@ class MockAuthBackend:
         payload |= {"iat": iat, "exp": exp, "type": token_type}
 
         token = jwt.encode(payload, self._private_key, algorithm=self._jwt_algorithm)
-        if isinstance(token, bytes):
-            # For PyJWT <= 1.7.1
-            return token.decode("utf-8")  # pragma: no cover
-        # For PyJWT >= 2.0.0a1
-        return token
+        return token.decode("utf-8") if isinstance(token, bytes) else token
 
     def create_access_token(self, payload: dict) -> str:
         return self._create_token(payload, "access", 60 * 5)

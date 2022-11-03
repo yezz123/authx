@@ -123,12 +123,13 @@ class SocialService:
             username = email.split("@")[0]
             i = 0
             resolved_username = username
-            postfix = str(i) if i > 0 else ""
             while True:
+                postfix = str(i) if i > 0 else ""
                 resolved_username = f"{username}{postfix}"
                 existing_username = await self._repo.get_by_username(resolved_username)
                 if not existing_username:
                     break
+                i = i + 1
 
             user = SocialInCreate(
                 **{

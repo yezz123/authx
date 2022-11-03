@@ -92,6 +92,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "iftenet",
+      "name": "Roman",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1397880?v=4",
+      "profile": "https://github.com/iftenet",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -99,5 +108,6 @@
   "projectOwner": "yezz123",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }

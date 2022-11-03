@@ -32,7 +32,7 @@ def test_middleware():
     def _test_middleware(**profiler_kwargs):
         app = FastAPI()
         if profiler_kwargs.get("profiler_output_type") != "text":
-            profiler_kwargs.update({"server_app": app})
+            profiler_kwargs["server_app"] = app
         app.add_middleware(ProfilerMiddleware, **profiler_kwargs)
 
         @app.route("/test")
