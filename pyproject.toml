@@ -36,7 +36,7 @@ dependencies = [
     "httpx==0.23.0",
     "itsdangerous == 2.1.2",
     "aiosmtplib == 1.1.6",
-    "pydantic==1.9.1",
+    "pydantic==1.10.2",
     "databases == 0.6.1",
     "motor == 3.0.0",
     "Authlib==0.15.5",
