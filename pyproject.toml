@@ -35,7 +35,7 @@ dependencies = [
     "cryptography==37.0.4",
     "httpx==0.23.0",
     "itsdangerous == 2.1.2",
-    "aiosmtplib == 1.1.6",
+    "aiosmtplib == 2.0.0",
     "pydantic==1.10.2",
     "databases == 0.6.1",
     "motor == 3.0.0",
