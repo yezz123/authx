@@ -35,7 +35,7 @@ dependencies = [
     "cryptography==37.0.4",
     "httpx==0.23.0",
     "itsdangerous == 2.1.2",
-    "aiosmtplib == 1.1.6",
+    "aiosmtplib == 2.0.0",
     "pydantic==1.10.2",
     "databases == 0.6.1",
     "motor == 3.0.0",
@@ -46,7 +46,7 @@ dependencies = [
     "pytz==2022.6",
     "python-dateutil==2.8.2",
     "python-socketio >=4.6.0,<5.7.3",
-    "pyinstrument >=4.1.1,<4.4.0",
+    "pyinstrument >=4.1.1,<4.5.0",
     "SQLAlchemy >=1.4.37,<1.4.43",
     "prometheus-client",
 ]
@@ -80,7 +80,7 @@ docs = [
     "mkdocs-markdownextradata-plugin >=0.1.7,<0.3.0",
     "mkdocs-mermaid2-plugin==0.6.0",
     "markdown-include==0.7.0",
-    "pymdown-extensions==9.7",
+    "pymdown-extensions==9.8",
     "jinja2==3.1.2"
 ]
 
