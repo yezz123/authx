@@ -70,7 +70,7 @@ test = [
     "asynctest==0.13.0",
     "codecov==2.1.12",
     "pytest-cov==4.0.0",
-    "uvloop==0.16.0",
+    "uvloop==0.17.0",
     "websockets==10.3"
 ]
 docs = [
