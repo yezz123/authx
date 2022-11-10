@@ -47,7 +47,7 @@ dependencies = [
     "python-dateutil==2.8.2",
     "python-socketio >=4.6.0,<5.7.3",
     "pyinstrument >=4.1.1,<4.5.0",
-    "SQLAlchemy >=1.4.37,<1.4.43",
+    "SQLAlchemy >=1.4.37,<1.4.44",
     "prometheus-client",
 ]
 
