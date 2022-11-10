@@ -70,8 +70,8 @@ test = [
     "asynctest==0.13.0",
     "codecov==2.1.12",
     "pytest-cov==4.0.0",
-    "websockets==10.4"
-    "uvloop==0.17.0",
+    "websockets==10.4",
+    "uvloop==0.17.0"
 ]
 docs = [
     "mkdocs >=1.1.2,<2.0.0",
