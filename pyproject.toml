@@ -71,7 +71,7 @@ test = [
     "codecov==2.1.12",
     "pytest-cov==4.0.0",
     "uvloop==0.16.0",
-    "websockets==10.3"
+    "websockets==10.4"
 ]
 docs = [
     "mkdocs >=1.1.2,<2.0.0",
