@@ -39,7 +39,7 @@ dependencies = [
     "pydantic==1.10.2",
     "databases == 0.6.2",
     "motor == 3.0.0",
-    "Authlib==0.15.5",
+    "Authlib==1.1.0",
     "starlette >=0.14.02,<0.21.1",
     "aioredis >=2.0.1,<2.1.0",
     "redis >=4.3.3,<4.3.5",
