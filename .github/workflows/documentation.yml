@@ -29,7 +29,7 @@ jobs:
         run: bash scripts/docs_build.sh
 
       - name: Deploy docs
-        uses: jsmrcaga/action-netlify-deploy@v1.1.0
+        uses: jsmrcaga/action-netlify-deploy@v1.8.1
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
