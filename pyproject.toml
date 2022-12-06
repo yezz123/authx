@@ -40,7 +40,7 @@ dependencies = [
     "databases == 0.6.2",
     "motor == 3.1.1",
     "Authlib==0.15.5",
-    "starlette >=0.14.02,<0.22.1",
+    "starlette >=0.14.02,<0.23.1",
     "aioredis >=2.0.1,<2.1.0",
     "redis >=4.3.3,<4.4.1",
     "pytz==2022.6",
