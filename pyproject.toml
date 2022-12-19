@@ -37,7 +37,7 @@ dependencies = [
     "itsdangerous == 2.1.2",
     "aiosmtplib == 2.0.0",
     "pydantic==1.10.2",
-    "databases == 0.6.2",
+    "databases == 0.7.0",
     "motor == 3.1.1",
     "Authlib==0.15.5",
     "starlette >=0.14.02,<0.23.2",
