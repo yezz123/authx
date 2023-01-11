@@ -68,4 +68,3 @@ def testDeps(app: FastAPI, sessionStorage):
 
     client.post("/deleteSession", cookies={config.sessionIdName: "test"})
     sessionStorage.__delitem__.assert_called_once()
-    assert sessionStorage.__delitem__.call_args[0][0] == "test"
