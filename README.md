@@ -6,13 +6,21 @@
     <em>Ready-to-use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
 </p>
 
-[![Test](https://github.com/yezz123/authx/actions/workflows/test.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/test.yml)
-[![Build Docs](https://github.com/yezz123/authx/actions/workflows/documentation.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/documentation.yml)
-[![Publish](https://github.com/yezz123/authx/actions/workflows/release.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/release.yml)
-[![Pypi](https://img.shields.io/pypi/pyversions/AuthX.svg?color=%2334D058)](https://pypi.org/project/AuthX)
-[![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
-[![Downloads](https://pepy.tech/badge/authx)](https://pepy.tech/project/authx)
-[![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
+<p align="center">
+<a href="https://github.com/yezz123/authx/actions/workflows/test.yml" target="_blank">
+    <img src="https://github.com/yezz123/authx/actions/workflows/test.yml/badge.svg" alt="lint">
+</a>
+<a href="https://pypi.org/project/authx" target="_blank">
+    <img src="https://img.shields.io/pypi/v/authx?color=%2334D058&label=pypi%20package" alt="Package version">
+</a>
+<a href="https://codecov.io/gh/yezz123/authx">
+    <img src="https://codecov.io/gh/yezz123/authx/branch/main/graph/badge.svg"/>
+</a>
+<a href="https://pepy.tech/project/authx" target="_blank">
+    <img src="https://pepy.tech/badge/authx" alt="Test">
+</a>
+</p>
+
 
 ---
 
