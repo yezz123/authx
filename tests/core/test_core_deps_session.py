@@ -1,6 +1,6 @@
 from typing import Any
 from unittest import mock
-import unittest
+
 import pytest
 from fastapi import Depends, FastAPI, Request, Response
 from fastapi.testclient import TestClient
@@ -21,9 +21,7 @@ def sessionStorage():
     with mock.patch("authx.core.session.SessionStorage") as mockClass:
         mockStorage = mock.Mock(spec=SessionStorage)
         mockStorage.__setitem__ = mock.Mock()
-        mockStorage.__getitem__ = mock.Mock(
-            dict(a=1, b="data", c=True)
-        )
+        mockStorage.__getitem__ = mock.Mock(dict(a=1, b="data", c=True))
         mockStorage.__delitem__ = mock.Mock()
         mockClass.return_value = mockStorage
         yield mockStorage
@@ -56,7 +54,7 @@ def app(sessionStorage: SessionStorage):
 
     yield application
 
-@unittest.skip("Fix the mock issue")
+
 def testDeps(app: FastAPI, sessionStorage):
     client = TestClient(app)
     client.post("/setSession", json=dict(a=1, b="data", c=True))
@@ -67,6 +65,8 @@ def testDeps(app: FastAPI, sessionStorage):
     sessionStorage.__getitem__.return_value = dict(a=1, b="data", c=True)
     client.get("/getSession", cookies={config.sessionIdName: "ssid"})
     sessionStorage.__getitem__.assert_called_once_with("ssid")
+    sessionStorage.__getitem__.reset_mock()
 
     client.post("/deleteSession", cookies={config.sessionIdName: "ssid"})
     sessionStorage.__delitem__.assert_called_once_with("ssid")
+    sessionStorage.__delitem__.reset_mock()
