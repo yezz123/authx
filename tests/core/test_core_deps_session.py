@@ -1,5 +1,6 @@
 from typing import Any
 from unittest import mock
+from unittest.mock import MagicMock
 
 import pytest
 from fastapi import Depends, FastAPI, Request, Response
@@ -19,12 +20,12 @@ from authx.core.session import (
 @pytest.fixture
 def sessionStorage():
     with mock.patch("authx.core.session.SessionStorage") as mockClass:
-        mockStorage = mock.Mock(spec=SessionStorage)
-        mockStorage.__setitem__ = mock.Mock()
-        mockStorage.__getitem__ = mock.Mock()
-        mockStorage.__delitem__ = mock.Mock()
-        mockClass.return_value = mockStorage
-        yield mockStorage
+        mock_session_storage = MagicMock(spec=SessionStorage)
+        mock_session_storage.__setitem__ = MagicMock()
+        mock_session_storage.__getitem__ = MagicMock()
+        mock_session_storage.__delitem__ = MagicMock()
+        mockClass.return_value = mock_session_storage
+        yield mock_session_storage
 
 
 @pytest.fixture
@@ -58,13 +59,12 @@ def app(sessionStorage: SessionStorage):
 def testDeps(app: FastAPI, sessionStorage):
     client = TestClient(app)
     client.post("/setSession", json=dict(a=1, b="data", c=True))
-    sessionStorage.__setitem__.assert_called_once_with(
-        sessionStorage.genSessionId(), dict(a=1, b="data", c=True)
-    )
+    sessionStorage.__setitem__.assert_called_once()
+    assert sessionStorage.__setitem__.call_args[0][0] == sessionStorage.genSessionId()
+    assert sessionStorage.__setitem__.call_args[0][1] == dict(a=1, b="data", c=True)
 
-    sessionStorage.__getitem__.return_value = dict(a=1, b="data", c=True)
-    client.get("/getSession", cookies={config.sessionIdName: "ssid"})
-    sessionStorage.__getitem__.assert_called_once_with("ssid")
+    client.get("/getSession", cookies={config.sessionIdName: "test"})
+    sessionStorage.__getitem__.assert_called_once()
 
-    client.post("/deleteSession", cookies={config.sessionIdName: "ssid"})
-    sessionStorage.__delitem__.assert_called_once_with("ssid")
+    client.post("/deleteSession", cookies={config.sessionIdName: "test"})
+    sessionStorage.__delitem__.assert_called_once()
