@@ -1,5 +1,6 @@
 from typing import Any
 from unittest import mock
+from unittest.mock import MagicMock
 
 import pytest
 from fastapi import Depends, FastAPI, Request, Response
@@ -19,12 +20,12 @@ from authx.core.session import (
 @pytest.fixture
 def sessionStorage():
     with mock.patch("authx.core.session.SessionStorage") as mockClass:
-        mockStorage = mock.Mock(spec=SessionStorage)
-        mockStorage.__setitem__ = mock.Mock(dict(a=1, b="data", c=True))
-        mockStorage.__getitem__ = mock.Mock(dict(a=1, b="data", c=True))
-        mockStorage.__delitem__ = mock.Mock(dict(a=1, b="data", c=True))
-        mockClass.return_value = mockStorage
-        yield mockStorage
+        mock_session_storage = MagicMock(spec=SessionStorage)
+        mock_session_storage.__setitem__ = MagicMock()
+        mock_session_storage.__getitem__ = MagicMock()
+        mock_session_storage.__delitem__ = MagicMock()
+        mockClass.return_value = mock_session_storage
+        yield mock_session_storage
 
 
 @pytest.fixture
