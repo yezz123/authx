@@ -20,9 +20,9 @@ from authx.core.session import (
 def sessionStorage():
     with mock.patch("authx.core.session.SessionStorage") as mockClass:
         mockStorage = mock.Mock(spec=SessionStorage)
-        mockStorage.__setitem__ = mock.Mock()
+        mockStorage.__setitem__ = mock.Mock(dict(a=1, b="data", c=True))
         mockStorage.__getitem__ = mock.Mock(dict(a=1, b="data", c=True))
-        mockStorage.__delitem__ = mock.Mock()
+        mockStorage.__delitem__ = mock.Mock(dict(a=1, b="data", c=True))
         mockClass.return_value = mockStorage
         yield mockStorage
 
