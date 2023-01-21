@@ -40,6 +40,8 @@ def testSessionStorage(sessionStorage: SessionStorage):
     sessionStorage.client.get = mock.Mock(
         return_value=pickle.dumps(data, protocol=pickle.HIGHEST_PROTOCOL)
     )
+    assert sessionStorage[sessionId] == data
+
     sessionStorage.client.get.assert_called_with(sessionId)
 
     del sessionStorage[sessionId]
