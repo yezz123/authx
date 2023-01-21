@@ -1,6 +1,6 @@
 """Ready to use and customizable Authentications and Oauth2 management for FastAPI"""
 
-__version__ = "0.8.2"
+__version__ = "0.8.3"
 
 from authx.backend import UsersRepo as UsersRepo
 from authx.cache import RedisBackend as RedisBackend
