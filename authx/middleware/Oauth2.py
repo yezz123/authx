@@ -72,7 +72,7 @@ class MiddlewareOauth2:
                 token = await self._client.authorize_access_token(request)
                 user = await self._client.parse_id_token(request, token)
                 assert user is not None
-            except Exception as e:
+            except Exception:
                 # impossible to build a user => invalidate the whole thing and redirect to home (which triggers a new auth)
                 logger.error("User authentication failed", exc_info=True)
                 response = RedirectResponse(url="/")
@@ -119,7 +119,7 @@ class MiddlewareOauth2:
             if token is None:
                 raise logging.error.InvalidTokenError
             await self._client.parse_id_token(request, token)
-        except Exception as e:
+        except Exception:
             # invalidate session and redirect.
             del request.session["user"]
             if self.db is None:

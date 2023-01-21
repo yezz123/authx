@@ -9,7 +9,7 @@ def genSessionId() -> str:
     return uuid4().hex
 
 
-settings = dict(sessionIdGenerator=genSessionId)
+settings = {"sessionIdGenerator": genSessionId}
 
 
 class Config(BaseSettings):

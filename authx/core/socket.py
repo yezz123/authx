@@ -2,7 +2,6 @@ from typing import Union
 
 import socketio
 from fastapi import FastAPI
-from socketio.asyncio_manager import AsyncManager
 
 
 class Socket:
