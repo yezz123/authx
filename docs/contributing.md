@@ -145,9 +145,9 @@ linting packages.
 
 - `pre-commit-hooks` - Some out-of-the-box hooks for pre-commit.
 - `isort` - A tool to sort imports.
-- `flake8` - A tool to check Python code for errors.
-- `mirrors-autoflake` - Mirror of the autoflake package for pre-commit.
+- `ruff-pre-commit` - A tool to check Python code for errors.
 - `black` - A tool to format Python code.
+- `pyupgrade` - A tool to upgrade Python syntax.
 
 ## Documentation
 

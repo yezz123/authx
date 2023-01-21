@@ -35,7 +35,7 @@ library for FastAPI. It is built on top of
 
 ## Features
 
-- [x] Support Python 3.8+.
+- [x] Support Python 3.9+.
 - [x] Extensible base user model.
 - [x] Ready-to-use register, login, reset password and verify e-mail routes.
 - [x] Ready-to-use Social login and Oauth2 routes.
@@ -72,14 +72,44 @@ library for FastAPI. It is built on top of
 
 ### Startup
 
-```py hl_lines="1 3 5-7 10-14 17"
-{!src/main.py!}
+```py
+from fastapi import FastAPI
+from authx import Authentication, User, RedisBackend
+
+app = FastAPI()
+# Set up Authentication & Authorization
+auth = Authentication()
+
+# Set up Pre-configured Routes
+app.include_router(auth.auth_router, prefix="/api/users")
+app.include_router(auth.social_router, prefix="/auth")
+app.include_router(auth.password_router, prefix="/api/users")
+app.include_router(auth.admin_router, prefix="/api/users")
+app.include_router(auth.search_router, prefix="/api/users")
+
+# Set Redis Cache
+auth.set_cache(RedisBackend)
 ```
 
 ### Dependency injections
 
-```py hl_lines="20-22 26-28 32-34"
-{!src/main.py!}
+```py
+# Set Anonymous User
+@app.get("/anonym")
+def anonym_test(user: User = Depends(auth.get_user)):
+    pass
+
+
+# Set Authenticated User
+@app.get("/user")
+def user_test(user: User = Depends(auth.get_authenticated_user)):
+    pass
+
+
+# Set Admin User (Only for Admins)
+@app.get("/admin", dependencies=[Depends(auth.admin_required)])
+def admin_test():
+    pass
 ```
 
 ### Dependency injections only
