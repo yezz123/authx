@@ -86,3 +86,68 @@ docs = [
 
 [tool.hatch.version]
 path = "authx/__init__.py"
+
+
+[tool.isort]
+profile = "black"
+known_third_party = ["pydantic", "sqlalchemy", "typing_extensions"]
+
+[tool.ruff]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+    "F811",  # redefinition of unused
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.ruff.isort]
+known-third-party = ["pydantic", "sqlalchemy", "typing_extensions"]
+
+[tool.coverage.run]
+parallel = true
+source = [
+    "tests",
+    "authx"
+]
+context = '${CONTEXT}'
+omit = [
+    "authx/core/config.py",
+    "authx/main.py",
+    "authx/utils/**",
+    "authx/errors/**",
+    "authx/database/**",
+    "authx/cache/**",
+    "authx/services/**",
+    "tests/middleware/example/**"
+]
+
+
+[tool.coverage.report]
+precision = 2
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "raise NotImplemented",
+    "@overload",
+    "if TYPE_CHECKING:",
+    "if __name__ == .__main__.:",
+]
+
+[tool.pytest]
+testpaths = "tests/"
+log_cli = "1"
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format= "%Y-%m-%d %H:%M:%S"
+asyncio_mode= "auto"
