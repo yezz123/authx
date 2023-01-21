@@ -58,10 +58,14 @@ def app(sessionStorage: SessionStorage):
 
 def testDeps(app: FastAPI, sessionStorage):
     client = TestClient(app)
-    client.post("/setSession", json=dict(a=1, b="data", c=True))
+    client.post("/setSession", json={"a": 1, "b": "data", "c": True})
     sessionStorage.__setitem__.assert_called_once()
     assert sessionStorage.__setitem__.call_args[0][0] == sessionStorage.genSessionId()
-    assert sessionStorage.__setitem__.call_args[0][1] == dict(a=1, b="data", c=True)
+    assert sessionStorage.__setitem__.call_args[0][1] == {
+        "a": 1,
+        "b": "data",
+        "c": True,
+    }
 
     client.get("/getSession", cookies={config.sessionIdName: "test"})
     sessionStorage.__getitem__.assert_called_once()

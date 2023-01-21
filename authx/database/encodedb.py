@@ -104,7 +104,7 @@ class EncodeDBBackend(BaseDBBackend):
             return False
 
     async def get_blacklist(self) -> Iterable[dict]:
-        query = sa.select(self.users).where(self.users.c.active == False)
+        query = sa.select(self.users).where(self.users.c.active is False)
         return await self.database.fetch_all(query)
 
     async def search(self, f: dict, p: int, size: int) -> tuple[dict, int]:

@@ -73,13 +73,14 @@ def cache(
 
 
 def invalidate_cache(
-    key: str = None,
-    keys: List = [],
+    key: str = [],
+    keys: List = None,
     obj: Any = None,
     obj_attr: str = None,
     namespace: str = None,
 ):
     """Invalidates a specific cache key"""
+
     if not namespace:
         namespace = HTTPCache.namespace
 

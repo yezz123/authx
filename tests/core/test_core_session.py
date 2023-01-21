@@ -23,10 +23,10 @@ def testSessionStorage(sessionStorage: SessionStorage):
         callTimes += 1
 
         if callTimes < 2:
-            return pickle.dumps(dict(a=1), protocol=pickle.HIGHEST_PROTOCOL)
+            return pickle.dumps({"a": 1}, protocol=pickle.HIGHEST_PROTOCOL)
         return None
 
-    data = dict(a=1, b="data", c=True)
+    data = {"a": 1, "b": "data", "c": True}
     sessionStorage.client.get = getStub
     sessionId = sessionStorage.genSessionId()
 
@@ -40,7 +40,8 @@ def testSessionStorage(sessionStorage: SessionStorage):
     sessionStorage.client.get = mock.Mock(
         return_value=pickle.dumps(data, protocol=pickle.HIGHEST_PROTOCOL)
     )
-    sessionStorage[sessionId] == data
+    assert sessionStorage[sessionId] == data
+
     sessionStorage.client.get.assert_called_with(sessionId)
 
     del sessionStorage[sessionId]

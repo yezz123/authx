@@ -51,7 +51,7 @@ class TestMethodCache:
         redis_client.flushdb()
         HTTPCache.init(redis_url=REDIS_URL, namespace="test_namespace")
         await cache_me_with_ttl_callable(x=22, invoke_count=0)
-        resp = await cache_me_with_ttl_callable(x=22, invoke_count=0)
+        await cache_me_with_ttl_callable(x=22, invoke_count=0)
         assert (
             pytest.approx(
                 redis_client.ttl("test_namespace:cache.me.ttl_callable"), rel=1e-3
