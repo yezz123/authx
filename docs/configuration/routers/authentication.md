@@ -19,7 +19,7 @@ the object `AuthService`.
 
 ```py
 from authx.services.auth import AuthService
-from authx.api import UsersRepo
+from authx.backend import UsersRepo
 from authx.core.jwt import JWTBackend
 
 AuthService.setup(

@@ -16,7 +16,7 @@ object `PasswordService`:
 
 ```py
 from authx.services.password import PasswordService
-from authx.api import UsersRepo
+from authx.backend import UsersRepo
 from authx.core.jwt import JWTBackend
 
 PasswordService.setup(

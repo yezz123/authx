@@ -13,7 +13,7 @@ To Setup the Search service, you will need to add all requirements to the object
 ```py
 from typing import Callable, Optional
 from authx.services.search import SearchService
-from authx.api import UsersRepo
+from authx.backend import UsersRepo
 
 SearchService.setup(
         repo = UserRepo,

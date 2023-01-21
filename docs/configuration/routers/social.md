@@ -13,7 +13,7 @@ requirements to the object `SocialService`.
 
 ```py
 from authx.services import SocialService
-from authx.api import UsersRepo
+from authx.backend import UsersRepo
 from authx.core.jwt import JWTBackend
 
 SocialService.setup(

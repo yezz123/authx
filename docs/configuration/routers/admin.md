@@ -19,7 +19,7 @@ To Setup the Admin service, you will need to add all requirements to the object
 ```py
 from typing import Callable, Optional
 from authx.services.admin import AdminService
-from authx.api import UsersRepo
+from authx.backend import UsersRepo
 
 AdminService.setup(
         repo = UserRepo,
