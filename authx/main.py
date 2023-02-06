@@ -1,6 +1,6 @@
 from typing import Iterable, Optional
 
-from aioredis import Redis
+import redis
 from fastapi import APIRouter, HTTPException, Request
 
 from authx.backend import UsersRepo
@@ -43,7 +43,7 @@ class authx:
             refresh_expiration,
         )
 
-    def set_cache(self, client: Redis) -> None:
+    def set_cache(self, client: redis.Redis) -> None:
         self._cache_backend.set_client(client)
 
     async def get_user(self, request: Request) -> User:
@@ -194,5 +194,5 @@ class Authentication(authx):
     def search_router(self) -> APIRouter:
         return get_search_router(self._users_repo, self.admin_required)
 
-    def set_cache(self, cache_client: Redis) -> None:
+    def set_cache(self, cache_client: redis.Redis) -> None:
         self._cache_backend.set_client(cache_client)
