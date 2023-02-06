@@ -7,7 +7,6 @@ from authx.services import SearchService
 
 
 def get_router(repo: UsersRepo, admin_required: Callable):
-
     SearchService.setup(repo)
     """Search router, for searching users"""
 

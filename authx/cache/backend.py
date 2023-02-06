@@ -22,7 +22,6 @@ class HTTPCacheBackend:
         end_of_day: bool = False,
         end_of_week: bool = False,
     ):
-
         ttl: int = await HTTPExpiry.get_ttl(
             ttl_in_seconds=ttl_in_seconds,
             end_of_day=end_of_day,
