@@ -1,14 +1,14 @@
 from typing import Iterable, Optional, Union
 
-from aioredis import Redis
+import redis
 
 
 class RedisBackend:
     """Setup the Redis connection for the backend using aioredis"""
 
-    _redis: Optional[Redis] = None
+    _redis: Optional[redis.Redis] = None
 
-    def set_client(self, redis: Redis) -> None:
+    def set_client(self, redis: redis.Redis) -> None:
         self._redis = redis
 
     async def get(self, key: str) -> str:

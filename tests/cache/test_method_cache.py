@@ -5,7 +5,7 @@ import redis
 
 from authx import HTTPCache, cache
 
-REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/3")
+REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/2")
 redis_client = redis.Redis.from_url(REDIS_URL)
 
 HTTPCache.init(redis_url=REDIS_URL, namespace="test_namespace")
