@@ -154,7 +154,6 @@ class MockDatabaseBackend:
         self._email_confirmations.append({"email": email, "token": token_hash})
 
     async def confirm_email(self, token_hash: str) -> bool:
-
         for item in self._email_confirmations:
             if item.get("token") == token_hash:
                 user = self._get("email", item.get("email"))

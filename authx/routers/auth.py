@@ -27,7 +27,6 @@ def get_router(
     smtp_tls: int,
     display_name: str,
 ) -> APIRouter:
-
     AuthService.setup(
         repo,
         auth_backend,
