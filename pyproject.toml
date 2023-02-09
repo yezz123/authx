@@ -18,6 +18,8 @@ classifiers = [
     "Intended Audience :: Developers",
     "Framework :: FastAPI",
     "Framework :: AsyncIO",
+    "Framework :: Pydantic",
+    "Framework :: Pydantic :: 1",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
