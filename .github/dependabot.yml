@@ -6,8 +6,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    reviewers:
-    - yezz123
     commit-message:
       prefix: ⬆
   # Python
@@ -15,7 +13,5 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    reviewers:
-    - yezz123
     commit-message:
       prefix: ⬆
