@@ -5,8 +5,7 @@
 Redis is a good choice for caching, that why we need to use it to store the
 token or users data some configuration relate to cache.
 
-In Python we use [`aioredis`](https://aioredis.readthedocs.io/en/stable/)
-library to connect to Redis.
+In Python we use [redis/redis-py](https://github.com/redis/redis-py) library to connect to Redis.
 
 ### Redis CRUD Operations
 

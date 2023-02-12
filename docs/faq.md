@@ -68,7 +68,6 @@ I use the following reference to get The package done:
 - <https://camillovisini.com/article/abstracting-fastapi-services/>
 - <https://motor.readthedocs.io/en/stable/>
 - <https://pyjwt.readthedocs.io/en/latest/>
-- <https://aioredis.readthedocs.io/en/latest/>
 
 ## License
 

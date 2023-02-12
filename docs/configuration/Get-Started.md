@@ -24,7 +24,7 @@ library.
 
 AuthX provides Redis cache, a fast and reliable cache provider that can be used
 to cache the authentication results and store the user data. This one is based
-on `aioredis` a pure Python asynchronous Redis client.
+on `redis` a pure Python asynchronous Redis client.
 
 ➡️ [Cache](cache/index.md)
 
