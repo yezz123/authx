@@ -14,7 +14,7 @@ of the Redis class and pass it to the `set_redis` method.
 
 ```python
 from authx import authx, RedisBackend
-from redis import Redis
+from redis import asyncio as Redis
 
 auth = authx()
 
