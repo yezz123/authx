@@ -8,8 +8,8 @@ from fastapi.testclient import TestClient
 
 from authx import HTTPCache, cache, invalidate_cache
 
-REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/3")
-redis_client = redis.Redis.from_url(REDIS_URL)
+REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/2")
+redis_client = redis.from_url(REDIS_URL)
 
 
 class User:

@@ -1,18 +1,12 @@
 import random
-import unittest
 from datetime import timedelta
-from unittest import mock
 
 from authx.cache.config import basicConfig, config
 
 
-@unittest.skip(
-    "Improve this test later while getting issues after adding the container of Redis to Github Workflow"
-)
-@mock.patch("authx.cache.config.uuid4")
-def testConfig(mock_uuid4):
-    config.genSessionId()
-    mock_uuid4.assert_called_once_with()  # pragma: no cover
+def test_config() -> None:
+    session_id = config.genSessionId().isnumeric()
+    assert session_id is not None
 
 
 def testBasicConfig():

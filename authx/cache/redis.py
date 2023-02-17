@@ -1,14 +1,17 @@
 from typing import Iterable, Optional, Union
 
-import redis
+from redis import asyncio as aioredis
 
 
 class RedisBackend:
-    """Setup the Redis connection for the backend using redis"""
+    """
+    Setup the Redis connection for the backend using aioredis.
 
-    _redis: Optional[redis.Redis] = None
+    """
 
-    def set_client(self, redis: redis.Redis) -> None:
+    _redis: Optional[aioredis.Redis] = None
+
+    def set_client(self, redis: aioredis.Redis) -> None:
         self._redis = redis
 
     async def get(self, key: str) -> str:
@@ -36,5 +39,6 @@ class RedisBackend:
         return await self._redis.incr(key)
 
     async def dispatch_action(self, channel: str, action: str, payload: dict) -> None:
+        # TODO: is publish_json exist in redis-py?
         await self._redis.publish_json(channel, {"action": action, "payload": payload})
         return None
