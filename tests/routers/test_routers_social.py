@@ -50,7 +50,7 @@ def test_login(provider: str):
         f"authx.routers.social.SocialService.login_{provider}",
         mock.Mock(return_value="/"),
     ) as mock_method:
-        response = test_client.get(url, allow_redirects=False)
+        response = test_client.get(url, follow_redirects=False)
         mock_method.assert_called_once()
 
     assert response.status_code == 307
@@ -78,7 +78,7 @@ def test_callback(provider: str):
     )
     mock_resolve_user = patcher_resolve_user.start()
     url = app.url_path_for("social:callback", provider=provider)
-    response = test_client.get(url, allow_redirects=False)
+    response = test_client.get(url, follow_redirects=False)
 
     assert response.status_code == 307
 

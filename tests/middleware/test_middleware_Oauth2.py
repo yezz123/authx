@@ -24,7 +24,7 @@ class Test(TestCase):
         cls.client = TestClient(app)
 
     def test_redirects(self):
-        response = self.client.get("/", allow_redirects=False)
+        response = self.client.get("/", follow_redirects=False)
 
         self.assertEqual(302, response.status_code)
         url = URL(response.headers["Location"])
