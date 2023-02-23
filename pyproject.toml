@@ -62,7 +62,7 @@ Funding = 'https://github.com/sponsors/yezz123'
 
 [project.optional-dependencies]
 lint = [
-    "pre-commit==3.0.4",
+    "pre-commit==3.1.0",
 ]
 test = [
     "pytest==7.2.1",
