@@ -1,5 +1,37 @@
 # Release Notes 🎞
 
+## 0.9.0
+
+### Fixes 🐛
+
+* ➕ Support Python 3.11 by @yezz123 in <https://github.com/yezz123/authx/pull/355>
+* 🐛  Support `aioredis` from redis package by @yezz123 in <https://github.com/yezz123/authx/pull/369>
+
+### Dependencies 🔨
+
+* ⬆ Update email-validator requirement from <1.3.1,>=1.1.0 to >=1.1.0,<1.3.2 by @dependabot in <https://github.com/yezz123/authx/pull/347>
+* ⬆ Bump pymdown-extensions from 9.9.1 to 9.9.2 by @dependabot in <https://github.com/yezz123/authx/pull/346>
+* ⬆ Bump pre-commit from 2.21.0 to 3.0.0 by @dependabot in <https://github.com/yezz123/authx/pull/348>
+* ⬆ Update sqlalchemy requirement from <1.4.47,>=1.4.37 to >=1.4.37,<2.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/350>
+* ⬆ Bump pre-commit from 3.0.0 to 3.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/349>
+* ⬆ Bump pre-commit from 3.0.1 to 3.0.4 by @dependabot in <https://github.com/yezz123/authx/pull/354>
+* ⬆ Update sqlalchemy requirement from <2.0.1,>=1.4.37 to >=1.4.37,<2.0.2 by @dependabot in <https://github.com/yezz123/authx/pull/353>
+* ⬆ Update starlette requirement from <0.23.2,>=0.14.02 to >=0.14.02,<0.24.1 by @dependabot in <https://github.com/yezz123/authx/pull/356>
+* ⬆ Update sqlalchemy requirement from <2.0.2,>=1.4.37 to >=1.4.37,<2.0.3 by @dependabot in <https://github.com/yezz123/authx/pull/357>
+* ⬆ Bump cryptography from 39.0.0 to 39.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/358>
+* ⬆ Update redis requirement from <4.4.3,>=4.3.3 to >=4.3.3,<4.5.1 by @dependabot in <https://github.com/yezz123/authx/pull/359>
+* ⬆ Bump markdown-include from 0.8.0 to 0.8.1 by @dependabot in <https://github.com/yezz123/authx/pull/360>
+* ⬆ Update fastapi requirement from <0.90.0,>=0.65.2 to >=0.65.2,<0.91.0 by @dependabot in <https://github.com/yezz123/authx/pull/361>
+* ⬆ Update redis requirement from <4.5.1,>=4.3.3 to >=4.3.3,<4.5.2 by @dependabot in <https://github.com/yezz123/authx/pull/362>
+* ⬆ Update sqlalchemy requirement from <2.0.3,>=1.4.37 to >=1.4.37,<2.0.4 by @dependabot in <https://github.com/yezz123/authx/pull/363>
+* ⬆ Update fastapi requirement from <0.91.0,>=0.65.2 to >=0.65.2,<0.92.0 by @dependabot in <https://github.com/yezz123/authx/pull/364>
+* ⬆ Update starlette requirement from <0.24.1,>=0.14.02 to >=0.14.02,<0.25.1 by @dependabot in <https://github.com/yezz123/authx/pull/366>
+* ⬆ Update fastapi requirement from <0.92.0,>=0.65.2 to >=0.65.2,<0.93.0 by @dependabot in <https://github.com/yezz123/authx/pull/367>
+* ⬆ Bump pydantic from 1.10.4 to 1.10.5 by @dependabot in <https://github.com/yezz123/authx/pull/368>
+* ⬆ Bump starlette from 0.17.1 to 0.25.0 in /tests/middleware/example by @dependabot in <https://github.com/yezz123/authx/pull/365>
+
+**Full Changelog**: <https://github.com/yezz123/authx/compare/0.8.3...0.9.0>
+
 ## 0.8.3
 
 ### Fixes 🐛
