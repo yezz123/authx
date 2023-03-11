@@ -75,7 +75,6 @@ test = [
     "websockets==10.4",
     "uvloop==0.17.0",
     "pytest-codspeed==1.2.2",
-    "pytest-benchmark==3.4.1",
 ]
 docs = [
     "mkdocs >=1.1.2,<2.0.0",
