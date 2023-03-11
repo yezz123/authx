@@ -5,6 +5,7 @@ set -x
 
 echo "ENV=${ENV}"
 echo "REDIS_URL-${REDIS_URL}"
+echo "CODSPEED_TOKEN-${CODSPEED_TOKEN}"
 
 export PYTHONPATH=.
-pytest --cov=authx --cov=tests --cov-report=html
+pytest --cov=tests --codspeed

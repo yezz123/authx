@@ -47,3 +47,8 @@ jobs:
         run: bash scripts/test.sh
       - name: Upload coverage
         uses: codecov/codecov-action@v3
+      - name: Run benchmarks
+        uses: CodSpeedHQ/action@v1
+        with:
+          token: ${{ secrets.CODSPEED_TOKEN }}
+          run: bash scripts/test_benchmark.sh
