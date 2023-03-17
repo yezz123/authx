@@ -47,7 +47,7 @@ dependencies = [
     "redis >=4.3.3,<4.5.2",
     "pytz==2022.7.1",
     "python-dateutil==2.8.2",
-    "python-socketio >=4.6.0,<5.7.3",
+    "python-socketio >=4.6.0,<5.8.1",
     "pyinstrument >=4.1.1,<4.5.0",
     "SQLAlchemy >=1.4.37,<2.0.7",
     "prometheus-client",
