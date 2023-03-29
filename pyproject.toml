@@ -45,7 +45,7 @@ dependencies = [
     "Authlib==0.15.5",
     "starlette >=0.14.02,<0.26.2",
     "redis >=4.3.3,<4.5.4",
-    "pytz==2023.2",
+    "pytz==2023.3",
     "python-dateutil==2.8.2",
     "python-socketio >=4.6.0,<5.8.1",
     "pyinstrument >=4.1.1,<4.5.0",
