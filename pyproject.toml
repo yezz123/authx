@@ -41,7 +41,7 @@ dependencies = [
     "aiosmtplib == 2.0.1",
     "pydantic==1.10.7",
     "databases == 0.7.0",
-    "motor == 3.1.1",
+    "motor == 3.1.2",
     "Authlib==0.15.5",
     "starlette >=0.14.02,<0.26.2",
     "redis >=4.3.3,<4.5.5",
