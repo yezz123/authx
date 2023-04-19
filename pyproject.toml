@@ -70,7 +70,6 @@ test = [
     "requests==2.28.2",
     "uvicorn==0.21.1",
     "asynctest==0.13.0",
-    "codecov==2.1.12",
     "pytest-cov==4.0.0",
     "websockets==11.0.1",
     "uvloop==0.17.0"
