@@ -71,7 +71,7 @@ test = [
     "uvicorn==0.22.0",
     "asynctest==0.13.0",
     "pytest-cov==4.0.0",
-    "websockets==11.0.2",
+    "websockets==11.0.3",
     "uvloop==0.17.0"
 ]
 docs = [
