@@ -34,7 +34,7 @@ dependencies = [
     "passlib ==1.7.4",
     "bcrypt ==4.0.1",
     "email-validator >=1.1.0,<2.0.1",
-    "pyjwt ==2.6.0",
+    "pyjwt ==2.7.0",
     "cryptography==40.0.2",
     "httpx==0.24.0",
     "itsdangerous == 2.1.2",
