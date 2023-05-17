@@ -43,7 +43,7 @@ dependencies = [
     "databases == 0.7.0",
     "motor == 3.1.2",
     "Authlib==0.15.5",
-    "starlette >=0.14.02,<0.26.2",
+    "starlette >=0.14.02,<0.27.1",
     "redis >=4.3.3,<4.5.6",
     "pytz==2023.3",
     "python-dateutil==2.8.2",
