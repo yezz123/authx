@@ -7,4 +7,4 @@ echo "ENV=${ENV}"
 echo "REDIS_URL-${REDIS_URL}"
 
 export PYTHONPATH=.
-pytest --cov=authx --cov=tests
+pytest --cov=authx -xv
