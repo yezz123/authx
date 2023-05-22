@@ -11,5 +11,4 @@ install the dependency:
 pip install authx
 ```
 
-- While Installing AuthX, you will install all the dependencies that require all
-  the functionality ex. `EncodeDB, MongoDB, OAuth2, Redis and more`.
+- TODO
