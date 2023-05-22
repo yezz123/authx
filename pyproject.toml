@@ -44,6 +44,7 @@ classifiers = [
 
 dependencies = [
     "fastapi >=0.65.2,<0.96.0",
+    "starlette >=0.14.02,<0.27.1",
     "pyjwt[crypto] >=2.6.0,<3.0.0",
     "pydantic >=1.6.2,!=1.7,!=1.7.1,!=1.7.2,!=1.7.3,!=1.8,!=1.8.1,<2.0.0",
     "typing-extensions >=3.7.4,<4.6.0",
@@ -60,6 +61,15 @@ Documentation = "https://authx.yezz.me/"
 Funding = 'https://github.com/sponsors/yezz123'
 
 [project.optional-dependencies]
+profiler = [
+    "pyinstrument >=4.1.1,<4.5.0",
+]
+oauth2 = [
+    "Authlib >=0.15.5,<1.0.0",
+]
+metrics = [
+    "prometheus-client >=0.16.0,<1.0.0",
+]
 lint = [
     "pre-commit==3.3.2",
     "mypy==1.3.0",
@@ -70,6 +80,10 @@ test = [
     "requests==2.30.0",
     "asynctest==0.13.0",
     "pytest-cov==4.0.0",
+    "httpx==0.24.1",
+    "uvicorn==0.22.0",
+    "SQLAlchemy ==1.4.37",
+    "itsdangerous == 2.0.1"
 ]
 docs = [
     "mkdocs >=1.1.2,<2.0.0",
