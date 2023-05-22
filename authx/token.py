@@ -71,7 +71,7 @@ def create_token(
     elif isinstance(not_before, (int, float)):
         jwt_claims["nbf"] = not_before
 
-    payload = {**additional_claims, **jwt_claims}
+    payload = additional_claims | jwt_claims
 
     return jwt.encode(payload=payload, key=key, algorithm=algorithm, headers=headers)
 
