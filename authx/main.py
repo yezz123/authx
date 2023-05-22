@@ -120,7 +120,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             **kwargs,
         )
         return payload.encode(
-            key=self.config.PRIVATE_KEY,
+            key=self.config.private_key,
             algorithm=self.config.JWT_ALGORITHM,
             headers=headers,
         )
@@ -134,7 +134,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
     ) -> TokenPayload:
         return TokenPayload.decode(
             token=token,
-            key=self.config.PUBLIC_KEY,
+            key=self.config.public_key,
             algorithms=[self.config.JWT_ALGORITHM],
             verify=verify,
             audience=audience or self.config.JWT_DECODE_AUDIENCE,
@@ -344,7 +344,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             TokenPayload: _description_
         """
         return token.verify(
-            key=self.config.PUBLIC_KEY,
+            key=self.config.public_key,
             algorithms=[self.config.JWT_ALGORITHM],
             verify_fresh=verify_fresh,
             verify_type=verify_type,
