@@ -1,17 +1,26 @@
-try:
-    from authx.external.metrics import MetricsMiddleware, get_metrics, request_count, request_time
-except ImportError as e:
-    raise ImportError("Missing dependency: pip install authx[metrics]") from e
+from authx.external.metrics import MetricsMiddleware, get_metrics, request_count, request_time
+from authx.external.Oauth2 import MiddlewareOauth2
+from authx.external.profiler import ProfilerMiddleware
+from authx.external.session import (
+    SessionStorage,
+    deleteSession,
+    getSession,
+    getSessionId,
+    getSessionStorage,
+    setSession,
+)
 
-try:
-    from authx.external.Oauth2 import MiddlewareOauth2
-except ImportError as e:
-    raise ImportError("Missing dependency: pip install authx[oauth2]") from e
-
-try:
-    from authx.external.profiler import ProfilerMiddleware
-except ImportError as e:
-    raise ImportError("Missing dependency: pip install authx[profiler]") from e
-
-
-__all__ = "MetricsMiddleware", "MiddlewareOauth2", "ProfilerMiddleware", "get_metrics", "request_count", "request_time"
+__all__ = (
+    "MetricsMiddleware",
+    "MiddlewareOauth2",
+    "ProfilerMiddleware",
+    "get_metrics",
+    "request_count",
+    "request_time",
+    "SessionStorage",
+    "deleteSession",
+    "getSession",
+    "getSessionId",
+    "getSessionStorage",
+    "setSession",
+)
