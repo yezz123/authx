@@ -1,198 +1,696 @@
-from typing import Iterable, Optional
+import contextlib
+from typing import Any, Callable, Coroutine, Dict, Literal, Optional, overload
 
-from fastapi import APIRouter, HTTPException, Request
-from redis import asyncio as aioredis
+from fastapi import Request, Response
 
-from authx.backend import UsersRepo
-from authx.cache import RedisBackend
-from authx.core.jwt import JWTBackend
-from authx.core.user import User
-from authx.database import BaseDBBackend
-from authx.routers import (
-    get_admin_router,
-    get_auth_router,
-    get_password_router,
-    get_search_router,
-    get_social_router,
+from authx._internal._callback import _CallbackHandler
+from authx._internal._error import _ErrorHandler
+from authx._internal._utils import get_uuid
+from authx.config import AuthXConfig
+from authx.core import _get_token_from_request
+from authx.dependencies import AuthXDependency
+from authx.exceptions import AuthXException, MissingTokenError, RevokedTokenError
+from authx.schema import RequestToken, TokenPayload
+from authx.types import (
+    DateTimeExpression,
+    StringOrSequence,
+    T,
+    TokenLocations,
+    TokenType,
 )
 
 
-class authx:
-    """Authx is a fastapi application that provides a simple way to authenticate users.
-    Using this application, you can easily create a user management system that allows users to register,
-    login, and logout, and also allows admins to manage users.
+class AuthX(_CallbackHandler[T], _ErrorHandler):
+    """The base class for AuthX
+
+    AuthX enables JWT management within a FastAPI application.
+    Its main purpose is to provide a reusable & simple syntax to protect API
+    with JSON Web Token authentication.
+
+    Args:
+        config (AuthXConfig, optional): Configuration instance to use. Defaults to AuthXConfig().
+        model (Optional[T], optional): Model type hint. Defaults to Dict[str, Any].
+
+    Note:
+        AuthX is a Generic python object.
+        Its TypeVar is not mandatory but helps type hinting furing development
+
     """
 
     def __init__(
-        self,
-        access_cookie_name: str,
-        refresh_cookie_name: str,
-        public_key: bytes,
-        access_expiration: int,
-        refresh_expiration: int,
+        self, config: AuthXConfig = AuthXConfig(), model: Optional[T] = Dict[str, Any]
     ) -> None:
-        self._access_cookie_name = access_cookie_name
-        self._refresh_cookie_name = refresh_cookie_name
+        """AuthX base object
 
-        self._cache_backend = RedisBackend()
-        self._auth_backend = JWTBackend(
-            self._cache_backend,
-            None,
-            public_key,
-            access_expiration,
-            refresh_expiration,
+        Args:
+            config (AuthXConfig, optional): Configuration instance to use. Defaults to AuthXConfig().
+            model (Optional[T], optional): Model type hint. Defaults to Dict[str, Any].
+        """
+        super().__init__(model=model)
+        super(_CallbackHandler, self).__init__()
+        self._config = config
+
+    def load_config(self, config: AuthXConfig) -> None:
+        """Loads a AuthXConfig as the new configuration
+
+        Args:
+            config (AuthXConfig): Configuration to load
+        """
+        self._config = config
+
+    @property
+    def config(self) -> AuthXConfig:
+        """AuthX Configuration getter
+
+        Returns:
+            AuthXConfig: Configuration BaseSettings
+        """
+        return self._config
+
+    # region Core methods
+
+    def _create_payload(
+        self,
+        uid: str,
+        type: str,
+        fresh: bool = False,
+        expiry: Optional[DateTimeExpression] = None,
+        data: Optional[Dict[str, Any]] = None,
+        audience: Optional[StringOrSequence] = None,
+        **kwargs,
+    ) -> TokenPayload:
+        # Handle additional data
+        if data is None:
+            data = {}
+        # Handle expiry date
+        exp = expiry
+        if exp is None:
+            exp = (
+                self.config.JWT_ACCESS_TOKEN_EXPIRES
+                if type == "access"
+                else self.config.JWT_REFRESH_TOKEN_EXPIRES
+            )
+        # Handle CSRF
+        csrf = None
+        if self.config.has_location("cookies") and self.config.JWT_COOKIE_CSRF_PROTECT:
+            csrf = get_uuid()
+        # Handle audience
+        aud = audience
+        if aud is None:
+            aud = self.config.JWT_ENCODE_AUDIENCE
+        return TokenPayload(
+            sub=uid,
+            fresh=fresh,
+            exp=exp,
+            type=type,
+            iss=self.config.JWT_ENCODE_ISSUER,
+            aud=aud,
+            csrf=csrf,
+            # Handle NBF
+            nbf=None,
+            **data,
         )
 
-    def set_cache(self, client: aioredis.Redis) -> None:
-        self._cache_backend.set_client(client)
+    def _create_token(
+        self,
+        uid: str,
+        type: str,
+        fresh: bool = False,
+        headers: Optional[Dict[str, Any]] = None,
+        expiry: Optional[DateTimeExpression] = None,
+        data: Optional[Dict[str, Any]] = None,
+        audience: Optional[StringOrSequence] = None,
+        **kwargs,
+    ) -> str:
+        payload = self._create_payload(
+            uid=uid,
+            type=type,
+            fresh=fresh,
+            expiry=expiry,
+            data=data,
+            audience=audience,
+            **kwargs,
+        )
+        return payload.encode(
+            key=self.config.PRIVATE_KEY,
+            algorithm=self.config.JWT_ALGORITHM,
+            headers=headers,
+        )
 
-    async def get_user(self, request: Request) -> User:
-        if access_token := request.cookies.get(self._access_cookie_name):
-            return await User.create(access_token, self._auth_backend)
+    def _decode_token(
+        self,
+        token: str,
+        verify: bool = True,
+        audience: Optional[StringOrSequence] = None,
+        issuer: Optional[str] = None,
+    ) -> TokenPayload:
+        return TokenPayload.decode(
+            token=token,
+            key=self.config.PUBLIC_KEY,
+            algorithms=[self.config.JWT_ALGORITHM],
+            verify=verify,
+            audience=audience or self.config.JWT_DECODE_AUDIENCE,
+            issuer=issuer or self.config.JWT_DECODE_ISSUER,
+        )
+
+    def _set_cookies(
+        self,
+        token: str,
+        type: str,
+        response: Response,
+        max_age: Optional[int] = None,
+        *args,
+        **kwargs,
+    ) -> None:
+        if type == "access":
+            token_key = self.config.JWT_ACCESS_COOKIE_NAME
+            token_path = self.config.JWT_ACCESS_COOKIE_PATH
+            csrf_key = self.config.JWT_ACCESS_CSRF_COOKIE_NAME
+            csrf_path = self.config.JWT_ACCESS_CSRF_COOKIE_PATH
+        elif type == "refresh":
+            token_key = self.config.JWT_REFRESH_COOKIE_NAME
+            token_path = self.config.JWT_REFRESH_COOKIE_PATH
+            csrf_key = self.config.JWT_REFRESH_CSRF_COOKIE_NAME
+            csrf_path = self.config.JWT_REFRESH_CSRF_COOKIE_PATH
         else:
-            return User()
+            raise ValueError("Token type must be 'access' | 'refresh'")
 
-    async def get_authenticated_user(
+        # Set cookie
+        response.set_cookie(
+            key=token_key,
+            value=token,
+            path=token_path,
+            domain=self.config.JWT_COOKIE_DOMAIN,
+            samesite=self.config.JWT_COOKIE_SAMESITE,
+            secure=self.config.JWT_COOKIE_SECURE,
+            httponly=True,
+            max_age=max_age or self.config.JWT_COOKIE_MAX_AGE,
+        )
+        # Set CSRF
+        if self.config.JWT_COOKIE_CSRF_PROTECT and self.config.JWT_CSRF_IN_COOKIES:
+            response.set_cookie(
+                key=csrf_key,
+                value=self._decode_token(token=token, verify=True).csrf,
+                path=csrf_path,
+                domain=self.config.JWT_COOKIE_DOMAIN,
+                samesite=self.config.JWT_COOKIE_SAMESITE,
+                secure=self.config.JWT_COOKIE_SECURE,
+                httponly=False,
+                max_age=max_age or self.config.JWT_COOKIE_MAX_AGE,
+            )
+
+    def _unset_cookies(
+        self,
+        type: str,
+        response: Response,
+    ) -> None:
+        if type == "access":
+            token_key = self.config.JWT_ACCESS_COOKIE_NAME
+            token_path = self.config.JWT_ACCESS_COOKIE_PATH
+            csrf_key = self.config.JWT_ACCESS_CSRF_COOKIE_NAME
+            csrf_path = self.config.JWT_ACCESS_CSRF_COOKIE_PATH
+        elif type == "refresh":
+            token_key = self.config.JWT_REFRESH_COOKIE_NAME
+            token_path = self.config.JWT_REFRESH_COOKIE_PATH
+            csrf_key = self.config.JWT_REFRESH_CSRF_COOKIE_NAME
+            csrf_path = self.config.JWT_REFRESH_CSRF_COOKIE_PATH
+        else:
+            raise ValueError("Token type must be 'access' | 'refresh'")
+        # Unset cookie
+        response.delete_cookie(
+            key=token_key,
+            path=token_path,
+            domain=self.config.JWT_COOKIE_DOMAIN,
+        )
+        if self.config.JWT_COOKIE_CSRF_PROTECT and self.config.JWT_CSRF_IN_COOKIES:
+            response.delete_cookie(
+                key=csrf_key,
+                path=csrf_path,
+                domain=self.config.JWT_COOKIE_DOMAIN,
+            )
+
+    @overload
+    async def _get_token_from_request(
         self,
         request: Request,
-    ) -> User:
-        if access_token := request.cookies.get(self._access_cookie_name):
-            return await User.create(access_token, self._auth_backend)
-        else:
-            raise HTTPException(401)
+        locations: Optional[TokenLocations] = None,
+        refresh: bool = False,
+        optional: Literal[False] = False,
+    ) -> RequestToken:
+        ...
 
-    async def admin_required(self, request: Request) -> None:
-        if access_token := request.cookies.get(self._access_cookie_name):
-            user = await User.create(access_token, self._auth_backend)
-            if user.is_admin:
-                return
-
-        raise HTTPException(403)
-
-
-class Authentication(authx):
-    """Authentication is the Class that handles all the authentication routes, such as login, register,
-    and logout, and Support all AuthX Features such as Social Authentication, Password Reset, and Admin,
-    and also provides a simple way to create a user management system.
-    You Can Add Also the Support to other Authentication Providers such as Google, Facebook.
-    Supporting Cache, JWT, and MongoDB.
-    """
-
-    def __init__(
+    @overload
+    async def _get_token_from_request(
         self,
-        debug: bool,
-        base_url: str,
-        site: str,
-        database_backend: BaseDBBackend,
-        callbacks: Iterable,
-        access_cookie_name: str,
-        refresh_cookie_name: str,
-        private_key: bytes,
-        public_key: bytes,
-        access_expiration: int,
-        refresh_expiration: int,
-        smtp_username: str,
-        smtp_password: str,
-        smtp_host: str,
-        smtp_tls: int,
-        display_name: str,
-        recaptcha_secret: str,
-        social_providers: Iterable,
-        social_creds: Optional[dict],
+        request: Request,
+        locations: Optional[TokenLocations] = None,
+        refresh: bool = False,
+        optional: Literal[True] = True,
+    ) -> Optional[RequestToken]:
+        ...
+
+    async def _get_token_from_request(
+        self,
+        request: Request,
+        locations: Optional[TokenLocations] = None,
+        refresh: bool = False,
+        optional: bool = False,
+    ) -> Optional[RequestToken]:
+        if refresh and locations is None:
+            locations = list(
+                set(self.config.JWT_TOKEN_LOCATION).intersection(["cookies", "json"])
+            )
+        elif (not refresh) and locations is None:
+            locations = list(self.config.JWT_TOKEN_LOCATION)
+        try:
+            return await _get_token_from_request(
+                request=request,
+                refresh=refresh,
+                locations=locations,
+                config=self.config,
+            )
+        except MissingTokenError as e:
+            if optional:
+                return None
+            raise e
+
+    async def get_access_token_from_request(self, request: Request) -> RequestToken:
+        """Dependency to retrieve access token from request
+
+        Args:
+            request (Request): Request to retrieve access token from
+
+        Raises:
+            MissingTokenError: When no `access` token is available in request
+
+        Returns:
+            RequestToken: Request Token instance for `access` token type
+        """
+        return await self._get_token_from_request(request, optional=False)
+
+    async def get_refresh_token_from_request(self, request: Request) -> RequestToken:
+        """Dependency to retrieve refresh token from request
+
+        Args:
+            request (Request): Request to retrieve refresh token from
+
+        Raises:
+            MissingTokenError: When no `refresh` token is available in request
+
+        Returns:
+            RequestToken: Request Token instance for `refresh` token type
+        """
+        return await self._get_token_from_request(request, refresh=True, optional=False)
+
+    async def _auth_required(
+        self,
+        request: Request,
+        type: str = "access",
+        verify_type: bool = True,
+        verify_fresh: bool = False,
+        verify_csrf: Optional[bool] = None,
+    ) -> TokenPayload:
+        if type == "access":
+            method = self.get_access_token_from_request
+        elif type == "refresh":
+            method = self.get_refresh_token_from_request
+        else:
+            ...
+        if verify_csrf is None:
+            verify_csrf = self.config.JWT_COOKIE_CSRF_PROTECT and (
+                request.method.upper() in self.config.JWT_CSRF_METHODS
+            )
+
+        request_token = await method(
+            request=request,
+        )
+
+        if self.is_token_in_blocklist(request_token.token):
+            raise RevokedTokenError("Token has been revoked")
+
+        return self.verify_token(
+            request_token,
+            verify_type=verify_type,
+            verify_fresh=verify_fresh,
+            verify_csrf=verify_csrf,
+        )
+
+    # endregion
+
+    # region Token methods
+
+    def verify_token(
+        self,
+        token: RequestToken,
+        verify_type: bool = True,
+        verify_fresh: bool = False,
+        verify_csrf: bool = True,
+    ) -> TokenPayload:
+        """Verify a request token
+
+        Args:
+            token (RequestToken): RequestToken instance
+            verify_type (bool, optional): Apply token type verification. Defaults to True.
+            verify_fresh (bool, optional): Apply token freshness verification. Defaults to False.
+            verify_csrf (bool, optional): Apply token CSRF verification. Defaults to True.
+
+        Returns:
+            TokenPayload: _description_
+        """
+        return token.verify(
+            key=self.config.PUBLIC_KEY,
+            algorithms=[self.config.JWT_ALGORITHM],
+            verify_fresh=verify_fresh,
+            verify_type=verify_type,
+            verify_csrf=verify_csrf,
+        )
+
+    def create_access_token(
+        self,
+        uid: str,
+        fresh: bool = False,
+        headers: Optional[Dict[str, Any]] = None,
+        expiry: Optional[DateTimeExpression] = None,
+        data: Optional[Dict[str, Any]] = None,
+        audience: Optional[StringOrSequence] = None,
+        *args,
+        **kwargs,
+    ) -> str:
+        """Generate an Access Token
+
+        Args:
+            uid (str): Unique identifier to generate token for
+            fresh (bool, optional): Generate fresh token. Defaults to False.
+            headers (Optional[Dict[str, Any]], optional): TODO. Defaults to None.
+            expiry (Optional[DateTimeExpression], optional): Use a user defined expiry claim. Defaults to None.
+            data (Optional[Dict[str, Any]], optional): Additional data to store in token. Defaults to None.
+            audience (Optional[StringOrSequence], optional): Audience claim. Defaults to None.
+
+        Returns:
+            str: Access Token
+        """
+        return self._create_token(
+            uid=uid,
+            type="access",
+            fresh=fresh,
+            headers=headers,
+            expiry=expiry,
+            data=data,
+            audience=audience,
+        )
+
+    def create_refresh_token(
+        self,
+        uid: str,
+        headers: Optional[Dict[str, Any]] = None,
+        expiry: Optional[DateTimeExpression] = None,
+        data: Optional[Dict[str, Any]] = None,
+        audience: Optional[StringOrSequence] = None,
+        *args,
+        **kwargs,
+    ) -> str:
+        """Generate a Refresh Token
+
+        Args:
+            uid (str): Unique identifier to generate token for
+            headers (Optional[Dict[str, Any]], optional): TODO. Defaults to None.
+            expiry (Optional[DateTimeExpression], optional): Use a user defined expiry claim. Defaults to None.
+            data (Optional[Dict[str, Any]], optional): Additional data to store in token. Defaults to None.
+            audience (Optional[StringOrSequence], optional): Audience claim. Defaults to None.
+
+        Returns:
+            str: Refresh Token
+        """
+        return self._create_token(
+            uid=uid,
+            type="refresh",
+            headers=headers,
+            expiry=expiry,
+            data=data,
+            audience=audience,
+        )
+
+    # endregion
+
+    # region Cookie methods
+
+    def set_access_cookies(
+        self,
+        token: str,
+        response: Response,
+        max_age: Optional[int] = None,
     ) -> None:
-        self._debug = debug
-        self._base_url = base_url
-        self._site = site
-        self._access_cookie_name = access_cookie_name
-        self._refresh_cookie_name = refresh_cookie_name
-        self._private_key = private_key
-        self._public_key = public_key
-        self._access_expiration = access_expiration
-        self._refresh_expiration = refresh_expiration
-        self._smtp_username = smtp_username
-        self._smtp_password = smtp_password
-        self._smtp_host = smtp_host
-        self._smtp_tls = smtp_tls
-        self._display_name = display_name
-        self._recaptcha_secret = recaptcha_secret
-        self._social_providers = social_providers
-        self._social_creds = social_creds
+        """Add 'Set-Cookie' for access token in response header
 
-        self._database_backend = database_backend
-        self._cache_backend = RedisBackend()
-
-        self._auth_backend = JWTBackend(
-            self._cache_backend,
-            private_key,
-            public_key,
-            access_expiration,
-            refresh_expiration,
+        Args:
+            token (str): Access token
+            response (Response): response to set cookie on
+            max_age (Optional[int], optional): Max Age cookie paramater. Defaults to None.
+        """
+        self._set_cookies(
+            token=token, type="access", response=response, max_age=max_age
         )
 
-        self._users_repo = UsersRepo(
-            self._database_backend, self._cache_backend, callbacks, access_expiration
+    def set_refresh_cookies(
+        self,
+        token: str,
+        response: Response,
+        max_age: Optional[int] = None,
+    ) -> None:
+        """Add 'Set-Cookie' for refresh token in response header
+
+        Args:
+            token (str): Refresh token
+            response (Response): response to set cookie on
+            max_age (Optional[int], optional): Max Age cookie paramater. Defaults to None.
+        """
+        self._set_cookies(
+            token=token, type="refresh", response=response, max_age=max_age
+        )
+
+    def unset_access_cookies(
+        self,
+        response: Response,
+    ) -> None:
+        """Remove 'Set-Cookie' for access token in response header
+
+        Args:
+            response (Response): response to remove cooke from
+        """
+        self._unset_cookies("access", response=response)
+
+    def unset_refresh_cookies(
+        self,
+        response: Response,
+    ) -> None:
+        """Remove 'Set-Cookie' for refresh token in response header
+
+        Args:
+            response (Response): response to remove cooke from
+        """
+        self._unset_cookies("refresh", response=response)
+
+    def unset_cookies(self, response: Response) -> None:
+        """Remove 'Set-Cookie' for tokens from response headers
+
+        Args:
+            response (Response): response to remove token cookies from
+        """
+        self.unset_access_cookies(response)
+        self.unset_refresh_cookies(response)
+
+    # endregion
+
+    # region Dependencies
+
+    def get_dependency(self, request: Request, response: Response) -> AuthXDependency:
+        """FastAPI Dependency to return a AuthX sub-object within the route context
+
+        Args:
+            request (Request): Request context managed by FastAPI
+            response (Response): Response context managed by FastAPI
+
+        Note:
+            The AuthXDeps is a utility class, to enable quick token operations
+            within the route logic. It provides methods to avoid addtional code
+            in your route that would be outside of the route logic
+
+            Such methods includes setting and unsetting cookies without the need
+            to generate a response object beforhand
+
+        Returns:
+            AuthXDeps: The contextful AuthX object
+        """
+        return AuthXDependency(self, request=request, response=response)
+
+    def token_required(
+        self,
+        type: str = "access",
+        verify_type: bool = True,
+        verify_fresh: bool = False,
+        verify_csrf: Optional[bool] = None,
+    ) -> Callable[[Request], TokenPayload]:
+        """Dependency to enforce valid token availability in request
+
+        Args:
+            type (str, optional): Require a given token type. Defaults to "access".
+            verify_type (bool, optional): Apply type verification. Defaults to True.
+            verify_fresh (bool, optional): Require token freshness. Defaults to False.
+            verify_csrf (Optional[bool], optional): Enable CSRF verification. Defaults to None.
+
+        Returns:
+            Callable[[Request], TokenPayload]: Dependency for Valid token Payload retrieval
+        """
+
+        async def _auth_required(request: Request):
+            return await self._auth_required(
+                request=request,
+                type=type,
+                verify_csrf=verify_csrf,
+                verify_type=verify_type,
+                verify_fresh=verify_fresh,
+            )
+
+        return _auth_required
+
+    @property
+    def fresh_token_required(self) -> Callable[[Request], TokenPayload]:
+        """FastAPI Dependency to enforce presence of a `fresh` `access` token in request"""
+        return self.token_required(
+            type="access",
+            verify_csrf=None,
+            verify_fresh=True,
+            verify_type=True,
         )
 
     @property
-    def auth_router(self) -> APIRouter:
-        return get_auth_router(
-            self._users_repo,
-            self._auth_backend,
-            self.get_authenticated_user,
-            self._debug,
-            self._base_url,
-            self._site,
-            self._access_cookie_name,
-            self._refresh_cookie_name,
-            self._access_expiration,
-            self._refresh_expiration,
-            self._recaptcha_secret,
-            self._smtp_username,
-            self._smtp_password,
-            self._smtp_host,
-            self._smtp_tls,
-            self._display_name,
+    def access_token_required(self) -> Callable[[Request], TokenPayload]:
+        """FastAPI Dependency to enforce presence of an `access` token in request"""
+        return self.token_required(
+            type="access",
+            verify_csrf=None,
+            verify_fresh=False,
+            verify_type=True,
         )
 
     @property
-    def password_router(self) -> APIRouter:
-        return get_password_router(
-            self._users_repo,
-            self._auth_backend,
-            self.get_authenticated_user,
-            self._debug,
-            self._base_url,
-            self._site,
-            self._recaptcha_secret,
-            self._smtp_username,
-            self._smtp_password,
-            self._smtp_host,
-            self._smtp_tls,
-            self._display_name,
+    def refresh_token_required(self) -> Callable[[Request], TokenPayload]:
+        """FastAPI Dependency to enforce presence of a `refresh` token in request"""
+        return self.token_required(
+            type="refresh",
+            verify_csrf=None,
+            verify_fresh=False,
+            verify_type=True,
         )
 
-    @property
-    def social_router(self) -> APIRouter:
-        return get_social_router(
-            self._users_repo,
-            self._auth_backend,
-            self._debug,
-            self._base_url,
-            self._access_cookie_name,
-            self._refresh_cookie_name,
-            self._access_expiration,
-            self._refresh_expiration,
-            self._social_providers,
-            self._social_creds,
-        )
+    async def get_current_subject(self, request: Request) -> Optional[T]:
+        token: TokenPayload = await self._auth_required(request=request)
+        uid = token.sub
+        return self._get_current_subject(uid=uid)
 
-    @property
-    def admin_router(self) -> APIRouter:
-        return get_admin_router(self._users_repo, self.admin_required)
+    def get_token_from_request(
+        self, type: TokenType = "access", optional: bool = True
+    ) -> Optional[RequestToken]:
+        """Return token from response if available
 
-    @property
-    def search_router(self) -> APIRouter:
-        return get_search_router(self._users_repo, self.admin_required)
+        Args:
+            type (TokenType, optional): The type of token to retrieve from request.
+                Defaults to "access".
+            optional (bool, optional): Whether or not to enforce token presence in request.
+                Defaults to True.
 
-    def set_cache(self, cache_client: aioredis.Redis) -> None:
-        self._cache_backend.set_client(cache_client)
+        Note:
+            When `optional=True`, the return value might be `None`
+            if no token is available in request
+
+            When `optional=False`, raises a MissingTokenError
+
+        Returns:
+            Optional[RequestToken]: The RequestToken if available
+        """
+
+        async def _token_getter(request: Request):
+            return await self._get_token_from_request(
+                request, optional=optional, refresh=(type == "refresh")
+            )
+
+        return _token_getter
+
+    # endregion
+
+    def _implicit_refresh_enabled_for_request(self, request: Request) -> bool:
+        """Check if a request should implement implicit token refresh
+
+        Args:
+            request (Request): Request to check
+
+        Returns:
+            bool: True if request allows for refreshing access token
+        """
+        if (
+            request.url.components.path
+            in self.config.JWT_IMPLICIT_REFRESH_ROUTE_EXCLUDE
+        ):
+            return False
+        elif (
+            request.url.components.path
+            in self.config.JWT_IMPLICIT_REFRESH_ROUTE_INCLUDE
+        ):
+            return True
+        elif request.method in self.config.JWT_IMPLICIT_REFRESH_METHOD_EXCLUDE:
+            return False
+        elif request.method in self.config.JWT_IMPLICIT_REFRESH_METHOD_INCLUDE:
+            return False
+        else:
+            return True
+
+    async def implicit_refresh_middleware(
+        self, request: Request, call_next: Coroutine
+    ) -> Response:
+        """FastAPI Middleware to enable token refresh for an APIRouter
+
+        Args:
+            request (Request): Incoming request
+            call_next (Coroutine): Endpoint logic to be called
+
+        Note:
+            This middleware is only based on `access` tokens.
+            Using implicit refresh mechanism makes use of `refresh`
+            tokens unnecessary.
+
+        Note:
+            The refreshed `access` token will not be considered as
+            `fresh`
+
+        Note:
+            The implicit refresh mechanism is only enabled
+            for authorization through cookies.
+
+        Returns:
+            Response: Response with update access token cookie if relevant
+        """
+        response = await call_next(request)
+
+        request_condition = self.config.has_location(
+            "cookies"
+        ) and self._implicit_refresh_enabled_for_request(request)
+
+        if request_condition:
+            with contextlib.suppress(AuthXException):
+                # Refresh mechanism
+                token = await self._get_token_from_request(
+                    request=request,
+                    locations=["cookies"],
+                    refresh=False,
+                    optional=False,
+                )
+                payload = self.verify_token(token, verify_fresh=False)
+                if (
+                    payload.time_until_expiry
+                    < self.config.JWT_IMPLICIT_REFRESH_DELTATIME
+                ):
+                    new_token = self.create_access_token(
+                        uid=payload.sub, fresh=False, data=payload.extra_dict
+                    )
+                    self.set_access_cookies(new_token, response=response)
+        return response
