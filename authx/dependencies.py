@@ -38,9 +38,7 @@ class AuthXDependency(Generic[T]):
         *args,
         **kwargs,
     ) -> str:
-        return self._security.create_access_token(
-            uid, fresh, headers, expiry, data, audience, *args, **kwargs
-        )
+        return self._security.create_access_token(uid, fresh, headers, expiry, data, audience, *args, **kwargs)
 
     def create_refresh_token(
         self,
@@ -52,23 +50,13 @@ class AuthXDependency(Generic[T]):
         *args: Any,
         **kwargs: Any,
     ) -> str:
-        return self._security.create_refresh_token(
-            uid, headers, expiry, data, audience, *args, **kwargs
-        )
+        return self._security.create_refresh_token(uid, headers, expiry, data, audience, *args, **kwargs)
 
-    def set_access_cookies(
-        self, token, response: Optional[Response] = None, max_age: Optional[int] = None
-    ):
-        self._security.set_access_cookies(
-            token=token, response=(response or self._response), max_age=max_age
-        )
+    def set_access_cookies(self, token, response: Optional[Response] = None, max_age: Optional[int] = None):
+        self._security.set_access_cookies(token=token, response=(response or self._response), max_age=max_age)
 
-    def set_refresh_cookies(
-        self, token, response: Optional[Response] = None, max_age: Optional[int] = None
-    ):
-        self._security.set_refresh_cookies(
-            token=token, response=(response or self._response), max_age=max_age
-        )
+    def set_refresh_cookies(self, token, response: Optional[Response] = None, max_age: Optional[int] = None):
+        self._security.set_refresh_cookies(token=token, response=(response or self._response), max_age=max_age)
 
     def unset_access_cookies(self, response: Optional[Response] = None):
         self._security.unset_access_cookies(response=(response or self._response))

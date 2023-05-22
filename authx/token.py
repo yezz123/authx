@@ -31,13 +31,9 @@ def create_token(
     # Filter additional data to remove JWT claims
     additional_claims = {}
     if additional_data is not None:
-        if not ignore_errors and set(additional_data.keys()).intersection(
-            RESERVED_CLAIMS
-        ):
+        if not ignore_errors and set(additional_data.keys()).intersection(RESERVED_CLAIMS):
             raise ValueError(f"{RESERVED_CLAIMS} are forbidden in additional claims")
-        additional_claims = {
-            k: v for k, v in additional_data.items() if k not in RESERVED_CLAIMS
-        }
+        additional_claims = {k: v for k, v in additional_data.items() if k not in RESERVED_CLAIMS}
 
     jwt_claims = {"sub": uid, "jti": jti or get_uuid(), "type": type}
 

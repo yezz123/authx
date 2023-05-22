@@ -56,9 +56,7 @@ class _ErrorHandler:
         status_code: int,
         message: str,
     ) -> None:
-        app.exception_handler(exception)(
-            self._error_handler(exception, status_code, message)
-        )
+        app.exception_handler(exception)(self._error_handler(exception, status_code, message))
 
     def handle_errors(self, app: FastAPI) -> None:
         """Add the `FastAPI.exception_handlers` relative to AuthX exceptions
@@ -66,9 +64,7 @@ class _ErrorHandler:
         Args:
             app (FastAPI): the FastAPI application to handle errors for
         """
-        self._set_app_exception_handler(
-            app, exception=exceptions.JWTDecodeError, status_code=422, message=None
-        )
+        self._set_app_exception_handler(app, exception=exceptions.JWTDecodeError, status_code=422, message=None)
         self._set_app_exception_handler(
             app,
             exception=exceptions.MissingTokenError,
