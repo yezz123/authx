@@ -1,4 +1,4 @@
-name: Test Suite
+name: Continuous Integration
 
 on:
   push:
@@ -8,8 +8,26 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: pip install -e .[lint]
+      - uses: pre-commit/action@v3.0.0
+        with:
+          extra_args: --all-files --verbose
+  test:
+    name: test on python ${{ matrix.python-version }} on ${{ matrix.os }}
     services:
       redis:
         image: redis
@@ -22,9 +40,12 @@ jobs:
           --health-retries 5
 
     strategy:
-      matrix:
-        python-version: ["3.9", "3.10", "3.11"]
       fail-fast: false
+      matrix:
+        os: [ubuntu, macos, windows]
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v3
