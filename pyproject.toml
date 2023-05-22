@@ -91,7 +91,9 @@ test = [
     "httpx==0.24.1",
     "uvicorn==0.22.0",
     "SQLAlchemy ==1.4.37",
-    "itsdangerous == 2.0.1"
+    "itsdangerous == 2.0.1",
+    "websockets==11.0.3",
+    "uvloop==0.17.0"
 ]
 docs = [
     "mkdocs >=1.1.2,<2.0.0",
@@ -204,4 +206,5 @@ log_cli_date_format= "%Y-%m-%d %H:%M:%S"
 asyncio_mode= "auto"
 filterwarnings = [
     'error',
+    'ignore::DeprecationWarning',
 ]
