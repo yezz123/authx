@@ -59,8 +59,6 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         """
         return self._config
 
-    # region Core methods
-
     def _create_payload(
         self,
         uid: str,
@@ -321,10 +319,6 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             verify_csrf=verify_csrf,
         )
 
-    # endregion
-
-    # region Token methods
-
     def verify_token(
         self,
         token: RequestToken,
@@ -416,10 +410,6 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             audience=audience,
         )
 
-    # endregion
-
-    # region Cookie methods
-
     def set_access_cookies(
         self,
         token: str,
@@ -480,10 +470,6 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         """
         self.unset_access_cookies(response)
         self.unset_refresh_cookies(response)
-
-    # endregion
-
-    # region Dependencies
 
     def get_dependency(self, request: Request, response: Response) -> AuthXDependency:
         """FastAPI Dependency to return a AuthX sub-object within the route context
@@ -593,8 +579,6 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             return await self._get_token_from_request(request, optional=optional, refresh=(type == "refresh"))
 
         return _token_getter
-
-    # endregion
 
     def _implicit_refresh_enabled_for_request(self, request: Request) -> bool:
         """Check if a request should implement implicit token refresh
