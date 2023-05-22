@@ -12,17 +12,6 @@ repos:
           - id: check-toml
           - id: check-yaml
             exclude: mkdocs.yml
-    - repo: https://github.com/pycqa/isort
-      rev: 5.12.0
-      hooks:
-        - id: isort
-          name: isort (python)
-        - id: isort
-          name: isort (cython)
-          types: [cython]
-        - id: isort
-          name: isort (pyi)
-          types: [pyi]
     - repo: https://github.com/charliermarsh/ruff-pre-commit
       rev: v0.0.269
       hooks:
