@@ -641,9 +641,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         """
         response = await call_next(request)
 
-        request_condition = self.config.has_location("cookies") and self._implicit_refresh_enabled_for_request(request)
-
-        if request_condition:
+        if request_condition := self.config.has_location(
+            "cookies"
+        ) and self._implicit_refresh_enabled_for_request(request):
             with contextlib.suppress(AuthXException):
                 # Refresh mechanism
                 token = await self._get_token_from_request(
