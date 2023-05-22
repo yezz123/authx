@@ -11,46 +11,42 @@ license = "MIT"
 authors = [
     { name = "Yasser Tahiri", email = "hello@yezz.me" },
 ]
+keywords = [
+    "FastAPI",
+    "Authentication",
+    "Oauth2",
+    "Pydantic",
+    "JWT",
+    "Cookie"
+]
 
 classifiers = [
     "License :: OSI Approved :: MIT License",
+    "Development Status :: 5 - Production/Stable",
     "Operating System :: OS Independent",
     "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
     "Framework :: FastAPI",
     "Framework :: AsyncIO",
     "Framework :: Pydantic",
     "Framework :: Pydantic :: 1",
     "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3 :: Only",
     "Topic :: Internet :: WWW/HTTP :: Session",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Internet",
     "Typing :: Typed",
 ]
 
 dependencies = [
     "fastapi >=0.65.2,<0.96.0",
-    "passlib ==1.7.4",
-    "bcrypt ==4.0.1",
-    "email-validator >=1.1.0,<2.0.1",
-    "pyjwt ==2.7.0",
-    "cryptography==40.0.2",
-    "httpx==0.24.1",
-    "itsdangerous == 2.1.2",
-    "aiosmtplib == 2.0.1",
-    "pydantic==1.10.7",
-    "databases == 0.7.0",
-    "motor == 3.1.2",
-    "Authlib==0.15.5",
-    "starlette >=0.14.02,<0.27.1",
-    "redis >=4.3.3,<4.5.6",
-    "pytz==2023.3",
-    "python-dateutil==2.8.2",
-    "python-socketio >=4.6.0,<5.8.1",
-    "pyinstrument >=4.1.1,<4.5.0",
-    "SQLAlchemy >=1.4.37,<2.0.16",
-    "prometheus-client",
+    "pyjwt >=2.6.0,<3.0.0",
+    "pydantic >=1.6.2,!=1.7,!=1.7.1,!=1.7.2,!=1.7.3,!=1.8,!=1.8.1,<2.0.0",
+    "typing-extensions >=3.7.4,<4.6.0",
 ]
 
 dynamic = ["version"]
@@ -68,11 +64,8 @@ test = [
     "pytest==7.3.1",
     "pytest-asyncio == 0.21.0",
     "requests==2.30.0",
-    "uvicorn==0.22.0",
     "asynctest==0.13.0",
     "pytest-cov==4.0.0",
-    "websockets==11.0.3",
-    "uvloop==0.17.0"
 ]
 docs = [
     "mkdocs >=1.1.2,<2.0.0",
@@ -122,16 +115,6 @@ source = [
     "authx"
 ]
 context = '${CONTEXT}'
-omit = [
-    "authx/core/config.py",
-    "authx/main.py",
-    "authx/utils/**",
-    "authx/errors/**",
-    "authx/database/**",
-    "authx/cache/**",
-    "authx/services/**",
-    "tests/middleware/example/**"
-]
 
 
 [tool.coverage.report]
@@ -152,3 +135,4 @@ log_cli_level = "INFO"
 log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
 log_cli_date_format= "%Y-%m-%d %H:%M:%S"
 asyncio_mode= "auto"
+
