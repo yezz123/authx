@@ -150,16 +150,16 @@ ignore = [
 "__init__.py" = ["F401"]
 
 [tool.ruff.isort]
-known-third-party = ["pydantic", "sqlalchemy", "typing_extensions"]
+known-third-party = ["pydantic", "typing_extensions"]
 
 [tool.coverage.run]
-source = ['pydantic_extra_types']
+source = ["authx"]
 branch = true
 context = '${CONTEXT}'
 
 [tool.coverage.paths]
 source = [
-    'pydantic_extra_types/',
+    "authx/",
 ]
 
 [tool.coverage.report]
