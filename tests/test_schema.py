@@ -18,7 +18,7 @@ def valid_payload():
     return TokenPayload(
         type="access",
         fresh=True,
-        sub="OCARINOW",
+        sub="BOOOM",
         csrf="CSRF_TOKEN",
         scopes=["read", "write"],
         exp=datetime.timedelta(minutes=20),
@@ -32,7 +32,7 @@ def valid_refresh_payload():
     return TokenPayload(
         type="refresh",
         fresh=True,
-        sub="OCARINOW",
+        sub="BOOOM",
         csrf="CSRF_TOKEN",
         scopes=["read", "write"],
         exp=datetime.timedelta(minutes=20),
@@ -46,7 +46,7 @@ def invalid_payload():
     return TokenPayload(
         type="false",
         fresh=False,
-        sub="OCARINOW",
+        sub="BOOOM",
         csrf="CSRF_TOKEN",
         iat=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc),
         exp=datetime.datetime(2000, 1, 1, 14, 0, tzinfo=datetime.timezone.utc),
@@ -222,7 +222,7 @@ def test_token_verify_none_csrf_claim_exception():
     payload = TokenPayload(
         type="false",
         fresh=False,
-        sub="OCARINOW",
+        sub="BOOOM",
         csrf=None,
         iat=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc),
     )

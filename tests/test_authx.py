@@ -25,35 +25,35 @@ def refresh_token(authx: AuthX):
 
 
 def test_create_access_token(authx: AuthX):
-    token = authx.create_access_token(uid="ocarinow", fresh=True)
+    token = authx.create_access_token(uid="blablah", fresh=True)
     assert isinstance(token, str)
     payload = authx._decode_token(token, verify=False)
     assert payload.fresh
-    assert payload.sub == "ocarinow"
+    assert payload.sub == "blablah"
     assert payload.type == "access"
 
 
 def test_create_refresh_token(authx: AuthX):
-    token = authx.create_refresh_token(uid="ocarinow", fresh=True)
+    token = authx.create_refresh_token(uid="blablah", fresh=True)
     assert isinstance(token, str)
     payload = authx._decode_token(token, verify=False)
     assert payload.fresh is not True
-    assert payload.sub == "ocarinow"
+    assert payload.sub == "blablah"
     assert payload.type == "refresh"
 
 
 def test_verify_token(authx: AuthX):
-    token = authx.create_access_token(uid="ocarinow", fresh=True)
+    token = authx.create_access_token(uid="blablah", fresh=True)
     payload = authx._decode_token(token, verify=False)
     request_token = RequestToken(token=token, csrf=None, location="headers", type="access")
     payload = authx.verify_token(request_token, verify_csrf=False)
     assert payload.fresh
-    assert payload.sub == "ocarinow"
+    assert payload.sub == "blablah"
 
 
 def test_set_wrong_token_type_cookie_exception(authx: AuthX):
     response = JSONResponse(content={"foo": "bar"})
-    token = authx.create_access_token(uid="ocarinow", fresh=True)
+    token = authx.create_access_token(uid="blablah", fresh=True)
 
     with pytest.raises(ValueError):
         authx._set_cookies(token=token, type="bad_type", response=response)
@@ -61,7 +61,7 @@ def test_set_wrong_token_type_cookie_exception(authx: AuthX):
 
 def test_unset_wrong_token_type_cookie_exception(authx: AuthX):
     response = JSONResponse(content={"foo": "bar"})
-    token = authx.create_access_token(uid="ocarinow", fresh=True)
+    token = authx.create_access_token(uid="blablah", fresh=True)
     authx.set_access_cookies(token=token, response=response)
 
     with pytest.raises(ValueError):
@@ -70,7 +70,7 @@ def test_unset_wrong_token_type_cookie_exception(authx: AuthX):
 
 def test_set_access_cookies(authx: AuthX):
     response = JSONResponse(content={"foo": "bar"})
-    token = authx.create_access_token(uid="ocarinow", fresh=True)
+    token = authx.create_access_token(uid="blablah", fresh=True)
     authx.set_access_cookies(token, response=response)
 
     assert all(
@@ -82,7 +82,7 @@ def test_set_access_cookies(authx: AuthX):
 
 def test_set_refresh_cookies(authx: AuthX):
     response = JSONResponse(content={"foo": "bar"})
-    token = authx.create_refresh_token(uid="ocarinow", fresh=True)
+    token = authx.create_refresh_token(uid="blablah", fresh=True)
     authx.set_refresh_cookies(token, response=response)
 
     assert all(
