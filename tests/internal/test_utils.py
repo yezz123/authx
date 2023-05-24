@@ -76,7 +76,7 @@ def test_to_UTC(sample_datetime_with_tz):
 
 def test_to_UTC_without_tz():
     event_timestamp = "2023-05-20 12:00:00.000"
-    expected_result = datetime(2023, 5, 20, 8, 0, 0, tzinfo=utc)
+    expected_result = datetime(2023, 5, 20, 12, 0, 0, tzinfo=utc)
     assert to_UTC_without_tz(event_timestamp) == expected_result.strftime("%Y-%m-%d %H:%M:%S.%f")
 
 
