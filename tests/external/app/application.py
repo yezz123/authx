@@ -5,8 +5,6 @@ from fastapi.responses import JSONResponse
 from sqlalchemy import JSON, Column, MetaData, String, Table, create_engine
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import create_session
-from starlette.config import Config
-from starlette.datastructures import Secret
 from starlette.middleware.sessions import SessionMiddleware
 
 from authx.external import MiddlewareOauth2
@@ -45,11 +43,10 @@ class DB:
         self._session.flush()
 
 
-config = Config(".env.sample")
-config.SECRET_KEY = config("SECRET_KEY", cast=Secret)
-config.SERVER_METADATA_URL = config("SERVER_METADATA_URL", cast=str)
-config.CLIENT_ID = config("CLIENT_ID", cast=str)
-config.CLIENT_SECRET = config("CLIENT_SECRET", cast=Secret)
+SECRET_KEY = "SECRET_KEY"
+SERVER_METADATA_URL = "https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration"
+CLIENT_ID = "00000000-0000-0000-0000-000000000000"
+CLIENT_SECRET = "0000000000000000000000000000000000000000000000000000000000000000"
 
 app = FastAPI(
     title="FastAPI OAuth2 Example",
@@ -71,12 +68,12 @@ class AuthenticateMiddleware(MiddlewareOauth2):
 app.add_middleware(
     AuthenticateMiddleware,
     db=db,
-    server_metadata_url=config.SERVER_METADATA_URL,
-    client_id=config.CLIENT_ID,
-    client_secret=config.CLIENT_SECRET,
+    server_metadata_url=SERVER_METADATA_URL,
+    client_id=CLIENT_ID,
+    client_secret=CLIENT_SECRET,
     force_https_redirect=False,
 )
-app.add_middleware(SessionMiddleware, secret_key=config.SECRET_KEY)
+app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 
 
 @app.get("/other")

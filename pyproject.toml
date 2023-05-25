@@ -154,6 +154,9 @@ known-third-party = ["pydantic", "typing_extensions"]
 source = ["authx"]
 branch = true
 context = '${CONTEXT}'
+omit = [
+    "tests/external/app/**"
+]
 
 [tool.coverage.paths]
 source = [
