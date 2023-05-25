@@ -85,15 +85,13 @@ lint = [
 test = [
     "pytest==7.3.1",
     "pytest-asyncio == 0.21.0",
-    "requests==2.31.0",
-    "uvicorn==0.22.0",
-    "asynctest==0.13.0",
-    "pytest-cov==4.0.0",
+    "pytest-cov==4.1.0",
     "httpx==0.24.1",
-    "uvicorn==0.22.0",
+    "requests==2.31.0",
     "SQLAlchemy ==1.4.37",
     "itsdangerous == 2.0.1",
-    "websockets==11.0.3",
+    "websockets==11.0.3",    
+    "uvicorn==0.22.0",
     "uvloop==0.17.0"
 ]
 docs = [
