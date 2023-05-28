@@ -11,4 +11,40 @@ install the dependency:
 pip install authx
 ```
 
-- TODO
+### Extra Dependencies
+
+#### Profiler Middleware
+
+```shell
+pip install authx[profiler]
+```
+
+#### Metrics Middleware
+
+```shell
+pip install authx[metrics]
+```
+
+#### Redis Session
+
+```shell
+pip install authx[session]
+```
+
+#### Cache Dependencies
+
+```shell
+pip install authx[cache]
+```
+
+#### Oauth2 Dependencies
+
+```shell
+pip install authx[oauth2]
+```
+
+### Development Dependencies
+
+```shell
+pip install authx[lint,test,docs]
+```
