@@ -80,3 +80,10 @@ class RefreshTokenRequiredError(TokenTypeError):
     """Exception raised when an `refresh` token is missing from request"""
 
     pass
+
+
+class InvalidToken(Exception):
+    """When a token is invalid for all identity providers"""
+
+    def __init__(self, errors):
+        self.errors = errors

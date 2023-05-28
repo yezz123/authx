@@ -1,138 +1,171 @@
+import datetime
+import json
 import logging
+import typing
+import urllib.request
 
-from authlib.integrations import starlette_client
-from starlette.requests import Request
-from starlette.responses import RedirectResponse
+import jose.jwt
+from fastapi.requests import HTTPConnection
+from fastapi.responses import JSONResponse
+from fastapi.websockets import WebSocket
 from starlette.types import ASGIApp, Receive, Scope, Send
+
+from authx.exceptions import InvalidToken
 
 logger = logging.getLogger(__name__)
 
 
+def _get_keys(url_or_keys):
+    if not isinstance(url_or_keys, str) or not url_or_keys.startswith("https://"):
+        return url_or_keys
+    logger.info("Getting jwk from %s...", url_or_keys)
+    with urllib.request.urlopen(url_or_keys) as f:
+        return json.loads(f.read().decode())
+
+
+def _validate_provider(provider_name, provider):
+    mandatory_keys = {"issuer", "keys", "audience"}
+    if not mandatory_keys.issubset(set(provider)):
+        raise ValueError(
+            f'Each provider must contain the following keys: {mandatory_keys}. Provider "{provider_name}" is missing {mandatory_keys - set(provider)}.'
+        )
+
+    keys = provider["keys"]
+    if isinstance(keys, str) and keys.startswith("http://"):
+        raise ValueError(
+            f'When "keys" is a url, it must start with "https://". This is not true in the provider "{provider_name}"'
+        )
+
+
 class MiddlewareOauth2:
-    """
-    Middleware for authentication through Oauth2.
-    which is often used to add authentication and authorization to a web application that interacts with an API on behalf of the user.
-    """
-
-    REDIRECT_PATH = "/authorized"
-
-    # list of paths that are public and do not require authentication
-    PUBLIC_PATHS = set()
-
     def __init__(
         self,
         app: ASGIApp,
-        server_metadata_url: str,
-        client_id: str,
-        client_secret: str,
-        db=None,
-        force_https_redirect=True,
+        providers,
+        public_paths=None,
+        get_keys=None,
+        key_refresh_minutes=None,
     ) -> None:
-        self.app = app
-        self.db = db
-        self._force_https_redirect = force_https_redirect
+        self._app = app
+        for provider in providers:
+            _validate_provider(provider, providers[provider])
+        self._providers = providers
+        self._get_keys = get_keys or _get_keys
+        self._public_paths = public_paths or set()
 
-        self._client = starlette_client.StarletteRemoteApp(
-            starlette_client.StartletteIntegration("starlette"),
-            client_id=client_id,
-            client_secret=client_secret,
-            server_metadata_url=server_metadata_url,
-            client_kwargs={"scope": "openid email profile"},
-        )
-
-    def _redirect_uri(self, request: Request):
-        """
-        The URI of the redirect path. This should be registered on whatever provider is declared.
-        """
-        port = request.url.port
-        port = "" if port is None else f":{str(port)}"
-        scheme = request.url.scheme
-        if scheme == "http" and self._force_https_redirect:
-            scheme = "https"
-        return f"{scheme}://{request.url.hostname}{port}{self.REDIRECT_PATH}"
-
-    async def _authenticate(self, scope: Scope, receive: Receive, send: Send):
-        """
-        Authenticate the user, and redirect to the original path.
-        """
-        request = Request(scope)
-
-        logger.info(f'Authenticating a user arriving at "{request.url.path}"')
-
-        if request.url.path != self.REDIRECT_PATH:
-            # store the original path of the request to redirect to when the user authenticates
-            request.session["original_path"] = str(request.url)
-
-            # any un-authenticated request is redirected to the tenant
-            redirect_uri = self._redirect_uri(request)
-            response = await self._client.authorize_redirect(request, redirect_uri)
+        if key_refresh_minutes is None:
+            self._timeout = {provider: None for provider in providers}
+        elif isinstance(key_refresh_minutes, dict):
+            self._timeout = {
+                provider: datetime.timedelta(minutes=key_refresh_minutes[provider]) for provider in providers
+            }
         else:
-            logger.info("Fetching id token...")
-            # try to construct a user from the access token
+            self._timeout = {provider: datetime.timedelta(minutes=key_refresh_minutes) for provider in providers}
+
+        # cached attribute and respective timeout
+        self._last_retrieval = {}
+        self._keys = {}
+
+    def _provider_claims(self, provider, token):
+        issuer = self._providers[provider]["issuer"]
+        audience = self._providers[provider]["audience"]
+        logger.debug(
+            'Trying to decode token for provider "%s", issuer "%s", audience "%s"...',
+            provider,
+            issuer,
+            audience,
+        )
+        decoded = jose.jwt.decode(
+            token,
+            self._provider_keys(provider),
+            issuer=issuer,
+            audience=audience,
+            options={"verify_at_hash": False},
+        )
+        logger.debug("Token decoded.")
+        return decoded
+
+    def claims(self, token: str) -> typing.Tuple[str, typing.Dict[str, str]]:
+        errors = {}
+        for provider in self._providers:
             try:
-                token = await self._client.authorize_access_token(request)
-                user = await self._client.parse_id_token(request, token)
-                assert user is not None
-            except Exception:
-                # impossible to build a user => invalidate the whole thing and redirect to home (which triggers a new auth)
-                logger.error("User authentication failed", exc_info=True)
-                response = RedirectResponse(url="/")
-                await response(scope, receive, send)
-                return
+                return provider, self._provider_claims(provider, token)
+            except jose.exceptions.ExpiredSignatureError as e:
+                # if the token has expired, it is at least from this provider.
+                logger.debug("Token has expired.")
+                errors = str(e)
+                break
+            except jose.exceptions.JWTClaimsError as e:
+                logger.debug("Invalid claims")
+                errors[provider] = str(e)
+            except jose.exceptions.JOSEError as e:  # the catch-all of Jose
+                logger.warning(e, exc_info=True)
+                errors[provider] = str(e)
+        raise InvalidToken(errors)
 
-            # store token id and access token
-            request.session["user"] = dict(user)
-
-            logger.info(f'Storing access token of user "{user["email"]}"...')
-            if self.db is None:
-                request.session["token"] = dict(token)
-            else:
-                self.db.put(user["email"], dict(token))
-
-            # finally, redirect to the original path
-            path = request.session.pop("original_path", "/")
-
-            response = RedirectResponse(url=path)
-
-        await response(scope, receive, send)
+    @staticmethod
+    async def _prepare_error_response(message, status_code, scope, receive, send):
+        if scope["type"] == "http":
+            response = JSONResponse(
+                {"message": message},
+                status_code=status_code,
+            )
+            return await response(scope, receive, send)
+        else:
+            websocket = WebSocket(scope, receive, send)
+            return await websocket.close(code=1008)
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
-        """Middleware entry point, called by starlette."""
-        request = Request(scope)
+        request = HTTPConnection(scope)
 
-        if request.url.path in self.PUBLIC_PATHS:
-            return await self.app(scope, receive, send)
+        if request.url.path in self._public_paths:
+            return await self._app(scope, receive, send)
 
-        user = request.session.get("user")
-
-        # no user => start authentication
-        if user is None:
-            return await self._authenticate(scope, receive, send)
-
-        # fetch the token from the database associated with the user
-        if self.db is None:
-            token = request.session.get("token")
+        # check for authorization header and token on it.
+        if "authorization" in request.headers and request.headers["authorization"].startswith("Bearer "):
+            token = request.headers["authorization"][len("Bearer ") :]
+            try:
+                provider, claims = self.claims(token)
+                scope["oauth2-claims"] = claims
+                scope["oauth2-provider"] = provider
+            except InvalidToken as e:
+                return await self._prepare_error_response(e.errors, 401, scope, receive, send)
+        elif "authorization" in request.headers:
+            logger.debug('No "Bearer" in authorization header')
+            return await self._prepare_error_response(
+                'The "authorization" header must start with "Bearer "',
+                400,
+                scope,
+                receive,
+                send,
+            )
         else:
-            token = self.db.get(user["email"])
+            logger.debug("No authorization header")
+            return await self._prepare_error_response(
+                'The request does not contain an "authorization" header',
+                400,
+                scope,
+                receive,
+                send,
+            )
 
-        try:
-            # check that the token is still valid (e.g. it has not expired)
-            if token is None:
-                raise logging.error.InvalidTokenError
-            await self._client.parse_id_token(request, token)
-        except Exception:
-            # invalidate session and redirect.
-            del request.session["user"]
-            if self.db is None:
-                del request.session["token"]
-            else:
-                self.db.delete(user["email"])
+        return await self._app(scope, receive, send)
 
-            redirect_uri = self._redirect_uri(request)
-            response = self._client.authorize_redirect(request, redirect_uri)
-            return await (await response)(scope, receive, send)
+    def _should_refresh(self, provider: str):
+        if self._keys.get(provider, None) is None:
+            # we do not even have the key (first time) => should refresh
+            return True
+        elif self._timeout[provider] is None:
+            # we have a key and no timeout => do not refresh
+            return False
+        # have the key and have timeout => check if we passed the timeout
+        return self._last_retrieval[provider] + self._timeout[provider] < datetime.datetime.utcnow()
 
-        logger.info(f'User "{user["email"]}" is authenticated.')
+    def _refresh_keys(self, provider: str):
+        self._keys[provider] = self._get_keys(self._providers[provider]["keys"])
+        self._last_retrieval[provider] = datetime.datetime.utcnow()
 
-        # user is authenticated, continue to the next middleware
-        await self.app(scope, receive, send)
+    def _provider_keys(self, provider: str):
+        if self._should_refresh(provider):
+            self._refresh_keys(provider)
+        return self._keys[provider]
