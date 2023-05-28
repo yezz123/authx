@@ -62,7 +62,7 @@ jobs:
         env:
           ENV: test
           REDIS_URL: "redis://0.0.0.0:6379"
-        run: bash scripts/test.sh
+        run: pytest --cov=authx --cov-report=html -xv --color=yes --disable-warnings --cov-fail-under=80
       - name: Upload coverage
         uses: codecov/codecov-action@v3
   # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
