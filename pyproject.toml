@@ -65,7 +65,7 @@ profiler = [
     "pyinstrument >=4.1.1,<4.5.0",
 ]
 oauth2 = [
-    "Authlib >=0.15.5,<1.0.0",
+    "python-jose >=3.3.0,<4.0.0",
 ]
 metrics = [
     "prometheus-client >=0.16.0,<1.0.0",
@@ -154,9 +154,6 @@ known-third-party = ["pydantic", "typing_extensions"]
 source = ["authx"]
 branch = true
 context = '${CONTEXT}'
-omit = [
-    "tests/external/app/**"
-]
 
 [tool.coverage.paths]
 source = [
