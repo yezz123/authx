@@ -115,7 +115,14 @@ class TestCase(unittest.TestCase):
 
         with self.assertLogs(None, level="DEBUG") as cm:
             response = client.get("/")
-            self.assertEqual(cm.output, ["DEBUG:authx.external.Oauth2:No authorization header"])
+            self.assertEqual(
+                cm.output,
+                [
+                    'DEBUG:asyncio:Using selector: KqueueSelector',
+                    'DEBUG:authx.external.Oauth2:No authorization header',
+                    'INFO:httpx:HTTP Request: GET http://testserver/ "HTTP/1.1 400 Bad Request"',
+                ],
+            )
 
         self.assertEqual(response.status_code, 400)
 
@@ -127,7 +134,11 @@ class TestCase(unittest.TestCase):
             response = client.get("/", headers={"authorization": "Baa "})
             self.assertEqual(
                 cm.output,
-                ['DEBUG:authx.external.Oauth2:No "Bearer" in authorization header'],
+                [
+                    'DEBUG:asyncio:Using selector: KqueueSelector',
+                    'DEBUG:authx.external.Oauth2:No "Bearer" in authorization header',
+                    'INFO:httpx:HTTP Request: GET http://testserver/ "HTTP/1.1 400 Bad Request"',
+                ],
             )
 
         self.assertEqual(response.status_code, 400)
