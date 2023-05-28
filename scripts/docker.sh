@@ -12,14 +12,14 @@ export PYTHONPATH=.
 if [[ "$(docker inspect -f '{{.State.Running}}' redis 2>/dev/null)" == "true" ]]; then
   echo "Redis container is already running. Running tests again..."
   # Run tests
-  pytest --cov=authx --cov=tests -xv
+  pytest --cov=authx --cov-report=html -xv --color=yes --disable-warnings --cov-fail-under=80
 else
   # Remove any existing Redis container
   docker rm -f redis || true
   # Start Redis container
   docker run -d -p 6379:6379 --name redis redis
   # Run tests
-  pytest --cov=authx --cov=tests -xv
+  pytest --cov=authx --cov-report=html -xv --color=yes --disable-warnings --cov-fail-under=80
   # Shutdown Redis container
   docker stop redis
   docker rm redis
