@@ -3,8 +3,8 @@ import os
 import pytest
 import redis
 
-from authx import HTTPCache
-from authx.utils.keys import HTTPKeys
+from authx.external import HTTPCache
+from authx.external.cache import HTTPKeys
 
 REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/3")
 redis_client = redis.Redis.from_url(REDIS_URL)
@@ -30,9 +30,7 @@ class TestHTTPKeys:
 
         namespace = "test_namespace"
         HTTPCache.init(redis_url=REDIS_URL, namespace=namespace)
-        namespaced_key = await HTTPKeys.generate_key(
-            key="hello.{}", config=HTTPCache, obj=user, obj_attr="id"
-        )
+        namespaced_key = await HTTPKeys.generate_key(key="hello.{}", config=HTTPCache, obj=user, obj_attr="id")
         assert namespaced_key == f"{namespace}:hello.112358"
 
     @pytest.mark.asyncio

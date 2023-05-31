@@ -3,7 +3,7 @@ import os
 import pytest
 import redis
 
-from authx import HTTPCache, cache
+from authx.external import HTTPCache, cache
 
 REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/2")
 redis_client = redis.Redis.from_url(REDIS_URL)
@@ -52,9 +52,4 @@ class TestMethodCache:
         HTTPCache.init(redis_url=REDIS_URL, namespace="test_namespace")
         await cache_me_with_ttl_callable(x=22, invoke_count=0)
         await cache_me_with_ttl_callable(x=22, invoke_count=0)
-        assert (
-            pytest.approx(
-                redis_client.ttl("test_namespace:cache.me.ttl_callable"), rel=1e-3
-            )
-            == 3600
-        )
+        assert pytest.approx(redis_client.ttl("test_namespace:cache.me.ttl_callable"), rel=1e-3) == 3600

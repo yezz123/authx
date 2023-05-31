@@ -1,127 +1,111 @@
 # AuthenticationX 💫
 
-![authx](https://user-images.githubusercontent.com/52716203/136962014-280d82b0-0640-4ee5-9a11-b451b338f6d8.png)
-
+<p align="center">
+<a href="https://authx.yezz.me" target="_blank">
+    <img src="https://user-images.githubusercontent.com/52716203/136962014-280d82b0-0640-4ee5-9a11-b451b338f6d8.png" alt="AuthX">
+</a>
 <p align="center">
     <em>Ready-to-use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
 </p>
-
-[![Test](https://github.com/yezz123/authx/actions/workflows/test.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/test.yml)
-[![Publish](https://github.com/yezz123/authx/actions/workflows/release.yml/badge.svg)](https://github.com/yezz123/authx/actions/workflows/release.yml)
-[![Pypi](https://img.shields.io/pypi/pyversions/AuthX.svg?color=%2334D058)](https://pypi.org/project/AuthX)
-[![codecov](https://codecov.io/gh/yezz123/AuthX/branch/main/graph/badge.svg?token=3j5znCNzDp)](https://codecov.io/gh/yezz123/AuthX)
-[![PyPI](https://badge.fury.io/py/authx.svg)](https://badge.fury.io/py/authx)
-[![Downloads](https://pepy.tech/badge/authx)](https://pepy.tech/project/authx)
-[![framework](https://img.shields.io/badge/Framework-FastAPI-blue?style)](https://fastapi.tiangolo.com/)
-
-<!--  -->
+<p align="center">
+<a href="https://github.com/yezz123/authx/actions/workflows/test.yml" target="_blank">
+    <img src="https://github.com/yezz123/authx/actions/workflows/test.yml/badge.svg" alt="lint">
+</a>
+<a href="https://pypi.org/project/authx" target="_blank">
+    <img src="https://img.shields.io/pypi/v/authx?color=%2334D058&label=pypi%20package" alt="Package version">
+</a>
+<a href="https://codecov.io/gh/yezz123/authx">
+    <img src="https://codecov.io/gh/yezz123/authx/branch/main/graph/badge.svg"/>
+</a>
+<a href="https://pepy.tech/project/authx" target="_blank">
+    <img src="https://pepy.tech/badge/authx" alt="Test">
+</a>
+</p>
+</p>
 
 ---
 
 **Source Code**: <https://github.com/yezz123/authx>
 
-**Get Started**: <https://authx.yezz.me/>
+**Documentation**: <https://authx.yezz.me/>
 
 ---
 
 Add a Fully registration and authentication or authorization system to your
-[FastAPI](https://fastapi.tiangolo.com/) project. **Authx** is designed to be as
+[FastAPI](https://fastapi.tiangolo.com/) project. **AuthX** is designed to be as
 customizable and adaptable as possible.
 
-Authx is a fast, flexible and easy to use authentication and authorization
-library for FastAPI. It is built on top of
-[FastAPI](https://fastapi.tiangolo.com/) and
-[starlette](https://www.starlette.io/).
+## Installation 📦
 
-## Features
+![authx](img/install.gif)
+
+## Features 🔧
 
 - [x] Support Python 3.9+.
-- [x] Extensible base user model.
-- [x] Ready-to-use register, login, reset password and verify e-mail routes.
-- [x] Ready-to-use Social login and Oauth2 routes.
-    - [x] Full Configuration and customization.
-    - [x] Ready-to-use social OAuth2 login flow.
-- [x] Middleware Support for Oauth2 using `Authlib` and Starlette.
-- [x] Dependency callable to inject current user in route.
-- [x] Pluggable password validation
-    - [x] Using Captcha Service.
-    - [x] Implements the `HMAC` algorithm And `Hashlib` library.
-- [x] Using Email Service. (SMTP)
-- [x] Extensible Error Handling
-- [x] High level API to manage users, roles and permissions
+- [x] Multiple customizable authentication backend:
+  - [x] JWT authentication backend included
+    - [x] JWT encoding/decoding for application authentication
+    - [x] Automatic detection of JWTs in requests:
+      - [x] JWTs in headers
+      - [x] JWTs in cookies
+      - [x] JWTs in query parameters
+      - [x] JWTs in request bodies
+  - [x] Cookie authentication backend included
+- [x] middleware for authentication and authorization through JWT.
+- [x] Extensible Error Handling System.
 - [x] Using Redis as a session store & cache.
 - [x] Support HTTPCache.
-- [x] Customizable database backend:
-    - [x] MongoDB async backend included thanks to
-          [mongodb/motor](https://github.com/mongodb/motor)
-    - [x] SQLAlchemy backend included thanks to
-          [Encode/Databases](https://github.com/encode/databases)
-- [x] Multiple customizable authentication backend:
-    - [x] JWT authentication backend included
-    - [x] Cookie authentication backend included
-- [x] Full OpenAPI schema support, even with several authentication backend.
-- [x] Provide a Docstring for each class and function.
-- [x] Support Sessions and Pre-built CRUD functions and Instance to launch
-      Redis.
-- [x] Support SocketIO.
-- [x] Support Middleware of [pyinstrument](https://pyinstrument.readthedocs.io/)
-      to check your service performance.
+- [x] Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
+- [x] Support Middleware of [pyinstrument](https://pyinstrument.readthedocs.io/) to check your service performance.
 - [x] Support Middleware for collecting and exposing [Prometheus](https://prometheus.io/) metrics.
 
-## Project using
+**Note:** Check [Release Notes](https://authx.yezz.me/release/).
 
-### Startup
+## Project using 🚀
 
-```py
-from fastapi import FastAPI
-from authx import Authentication, User, RedisBackend
-
-app = FastAPI()
-# Set up Authentication & Authorization
-auth = Authentication()
-
-# Set up Pre-configured Routes
-app.include_router(auth.auth_router, prefix="/api/users")
-app.include_router(auth.social_router, prefix="/auth")
-app.include_router(auth.password_router, prefix="/api/users")
-app.include_router(auth.admin_router, prefix="/api/users")
-app.include_router(auth.search_router, prefix="/api/users")
-
-# Set Redis Cache
-auth.set_cache(RedisBackend)
-```
-
-### Dependency injections
-
-```py
-# Set Anonymous User
-@app.get("/anonym")
-def anonym_test(user: User = Depends(auth.get_user)):
-    pass
-
-
-# Set Authenticated User
-@app.get("/user")
-def user_test(user: User = Depends(auth.get_authenticated_user)):
-    pass
-
-
-# Set Admin User (Only for Admins)
-@app.get("/admin", dependencies=[Depends(auth.admin_required)])
-def admin_test():
-    pass
-```
-
-### Dependency injections only
+Here is a simple way to kickstart your project with AuthX:
 
 ```python
-from authx import authx, RedisBackend
+from fastapi import FastAPI, Depends, HTTPException
+from authx import AuthX, AuthXConfig, RequestToken
 
-auth = authx()
+app = FastAPI()
 
-auth.set_cache(RedisBackend)
+config = AuthXConfig(
+     JWT_ALGORITHM = "HS256",
+     JWT_SECRET_KEY = "SECRET_KEY",
+     JWT_TOKEN_LOCATION = ["headers"],
+)
+
+auth = AuthX(config=config)
+auth.handle_errors(app)
+
+@app.get('/login')
+def login(username: str, password: str):
+     if username == "xyz" and password == "xyz":
+          token = auth.create_access_token(uid=username)
+          return {"access_token": token}
+     raise HTTPException(401, detail={"message": "Invalid credentials"})
+
+@app.get("/protected", dependencies=[Depends(auth.get_token_from_request)])
+def get_protected(token: RequestToken = Depends()):
+     try:
+          auth.verify_token(token=token)
+          return {"message": "Hello world !"}
+     except Exception as e:
+          raise HTTPException(401, detail={"message": str(e)}) from e
 ```
 
-## License
+## Links 🚧
 
-This project is licensed under the terms of the [MIT License](license.md).
+- [Homepage](https://authx.yezz.me/)
+- [FAQ](https://authx.yezz.me/faq/)
+- [Release - AuthX](https://authx.yezz.me/release/)
+- [MIT License](https://authx.yezz.me/license/)
+- [Code of Conduct](https://authx.yezz.me/code_of_conduct/)
+- [Contributing](https://authx.yezz.me/contributing/)
+- [Help - Sponsors](https://authx.yezz.me/help/)
+
+## License 📝
+
+This project is licensed under the terms of the MIT License.

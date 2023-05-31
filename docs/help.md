@@ -79,17 +79,15 @@ example:
 
 ## Sponsor the author
 
-You can also financially support the author (me) through
-<a href="https://paypal.me/yassertahiri?locale.x=en_US" class="external-link" target="_blank">Paypal
-sponsors</a>.
+<p align="center">
+<a href="https://github.com/sponsors/yezz123" target="_blank">
+<img src="https://www.pngitem.com/pimgs/m/330-3302960_github-sponsorship-logo-with-smiling-cat-and-heart.png" alt="Buy Me A Coffee"/>
+</a>
+</p>
 
-There you could buy me a [coffee ☕️](https://www.buymeacoffee.com/tahiri) to
-say thanks. 😄
+And you can also become a Silver or Gold sponsor for AuthX, just contact me by email. 🏅🎉
 
-And you can also become a Silver or Gold sponsor for AuthX. 🏅🎉
-
-<a href="https://www.producthunt.com/posts/authx?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-authx" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=318189&theme=light" alt="AuthX - A FastAPI package for Auth made by a human not an AI | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-<a href="https://www.buymeacoffee.com/tahiri" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+- Email: <a href="mailto:hello@yezz.me" class="external-link" target="_blank">hello@yezz.me</a>
 
 ## Sponsor the tools that power AuthX
 
