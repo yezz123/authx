@@ -8,6 +8,7 @@ updates:
       interval: "daily"
     commit-message:
       prefix: ⬆
+    target-branch: "0.X.X-fix"
   # Python
   - package-ecosystem: "pip"
     directory: "/"
@@ -15,3 +16,4 @@ updates:
       interval: "daily"
     commit-message:
       prefix: ⬆
+    target-branch: "0.X.X-fix"

@@ -3,7 +3,7 @@ name: Test Suite
 on:
   push:
     branches:
-      - main
+      - 0.X.X-fix
   pull_request:
     types: [opened, synchronize]
 
