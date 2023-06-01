@@ -144,7 +144,6 @@ The `.pre-commit-config.yaml` contains the following configuration with the
 linting packages.
 
 - `pre-commit-hooks` - Some out-of-the-box hooks for pre-commit.
-- `isort` - A tool to sort imports.
 - `ruff-pre-commit` - A tool to check Python code for errors.
 - `black` - A tool to format Python code.
 - `pyupgrade` - A tool to upgrade Python syntax.
@@ -223,7 +222,9 @@ all the dependencies that you need to test AuthX, which are:
 - `pytest` - The tool that runs the tests.
 - `pytest-asyncio` - The plugin that runs the tests in the background.
 - `requests` - The library that makes the requests to the AuthX API.
-- `asynctest` - The library that makes the tests asynchronous.
+- `HTTPX` - A fully featured HTTP client for Python 3
+
+and other dependencies that are needed to run the tests.
 
 ### Generate a Test Report
 
