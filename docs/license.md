@@ -6,7 +6,7 @@
 
 The class is licensed under the [MIT License](https://opensource.org/licenses/mit)
 
-Copyright &copy; 2021 to present [Yezz LLC.](https://yezz.me)
+Copyright &copy; 2021 to present [Yezz LLC.](https://yezz.me). and individual contributors.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
