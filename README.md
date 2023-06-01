@@ -7,9 +7,6 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/yezz123/authx/actions/workflows/test.yml" target="_blank">
-    <img src="https://github.com/yezz123/authx/actions/workflows/test.yml/badge.svg" alt="lint">
-</a>
 <a href="https://pypi.org/project/authx" target="_blank">
     <img src="https://img.shields.io/pypi/v/authx?color=%2334D058&label=pypi%20package" alt="Package version">
 </a>
