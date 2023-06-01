@@ -118,20 +118,9 @@ known-third-party = ["pydantic", "sqlalchemy", "typing_extensions"]
 [tool.coverage.run]
 parallel = true
 source = [
-    "tests",
     "authx"
 ]
 context = '${CONTEXT}'
-omit = [
-    "authx/core/config.py",
-    "authx/main.py",
-    "authx/utils/**",
-    "authx/errors/**",
-    "authx/database/**",
-    "authx/cache/**",
-    "authx/services/**",
-    "tests/middleware/example/**"
-]
 
 
 [tool.coverage.report]
