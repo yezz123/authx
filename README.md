@@ -14,13 +14,12 @@
     <img src="https://img.shields.io/pypi/v/authx?color=%2334D058&label=pypi%20package" alt="Package version">
 </a>
 <a href="https://codecov.io/gh/yezz123/authx">
-    <img src="https://codecov.io/gh/yezz123/authx/branch/main/graph/badge.svg"/>
+    <img src="https://codecov.io/gh/yezz123/authx/branch/0.X.X-fix/graph/badge.svg"/>
 </a>
 <a href="https://pepy.tech/project/authx" target="_blank">
     <img src="https://pepy.tech/badge/authx" alt="Test">
 </a>
 </p>
-
 
 ---
 
@@ -70,8 +69,6 @@ customizable and adaptable as possible.
 - [x] Support Middleware for collecting and exposing [Prometheus](https://prometheus.io/) metrics.
 
 **Note:** Check [Release Notes](https://authx-v0.yezz.me/release/).
-
-**Note:** Check [Examples](https://github.com/yezz123/authx/tree/main/example).
 
 ## Project using 🚀
 
