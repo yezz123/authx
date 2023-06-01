@@ -22,7 +22,8 @@ keywords = [
 
 classifiers = [
     "License :: OSI Approved :: MIT License",
-    "Development Status :: 5 - Production/Stable",
+    # Update the following list as the project matures
+    "Development Status :: 4 - Beta",
     "Operating System :: OS Independent",
     "Intended Audience :: Developers",
     "Intended Audience :: Information Technology",
