@@ -48,7 +48,7 @@ dependencies = [
     "starlette >=0.14.02,<0.27.1",
     "pyjwt[crypto] >=2.6.0,<3.0.0",
     "pydantic >=1.7.4,!=1.8,!=1.8.1,<2.0.0",
-    "typing-extensions >=3.7.4,<4.6.0",
+    "typing-extensions >=3.7.4,<4.7.0",
 ]
 
 dynamic = ["version"]
