@@ -428,7 +428,7 @@ HTTPCache.init(redis_url=REDIS_URL, namespace='test_namespace', tz=africa_Casabl
 ```
 
 * Read More in the New Documentation:
-  <https://authx.yezz.me/configuration/cache/httpcache/>
+  <https://authx-v0.yezz.me/configuration/cache/httpcache/>
 
 ### What's Changed
 
@@ -513,7 +513,7 @@ basicConfig(
 )
 ```
 
-* Read the Changelog <https://authx.yezz.me/release/>
+* Read the Changelog <https://authx-v0.yezz.me/release/>
 
 ## What's Changed
 

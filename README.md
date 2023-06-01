@@ -26,7 +26,7 @@
 
 **Source Code**: <https://github.com/yezz123/AuthX>
 
-**Documentation**: <https://authx.yezz.me/>
+**Documentation**: <https://authx-v0.yezz.me/>
 
 ---
 
@@ -69,7 +69,7 @@ customizable and adaptable as possible.
       to check your service performance.
 - [x] Support Middleware for collecting and exposing [Prometheus](https://prometheus.io/) metrics.
 
-**Note:** Check [Release Notes](https://authx.yezz.me/release/).
+**Note:** Check [Release Notes](https://authx-v0.yezz.me/release/).
 
 **Note:** Check [Examples](https://github.com/yezz123/authx/tree/main/example).
 
@@ -163,13 +163,13 @@ specification. Contributions of any kind welcome!
 
 ## Links 🚧
 
-- [Homepage](https://authx.yezz.me/)
-- [FAQ](https://authx.yezz.me/faq/)
-- [Release - AuthX](https://authx.yezz.me/release/)
-- [MIT License](https://authx.yezz.me/license/)
-- [Code of Conduct](https://authx.yezz.me/code_of_conduct/)
-- [Contributing](https://authx.yezz.me/contributing/)
-- [Help - Sponsors](https://authx.yezz.me/help/)
+- [Homepage](https://authx-v0.yezz.me/)
+- [FAQ](https://authx-v0.yezz.me/faq/)
+- [Release - AuthX](https://authx-v0.yezz.me/release/)
+- [MIT License](https://authx-v0.yezz.me/license/)
+- [Code of Conduct](https://authx-v0.yezz.me/code_of_conduct/)
+- [Contributing](https://authx-v0.yezz.me/contributing/)
+- [Help - Sponsors](https://authx-v0.yezz.me/help/)
 
 ## License 📝
 

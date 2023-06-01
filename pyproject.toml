@@ -57,7 +57,7 @@ dynamic = ["version"]
 
 [project.urls]
 Homepage = "https://github.com/yezz123/authx"
-Documentation = "https://authx.yezz.me/"
+Documentation = "https://authx-v0.yezz.me/"
 Funding = 'https://github.com/sponsors/yezz123'
 
 [project.optional-dependencies]
