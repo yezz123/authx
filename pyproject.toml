@@ -48,7 +48,7 @@ dependencies = [
     "starlette >=0.14.02,<0.27.1",
     "pyjwt[crypto] >=2.6.0,<3.0.0",
     "pydantic >=1.7.4,!=1.8,!=1.8.1,<2.0.0",
-    "typing-extensions >=3.7.4,<4.6.0",
+    "typing-extensions >=3.7.4,<4.7.0",
 ]
 
 dynamic = ["version"]
@@ -90,7 +90,7 @@ test = [
     "httpx==0.24.1",
     "requests==2.31.0",
     "SQLAlchemy ==2.0.15",
-    "itsdangerous == 2.0.1",
+    "itsdangerous == 2.1.2",
     "websockets==11.0.3",
     "uvicorn==0.22.0",
     "uvloop==0.17.0"
