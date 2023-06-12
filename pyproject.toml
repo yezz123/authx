@@ -63,7 +63,7 @@ Funding = 'https://github.com/sponsors/yezz123'
 
 [project.optional-dependencies]
 profiler = [
-    "pyinstrument >=4.1.1,<4.5.0",
+    "pyinstrument >=4.1.1,<4.6.0",
 ]
 oauth2 = [
     "python-jose >=3.3.0,<4.0.0",
