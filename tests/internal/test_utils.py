@@ -4,6 +4,7 @@ from datetime import datetime
 import pytest
 import pytz
 from dateutil.relativedelta import relativedelta
+from freezegun import freeze_time
 from pytz import timezone
 
 from authx._internal._utils import (
@@ -138,6 +139,7 @@ def test_is_yesterday(sample_datetime):
     assert is_yesterday(sample_datetime) is False
 
 
+@freeze_time("2023-05-20 12:00:00")
 def test_is_tomorrow(sample_datetime):
     assert is_tomorrow(sample_datetime) is False
 
