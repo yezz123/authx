@@ -93,7 +93,8 @@ test = [
     "itsdangerous == 2.1.2",
     "websockets==11.0.3",
     "uvicorn==0.22.0",
-    "uvloop==0.17.0"
+    "uvloop==0.17.0",
+    "freezegun==1.2.2"
 ]
 docs = [
     "mkdocs >=1.1.2,<2.0.0",
