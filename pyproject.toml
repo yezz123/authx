@@ -46,9 +46,9 @@ classifiers = [
 ]
 
 dependencies = [
-    "fastapi >=0.65.2,<0.99.0",
+    "fastapi >=0.65.2,<0.200.0",
     "pyjwt[crypto] >=2.6.0,<3.0.0",
-    "pydantic >=1.7.4,!=1.8,!=1.8.1,<2.0.0",
+    "pydantic >=2.0.3"
 ]
 
 dynamic = ["version"]
