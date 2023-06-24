@@ -108,11 +108,13 @@ class TokenPayload(BaseModel):
         cls,
         token: str,
         key: str,
-        algorithms: Sequence[AlgorithmType] = ["HS256"],
+        algorithms: Sequence[AlgorithmType] = None,
         audience: Optional[StringOrSequence] = None,
         issuer: Optional[str] = None,
         verify: bool = True,
     ) -> "TokenPayload":
+        if algorithms is None:
+            algorithms = ["HS256"]
         payload = decode_token(
             token=token,
             key=key,
@@ -121,7 +123,7 @@ class TokenPayload(BaseModel):
             issuer=issuer,
             verify=verify,
         )
-        return cls.parse_obj(payload)
+        return cls.model_validate(payload)
 
 
 class RequestToken(BaseModel):
@@ -133,7 +135,7 @@ class RequestToken(BaseModel):
     def verify(
         self,
         key: str,
-        algorithms: Sequence[AlgorithmType] = ["HS256"],
+        algorithms: Sequence[AlgorithmType] = None,
         audience: Optional[StringOrSequence] = None,
         issuer: Optional[str] = None,
         verify_jwt: bool = True,
@@ -141,6 +143,8 @@ class RequestToken(BaseModel):
         verify_csrf: bool = True,
         verify_fresh: bool = False,
     ) -> TokenPayload:
+        if algorithms is None:
+            algorithms = ["HS256"]
         # JWT Base Verification
         try:
             decoded_token = decode_token(
@@ -152,7 +156,7 @@ class RequestToken(BaseModel):
                 issuer=issuer,
             )
             # Parse payload
-            payload = TokenPayload.parse_obj(decoded_token)
+            payload = TokenPayload.model_validate(decoded_token)
         except JWTDecodeError as e:
             raise JWTDecodeError(*e.args) from e
         except ValidationError as e:
