@@ -175,21 +175,9 @@ exclude_lines = [
 exclude = 'authx/__init__.py'
 plugins = 'pydantic.mypy'
 python_version = '3.11'
-show_error_codes = true
-follow_imports = 'silent'
+no_implicit_optional=true
 strict_optional = true
-warn_redundant_casts = true
-warn_unused_ignores = true
-disallow_any_generics = true
-check_untyped_defs = true
-no_implicit_reexport = false
-warn_unused_configs = true
-disallow_subclassing_any = true
-disallow_incomplete_defs = true
-disallow_untyped_decorators = true
-disallow_untyped_calls = true
-disallow_untyped_defs = true
-implicit_optional = true
+
 
 [[tool.mypy.overrides]]
 module = [
