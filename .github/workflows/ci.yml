@@ -25,6 +25,8 @@ jobs:
       - uses: pre-commit/action@v3.0.0
         with:
           extra_args: --all-files --verbose
+      - name: Mypy check
+        run: bash scripts/mypy.sh
   test:
     name: test on python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
