@@ -2,7 +2,7 @@ import datetime
 from hmac import compare_digest
 from typing import Any, Dict, List, Optional, Sequence
 
-from pydantic import BaseModel, Extra, Field, ValidationError, validator
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, validator
 
 from authx._internal._utils import get_now, get_now_ts, get_uuid
 from authx.exceptions import (
@@ -18,6 +18,8 @@ from authx.types import AlgorithmType, DateTimeExpression, Numeric, StringOrSequ
 
 
 class TokenPayload(BaseModel):
+    model_config = ConfigDict(extra='allow')
+
     jti: Optional[str] = Field(default_factory=get_uuid)
     iss: Optional[str] = None
     sub: Optional[str] = None
@@ -29,9 +31,6 @@ class TokenPayload(BaseModel):
     csrf: Optional[str] = None
     scopes: Optional[List[str]] = None
     fresh: bool = False
-
-    class Config:
-        extra = Extra.allow
 
     @property
     def _additional_fields(self):
