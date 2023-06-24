@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Optional
 
 import pytz
 
@@ -8,10 +8,10 @@ from authx._internal import HTTPCache, end_of_day, end_of_week, tz_now, utc
 class HTTPExpiry:
     @staticmethod
     async def get_ttl(
-        ttl_in_seconds: int = None,
+        ttl_in_seconds: Optional[int] = None,
         end_of_day: bool = True,
-        end_of_week: bool = None,
-        ttl_func: Callable = None,
+        end_of_week: Optional[bool] = None,
+        ttl_func: Optional[Callable] = None,
         tz: pytz.timezone = utc,
     ) -> int:
         """Return the seconds till expiry of cache. Defaults to one day"""
