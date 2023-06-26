@@ -81,7 +81,7 @@ cache = [
 ]
 lint = [
     "pre-commit==3.3.3",
-    "mypy==1.4.0",
+    "mypy==1.4.1",
 ]
 test = [
     "pytest==7.4.0",
