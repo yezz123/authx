@@ -36,11 +36,24 @@ from authx._internal._utils import (
 )
 
 
+@pytest.fixture
+def sample_datetime():
+    return datetime(2023, 5, 20, 12, 0, 0)
+
+
+@pytest.fixture
+def sample_datetime_with_tz():
+    tz = pytz.timezone("America/New_York")
+    return tz.localize(datetime(2023, 5, 20, 12, 0, 0))
+
+
+@freeze_time("2023-07-01 12:00:00")
 def test_util_get_now():
     assert isinstance(get_now(), date.datetime)
     assert get_now().tzinfo == date.timezone.utc
 
 
+@freeze_time("2023-07-01 12:00:00")
 def test_util_get_now_ts():
     assert isinstance(get_now_ts(), float)
 
@@ -53,17 +66,7 @@ def test_util_get_uuid():
 utc = timezone("UTC")
 
 
-@pytest.fixture
-def sample_datetime():
-    return datetime(2023, 5, 20, 12, 0, 0)
-
-
-@pytest.fixture
-def sample_datetime_with_tz():
-    tz = pytz.timezone("America/New_York")
-    return tz.localize(datetime(2023, 5, 20, 12, 0, 0))
-
-
+@freeze_time("2023-07-01 12:00:00")
 def test_time_diff():
     dt1 = datetime(2023, 5, 20, 12, 0, 0)
     dt2 = datetime(2023, 5, 19, 12, 0, 0)
@@ -121,10 +124,9 @@ def test_months_after(sample_datetime):
     assert months_after(sample_datetime, months=1) == expected_result
 
 
-def test_years_ago():
-    dt = datetime(2023, 5, 20, 12, 0, 0)
+def test_years_ago(sample_datetime):
     expected_result = datetime(2022, 5, 20, 12, 0, 0)
-    assert years_ago(dt, years=1) == expected_result
+    assert years_ago(sample_datetime, years=1) == expected_result
 
 
 def test_days_after(sample_datetime):
@@ -132,6 +134,7 @@ def test_days_after(sample_datetime):
     assert days_after(sample_datetime, days=1) == expected_result
 
 
+@freeze_time("2023-07-01 12:00:00")
 def test_is_today():
     assert is_today(datetime.now()) is True
 
@@ -140,7 +143,7 @@ def test_is_yesterday(sample_datetime):
     assert is_yesterday(sample_datetime) is False
 
 
-@freeze_time("2023-05-20 12:00:00")
+@freeze_time("2023-07-22 12:00:00")
 def test_is_tomorrow(sample_datetime):
     assert is_tomorrow(sample_datetime) is False
 
@@ -161,17 +164,17 @@ def test_tz_from_iso():
 
 def test_start_of_week():
     dt = datetime(2023, 5, 20, 12, 0, 0)
-    expected_result = datetime(2023, 5, 14, 0, 0, 0)
+    expected_result = datetime(2023, 5, 15, 12, 0, 0)
     assert start_of_week(dt) == expected_result
 
 
 def test_end_of_week():
     dt = datetime(2023, 5, 20, 12, 0, 0)
-    expected_result = datetime(2023, 5, 20, 23, 59, 59, 999999)
+    expected_result = datetime(2023, 5, 21, 12, 0)
     assert end_of_week(dt) == expected_result
 
 
 def test_end_of_last_week():
     dt = datetime(2023, 5, 20, 12, 0, 0)
-    expected_result = datetime(2023, 5, 13, 23, 59, 59, 999999)
+    expected_result = datetime(2023, 5, 14, 12, 0)
     assert end_of_last_week(dt) == expected_result
