@@ -121,9 +121,10 @@ def test_months_after(sample_datetime):
     assert months_after(sample_datetime, months=1) == expected_result
 
 
-def test_years_ago(sample_datetime):
+def test_years_ago():
+    dt = datetime(2023, 5, 20, 12, 0, 0)
     expected_result = datetime(2022, 5, 20, 12, 0, 0)
-    assert years_ago(sample_datetime, years=1) == expected_result
+    assert years_ago(dt, years=1) == expected_result
 
 
 def test_days_after(sample_datetime):
@@ -160,17 +161,17 @@ def test_tz_from_iso():
 
 def test_start_of_week():
     dt = datetime(2023, 5, 20, 12, 0, 0)
-    expected_result = datetime(2023, 5, 15, 12, 0, 0)
+    expected_result = datetime(2023, 5, 14, 0, 0, 0)
     assert start_of_week(dt) == expected_result
 
 
 def test_end_of_week():
     dt = datetime(2023, 5, 20, 12, 0, 0)
-    expected_result = datetime(2023, 5, 21, 12, 0)
+    expected_result = datetime(2023, 5, 20, 23, 59, 59, 999999)
     assert end_of_week(dt) == expected_result
 
 
 def test_end_of_last_week():
     dt = datetime(2023, 5, 20, 12, 0, 0)
-    expected_result = datetime(2023, 5, 14, 12, 0)
+    expected_result = datetime(2023, 5, 13, 23, 59, 59, 999999)
     assert end_of_last_week(dt) == expected_result
