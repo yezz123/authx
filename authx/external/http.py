@@ -1,6 +1,6 @@
 import json
 from functools import wraps
-from typing import Any, Callable, List, Tuple, Union
+from typing import Any, Callable, List, Optional, Tuple, Union
 
 import redis
 
@@ -9,7 +9,7 @@ from authx.external.cache import HTTPExpiry, HTTPKeys
 
 
 class HTTPCacheBackend:
-    def __init__(self, redis: redis.Redis, namespace: str = None):
+    def __init__(self, redis: redis.Redis, namespace: Optional[str] = None):
         self.redis = redis
         self.namespace = namespace or HTTPCache.namespace
 
@@ -17,8 +17,8 @@ class HTTPCacheBackend:
         self,
         key: str,
         value: str,
-        ttl_in_seconds: int = None,
-        ttl_func: Callable = None,
+        ttl_in_seconds: Optional[int] = None,
+        ttl_func: Optional[Callable] = None,
         end_of_day: bool = False,
         end_of_week: bool = False,
     ):
@@ -81,13 +81,13 @@ class HTTPCacheBackend:
 
 def cache(
     key: str,
-    obj: Any = None,
-    obj_attr: str = None,
-    ttl_in_seconds: int = None,
+    obj: Optional[Any] = None,
+    obj_attr: Optional[str] = None,
+    ttl_in_seconds: Optional[int] = None,
     expire_end_of_day: bool = True,
     expire_end_of_week: bool = False,
-    ttl_func: Callable = None,
-    namespace: str = None,
+    ttl_func: Optional[Callable] = None,
+    namespace: Optional[str] = None,
 ):
     """Decorator method that sets the return value to cache before returning."""
     if not namespace:
@@ -138,10 +138,10 @@ def cache(
 
 def invalidate_cache(
     key: str = [],
-    keys: List = None,
-    obj: Any = None,
-    obj_attr: str = None,
-    namespace: str = None,
+    keys: Optional[List] = None,
+    obj: Optional[Any] = None,
+    obj_attr: Optional[str] = None,
+    namespace: Optional[str] = None,
 ):
     """Invalidates a specific cache key"""
 
