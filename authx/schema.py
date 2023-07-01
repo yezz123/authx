@@ -34,7 +34,7 @@ class TokenPayload(BaseModel):
         extra = Extra.allow
 
     @property
-    def _additional_fields(self) -> set[str]:
+    def _additional_fields(self):
         return set(self.__dict__) - set(self.__fields__)
 
     @property
