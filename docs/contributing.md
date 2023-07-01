@@ -93,12 +93,12 @@ If it shows the `pip` binary at `env/bin/pip` then it worked. 🎉
 
 ### pip
 
-After activating the environment as described above, Now lets install all the package that you need to develop Ormdantic:
+After activating the environment as described above, Now lets install all the package that you need to develop authx:
 
 <div class="termy">
 
 ```console
-$ pip install -e .[test,lint,docs]
+$ pip install -r requirements/all.txt
 
 ---> 100%
 ```
