@@ -46,5 +46,9 @@ pip install authx[oauth2]
 ### Development Dependencies
 
 ```shell
-pip install authx[lint,test,docs]
+git clone https://github.com/yezz123/authx.git
+
+cd authx
+
+bash scripts/install.sh
 ```

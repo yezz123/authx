@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/usr/bin/env bash
 
 rm -f `find . -type f -name '*.py[co]' `
 rm -f `find . -type f -name '*~' `

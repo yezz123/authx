@@ -1,0 +1,11 @@
+pytest
+pytest-asyncio
+pytest-cov
+httpx
+requests
+SQLAlchemy
+itsdangerous
+websockets
+uvicorn
+uvloop
+freezegun

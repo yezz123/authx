@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install Dependencies
-        run: pip install -e .[lint]
+        run: pip install -r requirements/pyproject.txt && pip install -r requirements/linting.txt
       - uses: pre-commit/action@v3.0.0
         with:
           extra_args: --all-files --verbose
@@ -57,7 +57,7 @@ jobs:
           key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}-test
       - name: Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: pip install -e .[test,oauth2,profiler,metrics,session,cache]
+        run: pip install -r requirements/all.txt
       - name: Test
         env:
           ENV: test

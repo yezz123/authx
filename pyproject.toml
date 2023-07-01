@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "authx"
 description = "Ready to use and customizable Authentications and Oauth2 management for FastAPI"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.8"
 license = "MIT"
 authors = [
     { name = "Yasser Tahiri", email = "hello@yezz.me" },
@@ -45,10 +45,8 @@ classifiers = [
 
 dependencies = [
     "fastapi >=0.65.2,<0.99.0",
-    "starlette >=0.14.02,<0.28.1",
     "pyjwt[crypto] >=2.6.0,<3.0.0",
     "pydantic >=1.7.4,!=1.8,!=1.8.1,<2.0.0",
-    "typing-extensions >=3.7.4,<4.7.0",
 ]
 
 dynamic = ["version"]
@@ -63,48 +61,21 @@ Funding = 'https://github.com/sponsors/yezz123'
 
 [project.optional-dependencies]
 profiler = [
-    "pyinstrument >=4.1.1,<4.6.0",
+    "pyinstrument>=4.1.1,<4.6.0",
 ]
 oauth2 = [
-    "python-jose >=3.3.0,<4.0.0",
+    "python-jose>=3.3.0,<4.0.0",
 ]
 metrics = [
-    "prometheus-client >=0.16.0,<1.0.0",
+    "prometheus-client>=0.16.0,<1.0.0",
 ]
 session = [
-    "redis >=4.3.3,<4.6.1",
+    "redis>=4.3.3,<4.6.1",
 ]
 cache = [
-    "python-dateutil==2.8.2",
-    "redis >=4.3.3,<4.6.1",
-    "pytz==2023.3",
-]
-lint = [
-    "pre-commit==3.3.3",
-    "mypy==1.4.1",
-]
-test = [
-    "pytest==7.4.0",
-    "pytest-asyncio == 0.21.0",
-    "pytest-cov==4.1.0",
-    "httpx==0.24.1",
-    "requests==2.31.0",
-    "SQLAlchemy ==2.0.17",
-    "itsdangerous == 2.1.2",
-    "websockets==11.0.3",
-    "uvicorn==0.22.0",
-    "uvloop==0.17.0",
-    "freezegun==1.2.2"
-]
-docs = [
-    "mkdocs >=1.1.2,<2.0.0",
-    "mkdocs-material >=8.1.4,<10.0.0",
-    "mdx-include >=1.4.1,<2.0.0",
-    "mkdocs-markdownextradata-plugin >=0.1.7,<0.3.0",
-    "mkdocs-mermaid2-plugin==0.6.0",
-    "markdown-include==0.8.1",
-    "pymdown-extensions==10.0.1",
-    "jinja2==3.1.2"
+    "python-dateutil>=2.8,<3.0.0",
+    "redis>=4.3.3,<4.6.1",
+    "pytz>=2023.3,<2024.0",
 ]
 
 [tool.hatch.version]
