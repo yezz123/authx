@@ -3,4 +3,4 @@
 set -e
 set -x
 
-mypy --show-error-codes authx
+mypy --show-error-codes authx --disable-recursive-aliases
