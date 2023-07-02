@@ -131,7 +131,7 @@ Now, install the pre-commit hooks in your `.git/hooks/` directory:
 <div class="termy">
 
 ```console
-pre-commit install
+$ pre-commit install
 ```
 
 </div>
@@ -237,7 +237,7 @@ If you want to generate the test report:
 <div class="termy">
 
 ```console
-bash scripts/test.sh
+$ bash scripts/test.sh
 ```
 
 </div>

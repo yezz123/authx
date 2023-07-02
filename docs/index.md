@@ -39,7 +39,7 @@ customizable and adaptable as possible.
 
 This branch relates to development of authx V1 which is not yet ready for production use.
 
-If you're a Authx user, you probably want either Authx V0.9 [Documentation](https://authx-v0.yezz.me/) or, [0.X.X-fix](https://github.com/yezz123/authx/tree/0.X.X-fix) git branch.
+If you're an Authx user, you probably want either Authx V0.9 [Documentation](https://authx-v0.yezz.me/) or, [0.X.X-fix](https://github.com/yezz123/authx/tree/0.X.X-fix) git branch.
 
 ## Installation 📦
 
@@ -55,23 +55,23 @@ $ pip install authx
 
 ## Features 🔧
 
-- [x] Support Python 3.8+.
-- [x] Multiple customizable authentication backend:
-  - [x] JWT authentication backend included
-    - [x] JWT encoding/decoding for application authentication
-    - [x] Automatic detection of JWTs in requests:
-      - [x] JWTs in headers
-      - [x] JWTs in cookies
-      - [x] JWTs in query parameters
-      - [x] JWTs in request bodies
-  - [x] Cookie authentication backend included
-- [x] middleware for authentication and authorization through JWT.
-- [x] Extensible Error Handling System.
-- [x] Using Redis as a session store & cache.
-- [x] Support HTTPCache.
-- [x] Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
-- [x] Support Middleware of [pyinstrument](https://pyinstrument.readthedocs.io/) to check your service performance.
-- [x] Support Middleware for collecting and exposing [Prometheus](https://prometheus.io/) metrics.
+- Support Python 3.8+.
+- Multiple customizable authentication backend:
+  - JWT authentication backend included
+    - JWT encoding/decoding for application authentication
+    - Automatic detection of JWTs in requests:
+      - JWTs in headers
+      - JWTs in cookies
+      - JWTs in query parameters
+      - JWTs in request bodies
+  - Cookie authentication backend included
+- middleware for authentication and authorization through JWT.
+- Extensible Error Handling System.
+- Using Redis as a session store & cache.
+- Support HTTPCache.
+- Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
+- Support Middleware of [pyinstrument](https://pyinstrument.readthedocs.io/) to check your service performance.
+- Support Middleware for collecting and exposing [Prometheus](https://prometheus.io/) metrics.
 
 **Note:** Check [Release Notes](https://authx.yezz.me/release/).
 
