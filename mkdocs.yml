@@ -86,5 +86,7 @@ extra:
     link: https://producthunt.com/posts/authx
   extra_css:
   - css/termynal.css
+  - css/custom.css
   extra_javascript:
   - js/termynal.js
+  - js/custom.js

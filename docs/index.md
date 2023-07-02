@@ -46,7 +46,7 @@ If you're a Authx user, you probably want either Authx V0.9 [Documentation](http
 <div class="termy">
 
 ```console
-$ pip install fastapi
+$ pip install authx
 
 ---> 100%
 ```
