@@ -1,5 +1,5 @@
 from datetime import timedelta
-from typing import Callable, Optional
+from typing import Callable, Dict, Optional
 from uuid import uuid4
 
 from pydantic import BaseSettings
@@ -9,12 +9,12 @@ def genSessionId() -> str:
     return uuid4().hex
 
 
-settings = {"sessionIdGenerator": genSessionId}
+settings: Dict[str, Callable[[], str]] = {"sessionIdGenerator": genSessionId}
 
 
 class Config(BaseSettings):
     redisURL: str = "redis://localhost:6379/0"
-    settings: dict = settings
+    settings: Dict[str, Callable[[], str]] = settings
     sessionIdName: str = "ssid"
     expireTime: timedelta = timedelta(hours=6)
 
@@ -30,7 +30,7 @@ def basicConfig(
     sessionIdName: Optional[str] = "",
     sessionIdGenerator: Optional[Callable[[], str]] = None,
     expireTime: Optional[timedelta] = None,
-):
+) -> None:
     if redisURL:
         config.redisURL = redisURL
     if sessionIdName:
