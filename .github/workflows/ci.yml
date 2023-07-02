@@ -25,6 +25,25 @@ jobs:
       - uses: pre-commit/action@v3.0.0
         with:
           extra_args: --all-files --verbose
+
+  mypy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: bash scripts/install.sh
+      - name: Run mypy
+        run: bash scripts/mypy.sh
+
   test:
     name: test on python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
