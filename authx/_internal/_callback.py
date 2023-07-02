@@ -83,10 +83,10 @@ class _CallbackHandler(Generic[T]):
             raise ValueError("Model callback not set")
         return callback(uid, *args, **kwargs) or self._model
 
-    def is_token_in_blocklist(self, token: str, **kwargs: ParamSpecKwargs) -> bool:
+    def is_token_in_blocklist(self, token: str, *args: Any, **kwargs: ParamSpecKwargs) -> bool:
         """Check if token is in blocklist"""
         if self._check_token_callback_is_set(ignore_errors=True):
             callback: Optional[TokenCallback] = self.callback_is_token_in_blocklist
             if callback is not None:
-                return callback(token, kwargs)
+                return callback(token, *args, **kwargs)
         return False
