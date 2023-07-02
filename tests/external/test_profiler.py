@@ -1,6 +1,8 @@
+import json
 import os
 import sys
 from io import StringIO
+from unittest.mock import ANY, Mock
 
 import pytest
 from fastapi import FastAPI
@@ -60,7 +62,7 @@ class TestProfilerMiddleware:
         assert f"Path: {request_path}" in stdout_redirect.fp.getvalue()
 
     def test_profiler_export_to_html(self, test_middleware):
-        full_path = f"{os.getcwd()}/authx_profiling_results.html"
+        full_path = f"{os.getcwd()}/tests/external/authx_profiling_results.html"
 
         with TestClient(
             test_middleware(
@@ -77,7 +79,7 @@ class TestProfilerMiddleware:
             assert "profiler.py" in f.read()
 
     def test_profiler_export_to_json(self, test_middleware):
-        full_path = f"{os.getcwd()}/authx_profiling_results.json"
+        full_path = f"{os.getcwd()}/tests/external/authx_profiling_results.json"
 
         with TestClient(
             test_middleware(
@@ -89,3 +91,74 @@ class TestProfilerMiddleware:
             # request
             request_path = "/tests/middleware"
             client.get(request_path)
+
+    def test_normal_request(self, client):
+        response = client.get("/test")
+        assert response.status_code == 200
+        assert response.json() == {"retMsg": "Normal Request test Success!"}
+
+    def test_profiler_stop_called_on_shutdown(self, test_middleware):
+        mock_server_app = Mock()
+        with TestClient(
+            test_middleware(
+                server_app=mock_server_app,
+                is_print_each_request=False,
+            )
+        ):
+            pass
+
+        mock_server_app.add_event_handler.assert_called_once_with("shutdown", ANY)
+
+    def test_profiler_output_text(self, test_middleware):
+        stdout_redirect.fp = StringIO()
+        temp_stdout, sys.stdout = sys.stdout, stdout_redirect
+
+        with TestClient(
+            test_middleware(
+                is_print_each_request=True,
+                profiler_output_type="text",
+            )
+        ) as client:
+            client.get("/test")
+
+        sys.stdout = temp_stdout
+        output_text = stdout_redirect.fp.getvalue()
+
+        assert "Method: GET" in output_text
+        assert "Path: /test" in output_text
+        assert "Duration: " in output_text
+        assert "Status: 200" in output_text
+
+    def test_profiler_output_html(self, test_middleware):
+        full_path = f"{os.getcwd()}/tests/external/authx_profiling_results.html"
+
+        with TestClient(
+            test_middleware(
+                profiler_output_type="html",
+                is_print_each_request=False,
+                html_file_name=full_path,
+            )
+        ) as client:
+            client.get("/test")
+
+        with open(full_path) as f:
+            html_content = f.read()
+            assert "profiler.py" in html_content
+
+    def test_profiler_output_json(self, test_middleware):
+        full_path = f"{os.getcwd()}/tests/external/authx_profiling_results.json"
+
+        with TestClient(
+            test_middleware(
+                profiler_output_type="json",
+                is_print_each_request=False,
+                json_file_name=full_path,
+            )
+        ) as client:
+            client.get("/test")
+
+        with open(full_path) as f:
+            json_data = json.load(f)
+            assert isinstance(json_data, dict)
+            assert "nodes" in json_data
+            assert "samples" in json_data
