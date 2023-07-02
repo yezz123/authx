@@ -65,6 +65,7 @@ nav:
   - Extra:
     - extra/OAuth2.md
     - extra/Metrics.md
+    - extra/Cache.md
   - Help AuthX - Get Help: help.md
   - Development - Contributing: contributing.md
   - Frequently Asked Questions: faq.md
