@@ -62,6 +62,8 @@ plugins:
 nav:
   - About: index.md
   - installation.md
+  - Extra:
+    - extra/OAuth2.md
   - Help AuthX - Get Help: help.md
   - Development - Contributing: contributing.md
   - Frequently Asked Questions: faq.md
