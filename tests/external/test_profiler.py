@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 from io import StringIO
@@ -53,14 +54,14 @@ class TestProfilerMiddleware:
         stdout_redirect.fp = StringIO()
         temp_stdout, sys.stdout = sys.stdout, stdout_redirect
 
-        request_path = "/tests/middleware"
+        request_path = "/tests/external"
         client.get(request_path)
 
         sys.stdout = temp_stdout
         assert f"Path: {request_path}" in stdout_redirect.fp.getvalue()
 
     def test_profiler_export_to_html(self, test_middleware):
-        full_path = f"{os.getcwd()}/authx_profiling_results.html"
+        full_path = f"{os.getcwd()}/tests/external/authx_profiling_results.html"
 
         with TestClient(
             test_middleware(
@@ -70,14 +71,14 @@ class TestProfilerMiddleware:
             )
         ) as client:
             # request
-            request_path = "/tests/middleware"
+            request_path = "/tests/external"
             client.get(request_path)
 
         with open(full_path) as f:
             assert "profiler.py" in f.read()
 
     def test_profiler_export_to_json(self, test_middleware):
-        full_path = f"{os.getcwd()}/authx_profiling_results.json"
+        full_path = f"{os.getcwd()}/tests/external/authx_profiling_results.json"
 
         with TestClient(
             test_middleware(
@@ -87,5 +88,60 @@ class TestProfilerMiddleware:
             )
         ) as client:
             # request
-            request_path = "/tests/middleware"
+            request_path = "/tests/external"
             client.get(request_path)
+
+    def test_normal_request(self, client):
+        response = client.get("/test")
+        assert response.status_code == 422
+
+    def test_profiler_output_text(self, test_middleware):
+        stdout_redirect.fp = StringIO()
+        temp_stdout, sys.stdout = sys.stdout, stdout_redirect
+
+        with TestClient(
+            test_middleware(
+                is_print_each_request=True,
+                profiler_output_type="text",
+            )
+        ) as client:
+            client.get("/test")
+
+        sys.stdout = temp_stdout
+        output_text = stdout_redirect.fp.getvalue()
+
+        assert "Method: GET" in output_text
+        assert "Path: /test" in output_text
+        assert "Duration: " in output_text
+
+    def test_profiler_output_html(self, test_middleware):
+        full_path = f"{os.getcwd()}/tests/external/authx_profiling_results.html"
+
+        with TestClient(
+            test_middleware(
+                profiler_output_type="html",
+                is_print_each_request=False,
+                html_file_name=full_path,
+            )
+        ) as client:
+            client.get("/test")
+
+        with open(full_path) as f:
+            html_content = f.read()
+            assert "profiler.py" in html_content
+
+    def test_profiler_output_json(self, test_middleware):
+        full_path = f"{os.getcwd()}/tests/external/authx_profiling_results.json"
+
+        with TestClient(
+            test_middleware(
+                profiler_output_type="json",
+                is_print_each_request=False,
+                json_file_name=full_path,
+            )
+        ) as client:
+            client.get("/test")
+
+        with open(full_path) as f:
+            json_data = json.load(f)
+            assert isinstance(json_data, dict)

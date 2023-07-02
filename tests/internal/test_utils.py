@@ -36,11 +36,24 @@ from authx._internal._utils import (
 )
 
 
+@pytest.fixture
+def sample_datetime():
+    return datetime(2023, 5, 20, 12, 0, 0)
+
+
+@pytest.fixture
+def sample_datetime_with_tz():
+    tz = pytz.timezone("America/New_York")
+    return tz.localize(datetime(2023, 5, 20, 12, 0, 0))
+
+
+@freeze_time("2023-07-01 12:00:00")
 def test_util_get_now():
     assert isinstance(get_now(), date.datetime)
     assert get_now().tzinfo == date.timezone.utc
 
 
+@freeze_time("2023-07-01 12:00:00")
 def test_util_get_now_ts():
     assert isinstance(get_now_ts(), float)
 
@@ -53,17 +66,7 @@ def test_util_get_uuid():
 utc = timezone("UTC")
 
 
-@pytest.fixture
-def sample_datetime():
-    return datetime(2023, 5, 20, 12, 0, 0)
-
-
-@pytest.fixture
-def sample_datetime_with_tz():
-    tz = pytz.timezone("America/New_York")
-    return tz.localize(datetime(2023, 5, 20, 12, 0, 0))
-
-
+@freeze_time("2023-07-01 12:00:00")
 def test_time_diff():
     dt1 = datetime(2023, 5, 20, 12, 0, 0)
     dt2 = datetime(2023, 5, 19, 12, 0, 0)
@@ -131,6 +134,7 @@ def test_days_after(sample_datetime):
     assert days_after(sample_datetime, days=1) == expected_result
 
 
+@freeze_time("2023-07-01 12:00:00")
 def test_is_today():
     assert is_today(datetime.now()) is True
 
@@ -139,7 +143,7 @@ def test_is_yesterday(sample_datetime):
     assert is_yesterday(sample_datetime) is False
 
 
-@freeze_time("2023-05-20 12:00:00")
+@freeze_time("2023-07-22 12:00:00")
 def test_is_tomorrow(sample_datetime):
     assert is_tomorrow(sample_datetime) is False
 

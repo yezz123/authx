@@ -228,7 +228,7 @@ async def test_get_token_from_cookies_post(
 
 @pytest.mark.asyncio
 async def test_get_token_from_cookies_post_without_csrf_exception(
-    config: AuthXConfig, request_cookies: list[list[str]]
+    config: AuthXConfig, request_cookies: List[List[str]]
 ):
     config.JWT_COOKIE_CSRF_PROTECT = False
     # Test on POST
@@ -248,7 +248,7 @@ async def test_get_token_from_cookies_post_without_csrf_exception(
 
 
 @pytest.mark.asyncio
-async def test_get_token_from_cookies_post_with_csrf_exception(config: AuthXConfig, request_cookies: list[list[str]]):
+async def test_get_token_from_cookies_post_with_csrf_exception(config: AuthXConfig, request_cookies: List[List[str]]):
     # Test on POST
     req = Request(
         scope={
@@ -279,8 +279,7 @@ async def test_get_token_from_cookies_post_with_missing_token_exception(
 
 @pytest.mark.asyncio
 async def test_get_token_from_json_post_content_type_exception(
-    config: AuthXConfig,
-    request_body: Coroutine[Any, Any, dict[Dict, Any]],
+    config: AuthXConfig, request_body: Coroutine[Any, Any, Dict[str, Any]]
 ):
     # Test on POST
     req = Request(
@@ -297,10 +296,7 @@ async def test_get_token_from_json_post_content_type_exception(
 
 
 @pytest.mark.asyncio
-async def test_get_token_from_json_post(
-    config: AuthXConfig,
-    request_body: Coroutine[Any, Any, dict[Dict, Any]],
-):
+async def test_get_token_from_json_post(config: AuthXConfig, request_body: Coroutine[Any, Any, Dict[str, Any]]):
     # Test on POST
     req = Request(
         scope={

@@ -15,7 +15,7 @@ from authx.exceptions import InvalidToken
 logger = logging.getLogger(__name__)
 
 
-def _get_keys(url_or_keys):
+def _get_keys(url_or_keys: typing.Union[str, typing.Any]) -> typing.Any:
     if not isinstance(url_or_keys, str) or not url_or_keys.startswith("https://"):
         return url_or_keys
     logger.info("Getting jwk from %s...", url_or_keys)
@@ -23,7 +23,7 @@ def _get_keys(url_or_keys):
         return json.loads(f.read().decode())
 
 
-def _validate_provider(provider_name, provider):
+def _validate_provider(provider_name: str, provider: typing.Dict[str, typing.Any]) -> None:
     mandatory_keys = {"issuer", "keys", "audience"}
     if not mandatory_keys.issubset(set(provider)):
         raise ValueError(
@@ -41,10 +41,10 @@ class MiddlewareOauth2:
     def __init__(
         self,
         app: ASGIApp,
-        providers,
-        public_paths=None,
-        get_keys=None,
-        key_refresh_minutes=None,
+        providers: typing.Dict[str, typing.Dict[str, typing.Any]],
+        public_paths: typing.Optional[typing.Set[str]] = None,
+        get_keys: typing.Optional[typing.Callable[[typing.Any], typing.Any]] = None,
+        key_refresh_minutes: typing.Optional[typing.Union[int, typing.Dict[str, int]]] = None,
     ) -> None:
         self._app = app
         for provider in providers:
@@ -63,10 +63,10 @@ class MiddlewareOauth2:
             self._timeout = {provider: datetime.timedelta(minutes=key_refresh_minutes) for provider in providers}
 
         # cached attribute and respective timeout
-        self._last_retrieval = {}
-        self._keys = {}
+        self._last_retrieval: typing.Dict[str, datetime.datetime] = {}
+        self._keys: typing.Dict[str, typing.Any] = {}
 
-    def _provider_claims(self, provider, token):
+    def _provider_claims(self, provider: str, token: str) -> typing.Any:
         issuer = self._providers[provider]["issuer"]
         audience = self._providers[provider]["audience"]
         logger.debug(
@@ -86,7 +86,7 @@ class MiddlewareOauth2:
         return decoded
 
     def claims(self, token: str) -> typing.Tuple[str, typing.Dict[str, str]]:
-        errors = {}
+        errors: typing.Dict[str, str] = {}
         for provider in self._providers:
             try:
                 return provider, self._provider_claims(provider, token)
@@ -104,7 +104,9 @@ class MiddlewareOauth2:
         raise InvalidToken(errors)
 
     @staticmethod
-    async def _prepare_error_response(message, status_code, scope, receive, send):
+    async def _prepare_error_response(
+        message: str, status_code: int, scope: Scope, receive: Receive, send: Send
+    ) -> None:
         if scope["type"] == "http":
             response = JSONResponse(
                 {"message": message},
@@ -151,7 +153,7 @@ class MiddlewareOauth2:
 
         return await self._app(scope, receive, send)
 
-    def _should_refresh(self, provider: str):
+    def _should_refresh(self, provider: str) -> bool:
         if self._keys.get(provider, None) is None:
             # we do not even have the key (first time) => should refresh
             return True
@@ -161,11 +163,11 @@ class MiddlewareOauth2:
         # have the key and have timeout => check if we passed the timeout
         return self._last_retrieval[provider] + self._timeout[provider] < datetime.datetime.utcnow()
 
-    def _refresh_keys(self, provider: str):
+    def _refresh_keys(self, provider: str) -> None:
         self._keys[provider] = self._get_keys(self._providers[provider]["keys"])
         self._last_retrieval[provider] = datetime.datetime.utcnow()
 
-    def _provider_keys(self, provider: str):
+    def _provider_keys(self, provider: str) -> typing.Any:
         if self._should_refresh(provider):
             self._refresh_keys(provider)
         return self._keys[provider]

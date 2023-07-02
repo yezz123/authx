@@ -261,3 +261,60 @@ def test_validation_error_on_verify():
             verify_type=False,
             verify_jwt=False,
         )
+
+
+def test_payload_issued_at_property(valid_payload: TokenPayload):
+    # Test when 'iat' is a float
+    assert isinstance(valid_payload.issued_at, datetime.datetime)
+
+    # Test when 'iat' is an int
+    valid_payload.iat = int(valid_payload.iat)
+    assert isinstance(valid_payload.issued_at, datetime.datetime)
+
+    # Test when 'iat' is a datetime object
+    valid_payload.iat = datetime.datetime.now(datetime.timezone.utc)
+    assert isinstance(valid_payload.issued_at, datetime.datetime)
+
+    # Test when 'iat' is not a supported type
+    invalid_payload = valid_payload.copy()
+    invalid_payload.iat = "invalid"
+    with pytest.raises(TypeError):
+        invalid_payload.issued_at
+
+
+def test_payload_expiry_datetime_property(valid_payload: TokenPayload):
+    # Test when 'exp' is a datetime object
+    assert isinstance(valid_payload.expiry_datetime, datetime.datetime)
+
+    # Test when 'exp' is a timedelta object
+    valid_payload.exp = datetime.timedelta(minutes=20)
+    assert isinstance(valid_payload.expiry_datetime, datetime.datetime)
+
+    assert isinstance(valid_payload.expiry_datetime, datetime.datetime)
+
+    # Test when 'exp' is not a supported type
+    invalid_payload = valid_payload.copy()
+    invalid_payload.exp = "invalid"
+    with pytest.raises(TypeError):
+        invalid_payload.expiry_datetime
+
+
+def test_payload_time_until_expiry_property(valid_payload: TokenPayload):
+    assert isinstance(valid_payload.time_until_expiry, datetime.timedelta)
+
+
+def test_payload_time_since_issued_property(valid_payload: TokenPayload):
+    assert isinstance(valid_payload.time_since_issued, datetime.timedelta)
+
+
+def test_payload_has_scopes_valid(valid_payload: TokenPayload):
+    assert valid_payload.has_scopes("read")
+    assert valid_payload.has_scopes("read", "write")
+    assert not valid_payload.has_scopes("admin")
+    assert not valid_payload.has_scopes("admin", "read")
+
+
+def test_payload_has_scopes_empty(valid_payload: TokenPayload):
+    valid_payload.scopes = []
+    assert not valid_payload.has_scopes("read")
+    assert not valid_payload.has_scopes("read", "write")

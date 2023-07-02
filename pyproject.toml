@@ -33,6 +33,7 @@ classifiers = [
     "Framework :: Pydantic :: 1",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -143,30 +144,8 @@ exclude_lines = [
 ]
 
 [tool.mypy]
-exclude = 'authx/__init__.py'
+strict = true
 plugins = 'pydantic.mypy'
-python_version = '3.11'
-show_error_codes = true
-follow_imports = 'silent'
-strict_optional = true
-warn_redundant_casts = true
-warn_unused_ignores = true
-disallow_any_generics = true
-check_untyped_defs = true
-no_implicit_reexport = false
-warn_unused_configs = true
-disallow_subclassing_any = true
-disallow_incomplete_defs = true
-disallow_untyped_decorators = true
-disallow_untyped_calls = true
-disallow_untyped_defs = true
-implicit_optional = true
-
-[[tool.mypy.overrides]]
-module = [
-    'dotenv.*',
-]
-ignore_missing_imports = true
 
 
 [tool.pytest.ini_options]

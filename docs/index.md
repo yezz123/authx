@@ -47,7 +47,7 @@ If you're a Authx user, you probably want either Authx V0.9 [Documentation](http
 
 ## Features 🔧
 
-- [x] Support Python 3.9+.
+- [x] Support Python 3.8+.
 - [x] Multiple customizable authentication backend:
   - [x] JWT authentication backend included
     - [x] JWT encoding/decoding for application authentication
