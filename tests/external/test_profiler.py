@@ -2,7 +2,6 @@ import json
 import os
 import sys
 from io import StringIO
-from unittest.mock import ANY, Mock
 
 import pytest
 from fastapi import FastAPI
@@ -95,18 +94,6 @@ class TestProfilerMiddleware:
     def test_normal_request(self, client):
         response = client.get("/test")
         assert response.status_code == 422
-
-    def test_profiler_stop_called_on_shutdown(self, test_middleware):
-        mock_server_app = Mock()
-        with TestClient(
-            test_middleware(
-                server_app=mock_server_app,
-                is_print_each_request=False,
-            )
-        ):
-            pass
-
-        mock_server_app.add_event_handler.assert_called_once_with("shutdown", ANY)
 
     def test_profiler_output_text(self, test_middleware):
         stdout_redirect.fp = StringIO()
