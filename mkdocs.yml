@@ -84,9 +84,11 @@ extra:
     link: https://yezz.me
   - icon: fontawesome/brands/product-hunt
     link: https://producthunt.com/posts/authx
-  extra_css:
+
+extra_css:
   - css/termynal.css
   - css/custom.css
-  extra_javascript:
+
+extra_javascript:
   - js/termynal.js
   - js/custom.js
