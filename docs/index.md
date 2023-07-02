@@ -43,7 +43,15 @@ If you're a Authx user, you probably want either Authx V0.9 [Documentation](http
 
 ## Installation 📦
 
-![authx](img/install.gif)
+<div class="termy">
+
+```console
+$ pip install fastapi
+
+---> 100%
+```
+
+</div>
 
 ## Features 🔧
 

@@ -3,8 +3,6 @@ site_description: Ready to use and customizable Authentications and Oauth2 manag
 site_url: https://authx.yezz.me/
 
 theme:
-  features:
-    - header.autohide
   name: 'material'
   palette:
     - scheme: default
@@ -21,38 +19,45 @@ theme:
           name: Switch to light mode
   favicon: favicon.png
   features:
+  - header.autohide
   - search.suggest
   - search.highlight
   - content.tabs.link
+  - navigation.indexes
+  - content.tooltips
+  - navigation.path
+  - content.code.annotate
+  - content.code.copy
+  - content.code.select
   icon:
     repo: fontawesome/brands/github
+  language: en
 repo_name: Yezz123/AuthX
 repo_url: https://github.com/yezz123/AuthX
 edit_uri: ""
 
 markdown_extensions:
-  - markdown_include.include:
-      base_path: docs
-  - toc:
-      permalink: true
-  - admonition
-  - codehilite
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:mermaid2.fence_mermaid
-  - pymdownx.tasklist
-  - pymdownx.tabbed
+  toc:
+    permalink: true
+  markdown.extensions.codehilite:
+    guess_lang: false
+  mdx_include:
+    base_path: docs
+  admonition:
+  codehilite:
+  extra:
+  pymdownx.superfences:
+    custom_fences:
+    - name: mermaid
+      class: mermaid
+      format: !!python/name:pymdownx.superfences.fence_code_format ''
+  pymdownx.tabbed:
+    alternate_style: true
+  attr_list:
+  md_in_html:
 
 plugins:
-  - search
-  - mermaid2:
-      arguments:
-        theme: |
-          ^(JSON.parse(window.localStorage.getItem('/.__palette')).index == 1) ? 'dark' : 'light'
-extra_javascript:
-    - https://unpkg.com/mermaid/dist/mermaid.min.js
+  search: null
 
 nav:
   - About: index.md
@@ -65,6 +70,9 @@ nav:
   - Release Notes: release.md
 
 extra:
+  analytics:
+    provider: google
+    property: G-7RF17YL4KP
   social:
   - icon: fontawesome/brands/github-alt
     link: https://github.com/yezz123
@@ -76,3 +84,7 @@ extra:
     link: https://yezz.me
   - icon: fontawesome/brands/product-hunt
     link: https://producthunt.com/posts/authx
+  extra_css:
+  - css/termynal.css
+  extra_javascript:
+  - js/termynal.js

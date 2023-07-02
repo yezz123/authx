@@ -6,3 +6,6 @@ mkdocs-mermaid2-plugin
 markdown-include
 pymdown-extensions
 jinja2
+typer-cli
+typer[all]
+pyyaml
