@@ -7,48 +7,90 @@ install the dependency:
 
 ### Default Dependency
 
-```shell
-pip install authx
+<div class="termy">
+
+```console
+$ pip install authx
+
+---> 100%
 ```
+
+</div>
 
 ### Extra Dependencies
 
 #### Profiler Middleware
 
-```shell
-pip install authx[profiler]
+<div class="termy">
+
+```console
+$ pip install authx[profiler]
+
+---> 100%
 ```
+
+</div>
 
 #### Metrics Middleware
 
-```shell
-pip install authx[metrics]
+<div class="termy">
+
+```console
+$ pip install authx[metrics]
+
+---> 100%
 ```
+
+</div>
 
 #### Redis Session
 
-```shell
-pip install authx[session]
+<div class="termy">
+
+```console
+$ pip install authx[session]
+
+---> 100%
 ```
+
+</div>
 
 #### Cache Dependencies
 
-```shell
-pip install authx[cache]
+<div class="termy">
+
+```console
+$ pip install authx[cache]
+
+---> 100%
 ```
+
+</div>
 
 #### Oauth2 Dependencies
 
-```shell
-pip install authx[oauth2]
+<div class="termy">
+
+```console
+$ pip install authx[oauth2]
+
+---> 100%
 ```
+
+</div>
 
 ### Development Dependencies
 
-```shell
-git clone https://github.com/yezz123/authx.git
+<div class="termy">
 
-cd authx
+```console
+$ git clone https://github.com/yezz123/authx.git
 
-bash scripts/install.sh
+---> 100%
+
+$ cd authx
+
+$ bash scripts/install.sh
 ```
+
+</div>

@@ -34,7 +34,7 @@ platformdirs==3.8.0
     #   virtualenv
 pre-commit==3.3.3
     # via -r requirements/linting.in
-pyupgrade==3.7.0
+pyupgrade==3.8.0
     # via -r requirements/linting.in
 pyyaml==6.0
     # via pre-commit
