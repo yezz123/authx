@@ -74,7 +74,7 @@ class SessionMiddleware(BaseHTTPMiddleware):
             self.logger = ConsoleLogger()
 
         self.logger.debug(
-            f"FastSession initialized http_only:{http_only} secure:{secure} session_key:'{session_object}' session_cookie_name:{session_cookie} store:{store}"
+            f"Session Middleware initialized http_only:{http_only} secure:{secure} session_key:'{session_object}' session_cookie_name:{session_cookie} store:{store}"
         )
 
     def create_session_cookie(self, session_id):

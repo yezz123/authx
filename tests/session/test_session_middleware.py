@@ -222,10 +222,10 @@ def test_check_no_httponly_flag_in_cookie():
 async def test_dispatch_should_skip_session_management_with_skip_header():
     app = Mock(return_value=Response("OK"))
     middleware = SessionMiddleware(
-        app=app, secret_key="test", skip_session_header={"header_name": "X-APITEST-Skip", "header_value": "skip"}
+        app=app, secret_key="test", skip_session_header={"header_name": "X-ApiTest-Skip", "header_value": "skip"}
     )
 
-    headers = [(b"x-APITEST-skip", b"skip")]
+    headers = [(b"x-apitest-skip", b"skip")]
     request = Request(scope={"type": "http", "headers": headers}, receive=None)
 
     class MockResponse:
@@ -246,7 +246,7 @@ async def test_dispatch_should_skip_session_management_with_skip_header():
 async def test_dispatch_should_not_skip_session_management_without_skip_heade1r():
     app = Mock(return_value=Response("OK"))
     middleware = SessionMiddleware(
-        app=app, secret_key="test", skip_session_header={"header_name": "X-APITEST-Skip", "header_value": "skip"}
+        app=app, secret_key="test", skip_session_header={"header_name": "X-FastSession-Skip", "header_value": "skip"}
     )
 
     headers = [(b"ignore", b"ignore")]
