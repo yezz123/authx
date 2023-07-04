@@ -1,25 +1,24 @@
 import random
 from datetime import timedelta
+from unittest import mock
 
-from authx._internal import basicConfig, config
+from authx._internal import config
 
 
-def test_config() -> None:
-    session_id = config.genSessionId().isnumeric()
-    assert session_id is not None
+@mock.patch("authx._internal._session.uuid4")
+def testConfig(mock_uuid4):
+    config().genSessionId()
+    mock_uuid4.assert_called_once_with()
 
 
 def testBasicConfig():
-    origin = config.settings["sessionIdGenerator"]
-    basicConfig(
+    config(
         redisURL="redis://localhost:6379/1",
         sessionIdName="sessionId",
         sessionIdGenerator=lambda: str(random.randint(1000, 9999)),
         expireTime=timedelta(days=1),
     )
-    assert config.redisURL == "redis://localhost:6379/1"
-    assert config.sessionIdName == "sessionId"
-    assert config.genSessionId().isnumeric()
-    assert config.expireTime == timedelta(seconds=24 * 3600)
-
-    basicConfig(sessionIdGenerator=origin, expireTime=timedelta(hours=6))
+    assert config().redisURL == "redis://localhost:6379/1"
+    assert config().sessionIdName == "sessionId"
+    assert config().genSessionId().isnumeric()
+    assert config().expireTime == timedelta(seconds=24 * 3600)
