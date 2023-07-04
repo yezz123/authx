@@ -1,6 +1,37 @@
 import time
+import unittest
 
 from authx._internal import SignatureSerializer
+
+
+class SignatureSerializerTest(unittest.TestCase):
+    def test_encode_decode(self):
+        serializer = SignatureSerializer('MY_SECRET_KEY', expired_in=1)
+        session_id = 1
+        dict_obj = {'session_id': session_id}
+        token = serializer.encode(dict_obj)
+        data, err = serializer.decode(token)
+        self.assertIsNotNone(data)
+        self.assertIsNone(err)
+        self.assertEqual(data['session_id'], session_id)
+
+    def test_decode_with_no_token(self):
+        serializer = SignatureSerializer('MY_SECRET_KEY', expired_in=1)
+        token = None
+        data, err = serializer.decode(token)
+        self.assertIsNone(data)
+        self.assertEqual(err, "NoTokenSpecified")
+
+    def test_decode_with_expired_token(self):
+        serializer = SignatureSerializer('MY_SECRET_KEY', expired_in=1)
+        session_id = 1
+        dict_obj = {'session_id': session_id}
+        token = serializer.encode(dict_obj)
+        # Sleep for more than 1 second to simulate an expired token
+        time.sleep(2)
+        data, err = serializer.decode(token)
+        self.assertIsNone(data)
+        self.assertEqual(err, "SignatureExpired")
 
 
 def test_token_expiration():
