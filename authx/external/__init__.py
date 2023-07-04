@@ -2,6 +2,7 @@ from authx.external.http import HTTPCache, HTTPCacheBackend, cache, invalidate_c
 from authx.external.metrics import MetricsMiddleware, get_metrics, request_count, request_time
 from authx.external.Oauth2 import MiddlewareOauth2, _get_keys
 from authx.external.profiler import ProfilerMiddleware
+from authx.external.session import SessionMiddleware
 
 __all__ = (
     "MetricsMiddleware",
@@ -15,4 +16,5 @@ __all__ = (
     "cache",
     "invalidate_cache",
     "HTTPCache",
+    "SessionMiddleware",
 )
