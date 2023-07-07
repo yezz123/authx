@@ -67,6 +67,7 @@ nav:
     - extra/Metrics.md
     - extra/Cache.md
     - extra/profiler.md
+    - extra/Sessions.md
   - Help AuthX - Get Help: help.md
   - Development - Contributing: contributing.md
   - Frequently Asked Questions: faq.md
