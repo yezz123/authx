@@ -8,9 +8,9 @@ beautifulsoup4==4.12.2
     # via mkdocs-mermaid2-plugin
 certifi==2023.5.7
     # via requests
-charset-normalizer==3.1.0
+charset-normalizer==3.2.0
     # via requests
-click==8.1.3
+click==8.1.4
     # via
     #   mkdocs
     #   typer
@@ -59,7 +59,7 @@ mkdocs==1.4.3
     #   mkdocs-mermaid2-plugin
 mkdocs-markdownextradata-plugin==0.2.5
     # via -r requirements/docs.in
-mkdocs-material==9.1.17
+mkdocs-material==9.1.18
     # via
     #   -r requirements/docs.in
     #   mkdocs-mermaid2-plugin
