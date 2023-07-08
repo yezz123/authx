@@ -4,16 +4,16 @@
 #
 #    pip-compile --config=pyproject.toml --output-file=requirements/testing.txt --resolver=backtracking requirements/testing.in
 #
-anyio==3.7.0
+anyio==3.7.1
     # via httpcore
 certifi==2023.5.7
     # via
     #   httpcore
     #   httpx
     #   requests
-charset-normalizer==3.1.0
+charset-normalizer==3.2.0
     # via requests
-click==8.1.3
+click==8.1.4
     # via uvicorn
 coverage[toml]==7.2.7
     # via pytest-cov
@@ -23,7 +23,7 @@ h11==0.14.0
     # via
     #   httpcore
     #   uvicorn
-httpcore==0.17.2
+httpcore==0.17.3
     # via httpx
 httpx==0.24.1
     # via -r requirements/testing.in
@@ -60,9 +60,9 @@ sniffio==1.3.0
     #   anyio
     #   httpcore
     #   httpx
-sqlalchemy==2.0.17
+sqlalchemy==2.0.18
     # via -r requirements/testing.in
-typing-extensions==4.7.0
+typing-extensions==4.7.1
     # via sqlalchemy
 urllib3==2.0.3
     # via requests
