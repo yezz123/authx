@@ -8,7 +8,7 @@ anyio==3.7.1
     # via starlette
 cffi==1.15.1
     # via cryptography
-cryptography==41.0.2
+cryptography==41.0.3
     # via pyjwt
 fastapi==0.98.0
     # via authx (pyproject.toml)
