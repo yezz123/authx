@@ -18,7 +18,7 @@
     <img src="https://codecov.io/gh/yezz123/authx/branch/main/graph/badge.svg"/>
 </a>
 <a href="https://pepy.tech/project/authx" target="_blank">
-    <img src="https://pepy.tech/badge/authx" alt="Test">
+    <img src="https://static.pepy.tech/badge/authx" alt="Total Downloads">
 </a>
 </p>
 </p>
