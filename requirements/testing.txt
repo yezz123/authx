@@ -15,12 +15,10 @@ charset-normalizer==3.3.0
     # via requests
 click==8.1.7
     # via uvicorn
-coverage[toml]==7.3.1
+coverage[toml]==7.3.2
     # via pytest-cov
 freezegun==1.2.2
-    # via -r testing.in
-greenlet==3.0.0
-    # via sqlalchemy
+    # via -r requirements/testing.in
 h11==0.14.0
     # via
     #   httpcore
@@ -28,7 +26,7 @@ h11==0.14.0
 httpcore==0.18.0
     # via httpx
 httpx==0.25.0
-    # via -r testing.in
+    # via -r requirements/testing.in
 idna==3.4
     # via
     #   anyio
@@ -37,24 +35,24 @@ idna==3.4
 iniconfig==2.0.0
     # via pytest
 itsdangerous==2.1.2
-    # via -r testing.in
+    # via -r requirements/testing.in
 packaging==23.2
     # via pytest
 pluggy==1.3.0
     # via pytest
 pytest==7.4.2
     # via
-    #   -r testing.in
+    #   -r requirements/testing.in
     #   pytest-asyncio
     #   pytest-cov
 pytest-asyncio==0.21.1
-    # via -r testing.in
+    # via -r requirements/testing.in
 pytest-cov==4.1.0
-    # via -r testing.in
+    # via -r requirements/testing.in
 python-dateutil==2.8.2
     # via freezegun
 requests==2.31.0
-    # via -r testing.in
+    # via -r requirements/testing.in
 six==1.16.0
     # via python-dateutil
 sniffio==1.3.0
@@ -62,15 +60,15 @@ sniffio==1.3.0
     #   anyio
     #   httpcore
     #   httpx
-sqlalchemy==2.0.21
-    # via -r testing.in
+sqlalchemy==2.0.22
+    # via -r requirements/testing.in
 typing-extensions==4.8.0
     # via sqlalchemy
 urllib3==2.0.6
     # via requests
 uvicorn==0.23.2
-    # via -r testing.in
-uvloop==0.17.0
-    # via -r testing.in
+    # via -r requirements/testing.in
+uvloop==0.18.0
+    # via -r requirements/testing.in
 websockets==11.0.3
-    # via -r testing.in
+    # via -r requirements/testing.in
