@@ -12,9 +12,9 @@ anyio==3.7.1
     #   starlette
 cffi==1.16.0
     # via cryptography
-cryptography==41.0.4
+cryptography==41.0.5
     # via pyjwt
-fastapi==0.103.2
+fastapi==0.104.1
     # via authx (pyproject.toml)
 idna==3.4
     # via anyio
@@ -27,7 +27,9 @@ pydantic==2.4.2
 pydantic-core==2.10.1
     # via pydantic
 pyjwt[crypto]==2.8.0
-    # via authx (pyproject.toml)
+    # via
+    #   authx (pyproject.toml)
+    #   pyjwt
 sniffio==1.3.0
     # via anyio
 starlette==0.27.0
