@@ -31,11 +31,11 @@ class SignatureSerializer:
 
 
 if CASUAL_UT:
-    serializer = SignatureSerializer('MY_SECRET_KEY', expired_in=1)
+    serializer = SignatureSerializer("MY_SECRET_KEY", expired_in=1)
     session_id = 1
-    dict_obj = {'session_id': session_id}
+    dict_obj = {"session_id": session_id}
     token = serializer.encode(dict_obj)
     data, err = serializer.decode(token)
     assert (
-        data is not None and err is None and data['session_id'] == 1
+        data is not None and err is None and data["session_id"] == 1
     ), "Failed to decode or session_id does not match."

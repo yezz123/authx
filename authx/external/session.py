@@ -135,8 +135,8 @@ class SessionMiddleware(BaseHTTPMiddleware):
         header_names = []
 
         for header in skip_header:
-            header_name = header.get('header_name')
-            header_value = header.get('header_value')
+            header_name = header.get("header_name")
+            header_value = header.get("header_value")
             header_names.append(header_name)
 
             self.logger.debug(f"Use skip_header option. skip_header:'{header_name}':'{header_value}'")
