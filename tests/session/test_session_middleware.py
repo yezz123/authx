@@ -21,7 +21,7 @@ def test_create_session_id_and_store():
 
     app.add_middleware(
         SessionMiddleware,
-        secret_key='test-secret',
+        secret_key="test-secret",
         store=MemoryIO(),
         http_only=True,
         max_age=3600,
@@ -51,7 +51,7 @@ def test_session_counter_increment():
     is_cookie_secure = False
     app.add_middleware(
         SessionMiddleware,
-        secret_key='test-secret',
+        secret_key="test-secret",
         store=MemoryIO(),
         http_only=True,
         max_age=3600,
@@ -93,7 +93,7 @@ def test_session_cookie_expiry():
     is_cookie_secure = False
     app.add_middleware(
         SessionMiddleware,
-        secret_key='test-secret',
+        secret_key="test-secret",
         store=MemoryIO(),
         http_only=True,
         max_age=1,
@@ -121,7 +121,7 @@ def test_session_cookie_not_persisted_with_secure_option():
     is_cookie_secure = True
     app.add_middleware(
         SessionMiddleware,
-        secret_key='test-secret',
+        secret_key="test-secret",
         store=MemoryIO(),
         http_only=True,
         max_age=3600,
@@ -171,7 +171,7 @@ def test_check_httponly_flag_in_cookie():
     is_http_only = True
     app.add_middleware(
         SessionMiddleware,
-        secret_key='test-secret',
+        secret_key="test-secret",
         store=MemoryIO(),
         http_only=is_http_only,
         max_age=3600,
@@ -183,7 +183,7 @@ def test_check_httponly_flag_in_cookie():
 
     # First request
     response = client.get("/")
-    assert 'HttpOnly' in response.headers['Set-Cookie']
+    assert "HttpOnly" in response.headers["Set-Cookie"]
 
 
 def test_check_no_httponly_flag_in_cookie():
@@ -203,7 +203,7 @@ def test_check_no_httponly_flag_in_cookie():
     is_http_only = False
     app.add_middleware(
         SessionMiddleware,
-        secret_key='test-secret',
+        secret_key="test-secret",
         store=MemoryIO(),
         http_only=is_http_only,
         max_age=3600,
@@ -215,7 +215,7 @@ def test_check_no_httponly_flag_in_cookie():
 
     # First request
     response = client.get("/")
-    assert 'HttpOnly' not in response.headers['Set-Cookie']
+    assert "HttpOnly" not in response.headers["Set-Cookie"]
 
 
 @pytest.mark.asyncio
@@ -239,7 +239,7 @@ async def test_dispatch_should_skip_session_management_with_skip_header():
 
     response = await middleware.dispatch(request, call_next)
     print(f"res:{response}")
-    assert not hasattr(request.state, 'session')
+    assert not hasattr(request.state, "session")
 
 
 @pytest.mark.asyncio
@@ -263,4 +263,4 @@ async def test_dispatch_should_not_skip_session_management_without_skip_heade1r(
 
     response = await middleware.dispatch(request, call_next)
     print(f"res:{response}")
-    assert hasattr(request.state, 'session')
+    assert hasattr(request.state, "session")

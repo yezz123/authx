@@ -142,7 +142,7 @@ class MiddlewareOauth2:
                 send,
             )
         else:
-            logger.debug('No authorization header')
+            logger.debug("No authorization header")
             return await self._prepare_error_response(
                 'The request does not contain an "authorization" header',
                 400,

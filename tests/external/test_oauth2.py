@@ -118,8 +118,8 @@ class TestCase(unittest.TestCase):
             self.assertEqual(
                 cm.output,
                 [
-                    'DEBUG:asyncio:Using selector: EpollSelector',
-                    'DEBUG:authx.external.Oauth2:No authorization header',
+                    "DEBUG:asyncio:Using selector: EpollSelector",
+                    "DEBUG:authx.external.Oauth2:No authorization header",
                     'INFO:httpx:HTTP Request: GET http://testserver/ "HTTP/1.1 400 Bad Request"',
                 ],
             )
@@ -135,7 +135,7 @@ class TestCase(unittest.TestCase):
             self.assertEqual(
                 cm.output,
                 [
-                    'DEBUG:asyncio:Using selector: EpollSelector',
+                    "DEBUG:asyncio:Using selector: EpollSelector",
                     'DEBUG:authx.external.Oauth2:No "Bearer" in authorization header',
                     'INFO:httpx:HTTP Request: GET http://testserver/ "HTTP/1.1 400 Bad Request"',
                 ],
