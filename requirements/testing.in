@@ -2,6 +2,7 @@ pytest
 pytest-asyncio
 pytest-cov
 httpx
+anyio<4
 requests
 SQLAlchemy
 itsdangerous
