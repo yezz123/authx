@@ -18,14 +18,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-          cache-dependency-path: pyproject.toml
-      - uses: actions/cache@v3
-        id: cache
-        with:
-          path: ${{ env.pythonLocation }}
-          key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}-publish
       - name: Install build dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
         run: pip install build
       - name: Build distribution
         run: python -m build
@@ -33,7 +26,3 @@ jobs:
         uses: pypa/gh-action-pypi-publish@v1.8.11
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
