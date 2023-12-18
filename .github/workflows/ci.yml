@@ -35,25 +35,21 @@ jobs:
 
     runs-on: ${{ matrix.os }}-latest
 
-    services:
-      redis:
-        image: redis
-        ports:
-          - 6379:6379
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
     strategy:
       fail-fast: false
       matrix:
         python-version: ["3.8","3.9", "3.10", "3.11", "3.12"]
         os: [ubuntu, macos, windows]
+        redis-version: ["6"]
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.7.0
+        with:
+          redis-version: ${{ matrix.redis-version }}
+          redis-port: 12345
 
       - name: Set up Python
         uses: actions/setup-python@v4
