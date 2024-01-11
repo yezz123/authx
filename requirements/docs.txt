@@ -33,12 +33,12 @@ idna==3.6
     # via requests
 jinja2==3.1.3
     # via
-    #   -r docs.in
+    #   -r requirements/docs.in
     #   mkdocs
     #   mkdocs-material
 jsbeautifier==1.14.11
     # via mkdocs-mermaid2-plugin
-markdown==3.5.1
+markdown==3.5.2
     # via
     #   markdown-include
     #   mdx-include
@@ -46,29 +46,29 @@ markdown==3.5.1
     #   mkdocs-material
     #   pymdown-extensions
 markdown-include==0.8.1
-    # via -r docs.in
+    # via -r requirements/docs.in
 markupsafe==2.1.3
     # via
     #   jinja2
     #   mkdocs
 mdx-include==1.4.2
-    # via -r docs.in
+    # via -r requirements/docs.in
 mergedeep==1.3.4
     # via mkdocs
 mkdocs==1.5.3
     # via
-    #   -r docs.in
+    #   -r requirements/docs.in
     #   mkdocs-markdownextradata-plugin
     #   mkdocs-material
     #   mkdocs-mermaid2-plugin
 mkdocs-markdownextradata-plugin==0.2.5
-    # via -r docs.in
-mkdocs-material==9.5.2
-    # via -r docs.in
+    # via -r requirements/docs.in
+mkdocs-material==9.5.3
+    # via -r requirements/docs.in
 mkdocs-material-extensions==1.3.1
     # via mkdocs-material
 mkdocs-mermaid2-plugin==1.1.1
-    # via -r docs.in
+    # via -r requirements/docs.in
 packaging==23.2
     # via mkdocs
 paginate==0.5.6
@@ -81,16 +81,16 @@ pygments==2.17.2
     # via
     #   mkdocs-material
     #   rich
-pymdown-extensions==10.5
+pymdown-extensions==10.7
     # via
-    #   -r docs.in
+    #   -r requirements/docs.in
     #   mkdocs-material
     #   mkdocs-mermaid2-plugin
 python-dateutil==2.8.2
     # via ghp-import
 pyyaml==6.0.1
     # via
-    #   -r docs.in
+    #   -r requirements/docs.in
     #   mkdocs
     #   mkdocs-markdownextradata-plugin
     #   pymdown-extensions
@@ -99,7 +99,7 @@ pyyaml-env-tag==0.1
     # via mkdocs
 rcslice==1.1.0
     # via mdx-include
-regex==2023.10.3
+regex==2023.12.25
     # via mkdocs-material
 requests==2.31.0
     # via
@@ -119,10 +119,10 @@ soupsieve==2.5
     # via beautifulsoup4
 typer[all]==0.7.0
     # via
-    #   -r docs.in
+    #   -r requirements/docs.in
     #   typer-cli
 typer-cli==0.0.13
-    # via -r docs.in
+    # via -r requirements/docs.in
 urllib3==2.1.0
     # via requests
 watchdog==3.0.0
