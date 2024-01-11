@@ -31,9 +31,9 @@ ghp-import==2.1.0
     # via mkdocs
 idna==3.6
     # via requests
-jinja2==3.1.2
+jinja2==3.1.3
     # via
-    #   -r requirements/docs.in
+    #   -r docs.in
     #   mkdocs
     #   mkdocs-material
 jsbeautifier==1.14.11
@@ -46,29 +46,29 @@ markdown==3.5.1
     #   mkdocs-material
     #   pymdown-extensions
 markdown-include==0.8.1
-    # via -r requirements/docs.in
+    # via -r docs.in
 markupsafe==2.1.3
     # via
     #   jinja2
     #   mkdocs
 mdx-include==1.4.2
-    # via -r requirements/docs.in
+    # via -r docs.in
 mergedeep==1.3.4
     # via mkdocs
 mkdocs==1.5.3
     # via
-    #   -r requirements/docs.in
+    #   -r docs.in
     #   mkdocs-markdownextradata-plugin
     #   mkdocs-material
     #   mkdocs-mermaid2-plugin
 mkdocs-markdownextradata-plugin==0.2.5
-    # via -r requirements/docs.in
+    # via -r docs.in
 mkdocs-material==9.5.2
-    # via -r requirements/docs.in
+    # via -r docs.in
 mkdocs-material-extensions==1.3.1
     # via mkdocs-material
 mkdocs-mermaid2-plugin==1.1.1
-    # via -r requirements/docs.in
+    # via -r docs.in
 packaging==23.2
     # via mkdocs
 paginate==0.5.6
@@ -83,14 +83,14 @@ pygments==2.17.2
     #   rich
 pymdown-extensions==10.5
     # via
-    #   -r requirements/docs.in
+    #   -r docs.in
     #   mkdocs-material
     #   mkdocs-mermaid2-plugin
 python-dateutil==2.8.2
     # via ghp-import
 pyyaml==6.0.1
     # via
-    #   -r requirements/docs.in
+    #   -r docs.in
     #   mkdocs
     #   mkdocs-markdownextradata-plugin
     #   pymdown-extensions
@@ -119,10 +119,10 @@ soupsieve==2.5
     # via beautifulsoup4
 typer[all]==0.7.0
     # via
-    #   -r requirements/docs.in
+    #   -r docs.in
     #   typer-cli
 typer-cli==0.0.13
-    # via -r requirements/docs.in
+    # via -r docs.in
 urllib3==2.1.0
     # via requests
 watchdog==3.0.0
