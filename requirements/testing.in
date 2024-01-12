@@ -6,6 +6,4 @@ requests
 SQLAlchemy
 itsdangerous
 websockets
-uvicorn
-uvloop
 freezegun
