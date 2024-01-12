@@ -4,7 +4,7 @@
 #
 #    pip-compile --extra=all --output-file=requirements/pyproject.txt pyproject.toml
 #
-anyio==4.2.0
+anyio==4.1.0
     # via starlette
 cffi==1.16.0
     # via cryptography
