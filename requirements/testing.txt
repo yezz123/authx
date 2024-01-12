@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=requirements/testing.txt requirements/testing.in
 #
-anyio==4.1.0
+anyio==4.2.0
     # via httpx
 certifi==2023.11.17
     # via
@@ -15,11 +15,11 @@ charset-normalizer==3.3.2
     # via requests
 click==8.1.7
     # via uvicorn
-coverage[toml]==7.3.3
+coverage[toml]==7.4.0
     # via
     #   coverage
     #   pytest-cov
-freezegun==1.3.1
+freezegun==1.4.0
     # via -r requirements/testing.in
 h11==0.14.0
     # via
@@ -27,7 +27,7 @@ h11==0.14.0
     #   uvicorn
 httpcore==1.0.2
     # via httpx
-httpx==0.25.2
+httpx==0.26.0
     # via -r requirements/testing.in
 idna==3.6
     # via
@@ -42,12 +42,12 @@ packaging==23.2
     # via pytest
 pluggy==1.3.0
     # via pytest
-pytest==7.4.3
+pytest==7.4.4
     # via
     #   -r requirements/testing.in
     #   pytest-asyncio
     #   pytest-cov
-pytest-asyncio==0.23.2
+pytest-asyncio==0.23.3
     # via -r requirements/testing.in
 pytest-cov==4.1.0
     # via -r requirements/testing.in
@@ -61,13 +61,13 @@ sniffio==1.3.0
     # via
     #   anyio
     #   httpx
-sqlalchemy==2.0.23
+sqlalchemy==2.0.25
     # via -r requirements/testing.in
 typing-extensions==4.9.0
     # via sqlalchemy
 urllib3==2.1.0
     # via requests
-uvicorn==0.24.0.post1
+uvicorn==0.25.0
     # via -r requirements/testing.in
 uvloop==0.19.0
     # via -r requirements/testing.in
