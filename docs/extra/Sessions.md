@@ -36,7 +36,7 @@ Here is a basic usage example:
 from fastapi import FastAPI, Request
 
 from authx._internal import MemoryIO
-from authx.external import SessionMiddleware
+from authx_extra.session import SessionMiddleware
 
 app = FastAPI()
 app.add_middleware(

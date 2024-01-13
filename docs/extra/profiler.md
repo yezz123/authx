@@ -97,7 +97,7 @@ Make sure to have the necessary dependencies installed:
 <div class="termy">
 
 ```console
-$ pip install authx[profiler]
+$ pip install authx_extra[profiler]
 
 ---> 100%
 ```
@@ -113,7 +113,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
-from authx.external import ProfilerMiddleware
+from authx_extra.profiler import ProfilerMiddleware
 
 
 app = FastAPI()

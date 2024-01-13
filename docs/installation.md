@@ -19,65 +19,25 @@ $ pip install authx
 
 ### Extra Dependencies
 
-#### Profiler Middleware
+After installing the dependency, you can install the extra dependencies, which we have in the [`authx-extra`](https://github.com/yezz123/authx-extra) repository.
 
 <div class="termy">
 
 ```console
-$ pip install authx[profiler]
+$ pip install authx_extra
 
 ---> 100%
 ```
 
 </div>
 
-#### Metrics Middleware
+!!! warning
+     You should install the extra dependency you are aiming to use, ex:
 
-<div class="termy">
-
-```console
-$ pip install authx[metrics]
-
----> 100%
-```
-
-</div>
-
-#### Redis Session
-
-<div class="termy">
-
-```console
-$ pip install authx[session]
-
----> 100%
-```
-
-</div>
-
-#### Cache Dependencies
-
-<div class="termy">
-
-```console
-$ pip install authx[cache]
-
----> 100%
-```
-
-</div>
-
-#### Oauth2 Dependencies
-
-<div class="termy">
-
-```console
-$ pip install authx[oauth2]
-
----> 100%
-```
-
-</div>
+     - `authx_extra[cache]` for Redis support
+     - `authx_extra[profiler]` for Pyinstruments Profiler support
+     - `authx_extra[oauth2]` for OAuth2 support
+     - `authx_extra[metrics]` for prometheus metrics support
 
 ### Development Dependencies
 

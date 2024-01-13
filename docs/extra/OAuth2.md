@@ -20,7 +20,7 @@ This middleware relies exclusively on the `python-jose` library, which it utiliz
 <div class="termy">
 
 ```console
-$ pip install authx[oauth2]
+$ pip install authx_extra[oauth2]
 
 ---> 100%
 ```
@@ -34,7 +34,7 @@ To enable authentication and authorization in your FastAPI application using the
 
 ```python
 from fastapi import FastAPI
-from authx.external import MiddlewareOauth2
+from authx_extra.oauth2 import MiddlewareOauth2
 ```
 
 2. Create a FastAPI application instance:

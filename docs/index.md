@@ -67,6 +67,15 @@ $ pip install authx
   - Cookie authentication backend included
 - middleware for authentication and authorization through JWT.
 - Extensible Error Handling System.
+
+### Extra Features 🎁
+
+!!! notes
+
+    AuthX is designed to be as customizable and adaptable as possible.
+
+    So you need to install [`authx-extra`](https://github.com/yezz123/authx-extra) to get extra features.
+
 - Using Redis as a session store & cache.
 - Support HTTPCache.
 - Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
