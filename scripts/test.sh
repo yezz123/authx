@@ -6,4 +6,4 @@ set -x
 echo "ENV=${ENV}"
 
 export PYTHONPATH=.
-pytest --cov=authx --cov=tests --cov-report=term-missing --cov-fail-under=80
+pytest --cov-report=term-missing --cov-fail-under=80

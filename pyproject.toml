@@ -104,13 +104,14 @@ known-third-party = ["pydantic", "typing_extensions", "sqlalchemy"]
 keep-runtime-typing = true
 
 [tool.coverage.run]
-source = ["authx"]
+source = ["authx", "tests"]
 branch = true
 context = '${CONTEXT}'
 
 [tool.coverage.paths]
 source = [
     "authx/",
+    "tests/",
 ]
 
 [tool.coverage.report]
