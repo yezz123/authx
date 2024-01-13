@@ -18,15 +18,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
-          cache-dependency-path: pyproject.toml
-      - uses: actions/cache@v3
-        id: cache
-        with:
-          path: ${{ env.pythonLocation }}
-          key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}-publish
       - name: Install build dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
         run: pip install build
+      - name: check GITHUB_REF matches package version
+        uses: samuelcolvin/check-python-version@v4.1
+        with:
+          version_file_path: authx/__init__.py
       - name: Build distribution
         run: python -m build
       - name: Publish
