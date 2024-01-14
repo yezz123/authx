@@ -35,11 +35,11 @@ Add a Fully registration and authentication or authorization system to your
 [FastAPI](https://fastapi.tiangolo.com/) project. **AuthX** is designed to be as
 customizable and adaptable as possible.
 
-## [Authx V0.9.x](https://authx-v0.yezz.me/)
+!!! warning
 
-This branch relates to development of authx V1 which is not yet ready for production use.
+    [Authx V0.9.x](https://authx-v0.yezz.me/) This branch relates to development of authx V1 which is not yet ready for production use.
 
-If you're an Authx user, you probably want either Authx V0.9 [Documentation](https://authx-v0.yezz.me/) or, [0.X.X-fix](https://github.com/yezz123/authx/tree/0.X.X-fix) git branch.
+    If you're an Authx user, you probably want either Authx V0.9 [Documentation](https://authx-v0.yezz.me/) or, [0.X.X-fix](https://github.com/yezz123/authx/tree/0.X.X-fix) git branch.
 
 ## Installation 📦
 
@@ -119,7 +119,7 @@ def get_protected(token: RequestToken = Depends()):
           raise HTTPException(401, detail={"message": str(e)}) from e
 ```
 
-## Links 🚧
+## Links 🔗
 
 - [Homepage](https://authx.yezz.me/)
 - [FAQ](https://authx.yezz.me/faq/)
