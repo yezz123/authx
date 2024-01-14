@@ -105,7 +105,7 @@ def get_protected(token: RequestToken = Depends()):
           raise HTTPException(401, detail={"message": str(e)}) from e
 ```
 
-## Contributors and sponsors ✨☕️
+## Contributors and sponsors 👏
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -157,7 +157,7 @@ This project follows the
 [all-contributors](https://github.com/all-contributors/all-contributors)
 specification. Contributions of any kind welcome!
 
-## Links 🚧
+## Links 🔗
 
 - [Homepage](https://authx.yezz.me/)
 - [FAQ](https://authx.yezz.me/faq/)
@@ -167,6 +167,6 @@ specification. Contributions of any kind welcome!
 - [Contributing](https://authx.yezz.me/contributing/)
 - [Help - Sponsors](https://authx.yezz.me/help/)
 
-## License 📝
+## License 📄
 
 This project is licensed under the terms of the MIT License.
