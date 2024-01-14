@@ -35,11 +35,11 @@ Add a Fully registration and authentication or authorization system to your
 [FastAPI](https://fastapi.tiangolo.com/) project. **AuthX** is designed to be as
 customizable and adaptable as possible.
 
-## [Authx V0.9.x](https://authx-v0.yezz.me/)
-
-This branch relates to development of authx V1 which is not yet ready for production use.
-
-If you're a Authx user, you probably want either Authx V0.9 [Documentation](https://authx-v0.yezz.me/) or, [0.X.X-fix](https://github.com/yezz123/authx/tree/0.X.X-fix) git branch.
+> **Notes**:
+>
+> [Authx V0.9.x](https://authx-v0.yezz.me/) This branch relates to development of authx V1 which is not yet ready for production use.
+>
+>If you're a Authx user, you probably want either Authx V0.9 [Documentation](https://authx-v0.yezz.me/) or, [0.X.X-fix](https://github.com/yezz123/authx/tree/0.X.X-fix) git branch.
 
 ## Features 🔧
 
@@ -55,6 +55,13 @@ If you're a Authx user, you probably want either Authx V0.9 [Documentation](http
   - [x] Cookie authentication backend included
 - [x] middleware for authentication and authorization through JWT.
 - [x] Extensible Error Handling System.
+
+### Extra Features 🎁
+
+AuthX is designed to be as customizable and adaptable as possible.
+
+So you need to install [`authx-extra`](https://github.com/yezz123/authx-extra) to get extra features.
+
 - [x] Using Redis as a session store & cache.
 - [x] Support HTTPCache.
 - [x] Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
@@ -98,7 +105,7 @@ def get_protected(token: RequestToken = Depends()):
           raise HTTPException(401, detail={"message": str(e)}) from e
 ```
 
-## Contributors and sponsors ✨☕️
+## Contributors and sponsors 👏
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -150,7 +157,7 @@ This project follows the
 [all-contributors](https://github.com/all-contributors/all-contributors)
 specification. Contributions of any kind welcome!
 
-## Links 🚧
+## Links 🔗
 
 - [Homepage](https://authx.yezz.me/)
 - [FAQ](https://authx.yezz.me/faq/)
@@ -160,6 +167,6 @@ specification. Contributions of any kind welcome!
 - [Contributing](https://authx.yezz.me/contributing/)
 - [Help - Sponsors](https://authx.yezz.me/help/)
 
-## License 📝
+## License 📄
 
 This project is licensed under the terms of the MIT License.

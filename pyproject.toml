@@ -49,6 +49,9 @@ dependencies = [
     "fastapi >=0.65.2,<0.99.0",
     "pyjwt[crypto] >=2.6.0,<3.0.0",
     "pydantic >=1.7.4,!=1.8,!=1.8.1,<2.0.0",
+    "python-dateutil>=2.8,<3.0.0",
+    "pytz>=2023.3,<2024.0",
+    "python-jose>=3.3.0,<4.0.0",
 ]
 
 dynamic = ["version"]
@@ -62,20 +65,10 @@ Documentation = "https://authx.yezz.me/"
 Funding = 'https://github.com/sponsors/yezz123'
 
 [project.optional-dependencies]
-profiler = [
-    "pyinstrument>=4.1.1,<4.6.0",
+extra = [
+    "authx_extra@git+https://github.com/yezz123/authx_extra.git@main",
 ]
-oauth2 = [
-    "python-jose>=3.3.0,<4.0.0",
-]
-metrics = [
-    "prometheus-client>=0.16.0,<1.0.0",
-]
-cache = [
-    "python-dateutil>=2.8,<3.0.0",
-    "redis>=4.3.3,<4.6.1",
-    "pytz>=2023.3,<2024.0",
-]
+
 
 [tool.hatch.version]
 path = "authx/__init__.py"
@@ -111,13 +104,14 @@ known-third-party = ["pydantic", "typing_extensions", "sqlalchemy"]
 keep-runtime-typing = true
 
 [tool.coverage.run]
-source = ["authx"]
+source = ["authx", "tests"]
 branch = true
 context = '${CONTEXT}'
 
 [tool.coverage.paths]
 source = [
     "authx/",
+    "tests/",
 ]
 
 [tool.coverage.report]

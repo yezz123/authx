@@ -4,16 +4,22 @@
 #
 #    pip-compile --extra=all --output-file=requirements/pyproject.txt pyproject.toml
 #
-anyio==4.1.0
+anyio==4.2.0
     # via starlette
 cffi==1.16.0
     # via cryptography
 cryptography==41.0.7
     # via pyjwt
+ecdsa==0.18.0
+    # via python-jose
 fastapi==0.98.0
     # via authx (pyproject.toml)
 idna==3.6
     # via anyio
+pyasn1==0.5.1
+    # via
+    #   python-jose
+    #   rsa
 pycparser==2.21
     # via cffi
 pydantic==1.10.13
@@ -24,6 +30,18 @@ pyjwt[crypto]==2.8.0
     # via
     #   authx (pyproject.toml)
     #   pyjwt
+python-dateutil==2.8.2
+    # via authx (pyproject.toml)
+python-jose==3.3.0
+    # via authx (pyproject.toml)
+pytz==2023.3.post1
+    # via authx (pyproject.toml)
+rsa==4.9
+    # via python-jose
+six==1.16.0
+    # via
+    #   ecdsa
+    #   python-dateutil
 sniffio==1.3.0
     # via anyio
 starlette==0.27.0

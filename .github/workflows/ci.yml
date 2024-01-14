@@ -25,50 +25,46 @@ jobs:
       - uses: pre-commit/action@v3.0.0
         with:
           extra_args: --all-files --verbose
-  test:
-    name: test on python ${{ matrix.python-version }}
-    runs-on: ubuntu-latest
-    services:
-      redis:
-        image: redis
-        ports:
-          - 6379:6379
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+
+  tests:
+
+    name: test py${{ matrix.python-version }} on ${{ matrix.os }}
+
+    runs-on: ${{ matrix.os }}-latest
+
 
     strategy:
-      fail-fast: false
+
       matrix:
-        python-version: ["3.8","3.9", "3.10", "3.11", "3.12"]
+
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+        os: [ubuntu, macos, windows]
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - uses: actions/cache@v3
-        id: cache
-        with:
-          path: ${{ env.pythonLocation }}
-          key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}-test
+
       - name: Install Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
         run: pip install -r requirements/all.txt
-      - name: Test
-        env:
-          ENV: test
-          REDIS_URL: "redis://0.0.0.0:6379"
-        run: pytest --cov=authx --cov-report=html -xv --color=yes --disable-warnings --cov-fail-under=80
+
+      - name: Freeze Dependencies
+        run: pip freeze
+
+      - name: Test with pytest
+        run: bash scripts/test.sh
+
       - name: Upload coverage
         uses: codecov/codecov-action@v3
+
   # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
   check:
     if: always()
-    needs: [lint, test]
+    needs: [lint, tests]
     runs-on: ubuntu-latest
     steps:
       - name: Decide whether the needed jobs succeeded or failed

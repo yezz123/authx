@@ -1,4 +1,3 @@
-from authx._internal._cache import HTTPCache
 from authx._internal._callback import _CallbackHandler
 from authx._internal._error import _ErrorHandler
 from authx._internal._logger import get_logger, log_debug, log_error, log_info, set_log_level
@@ -13,7 +12,6 @@ __all__ = (
     "get_uuid",
     "_CallbackHandler",
     "_ErrorHandler",
-    "HTTPCache",
     "get_logger",
     "set_log_level",
     "log_debug",

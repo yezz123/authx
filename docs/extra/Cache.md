@@ -48,7 +48,7 @@ Make sure to have the necessary dependencies installed:
 <div class="termy">
 
 ```console
-$ pip install authx[cache]
+$ pip install authx_extra[cache]
 
 ---> 100%
 ```
@@ -60,7 +60,7 @@ $ pip install authx[cache]
 ```python
 import os
 import redis
-from authx.external import HTTPCache
+from authx_extra.cache import HTTPCache
 from pytz import timezone
 
 REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/3")
@@ -84,7 +84,7 @@ approaches to take with helpers like `expire_end_of_day` and
 from datetime import datetime
 from fastapi import FastAPI, Request, Response
 from fastapi.responses import JSONResponse
-from authx.external import HTTPCache, cache
+from authx_extra.cache import HTTPCache, cache
 
 @app.get("/b/home")
 @cache(key="b.home", ttl_in_seconds=180)
@@ -191,7 +191,7 @@ explains usage of the cache in service objects and application services.
 ```py
 import os
 import redis
-from authx import HTTPCache, cache, invalidate_cache
+from authx_extra.cache import HTTPCache, cache, invalidate_cache
 
 REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/3")
 redis_client = redis.Redis.from_url(REDIS_URL)

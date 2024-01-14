@@ -79,7 +79,7 @@ Make sure to have the necessary dependencies installed (e.g., `prometheus_client
 <div class="termy">
 
 ```console
-$ pip install authx[metrics]
+$ pip install authx_extra[metrics]
 
 ---> 100%
 ```
@@ -92,7 +92,7 @@ Thats Work by adding a Middleware to your FastAPI application, work on collectin
 
 ```python
 from fastapi import FastAPI
-from authx.external import MetricsMiddleware, get_metrics
+from authx_extra.metrics import MetricsMiddleware, get_metrics
 
 app = FastAPI()
 app.add_middleware(MetricsMiddleware)
