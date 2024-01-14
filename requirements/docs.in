@@ -9,3 +9,7 @@ jinja2
 typer-cli
 typer[all]
 pyyaml
+# For image processing by Material for MkDocs
+pillow
+# For image processing by Material for MkDocs
+cairosvg

@@ -8,8 +8,14 @@ babel==2.14.0
     # via mkdocs-material
 beautifulsoup4==4.12.2
     # via mkdocs-mermaid2-plugin
+cairocffi==1.6.1
+    # via cairosvg
+cairosvg==2.7.1
+    # via -r requirements/docs.in
 certifi==2023.11.17
     # via requests
+cffi==1.16.0
+    # via cairocffi
 charset-normalizer==3.3.2
     # via requests
 click==8.1.7
@@ -23,8 +29,12 @@ colorama==0.4.6
     #   typer-cli
 commonmark==0.9.1
     # via rich
+cssselect2==0.7.0
+    # via cairosvg
 cyclic==1.0.0
     # via mdx-include
+defusedxml==0.7.1
+    # via cairosvg
 editorconfig==0.12.3
     # via jsbeautifier
 ghp-import==2.1.0
@@ -75,8 +85,14 @@ paginate==0.5.6
     # via mkdocs-material
 pathspec==0.12.1
     # via mkdocs
+pillow==10.2.0
+    # via
+    #   -r requirements/docs.in
+    #   cairosvg
 platformdirs==4.1.0
     # via mkdocs
+pycparser==2.21
+    # via cffi
 pygments==2.17.2
     # via
     #   mkdocs-material
@@ -117,6 +133,10 @@ six==1.16.0
     #   python-dateutil
 soupsieve==2.5
     # via beautifulsoup4
+tinycss2==1.2.1
+    # via
+    #   cairosvg
+    #   cssselect2
 typer[all]==0.7.0
     # via
     #   -r requirements/docs.in
@@ -127,6 +147,10 @@ urllib3==2.1.0
     # via requests
 watchdog==3.0.0
     # via mkdocs
+webencodings==0.5.1
+    # via
+    #   cssselect2
+    #   tinycss2
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
