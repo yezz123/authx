@@ -31,6 +31,8 @@ theme:
   - content.code.select
   icon:
     repo: fontawesome/brands/github
+  plugins:
+    - social
   language: en
 repo_name: Yezz123/AuthX
 repo_url: https://github.com/yezz123/AuthX
