@@ -35,11 +35,11 @@ Add a Fully registration and authentication or authorization system to your
 [FastAPI](https://fastapi.tiangolo.com/) project. **AuthX** is designed to be as
 customizable and adaptable as possible.
 
-## [Authx V0.9.x](https://authx-v0.yezz.me/)
-
-This branch relates to development of authx V1 which is not yet ready for production use.
-
-If you're a Authx user, you probably want either Authx V0.9 [Documentation](https://authx-v0.yezz.me/) or, [0.X.X-fix](https://github.com/yezz123/authx/tree/0.X.X-fix) git branch.
+> **Notes**:
+>
+> [Authx V0.9.x](https://authx-v0.yezz.me/) This branch relates to development of authx V1 which is not yet ready for production use.
+>
+>If you're a Authx user, you probably want either Authx V0.9 [Documentation](https://authx-v0.yezz.me/) or, [0.X.X-fix](https://github.com/yezz123/authx/tree/0.X.X-fix) git branch.
 
 ## Features 🔧
 
@@ -55,6 +55,13 @@ If you're a Authx user, you probably want either Authx V0.9 [Documentation](http
   - [x] Cookie authentication backend included
 - [x] middleware for authentication and authorization through JWT.
 - [x] Extensible Error Handling System.
+
+### Extra Features 🎁
+
+AuthX is designed to be as customizable and adaptable as possible.
+
+So you need to install [`authx-extra`](https://github.com/yezz123/authx-extra) to get extra features.
+
 - [x] Using Redis as a session store & cache.
 - [x] Support HTTPCache.
 - [x] Support Sessions and Pre-built CRUD functions and Instance to launch Redis.
