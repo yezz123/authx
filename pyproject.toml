@@ -64,11 +64,6 @@ Homepage = "https://github.com/yezz123/authx"
 Documentation = "https://authx.yezz.me/"
 Funding = 'https://github.com/sponsors/yezz123'
 
-[project.optional-dependencies]
-extra = [
-    "authx_extra@git+https://github.com/yezz123/authx_extra.git@main",
-]
-
 
 [tool.hatch.version]
 path = "authx/__init__.py"
