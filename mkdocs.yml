@@ -1,5 +1,5 @@
 site_name: AuthenticationX
-site_description: Ready to use and customizable Authentications and Oauth2 management for FastAPI ⚡
+site_description: Ready to use and customizable Authentications and Oauth2 management for FastAPI
 site_url: https://authx.yezz.me/
 
 theme:
@@ -31,12 +31,16 @@ theme:
   - content.code.select
   icon:
     repo: fontawesome/brands/github
-  plugins:
-    - social
   language: en
 repo_name: Yezz123/AuthX
 repo_url: https://github.com/yezz123/AuthX
 edit_uri: ""
+
+plugins:
+  - search: null
+  - social:
+      cards_layout_options:
+        background_color: "#009485"
 
 markdown_extensions:
   toc:
@@ -57,9 +61,6 @@ markdown_extensions:
     alternate_style: true
   attr_list:
   md_in_html:
-
-plugins:
-  search: null
 
 nav:
   - About: index.md
