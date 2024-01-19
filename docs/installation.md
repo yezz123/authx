@@ -36,7 +36,6 @@ $ pip install authx_extra
 
      - `authx_extra[cache]` for Redis support
      - `authx_extra[profiler]` for Pyinstruments Profiler support
-     - `authx_extra[oauth2]` for OAuth2 support
      - `authx_extra[metrics]` for prometheus metrics support
 
 ### Development Dependencies
