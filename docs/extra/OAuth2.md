@@ -1,8 +1,5 @@
 # OAuth2 Middleware
 
-!!! warning
-     You need to install dependencies for the middleware you want to use
-
 A middleware for FastAPI that enables authentication and authorization using JSON Web Tokens (JWT).
 
 The purpose of this middleware is to incorporate authentication and authorization functionalities into an API, such as FastAPI, by utilizing access tokens obtained from an external authentication provider like `Microsoft AD` or `Auth0`.
@@ -15,17 +12,9 @@ its sole responsibility is to verify that the access tokens are properly signed 
 
 ## How to install
 
-This middleware relies exclusively on the `python-jose` library, which it utilizes for decoding and validating JWTs.
+!!! warning
+     This middleware relies exclusively on the `python-jose` library, which it utilizes for decoding and validating JWTs.
 
-<div class="termy">
-
-```console
-$ pip install authx_extra[oauth2]
-
----> 100%
-```
-
-</div>
 ## How to Use
 
 To enable authentication and authorization in your FastAPI application using the `MiddlewareOauth2` from the `authx.external` module, follow these steps:
@@ -90,7 +79,7 @@ If your identity provider includes custom claims in the JWT, you can use them fo
 
 ## Websockets
 
-When establishing a websocket connection, the same JWT-based authentication method is required as for regular HTTP requests. If the token is invalid (as defined below), the connection will be terminated with code 1008.
+When establishing a WebSocket connection, the same JWT-based authentication method is required for regular HTTP requests. If the token is invalid (as defined below), the connection will be terminated with code 1008.
 
 ## CORS
 
@@ -170,4 +159,4 @@ The signature of the token is verified using the provided keys.
 
 ### Key Caching Management
 
-Some providers have rotating keys that the server needs to keep up-to-date. To refresh keys periodically, you can pass the `key_refresh_minutes` parameter to the middleware. By default, key refresh is disabled, meaning the key remains constant and is the same as the initially fetched key from the provider.
+Some providers have rotating keys that the server needs to keep up to date. To refresh keys periodically, you can pass the `key_refresh_minutes` parameter to the middleware. By default, key refresh is disabled, meaning the key remains constant and is the same as the initially fetched key from the provider.
