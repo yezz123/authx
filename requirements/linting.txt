@@ -16,7 +16,7 @@ filelock==3.13.1
     # via virtualenv
 identify==2.5.33
     # via pre-commit
-mypy==1.7.1
+mypy==1.8.0
     # via -r requirements/linting.in
 mypy-extensions==1.0.0
     # via
