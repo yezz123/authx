@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=requirements/linting.txt requirements/linting.in
 #
-black==23.12.1
+black==24.1.1
     # via -r requirements/linting.in
 cfgv==3.4.0
     # via pre-commit
