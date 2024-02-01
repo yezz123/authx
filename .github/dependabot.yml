@@ -13,5 +13,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      python-packages:
+        patterns:
+          - "*"
     commit-message:
       prefix: ⬆
