@@ -69,7 +69,7 @@ Funding = 'https://github.com/sponsors/yezz123'
 path = "authx/__init__.py"
 
 
-[tool.ruff]
+[tool.ruff.lint]
 line-length = 120
 mccabe = { max-complexity = 14 }
 select = [
@@ -89,13 +89,13 @@ ignore = [
     "E721",  # Do not compare types, use `isinstance()`
 ]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-third-party = ["pydantic", "typing_extensions", "sqlalchemy"]
 
-[tool.ruff.pyupgrade]
+[tool.ruff.lint.pyupgrade]
 keep-runtime-typing = true
 
 [tool.coverage.run]
