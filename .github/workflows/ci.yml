@@ -59,7 +59,7 @@ jobs:
         run: bash scripts/test.sh
 
       - name: Upload coverage
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
 
   # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
   check:
