@@ -83,7 +83,9 @@ def request_body(config: AuthXConfig) -> Coroutine[Any, Any, Dict[str, Any]]:
 
 
 @pytest.fixture(scope="function")
-def http_request(request_body, request_headers, request_cookies, request_csrf_headers, request_query) -> Request:
+def http_request(
+    request_body, request_headers, request_cookies, request_csrf_headers, request_query
+) -> Request:
     return Request(
         scope={
             "method": "POST",
@@ -125,7 +127,9 @@ async def test_get_token_from_query_with_exception(config: AuthXConfig):
 
 
 @pytest.mark.asyncio
-async def test_get_token_from_headers(config: AuthXConfig, request_headers: List[List[str]]):
+async def test_get_token_from_headers(
+    config: AuthXConfig, request_headers: List[List[str]]
+):
     req = Request(
         scope={
             "type": "http",
@@ -173,7 +177,9 @@ async def test_get_token_from_headers_with_token_exception(config: AuthXConfig):
 
 
 @pytest.mark.asyncio
-async def test_get_token_from_cookies_get(config: AuthXConfig, request_cookies: List[List[str]]):
+async def test_get_token_from_cookies_get(
+    config: AuthXConfig, request_cookies: List[List[str]]
+):
     req = Request(
         scope={
             "method": "GET",
@@ -189,7 +195,9 @@ async def test_get_token_from_cookies_get(config: AuthXConfig, request_cookies: 
     assert request_token.location == "cookies"
     assert request_token.token == "TOKEN"
     # Test on GET with Refresh Token
-    request_token = await _get_token_from_cookies(request=req, config=config, refresh=True)
+    request_token = await _get_token_from_cookies(
+        request=req, config=config, refresh=True
+    )
     assert request_token is not None
     assert request_token.type == "refresh"
     assert request_token.location == "cookies"
@@ -218,7 +226,9 @@ async def test_get_token_from_cookies_post(
     assert request_token.csrf == "ACCESS_CSRF_TOKEN"
     assert request_token.token == "TOKEN"
 
-    request_token = await _get_token_from_cookies(request=req, config=config, refresh=True)
+    request_token = await _get_token_from_cookies(
+        request=req, config=config, refresh=True
+    )
     assert request_token is not None
     assert request_token.type == "refresh"
     assert request_token.location == "cookies"
@@ -248,7 +258,9 @@ async def test_get_token_from_cookies_post_without_csrf_exception(
 
 
 @pytest.mark.asyncio
-async def test_get_token_from_cookies_post_with_csrf_exception(config: AuthXConfig, request_cookies: List[List[str]]):
+async def test_get_token_from_cookies_post_with_csrf_exception(
+    config: AuthXConfig, request_cookies: List[List[str]]
+):
     # Test on POST
     req = Request(
         scope={
@@ -296,7 +308,9 @@ async def test_get_token_from_json_post_content_type_exception(
 
 
 @pytest.mark.asyncio
-async def test_get_token_from_json_post(config: AuthXConfig, request_body: Coroutine[Any, Any, Dict[str, Any]]):
+async def test_get_token_from_json_post(
+    config: AuthXConfig, request_body: Coroutine[Any, Any, Dict[str, Any]]
+):
     # Test on POST
     req = Request(
         scope={
@@ -400,7 +414,9 @@ async def test_get_token_from_request_with_exception(config: AuthXConfig):
 
 
 @pytest.mark.asyncio
-async def test_get_token_from_request_with_locations(http_request: Request, config: AuthXConfig):
+async def test_get_token_from_request_with_locations(
+    http_request: Request, config: AuthXConfig
+):
     request_token = await _get_token_from_request(
         request=http_request, config=config, locations=["query"], refresh=True
     )
@@ -410,7 +426,9 @@ async def test_get_token_from_request_with_locations(http_request: Request, conf
     assert request_token.csrf is None
     assert request_token.token == "TOKEN"
 
-    request_token = await _get_token_from_request(request=http_request, config=config, locations=["json"], refresh=True)
+    request_token = await _get_token_from_request(
+        request=http_request, config=config, locations=["json"], refresh=True
+    )
     assert request_token is not None
     assert request_token.type == "refresh"
     assert request_token.location == "json"
@@ -427,4 +445,6 @@ async def test_get_token_from_request_with_locations(http_request: Request, conf
     assert request_token.token == "REFRESH_TOKEN"
 
     with pytest.raises(MissingTokenError):
-        await _get_token_from_request(request=http_request, config=config, locations=[], refresh=True)
+        await _get_token_from_request(
+            request=http_request, config=config, locations=[], refresh=True
+        )

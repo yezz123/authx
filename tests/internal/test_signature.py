@@ -41,7 +41,9 @@ def test_token_expiration():
 
     time.sleep(2)
     data, err = serializer.decode(token)
-    assert data is None and err == "SignatureExpired", "Token did not expire as expected."
+    assert (
+        data is None and err == "SignatureExpired"
+    ), "Token did not expire as expected."
 
 
 def test_token_no_expiration():
@@ -64,4 +66,6 @@ def test_token_tampering():
 
     tampered_token = f"{token[:-1]}a"
     data, err = serializer.decode(tampered_token)
-    assert data is None and err == "InvalidSignature", "Tampered token did not cause an error as expected."
+    assert (
+        data is None and err == "InvalidSignature"
+    ), "Tampered token did not cause an error as expected."

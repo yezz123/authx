@@ -13,12 +13,16 @@ from authx.schema import RequestToken
 from authx.types import TokenLocation, TokenLocations
 
 
-async def _get_token_from_headers(request: Request, config: AuthXConfig, **kwargs) -> RequestToken:
+async def _get_token_from_headers(
+    request: Request, config: AuthXConfig, **kwargs
+) -> RequestToken:
     """Get access token from headers"""
     # Get Header
     auth_header: Optional[str] = request.headers.get(config.JWT_HEADER_NAME)
     if auth_header is None:
-        raise MissingTokenError(f"Missing '{config.JWT_HEADER_TYPE}' in '{config.JWT_HEADER_NAME}' header.")
+        raise MissingTokenError(
+            f"Missing '{config.JWT_HEADER_TYPE}' in '{config.JWT_HEADER_NAME}' header."
+        )
 
     if config.JWT_HEADER_TYPE:
         token = auth_header.replace(f"{config.JWT_HEADER_TYPE} ", "")
@@ -58,7 +62,10 @@ async def _get_token_from_cookies(
         raise MissingTokenError(f"Missing cookie '{cookie_key}'.")
 
     csrf_token = None
-    if config.JWT_COOKIE_CSRF_PROTECT and request.method.upper() in config.JWT_CSRF_METHODS:
+    if (
+        config.JWT_COOKIE_CSRF_PROTECT
+        and request.method.upper() in config.JWT_CSRF_METHODS
+    ):
         csrf_token = request.headers.get(csrf_header_key.lower())
         if not csrf_token and config.JWT_CSRF_CHECK_FORM:
             form_data = await request.form()
@@ -75,15 +82,21 @@ async def _get_token_from_cookies(
     )
 
 
-async def _get_token_from_query(request: Request, config: AuthXConfig, **kwargs) -> RequestToken:
+async def _get_token_from_query(
+    request: Request, config: AuthXConfig, **kwargs
+) -> RequestToken:
     query_token = request.query_params.get(config.JWT_QUERY_STRING_NAME)
     if query_token is None:
-        raise MissingTokenError(f"Missing '{config.JWT_QUERY_STRING_NAME}' in query parameters")
+        raise MissingTokenError(
+            f"Missing '{config.JWT_QUERY_STRING_NAME}' in query parameters"
+        )
 
     return RequestToken(token=query_token, location="query")
 
 
-async def _get_token_from_json(request: Request, config: AuthXConfig, refresh: bool = False, **kwargs) -> RequestToken:
+async def _get_token_from_json(
+    request: Request, config: AuthXConfig, refresh: bool = False, **kwargs
+) -> RequestToken:
     if not (request.headers.get("content-type") == "application/json"):
         raise MissingTokenError("Invalid content-type. Must be application/json")
 

@@ -20,7 +20,9 @@ def app():
 
 @pytest.mark.asyncio
 async def test_error_handler(authx: AuthX):
-    error_handler = authx._error_handler(ValueError, status_code=100, message="Sample Message")
+    error_handler = authx._error_handler(
+        ValueError, status_code=100, message="Sample Message"
+    )
     try:
         raise ValueError("Execution Message")
     except ValueError as e:

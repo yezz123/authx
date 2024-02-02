@@ -14,7 +14,15 @@ from authx.exceptions import (
     TokenTypeError,
 )
 from authx.token import create_token, decode_token
-from authx.types import AlgorithmType, DateTimeExpression, Numeric, StringOrSequence, TokenLocation, TokenType, Union
+from authx.types import (
+    AlgorithmType,
+    DateTimeExpression,
+    Numeric,
+    StringOrSequence,
+    TokenLocation,
+    TokenType,
+    Union,
+)
 
 
 class TokenPayload(BaseModel):
@@ -24,7 +32,9 @@ class TokenPayload(BaseModel):
     aud: Optional[str] = None
     exp: Optional[Union[Numeric, DateTimeExpression]] = None
     nbf: Optional[Union[Numeric, DateTimeExpression]] = None
-    iat: Optional[Union[Numeric, DateTimeExpression]] = Field(default_factory=lambda: int(get_now_ts()))
+    iat: Optional[Union[Numeric, DateTimeExpression]] = Field(
+        default_factory=lambda: int(get_now_ts())
+    )
     type: Optional[str] = None
     csrf: Optional[str] = None
     scopes: Optional[List[str]] = None
@@ -48,7 +58,9 @@ class TokenPayload(BaseModel):
         elif isinstance(self.iat, datetime.datetime):
             return self.iat
         else:
-            raise TypeError("'iat' claim should be of type float | int | datetime.datetime")
+            raise TypeError(
+                "'iat' claim should be of type float | int | datetime.datetime"
+            )
 
     @property
     def expiry_datetime(self) -> datetime.datetime:
@@ -59,7 +71,9 @@ class TokenPayload(BaseModel):
         elif isinstance(self.exp, (float, int)):
             return datetime.datetime.fromtimestamp(self.exp, tz=datetime.timezone.utc)
         else:
-            raise TypeError("'exp' claim should be of type float | int | datetime.datetime")
+            raise TypeError(
+                "'exp' claim should be of type float | int | datetime.datetime"
+            )
 
     @property
     def time_until_expiry(self) -> datetime.timedelta:
