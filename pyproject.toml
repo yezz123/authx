@@ -70,8 +70,6 @@ path = "authx/__init__.py"
 
 
 [tool.ruff.lint]
-line-length = 120
-mccabe = { max-complexity = 14 }
 select = [
     "E",  # pycodestyle errors
     "W",  # pycodestyle warnings
