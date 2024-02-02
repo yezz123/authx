@@ -11,7 +11,13 @@ from authx.core import _get_token_from_request
 from authx.dependencies import AuthXDependency
 from authx.exceptions import AuthXException, MissingTokenError, RevokedTokenError
 from authx.schema import RequestToken, TokenPayload
-from authx.types import DateTimeExpression, StringOrSequence, T, TokenLocations, TokenType
+from authx.types import (
+    DateTimeExpression,
+    StringOrSequence,
+    T,
+    TokenLocations,
+    TokenType,
+)
 
 
 class AuthX(_CallbackHandler[T], _ErrorHandler):
@@ -31,7 +37,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
 
     """
 
-    def __init__(self, config: AuthXConfig = AuthXConfig(), model: Optional[T] = Dict[str, Any]) -> None:
+    def __init__(
+        self, config: AuthXConfig = AuthXConfig(), model: Optional[T] = Dict[str, Any]
+    ) -> None:
         """AuthX base object
 
         Args:
@@ -75,7 +83,11 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         # Handle expiry date
         exp = expiry
         if exp is None:
-            exp = self.config.JWT_ACCESS_TOKEN_EXPIRES if type == "access" else self.config.JWT_REFRESH_TOKEN_EXPIRES
+            exp = (
+                self.config.JWT_ACCESS_TOKEN_EXPIRES
+                if type == "access"
+                else self.config.JWT_REFRESH_TOKEN_EXPIRES
+            )
         # Handle CSRF
         csrf = None
         if self.config.has_location("cookies") and self.config.JWT_COOKIE_CSRF_PROTECT:
@@ -243,7 +255,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         optional: bool = False,
     ) -> Optional[RequestToken]:
         if refresh and locations is None:
-            locations = list(set(self.config.JWT_TOKEN_LOCATION).intersection(["cookies", "json"]))
+            locations = list(
+                set(self.config.JWT_TOKEN_LOCATION).intersection(["cookies", "json"])
+            )
         elif (not refresh) and locations is None:
             locations = list(self.config.JWT_TOKEN_LOCATION)
         try:
@@ -423,7 +437,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             response (Response): response to set cookie on
             max_age (Optional[int], optional): Max Age cookie paramater. Defaults to None.
         """
-        self._set_cookies(token=token, type="access", response=response, max_age=max_age)
+        self._set_cookies(
+            token=token, type="access", response=response, max_age=max_age
+        )
 
     def set_refresh_cookies(
         self,
@@ -438,7 +454,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             response (Response): response to set cookie on
             max_age (Optional[int], optional): Max Age cookie paramater. Defaults to None.
         """
-        self._set_cookies(token=token, type="refresh", response=response, max_age=max_age)
+        self._set_cookies(
+            token=token, type="refresh", response=response, max_age=max_age
+        )
 
     def unset_access_cookies(
         self,
@@ -556,7 +574,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         uid = token.sub
         return self._get_current_subject(uid=uid)
 
-    def get_token_from_request(self, type: TokenType = "access", optional: bool = True) -> Optional[RequestToken]:
+    def get_token_from_request(
+        self, type: TokenType = "access", optional: bool = True
+    ) -> Optional[RequestToken]:
         """Return token from response if available
 
         Args:
@@ -576,7 +596,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         """
 
         async def _token_getter(request: Request):
-            return await self._get_token_from_request(request, optional=optional, refresh=(type == "refresh"))
+            return await self._get_token_from_request(
+                request, optional=optional, refresh=(type == "refresh")
+            )
 
         return _token_getter
 
@@ -589,9 +611,15 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         Returns:
             bool: True if request allows for refreshing access token
         """
-        if request.url.components.path in self.config.JWT_IMPLICIT_REFRESH_ROUTE_EXCLUDE:
+        if (
+            request.url.components.path
+            in self.config.JWT_IMPLICIT_REFRESH_ROUTE_EXCLUDE
+        ):
             return False
-        elif request.url.components.path in self.config.JWT_IMPLICIT_REFRESH_ROUTE_INCLUDE:
+        elif (
+            request.url.components.path
+            in self.config.JWT_IMPLICIT_REFRESH_ROUTE_INCLUDE
+        ):
             return True
         elif request.method in self.config.JWT_IMPLICIT_REFRESH_METHOD_EXCLUDE:
             return False
@@ -600,7 +628,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         else:
             return True
 
-    async def implicit_refresh_middleware(self, request: Request, call_next: Coroutine) -> Response:
+    async def implicit_refresh_middleware(
+        self, request: Request, call_next: Coroutine
+    ) -> Response:
         """FastAPI Middleware to enable token refresh for an APIRouter
 
         Args:
@@ -625,7 +655,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         """
         response = await call_next(request)
 
-        request_condition = self.config.has_location("cookies") and self._implicit_refresh_enabled_for_request(request)
+        request_condition = self.config.has_location(
+            "cookies"
+        ) and self._implicit_refresh_enabled_for_request(request)
 
         if request_condition:
             with contextlib.suppress(AuthXException):
@@ -637,7 +669,12 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
                     optional=False,
                 )
                 payload = self.verify_token(token, verify_fresh=False)
-                if payload.time_until_expiry < self.config.JWT_IMPLICIT_REFRESH_DELTATIME:
-                    new_token = self.create_access_token(uid=payload.sub, fresh=False, data=payload.extra_dict)
+                if (
+                    payload.time_until_expiry
+                    < self.config.JWT_IMPLICIT_REFRESH_DELTATIME
+                ):
+                    new_token = self.create_access_token(
+                        uid=payload.sub, fresh=False, data=payload.extra_dict
+                    )
                     self.set_access_cookies(new_token, response=response)
         return response

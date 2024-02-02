@@ -19,7 +19,10 @@ def test_create_store(memory_io):
 
 def test_get_store_existing(memory_io):
     session_id = "123"
-    memory_io.raw_memory_store[session_id] = {"created_at": int(time()), "store": {"key": "value"}}
+    memory_io.raw_memory_store[session_id] = {
+        "created_at": int(time()),
+        "store": {"key": "value"},
+    }
     store = memory_io.get_store(session_id)
     assert store == {"key": "value"}
 
@@ -32,7 +35,10 @@ def test_get_store_nonexistent(memory_io):
 
 def test_save_store(memory_io):
     session_id = "123"
-    memory_io.raw_memory_store[session_id] = {"created_at": int(time()), "store": {"key": "value"}}
+    memory_io.raw_memory_store[session_id] = {
+        "created_at": int(time()),
+        "store": {"key": "value"},
+    }
     memory_io.save_store(session_id)
     assert memory_io.get_store(session_id) == {"key": "value"}
 

@@ -1,7 +1,13 @@
 import logging
 from unittest.mock import patch
 
-from authx._internal._logger import get_logger, log_debug, log_error, log_info, set_log_level
+from authx._internal._logger import (
+    get_logger,
+    log_debug,
+    log_error,
+    log_info,
+    set_log_level,
+)
 
 
 def test_get_logger():

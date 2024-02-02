@@ -23,7 +23,9 @@ def valid_payload():
         scopes=["read", "write"],
         exp=datetime.timedelta(minutes=20),
         nbf=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc),
-        iat=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc).timestamp(),
+        iat=datetime.datetime(
+            2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc
+        ).timestamp(),
     )
 
 
@@ -37,7 +39,9 @@ def valid_refresh_payload():
         scopes=["read", "write"],
         exp=datetime.timedelta(minutes=20),
         nbf=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc),
-        iat=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc).timestamp(),
+        iat=datetime.datetime(
+            2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc
+        ).timestamp(),
     )
 
 

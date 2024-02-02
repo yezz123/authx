@@ -18,7 +18,10 @@ class MemoryIO:
         return session_id not in self.raw_memory_store
 
     def create_store(self, session_id):
-        self.raw_memory_store[session_id] = {"created_at": int(time.time()), "store": {}}
+        self.raw_memory_store[session_id] = {
+            "created_at": int(time.time()),
+            "store": {},
+        }
         self.save_store(session_id)
         return self.raw_memory_store.get(session_id).get("store")
 

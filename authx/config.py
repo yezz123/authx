@@ -5,7 +5,13 @@ from jwt.algorithms import get_default_algorithms, requires_cryptography
 from pydantic import BaseSettings, Field
 
 from authx.exceptions import BadConfigurationError
-from authx.types import AlgorithmType, HTTPMethods, SameSitePolicy, StringOrSequence, TokenLocations
+from authx.types import (
+    AlgorithmType,
+    HTTPMethods,
+    SameSitePolicy,
+    StringOrSequence,
+    TokenLocations,
+)
 
 
 class AuthXConfig(BaseSettings):
@@ -24,7 +30,9 @@ class AuthXConfig(BaseSettings):
 
     JWT_ACCESS_TOKEN_EXPIRES: Optional[timedelta] = timedelta(minutes=15)
     JWT_ALGORITHM: AlgorithmType = "HS256"
-    JWT_DECODE_ALGORITHMS: Sequence[AlgorithmType] = Field(default_factory=lambda: ["HS256"])
+    JWT_DECODE_ALGORITHMS: Sequence[AlgorithmType] = Field(
+        default_factory=lambda: ["HS256"]
+    )
     JWT_DECODE_AUDIENCE: Optional[StringOrSequence] = None
     JWT_DECODE_ISSUER: Optional[str] = None
     JWT_DECODE_LEEWAY: Optional[int] = 0
@@ -59,7 +67,9 @@ class AuthXConfig(BaseSettings):
     JWT_ACCESS_CSRF_HEADER_NAME: str = "X-CSRF-TOKEN"
     JWT_CSRF_CHECK_FORM: bool = False
     JWT_CSRF_IN_COOKIES: bool = True
-    JWT_CSRF_METHODS: HTTPMethods = Field(default_factory=lambda: ["POST", "PUT", "PATCH", "DELETE"])
+    JWT_CSRF_METHODS: HTTPMethods = Field(
+        default_factory=lambda: ["POST", "PUT", "PATCH", "DELETE"]
+    )
     JWT_REFRESH_CSRF_COOKIE_NAME: str = "csrf_refresh_token"
     JWT_REFRESH_CSRF_COOKIE_PATH: str = "/"
     JWT_REFRESH_CSRF_FIELD_NAME: str = "csrf_token"
@@ -80,12 +90,18 @@ class AuthXConfig(BaseSettings):
     @property
     def is_algo_symmetric(self) -> bool:
         """Check if the JWT_ALGORITHM is a symmetric encryption algorithm"""
-        return self.JWT_ALGORITHM in get_default_algorithms() and self.JWT_ALGORITHM not in requires_cryptography
+        return (
+            self.JWT_ALGORITHM in get_default_algorithms()
+            and self.JWT_ALGORITHM not in requires_cryptography
+        )
 
     @property
     def is_algo_asymmetric(self) -> bool:
         """Check if the JWT_ALGORITHM is an asymmetric encryption algorithm"""
-        return self.JWT_ALGORITHM in get_default_algorithms() and self.JWT_ALGORITHM in requires_cryptography
+        return (
+            self.JWT_ALGORITHM in get_default_algorithms()
+            and self.JWT_ALGORITHM in requires_cryptography
+        )
 
     def _get_key(self, crypto_value: str) -> str:
         """Get the key for the algorithm type (symmetric or asymmetric) and the algorithm"""
