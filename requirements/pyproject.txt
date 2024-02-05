@@ -12,7 +12,7 @@ cryptography==41.0.7
     # via pyjwt
 ecdsa==0.18.0
     # via python-jose
-fastapi==0.98.0
+fastapi==0.109.1
     # via authx (pyproject.toml)
 idna==3.6
     # via anyio
