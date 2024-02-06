@@ -8,7 +8,7 @@ anyio==4.2.0
     # via starlette
 cffi==1.16.0
     # via cryptography
-cryptography==41.0.7
+cryptography==42.0.0
     # via pyjwt
 ecdsa==0.18.0
     # via python-jose
