@@ -20,6 +20,9 @@
 <a href="https://pepy.tech/project/authx" target="_blank">
     <img src="https://static.pepy.tech/badge/authx" alt="Test">
 </a>
+<a href="https://pydantic.dev" target="_blank">
+    <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/pydantic/pydantic/main/docs/badge/v2.json" alt="Pydantic Version 2">
+</a>
 </p>
 </p>
 
@@ -43,7 +46,7 @@ customizable and adaptable as possible.
 
 ## Features 🔧
 
-- [x] Support Python 3.8+.
+- [x] Support Python 3.8+ & Pydantic 2.0+.
 - [x] Multiple customizable authentication backend:
   - [x] JWT authentication backend included
     - [x] JWT encoding/decoding for application authentication

@@ -20,6 +20,9 @@
 <a href="https://pepy.tech/project/authx" target="_blank">
     <img src="https://static.pepy.tech/badge/authx" alt="Total Downloads">
 </a>
+<a href="https://pydantic.dev" target="_blank">
+    <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/pydantic/pydantic/main/docs/badge/v2.json" alt="Pydantic Version 2">
+</a>
 </p>
 </p>
 
@@ -55,7 +58,7 @@ $ pip install authx
 
 ## Features 🔧
 
-- Support Python 3.8+.
+- Support Python 3.8+ & Pydantic 2.0+.
 - Multiple customizable authentication backend:
   - JWT authentication backend included
     - JWT encoding/decoding for application authentication
