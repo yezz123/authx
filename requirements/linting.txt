@@ -28,7 +28,7 @@ packaging==23.2
     # via black
 pathspec==0.12.1
     # via black
-platformdirs==4.1.0
+platformdirs==4.2.0
     # via
     #   black
     #   virtualenv
@@ -38,7 +38,7 @@ pyupgrade==3.15.0
     # via -r requirements/linting.in
 pyyaml==6.0.1
     # via pre-commit
-ruff==0.2.0
+ruff==0.2.1
     # via -r requirements/linting.in
 tokenize-rt==5.2.0
     # via pyupgrade
