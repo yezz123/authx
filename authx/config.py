@@ -2,7 +2,8 @@ from datetime import timedelta
 from typing import List, Optional, Sequence
 
 from jwt.algorithms import get_default_algorithms, requires_cryptography
-from pydantic import BaseSettings, Field
+from pydantic import Field
+from pydantic_settings import BaseSettings
 
 from authx.exceptions import BadConfigurationError
 from authx.types import (
