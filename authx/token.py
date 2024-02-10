@@ -44,36 +44,39 @@ def create_token(
     if type == "access":
         jwt_claims["fresh"] = fresh
 
-    if csrf and not isinstance(csrf, str):
-        jwt_claims["csrf"] = get_uuid()
+    if isinstance(csrf, bool):
+        if csrf:
+            jwt_claims["csrf"] = get_uuid()
+        else:
+            jwt_claims["csrf"] = ""
     elif isinstance(csrf, str):
         jwt_claims["csrf"] = csrf
 
     if isinstance(issued, datetime.datetime):
-        jwt_claims["iat"] = issued.timestamp()
+        jwt_claims["iat"] = issued.timestamp()  # type: ignore
     elif isinstance(issued, (float, int)):
         jwt_claims["iat"] = issued
     else:
-        jwt_claims["iat"] = get_now_ts()
+        jwt_claims["iat"] = get_now_ts()  # type: ignore
 
     if isinstance(expiry, datetime.datetime):
-        jwt_claims["exp"] = expiry.timestamp()
+        jwt_claims["exp"] = expiry.timestamp()  # type: ignore
     elif isinstance(expiry, datetime.timedelta):
-        jwt_claims["exp"] = (now + expiry).timestamp()
+        jwt_claims["exp"] = (now + expiry).timestamp()  # type: ignore
     elif isinstance(expiry, (float, int)):
         jwt_claims["exp"] = expiry
 
     if audience:
-        jwt_claims["aud"] = audience
+        jwt_claims["aud"] = audience  # type: ignore
     if issuer:
         jwt_claims["iss"] = issuer
 
     if isinstance(not_before, datetime.datetime):
-        jwt_claims["nbf"] = not_before.timestamp()
+        jwt_claims["nbf"] = not_before.timestamp()  # type: ignore
     elif isinstance(not_before, datetime.timedelta):
-        jwt_claims["nbf"] = (now + not_before).timestamp()
+        jwt_claims["nbf"] = (now + not_before).timestamp()  # type: ignore
     elif isinstance(not_before, (int, float)):
-        jwt_claims["nbf"] = not_before
+        jwt_claims["nbf"] = not_before  # type: ignore
 
     payload = {**additional_claims, **jwt_claims}
 
@@ -83,7 +86,7 @@ def create_token(
 def decode_token(
     token: str,
     key: str,
-    algorithms: Sequence[AlgorithmType] = ["HS256"],
+    algorithms: Optional[Sequence[AlgorithmType]] = None,
     audience: Optional[StringOrSequence] = None,
     issuer: Optional[str] = None,
     verify: bool = True,
@@ -93,7 +96,7 @@ def decode_token(
         return jwt.decode(
             jwt=token,
             key=key,
-            algorithms=algorithms,
+            algorithms=algorithms if algorithms is not None else ["HS256"],  # type: ignore
             audience=audience,
             issuer=issuer,
             options={"verify_signature": verify},

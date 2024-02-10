@@ -1,4 +1,4 @@
-from typing import Generic, Optional
+from typing import Generic, Optional, ParamSpecKwargs
 
 from authx.types import ModelCallback, T, TokenCallback
 
@@ -66,15 +66,16 @@ class _CallbackHandler(Generic[T]):
         """Set callback for token"""
         self.callback_is_token_in_blocklist = callback
 
-    def _get_current_subject(self, uid: str, **kwargs) -> T:
+    def _get_current_subject(self, uid: str, **kwargs: ParamSpecKwargs) -> Optional[T]:
         """Get current model instance from callback"""
         self._check_model_callback_is_set()
-        callback: ModelCallback[T] = self.callback_get_model_instance
-        return callback(uid, **kwargs)
+        callback: Optional[ModelCallback[T]] = self.callback_get_model_instance
+        return callback(uid, **kwargs) if callback is not None else None
 
-    def is_token_in_blocklist(self, token: str, **kwargs) -> bool:
+    def is_token_in_blocklist(self, token: str, **kwargs: ParamSpecKwargs) -> bool:
         """Check if token is in blocklist"""
         if self._check_token_callback_is_set(ignore_errors=True):
-            callback: TokenCallback = self.callback_is_token_in_blocklist
-            return callback(token, **kwargs)
+            callback: Optional[TokenCallback] = self.callback_is_token_in_blocklist
+            if callback is not None:
+                return callback(token, **kwargs)
         return False
