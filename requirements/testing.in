@@ -7,3 +7,5 @@ SQLAlchemy
 itsdangerous
 websockets
 freezegun
+types-python-dateutil
+types-pytz
