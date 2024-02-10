@@ -25,6 +25,8 @@ jobs:
       - uses: pre-commit/action@v3.0.0
         with:
           extra_args: --all-files --verbose
+      - name: Typecheck with mypy
+        run: bash scripts/mypy.sh
 
   tests:
 
