@@ -1,4 +1,9 @@
-from typing import Generic, Optional, ParamSpecKwargs
+try:
+    from typing import ParamSpecKwargs
+except Exception:
+    from typing_extensions import ParamSpecKwargs
+
+from typing import Generic, Optional
 
 from authx.types import ModelCallback, T, TokenCallback
 
