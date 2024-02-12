@@ -19,6 +19,8 @@ coverage[toml]==7.4.1
     #   pytest-cov
 freezegun==1.4.0
     # via -r requirements/testing.in
+greenlet==3.0.3
+    # via sqlalchemy
 h11==0.14.0
     # via httpcore
 httpcore==1.0.2
@@ -57,7 +59,7 @@ sniffio==1.3.0
     # via
     #   anyio
     #   httpx
-sqlalchemy==2.0.25
+sqlalchemy==2.0.26
     # via -r requirements/testing.in
 typing-extensions==4.9.0
     # via sqlalchemy
