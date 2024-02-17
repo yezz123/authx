@@ -64,7 +64,7 @@ jobs:
           uv-version: "0.1.2"
 
       - name: setup UV
-        run: uv venv venv
+        run: uv venv
 
       - name: Install Dependencies
         run: uv pip install -r requirements/pyproject.txt && uv pip install -r requirements/testing.txt
@@ -75,7 +75,7 @@ jobs:
       - name: Test with pytest
         run: pytest --cov-report=term-missing --cov-fail-under=80
         env:
-          PYTHONPATH: venv/bin/python
+          PYTHONPATH: .venv/bin/python
 
       - name: Upload coverage
         uses: codecov/codecov-action@v4
