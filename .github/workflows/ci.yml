@@ -72,18 +72,26 @@ jobs:
       - name: Freeze Dependencies
         run: uv pip freeze
 
-      - name: Test with pytest
+      - name: Test with pytest on Windows - Python ${{ matrix.python-version }}
+        if: ${{ matrix.os == 'windows' }}
         run: |
-          if [ "${{ matrix.os }}" == "windows" ]; then
-            .\.venv\Scripts\activate.ps1 && coverage run -m pytest --durations=10
-          else
-            source .venv/bin/activate && coverage run -m pytest --durations=10
-          fi
+          .\.venv\Scripts\activate.ps1 && coverage run -m pytest --durations=10
+        env:
+          CONTEXT: ${{ runner.os }}-py${{ matrix.python-version }}-with-deps
+
+      - name: Test with pytest on POSIX - Python ${{ matrix.python-version }}
+        if: ${{ matrix.os != 'windows' }}
+        run: |
+          source .venv/bin/activate && coverage run -m pytest --durations=10
         env:
             CONTEXT: ${{ runner.os }}-py${{ matrix.python-version }}-with-deps
 
       - name: Upload coverage
+        if: ${{ matrix.os == 'ubuntu' }}
         uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: .coverage
 
   # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
   check:
