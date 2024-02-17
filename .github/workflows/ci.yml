@@ -63,8 +63,15 @@ jobs:
         with:
           uv-version: "0.1.2"
 
-      - name: Create virtual environment
-        run: uv venv
+      - name: Setup venv for windows
+        if: matrix.os == 'windows'
+        run: |
+          uv venv && .\.venv\Scripts\activate.ps1
+
+      - name: Setup venv for linux and macos
+        if: matrix.os != 'windows'
+        run: |
+          uv venv && source .venv/bin/activate
 
       - name: Install Dependencies
         run: uv pip install -r requirements/pyproject.txt && uv pip install -r requirements/testing.txt
@@ -73,14 +80,7 @@ jobs:
         run: uv pip freeze
 
       - name: Test with pytest
-        run: |
-          if [ "${{ matrix.os }}" = "windows" ]; then
-            .\.venv\Scripts\activate.ps1
-            pytest --cov-report=term-missing --cov-fail-under=80
-          else
-            source .venv/bin/activate
-            pytest --cov-report=term-missing --cov-fail-under=80
-          fi
+        run: pytest --cov-report=term-missing --cov-fail-under=80
 
       - name: Upload coverage
         uses: codecov/codecov-action@v4
