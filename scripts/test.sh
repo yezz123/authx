@@ -3,7 +3,7 @@
 set -e
 set -x
 
-echo "ENV=${ENV}"
+export PATH=".venv/bin:$PATH"
 
-export PYTHONPATH=.
+# run tests
 pytest --cov-report=term-missing --cov-fail-under=80
