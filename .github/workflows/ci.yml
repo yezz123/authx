@@ -26,7 +26,7 @@ jobs:
         with:
           uv-version: "0.1.2"
 
-      - name: setup UV
+      - name: Create virtual environment
         run: uv venv
 
       - name: Install Dependencies
@@ -58,12 +58,12 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: setup uv
+      - name: setup UV
         uses: yezz123/setup-uv@v1
         with:
           uv-version: "0.1.2"
 
-      - name: setup UV
+      - name: Create virtual environment
         run: uv venv
 
       - name: Install Dependencies
@@ -73,9 +73,14 @@ jobs:
         run: uv pip freeze
 
       - name: Test with pytest
-        run: pytest --cov-report=term-missing --cov-fail-under=80
-        env:
-          PYTHONPATH: .venv/bin/python
+        run: |
+          if [ "${{ matrix.os }}" = "windows" ]; then
+            .\.venv\Scripts\activate.ps1
+            pytest --cov-report=term-missing --cov-fail-under=80
+          else
+            source .venv/bin/activate
+            pytest --cov-report=term-missing --cov-fail-under=80
+          fi
 
       - name: Upload coverage
         uses: codecov/codecov-action@v4
