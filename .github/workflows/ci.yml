@@ -26,6 +26,9 @@ jobs:
         with:
           uv-version: "0.1.2"
 
+      - name: setup UV
+        run: uv venv
+
       - name: Install Dependencies
         run: uv pip install -r requirements/pyproject.txt && uv pip install -r requirements/linting.txt
       - uses: pre-commit/action@v3.0.1
@@ -59,6 +62,9 @@ jobs:
         uses: yezz123/setup-uv@v1
         with:
           uv-version: "0.1.2"
+
+      - name: setup UV
+        run: uv venv
 
       - name: Install Dependencies
         run: uv pip install -r requirements/pyproject.txt && uv pip install -r requirements/testing.txt
