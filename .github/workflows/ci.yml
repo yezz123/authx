@@ -20,8 +20,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+
+      - name: setup uv
+        uses: yezz123/setup-uv@v1
+        with:
+          uv-version: "0.1.2"
+
       - name: Install Dependencies
-        run: pip install -r requirements/pyproject.txt && pip install -r requirements/linting.txt
+        run: uv pip install -r requirements/pyproject.txt && uv pip install -r requirements/linting.txt
       - uses: pre-commit/action@v3.0.1
         with:
           extra_args: --all-files --verbose
@@ -49,11 +55,16 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: setup uv
+        uses: yezz123/setup-uv@v1
+        with:
+          uv-version: "0.1.2"
+
       - name: Install Dependencies
-        run: pip install -r requirements/pyproject.txt && pip install -r requirements/testing.txt
+        run: uv pip install -r requirements/pyproject.txt && uv pip install -r requirements/testing.txt
 
       - name: Freeze Dependencies
-        run: pip freeze
+        run: uv pip freeze
 
       - name: Test with pytest
         run: bash scripts/test.sh
