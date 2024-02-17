@@ -86,12 +86,10 @@ jobs:
         env:
             CONTEXT: ${{ runner.os }}-py${{ matrix.python-version }}-with-deps
 
-      - name: Upload coverage
-        if: ${{ matrix.os == 'ubuntu' }}
+      - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: .coverage
 
   # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
   check:
