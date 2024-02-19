@@ -4,6 +4,7 @@ rm -f `find . -type f -name '*.py[co]' `
 rm -f `find . -type f -name '*~' `
 rm -f `find . -type f -name '.*~' `
 rm -f `find . -type f -name .coverage`
+rm -f `find . -type f -name coverage.xml`
 rm -f `find . -type f -name ".coverage.*"`
 rm -rf `find . -name __pycache__`
 rm -rf `find . -name authx_profiling_results.html`
