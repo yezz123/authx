@@ -35,7 +35,7 @@ class MemoryIO:
         self.get_store(session_id)
 
     def gc(self):
-        if len(self.raw_memory_store) >= 100:
+        if len(self.raw_memory_store) >= 100:  # pragma: no cover
             self.cleanup_old_sessions()
 
     def cleanup_old_sessions(self):

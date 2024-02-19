@@ -3,8 +3,8 @@ from typing import Callable, Literal, Optional, Sequence, TypeVar, Union
 
 try:
     from typing import ParamSpecKwargs
-except Exception:
-    from typing_extensions import ParamSpecKwargs
+except Exception:  # pragma: no cover
+    from typing_extensions import ParamSpecKwargs  # pragma: no cover
 
 T = TypeVar("T")
 Numeric = Union[float, int]
