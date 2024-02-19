@@ -67,3 +67,9 @@ def test_handle_app_errors(app: FastAPI, authx: AuthX):
     assert exc.AccessTokenRequiredError in app.exception_handlers
     assert exc.RefreshTokenRequiredError in app.exception_handlers
     assert exc.CSRFError in app.exception_handlers
+
+
+def test_invalid_token_init():
+    errors = ["Invalid signature", "Expired token"]
+    exception = exc.InvalidToken(errors)
+    assert exception.errors == errors
