@@ -70,3 +70,28 @@ def test_get_store():
     store.create_store("test-id")
     assert store.get_store("test-id") == {}
     assert store.get_store("nonexistent-id") is None
+
+
+def test_gc_cleanup_old_sessions(memory_io):
+    # Populate raw_memory_store with 100 sessions older than 12 hours
+    current_time = int(time())
+    twelve_hours_ago = current_time - 3600 * 12
+    for i in range(100):
+        memory_io.raw_memory_store[str(i)] = {
+            "created_at": twelve_hours_ago,
+            "store": {},
+        }
+
+    # Add one more session within 12 hours
+    extra_session_id = "1000"
+    memory_io.raw_memory_store[extra_session_id] = {
+        "created_at": current_time,
+        "store": {},
+    }
+
+    # Ensure gc triggers cleanup
+    memory_io.gc()
+
+    # Ensure old sessions are cleaned up
+    assert len(memory_io.raw_memory_store) == 101
+    assert extra_session_id in memory_io.raw_memory_store

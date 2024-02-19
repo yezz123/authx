@@ -28,7 +28,8 @@ class SignatureSerializer:
             return None, "SignatureExpired"
         except BadTimeSignature:
             return None, "InvalidSignature"
-
+        except Exception:
+            return None, "BadSignature"  # Catch-all for other signature errors
         return decoded_obj, None
 
 
