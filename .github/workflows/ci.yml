@@ -30,9 +30,8 @@ jobs:
       - name: Install Dependencies
         run: uv pip install -r requirements/pyproject.txt && uv pip install -r requirements/linting.txt
 
-      - uses: pre-commit/action@v3.0.1
-        with:
-          extra_args: --all-files --verbose
+      - name: Run Pre-commit
+        run: bash scripts/format.sh
 
   tests:
 
