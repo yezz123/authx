@@ -8,20 +8,22 @@ First, you might want to see the basic ways to
 If you already cloned the repository and you know that you need to deep dive
 into the code, here is a guideline to set up your environment:
 
-### Virtual environment with `venv`
+### Virtual environment with `uv`
 
-You can create a virtual environment in a directory using Python's `venv`
+You can create a virtual environment in a directory using Python's [`uv`](https://github.com/astral-sh/uv)
 module:
 
 <div class="termy">
 
 ```console
-python -m venv env
+pip install uv
+
+uv venv
 ```
 
 </div>
 
-That will create a directory `./env/` with the python binaries and then you will
+That will create a directory `.venv` with the python binaries and then you will
 be able to install packages for that isolated environment.
 
 ### Activate the environment
@@ -33,7 +35,7 @@ Activate the new environment with:
     <div class="termy">
 
     ```console
-    $ source ./env/bin/activate
+    $ source ./.venv/bin/activate
     ```
 
     </div>
@@ -43,7 +45,7 @@ Activate the new environment with:
     <div class="termy">
 
     ```console
-    $ .\env\Scripts\Activate.ps1
+    $ .\.venv\Scripts\Activate.ps1
     ```
 
     </div>
@@ -55,7 +57,7 @@ Activate the new environment with:
     <div class="termy">
 
     ```console
-    $ source ./env/Scripts/activate
+    $ source ./.venv/Scripts/activate
     ```
 
     </div>
@@ -82,7 +84,7 @@ To check it worked, use:
 
     </div>
 
-If it shows the `pip` binary at `env/bin/pip` then it worked. 🎉
+If it shows the `pip` binary at `venv/bin/pip` then it worked. 🎉
 
 !!! tip
 
@@ -98,7 +100,7 @@ After activating the environment as described above, Now lets install all the pa
 <div class="termy">
 
 ```console
-$ pip install -r requirements/all.txt
+$ uv pip install -r requirements/all.txt
 
 ---> 100%
 ```
