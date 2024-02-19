@@ -22,15 +22,14 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: setup uv
-        uses: yezz123/setup-uv@v1
+        uses: yezz123/setup-uv@v2
         with:
-          uv-version: "0.1.2"
-
-      - name: Create virtual environment
-        run: uv venv
+          uv-version: "0.2.2"
+          uv-venv: ".venv"
 
       - name: Install Dependencies
         run: uv pip install -r requirements/pyproject.txt && uv pip install -r requirements/linting.txt
+
       - uses: pre-commit/action@v3.0.1
         with:
           extra_args: --all-files --verbose
@@ -59,12 +58,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: setup UV
-        uses: yezz123/setup-uv@v1
+        uses: yezz123/setup-uv@v2
         with:
-          uv-version: "0.1.2"
-
-      - name: Create virtual environment
-        run: uv venv
+          uv-version: "0.2.2"
+          uv-venv: ".venv"
 
       - name: Install Dependencies
         run: uv pip install -r requirements/pyproject.txt && uv pip install -r requirements/testing.txt
@@ -72,19 +69,10 @@ jobs:
       - name: Freeze Dependencies
         run: uv pip freeze
 
-      - name: Test with pytest on Windows - Python ${{ matrix.python-version }}
-        if: ${{ matrix.os == 'windows' }}
-        run: |
-          .\.venv\Scripts\activate.ps1 && bash scripts/test.sh
+      - name: Test with pytest - ${{ matrix.os }} - py${{ matrix.python-version }}
+        run: bash scripts/test.sh
         env:
           CONTEXT: ${{ runner.os }}-py${{ matrix.python-version }}-with-deps
-
-      - name: Test with pytest on POSIX - Python ${{ matrix.python-version }}
-        if: ${{ matrix.os != 'windows' }}
-        run: |
-          source .venv/bin/activate && bash scripts/test.sh
-        env:
-            CONTEXT: ${{ runner.os }}-py${{ matrix.python-version }}-with-deps
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
