@@ -30,7 +30,7 @@ classifiers = [
     "Framework :: FastAPI",
     "Framework :: AsyncIO",
     "Framework :: Pydantic",
-    "Framework :: Pydantic :: 1",
+    "Framework :: Pydantic :: 2",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
