@@ -1,6 +1,6 @@
 """Ready to use and customizable Authentications and Oauth2 management for FastAPI and Starlette."""
 
-__version__ = "1.0.1b0"
+__version__ = "1.0.1b1"
 
 from authx.config import AuthXConfig
 from authx.dependencies import AuthXDependency
