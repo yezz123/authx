@@ -24,7 +24,7 @@ jobs:
       - name: setup uv
         uses: yezz123/setup-uv@v2
         with:
-          uv-version: "0.2.2"
+          uv-version: "0.1.5"
           uv-venv: ".venv"
 
       - name: Install Dependencies
@@ -59,7 +59,7 @@ jobs:
       - name: setup UV
         uses: yezz123/setup-uv@v2
         with:
-          uv-version: "0.2.2"
+          uv-version: "0.1.6"
           uv-venv: ".venv"
 
       - name: Install Dependencies
