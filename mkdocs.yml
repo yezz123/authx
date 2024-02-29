@@ -65,6 +65,8 @@ markdown_extensions:
 nav:
   - About: index.md
   - installation.md
+  - Get Started:
+    - get-started/basic-usage.md
   - Extra:
     - extra/OAuth2.md
     - extra/Metrics.md
