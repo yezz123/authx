@@ -22,8 +22,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: setup uv
-        uses: yezz123/setup-uv@v3
+        uses: yezz123/setup-uv@v4
         with:
+          uv-version: "0.1.15"
           uv-venv: ".venv"
 
       - name: Install Dependencies
@@ -56,8 +57,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: setup UV
-        uses: yezz123/setup-uv@v3
+        uses: yezz123/setup-uv@v4
         with:
+          uv-version: "0.1.15"
           uv-venv: ".venv"
 
       - name: Install Dependencies
