@@ -13,3 +13,5 @@ pyyaml
 pillow
 # For image processing by Material for MkDocs
 cairosvg
+mkdocstrings[python]
+griffe-typingdoc==0.2.5
