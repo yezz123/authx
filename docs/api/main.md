@@ -1,0 +1,3 @@
+# Authx
+
+::: authx.main.AuthX

@@ -1,0 +1,3 @@
+# AuthXConfig
+
+::: authx.config.AuthXConfig
