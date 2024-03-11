@@ -15,3 +15,5 @@ pillow
 cairosvg
 mkdocstrings[python]
 griffe-typingdoc==0.2.5
+httpx
+starlette==0.36.3
