@@ -110,6 +110,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "pinchXOXO",
+      "name": "Devy Santo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68501799?v=4",
+      "profile": "https://github.com/pinchXOXO",
+      "contributions": [
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -118,5 +127,6 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true,
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs"
 }
