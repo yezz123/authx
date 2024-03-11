@@ -41,26 +41,55 @@ plugins:
   - social:
       cards_layout_options:
         background_color: "#009485"
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            extensions:
+            - griffe_typingdoc
+            show_root_heading: true
+            show_if_no_docstring: true
+            preload_modules:
+            - httpx
+            - starlette
+            - fastapi
+            inherited_members: true
+            members_order: source
+            separate_signature: true
+            unwrap_annotated: true
+            filters:
+            - '!^_'
+            heading_level: 3
+            merge_init_into_class: true
+            docstring_section_style: spacy
+            signature_crossrefs: true
+            allow_inspection: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
 
 markdown_extensions:
-  toc:
-    permalink: true
-  markdown.extensions.codehilite:
-    guess_lang: false
-  mdx_include:
-    base_path: docs
-  admonition:
-  codehilite:
-  extra:
-  pymdownx.superfences:
-    custom_fences:
-    - name: mermaid
-      class: mermaid
-      format: !!python/name:pymdownx.superfences.fence_code_format ''
-  pymdownx.tabbed:
-    alternate_style: true
-  attr_list:
-  md_in_html:
+  - attr_list
+  - md_in_html
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - abbr
+  - admonition
+  - pymdownx.details
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 nav:
   - About: index.md
@@ -73,6 +102,14 @@ nav:
     - extra/Cache.md
     - extra/profiler.md
     - extra/Sessions.md
+  - API:
+    - api/reference.md
+    - api/main.md
+    - api/config.md
+    - api/request.md
+    - api/token.md
+    - api/dependencies.md
+    - api/exceptions.md
   - Help AuthX - Get Help: help.md
   - Development - Contributing: contributing.md
   - Frequently Asked Questions: faq.md
@@ -80,7 +117,9 @@ nav:
   - License: license.md
   - Release Notes: release.md
 
+
 extra:
+  generator: true
   analytics:
     provider: google
     property: G-7RF17YL4KP
@@ -88,13 +127,11 @@ extra:
   - icon: fontawesome/brands/github-alt
     link: https://github.com/yezz123
   - icon: fontawesome/brands/twitter
-    link: https://twitter.com/THyasser1
+    link: https://x.com/THyasser1
   - icon: fontawesome/brands/linkedin
     link: https://www.linkedin.com/in/yezz123
   - icon: fontawesome/solid/globe
     link: https://yezz.me
-  - icon: fontawesome/brands/product-hunt
-    link: https://producthunt.com/posts/authx
 
 extra_css:
   - css/termynal.css

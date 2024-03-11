@@ -86,4 +86,9 @@ class InvalidToken(Exception):
     """When a token is invalid for all identity providers"""
 
     def __init__(self, errors):
+        """Initialize InvalidToken Exception
+
+        Args:
+            errors (List[str]): List of errors
+        """
         self.errors = errors

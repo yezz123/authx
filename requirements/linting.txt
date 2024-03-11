@@ -11,14 +11,14 @@ filelock==3.13.1
     # via virtualenv
 identify==2.5.35
     # via pre-commit
-mypy==1.8.0
+mypy==1.9.0
 mypy-extensions==1.0.0
     # via
     #   black
     #   mypy
 nodeenv==1.8.0
     # via pre-commit
-packaging==23.2
+packaging==24.0
     # via black
 pathspec==0.12.1
     # via black
@@ -30,7 +30,7 @@ pre-commit==3.6.2
 pyupgrade==3.15.1
 pyyaml==6.0.1
     # via pre-commit
-ruff==0.2.2
+ruff==0.3.2
 setuptools==69.1.1
     # via nodeenv
 tokenize-rt==5.2.0

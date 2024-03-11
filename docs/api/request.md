@@ -1,0 +1,3 @@
+# RequestToken
+
+::: authx.schema.RequestToken
