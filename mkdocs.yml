@@ -103,7 +103,7 @@ nav:
     - extra/profiler.md
     - extra/Sessions.md
   - API:
-    - api/index.md
+    - api/reference.md
     - api/main.md
     - api/config.md
     - api/request.md
