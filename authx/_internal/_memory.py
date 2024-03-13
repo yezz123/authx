@@ -2,6 +2,12 @@ import time
 
 
 class MemoryIO:
+    """
+    MemoryIO is a class that implements the IO interface for the session store.
+
+    It is used to store session data in memory.
+    """
+
     def __init__(self):
         """
         Initialize an instance of MemoryIO.
