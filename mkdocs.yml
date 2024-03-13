@@ -1,4 +1,4 @@
-site_name: AuthenticationX
+site_name: Authx
 site_description: Ready to use and customizable Authentications and Oauth2 management for FastAPI
 site_url: https://authx.yezz.me/
 
@@ -17,9 +17,9 @@ theme:
       toggle:
           icon: material/lightbulb-outline
           name: Switch to light mode
-  favicon: favicon.png
+  logo: img/logo.png
+  favicon: img/icon.ico
   features:
-  - header.autohide
   - search.suggest
   - search.highlight
   - content.tabs.link
@@ -29,6 +29,7 @@ theme:
   - content.code.annotate
   - content.code.copy
   - content.code.select
+  - navigation.tabs
   icon:
     repo: fontawesome/brands/github
   language: en
@@ -92,17 +93,17 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
 
 nav:
-  - About: index.md
-  - installation.md
+  - Authx: index.md
   - Get Started:
-    - get-started/basic-usage.md
-  - Extra:
-    - extra/OAuth2.md
-    - extra/Metrics.md
-    - extra/Cache.md
-    - extra/profiler.md
-    - extra/Sessions.md
-  - API:
+    - Installation: get-started/installation.md
+    - Basic-Usage: get-started/basic-usage.md
+  - Extra Features:
+    - Oauth2: extra/OAuth2.md
+    - Metrics: extra/Metrics.md
+    - Cache: extra/Cache.md
+    - Profiler: extra/profiler.md
+    - Sessions: extra/Sessions.md
+  - Reference - API:
     - api/reference.md
     - api/main.md
     - api/config.md
@@ -110,11 +111,18 @@ nav:
     - api/token.md
     - api/dependencies.md
     - api/exceptions.md
-  - Help AuthX - Get Help: help.md
-  - Development - Contributing: contributing.md
-  - Frequently Asked Questions: faq.md
-  - Code of Conduct: code_of_conduct.md
-  - License: license.md
+    - Internal:
+      - api/internal/callback.md
+      - api/internal/errors.md
+      - api/internal/memory.md
+      - api/internal/signature.md
+  - Help: help/help.md
+  - Development:
+    - Contributing: development/contributing.md
+  - FAQ:
+    - Frequently Asked Questions: faq/faq.md
+    - Code of Conduct: faq/code_of_conduct.md
+    - License: faq/license.md
   - Release Notes: release.md
 
 
