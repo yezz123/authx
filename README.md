@@ -1,4 +1,4 @@
-# AuthenticationX 💫
+# Authx
 
 <p align="center">
 <a href="https://authx.yezz.me" target="_blank">
@@ -38,7 +38,7 @@ Add a Fully registration and authentication or authorization system to your
 [FastAPI](https://fastapi.tiangolo.com/) project. **AuthX** is designed to be as
 customizable and adaptable as possible.
 
-## Features 🔧
+## Features
 
 - [x] Support Python 3.8+ & Pydantic 2.0+.
 - [x] Multiple customizable authentication backend:
@@ -53,7 +53,7 @@ customizable and adaptable as possible.
 - [x] middleware for authentication and authorization through JWT.
 - [x] Extensible Error Handling System.
 
-### Extra Features 🎁
+### Extra Features
 
 AuthX is designed to be as customizable and adaptable as possible.
 
@@ -67,7 +67,7 @@ So you need to install [`authx-extra`](https://github.com/yezz123/authx-extra) t
 
 **Note:** Check [Release Notes](https://authx.yezz.me/release/).
 
-## Project using 🚀
+## Project using
 
 Here is a simple way to kickstart your project with AuthX:
 
@@ -102,7 +102,7 @@ def get_protected(token: RequestToken = Depends()):
           raise HTTPException(401, detail={"message": str(e)}) from e
 ```
 
-## Contributors and sponsors 👏
+## Contributors and sponsors
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
@@ -151,16 +151,6 @@ This project follows the
 [all-contributors](https://github.com/all-contributors/all-contributors)
 specification. Contributions of any kind welcome!
 
-## Links 🔗
-
-- [Homepage](https://authx.yezz.me/)
-- [FAQ](https://authx.yezz.me/faq/)
-- [Release - AuthX](https://authx.yezz.me/release/)
-- [MIT License](https://authx.yezz.me/license/)
-- [Code of Conduct](https://authx.yezz.me/code_of_conduct/)
-- [Contributing](https://authx.yezz.me/contributing/)
-- [Help - Sponsors](https://authx.yezz.me/help/)
-
-## License 📄
+## License
 
 This project is licensed under the terms of the MIT License.
