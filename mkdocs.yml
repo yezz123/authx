@@ -54,6 +54,8 @@ plugins:
             - httpx
             - starlette
             - fastapi
+            - pydantic_settings
+            - typing
             inherited_members: true
             members_order: source
             separate_signature: true
@@ -96,7 +98,9 @@ nav:
   - Authx: index.md
   - Get Started:
     - Installation: get-started/installation.md
-    - Basic-Usage: get-started/basic-usage.md
+    - Basic Usage: get-started/basic-usage.md
+    - Payload Data: get-started/payload.md
+    - JWT Locations: get-started/location.md
   - Extra Features:
     - Oauth2: extra/OAuth2.md
     - Metrics: extra/Metrics.md
