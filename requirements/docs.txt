@@ -43,7 +43,7 @@ editorconfig==0.12.4
     # via jsbeautifier
 ghp-import==2.1.0
     # via mkdocs
-griffe==0.41.3
+griffe==0.42.0
     # via
     #   griffe-typingdoc
     #   mkdocstrings-python
@@ -73,6 +73,7 @@ markdown==3.5.2
     #   mkdocs-autorefs
     #   mkdocs-material
     #   mkdocstrings
+    #   mkdocstrings-python
     #   pymdown-extensions
 markdown-include==0.8.1
 markupsafe==2.1.5
@@ -100,7 +101,7 @@ mkdocs-material-extensions==1.3.1
 mkdocs-mermaid2-plugin==1.1.1
 mkdocstrings==0.24.1
     # via mkdocstrings-python
-mkdocstrings-python==1.8.0
+mkdocstrings-python==1.9.0
     # via mkdocstrings
 packaging==24.0
     # via mkdocs
@@ -145,7 +146,7 @@ requests==2.31.0
     #   mkdocs-mermaid2-plugin
 rich==12.6.0
     # via typer
-setuptools==69.1.1
+setuptools==69.2.0
     # via mkdocs-mermaid2-plugin
 shellingham==1.4.0
     # via
