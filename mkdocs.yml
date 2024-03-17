@@ -137,13 +137,11 @@ extra:
     property: G-7RF17YL4KP
   social:
   - icon: fontawesome/brands/github-alt
-    link: https://github.com/yezz123
-  - icon: fontawesome/brands/twitter
+    link: https://github.com/yezz123/authx
+  - icon: fontawesome/brands/x-twitter
     link: https://x.com/THyasser1
-  - icon: fontawesome/brands/linkedin
-    link: https://www.linkedin.com/in/yezz123
   - icon: fontawesome/solid/globe
-    link: https://yezz.me
+    link: https://authx.yezz.me
 
 extra_css:
   - css/termynal.css
