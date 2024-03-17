@@ -1,4 +1,7 @@
-# Release Notes
+---
+hide:
+  - navigation
+---
 
 ## 1.0.1b1
 
