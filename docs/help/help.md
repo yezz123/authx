@@ -1,4 +1,7 @@
-# Help AuthX - Get Help 🦥
+---
+hide:
+  - navigation
+---
 
 Do you like **AuthX**?
 
@@ -27,8 +30,8 @@ it has been already useful for others.
 ## Watch the GitHub repository for releases
 
 You can "watch" AuthX in GitHub (clicking the "watch" button at the top right):
-<a href="https://github.com/yezz123/AuthX class="external-link"
-target="\_blank">https://github.com/yezz123/AuthX</a>. 👀
+<a href="<https://github.com/yezz123/AuthX> class="external-link"
+target="\_blank"><https://github.com/yezz123/AuthX></a>. 👀
 
 There you can select **"Releases only"**.
 
@@ -45,8 +48,8 @@ you might already know the answer for. 🤓
 ## Watch the GitHub repository
 
 You can "watch" AuthX in GitHub (clicking the "watch" button at the top right):
-<a href="https://github.com/yezz123/AuthX class="external-link"
-target="\_blank">https://github.com/yezz123/AuthX</a>. 👀
+<a href="<https://github.com/yezz123/AuthX> class="external-link"
+target="\_blank"><https://github.com/yezz123/AuthX></a>. 👀
 
 If you select "Watching" instead of "Releases only" you will receive
 notifications when someone creates a new issue.
@@ -67,11 +70,11 @@ a new issue</a> in the GitHub repository, for example to:
 
 ## Create a Pull Request
 
-You can [contribute](contributing.md) to the source code with Pull Requests, for
+You can [contribute](../development/contributing.md) to the source code with Pull Requests, for
 example:
 
 - To fix a typo you found on the documentation.
-- To help [translate the documentation](contributing.md) to your language.
+- To help [translate the documentation](../development/contributing.md) to your language.
   - You can also help to review the translations created by others.
 - To propose new documentation sections.
 - To fix an existing issue/bug.

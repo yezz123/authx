@@ -7,6 +7,8 @@ from authx import exceptions
 
 
 class _ErrorHandler:
+    """Base Handler for FastAPI handling AuthX exceptions"""
+
     def __init__(self) -> None:
         """Base Handler for FastAPI handling AuthX exceptions"""
 

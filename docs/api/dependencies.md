@@ -1,0 +1,3 @@
+# AuthXDependency
+
+::: authx.dependencies.AuthXDependency

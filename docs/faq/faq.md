@@ -1,6 +1,6 @@
 # Frequently Asked Questions 🍂
 
-![image](header.svg)
+![image](../img/header.svg)
 
 ## What is the purpose of this project?
 

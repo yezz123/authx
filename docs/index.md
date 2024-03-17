@@ -1,4 +1,7 @@
-# AuthenticationX 💫
+---
+hide:
+  - navigation
+---
 
 <p align="center">
 <a href="https://authx.yezz.me" target="_blank">
@@ -38,13 +41,7 @@ Add a Fully registration and authentication or authorization system to your
 [FastAPI](https://fastapi.tiangolo.com/) project. **AuthX** is designed to be as
 customizable and adaptable as possible.
 
-!!! warning
-
-    [Authx V0.9.x](https://authx-v0.yezz.me/) This branch relates to development of authx V1 which is not yet ready for production use.
-
-    If you're an Authx user, you probably want either Authx V0.9 [Documentation](https://authx-v0.yezz.me/) or, [0.X.X-fix](https://github.com/yezz123/authx/tree/0.X.X-fix) git branch.
-
-## Installation 📦
+## Installation
 
 <div class="termy">
 
@@ -56,7 +53,7 @@ $ pip install authx
 
 </div>
 
-## Features 🔧
+## Features
 
 - Support Python 3.8+ & Pydantic 2.0+.
 - Multiple customizable authentication backend:
@@ -71,7 +68,7 @@ $ pip install authx
 - middleware for authentication and authorization through JWT.
 - Extensible Error Handling System.
 
-### Extra Features 🎁
+### Extra Features
 
 !!! notes
 
@@ -87,7 +84,7 @@ $ pip install authx
 
 **Note:** Check [Release Notes](https://authx.yezz.me/release/).
 
-## Project using 🚀
+## Project using
 
 Here is a simple way to kickstart your project with AuthX:
 
@@ -121,17 +118,3 @@ def get_protected(token: RequestToken = Depends()):
      except Exception as e:
           raise HTTPException(401, detail={"message": str(e)}) from e
 ```
-
-## Links 🔗
-
-- [Homepage](https://authx.yezz.me/)
-- [FAQ](https://authx.yezz.me/faq/)
-- [Release - AuthX](https://authx.yezz.me/release/)
-- [MIT License](https://authx.yezz.me/license/)
-- [Code of Conduct](https://authx.yezz.me/code_of_conduct/)
-- [Contributing](https://authx.yezz.me/contributing/)
-- [Help - Sponsors](https://authx.yezz.me/help/)
-
-## License 📝
-
-This project is licensed under the terms of the MIT License.

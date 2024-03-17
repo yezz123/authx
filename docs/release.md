@@ -1,4 +1,32 @@
-# Release Notes 🎞
+---
+hide:
+  - navigation
+---
+
+## 1.0.1b1
+
+### Documentations 📝
+
+* :memo: Add Basic Documentation for AuthX core by @yezz123 in <https://github.com/yezz123/authx/pull/513>
+
+### Core 🔨
+
+* ✨ Migrate Authx to use pydantic v2  by @yezz123 in <https://github.com/yezz123/authx/pull/531>
+* ✨ Handle catch-all signature errors by @yezz123 in <https://github.com/yezz123/authx/pull/538>
+* ✅ Add test case for garbage collection of old sessions by @yezz123 in <https://github.com/yezz123/authx/pull/539>
+* 🍻 Add tests for several functions & Bump coverage by @yezz123 in <https://github.com/yezz123/authx/pull/540>
+
+### CI/CD 👷
+
+* 💸 Add Support for Polar by @yezz123 in <https://github.com/yezz123/authx/pull/536>
+* 👷 Add setup for uv and use uv for dependency installation by @yezz123 in <https://github.com/yezz123/authx/pull/537>
+* 🔨 Update `setup-uv` and specify virtual environment path by @yezz123 in <https://github.com/yezz123/authx/pull/542>
+
+### Dependencies ⬆
+
+* ⬆ Bump the python-packages group with 3 updates by @dependabot in <https://github.com/yezz123/authx/pull/535>
+* ⬆ Bump pre-commit/action from 3.0.0 to 3.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/534>
+* ⬆ Bump the python-packages group with 6 updates by @dependabot in <https://github.com/yezz123/authx/pull/541>
 
 ## 1.0.0b0
 

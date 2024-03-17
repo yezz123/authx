@@ -3,7 +3,14 @@ from typing import Any, Dict, Optional
 
 
 class MemoryIO:
+
     raw_memory_store: Dict[str, Dict[str, Any]]
+
+    """
+    MemoryIO is a class that implements the IO interface for the session store.
+
+    It is used to store session data in memory.
+    """
 
     def __init__(self) -> None:
         """

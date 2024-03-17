@@ -1,7 +1,7 @@
 # Development - Contributing 🐣
 
 First, you might want to see the basic ways to
-[help AuthX and get help](help.md)
+[help AuthX and get help](../help/help.md)
 
 ## Developing
 
@@ -115,7 +115,7 @@ The Dependencies file contains all the dependencies that you need to develop
 AuthX, which are:
 
 - The Base Dependencies - the ones that are needed to run AuthX.
-  [See Installation](installation.md).
+  [See Installation](../get-started/installation.md).
 
 ### Format
 

@@ -1,0 +1,3 @@
+# TokenPayload
+
+::: authx.schema.TokenPayload
