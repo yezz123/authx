@@ -9,7 +9,7 @@ certifi==2024.2.2
     #   requests
 charset-normalizer==3.3.2
     # via requests
-coverage==7.4.3
+coverage==7.4.4
     # via pytest-cov
 freezegun==1.4.0
 h11==0.14.0
