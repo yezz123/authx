@@ -122,11 +122,11 @@ nav:
       - api/internal/errors.md
       - api/internal/memory.md
       - api/internal/signature.md
-  - Help: help/help.md
   - Development:
     - Contributing: development/contributing.md
   - FAQ:
     - Frequently Asked Questions: faq/faq.md
+    - Help & Support: faq/help.md
     - Code of Conduct: faq/code_of_conduct.md
     - License: faq/license.md
   - Release Notes: release.md
