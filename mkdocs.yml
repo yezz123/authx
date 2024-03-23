@@ -104,11 +104,11 @@ nav:
     - Refreshing Tokens: get-started/refresh.md
     - Freshness Tokens: get-started/token.md
   - Extra Features:
-    - Oauth2: extra/OAuth2.md
-    - Metrics: extra/Metrics.md
-    - Cache: extra/Cache.md
-    - Profiler: extra/profiler.md
-    - Sessions: extra/Sessions.md
+    - Oauth2 Features: extra/OAuth2.md
+    - Metrics Features: extra/Metrics.md
+    - Cache Features: extra/Cache.md
+    - Profiler Middleware: extra/profiler.md
+    - Sessions Middleware: extra/Sessions.md
   - Reference - API:
     - api/reference.md
     - api/main.md
