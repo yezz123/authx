@@ -102,6 +102,7 @@ nav:
     - Payload Data: get-started/payload.md
     - JWT Locations: get-started/location.md
     - Refreshing Tokens: get-started/refresh.md
+    - Freshness Tokens: get-started/token.md
   - Extra Features:
     - Oauth2: extra/OAuth2.md
     - Metrics: extra/Metrics.md
