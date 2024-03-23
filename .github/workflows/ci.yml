@@ -33,6 +33,9 @@ jobs:
       - name: Run Pre-commit
         run: bash scripts/format.sh
 
+      - name: Typecheck with mypy
+        run: bash scripts/mypy.sh
+
   tests:
 
     name: test py${{ matrix.python-version }} on ${{ matrix.os }}

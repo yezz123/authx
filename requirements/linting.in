@@ -3,3 +3,5 @@ mypy
 black
 pyupgrade
 ruff
+types-python-dateutil
+types-pytz
