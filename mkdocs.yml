@@ -101,6 +101,7 @@ nav:
     - Basic Usage: get-started/basic-usage.md
     - Payload Data: get-started/payload.md
     - JWT Locations: get-started/location.md
+    - Refreshing Tokens: get-started/refresh.md
   - Extra Features:
     - Oauth2: extra/OAuth2.md
     - Metrics: extra/Metrics.md
