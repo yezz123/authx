@@ -43,7 +43,7 @@ editorconfig==0.12.4
     # via jsbeautifier
 ghp-import==2.1.0
     # via mkdocs
-griffe==0.42.0
+griffe==0.42.1
     # via
     #   griffe-typingdoc
     #   mkdocstrings-python
