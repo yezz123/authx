@@ -7,7 +7,7 @@ click==8.1.7
     # via black
 distlib==0.3.8
     # via virtualenv
-filelock==3.13.1
+filelock==3.13.3
     # via virtualenv
 identify==2.5.35
     # via pre-commit
@@ -26,11 +26,11 @@ platformdirs==4.2.0
     # via
     #   black
     #   virtualenv
-pre-commit==3.6.2
-pyupgrade==3.15.1
+pre-commit==3.7.0
+pyupgrade==3.15.2
 pyyaml==6.0.1
     # via pre-commit
-ruff==0.3.3
+ruff==0.3.4
 setuptools==69.2.0
     # via nodeenv
 tokenize-rt==5.2.0

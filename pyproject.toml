@@ -82,15 +82,13 @@ select = [
 ]
 ignore = [
     "E501",  # line too long, handled by black
-    "B008",  # do not perform function calls in argument defaults
-    "C901",  # too complex
-    "F811",  # redefinition of unused
     "B018",  # Found useless expression.
-    "E721",  # Do not compare types, use `isinstance()`
 ]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
+"authx/token.py" = ["C901"]
+"authx/main.py" = ["B008"]
 
 [tool.ruff.lint.isort]
 known-third-party = ["pydantic", "typing_extensions", "sqlalchemy"]

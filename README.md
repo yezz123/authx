@@ -50,7 +50,7 @@ customizable and adaptable as possible.
       - [x] JWTs in query parameters
       - [x] JWTs in request bodies
   - [x] Cookie authentication backend included
-- [x] middleware for authentication and authorization through JWT.
+- [x] Middleware for authentication and authorization through JWT.
 - [x] Extensible Error Handling System.
 
 ### Extra Features

@@ -101,12 +101,14 @@ nav:
     - Basic Usage: get-started/basic-usage.md
     - Payload Data: get-started/payload.md
     - JWT Locations: get-started/location.md
+    - Refreshing Tokens: get-started/refresh.md
+    - Freshness Tokens: get-started/token.md
   - Extra Features:
-    - Oauth2: extra/OAuth2.md
-    - Metrics: extra/Metrics.md
-    - Cache: extra/Cache.md
-    - Profiler: extra/profiler.md
-    - Sessions: extra/Sessions.md
+    - Oauth2 Features: extra/OAuth2.md
+    - Metrics Features: extra/Metrics.md
+    - Cache Features: extra/Cache.md
+    - Profiler Middleware: extra/profiler.md
+    - Sessions Middleware: extra/Sessions.md
   - Reference - API:
     - api/reference.md
     - api/main.md
@@ -120,11 +122,11 @@ nav:
       - api/internal/errors.md
       - api/internal/memory.md
       - api/internal/signature.md
-  - Help: help/help.md
   - Development:
     - Contributing: development/contributing.md
   - FAQ:
     - Frequently Asked Questions: faq/faq.md
+    - Help & Support: faq/help.md
     - Code of Conduct: faq/code_of_conduct.md
     - License: faq/license.md
   - Release Notes: release.md

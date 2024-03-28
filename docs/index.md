@@ -65,7 +65,7 @@ $ pip install authx
       - JWTs in query parameters
       - JWTs in request bodies
   - Cookie authentication backend included
-- middleware for authentication and authorization through JWT.
+- Middleware for authentication and authorization through JWT.
 - Extensible Error Handling System.
 
 ### Extra Features
