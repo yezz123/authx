@@ -35,7 +35,7 @@ theme:
   language: en
 repo_name: Yezz123/AuthX
 repo_url: https://github.com/yezz123/AuthX
-edit_uri: ""
+edit_uri: edit/main/docs/
 
 plugins:
   - search: null
@@ -55,7 +55,6 @@ plugins:
             - starlette
             - fastapi
             - pydantic_settings
-            - typing
             inherited_members: true
             members_order: source
             separate_signature: true
@@ -103,6 +102,8 @@ nav:
     - JWT Locations: get-started/location.md
     - Refreshing Tokens: get-started/refresh.md
     - Freshness Tokens: get-started/token.md
+  - Callbacks:
+    - User Serialization: callbacks/user.md
   - Extra Features:
     - Oauth2 Features: extra/OAuth2.md
     - Metrics Features: extra/Metrics.md
