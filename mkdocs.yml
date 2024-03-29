@@ -108,6 +108,8 @@ nav:
   - Dependencies:
     - Dependencies: dependencies/dependencies.md
     - Dependency Injection: dependencies/injection.md
+    - Dependency Aliases: dependencies/aliases.md
+    - Dependency Bundle: dependencies/bundle.md
   - Extra Features:
     - Oauth2 Features: extra/OAuth2.md
     - Metrics Features: extra/Metrics.md
