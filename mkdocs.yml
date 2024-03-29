@@ -39,9 +39,9 @@ edit_uri: edit/main/docs/
 
 plugins:
   - search: null
-  - social:
-      cards_layout_options:
-        background_color: "#009485"
+  # - social:
+  #     cards_layout_options:
+  #       background_color: "#009485"
   - mkdocstrings:
       handlers:
         python:
