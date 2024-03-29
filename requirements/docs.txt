@@ -50,7 +50,7 @@ griffe==0.42.1
 griffe-typingdoc==0.2.5
 h11==0.14.0
     # via httpcore
-httpcore==1.0.4
+httpcore==1.0.5
     # via httpx
 httpx==0.27.0
 idna==3.6
