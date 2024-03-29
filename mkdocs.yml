@@ -107,6 +107,7 @@ nav:
     - Token Serialization: callbacks/token.md
   - Dependencies:
     - Dependencies: dependencies/dependencies.md
+    - Dependency Injection: dependencies/injection.md
   - Extra Features:
     - Oauth2 Features: extra/OAuth2.md
     - Metrics Features: extra/Metrics.md
