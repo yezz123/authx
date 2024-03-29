@@ -1,5 +1,5 @@
 mkdocs
-mkdocs-material
+mkdocs-material==9.5.14
 mdx-include
 mkdocs-markdownextradata-plugin
 mkdocs-mermaid2-plugin
