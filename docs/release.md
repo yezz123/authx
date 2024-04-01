@@ -7,6 +7,8 @@ hide:
 
 ## Latest Changes
 
+* 🔨 Add Latest Changes workflow. PR [#562](https://github.com/yezz123/authx/pull/562) by [@yezz123](https://github.com/yezz123).
+
 ## 1.0.1b1
 
 ### Documentations 📝
