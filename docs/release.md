@@ -3,6 +3,10 @@ hide:
   - navigation
 ---
 
+# Release Notes
+
+## Latest Changes
+
 ## 1.0.1b1
 
 ### Documentations 📝
