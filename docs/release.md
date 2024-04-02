@@ -11,1249 +11,456 @@ hide:
 
 ## 1.0.1b1
 
-### Documentations 📝
+### Documentations
 
-* :memo: Add Basic Documentation for AuthX core by @yezz123 in <https://github.com/yezz123/authx/pull/513>
+* 📝 Add Basic Documentation for AuthX core. PR [#513](https://github.com/yezz123/authx/pull/513) by [@yezz123](https://github.com/yezz123).
+* 📝 Add Documentation for AuthX core. PR [#562](https://github.com/yezz123/authx/pull/562) by [@yezz123](https://github.com/yezz123).
 
-### Core 🔨
+### Core
 
-* ✨ Migrate Authx to use pydantic v2  by @yezz123 in <https://github.com/yezz123/authx/pull/531>
-* ✨ Handle catch-all signature errors by @yezz123 in <https://github.com/yezz123/authx/pull/538>
-* ✅ Add test case for garbage collection of old sessions by @yezz123 in <https://github.com/yezz123/authx/pull/539>
-* 🍻 Add tests for several functions & Bump coverage by @yezz123 in <https://github.com/yezz123/authx/pull/540>
+* ✨ Migrate Authx to use pydantic v2. PR [#531](https://github.com/yezz123/authx/pull/531) by [@yezz123](https://github.com/yezz123).
+* ✨ Handle catch-all signature errors. PR [#538](https://github.com/yezz123/authx/pull/538) by [@yezz123](https://github.com/yezz123).
+* ✅ Add test case for garbage collection of old sessions. PR [#539](https://github.com/yezz123/authx/pull/539) by [@yezz123](https://github.com/yezz123).
+* 🍻 Add tests for several functions & Bump coverage. PR [#540](https://github.com/yezz123/authx/pull/540) by [@yezz123](https://github.com/yezz123).
 
-### CI/CD 👷
+### CI/CD
 
-* 💸 Add Support for Polar by @yezz123 in <https://github.com/yezz123/authx/pull/536>
-* 👷 Add setup for uv and use uv for dependency installation by @yezz123 in <https://github.com/yezz123/authx/pull/537>
-* 🔨 Update `setup-uv` and specify virtual environment path by @yezz123 in <https://github.com/yezz123/authx/pull/542>
+* 💸 Add Support for Polar. PR [#536](https://github.com/yezz123/authx/pull/536) by [@yezz123](https://github.com/yezz123).
+* 👷 Add setup for uv and use uv for dependency installation. PR [#537](https://github.com/yezz123/authx/pull/537) by [@yezz123](https://github.com/yezz123).
+* 🔨 Update `setup-uv` and specify virtual environment path. PR [#542](https://github.com/yezz123/authx/pull/542) by [@yezz123](https://github.com/yezz123).
 
-### Dependencies ⬆
+### Dependencies
 
-* ⬆ Bump the python-packages group with 3 updates by @dependabot in <https://github.com/yezz123/authx/pull/535>
-* ⬆ Bump pre-commit/action from 3.0.0 to 3.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/534>
-* ⬆ Bump the python-packages group with 6 updates by @dependabot in <https://github.com/yezz123/authx/pull/541>
+* ⬆ Bump the python-packages group with 3 updates. PR [#535](https://github.com/yezz123/authx/pull/535) by @dependabot.
+* ⬆ Bump pre-commit/action from 3.0.0 to 3.0.1. PR [#534](https://github.com/yezz123/authx/pull/534) by @dependabot.
+* ⬆ Bump the python-packages group with 6 updates. PR [#541](https://github.com/yezz123/authx/pull/541) by @dependabot.
 
 ## 1.0.0b0
 
-We are thrilled to announce the release of authx version 1.0.0-beta0, a significant milestone in our journey. This release brings about several important changes and enhancements, including the drop of different features we used to have. Below, we outline the key updates and improvements.
-
 ### Major Changes 🚑️
 
-* ➖ Remove Documentation Workflow by @yezz123 in <https://github.com/yezz123/authx/pull/414>
-* ♻️ chore(revamp): AuthX Revamp - V1.0.0 by @yezz123 in <https://github.com/yezz123/authx/pull/446>
-* 🔧 Feat: Refactor & Rebuild Functionalities in authx by @yezz123 in <https://github.com/yezz123/authx/pull/454>
-* 🐛 fix Continuous Integration Badge by @yezz123 in <https://github.com/yezz123/authx/pull/455>
-* ♻️ use pip-tool to autogenerate dependencies by @yezz123 in <https://github.com/yezz123/authx/pull/478>
-* 🔧 Run tests against `py38` by @yezz123 in <https://github.com/yezz123/authx/pull/480>
-* :memo: overrides template & Include google analytics by @yezz123 in <https://github.com/yezz123/authx/pull/482>
-* :memo: Add Extra documentation to AuthX by @yezz123 in <https://github.com/yezz123/authx/pull/483>
-* 🔧 Include Python 3.12 by @yezz123 in <https://github.com/yezz123/authx/pull/494>
-* ✨ add support for ruff linter by @yezz123 in <https://github.com/yezz123/authx/pull/497>
-* ♻️ Drop External Libraries in favour of `authx-extra` by @yezz123 in <https://github.com/yezz123/authx/pull/506>
-
-### Dependency Updates ⬆️
-
-* ⬆ Update sqlalchemy requirement from <2.0.4,>=1.4.37 to >=1.4.37,<2.0.5 by @dependabot in <https://github.com/yezz123/authx/pull/370>
-* ⬆ Bump pre-commit from 3.0.4 to 3.1.0 by @dependabot in <https://github.com/yezz123/authx/pull/371>
-* ⬆ Bump pre-commit from 3.1.0 to 3.1.1 by @dependabot in <https://github.com/yezz123/authx/pull/372>
-* ⬆ Bump cryptography from 39.0.1 to 39.0.2 by @dependabot in <https://github.com/yezz123/authx/pull/373>
-* ⬆ Update sqlalchemy requirement from <2.0.5,>=1.4.37 to >=1.4.37,<2.0.6 by @dependabot in <https://github.com/yezz123/authx/pull/374>
-* ⬆ Bump pymdown-extensions from 9.9.2 to 9.10 by @dependabot in <https://github.com/yezz123/authx/pull/375>
-* ⬆ Bump pytest from 7.2.1 to 7.2.2 by @dependabot in <https://github.com/yezz123/authx/pull/376>
-* ⬆ Update fastapi requirement from <0.93.0,>=0.65.2 to >=0.65.2,<0.94.0 by @dependabot in <https://github.com/yezz123/authx/pull/380>
-* ⬆ Bump pydantic from 1.10.5 to 1.10.6 by @dependabot in <https://github.com/yezz123/authx/pull/381>
-* ⬆ Bump uvicorn from 0.20.0 to 0.21.0 by @dependabot in <https://github.com/yezz123/authx/pull/382>
-* ⬆ Update starlette requirement from <0.25.1,>=0.14.02 to >=0.14.02,<0.26.1 by @dependabot in <https://github.com/yezz123/authx/pull/383>
-* ⬆ Update fastapi requirement from <0.94.0,>=0.65.2 to >=0.65.2,<0.95.0 by @dependabot in <https://github.com/yezz123/authx/pull/385>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.6.4 to 1.7.1 by @dependabot in <https://github.com/yezz123/authx/pull/386>
-* ⬆ Update sqlalchemy requirement from <2.0.6,>=1.4.37 to >=1.4.37,<2.0.7 by @dependabot in <https://github.com/yezz123/authx/pull/387>
-* ⬆ Update starlette requirement from <0.26.1,>=0.14.02 to >=0.14.02,<0.26.2 by @dependabot in <https://github.com/yezz123/authx/pull/388>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.7.1 to 1.8.0 by @dependabot in <https://github.com/yezz123/authx/pull/389>
-* ⬆ Bump uvicorn from 0.21.0 to 0.21.1 by @dependabot in <https://github.com/yezz123/authx/pull/390>
-* ⬆ Update python-socketio requirement from <5.7.3,>=4.6.0 to >=4.6.0,<5.8.1 by @dependabot in <https://github.com/yezz123/authx/pull/391>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.8.0 to 1.8.1 by @dependabot in <https://github.com/yezz123/authx/pull/392>
-* ⬆ Bump pre-commit from 3.1.1 to 3.2.0 by @dependabot in <https://github.com/yezz123/authx/pull/394>
-* ⬆ Bump pytest-asyncio from 0.20.3 to 0.21.0 by @dependabot in <https://github.com/yezz123/authx/pull/395>
-* ⬆ Update fastapi requirement from <0.95.0,>=0.65.2 to >=0.65.2,<0.96.0 by @dependabot in <https://github.com/yezz123/authx/pull/396>
-* ⬆ Update sqlalchemy requirement from <2.0.7,>=1.4.37 to >=1.4.37,<2.0.8 by @dependabot in <https://github.com/yezz123/authx/pull/397>
-* ⬆ Update redis requirement from <4.5.2,>=4.3.3 to >=4.3.3,<4.5.3 by @dependabot in <https://github.com/yezz123/authx/pull/398>
-* ⬆ Bump pydantic from 1.10.6 to 1.10.7 by @dependabot in <https://github.com/yezz123/authx/pull/399>
-* ⬆ Update redis requirement from <4.5.3,>=4.3.3 to >=4.3.3,<4.5.4 by @dependabot in <https://github.com/yezz123/authx/pull/400>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.8.1 to 1.8.3 by @dependabot in <https://github.com/yezz123/authx/pull/401>
-* ⬆ Bump cryptography from 39.0.2 to 40.0.0 by @dependabot in <https://github.com/yezz123/authx/pull/402>
-* ⬆ Bump cryptography from 40.0.0 to 40.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/404>
-* ⬆ Bump pre-commit from 3.2.0 to 3.2.1 by @dependabot in <https://github.com/yezz123/authx/pull/405>
-* ⬆ Bump pytz from 2022.7.1 to 2023.2 by @dependabot in <https://github.com/yezz123/authx/pull/403>
-* ⬆ Bump pytz from 2023.2 to 2023.3 by @dependabot in <https://github.com/yezz123/authx/pull/406>
-* ⬆ Update redis requirement from <4.5.4,>=4.3.3 to >=4.3.3,<4.5.5 by @dependabot in <https://github.com/yezz123/authx/pull/407>
-* ⬆ Update sqlalchemy requirement from <2.0.8,>=1.4.37 to >=1.4.37,<2.0.9 by @dependabot in <https://github.com/yezz123/authx/pull/408>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.8.3 to 1.8.4 by @dependabot in <https://github.com/yezz123/authx/pull/410>
-* ⬆ Bump websockets from 10.4 to 11.0 by @dependabot in <https://github.com/yezz123/authx/pull/409>
-* ⬆ Bump pre-commit from 3.2.1 to 3.2.2 by @dependabot in <https://github.com/yezz123/authx/pull/411>
-* ⬆ Bump motor from 3.1.1 to 3.1.2 by @dependabot in <https://github.com/yezz123/authx/pull/412>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.8.4 to 1.8.5 by @dependabot in <https://github.com/yezz123/authx/pull/413>
-* ⬆ Update sqlalchemy requirement from <2.0.9,>=1.4.37 to >=1.4.37,<2.0.10 by @dependabot in <https://github.com/yezz123/authx/pull/415>
-* ⬆ Bump websockets from 11.0 to 11.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/416>
-* ⬆ Bump pytest from 7.2.2 to 7.3.0 by @dependabot in <https://github.com/yezz123/authx/pull/417>
-* ⬆ Bump pymdown-extensions from 9.10 to 9.11 by @dependabot in <https://github.com/yezz123/authx/pull/418>
-* ⬆ Bump httpx from 0.23.3 to 0.24.0 by @dependabot in <https://github.com/yezz123/authx/pull/419>
-* ⬆ Update email-validator requirement from <1.3.2,>=1.1.0 to >=1.1.0,<2.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/420>
-* ⬆ Bump pytest from 7.3.0 to 7.3.1 by @dependabot in <https://github.com/yezz123/authx/pull/421>
-* ⬆ Bump websockets from 11.0.1 to 11.0.2 by @dependabot in <https://github.com/yezz123/authx/pull/424>
-* ⬆ Bump cryptography from 40.0.1 to 40.0.2 by @dependabot in <https://github.com/yezz123/authx/pull/422>
-* ⬆ Update sqlalchemy requirement from <2.0.10,>=1.4.37 to >=1.4.37,<2.0.11 by @dependabot in <https://github.com/yezz123/authx/pull/425>
-* ⬆ Update sqlalchemy requirement from <2.0.11,>=1.4.37 to >=1.4.37,<2.0.12 by @dependabot in <https://github.com/yezz123/authx/pull/426>
-* ⬆ Bump requests from 2.28.2 to 2.29.0 by @dependabot in <https://github.com/yezz123/authx/pull/427>
-* ⬆ Bump uvicorn from 0.21.1 to 0.22.0 by @dependabot in <https://github.com/yezz123/authx/pull/428>
-* ⬆ Update sqlalchemy requirement from <2.0.12,>=1.4.37 to >=1.4.37,<2.0.13 by @dependabot in <https://github.com/yezz123/authx/pull/429>
-* ⬆ Bump pre-commit from 3.2.2 to 3.3.0 by @dependabot in <https://github.com/yezz123/authx/pull/430>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.8.5 to 1.8.6 by @dependabot in <https://github.com/yezz123/authx/pull/432>
-* ⬆ Bump pre-commit from 3.3.0 to 3.3.1 by @dependabot in <https://github.com/yezz123/authx/pull/431>
-* ⬆ Bump requests from 2.29.0 to 2.30.0 by @dependabot in <https://github.com/yezz123/authx/pull/433>
-* ⬆ Update redis requirement from <4.5.5,>=4.3.3 to >=4.3.3,<4.5.6 by @dependabot in <https://github.com/yezz123/authx/pull/435>
-* ⬆ Bump websockets from 11.0.2 to 11.0.3 by @dependabot in <https://github.com/yezz123/authx/pull/434>
-* ⬆ Bump pyjwt from 2.6.0 to 2.7.0 by @dependabot in <https://github.com/yezz123/authx/pull/436>
-* ⬆ Update sqlalchemy requirement from <2.0.13,>=1.4.37 to >=1.4.37,<2.0.14 by @dependabot in <https://github.com/yezz123/authx/pull/437>
-* ⬆ Bump pymdown-extensions from 9.11 to 10.0 by @dependabot in <https://github.com/yezz123/authx/pull/438>
-* ⬆ Bump starlette from 0.25.0 to 0.27.0 in /tests/middleware/example by @dependabot in <https://github.com/yezz123/authx/pull/439>
-* ⬆ Bump pymdown-extensions from 10.0 to 10.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/440>
-* ⬆ Update starlette requirement from <0.26.2,>=0.14.02 to >=0.14.02,<0.27.1 by @dependabot in <https://github.com/yezz123/authx/pull/441>
-* ⬆ Bump pre-commit from 3.3.1 to 3.3.2 by @dependabot in <https://github.com/yezz123/authx/pull/442>
-* ⬆ Update sqlalchemy requirement from <2.0.14,>=1.4.37 to >=1.4.37,<2.0.15 by @dependabot in <https://github.com/yezz123/authx/pull/444>
-* ⬆ Bump httpx from 0.24.0 to 0.24.1 by @dependabot in <https://github.com/yezz123/authx/pull/443>
-* ⬆ Update sqlalchemy requirement from <2.0.15,>=1.4.37 to >=1.4.37,<2.0.16 by @dependabot in <https://github.com/yezz123/authx/pull/445>
-* ⬆ Bump requests from 2.30.0 to 2.31.0 by @dependabot in <https://github.com/yezz123/authx/pull/450>
-* ⬆ Bump pytest-cov from 4.0.0 to 4.1.0 by @dependabot in <https://github.com/yezz123/authx/pull/452>
-* ⬆ Bump cryptography from 40.0.2 to 41.0.0 by @dependabot in <https://github.com/yezz123/authx/pull/453>
-* ⬆ Update typing-extensions requirement from <4.6.0,>=3.7.4 to >=3.7.4,<4.7.0 by @dependabot in <https://github.com/yezz123/authx/pull/458>
-* ⬆ Bump itsdangerous from 2.0.1 to 2.1.2 by @dependabot in <https://github.com/yezz123/authx/pull/457>
-* ⬆ Bump sqlalchemy from 1.4.37 to 2.0.15 by @dependabot in <https://github.com/yezz123/authx/pull/456>
-* ⬆ Update fastapi requirement from <0.96.0,>=0.65.2 to >=0.65.2,<0.97.0 by @dependabot in <https://github.com/yezz123/authx/pull/463>
-* ⬆ Update starlette requirement from <0.27.1,>=0.14.02 to >=0.14.02,<0.28.1 by @dependabot in <https://github.com/yezz123/authx/pull/468>
-* ⬆ Update pyinstrument requirement from <4.5.0,>=4.1.1 to >=4.1.1,<4.6.0 by @dependabot in <https://github.com/yezz123/authx/pull/466>
-* ⬆ Bump pytest from 7.3.1 to 7.3.2 by @dependabot in <https://github.com/yezz123/authx/pull/464>
-* ⬆ Bump sqlalchemy from 2.0.15 to 2.0.16 by @dependabot in <https://github.com/yezz123/authx/pull/465>
-* ⬆ Update fastapi requirement from <0.97.0,>=0.65.2 to >=0.65.2,<0.98.0 by @dependabot in <https://github.com/yezz123/authx/pull/467>
-* ⬆ Bump pre-commit from 3.3.2 to 3.3.3 by @dependabot in <https://github.com/yezz123/authx/pull/469>
-* ⬆ Bump sqlalchemy from 2.0.16 to 2.0.17 by @dependabot in <https://github.com/yezz123/authx/pull/471>
-* ⬆ Bump mypy from 1.3.0 to 1.4.0 by @dependabot in <https://github.com/yezz123/authx/pull/472>
-* ⬆ Bump pytest from 7.3.2 to 7.4.0 by @dependabot in <https://github.com/yezz123/authx/pull/473>
-* ⬆ Update fastapi requirement from <0.98.0,>=0.65.2 to >=0.65.2,<0.99.0 by @dependabot in <https://github.com/yezz123/authx/pull/474>
-* ⬆ Update redis requirement from <4.5.6,>=4.3.3 to >=4.3.3,<4.6.1 by @dependabot in <https://github.com/yezz123/authx/pull/477>
-* ⬆ Bump mypy from 1.4.0 to 1.4.1 by @dependabot in <https://github.com/yezz123/authx/pull/476>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.8.6 to 1.8.7 by @dependabot in <https://github.com/yezz123/authx/pull/479>
-* ⬆ Bump Requirements by @yezz123 in <https://github.com/yezz123/authx/pull/484>
-* ⬆ Bump cryptography from 41.0.1 to 41.0.2 in /requirements by @dependabot in <https://github.com/yezz123/authx/pull/485>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.8.7 to 1.8.8 by @dependabot in <https://github.com/yezz123/authx/pull/486>
-* ⬆ Bump certifi from 2023.5.7 to 2023.7.22 in /requirements by @dependabot in <https://github.com/yezz123/authx/pull/487>
-* ⬆ Bump cryptography from 41.0.2 to 41.0.3 in /requirements by @dependabot in <https://github.com/yezz123/authx/pull/488>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.8.8 to 1.8.10 by @dependabot in <https://github.com/yezz123/authx/pull/489>
-* ⬆ Bump actions/checkout from 3 to 4 by @dependabot in <https://github.com/yezz123/authx/pull/491>
-* ⬆ Upgrade Dependencies by @yezz123 in <https://github.com/yezz123/authx/pull/492>
-* ⬆ Bump urllib3 from 2.0.5 to 2.0.6 in /requirements by @dependabot in <https://github.com/yezz123/authx/pull/493>
-* ⬆ Bump urllib3 from 2.0.6 to 2.0.7 in /requirements by @dependabot in <https://github.com/yezz123/authx/pull/495>
-* ⬆ Bump cryptography from 41.0.4 to 41.0.6 in /requirements by @dependabot in <https://github.com/yezz123/authx/pull/498>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.8.10 to 1.8.11 by @dependabot in <https://github.com/yezz123/authx/pull/499>
-* ⬆ Upgrade Dependencies by @yezz123 in <https://github.com/yezz123/authx/pull/500>
-* ⬆ Bump actions/setup-python from 4 to 5 by @dependabot in <https://github.com/yezz123/authx/pull/503>
-* ⬆ Bump jinja2 from 3.1.2 to 3.1.3 in /requirements by @dependabot in <https://github.com/yezz123/authx/pull/505>
-
-### What's Changed
-
-For detailed information on the changes introduced in this release, please refer to the [Full Changelog](https://github.com/yezz123/authx/compare/0.9.0...1.0.0b0)
+* ➖ Remove Documentation Workflow. PR [#414](https://github.com/yezz123/authx/pull/414) by [@yezz123](https://github.com/yezz123).
+* ♻️ chore(revamp): AuthX Revamp - V1.0.0. PR [#446](https://github.com/yezz123/authx/pull/446) by [@yezz123](https://github.com/yezz123).
+* 🔧 Feat: Refactor & Rebuild Functionalities in authx. PR [#454](https://github.com/yezz123/authx/pull/454) by [@yezz123](https://github.com/yezz123).
+* 🐛 fix Continuous Integration Badge. [PR #455](https://github.com/yezz123/authx/pull/455) by [@yezz123](https://github.com/yezz123).
+* ♻️ use pip-tool to autogenerate dependencies[PR #478](https://github.com/yezz123/authx/pull/478) by [@yezz123](https://github.com/yezz123)
+* 🔧 Run tests against `py38`. [PR #480](https://github.com/yezz123/authx/pull/480) by [@yezz123](https://github.com/yezz123)
+* 📝 overrides template & Include google analytics. [PR #482](https://github.com/yezz123/authx/pull/482) by [@yezz123](https://github.com/yezz123)
+* 📝 Add Extra documentation to AuthX. [PR #483](https://github.com/yezz123/authx/pull/483) by [@yezz123](https://github.com/yezz123)
+* 🔧 Include Python 3.12. [PR #494](https://github.com/yezz123/authx/pull/494) by [@yezz123](https://github.com/yezz123)
+* ✨ add support for ruff linter. [PR #497](https://github.com/yezz123/authx/pull/497) by [@yezz123](https://github.com/yezz123)
+* ♻️ Drop External Libraries in favour of `authx-extra`. [PR #506](https://github.com/yezz123/authx/pull/506) by [@yezz123](https://github.com/yezz123)
 
 ## 0.9.1
 
-### 🟥  LAST RELEASE FOR AUTHX - 0.x.x
-
-As you may observe, my primary shift has been towards concentrating on the development of the new release, with a strong emphasis on incorporating features that users would appreciate to enhance authentication capabilities.
-
-In doing so, I have intentionally omitted several functions. This is why I strongly believe that having two distinct versions is truly beneficial.
-
-#### 0.x.x
-
-The primary focus will be on addressing bug fixes and improving documentation in the previous version. It appears that the excessive use of dependencies may have been a factor that many people did not appreciate.
-
-You can open a pull request in case you want to fix something related to it 🙌🏻
-
-#### 1.x.x
-
-You can read here what is new until now:
-
-AuthX Revamp - V 1.0.0 will be our authentication system New design. This version comes with several new features and enhancements to improve security, usability, and performance.
-
-##### Core Functionality
-
-* JWT encoding/decoding for application authentication
-* Automatic detection of JWTs in requests:
-  * JWTs in headers
-  * JWTs in cookies
-  * JWTs in query strings
-  * JWTs in JSON bodies
-* Implicit/explicit token refresh mechanism
-* Tracking the freshness state of tokens
-* Route protection:
-  * Protection based on token type (access/refresh)
-  * Protection based on token freshness
-  * Partial route protection
-* Handling custom user logic for revoked token validation
-* Handling custom logic for token recipient retrieval (ORM, pydantic serialization...)
-* Providing FastAPI-compliant dependency injection API
-* Automatic error handling
-
-##### External Support
-
-* Keeping profiler
-* Keeping Redis
-* Keeping Instrument
-* Keeping Metrics
-* Providing OAuth2 support
-
 ### Fixes 🐛
 
-* ➖ Remove Documentation Workflow by @yezz123 in <https://github.com/yezz123/authx/pull/414>
+* Remove Documentation Workflow by @yezz123. PR [#414](https://github.com/yezz123/authx/pull/414) by @yezz123.
 
 ### Dependencies 📦
 
-* ⬆ Update sqlalchemy requirement from <2.0.4,>=1.4.37 to >=1.4.37,<2.0.5 by @dependabot in <https://github.com/yezz123/authx/pull/370>
-
-* ⬆ Bump pre-commit from 3.0.4 to 3.1.0 by @dependabot in <https://github.com/yezz123/authx/pull/371>
-* ⬆ Bump pre-commit from 3.1.0 to 3.1.1 by @dependabot in <https://github.com/yezz123/authx/pull/372>
-* ⬆ Bump cryptography from 39.0.1 to 39.0.2 by @dependabot in <https://github.com/yezz123/authx/pull/373>
-* ⬆ Update sqlalchemy requirement from <2.0.5,>=1.4.37 to >=1.4.37,<2.0.6 by @dependabot in <https://github.com/yezz123/authx/pull/374>
-* ⬆ Bump pymdown-extensions from 9.9.2 to 9.10 by @dependabot in <https://github.com/yezz123/authx/pull/375>
-* ⬆ Bump pytest from 7.2.1 to 7.2.2 by @dependabot in <https://github.com/yezz123/authx/pull/376>
-* ⬆ Update fastapi requirement from <0.93.0,>=0.65.2 to >=0.65.2,<0.94.0 by @dependabot in <https://github.com/yezz123/authx/pull/380>
-* ⬆ Bump pydantic from 1.10.5 to 1.10.6 by @dependabot in <https://github.com/yezz123/authx/pull/381>
-* ⬆ Bump uvicorn from 0.20.0 to 0.21.0 by @dependabot in <https://github.com/yezz123/authx/pull/382>
-* ⬆ Update starlette requirement from <0.25.1,>=0.14.02 to >=0.14.02,<0.26.1 by @dependabot in <https://github.com/yezz123/authx/pull/383>
-* ⬆ Update fastapi requirement from <0.94.0,>=0.65.2 to >=0.65.2,<0.95.0 by @dependabot in <https://github.com/yezz123/authx/pull/385>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.6.4 to 1.7.1 by @dependabot in <https://github.com/yezz123/authx/pull/386>
-* ⬆ Update sqlalchemy requirement from <2.0.6,>=1.4.37 to >=1.4.37,<2.0.7 by @dependabot in <https://github.com/yezz123/authx/pull/387>
-* ⬆ Update starlette requirement from <0.26.1,>=0.14.02 to >=0.14.02,<0.26.2 by @dependabot in <https://github.com/yezz123/authx/pull/388>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.7.1 to 1.8.0 by @dependabot in <https://github.com/yezz123/authx/pull/389>
-* ⬆ Bump uvicorn from 0.21.0 to 0.21.1 by @dependabot in <https://github.com/yezz123/authx/pull/390>
-* ⬆ Update python-socketio requirement from <5.7.3,>=4.6.0 to >=4.6.0,<5.8.1 by @dependabot in <https://github.com/yezz123/authx/pull/391>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.8.0 to 1.8.1 by @dependabot in <https://github.com/yezz123/authx/pull/392>
-* ⬆ Bump pre-commit from 3.1.1 to 3.2.0 by @dependabot in <https://github.com/yezz123/authx/pull/394>
-* ⬆ Bump pytest-asyncio from 0.20.3 to 0.21.0 by @dependabot in <https://github.com/yezz123/authx/pull/395>
-* ⬆ Update fastapi requirement from <0.95.0,>=0.65.2 to >=0.65.2,<0.96.0 by @dependabot in <https://github.com/yezz123/authx/pull/396>
-* ⬆ Update sqlalchemy requirement from <2.0.7,>=1.4.37 to >=1.4.37,<2.0.8 by @dependabot in <https://github.com/yezz123/authx/pull/397>
-* ⬆ Update redis requirement from <4.5.2,>=4.3.3 to >=4.3.3,<4.5.3 by @dependabot in <https://github.com/yezz123/authx/pull/398>
-* ⬆ Bump pydantic from 1.10.6 to 1.10.7 by @dependabot in <https://github.com/yezz123/authx/pull/399>
-* ⬆ Update redis requirement from <4.5.3,>=4.3.3 to >=4.3.3,<4.5.4 by @dependabot in <https://github.com/yezz123/authx/pull/400>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.8.1 to 1.8.3 by @dependabot in <https://github.com/yezz123/authx/pull/401>
-* ⬆ Bump cryptography from 39.0.2 to 40.0.0 by @dependabot in <https://github.com/yezz123/authx/pull/402>
-* ⬆ Bump cryptography from 40.0.0 to 40.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/404>
-* ⬆ Bump pre-commit from 3.2.0 to 3.2.1 by @dependabot in <https://github.com/yezz123/authx/pull/405>
-* ⬆ Bump pytz from 2022.7.1 to 2023.2 by @dependabot in <https://github.com/yezz123/authx/pull/403>
-* ⬆ Bump pytz from 2023.2 to 2023.3 by @dependabot in <https://github.com/yezz123/authx/pull/406>
-* ⬆ Update redis requirement from <4.5.4,>=4.3.3 to >=4.3.3,<4.5.5 by @dependabot in <https://github.com/yezz123/authx/pull/407>
-* ⬆ Update sqlalchemy requirement from <2.0.8,>=1.4.37 to >=1.4.37,<2.0.9 by @dependabot in <https://github.com/yezz123/authx/pull/408>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.8.3 to 1.8.4 by @dependabot in <https://github.com/yezz123/authx/pull/410>
-* ⬆ Bump websockets from 10.4 to 11.0 by @dependabot in <https://github.com/yezz123/authx/pull/409>
-* ⬆ Bump pre-commit from 3.2.1 to 3.2.2 by @dependabot in <https://github.com/yezz123/authx/pull/411>
-* ⬆ Bump motor from 3.1.1 to 3.1.2 by @dependabot in <https://github.com/yezz123/authx/pull/412>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.8.4 to 1.8.5 by @dependabot in <https://github.com/yezz123/authx/pull/413>
-* ⬆ Update sqlalchemy requirement from <2.0.9,>=1.4.37 to >=1.4.37,<2.0.10 by @dependabot in <https://github.com/yezz123/authx/pull/415>
-* ⬆ Bump websockets from 11.0 to 11.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/416>
-* ⬆ Bump pytest from 7.2.2 to 7.3.0 by @dependabot in <https://github.com/yezz123/authx/pull/417>
-* ⬆ Bump pymdown-extensions from 9.10 to 9.11 by @dependabot in <https://github.com/yezz123/authx/pull/418>
-* ⬆ Bump httpx from 0.23.3 to 0.24.0 by @dependabot in <https://github.com/yezz123/authx/pull/419>
-* ⬆ Update email-validator requirement from <1.3.2,>=1.1.0 to >=1.1.0,<2.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/420>
-* ⬆ Bump pytest from 7.3.0 to 7.3.1 by @dependabot in <https://github.com/yezz123/authx/pull/421>
-* ⬆ Bump websockets from 11.0.1 to 11.0.2 by @dependabot in <https://github.com/yezz123/authx/pull/424>
-* ⬆ Bump cryptography from 40.0.1 to 40.0.2 by @dependabot in <https://github.com/yezz123/authx/pull/422>
-* ⬆ Update sqlalchemy requirement from <2.0.10,>=1.4.37 to >=1.4.37,<2.0.11 by @dependabot in <https://github.com/yezz123/authx/pull/425>
-* ⬆ Update sqlalchemy requirement from <2.0.11,>=1.4.37 to >=1.4.37,<2.0.12 by @dependabot in <https://github.com/yezz123/authx/pull/426>
-* ⬆ Bump requests from 2.28.2 to 2.29.0 by @dependabot in <https://github.com/yezz123/authx/pull/427>
-* ⬆ Bump uvicorn from 0.21.1 to 0.22.0 by @dependabot in <https://github.com/yezz123/authx/pull/428>
-* ⬆ Update sqlalchemy requirement from <2.0.12,>=1.4.37 to >=1.4.37,<2.0.13 by @dependabot in <https://github.com/yezz123/authx/pull/429>
-* ⬆ Bump pre-commit from 3.2.2 to 3.3.0 by @dependabot in <https://github.com/yezz123/authx/pull/430>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.8.5 to 1.8.6 by @dependabot in <https://github.com/yezz123/authx/pull/432>
-* ⬆ Bump pre-commit from 3.3.0 to 3.3.1 by @dependabot in <https://github.com/yezz123/authx/pull/431>
-* ⬆ Bump requests from 2.29.0 to 2.30.0 by @dependabot in <https://github.com/yezz123/authx/pull/433>
-* ⬆ Update redis requirement from <4.5.5,>=4.3.3 to >=4.3.3,<4.5.6 by @dependabot in <https://github.com/yezz123/authx/pull/435>
-* ⬆ Bump websockets from 11.0.2 to 11.0.3 by @dependabot in <https://github.com/yezz123/authx/pull/434>
-* ⬆ Bump pyjwt from 2.6.0 to 2.7.0 by @dependabot in <https://github.com/yezz123/authx/pull/436>
-* ⬆ Update sqlalchemy requirement from <2.0.13,>=1.4.37 to >=1.4.37,<2.0.14 by @dependabot in <https://github.com/yezz123/authx/pull/437>
-* ⬆ Bump pymdown-extensions from 9.11 to 10.0 by @dependabot in <https://github.com/yezz123/authx/pull/438>
-* ⬆️ Bump starlette from 0.25.0 to 0.27.0 in /tests/middleware/example by @dependabot in <https://github.com/yezz123/authx/pull/439>
-* ⬆ Bump pymdown-extensions from 10.0 to 10.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/440>
-* ⬆ Update starlette requirement from <0.26.2,>=0.14.02 to >=0.14.02,<0.27.1 by @dependabot in <https://github.com/yezz123/authx/pull/441>
-* ⬆ Bump pre-commit from 3.3.1 to 3.3.2 by @dependabot in <https://github.com/yezz123/authx/pull/442>
-* ⬆ Update sqlalchemy requirement from <2.0.14,>=1.4.37 to >=1.4.37,<2.0.15 by @dependabot in <https://github.com/yezz123/authx/pull/444>
-* ⬆ Bump httpx from 0.24.0 to 0.24.1 by @dependabot in <https://github.com/yezz123/authx/pull/443>
-* ⬆ Update sqlalchemy requirement from <2.0.15,>=1.4.37 to >=1.4.37,<2.0.16 by @dependabot in <https://github.com/yezz123/authx/pull/445>
-* ⬆ Bump requests from 2.30.0 to 2.31.0 by @dependabot in <https://github.com/yezz123/authx/pull/450>
-* ⬆ Bump pytest-cov from 4.0.0 to 4.1.0 by @dependabot in <https://github.com/yezz123/authx/pull/452>
-* ⬆ Bump cryptography from 40.0.2 to 41.0.0 by @dependabot in <https://github.com/yezz123/authx/pull/453>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.9.0...0.9.1>
+* Update sqlalchemy requirement from <2.0.4,>=1.4.37 to >=1.4.37,<2.0.5 by @dependabot. PR [#370](https://github.com/yezz123/authx/pull/370) by @dependabot.
+* Bump pre-commit from 3.0.4 to 3.1.0 by @dependabot. PR [#371](https://github.com/yezz123/authx/pull/371) by @dependabot.
+* Bump pre-commit from 3.1.0 to 3.1.1 by @dependabot. PR [#372](https://github.com/yezz123/authx/pull/372) by @dependabot.
+* Bump cryptography from 39.0.1 to 39.0.2 by @dependabot. PR [#373](https://github.com/yezz123/authx/pull/373) by @dependabot.
+* Update sqlalchemy requirement from <2.0.5,>=1.4.37 to >=1.4.37,<2.0.6 by @dependabot. PR [#374](https://github.com/yezz123/authx/pull/374) by @dependabot.
+* Bump pymdown-extensions from 9.9.2 to 9.10 by @dependabot. PR [#375](https://github.com/yezz123/authx/pull/375) by @dependabot.
+* Bump pytest from 7.2.1 to 7.2.2 by @dependabot. PR [#376](https://github.com/yezz123/authx/pull/376) by @dependabot.
+* Update fastapi requirement from <0.93.0,>=0.65.2 to >=0.65.2,<0.94.0 by @dependabot. PR [#380](https://github.com/yezz123/authx/pull/380) by @dependabot.
+* Bump pydantic from 1.10.5 to 1.10.6 by @dependabot. PR [#381](https://github.com/yezz123/authx/pull/381) by @dependabot.
+* Bump uvicorn from 0.20.0 to 0.21.0 by @dependabot. PR [#382](https://github.com/yezz123/authx/pull/382) by @dependabot.
+* Update starlette requirement from <0.25.1,>=0.14.02 to >=0.14.02,<0.26.1 by @dependabot. PR [#383](https://github.com/yezz123/authx/pull/383) by @dependabot.
+* Update fastapi requirement from <0.94.0,>=0.65.2 to >=0.65.2,<0.95.0 by @dependabot. PR [#385](https://github.com/yezz123/authx/pull/385) by @dependabot.
+* Bump pypa/gh-action-pypi-publish from 1.6.4 to 1.7.1 by @dependabot. PR [#386](https://github.com/yezz123/authx/pull/386) by @dependabot.
+* Update sqlalchemy requirement from <2.0.6,>=1.4.37 to >=1.4.37,<2.0.7 by @dependabot. PR [#387](https://github.com/yezz123/authx/pull/387) by @dependabot.
+* Update starlette requirement from <0.26.1,>=0.14.02 to >=0.14.02,<0.26.2 by @dependabot. PR [#388](https://github.com/yezz123/authx/pull/388) by @dependabot.
+* Bump pypa/gh-action-pypi-publish from 1.7.1 to 1.8.0 by @dependabot. PR [#389](https://github.com/yezz123/authx/pull/389) by @dependabot.
+* Bump uvicorn from 0.21.0 to 0.21.1 by @dependabot. PR [#390](https://github.com/yezz123/authx/pull/390) by @dependabot.
+* Update python-socketio requirement from <5.7.3,>=4.6.0 to >=4.6.0,<5.8.1 by @dependabot. PR [#391](https://github.com/yezz123/authx/pull/391) by @dependabot.
+* Bump pypa/gh-action-pypi-publish from 1.8.0 to 1.8.1 by @dependabot. PR [#392](https://github.com/yezz123/authx/pull/392) by @dependabot.
+* Bump pre-commit from 3.1.1 to 3.2.0 by @dependabot. PR [#394](https://github.com/yezz123/authx/pull/394) by @dependabot.
+* Bump pytest-asyncio from 0.20.3 to 0.21.0 by @dependabot. PR [#395](https://github.com/yezz123/authx/pull/395) by @dependabot.
+* Update fastapi requirement from <0.95.0,>=0.65.2 to >=0.65.2,<0.96.0 by @dependabot. PR [#396](https://github.com/yezz123/authx/pull/396) by @dependabot.
+* Update sqlalchemy requirement from <2.0.7,>=1.4.37 to >=1.4.37,<2.0.8 by @dependabot. PR [#397](https://github.com/yezz123/authx/pull/397) by @dependabot.
+* Update redis requirement from <4.5.2,>=4.3.3 to >=4.3.3,<4.5.3 by @dependabot. PR [#398](https://github.com/yezz123/authx/pull/398) by @dependabot.
+* Bump pydantic from 1.10.6 to 1.10.7 by @dependabot. PR [#399](https://github.com/yezz123/authx/pull/399) by @dependabot.
+* Update redis requirement from <4.5.3,>=4.3.3 to >=4.3.3,<4.5.4 by @dependabot. PR [#400](https://github.com/yezz123/authx/pull/400) by @dependabot.
+* Bump pypa/gh-action-pypi-publish from 1.8.1 to 1.8.3 by @dependabot. PR [#401](https://github.com/yezz123/authx/pull/401) by @dependabot.
+* Bump cryptography from 39.0.2 to 40.0.0 by @dependabot. PR [#402](https://github.com/yezz123/authx/pull/402) by @dependabot.
+* Bump cryptography from 40.0.0 to 40.0.1 by @dependabot. PR [#404](https://github.com/yezz123/authx/pull/404) by @dependabot.
+* Bump pre-commit from 3.2.0 to 3.2.1 by @dependabot. PR [#405](https://github.com/yezz123/authx/pull/405) by @dependabot.
+* Bump pytz from 2022.7.1 to 2023.2 by @dependabot. PR [#403](https://github.com/yezz123/authx/pull/403) by @dependabot.
+* Bump pytz from 2023.2 to 2023.3 by @dependabot. PR [#406](https://github.com/yezz123/authx/pull/406) by @dependabot.
+* Update redis requirement from <4.5.4,>=4.3.3 to >=4.3.3,<4.5.5 by @dependabot. PR [#407](https://github.com/yezz123/authx/pull/407) by @dependabot.
+* Update sqlalchemy requirement from <2.0.8,>=1.4.37 to >=1.4.37,<2.0.9 by @dependabot. PR [#408](https://github.com/yezz123/authx/pull/408) by @dependabot.
+* Bump pypa/gh-action-pypi-publish from 1.8.3 to 1.8.4 by @dependabot. PR [#410](https://github.com/yezz123/authx/pull/410) by @dependabot.
+* Bump websockets from 10.4 to 11.0 by @dependabot. PR [#409](https://github.com/yezz123/authx/pull/409) by @dependabot.
+* Bump pre-commit from 3.2.1 to 3.2.2 by @dependabot. PR [#411](https://github.com/yezz123/authx/pull/411) by @dependabot.
+* Bump motor from 3.1.1 to 3.1.2 by @dependabot. PR [#412](https://github.com/yezz123/authx/pull/412) by @dependabot.
+* Bump pypa/gh-action-pypi-publish from 1.8.4 to 1.8.5 by @dependabot. PR [#413](https://github.com/yezz123/authx/pull/413) by @dependabot.
+* Update sqlalchemy requirement from <2.0.9,>=1.4.37 to >=1.4.37,<2.0.10 by @dependabot. PR [#415](https://github.com/yezz123/authx/pull/415) by @dependabot.
+* Bump websockets from 11.0 to 11.0.1 by @dependabot. PR [#416](https://github.com/yezz123/authx/pull/416) by @dependabot.
+* Bump pytest from 7.2.2 to 7.3.0 by @dependabot. PR [#417](https://github.com/yezz123/authx/pull/417) by @dependabot.
+* Bump pymdown-extensions from 9.10 to 9.11 by @dependabot. PR [#418](https://github.com/yezz123/authx/pull/418) by @dependabot.
+* Bump httpx from 0.23.3 to 0.24.0 by @dependabot. PR [#419](https://github.com/yezz123/authx/pull/419) by @dependabot.
+* Update email-validator requirement from <1.3.2,>=1.1.0 to >=1.1.0,<2.0.1 by @dependabot. PR [#420](https://github.com/yezz123/authx/pull/420) by @dependabot.
+* Bump pytest from 7.3.0 to 7.3.1 by @dependabot. PR [#421](https://github.com/yezz123/authx/pull/421) by @dependabot.
+* Bump websockets from 11.0.1 to 11.0.2 by @dependabot. PR [#424](https://github.com/yezz123/authx/pull/424) by @dependabot.
+* Bump cryptography from 40.0.1 to 40.0.2 by @dependabot. PR [#422](https://github.com/yezz123/authx/pull/422) by @dependabot.
+* Update sqlalchemy requirement from <2.0.10,>=1.4.37 to >=1.4.37,<2.0.11 by @dependabot. PR [#425](https://github.com/yezz123/authx/pull/425) by @dependabot.
+* Update sqlalchemy requirement from <2.0.11,>=1.4.37 to >=1.4.37,<2.0.12 by @dependabot. PR [#426](https://github.com/yezz123/authx/pull/426) by @dependabot.
+* Bump requests from 2.28.2 to 2.29.0 by @dependabot. PR [#427](https://github.com/yezz123/authx/pull/427) by @dependabot.
+* Bump uvicorn from 0.21.1 to 0.22.0 by @dependabot. PR [#428](https://github.com/yezz123/authx/pull/428) by @dependabot.
+* Update sqlalchemy requirement from <2.0.12,>=1.4.37 to >=1.4.37,<2.0.13 by @dependabot. PR [#429](https://github.com/yezz123/authx/pull/429) by @dependabot.
+* Bump pre-commit from 3.2.2 to 3.3.0 by @dependabot. PR [#430](https://github.com/yezz123/authx/pull/430) by @dependabot.
+* Bump pypa/gh-action-pypi-publish from 1.8.5 to 1.8.6 by @dependabot. PR [#432](https://github.com/yezz123/authx/pull/432) by @dependabot.
+* Bump pre-commit from 3.3.0 to 3.3.1 by @dependabot. PR [#431](https://github.com/yezz123/authx/pull/431) by @dependabot.
+* Bump requests from 2.29.0 to 2.30.0 by @dependabot. PR [#433](https://github.com/yezz123/authx/pull/433) by @dependabot.
+* Update redis requirement from <4.5.5,>=4.3.3 to >=4.3.3,<4.5.6 by @dependabot. PR [#435](https://github.com/yezz123/authx/pull/435) by @dependabot.
+* Bump websockets from 11.0.2 to 11.0.3 by @dependabot. PR [#434](https://github.com/yezz123/authx/pull/434) by @dependabot.
+* Bump pyjwt from 2.6.0 to 2.7.0 by @dependabot. PR [#436](https://github.com/yezz123/authx/pull/436) by @dependabot.
+* Update sqlalchemy requirement from <2.0.13,>=1.4.37 to >=1.4.37,<2.0.14 by @dependabot. PR [#437](https://github.com/yezz123/authx/pull/437) by @dependabot.
+* Bump pymdown-extensions from 9.11 to 10.0 by @dependabot. PR [#438](https://github.com/yezz123/authx/pull/438) by @dependabot.
+* Bump starlette from 0.25.0 to 0.27.0 in /tests/middleware/example by @dependabot. PR [#439](https://github.com/yezz123/authx/pull/439) by @dependabot.
+* Bump pymdown-extensions from 10.0 to 10.0.1 by @dependabot. PR [#440](https://github.com/yezz123/authx/pull/440) by @dependabot.
+* Update starlette requirement from <0.26.2,>=0.14.02 to >=0.14.02,<0.27.1 by @dependabot. PR [#441](https://github.com/yezz123/authx/pull/441) by @dependabot.
+* Bump pre-commit from 3.3.1 to 3.3.2 by @dependabot. PR [#442](https://github.com/yezz123/authx/pull/442) by @dependabot.
+* Update sqlalchemy requirement from <2.0.14,>=1.4.37 to >=1.4.37,<2.0.15 by @dependabot. PR [#444](https://github.com/yezz123/authx/pull/444) by @dependabot.
+* Bump httpx from 0.24.0 to 0.24.1 by @dependabot. PR [#443](https://github.com/yezz123/authx/pull/443) by @dependabot.
+* Update sqlalchemy requirement from <2.0.15,>=1.4.37 to >=1.4.37,<2.0.16 by @dependabot. PR [#445](https://github.com/yezz123/authx/pull/445) by @dependabot.
+* Bump requests from 2.30.0 to 2.31.0 by @dependabot. PR [#450](https://github.com/yezz123/authx/pull/450) by @dependabot.
+* Bump pytest-cov from 4.0.0 to 4.1.0 by @dependabot. PR [#452](https://github.com/yezz123/authx/pull/452) by @dependabot.
+* Bump cryptography from 40.0.2 to 41.0.0 by @dependabot. PR [#453](https://github.com/yezz123/authx/pull/453) by @dependabot.
 
 ## 0.9.0
 
-### Fixes 🐛
+### Internal
 
-* ➕ Support Python 3.11 by @yezz123 in <https://github.com/yezz123/authx/pull/355>
-* 🐛  Support `aioredis` from redis package by @yezz123 in <https://github.com/yezz123/authx/pull/369>
+* Support Python 3.11 by @yezz123. PR [#355](https://github.com/yezz123/authx/pull/355) by @yezz123.
+* Support `aioredis` from redis package by @yezz123. PR [#369](https://github.com/yezz123/authx/pull/369) by @yezz123.
 
-### Dependencies 🔨
+### Dependencies
 
-* ⬆ Update email-validator requirement from <1.3.1,>=1.1.0 to >=1.1.0,<1.3.2 by @dependabot in <https://github.com/yezz123/authx/pull/347>
-* ⬆ Bump pymdown-extensions from 9.9.1 to 9.9.2 by @dependabot in <https://github.com/yezz123/authx/pull/346>
-* ⬆ Bump pre-commit from 2.21.0 to 3.0.0 by @dependabot in <https://github.com/yezz123/authx/pull/348>
-* ⬆ Update sqlalchemy requirement from <1.4.47,>=1.4.37 to >=1.4.37,<2.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/350>
-* ⬆ Bump pre-commit from 3.0.0 to 3.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/349>
-* ⬆ Bump pre-commit from 3.0.1 to 3.0.4 by @dependabot in <https://github.com/yezz123/authx/pull/354>
-* ⬆ Update sqlalchemy requirement from <2.0.1,>=1.4.37 to >=1.4.37,<2.0.2 by @dependabot in <https://github.com/yezz123/authx/pull/353>
-* ⬆ Update starlette requirement from <0.23.2,>=0.14.02 to >=0.14.02,<0.24.1 by @dependabot in <https://github.com/yezz123/authx/pull/356>
-* ⬆ Update sqlalchemy requirement from <2.0.2,>=1.4.37 to >=1.4.37,<2.0.3 by @dependabot in <https://github.com/yezz123/authx/pull/357>
-* ⬆ Bump cryptography from 39.0.0 to 39.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/358>
-* ⬆ Update redis requirement from <4.4.3,>=4.3.3 to >=4.3.3,<4.5.1 by @dependabot in <https://github.com/yezz123/authx/pull/359>
-* ⬆ Bump markdown-include from 0.8.0 to 0.8.1 by @dependabot in <https://github.com/yezz123/authx/pull/360>
-* ⬆ Update fastapi requirement from <0.90.0,>=0.65.2 to >=0.65.2,<0.91.0 by @dependabot in <https://github.com/yezz123/authx/pull/361>
-* ⬆ Update redis requirement from <4.5.1,>=4.3.3 to >=4.3.3,<4.5.2 by @dependabot in <https://github.com/yezz123/authx/pull/362>
-* ⬆ Update sqlalchemy requirement from <2.0.3,>=1.4.37 to >=1.4.37,<2.0.4 by @dependabot in <https://github.com/yezz123/authx/pull/363>
-* ⬆ Update fastapi requirement from <0.91.0,>=0.65.2 to >=0.65.2,<0.92.0 by @dependabot in <https://github.com/yezz123/authx/pull/364>
-* ⬆ Update starlette requirement from <0.24.1,>=0.14.02 to >=0.14.02,<0.25.1 by @dependabot in <https://github.com/yezz123/authx/pull/366>
-* ⬆ Update fastapi requirement from <0.92.0,>=0.65.2 to >=0.65.2,<0.93.0 by @dependabot in <https://github.com/yezz123/authx/pull/367>
-* ⬆ Bump pydantic from 1.10.4 to 1.10.5 by @dependabot in <https://github.com/yezz123/authx/pull/368>
-* ⬆ Bump starlette from 0.17.1 to 0.25.0 in /tests/middleware/example by @dependabot in <https://github.com/yezz123/authx/pull/365>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.8.3...0.9.0>
+* Update email-validator requirement from <1.3.1,>=1.1.0 to >=1.1.0,<1.3.2 by @dependabot. PR [#347](https://github.com/yezz123/authx/pull/347) by @dependabot.
+* Bump pymdown-extensions from 9.9.1 to 9.9.2 by @dependabot. PR [#346](https://github.com/yezz123/authx/pull/346) by @dependabot.
+* Bump pre-commit from 2.21.0 to 3.0.0 by @dependabot. PR [#348](https://github.com/yezz123/authx/pull/348) by @dependabot.
+* Update sqlalchemy requirement from <1.4.47,>=1.4.37 to >=1.4.37,<2.0.1 by @dependabot. PR [#350](https://github.com/yezz123/authx/pull/350) by @dependabot.
+* Bump pre-commit from 3.0.0 to 3.0.1 by @dependabot. PR [#349](https://github.com/yezz123/authx/pull/349) by @dependabot.
+* Bump pre-commit from 3.0.1 to 3.0.4 by @dependabot. PR [#354](https://github.com/yezz123/authx/pull/354) by @dependabot.
+* Update sqlalchemy requirement from <2.0.1,>=1.4.37 to >=1.4.37,<2.0.2 by @dependabot. PR [#353](https://github.com/yezz123/authx/pull/353) by @dependabot.
+* Update starlette requirement from <0.23.2,>=0.14.02 to >=0.14.02,<0.24.1 by @dependabot. PR [#356](https://github.com/yezz123/authx/pull/356) by @dependabot.
+* Update sqlalchemy requirement from <2.0.2,>=1.4.37 to >=1.4.37,<2.0.3 by @dependabot. PR [#357](https://github.com/yezz123/authx/pull/357) by @dependabot.
+* Bump cryptography from 39.0.0 to 39.0.1 by @dependabot. PR [#358](https://github.com/yezz123/authx/pull/358) by @dependabot.
+* Update redis requirement from <4.4.3,>=4.3.3 to >=4.3.3,<4.5.1 by @dependabot. PR [#359](https://github.com/yezz123/authx/pull/359) by @dependabot.
+* Bump markdown-include from 0.8.0 to 0.8.1 by @dependabot. PR [#360](https://github.com/yezz123/authx/pull/360) by @dependabot.
+* Update fastapi requirement from <0.90.0,>=0.65.2 to >=0.65.2,<0.91.0 by @dependabot. PR [#361](https://github.com/yezz123/authx/pull/361) by @dependabot.
+* Update redis requirement from <4.5.1,>=4.3.3 to >=4.3.3,<4.5.2 by @dependabot. PR [#362](https://github.com/yezz123/authx/pull/362) by @dependabot.
+* Update sqlalchemy requirement from <2.0.3,>=1.4.37 to >=1.4.37,<2.0.4 by @dependabot. PR [#363](https://github.com/yezz123/authx/pull/363) by @dependabot.
+* Update fastapi requirement from <0.91.0,>=0.65.2 to >=0.65.2,<0.92.0 by @dependabot. PR [#364](https://github.com/yezz123/authx/pull/364) by @dependabot.
+* Update starlette requirement from <0.24.1,>=0.14.02 to >=0.14.02,<0.25.1 by @dependabot. PR [#366](https://github.com/yezz123/authx/pull/366) by @dependabot.
+* Update fastapi requirement from <0.92.0,>=0.65.2 to >=0.65.2,<0.93.0 by @dependabot. PR [#367](https://github.com/yezz123/authx/pull/367) by @dependabot.
+* Bump pydantic from 1.10.4 to 1.10.5 by @dependabot. PR [#368](https://github.com/yezz123/authx/pull/368) by @dependabot.
+* Bump starlette from 0.17.1 to 0.25.0 in /tests/middleware/example by @dependabot. PR [#365](https://github.com/yezz123/authx/pull/365) by @dependabot.
 
 ## 0.8.3
 
-### Fixes 🐛
+### Fixes
 
-* Fixes a few imports in the documentation by @alobbs in <https://github.com/yezz123/authx/pull/343>
-* ✨ Use Ruff for linting by @yezz123 in <https://github.com/yezz123/authx/pull/344>
+* Fixes a few imports in the documentation by @alobbs. PR [#343](https://github.com/yezz123/authx/pull/343) by @alobbs.
+* Use Ruff for linting by @yezz123. PR [#344](https://github.com/yezz123/authx/pull/344) by @yezz123.
 
-### Docs 📝
+### Docs
 
-* docs: add @alobbs as a contributor for doc by @allcontributors in <https://github.com/yezz123/authx/pull/345>
+* Add @alobbs as a contributor for doc by @allcontributors. PR [#345](https://github.com/yezz123/authx/pull/345) by @allcontributors.
 
-### Dependencies 🔨
+### Dependencies
 
-* ⬆ Bump pymdown-extensions from 9.9 to 9.9.1 by @dependabot in <https://github.com/yezz123/authx/pull/338>
-* ⬆ Update redis requirement from <4.4.2,>=4.3.3 to >=4.3.3,<4.4.3 by @dependabot in <https://github.com/yezz123/authx/pull/337>
-* ⬆ Bump requests from 2.28.1 to 2.28.2 by @dependabot in <https://github.com/yezz123/authx/pull/339>
-* ⬆ Bump pytz from 2022.7 to 2022.7.1 by @dependabot in <https://github.com/yezz123/authx/pull/340>
-* ⬆ Bump pytest from 7.2.0 to 7.2.1 by @dependabot in <https://github.com/yezz123/authx/pull/341>
-
-### New Contributors
-
-* @alobbs made their first contribution at <https://github.com/yezz123/authx/pull/343>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.8.2...0.8.3>
+* Bump pymdown-extensions from 9.9 to 9.9.1 by @dependabot. PR [#338](https://github.com/yezz123/authx/pull/338) by @dependabot.
+* Update redis requirement from <4.4.2,>=4.3.3 to >=4.3.3,<4.4.3 by @dependabot. PR [#337](https://github.com/yezz123/authx/pull/337) by @dependabot.
+* Bump requests from 2.28.1 to 2.28.2 by @dependabot. PR [#339](https://github.com/yezz123/authx/pull/339) by @dependabot.
+* Bump pytz from 2022.7 to 2022.7.1 by @dependabot. PR [#340](https://github.com/yezz123/authx/pull/340) by @dependabot.
+* Bump pytest from 7.2.0 to 7.2.1 by @dependabot. PR [#341](https://github.com/yezz123/authx/pull/341) by @dependabot.
 
 ## 0.8.2
 
-### What's Changed
+### Dependencies
 
-* ⬆ Bump jinja2 from 3.0.3 to 3.1.2 by @dependabot in <https://github.com/yezz123/authx/pull/268>
-* ⬆ Bump databases from 0.6.0 to 0.6.1 by @dependabot in <https://github.com/yezz123/authx/pull/270>
-* ⬆ Update email-validator requirement from <1.2.1,>=1.1.0 to >=1.1.0,<1.3.1 by @dependabot in <https://github.com/yezz123/authx/pull/271>
-* ⬆ Bump pytz from 2022.1 to 2022.6 by @dependabot in <https://github.com/yezz123/authx/pull/273>
-* ⬆ Update pyinstrument requirement from <4.2.0,>=4.1.1 to >=4.1.1,<4.4.0 by @dependabot in <https://github.com/yezz123/authx/pull/274>
-* ⬆ Bump pymdown-extensions from 9.5 to 9.7 by @dependabot in <https://github.com/yezz123/authx/pull/275>
-* ⬆ Bump pytest-cov from 3.0.0 to 4.0.0 by @dependabot in <https://github.com/yezz123/authx/pull/276>
-* ⬆ Update redis requirement from <4.3.4,>=4.3.3 to >=4.3.3,<4.3.5 by @dependabot in <https://github.com/yezz123/authx/pull/277>
-* ⬆ Bump pytest from 7.1.3 to 7.2.0 by @dependabot in <https://github.com/yezz123/authx/pull/278>
-* ⬆ Update fastapi requirement from <=0.81.0,>=0.65.2 to >=0.65.2,<0.87.0 by @dependabot in <https://github.com/yezz123/authx/pull/279>
-* ⬆ Bump bcrypt from 3.2.2 to 4.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/281>
-* ⬆ Bump pytest-asyncio from 0.19.0 to 0.20.1 by @dependabot in <https://github.com/yezz123/authx/pull/280>
-* ⬆ Bump pydantic from 1.9.1 to 1.10.2 by @dependabot in <https://github.com/yezz123/authx/pull/282>
-* ⬆ Update sqlalchemy requirement from <=1.4.40,>=1.4.37 to >=1.4.37,<1.4.43 by @dependabot in <https://github.com/yezz123/authx/pull/283>
-* ⬆ Bump aiosmtplib from 1.1.6 to 2.0.0 by @dependabot in <https://github.com/yezz123/authx/pull/285>
-* ⬆ Update pyinstrument requirement from <4.4.0,>=4.1.1 to >=4.1.1,<4.5.0 by @dependabot in <https://github.com/yezz123/authx/pull/286>
-* ⬆ Bump pymdown-extensions from 9.7 to 9.8 by @dependabot in <https://github.com/yezz123/authx/pull/287>
-* ⬆ Update python-socketio requirement from <5.7.1,>=4.6.0 to >=4.6.0,<5.7.3 by @dependabot in <https://github.com/yezz123/authx/pull/288>
-* ⬆ Bump databases from 0.6.1 to 0.6.2 by @dependabot in <https://github.com/yezz123/authx/pull/289>
-* ⬆ Update starlette requirement from <0.20.4,>=0.14.02 to >=0.14.02,<0.21.1 by @dependabot in <https://github.com/yezz123/authx/pull/290>
-* ⬆ Update sqlalchemy requirement from <1.4.43,>=1.4.37 to >=1.4.37,<1.4.44 by @dependabot in <https://github.com/yezz123/authx/pull/291>
-* ⬆ Bump cryptography from 37.0.4 to 38.0.3 by @dependabot in <https://github.com/yezz123/authx/pull/292>
-* ⬆ Bump uvloop from 0.16.0 to 0.17.0 by @dependabot in <https://github.com/yezz123/authx/pull/293>
-* ⬆ Bump websockets from 10.3 to 10.4 by @dependabot in <https://github.com/yezz123/authx/pull/294>
-* ⬆ Bump pyjwt from 2.4.0 to 2.6.0 by @dependabot in <https://github.com/yezz123/authx/pull/296>
-* ⬆ Bump motor from 3.0.0 to 3.1.1 by @dependabot in <https://github.com/yezz123/authx/pull/297>
-* ⬆ Bump pytest-asyncio from 0.20.1 to 0.20.2 by @dependabot in <https://github.com/yezz123/authx/pull/300>
-* ⬆ Update sqlalchemy requirement from <1.4.44,>=1.4.37 to >=1.4.37,<1.4.45 by @dependabot in <https://github.com/yezz123/authx/pull/298>
-* ⬆ Update starlette requirement from <0.21.1,>=0.14.02 to >=0.14.02,<0.22.1 by @dependabot in <https://github.com/yezz123/authx/pull/301>
-* ⬆ Bump httpx from 0.23.0 to 0.23.1 by @dependabot in <https://github.com/yezz123/authx/pull/303>
-* ⬆ Bump uvicorn from 0.18.3 to 0.20.0 by @dependabot in <https://github.com/yezz123/authx/pull/302>
-* ⬆ Update redis requirement from <4.3.5,>=4.3.3 to >=4.3.3,<4.3.6 by @dependabot in <https://github.com/yezz123/authx/pull/304>
-* ⬆ Bump pymdown-extensions from 9.8 to 9.9 by @dependabot in <https://github.com/yezz123/authx/pull/305>
-* ⬆ Bump markdown-include from 0.7.0 to 0.8.0 by @dependabot in <https://github.com/yezz123/authx/pull/306>
-* ⬆ Bump cryptography from 38.0.3 to 38.0.4 by @dependabot in <https://github.com/yezz123/authx/pull/307>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.5.1 to 1.6.1 by @dependabot in <https://github.com/yezz123/authx/pull/312>
-* ⬆ Bump jsmrcaga/action-netlify-deploy from 1.1.0 to 1.8.1 by @dependabot in <https://github.com/yezz123/authx/pull/309>
-* Revert "⬆ Bump jsmrcaga/action-netlify-deploy from 1.1.0 to 1.8.1" by @yezz123 in <https://github.com/yezz123/authx/pull/314>
-* ⬆ Update redis requirement from <4.3.6,>=4.3.3 to >=4.3.3,<4.4.1 by @dependabot in <https://github.com/yezz123/authx/pull/311>
-* ⬆ Update starlette requirement from <0.22.1,>=0.14.02 to >=0.14.02,<0.23.1 by @dependabot in <https://github.com/yezz123/authx/pull/315>
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.6.1 to 1.6.4 by @dependabot in <https://github.com/yezz123/authx/pull/318>
-* ⬆ Bump pytest-asyncio from 0.20.2 to 0.20.3 by @dependabot in <https://github.com/yezz123/authx/pull/319>
-* ⬆ Update sqlalchemy requirement from <1.4.45,>=1.4.37 to >=1.4.37,<1.4.46 by @dependabot in <https://github.com/yezz123/authx/pull/320>
-* ⬆ Update starlette requirement from <0.23.1,>=0.14.02 to >=0.14.02,<0.23.2 by @dependabot in <https://github.com/yezz123/authx/pull/321>
-* ⬆ Bump databases from 0.6.2 to 0.7.0 by @dependabot in <https://github.com/yezz123/authx/pull/324>
-* ⬆ Bump pytz from 2022.6 to 2022.7 by @dependabot in <https://github.com/yezz123/authx/pull/323>
-* ⬆ Bump pre-commit from 2.20.0 to 2.21.0 by @dependabot in <https://github.com/yezz123/authx/pull/325>
-* ⬆ Bump pydantic from 1.10.2 to 1.10.3 by @dependabot in <https://github.com/yezz123/authx/pull/326>
-* ⬆ Bump cryptography from 38.0.4 to 39.0.0 by @dependabot in <https://github.com/yezz123/authx/pull/328>
-* ⬆ Bump pydantic from 1.10.3 to 1.10.4 by @dependabot in <https://github.com/yezz123/authx/pull/327>
-* ⬆ Update mkdocs-material requirement from <9.0.0,>=8.1.4 to >=8.1.4,<10.0.0 by @dependabot in <https://github.com/yezz123/authx/pull/330>
-* ⬆ Bump httpx from 0.23.1 to 0.23.2 by @dependabot in <https://github.com/yezz123/authx/pull/329>
-* ⬆ Update sqlalchemy requirement from <1.4.46,>=1.4.37 to >=1.4.37,<1.4.47 by @dependabot in <https://github.com/yezz123/authx/pull/331>
-* ⬆ Update fastapi requirement from <0.87.0,>=0.65.2 to >=0.65.2,<0.89.0 by @dependabot in <https://github.com/yezz123/authx/pull/308>
-* ⬆ Bump httpx from 0.23.2 to 0.23.3 by @dependabot in <https://github.com/yezz123/authx/pull/332>
-* ⬆ Bump aiosmtplib from 2.0.0 to 2.0.1 by @dependabot in <https://github.com/yezz123/authx/pull/334>
-* ⬆ Update redis requirement from <4.4.1,>=4.3.3 to >=4.3.3,<4.4.2 by @dependabot in <https://github.com/yezz123/authx/pull/335>
-* ⬆ Update fastapi requirement from <0.87.0,>=0.65.2 to >=0.65.2,<0.90.0 by @dependabot in <https://github.com/yezz123/authx/pull/336>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.8.1...0.8.2>
+* Bump jinja2 from 3.0.3 to 3.1.2 by @dependabot. PR [#268](https://github.com/yezz123/authx/pull/268) by @dependabot.
+* Bump databases from 0.6.0 to 0.6.1 by @dependabot. PR [#270](https://github.com/yezz123/authx/pull/270) by @dependabot.
+* Update email-validator requirement from <1.2.1,>=1.1.0 to >=1.1.0,<1.3.1 by @dependabot. PR [#271](https://github.com/yezz123/authx/pull/271) by @dependabot.
+* Bump pytz from 2022.1 to 2022.6 by @dependabot. PR [#273](https://github.com/yezz123/authx/pull/273) by @dependabot.
+* Update pyinstrument requirement from <4.2.0,>=4.1.1 to >=4.1.1,<4.4.0 by @dependabot. PR [#274](https://github.com/yezz123/authx/pull/274) by @dependabot.
+* Bump pymdown-extensions from 9.5 to 9.7 by @dependabot. PR [#275](https://github.com/yezz123/authx/pull/275) by @dependabot.
+* Bump pytest-cov from 3.0.0 to 4.0.0 by @dependabot. PR [#276](https://github.com/yezz123/authx/pull/276) by @dependabot.
+* Update redis requirement from <4.3.4,>=4.3.3 to >=4.3.3,<4.3.5 by @dependabot. PR [#277](https://github.com/yezz123/authx/pull/277) by @dependabot.
+* Bump pytest from 7.1.3 to 7.2.0 by @dependabot. PR [#278](https://github.com/yezz123/authx/pull/278) by @dependabot.
+* Update fastapi requirement from <=0.81.0,>=0.65.2 to >=0.65.2,<0.87.0 by @dependabot. PR [#279](https://github.com/yezz123/authx/pull/279) by @dependabot.
+* Bump bcrypt from 3.2.2 to 4.0.1 by @dependabot. PR [#281](https://github.com/yezz123/authx/pull/281) by @dependabot.
+* Bump pytest-asyncio from 0.19.0 to 0.20.1 by @dependabot. PR [#280](https://github.com/yezz123/authx/pull/280) by @dependabot.
+* Bump pydantic from 1.9.1 to 1.10.2 by @dependabot. PR [#282](https://github.com/yezz123/authx/pull/282) by @dependabot.
+* Update sqlalchemy requirement from <=1.4.40,>=1.4.37 to >=1.4.37,<1.4.43 by @dependabot. PR [#283](https://github.com/yezz123/authx/pull/283) by @dependabot.
+* Bump aiosmtplib from 1.1.6 to 2.0.0 by @dependabot. PR [#285](https://github.com/yezz123/authx/pull/285) by @dependabot.
+* Update pyinstrument requirement from <4.4.0,>=4.1.1 to >=4.1.1,<4.5.0 by @dependabot. PR [#286](https://github.com/yezz123/authx/pull/286) by @dependabot.
+* Bump pymdown-extensions from 9.7 to 9.8 by @dependabot. PR [#287](https://github.com/yezz123/authx/pull/287) by @dependabot.
+* Update python-socketio requirement from <5.7.1,>=4.6.0 to >=4.6.0,<5.7.3 by @dependabot. PR [#288](https://github.com/yezz123/authx/pull/288) by @dependabot.
+* Bump databases from 0.6.1 to 0.6.2 by @dependabot. PR [#289](https://github.com/yezz123/authx/pull/289) by @dependabot.
+* Update starlette requirement from <0.20.4,>=0.14.02 to >=0.14.02,<0.21.1 by @dependabot. PR [#290](https://github.com/yezz123/authx/pull/290) by @dependabot.
+* Update sqlalchemy requirement from <1.4.43,>=1.4.37 to >=1.4.37,<1.4.44 by @dependabot. PR [#291](https://github.com/yezz123/authx/pull/291) by @dependabot.
+* Bump cryptography from 37.0.4 to 38.0.3 by @dependabot. PR [#292](https://github.com/yezz123/authx/pull/292) by @dependabot.
+* Bump uvloop from 0.16.0 to 0.17.0 by @dependabot. PR [#293](https://github.com/yezz123/authx/pull/293) by @dependabot.
+* Bump websockets from 10.3 to 10.4 by @dependabot. PR [#294](https://github.com/yezz123/authx/pull/294) by @dependabot.
+* Bump pyjwt from 2.4.0 to 2.6.0 by @dependabot. PR [#296](https://github.com/yezz123/authx/pull/296) by @dependabot.
+* Bump motor from 3.0.0 to 3.1.1 by @dependabot. PR [#297](https://github.com/yezz123/authx/pull/297) by @dependabot.
+* Bump pytest-asyncio from 0.20.1 to 0.20.2 by @dependabot. PR [#300](https://github.com/yezz123/authx/pull/300) by @dependabot.
+* Update sqlalchemy requirement from <1.4.44,>=1.4.37 to >=1.4.37,<1.4.45 by @dependabot. PR [#298](https://github.com/yezz123/authx/pull/298) by @dependabot.
+* Update starlette requirement from <0.21.1,>=0.14.02 to >=0.14.02,<0.22.1 by @dependabot. PR [#301](https://github.com/yezz123/authx/pull/301) by @dependabot.
+* Bump httpx from 0.23.0 to 0.23.1 by @dependabot. PR [#303](https://github.com/yezz123/authx/pull/303) by @dependabot.
+* Bump uvicorn from 0.18.3 to 0.20.0 by @dependabot. PR [#302](https://github.com/yezz123/authx/pull/302) by @dependabot.
+* Update redis requirement from <4.3.5,>=4.3.3 to >=4.3.3,<4.3.6 by @dependabot. PR [#304](https://github.com/yezz123/authx/pull/304) by @dependabot.
+* Bump pymdown-extensions from 9.8 to 9.9 by @dependabot. PR [#305](https://github.com/yezz123/authx/pull/305) by @dependabot.
+* Bump markdown-include from 0.7.0 to 0.8.0 by @dependabot. PR [#306](https://github.com/yezz123/authx/pull/306) by @dependabot.
+* Bump cryptography from 38.0.3 to 38.0.4 by @dependabot. PR [#307](https://github.com/yezz123/authx/pull/307) by @dependabot.
+* Bump pypa/gh-action-pypi-publish from 1.5.1 to 1.6.1 by @dependabot. PR [#312](https://github.com/yezz123/authx/pull/312) by @dependabot.
+* Bump jsmrcaga/action-netlify-deploy from 1.1.0 to 1.8.1 by @dependabot. PR [#309](https://github.com/yezz123/authx/pull/309) by @dependabot.
+* Revert "Bump jsmrcaga/action-netlify-deploy from 1.1.0 to 1.8.1" by @yezz123. PR [#314](https://github.com/yezz123/authx/pull/314) by @yezz123.
+* Update redis requirement from <4.3.6,>=4.3.3 to >=4.3.3,<4.4.1 by @dependabot. PR [#311](https://github.com/yezz123/authx/pull/311) by @dependabot.
+* Update starlette requirement from <0.22.1,>=0.14.02 to >=0.14.02,<0.23.1 by @dependabot. PR [#315](https://github.com/yezz123/authx/pull/315) by @dependabot.
+* Bump pypa/gh-action-pypi-publish from 1.6.1 to 1.6.4 by @dependabot. PR [#318](https://github.com/yezz123/authx/pull/318) by @dependabot.
+* Bump pytest-asyncio from 0.20.2 to 0.20.3 by @dependabot. PR [#319](https://github.com/yezz123/authx/pull/319) by @dependabot.
+* Update sqlalchemy requirement from <1.4.45,>=1.4.37 to >=1.4.37,<1.4.46 by @dependabot. PR [#320](https://github.com/yezz123/authx/pull/320) by @dependabot.
+* Update starlette requirement from <0.23.1,>=0.14.02 to >=0.14.02,<0.23.2 by @dependabot. PR [#321](https://github.com/yezz123/authx/pull/321) by @dependabot.
+* Bump databases from 0.6.2 to 0.7.0 by @dependabot. PR [#324](https://github.com/yezz123/authx/pull/324) by @dependabot.
+* Bump pytz from 2022.6 to 2022.7 by @dependabot. PR [#323](https://github.com/yezz123/authx/pull/323) by @dependabot.
+* Bump pre-commit from 2.20.0 to 2.21.0 by @dependabot. PR [#325](https://github.com/yezz123/authx/pull/325) by @dependabot.
+* Bump pydantic from 1.10.2 to 1.10.3 by @dependabot. PR [#326](https://github.com/yezz123/authx/pull/326) by @dependabot.
+* Bump cryptography from 38.0.4 to 39.0.0 by @dependabot. PR [#328](https://github.com/yezz123/authx/pull/328) by @dependabot.
+* Bump pydantic from 1.10.3 to 1.10.4 by @dependabot. PR [#327](https://github.com/yezz123/authx/pull/327) by @dependabot.
+* Update mkdocs-material requirement from <9.0.0,>=8.1.4 to >=8.1.4,<10.0.0 by @dependabot. PR [#330](https://github.com/yezz123/authx/pull/330) by @dependabot.
+* Bump httpx from 0.23.1 to 0.23.2 by @dependabot. PR [#329](https://github.com/yezz123/authx/pull/329) by @dependabot.
+* Bump aiosmtplib from 2.0.0 to 2.0.1 by @dependabot. PR [#334](https://github.com/yezz123/authx/pull/334) by @dependabot.
+* Update redis requirement from <4.4.1,>=4.3.3 to >=4.3.3,<4.4.2 by @dependabot. PR [#335](https://github.com/yezz123/authx/pull/335) by @dependabot.
+* Update fastapi requirement from <0.87.0,>=0.65.2 to >=0.65.2,<0.90.0 by @dependabot. PR [#336](https://github.com/yezz123/authx/pull/336) by @dependabot.
 
 ## 0.8.1
 
-### What's Changed
-
-* increment postfix to find the possible username to use by @iftenet in <https://github.com/yezz123/authx/pull/266>
-* docs: add @iftenet as a contributor for bug by @allcontributors in <https://github.com/yezz123/authx/pull/267>
-
-### New Contributors
-
-* @iftenet made their first contribution in <https://github.com/yezz123/authx/pull/266>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.8.0...0.8.1>
+* Increment postfix to find the possible username to use by @iftenet. PR [#266](https://github.com/yezz123/authx/pull/266) by @iftenet.
+* Docs: Add @iftenet as a contributor for bug. PR [#267](https://github.com/yezz123/authx/pull/267) by @allcontributors.
 
 ## 0.8.0
 
-### Implementation in FastAPI applications
-
-Thats Work by adding a Middleware to your FastAPI application, work on collecting prometheus metrics for each request, and then to handle that we need a function `get_metrics` work on handling exposing the prometheus metrics into `/metrics` endpoint.
-
-```python
-from fastapi import FastAPI
-from authx.middleware import MetricsMiddleware, get_metrics
-
-app = FastAPI()
-app.add_middleware(MetricsMiddleware)
-app.add_route("/metrics", get_metrics)
-```
-
-### What's Changed
-
-* :construction_worker: chore(dev): Support middleware for Prometheus metrics by @yezz123 in <https://github.com/yezz123/authx/pull/262>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.7.0...0.8.0>
+* Chore(dev): Support middleware for Prometheus metrics by @yezz123. PR [#262](https://github.com/yezz123/authx/pull/262) by @yezz123.
 
 ## 0.7.0
 
-* 🔧 Update package metadata and move build internals from Flit to Hatch.
-
-### What's Changed
-
-* Migrate to Hatchling by @yezz123 in <https://github.com/yezz123/authx/pull/261>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.6.1...0.7.0>
+* Migrate to Hatchling by @yezz123. PR [#261](https://github.com/yezz123/authx/pull/261) by @yezz123.
 
 ## 0.6.1
 
-Fix Client issue for launching both the client and database_name in `MongoDBBackend`.
-
-```py
-from authx import Authentication
-from authx.database import MongoDBBackend
-from motor.motor_asyncio import AsyncIOMotorClient
-
-
-authx = Authentication(
-     database_backend=MongoDBBackend(
-          client=AsyncIOMotorClient("mongodb://localhost:27017"),
-          database_name="test",
-     )
-)
-```
-
-### What's Changed
-
-* 🛠 chore(refactor): Improve Errors  by @yezz123 in [#257](https://github.com/yezz123/authx/pull/257)
-* 🔊 Update Dependencies by @yezz123 in [#259](https://github.com/yezz123/authx/pull/259)
-* :bug: [WIP] fix client issue by @yezz123 in [#260](https://github.com/yezz123/authx/pull/260)
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.6.0...0.6.1>
+* Chore(refactor): Improve Errors by @yezz123. PR [#257](https://github.com/yezz123/authx/pull/257) by @yezz123.
+* Update Dependencies by @yezz123. PR [#259](https://github.com/yezz123/authx/pull/259) by @yezz123.
+* [WIP] fix client issue by @yezz123. PR [#260](https://github.com/yezz123/authx/pull/260) by @yezz123.
 
 ## 0.6.0
 
-### Idea
-
-Profiling is a technique to figure out how time is spent in a program. With
-these statistics, we can find the “hot spot” of a program and think about ways
-of improvement. Sometimes, a hot spot in an unexpected location may also hint at
-a bug in the program.
-
-> Pyinstrument is a Python profiler. A profiler is a tool to help you optimize
-> your code - make it faster.
-
-### Profile a web request in FastAPI
-
-To profile call stacks in FastAPI, you can write a middleware extension for
-`pyinstrument`.
-
-Create an async function and decorate it with `app.middleware('http')` where the
-app is the name of your FastAPI application instance.
-
-Make sure you configure a setting to only make this available when required.
-
-```py
-from pyinstrument import Profiler
-PROFILING = True  # Set this from a settings model
-if PROFILING:
-    @app.middleware("http")
-    async def profile_request(request: Request, call_next):
-        profiling = request.query_params.get("profile", False)
-        if profiling:
-            profiler = Profiler(interval=settings.profiling_interval, async_mode="enabled")
-            profiler.start()
-            await call_next(request)
-            profiler.stop()
-            return HTMLResponse(profiler.output_html())
-        else:
-            return await call_next(request)
-```
-
-To invoke, make any request to your application with the GET parameter
-`profile=1` and it will print the HTML result from `pyinstrument`.
-
-### AuthX's Support
-
-With AuthX the abstract of profiling is easy, it's just about calling the
-`ProfilerMiddleware` 's class and calling it in
-`add_middleware(ProfilerMiddleware)` func that FastAPI provides.
-
-#### Example
-
-```py
-import os
-import uvicorn
-from fastapi import FastAPI
-from fastapi.responses import JSONResponse
-from authx import ProfilerMiddleware
-app = FastAPI()
-app.add_middleware(ProfilerMiddleware)
-@app.get("/test")
-async def normal_request():
-    return JSONResponse({"retMsg": "Hello World!"})
-if __name__ == '__main__':
-    app_name = os.path.basename(__file__).replace(".py", "")
-    uvicorn.run(app=f"{app_name}:app", host="0.0.0.0", port=8080, workers=1)
-```
-
-### References
-
-* [Profiling Python Code](https://machinelearningmastery.com/profiling-python-code/)
-* [profile-a-web-request-in-fastapi](https://pyinstrument.readthedocs.io/en/latest/guide.html#profile-a-web-request-in-fastapi)
-
-### What's Changed
-
-* 👷 Support Profiling for checking service performance by @yezz123 in
-  <https://github.com/yezz123/authx/pull/240>
-* 👷 chore(fix): Fix Failed tests for Oauth2 by @yezz123 in
-  <https://github.com/yezz123/authx/pull/241>
-* 🔖 Clean codebase from unread Docstrings by @yezz123 in
-  <https://github.com/yezz123/authx/pull/242>
-* 📝 Docs: Upgrade pre-commit and add new markdown's linter by @yezz123 in
-  <https://github.com/yezz123/authx/pull/243>
-* 🔧 Upgrade all Github Actions by @yezz123 in
-  <https://github.com/yezz123/authx/pull/249>
-* Chore(deps): Bump jsmrcaga/action-netlify-deploy from 1.1.0 to 1.8.0 by
-  @dependabot in <https://github.com/yezz123/authx/pull/250>
-* Add license scan report and status by @fossabot in
-  <https://github.com/yezz123/authx/pull/253>
-* 🔖 release 0.6.0 - Supporting Profiling by @yezz123 in
-  <https://github.com/yezz123/authx/pull/255>
-
-### New Contributors
-
-* @fossabot made their first contribution in
-  <https://github.com/yezz123/authx/pull/253>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.5.1...0.6.0>
+* Support Profiling for checking service performance by @yezz123. PR [#240](https://github.com/yezz123/authx/pull/240) by @yezz123.
+* Chore(fix): Fix Failed tests for OAuth2 by @yezz123. PR [#241](https://github.com/yezz123/authx/pull/241) by @yezz123.
+* Clean codebase from unread Docstrings by @yezz123. PR [#242](https://github.com/yezz123/authx/pull/242) by @yezz123.
+* Docs: Upgrade pre-commit and add new markdown's linter by @yezz123. PR [#243](https://github.com/yezz123/authx/pull/243) by @yezz123.
+* Upgrade all Github Actions by @yezz123. PR [#249](https://github.com/yezz123/authx/pull/249) by @yezz123.
+* Bump jsmrcaga/action-netlify-deploy from 1.1.0 to 1.8.0 by @dependabot. PR [#250](https://github.com/yezz123/authx/pull/250) by @dependabot.
+* Add license scan report and status by @fossabot. PR [#253](https://github.com/yezz123/authx/pull/253) by @fossabot.
+* Release 0.6.0 - Supporting Profiling by @yezz123. PR [#255](https://github.com/yezz123/authx/pull/255) by @yezz123.
 
 ## 0.5.1
 
-Fix Wrong `username` validation `UserInRegister` model #237, Thanks to
-[@YogeshUpdhyay](https://yogeshupadhyay.netlify.app/) 🙏🏻
-
-### What's Changed
-
-* Username Validation Fixed by
-  [@YogeshUpdhyay](https://yogeshupadhyay.netlify.app/) in
-  <https://github.com/yezz123/authx/pull/238>
-
-### New Contributors
-
-* [@YogeshUpdhyay](https://yogeshupadhyay.netlify.app/) made their first
-  contribution in <https://github.com/yezz123/authx/pull/238>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.5.0...0.5.1>
+* Username Validation Fixed by [@YogeshUpdhyay](https://yogeshupadhyay.netlify.app/). PR [#238](https://github.com/yezz123/authx/pull/238) by [@YogeshUpdhyay](https://yogeshupadhyay.netlify.app/).
 
 ## 0.5.0
 
-Supporting SocketIO that's allows bi-directional communication between client
-and server. Bi-directional communications are enabled when a client has
-Socket.IO in the browser, and a server has also integrated the Socket.IO
-package. While data can be sent in a number of forms, JSON is the simplest.
-
-### Usage
-
-To add SocketIO support to FastAPI all you need to do is import `AuthXSocket`
-and pass it `FastAPI` object.
-
-```python
-from fastapi import FastAPI
-from authx import AuthXSocket
-
-app = FastAPI()
-socket = AuthXSocket(app=app)
-```
-
-you can import `AuthXSocket` object that exposes most of the SocketIO
-functionality.
-
-```python
-@AuthXSocket.on('leave')
-async def handle_leave(sid, *args, **kwargs):
-    await AuthXSocket.emit('lobby', 'User left')
-```
-
-### Working with distributed applications
-
-When working with distributed applications, it is often necessary to access the
-functionality of the Socket.IO from multiple processes. As a solution to the
-above problems, the Socket.IO server can be configured to connect to a message
-queue such as `Redis` or `RabbitMQ`, to communicate with other related Socket.IO
-servers or auxiliary workers.
-
-Refer this link for more details
-[using-a-message-queue](https://python-socketio.readthedocs.io/en/latest/server.html#using-a-message-queue)
-
-```python
-
-import socketio
-from fastapi import FastAPI
-from authx import AuthXSocket
-
-app = FastAPI()
-
-redis_manager = socketio.AsyncRedisManager('redis://')
-
-socket_manager = AuthXSocket(app=app, client_manager=redis_manager)
-```
-
-### What's Changed
-
-* chore(ref): Improve API and refactor users management code by @yezz123 in
-  <https://github.com/yezz123/authx/pull/222>
-* chore: Fix Issue of Missing requirements by @yezz123 in
-  <https://github.com/yezz123/authx/pull/225>
-* chore(deps): update dependencies by @yezz123 in
-  <https://github.com/yezz123/authx/pull/233>
-* 🔧 change domain from `.codes` to `.me` by @yezz123 in
-  <https://github.com/yezz123/authx/pull/235>
-* chore(feat): support SocketIO in authx ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/234>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.4.0...0.5.0>
+* Chore(ref): Improve API and refactor users management code by @yezz123. PR [#222](https://github.com/yezz123/authx/pull/222) by @yezz123.
+* Fix Issue of Missing requirements by @yezz123. PR [#225](https://github.com/yezz123/authx/pull/225) by @yezz123.
+* Update dependencies by @yezz123. PR [#233](https://github.com/yezz123/authx/pull/233) by @yezz123.
+* Change domain from `.codes` to `.me` by @yezz123. PR [#235](https://github.com/yezz123/authx/pull/235) by @yezz123.
+* Support SocketIO in AuthX ✨ by @yezz123. PR [#234](https://github.com/yezz123/authx/pull/234) by @yezz123.
 
 ## 0.4.0
 
-## HTTPCache
-
-### Overview
-
-HTTP caching occurs when the browser stores local copies of web resources for
-faster retrieval the next time the resource is required. As your application
-serves resources it can attach cache headers to the response specifying the
-desired cache behavior.
-
-![Overview](https://devcenter1.assets.heroku.com/article-images/782-imported-1443570279-782-imported-1443554749-55-original.jpg)
-
-When an item is fully cached, the browser may choose to not contact the server
-at all and simply use its cached copy:
-
-![Overview](https://devcenter1.assets.heroku.com/article-images/782-imported-1443570282-782-imported-1443554751-54-original.jpg)
-
-### HTTP cache headers
-
-There are two primary cache headers, `Cache-Control` and `Expires`.
-
-#### Cache-Control
-
-The `Cache-Control` header is the most important header to set as it effectively
-`switches on` caching in the browser. With this header in place, and set with a
-value that enables caching, the browser will cache the file for as long as
-specified. Without this header, the browser will re-request the file on each
-subsequent request.
-
-#### Expires
-
-When accompanying the `Cache-Control` header, Expires simply sets a date from
-which the cached resource should no longer be considered valid. From this date
-forward the browser will request a fresh copy of the resource.
-
-> This Introduction to HTTP Caching is based on the
-> [HTTP Caching Guide](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching).
-
-AuthX provides a simple HTTP caching model designed to work with
-[FastAPI](https://fastapi.tiangolo.com/),
-
-### Initialize the cache
-
-```python
-from authx import HTTPCache
-from pytz import timezone
-
-africa_Casablanca = timezone('Africa/Casablanca')
-HTTPCache.init(redis_url=REDIS_URL, namespace='test_namespace', tz=africa_Casablanca)
-```
-
-* Read More in the New Documentation:
-  <https://authx.yezz.me/configuration/cache/httpcache/>
-
-### What's Changed
-
-* chore(docs): Improve Documentation by @yezz123 in
-  <https://github.com/yezz123/authx/pull/209>
-* chore(dev): refactor code & improve some exceptions ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/212>
-* ref: Use the built-in function `next` instead of a for-loop. by @yezz123 in
-  <https://github.com/yezz123/authx/pull/213>
-* chore(docs): add New Sponsors ✨❤️ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/214>
-* docs(mkdocs.yml): Change name from `middlewares` to `middleware` by @theoohoho
-  in <https://github.com/yezz123/authx/pull/215>
-* chore(f/l): Integrate `Pyupgrade` to AuthX Environment by @yezz123 in
-  <https://github.com/yezz123/authx/pull/216>
-* chore(feat): Integrate HTTP Caching Model for authx ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/217>
-* docs: add theoohoho as a contributor for doc by @allcontributors in
-  <https://github.com/yezz123/authx/pull/218>
-* chore(Example): Provide New Cache Example✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/219>
-
-### New Contributors
-
-* @theoohoho made their first contribution in
-  <https://github.com/yezz123/authx/pull/215>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.3.1...0.4.0>
+* Chore(docs): Improve Documentation. PR [#209](https://github.com/yezz123/authx/pull/209) by @yezz123.
+* Chore(dev): Refactor code & improve some exceptions ✨. PR [#212](https://github.com/yezz123/authx/pull/212) by @yezz123.
+* Ref: Use the built-in function `next` instead of a for-loop. PR [#213](https://github.com/yezz123/authx/pull/213) by @yezz123.
+* Chore(docs): Add New Sponsors ✨❤️. PR [#214](https://github.com/yezz123/authx/pull/214) by @yezz123.
+* Docs(mkdocs.yml): Change name from `middlewares` to `middleware`. PR [#215](https://github.com/yezz123/authx/pull/215) by @theoohoho.
+* Chore(f/l): Integrate `Pyupgrade` to AuthX Environment. PR [#216](https://github.com/yezz123/authx/pull/216) by @yezz123.
+* Chore(feat): Integrate HTTP Caching Model for AuthX ✨. PR [#217](https://github.com/yezz123/authx/pull/217) by @yezz123.
+* Docs: Add theoohoho as a contributor for doc. PR [#218](https://github.com/yezz123/authx/pull/218) by @allcontributors.
+* Chore(Example): Provide New Cache Example✨. PR [#219](https://github.com/yezz123/authx/pull/219) by @yezz123.
 
 ## 0.3.1
 
-### Session
-
-This is a supported Redis Based Session Storage for your FastAPI Application,
-you can use it with any Session Backend.
-
-```sh
-pip install authx[session]
-```
-
-**Note**: The requirements in `authx[redis]` are not the same used in Sessions
-features.
-
-#### Features
-
----
-
-* [x] Dependency injection to protect routes
-* [x] Compatible with FastAPI's auto-generated docs
-* [x] Pydantic models for verifying session data
-* [x] Abstract session backend so you can build one that fits your needs
-* [x] Abstract frontends to choose how you extract the session ids (cookies,
-      header, etc.)
-* [x] Create verifiers based on the session data.
-* [x] Compatible with any Redis Configuration.
-
-##### Redis Configuration
-
-Before setting up our Sessions Storage and our CRUD Backend, we need to
-configure our Redis Instance.
-
-`BasicConfig` is a function that helps us set up the Instance Information like
-Redis Link Connection or ID Name or Expiration Time.
-
-###### Default Config
-
-* [x] url of Redis: `redis://localhost:6379/0`
-* [x] name of sessionId: `ssid`
-* [x] generator function of `sessionId`: `lambda :uuid.uuid4().hex`
-* [x] expire time of session in redis: `6 hours`
-
-```py
-import random
-from datetime import timedelta
-from authx.cache import basicConfig
-
-basicConfig(
-    redisURL="redis://localhost:6379/1",
-    sessionIdName="sessionId",
-    sessionIdGenerator=lambda: str(random.randint(1000, 9999)),
-    expireTime=timedelta(days=1),
-)
-```
-
-* Read the Changelog <https://authx.yezz.me/release/>
-
-## What's Changed
-
-* chore(dev): Add Sessions Requirements by @yezz123 in
-  <https://github.com/yezz123/authx/pull/207>
-
-* chore(docs): Documented the Functionality of Session Storing by @yezz123 in
-  <https://github.com/yezz123/authx/pull/208>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.3.0...0.3.1>
+* Chore(dev): Add Sessions Requirements. PR [#207](https://github.com/yezz123/authx/pull/207) by @yezz123.
+* Chore(docs): Document the Functionality of Session Storing. PR [#208](https://github.com/yezz123/authx/pull/208) by @yezz123.
 
 ## 0.3.0
 
-## What's Changed
-
-### Release Notes
-
-Finally, we drop the full support from MongoDB Thanks to @stephane That's
-implemented some functionality under the name of `BaseDBBackend` and Create some
-Database Crud Functionality without a database.
-
-* Database Plugins:
-
-  * MongoDB: Using MongoDB as a Database Backend is now supported as a plugin
-    based on `BaseDBBackend`.
-  * EncodeDB: Databases give you simple asyncio support for a range of
-    databases.
-
-    It allows you to make queries using the powerful `SQLAlchemy Core`
-    expression language and provides support for `PostgreSQL`, `MySQL`, and
-    `SQLite`.
-
-    We can now provide some SQL queries to the database on the top of
-    `BaseDBBackend`.
-
-### MongoDB
-
-```python
-from authx import MongoDBBackend
-```
-
-### EncodeDB
-
-```python
-from authx import EncodeDBBackend
-```
-
-**Note**: Don't forget to set up the database connection as a client that will
-be functioned under pre-built Methods.
-
-* Improve the package by Switching to `flit` to build the package.
-  * Improve Workflow and integrate `codecov.yml`.
-  * Use the issue of new Functionalities in Github.
-  * Create New Directory called `scripts` to store the shell scripts to run
-    tests or linting.
-* Improve Importing the package
-  <https://github.com/yezz123/authx/blob/main/authx/__init__.py>.
-  * Calling the function or the class directly from the `__init__.py` file.
-* Improve Documentation, and Describe different new Addons, that AuthX now
-  provide such as new Database Backends or Plugins or the new middleware
-  add-ons, Thanks to @AbderrahimSoubaiElidrissi
-* Update and upgrade Dependencies.
-* Inline and improve IDLE Support.
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.2.0...0.3.0>
+**Note:** This release does not have any changes, but it was released to fix the versioning issue.
 
 ## 0.2.0
 
-## What's Changed
-
-### Middleware - Oauth2
-
-The OAuth 2.0 authorization framework is a protocol that allows a user to grant
-a third-party website or application access to the user's protected resources,
-without necessarily revealing their long-term credentials or even their
-identity.
-
-Starlette middleware for authentication through oauth2's via a secret key, which
-is often used to add authentication and authorization to a web application that
-interacts with an API on behalf of the user.
-
-That's why AuthX provides a Configuration `MiddlewareOauth2` to configure the
-OAuth2 middleware.
-
-```py
-from authx import MiddlewareOauth2
-
-class AuthenticateMiddleware(MiddlewareOauth2):
-    PUBLIC_PATHS = {"/public"}
-```
-
-### Code Enhancement
-
-* Remove unnecessary calls to `enumerate` when the index variable is not used.
-  by @yezz123 in <https://github.com/yezz123/authx/pull/179>
-* chore: Create a Basic Example to serve the utility of AuthX by @yezz123 in
-  <https://github.com/yezz123/authx/pull/178>
-* Clean DocString & Define Functions by @yezz123 in
-  <https://github.com/yezz123/authx/pull/189>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.1.4...0.2.0>
-
-## 0.1.4
-
-### What's Changed
-
-* Chore(deps-dev): Bump pymdown-extensions from 9.0 to 9.1 by @dependabot in
-  <https://github.com/yezz123/authx/pull/155>
-* empty Scheduled daily dependency update on Monday by @pyup-bot in
-  <https://github.com/yezz123/authx/pull/156>
-* empty Scheduled daily dependency update on Tuesday by @pyup-bot in
-  <https://github.com/yezz123/authx/pull/157>
-* chore: add FastAPI to Classifiers by @yezz123 in
-  <https://github.com/yezz123/authx/pull/163>
-* Chore: Fix CI & Delete Docker Configuration ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/165>
-* empty Scheduled daily dependency update on Monday by @pyup-bot in
-  <https://github.com/yezz123/authx/pull/166>
-* empty Scheduled daily dependency update on Monday by @pyup-bot in
-  <https://github.com/yezz123/authx/pull/167>
-* CI: Ignore some Directories 🪨 by @yezz123 in
-  <https://github.com/yezz123/authx/pull/168>
-* empty Scheduled daily dependency update on Wednesday by @pyup-bot in
-  <https://github.com/yezz123/authx/pull/169>
-* empty Scheduled daily dependency update on Thursday by @pyup-bot in
-  <https://github.com/yezz123/authx/pull/170>
-* empty Scheduled daily dependency update on Saturday by @pyup-bot in
-  <https://github.com/yezz123/authx/pull/171>
-* empty Scheduled daily dependency update on Wednesday by @pyup-bot in
-  <https://github.com/yezz123/authx/pull/172>
-* empty Scheduled daily dependency update on Friday by @pyup-bot in
-  <https://github.com/yezz123/authx/pull/173>
-* empty Scheduled daily dependency update on Sunday by @pyup-bot in
-  <https://github.com/yezz123/authx/pull/174>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.1.3...0.1.4>
+* Chore(deps-dev): Bump pymdown-extensions from 9.0 to 9.1. PR [#155](https://github.com/yezz123/authx/pull/155) by @dependabot.
+* Chore: Add FastAPI to Classifiers. PR [#163](https://github.com/yezz123/authx/pull/163) by @yezz123.
+* Chore: Fix CI & Delete Docker Configuration ✨. PR [#165](https://github.com/yezz123/authx/pull/165) by @yezz123.
+* CI: Ignore some Directories 🪨. PR [#168](https://github.com/yezz123/authx/pull/168) by @yezz123.
 
 ## 0.1.3
 
-* Fix the issue relate to PyJWT (Bumping version #151 )
-* Add `sameSite` to Cookies metadata ( #134)
-
-### What's Changed
-
-* chore: add sameSite attribute to the http only cookie by @smakosh in
-  <https://github.com/yezz123/authx/pull/134>
-* docs: add smakosh as a contributor for code, security by @allcontributors in
-  <https://github.com/yezz123/authx/pull/138>
-* chore: update Requirements ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/139>
-* CI: Add Code Security Analyse ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/140>
-* empty Scheduled daily dependency update on Tuesday by @pyup-bot in
-  <https://github.com/yezz123/authx/pull/141>
-* chore: Add JWT Algorithm Choices ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/143>
-* Docs: Add financial Supporters ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/144>
-* Bump PyJWT version from 1.7.1 to 2.3.0 by @MojixCoder in
-  <https://github.com/yezz123/authx/pull/151>
-* docs: add MojixCoder as a contributor for code, bug by @allcontributors in
-  <https://github.com/yezz123/authx/pull/152>
-* chore: Remove Todos assign 🖇 by @yezz123 in
-  <https://github.com/yezz123/authx/pull/153>
-* Upgrade `pre-commit` requirements ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/154>
-
-## New Contributors
-
-* @smakosh made their first contribution in
-  <https://github.com/yezz123/authx/pull/134>
-* @MojixCoder made their first contribution in
-  <https://github.com/yezz123/authx/pull/151>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.1.2...0.1.3>
+* Chore: Add sameSite attribute to the http-only cookie. PR [#134](https://github.com/yezz123/authx/pull/134) by @smakosh.
+* Docs: Add smakosh as a contributor for code, security. PR [#138](https://github.com/yezz123/authx/pull/138) by @allcontributors.
+* Chore: Update Requirements ✨. PR [#139](https://github.com/yezz123/authx/pull/139) by @yezz123.
+* CI: Add Code Security Analyse ✨. PR [#140](https://github.com/yezz123/authx/pull/140) by @yezz123.
+* Chore: Add JWT Algorithm Choices ✨. PR [#143](https://github.com/yezz123/authx/pull/143) by @yezz123.
+* Docs: Add financial Supporters ✨. PR [#144](https://github.com/yezz123/authx/pull/144) by @yezz123.
+* Bump PyJWT version from 1.7.1 to 2.3.0. PR [#151](https://github.com/yezz123/authx/pull/151) by @MojixCoder.
+* Docs: Add MojixCoder as a contributor for code, bug. PR [#152](https://github.com/yezz123/authx/pull/152) by @allcontributors.
+* Chore: Remove Todos assign 🖇. PR [#153](https://github.com/yezz123/authx/pull/153) by @yezz123.
+* Upgrade `pre-commit` requirements ✨. PR [#154](https://github.com/yezz123/authx/pull/154) by @yezz123.
 
 ## 0.1.2
 
-After this discussion #124 with [@stephane](https://github.com/stephane) we need
-to change the package name that what pep's rules provide.
-
-> Modules should have short, all-lowercase names. Underscores can be used in the
-> module name if it improves readability. Python packages should also have
-> short, all-lowercase names, although the use of underscores is discouraged.
-
-![carbon](https://user-images.githubusercontent.com/52716203/140792904-39a9ddfa-c91b-4aa4-8069-955e38bf22a0.png)
-
-## What's Changed
-
 * Bump mkdocs-material from 7.2.6 to 7.3.5 by @dependabot in
-  <https://github.com/yezz123/authx/pull/101>
+  [PR #101](https://github.com/yezz123/authx/pull/101)
 * Docs: Prepare Project for Being Public ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/102>
+  [PR #102](https://github.com/yezz123/authx/pull/102)
 * Bump mkdocs-material from 7.3.5 to 7.3.6 by @dependabot in
-  <https://github.com/yezz123/authx/pull/103>
+  [PR #103](https://github.com/yezz123/authx/pull/103)
 * Bump python from 3.9.2 to 3.10.0 by @dependabot in
-  <https://github.com/yezz123/authx/pull/104>
-* docs: add yezz123 as a contributor for code, doc, maintenance, infra by
-  @allcontributors in <https://github.com/yezz123/authx/pull/105>
-* docs: add AbderrahimSoubaiElidrissi as a contributor for review, doc by
-  @allcontributors in <https://github.com/yezz123/authx/pull/106>
+  [PR #104](https://github.com/yezz123/authx/pull/104)
+* Docs: add yezz123 as a contributor for code, doc, maintenance, infra by
+  @allcontributors in [PR #105](https://github.com/yezz123/authx/pull/105)
+* Docs: add AbderrahimSoubaiElidrissi as a contributor for review, doc by
+  @allcontributors in [PR #106](https://github.com/yezz123/authx/pull/106)
 * CI: Delete Docs Build ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/108>
+  [PR #108](https://github.com/yezz123/authx/pull/108)
 * Docs: Delete a part of FAQ ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/109>
+  [PR #109](https://github.com/yezz123/authx/pull/109)
 * chore: Fix workflows ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/112>
+  [PR #112](https://github.com/yezz123/authx/pull/112)
 * chore: Rename Website name & Fix Build Issue 🚀 by @yezz123 in
-  <https://github.com/yezz123/authx/pull/113>
+  [PR #113](https://github.com/yezz123/authx/pull/113)
 * Chore: Delete `aiohttp` by @yezz123 in
-  <https://github.com/yezz123/authx/pull/114>
+  [PR #114](https://github.com/yezz123/authx/pull/114)
 * WIP: Add Code owner 🖇 by @yezz123 in
-  <https://github.com/yezz123/authx/pull/117>
+  [PR #117](https://github.com/yezz123/authx/pull/117)
 * Chore: Fix Key Directory 🔑 by @yezz123 in
-  <https://github.com/yezz123/authx/pull/115>
+  [PR #115](https://github.com/yezz123/authx/pull/115)
 * Configure `.pyup` ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/120>
+  [PR #120](https://github.com/yezz123/authx/pull/120)
 * pep-0008: Fix Package and Module Names✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/126>
+  [PR #126](https://github.com/yezz123/authx/pull/126)
 * chore: Change project Name by @yezz123 in
-  <https://github.com/yezz123/authx/pull/128>
+  [PR #128](https://github.com/yezz123/authx/pull/128)
 * chore: fix dockerfile commands by @yezz123 in
-  <https://github.com/yezz123/authx/pull/130>
+  [PR #130](https://github.com/yezz123/authx/pull/130)
 * Chore: change Name from `AuthX` to `authx` ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/131>
+  [PR #131](https://github.com/yezz123/authx/pull/131)
 * Bump version from 0.1.1 to 0.1.2 ✨ by @yezz123 in
-  <https://github.com/yezz123/authx/pull/132>
-
-## New Contributors
-
-* @allcontributors made their first contribution in
-  <https://github.com/yezz123/authx/pull/105>
-
-**Full Changelog**: <https://github.com/yezz123/authx/compare/0.1.1...0.1.2>
+  [PR #132](https://github.com/yezz123/authx/pull/132)
 
 ## 0.1.1
 
-* Kuddos to
-  [@AbderrahimSoubaiElidrissi](https://github.com/AbderrahimSoubaiElidrissi) for
-  fixing multiple issues in docs ✨
-* Fix Database partial router.
-* Now we can call the `cache` or `mongo` only from a partial router.
-
-### Example
-
-<img width="654" alt="main py" src="https://user-images.githubusercontent.com/52716203/138797035-549804e4-0609-46aa-ba2f-e1b1f8757f59.png">
-
-## What's Changed
-
 * Add a partial router to Database ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/97>
+  [PR #97](https://github.com/yezz123/AuthX/pull/97)
 * Docs: Update documentation by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/98>
+  [PR #98](https://github.com/yezz123/AuthX/pull/98)
 * Bump from 0.1.0 to 0.1.1 ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/99>
-
-**Full Changelog**: <https://github.com/yezz123/AuthX/compare/0.1.0...0.1.1>
+  [PR #99](https://github.com/yezz123/AuthX/pull/99)
 
 ## 0.1.0
 
-* Provide a full support for python 3.10 after adding a testcase (workflow), and
-  fix the version of pytest.
-* Provide a full requirements for `Setup.py` with all the dependencies and
-  classifiers.
-
-## What's Changed
-
 * docs: Add All Contributor by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/89>
+  [PR #89](https://github.com/yezz123/AuthX/pull/89)
 * 📃 Docs: Add Codacy Review ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/90>
-* CI: Fix Workflows ✨ by @yezz123 in <https://github.com/yezz123/AuthX/pull/92>
+  [PR #90](https://github.com/yezz123/AuthX/pull/90)
+* CI: Fix Workflows ✨. [PR #92](https://github.com/yezz123/AuthX/pull/92)
 * chore: Provide all requirements relate to `Setup.py` ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/93>
+  [PR #93](https://github.com/yezz123/AuthX/pull/93)
 * ⬆️ Bump from 0.0.9 to 0.1.0 by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/94>
-
-**Full Changelog**: <https://github.com/yezz123/AuthX/compare/0.0.9...0.1.0>
+  [PR #94](https://github.com/yezz123/AuthX/pull/94)
 
 ## 0.0.9
 
-* Add Code coverage and local testing for AuthenticationX.
-* Add DocString to Some Functions relate to `Services`.
-* Bump multiple packages to last release.
-
-### What's Changed
-
 * Bump mkdocs from 1.2.2 to 1.2.3 by @dependabot in
-  <https://github.com/yezz123/AuthX/pull/78>
+  [PR #78](https://github.com/yezz123/AuthX/pull/78)
 * Bump pytest-asyncio from 0.14.0 to 0.16.0 by @dependabot in
-  <https://github.com/yezz123/AuthX/pull/77>
+  [PR #77](https://github.com/yezz123/AuthX/pull/77)
 * 🐳 DockerFile Checker ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/80>
+  [PR #80](https://github.com/yezz123/AuthX/pull/80)
 * chore: Provide DocString for Functions ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/84>
+  [PR #84](https://github.com/yezz123/AuthX/pull/84)
 * Docs: Create a Release Notes ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/85>
+  [PR #85](https://github.com/yezz123/AuthX/pull/85)
 * Chore: Add Local Testing & Code Coverage ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/86>
+  [PR #86](https://github.com/yezz123/AuthX/pull/86)
 * Docs: Add Coverage Badge ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/87>
+  [PR #87](https://github.com/yezz123/AuthX/pull/87)
 * ⬆️ Bump Version from 0.0.8 to 0.0.9 by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/88>
-
-**Full Changelog**: <https://github.com/yezz123/AuthX/compare/0.0.8...0.0.9>
+  [PR #88](https://github.com/yezz123/AuthX/pull/88)
 
 ## 0.0.8
 
-### What's Changed
-
 * Fix Highlighting Issue ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/69>
+  [PR #69](https://github.com/yezz123/AuthX/pull/69)
 * Docs: Add some Typo ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/70>
+  [PR #70](https://github.com/yezz123/AuthX/pull/70)
 * Add Code of Conducts & License ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/71>
+  [PR #71](https://github.com/yezz123/AuthX/pull/71)
 * Switch to MIT License ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/73>
+  [PR #73](https://github.com/yezz123/AuthX/pull/73)
 * Test Documentation Build ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/74>
+  [PR #74](https://github.com/yezz123/AuthX/pull/74)
 * ⬆️ Bump from 0.0.7 to 0.0.8 ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/75>
-
-**Full Changelog**: <https://github.com/yezz123/AuthX/compare/0.0.7...0.0.8>
+  [PR #75](https://github.com/yezz123/AuthX/pull/75)
 
 ## 0.0.7
 
-### What's Changed
-
-* Implement DocStrings ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/60>
-* Create a Global Documentation using Mkdocs by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/63>
-* Fix Requirements by @yezz123 in <https://github.com/yezz123/AuthX/pull/66>
-* Fix Documentation by @yezz123 in <https://github.com/yezz123/AuthX/pull/67>
-* Version 0.0.7 ✨ by @yezz123 in <https://github.com/yezz123/AuthX/pull/68>
-
-**Full Changelog**: <https://github.com/yezz123/AuthX/compare/0.0.6...0.0.7>
+* Implement DocStrings ✨. PR [#60](https://github.com/yezz123/AuthX/pull/60) by @yezz123.
+* Create a Global Documentation using Mkdocs. PR [#63](https://github.com/yezz123/AuthX/pull/63) by @yezz123.
+* Fix Requirements. PR [#66](https://github.com/yezz123/AuthX/pull/66) by @yezz123.
+* Fix Documentation. PR [#67](https://github.com/yezz123/AuthX/pull/67) by @yezz123.
+* Version 0.0.7 ✨. PR [#68](https://github.com/yezz123/AuthX/pull/68) by @yezz123.
 
 ## 0.0.6
 
-### What's Changed
-
-* Fix Environment Files by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/54>
-* Provide More Classifiers ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/57>
-* Setup Tests DocStrings ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/58>
-
-**Full Changelog**: <https://github.com/yezz123/AuthX/compare/0.0.5...0.0.6>
+* Fix Environment Files. PR [#54](https://github.com/yezz123/AuthX/pull/54) by @yezz123.
+* Provide More Classifiers ✨. PR [#57](https://github.com/yezz123/AuthX/pull/57) by @yezz123.
+* Setup Tests DocStrings ✨. PR [#58](https://github.com/yezz123/AuthX/pull/58) by @yezz123.
 
 ## 0.0.5
 
-All this is based on This PR #45 :
-
-* here I fix issues related to documentation.
-* Generate a docstring for the main file.
-
-### What's Changed
-
-* ✨: Fix Documentation issue by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/45>
-
-**Full Changelog**: <https://github.com/yezz123/AuthX/compare/0.0.4...0.0.5>
+* ✨ Fix Documentation issue. PR [#45](https://github.com/yezz123/AuthX/pull/45) by @yezz123.
 
 ## 0.0.4
 
-During the work on this PR #44 :
-
-* I generate a docstring to improve the project & clear some parts of the code.
-* Add an Issue Template (Pre-public).
-* Create a simple Readme For the whole users.
-* Adding New Commands relate to the bumpversion package in the Makefile.
-
-### What's Changed
-
-* Setup docstring & Create Documentation by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/44>
-
-**Full Changelog**: <https://github.com/yezz123/AuthX/compare/0.0.3...0.0.4>
+* Setup docstring & Create Documentation. PR [#44](https://github.com/yezz123/AuthX/pull/44) by @yezz123.
 
 ## 0.0.3
 
-* Create a simple Readme.
-* Create a Build to release the package.
-* Fix Test Issues
-
-### What's Changed
-
-* Test : All functions in the Services and Fix some issues related to Raise() by
-  @yezz123 in <https://github.com/yezz123/AuthX/pull/23>
-* Release the first Version of AuthX ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/28>
-* Create a Simple Readme by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/42>
-* Create 0.0.3 version by @yezz123 in <https://github.com/yezz123/AuthX/pull/43>
-
-**Full Changelog**: <https://github.com/yezz123/AuthX/compare/0.0.2...0.0.3>
+* Test: All functions in the Services and Fix some issues related to Raise(). PR [#23](https://github.com/yezz123/AuthX/pull/23) by @yezz123.
+* Release the first Version of AuthX ✨. PR [#28](https://github.com/yezz123/AuthX/pull/28) by @yezz123.
+* Create a Simple Readme. PR [#42](https://github.com/yezz123/AuthX/pull/42) by @yezz123.
+* Create 0.0.3 version. PR [#43](https://github.com/yezz123/AuthX/pull/43) by @yezz123.
 
 ## 0.0.2
 
-Create a Testable Core for Email and work on Users and JWT. work on a PR to test
-the Services and Provide more Routers tests
-
-### What's Changed
-
-* Create a test for Email ✨ by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/25>
-
-**Full Changelog**: <https://github.com/yezz123/AuthX/compare/0.0.1...0.0.2>
+* Create a test for Email ✨. PR [#25](https://github.com/yezz123/AuthX/pull/25) by @yezz123.
 
 ## 0.0.1
 
-* Create Authentication Routes ex. Register, login, logout, and Reset.
-* Add The Social Authentication Routes, Connecting using Google and Facebook.
-* Give the Admin the Permission of Adding a User to the Blacklist or Ban a User
-  from The API.
-* Done with Setup of Multiple Routes and Fix The Crud Issues.
-* Use the JWT package For Creating tokens and checking, also the Email Provider
-  works with booths aiosmtplib and email-validator.
-* Provide the Common Models ex. Users Models and Social Models.
-* Create a Multiple Errors Support for Route and Models Validation or also if
-  the Social Authentication CallBack got Errors.
-* Add A Recaptcha Bypass using Httpx Library and Create A String and Signature
-  Generator using Passlib.
-* Using passlib to Verify the Password and Hash it under sha256.
-* Set up a workflow to Test The Project in a Docker environment.
-
-### What's Changed
-
-* chore : Create Package Core by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/1>
-* chore: Provide The Full Functionality of Routers and Services by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/2>
-* chore: Create the Package Main file by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/3>
-* chore: Add Testing and Building Configuration by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/5>
-* chore: Add Last Build Addons to Test Branch by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/8>
-* chore: Create Dev work for testing the Package by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/4>
-* chore: Fix Build Files by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/10>
-* Isort AuthX path and Fix Missing packages for test by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/18>
-* adding test case to workflow by @yezz123 in
-  <https://github.com/yezz123/AuthX/pull/19>
-
-**Full Changelog**: <https://github.com/yezz123/AuthX/commits/0.0.1>
+* Chore: Create Package Core. PR [#1](https://github.com/yezz123/AuthX/pull/1) by @yezz123.
+* Chore: Provide The Full Functionality of Routers and Services. PR [#2](https://github.com/yezz123/AuthX/pull/2) by @yezz123.
+* Chore: Create the Package Main file. PR [#3](https://github.com/yezz123/AuthX/pull/3) by @yezz123.
+* Chore: Add Testing and Building Configuration. PR [#5](https://github.com/yezz123/AuthX/pull/5) by @yezz123.
+* Chore: Add Last Build Addons to Test Branch. PR [#8](https://github.com/yezz123/AuthX/pull/8) by @yezz123.
+* Chore: Create Dev work for testing the Package. PR [#4](https://github.com/yezz123/AuthX/pull/4) by @yezz123.
+* Chore: Fix Build Files. PR [#10](https://github.com/yezz123/AuthX/pull/10) by @yezz123.
+* Isort AuthX path and Fix Missing packages for test. PR [#18](https://github.com/yezz123/AuthX/pull/18) by @yezz123.
+* Adding test case to workflow. PR [#19](https://github.com/yezz123/AuthX/pull/19) by @yezz123.
