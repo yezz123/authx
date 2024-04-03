@@ -7,6 +7,8 @@ hide:
 
 ## Latest Changes
 
+* ⬆️ Bump pillow from 10.2.0 to 10.3.0 in /requirements. PR [#564](https://github.com/yezz123/authx/pull/564) by [@dependabot[bot]](https://github.com/apps/dependabot).
+
 ## 1.0.0
 
 ### Core
