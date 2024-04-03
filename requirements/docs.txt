@@ -11,6 +11,7 @@ beautifulsoup4==4.12.3
 cairocffi==1.6.1
     # via cairosvg
 cairosvg==2.7.1
+    # via -r docs.in
 certifi==2024.2.2
     # via
     #   httpcore
@@ -44,11 +45,13 @@ griffe==0.42.1
     #   griffe-typingdoc
     #   mkdocstrings-python
 griffe-typingdoc==0.2.5
+    # via -r docs.in
 h11==0.14.0
     # via httpcore
 httpcore==1.0.5
     # via httpx
 httpx==0.27.0
+    # via -r docs.in
 idna==3.6
     # via
     #   anyio
@@ -56,6 +59,7 @@ idna==3.6
     #   requests
 jinja2==3.1.3
     # via
+    #   -r docs.in
     #   mkdocs
     #   mkdocs-material
     #   mkdocstrings
@@ -71,6 +75,7 @@ markdown==3.6
     #   mkdocstrings
     #   pymdown-extensions
 markdown-include==0.8.1
+    # via -r docs.in
 markdown-it-py==3.0.0
     # via rich
 markupsafe==2.1.5
@@ -82,10 +87,12 @@ markupsafe==2.1.5
 mdurl==0.1.2
     # via markdown-it-py
 mdx-include==1.4.2
+    # via -r docs.in
 mergedeep==1.3.4
     # via mkdocs
 mkdocs==1.5.3
     # via
+    #   -r docs.in
     #   mkdocs-autorefs
     #   mkdocs-markdownextradata-plugin
     #   mkdocs-material
@@ -94,12 +101,17 @@ mkdocs==1.5.3
 mkdocs-autorefs==1.0.1
     # via mkdocstrings
 mkdocs-markdownextradata-plugin==0.2.5
+    # via -r docs.in
 mkdocs-material==9.5.16
+    # via -r docs.in
 mkdocs-material-extensions==1.3.1
     # via mkdocs-material
 mkdocs-mermaid2-plugin==1.1.1
-mkdocstrings==0.24.1
-    # via mkdocstrings-python
+    # via -r docs.in
+mkdocstrings[python]==0.24.1
+    # via
+    #   -r docs.in
+    #   mkdocstrings-python
 mkdocstrings-python==1.8.0
     # via mkdocstrings
 packaging==24.0
@@ -108,8 +120,10 @@ paginate==0.5.6
     # via mkdocs-material
 pathspec==0.12.1
     # via mkdocs
-pillow==10.2.0
-    # via cairosvg
+pillow==10.3.0
+    # via
+    #   -r docs.in
+    #   cairosvg
 platformdirs==4.2.0
     # via
     #   mkdocs
@@ -122,6 +136,7 @@ pygments==2.17.2
     #   rich
 pymdown-extensions==10.7.1
     # via
+    #   -r docs.in
     #   mkdocs-material
     #   mkdocs-mermaid2-plugin
     #   mkdocstrings
@@ -129,6 +144,7 @@ python-dateutil==2.9.0.post0
     # via ghp-import
 pyyaml==6.0.1
     # via
+    #   -r docs.in
     #   mkdocs
     #   mkdocs-markdownextradata-plugin
     #   pymdown-extensions
@@ -145,8 +161,6 @@ requests==2.31.0
     #   mkdocs-mermaid2-plugin
 rich==13.7.1
     # via typer-slim
-setuptools==69.2.0
-    # via mkdocs-mermaid2-plugin
 shellingham==1.5.4
     # via typer-slim
 six==1.16.0
@@ -160,14 +174,18 @@ sniffio==1.3.1
 soupsieve==2.5
     # via beautifulsoup4
 starlette==0.36.3
+    # via -r docs.in
 tinycss2==1.2.1
     # via
     #   cairosvg
     #   cssselect2
 typer==0.12.0
+    # via -r docs.in
 typer-cli==0.12.0
-    # via typer
-typer-slim==0.12.0
+    # via
+    #   -r docs.in
+    #   typer
+typer-slim[standard]==0.12.0
     # via
     #   typer
     #   typer-cli
