@@ -7,6 +7,7 @@ hide:
 
 ## Latest Changes
 
+* ⬆️ Bump dependencies in requirements files. PR [#567](https://github.com/yezz123/authx/pull/567) by [@yezz123](https://github.com/yezz123).
 * ♻️ Refactor error message constants. PR [#565](https://github.com/yezz123/authx/pull/565) by [@yezz123](https://github.com/yezz123).
 * ⬆️ Bump pillow from 10.2.0 to 10.3.0 in /requirements. PR [#564](https://github.com/yezz123/authx/pull/564) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
