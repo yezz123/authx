@@ -234,8 +234,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         locations: Optional[TokenLocations] = None,
         refresh: bool = False,
         optional: Literal[False] = False,
-    ) -> RequestToken:
-        ...
+    ) -> RequestToken: ...
 
     @overload
     async def _get_token_from_request(
@@ -244,8 +243,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         locations: Optional[TokenLocations] = None,
         refresh: bool = False,
         optional: Literal[True] = True,
-    ) -> Optional[RequestToken]:
-        ...
+    ) -> Optional[RequestToken]: ...
 
     async def _get_token_from_request(
         self,
