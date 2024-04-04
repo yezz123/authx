@@ -1,7 +1,7 @@
 import contextlib
 from typing import Any, Callable, Coroutine, Dict, Literal, Optional, overload
 
-from fastapi import Request, Response
+from fastapi import Depends, Request, Response
 
 from authx._internal._callback import _CallbackHandler
 from authx._internal._error import _ErrorHandler
@@ -500,6 +500,54 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         """
         self.unset_access_cookies(response)
         self.unset_refresh_cookies(response)
+
+    # Notes:
+    # The AuthXDeps is a utility class, to enable quick token operations
+    # within the route logic. It provides methods to avoid addtional code
+    # in your route that would be outside of the route logic
+
+    # Such methods includes setting and unsetting cookies without the need
+    # to generate a response object beforhand.
+
+    @property
+    def DEPENDENCY(self) -> AuthXDependency:
+        """FastAPI Dependency to return an AuthX sub-object within the route context"""
+        return Depends(self.get_dependency)
+
+    @property
+    def BUNDLE(self) -> AuthXDependency:
+        """FastAPI Dependency to return a AuthX sub-object within the route context"""
+        return self.DEPENDENCY
+
+    @property
+    def FRESH_REQUIRED(self) -> TokenPayload:
+        """FastAPI Dependency to enforce valid token availability in request"""
+        return Depends(self.fresh_token_required)
+
+    @property
+    def ACCESS_REQUIRED(self) -> TokenPayload:
+        """FastAPI Dependency to enforce presence of an `access` token in request"""
+        return Depends(self.access_token_required)
+
+    @property
+    def REFRESH_REQUIRED(self) -> TokenPayload:
+        """FastAPI Dependency to enforce presence of a `refresh` token in request"""
+        return Depends(self.refresh_token_required)
+
+    @property
+    def ACCESS_TOKEN(self) -> RequestToken:
+        """FastAPI Dependency to retrieve access token from request"""
+        return Depends(self.get_token_from_request(type="access"))
+
+    @property
+    def REFRESH_TOKEN(self) -> RequestToken:
+        """FastAPI Dependency to retrieve refresh token from request"""
+        return Depends(self.get_token_from_request(type="refresh"))
+
+    @property
+    def CURRENT_SUBJECT(self) -> T:
+        """FastAPI Dependency to retrieve the current subject from request"""
+        return Depends(self.get_current_subject)
 
     def get_dependency(self, request: Request, response: Response) -> AuthXDependency:
         """FastAPI Dependency to return a AuthX sub-object within the route context
