@@ -17,3 +17,4 @@ mkdocstrings[python]
 griffe-typingdoc==0.2.5
 httpx
 starlette
+authx_extra

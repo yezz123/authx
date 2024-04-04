@@ -16,3 +16,6 @@ rm -rf `find . -type d -name htmlcov`
 rm -rf `find . -type d -name "*.egg-info"`
 rm -rf `find . -type d -name build`
 rm -rf `find . -type d -name dist`
+rm -rf `find . -type d -name authx_extra`
+rm -rf `find . -type d -name .pytest_cache`
+rm -rf `find . -type d -name .mypy_cache`

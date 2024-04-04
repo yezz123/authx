@@ -129,6 +129,12 @@ nav:
       - api/internal/errors.md
       - api/internal/memory.md
       - api/internal/signature.md
+    - Extra:
+      - api/extra/session.md
+      - api/extra/profiler.md
+      - api/extra/oauth2.md
+      - api/extra/metrics.md
+      - api/extra/cache.md
   - Development:
     - Contributing: development/contributing.md
   - FAQ:
