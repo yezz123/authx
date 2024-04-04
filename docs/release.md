@@ -7,14 +7,21 @@ hide:
 
 ## Latest Changes
 
-* ✅ Add new test cases for access location and blocklist token. PR [#568](https://github.com/yezz123/authx/pull/568) by [@yezz123](https://github.com/yezz123).
-* ⬆️ Bump dependencies in requirements files. PR [#567](https://github.com/yezz123/authx/pull/567) by [@yezz123](https://github.com/yezz123).
-* ♻️ Refactor error message constants. PR [#565](https://github.com/yezz123/authx/pull/565) by [@yezz123](https://github.com/yezz123).
-* ⬆️ Bump pillow from 10.2.0 to 10.3.0 in /requirements. PR [#564](https://github.com/yezz123/authx/pull/564) by [@dependabot[bot]](https://github.com/apps/dependabot).
+## 1.1.0
 
-### Fixes
+### Core
 
 * ✨ Add FastAPI dependencies for token operations in route logic. PR [#566](https://github.com/yezz123/authx/pull/566) by [@yezz123](https://github.com/yezz123).
+* ♻️ Refactor error message constants. PR [#565](https://github.com/yezz123/authx/pull/565) by [@yezz123](https://github.com/yezz123).
+
+### Internal
+
+* ✅ Add new test cases for access location and blocklist token. PR [#568](https://github.com/yezz123/authx/pull/568) by [@yezz123](https://github.com/yezz123).
+
+### Dependencies
+
+* ⬆️ Bump dependencies in requirements files. PR [#567](https://github.com/yezz123/authx/pull/567) by [@yezz123](https://github.com/yezz123).
+* ⬆️ Bump pillow from 10.2.0 to 10.3.0 in /requirements. PR [#564](https://github.com/yezz123/authx/pull/564) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
 ## 1.0.0
 
