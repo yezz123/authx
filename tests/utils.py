@@ -18,7 +18,7 @@ class SecuritiesTuple(NamedTuple):
     refresh_token_cookies: TokenPayload
 
 
-def init_app(config: Optional[AuthXConfig] = None) -> 'tuple[FastAPI, AuthX]':
+def init_app(config: Optional[AuthXConfig] = None) -> "tuple[FastAPI, AuthX]":
     """Initialize FastAPI app and AuthX instance."""
 
     app = FastAPI()
