@@ -71,6 +71,14 @@ class _CallbackHandler(Generic[T]):
         """Set callback for token"""
         self.callback_is_token_in_blocklist = callback
 
+    def set_subject_getter(self, callback: ModelCallback[T]) -> None:
+        """Set the callback to run for subject retrieval and serialization"""
+        self.set_callback_get_model_instance(callback)
+
+    def set_token_blocklist(self, callback: TokenCallback) -> None:
+        """Set the callback to run for validation of revoked tokens"""
+        self.set_callback_token_blocklist(callback)
+
     def _get_current_subject(self, uid: str, **kwargs: ParamSpecKwargs) -> Optional[T]:
         """Get current model instance from callback"""
         self._check_model_callback_is_set()

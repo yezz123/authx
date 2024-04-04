@@ -1,7 +1,7 @@
 import contextlib
 from typing import Any, Callable, Coroutine, Dict, Literal, Optional, overload
 
-from fastapi import Request, Response
+from fastapi import Depends, Request, Response
 
 from authx._internal._callback import _CallbackHandler
 from authx._internal._error import _ErrorHandler
@@ -272,11 +272,14 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
                 return None
             raise e
 
-    async def get_access_token_from_request(self, request: Request) -> RequestToken:
+    async def get_access_token_from_request(
+        self, request: Request, locations: Optional[TokenLocations] = None
+    ) -> RequestToken:
         """Dependency to retrieve access token from request
 
         Args:
             request (Request): Request to retrieve access token from
+            locations (Optional[TokenLocations], optional): Locations to retrieve token from. Defaults to None.
 
         Raises:
             MissingTokenError: When no `access` token is available in request
@@ -284,13 +287,18 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         Returns:
             RequestToken: Request Token instance for `access` token type
         """
-        return await self._get_token_from_request(request, optional=False)
+        return await self._get_token_from_request(
+            request, optional=False, locations=locations
+        )
 
-    async def get_refresh_token_from_request(self, request: Request) -> RequestToken:
+    async def get_refresh_token_from_request(
+        self, request: Request, locations: Optional[TokenLocations] = None
+    ) -> RequestToken:
         """Dependency to retrieve refresh token from request
 
         Args:
             request (Request): Request to retrieve refresh token from
+            locations (Optional[TokenLocations], optional): Locations to retrieve token from. Defaults to None.
 
         Raises:
             MissingTokenError: When no `refresh` token is available in request
@@ -298,7 +306,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         Returns:
             RequestToken: Request Token instance for `refresh` token type
         """
-        return await self._get_token_from_request(request, refresh=True, optional=False)
+        return await self._get_token_from_request(
+            request, refresh=True, optional=False, locations=locations
+        )
 
     async def _auth_required(
         self,
@@ -307,6 +317,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         verify_type: bool = True,
         verify_fresh: bool = False,
         verify_csrf: Optional[bool] = None,
+        locations: Optional[TokenLocations] = None,
     ) -> TokenPayload:
         if type == "access":
             method = self.get_access_token_from_request
@@ -321,6 +332,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
 
         request_token = await method(
             request=request,
+            locations=locations,
         )
 
         if self.is_token_in_blocklist(request_token.token):
@@ -489,6 +501,54 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         self.unset_access_cookies(response)
         self.unset_refresh_cookies(response)
 
+    # Notes:
+    # The AuthXDeps is a utility class, to enable quick token operations
+    # within the route logic. It provides methods to avoid addtional code
+    # in your route that would be outside of the route logic
+
+    # Such methods includes setting and unsetting cookies without the need
+    # to generate a response object beforhand.
+
+    @property
+    def DEPENDENCY(self) -> AuthXDependency:
+        """FastAPI Dependency to return an AuthX sub-object within the route context"""
+        return Depends(self.get_dependency)
+
+    @property
+    def BUNDLE(self) -> AuthXDependency:
+        """FastAPI Dependency to return a AuthX sub-object within the route context"""
+        return self.DEPENDENCY
+
+    @property
+    def FRESH_REQUIRED(self) -> TokenPayload:
+        """FastAPI Dependency to enforce valid token availability in request"""
+        return Depends(self.fresh_token_required)
+
+    @property
+    def ACCESS_REQUIRED(self) -> TokenPayload:
+        """FastAPI Dependency to enforce presence of an `access` token in request"""
+        return Depends(self.access_token_required)
+
+    @property
+    def REFRESH_REQUIRED(self) -> TokenPayload:
+        """FastAPI Dependency to enforce presence of a `refresh` token in request"""
+        return Depends(self.refresh_token_required)
+
+    @property
+    def ACCESS_TOKEN(self) -> RequestToken:
+        """FastAPI Dependency to retrieve access token from request"""
+        return Depends(self.get_token_from_request(type="access"))
+
+    @property
+    def REFRESH_TOKEN(self) -> RequestToken:
+        """FastAPI Dependency to retrieve refresh token from request"""
+        return Depends(self.get_token_from_request(type="refresh"))
+
+    @property
+    def CURRENT_SUBJECT(self) -> T:
+        """FastAPI Dependency to retrieve the current subject from request"""
+        return Depends(self.get_current_subject)
+
     def get_dependency(self, request: Request, response: Response) -> AuthXDependency:
         """FastAPI Dependency to return a AuthX sub-object within the route context
 
@@ -515,6 +575,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         verify_type: bool = True,
         verify_fresh: bool = False,
         verify_csrf: Optional[bool] = None,
+        locations: Optional[TokenLocations] = None,
     ) -> Callable[[Request], TokenPayload]:
         """Dependency to enforce valid token availability in request
 
@@ -523,6 +584,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             verify_type (bool, optional): Apply type verification. Defaults to True.
             verify_fresh (bool, optional): Require token freshness. Defaults to False.
             verify_csrf (Optional[bool], optional): Enable CSRF verification. Defaults to None.
+            locations (Optional[TokenLocations], optional): Locations to retrieve token from. Defaults to None.
 
         Returns:
             Callable[[Request], TokenPayload]: Dependency for Valid token Payload retrieval
@@ -535,6 +597,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
                 verify_csrf=verify_csrf,
                 verify_type=verify_type,
                 verify_fresh=verify_fresh,
+                locations=locations,
             )
 
         return _auth_required

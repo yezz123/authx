@@ -35,7 +35,7 @@ theme:
   language: en
 repo_name: Yezz123/AuthX
 repo_url: https://github.com/yezz123/AuthX
-edit_uri: ""
+edit_uri: edit/main/docs/
 
 plugins:
   - search: null
@@ -55,7 +55,6 @@ plugins:
             - starlette
             - fastapi
             - pydantic_settings
-            - typing
             inherited_members: true
             members_order: source
             separate_signature: true
@@ -101,12 +100,22 @@ nav:
     - Basic Usage: get-started/basic-usage.md
     - Payload Data: get-started/payload.md
     - JWT Locations: get-started/location.md
+    - Refreshing Tokens: get-started/refresh.md
+    - Freshness Tokens: get-started/token.md
+  - Callbacks:
+    - User Serialization: callbacks/user.md
+    - Token Serialization: callbacks/token.md
+  - Dependencies:
+    - Dependencies: dependencies/dependencies.md
+    - Dependency Injection: dependencies/injection.md
+    - Dependency Aliases: dependencies/aliases.md
+    - Dependency Bundle: dependencies/bundle.md
   - Extra Features:
-    - Oauth2: extra/OAuth2.md
-    - Metrics: extra/Metrics.md
-    - Cache: extra/Cache.md
-    - Profiler: extra/profiler.md
-    - Sessions: extra/Sessions.md
+    - Oauth2 Features: extra/OAuth2.md
+    - Metrics Features: extra/Metrics.md
+    - Cache Features: extra/Cache.md
+    - Profiler Middleware: extra/profiler.md
+    - Sessions Middleware: extra/Sessions.md
   - Reference - API:
     - api/reference.md
     - api/main.md
@@ -120,11 +129,11 @@ nav:
       - api/internal/errors.md
       - api/internal/memory.md
       - api/internal/signature.md
-  - Help: help/help.md
   - Development:
     - Contributing: development/contributing.md
   - FAQ:
     - Frequently Asked Questions: faq/faq.md
+    - Help & Support: faq/help.md
     - Code of Conduct: faq/code_of_conduct.md
     - License: faq/license.md
   - Release Notes: release.md

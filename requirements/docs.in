@@ -7,7 +7,7 @@ markdown-include
 pymdown-extensions
 jinja2
 typer-cli
-typer[all]
+typer
 pyyaml
 # For image processing by Material for MkDocs
 pillow

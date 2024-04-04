@@ -13,11 +13,11 @@ ecdsa==0.18.0
 fastapi==0.110.0
 idna==3.6
     # via anyio
-pyasn1==0.5.1
+pyasn1==0.6.0
     # via
     #   python-jose
     #   rsa
-pycparser==2.21
+pycparser==2.22
     # via cffi
 pydantic==2.6.2
     # via

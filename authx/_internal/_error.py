@@ -9,21 +9,18 @@ from authx import exceptions
 class _ErrorHandler:
     """Base Handler for FastAPI handling AuthX exceptions"""
 
-    def __init__(self) -> None:
-        """Base Handler for FastAPI handling AuthX exceptions"""
-
-        self.MSG_DEFAULT = "AuthX Error"
-        self.MSG_TOKEN_ERROR = "Token Error"
-        self.MSG_MISSING_TOKEN_ERROR = "Missing JWT in request"
-        self.MSG_MISSING_CSRF_ERROR = "Missing CSRF double submit token in request"
-        self.MSG_TOKEN_TYPE_ERROR = "Bad token type"
-        self.MSG_REVOKED_TOKEN_ERROR = "Invalid token"
-        self.MSG_TOKEN_REQUIRED_ERROR = "Token required"
-        self.MSG_FRESH_TOKEN_REQUIRED_ERROR = "Fresh token required"
-        self.MSG_ACCESS_TOKEN_REQUIRED_ERROR = "Access token required"
-        self.MSG_REFRESH_TOKEN_REQUIRED_ERROR = "Refresh token required"
-        self.MSG_CSRF_ERROR = "CSRF double submit does not match"
-        self.MSG_DECODE_JWT_ERROR = "Invalid Token"
+    MSG_DEFAULT = "AuthX Error"
+    MSG_TOKEN_ERROR = "Token Error"
+    MSG_MISSING_TOKEN_ERROR = "Missing JWT in request"
+    MSG_MISSING_CSRF_ERROR = "Missing CSRF double submit token in request"
+    MSG_TOKEN_TYPE_ERROR = "Bad token type"
+    MSG_REVOKED_TOKEN_ERROR = "Invalid token"
+    MSG_TOKEN_REQUIRED_ERROR = "Token required"
+    MSG_FRESH_TOKEN_REQUIRED_ERROR = "Fresh token required"
+    MSG_ACCESS_TOKEN_REQUIRED_ERROR = "Access token required"
+    MSG_REFRESH_TOKEN_REQUIRED_ERROR = "Refresh token required"
+    MSG_CSRF_ERROR = "CSRF double submit does not match"
+    MSG_DECODE_JWT_ERROR = "Invalid Token"
 
     async def _error_handler(
         self,

@@ -1,9 +1,6 @@
----
-hide:
-  - navigation
----
+# Help and Support
 
-Do you like **AuthX**?
+## Do you like **AuthX**?
 
 Would you like to help AuthX, other users, and the author?
 
@@ -15,8 +12,7 @@ And there are several ways to get help too.
 
 ## Follow AuthX's Author
 
-<a href="https://twitter.com/THyasser1" class="external-link" target="_blank">Follow
-@THyasser1 on **Twitter**</a> to get the latest news about **AuthX**.
+[Follow @THyasser1 on **Twitter**](https://x.com/THyasser1) to get the latest news about **AuthX**.
 
 ## Star **AuthX** in GitHub
 
@@ -29,9 +25,7 @@ it has been already useful for others.
 
 ## Watch the GitHub repository for releases
 
-You can "watch" AuthX in GitHub (clicking the "watch" button at the top right):
-<a href="<https://github.com/yezz123/AuthX> class="external-link"
-target="\_blank"><https://github.com/yezz123/AuthX></a>. 👀
+You can "watch" AuthX in GitHub (clicking the "watch" button at the top right): [yezz123/AuthX](https://github.com/yezz123/AuthX). 👀
 
 There you can select **"Releases only"**.
 
@@ -40,27 +34,11 @@ new release (a new version) of **AuthX** with bug fixes and new features.
 
 ## Help Author with issues in GitHub
 
-You can see
-<a href="https://github.com/yezz123/AuthX/issues" class="external-link" target="_blank">existing
-issues</a> and try and help others, most of the times they are questions that
-you might already know the answer for. 🤓
-
-## Watch the GitHub repository
-
-You can "watch" AuthX in GitHub (clicking the "watch" button at the top right):
-<a href="<https://github.com/yezz123/AuthX> class="external-link"
-target="\_blank"><https://github.com/yezz123/AuthX></a>. 👀
-
-If you select "Watching" instead of "Releases only" you will receive
-notifications when someone creates a new issue.
-
-Then you can try and help them solve those issues.
+You can see [existing issues](https://github.com/yezz123/AuthX/issues) and try and help others, most of the times they are questions that you might already know the answer for. 🤓
 
 ## Create issues
 
-You can
-<a href="https://github.com/yezz123/AuthX/issues/new/choose" class="external-link" target="_blank">create
-a new issue</a> in the GitHub repository, for example to:
+You can [create a new issue](https://github.com/yezz123/AuthX/issues/new) in the GitHub repository, for example to:
 
 - Ask a **question** or ask about a **problem**.
 - Suggest a new **feature**.
@@ -73,9 +51,8 @@ a new issue</a> in the GitHub repository, for example to:
 You can [contribute](../development/contributing.md) to the source code with Pull Requests, for
 example:
 
-- To fix a typo you found on the documentation.
-- To help [translate the documentation](../development/contributing.md) to your language.
-  - You can also help to review the translations created by others.
+- To help [fix the documentation](../development/contributing.md) in general.
+  - You can also help to review the documentation and suggest improvements.
 - To propose new documentation sections.
 - To fix an existing issue/bug.
 - To add a new feature.
@@ -90,7 +67,7 @@ example:
 
 And you can also become a Silver or Gold sponsor for AuthX, just contact me by email. 🏅🎉
 
-- Email: <a href="mailto:hello@yezz.me" class="external-link" target="_blank">hello@yezz.me</a>
+- Email: [hello@yezz.me](mailto:hello@yezz.me)
 
 ## Sponsor the tools that power AuthX
 
