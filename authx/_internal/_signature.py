@@ -6,7 +6,6 @@ CASUAL_UT = False
 
 
 class SignatureSerializer:
-
     """
     A class that implements a URL-safe timed serializer.
     """

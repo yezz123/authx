@@ -3,7 +3,6 @@ from typing import Any, Dict, Optional
 
 
 class MemoryIO:
-
     raw_memory_store: Dict[str, Dict[str, Any]]
 
     """

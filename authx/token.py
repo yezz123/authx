@@ -42,7 +42,7 @@ def create_token(
     jwt_claims = {"sub": uid, "jti": jti or get_uuid(), "type": type}
 
     if type == "access":
-        jwt_claims["fresh"] = fresh
+        jwt_claims["fresh"] = str(fresh)
 
     if csrf and not isinstance(csrf, str):
         jwt_claims["csrf"] = get_uuid()

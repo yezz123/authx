@@ -1,6 +1,6 @@
 import datetime
 from hmac import compare_digest
-from typing import Any, Dict, List, Optional, Sequence
+from typing import Any, Dict, List, Optional, Sequence, Union
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, validator
 
@@ -21,7 +21,6 @@ from authx.types import (
     StringOrSequence,
     TokenLocation,
     TokenType,
-    Union,
 )
 
 
@@ -42,11 +41,11 @@ class TokenPayload(BaseModel):
     fresh: bool = False
 
     @property
-    def _additional_fields(self):
+    def _additional_fields(self) -> set[str]:
         return set(self.__dict__) - set(self.model_fields)
 
     @property
-    def extra_dict(self):
+    def extra_dict(self) -> Dict[str, Any]:
         return self.model_dump(include=self._additional_fields)
 
     @property
@@ -82,7 +81,7 @@ class TokenPayload(BaseModel):
         return get_now() - self.issued_at
 
     @validator("exp", "nbf", always=True)
-    def _set_default_ts(cls, value):
+    def _set_default_ts(cls, value: Union[float, int]) -> Union[float, int]:
         if isinstance(value, datetime.datetime):
             return value.timestamp()
         elif isinstance(value, datetime.timedelta):
@@ -90,19 +89,19 @@ class TokenPayload(BaseModel):
         return value
 
     def has_scopes(self, *scopes: Sequence[str]) -> bool:
-        return all(s in self.scopes for s in scopes)
+        return all(s in self.scopes for s in scopes)  # type: ignore
 
     def encode(
         self,
         key: str,
-        algorithm: str,
+        algorithm: AlgorithmType = "HS256",
         ignore_errors: bool = True,
         headers: Optional[Dict[str, Any]] = None,
     ) -> str:
         return create_token(
             key=key,
             algorithm=algorithm,
-            uid=self.sub,
+            uid=str(self.sub),
             jti=self.jti,
             issued=self.iat,
             type=self.type,
