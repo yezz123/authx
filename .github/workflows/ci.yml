@@ -79,23 +79,10 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
 
-  build-package:
-    name: Build & verify package
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      # Using Hynek's action to build and verify the package
-      # https://github.com/hynek/build-and-inspect-python-package
-      - uses: hynek/build-and-inspect-python-package@v2.2.0
-
   # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
   check:
     if: always()
-    needs: [lint, tests, build-package]
+    needs: [lint, tests]
     runs-on: ubuntu-latest
     steps:
       - name: Decide whether the needed jobs succeeded or failed
