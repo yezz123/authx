@@ -7,6 +7,8 @@ hide:
 
 ## Latest Changes
 
+* 📝 Add extra API documentation files. PR [#569](https://github.com/yezz123/authx/pull/569) by [@yezz123](https://github.com/yezz123).
+
 ## 1.1.0
 
 ### Core
