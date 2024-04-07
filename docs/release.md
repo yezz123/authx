@@ -7,6 +7,7 @@ hide:
 
 ## Latest Changes
 
+* ✅ Fix skipped tests & Add coverage pragmas. PR [#571](https://github.com/yezz123/authx/pull/571) by [@yezz123](https://github.com/yezz123).
 * 🔧 drop The action `hynek/build-and-inspect-python-package`. PR [#570](https://github.com/yezz123/authx/pull/570) by [@yezz123](https://github.com/yezz123).
 * 📝 Add extra API documentation files. PR [#569](https://github.com/yezz123/authx/pull/569) by [@yezz123](https://github.com/yezz123).
 
