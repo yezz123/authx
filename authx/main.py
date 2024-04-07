@@ -322,7 +322,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         elif type == "refresh":
             method = self.get_refresh_token_from_request
         else:
-            ...
+            ...  # pragma: no cover
         if verify_csrf is None:
             verify_csrf = self.config.JWT_COOKIE_CSRF_PROTECT and (
                 request.method.upper() in self.config.JWT_CSRF_METHODS

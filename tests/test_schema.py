@@ -322,3 +322,49 @@ def test_payload_has_scopes_empty(valid_payload: TokenPayload):
     valid_payload.scopes = []
     assert not valid_payload.has_scopes("read")
     assert not valid_payload.has_scopes("read", "write")
+
+
+def test_payload_extra_dict():
+    payload = TokenPayload(
+        type="access",
+        fresh=True,
+        sub="BOOOM",
+        csrf="CSRF_TOKEN",
+        scopes=["read", "write"],
+        exp=datetime.timedelta(minutes=20),
+        nbf=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc),
+        iat=datetime.datetime(
+            2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc
+        ).timestamp(),
+        extra="EXTRA",
+    )
+    assert payload.extra_dict == {}
+
+
+def test_verify_token_type_exception():
+    KEY = "SECRET"
+    ALGO = "HS256"
+
+    payload = TokenPayload(
+        type="false",
+        fresh=False,
+        sub="BOOOM",
+        csrf=None,
+        iat=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc),
+    )
+
+    token = RequestToken(
+        token=payload.encode(KEY, ALGO),
+        csrf="EXPECTED_CSRF",
+        type="access",
+        location="cookies",
+    )
+    with pytest.raises(TokenTypeError):
+        token.verify(
+            KEY,
+            [ALGO],
+            verify_jwt=True,
+            verify_type=True,
+            verify_csrf=True,
+            verify_fresh=False,
+        )

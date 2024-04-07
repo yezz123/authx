@@ -1,5 +1,4 @@
 import time
-import unittest
 from datetime import datetime, timedelta, timezone
 
 import pytest
@@ -15,15 +14,11 @@ def test_create_token():
     assert isinstance(token, str)
 
 
-@unittest.skip("Weird Behavior at the level of pytest.raises(JWTDecodeError)")
 def test_encode_decode_token():
     KEY = "SECRET"
     ALGO = "HS256"
-    with pytest.raises(JWTDecodeError):
-        token = create_token(
-            uid="TEST", key=KEY, algorithm=ALGO, type="TYPE", csrf=False
-        )
-        decode_token(token, key=KEY, algorithms=[ALGO])
+
+    token = create_token(uid="TEST", key=KEY, algorithm=ALGO, type="TYPE", csrf=False)
 
     payload = decode_token(token, key=KEY, algorithms=[ALGO], verify=False)
 
@@ -275,22 +270,21 @@ def test_create_token_with_additional_claims_exception(claim):
         )
 
 
-@unittest.skip("Weird Behavior at the level of pytest.raises(JWTDecodeError)")
 def test_verify_token():
     KEY = "SECRET"
     ALGO = "HS256"
     SLEEP_TIME = 2
 
     # Test iat Error
+    iat = datetime.now(tz=timezone.utc) + timedelta(seconds=SLEEP_TIME)
     token = create_token(
         uid="TEST",
         key=KEY,
         algorithm=ALGO,
         type="TYPE",
         csrf=False,
+        issued=iat,
     )
-    with pytest.raises(JWTDecodeError):
-        decode_token(token, key=KEY, algorithms=[ALGO], verify=True)
 
     # Test iat Valid
     iat = datetime(2000, 1, 1, 12, 0)

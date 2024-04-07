@@ -60,3 +60,13 @@ def test_get_current_subject(authx: AuthX):
 
     assert authx._get_current_subject("a") == {"username": "a"}
     assert authx._get_current_subject("Meh") is None
+
+
+def test_set_token_blocklist(authx: AuthX):
+    """Test that the token blocklist callback is set correctly"""
+
+    def fake_token_handler(token: str):
+        return True
+
+    authx.set_token_blocklist(fake_token_handler)
+    assert authx.is_token_callback_set is True
