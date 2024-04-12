@@ -11,7 +11,7 @@ cryptography==42.0.5
 ecdsa==0.18.0
     # via python-jose
 fastapi==0.110.1
-idna==3.6
+idna==3.7
     # via anyio
 pyasn1==0.6.0
     # via
