@@ -150,8 +150,6 @@ linting packages.
 
 - `pre-commit-hooks` - Some out-of-the-box hooks for pre-commit.
 - `ruff-pre-commit` - A tool to check Python code for errors.
-- `black` - A tool to format Python code.
-- `pyupgrade` - A tool to upgrade Python syntax.
 
 ## Documentation
 
