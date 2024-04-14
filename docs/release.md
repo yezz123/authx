@@ -7,11 +7,21 @@ hide:
 
 ## Latest Changes
 
-* ♻️ Refactor Installation of `authx_extra` package. PR [#575](https://github.com/yezz123/authx/pull/575) by [@yezz123](https://github.com/yezz123).
-* ⬆️ Upgrade Pydantic version. PR [#574](https://github.com/yezz123/authx/pull/574) by [@yezz123](https://github.com/yezz123).
-* ⬆️  Bump `idna` from 3.6 to 3.7. PR [#573](https://github.com/yezz123/authx/pull/573) by [@dependabot[bot]](https://github.com/apps/dependabot).
+## 1.1.1
+
+### Internal
+
 * ✅ Fix skipped tests & Add coverage pragmas. PR [#571](https://github.com/yezz123/authx/pull/571) by [@yezz123](https://github.com/yezz123).
 * 🔧 drop The action `hynek/build-and-inspect-python-package`. PR [#570](https://github.com/yezz123/authx/pull/570) by [@yezz123](https://github.com/yezz123).
+
+### Dependencies
+
+* ⬆️ Upgrade Pydantic version. PR [#574](https://github.com/yezz123/authx/pull/574) by [@yezz123](https://github.com/yezz123).
+* ⬆️  Bump `idna` from 3.6 to 3.7. PR [#573](https://github.com/yezz123/authx/pull/573) by [@dependabot[bot]](https://github.com/apps/dependabot).
+
+### Documentation
+
+* ♻️ Refactor Installation of `authx_extra` package. PR [#575](https://github.com/yezz123/authx/pull/575) by [@yezz123](https://github.com/yezz123).
 * 📝 Add extra API documentation files. PR [#569](https://github.com/yezz123/authx/pull/569) by [@yezz123](https://github.com/yezz123).
 
 ## 1.1.0
