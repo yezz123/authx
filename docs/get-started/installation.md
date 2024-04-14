@@ -32,11 +32,11 @@ $ pip install authx_extra
 </div>
 
 !!! warning
-     You should install the extra dependency you are aiming to use, ex:
+     Once you install the extra dependency you are aiming to use, ex:
 
-     - `authx_extra[cache]` for Redis support
-     - `authx_extra[profiler]` for Pyinstruments Profiler support
-     - `authx_extra[metrics]` for prometheus metrics support
+     - for `cache` you will have Redis installed as a dependency.
+     - for `profiler` you will have Pyinstruments Profiler installed as a dependency.
+     - for `metrics` you will have Prometheus installed as a dependency.
 
 ### Development Dependencies
 
