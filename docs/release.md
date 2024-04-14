@@ -7,6 +7,7 @@ hide:
 
 ## Latest Changes
 
+* ⬆️ Upgrade Pydantic version. PR [#574](https://github.com/yezz123/authx/pull/574) by [@yezz123](https://github.com/yezz123).
 * ⬆️  Bump `idna` from 3.6 to 3.7. PR [#573](https://github.com/yezz123/authx/pull/573) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ✅ Fix skipped tests & Add coverage pragmas. PR [#571](https://github.com/yezz123/authx/pull/571) by [@yezz123](https://github.com/yezz123).
 * 🔧 drop The action `hynek/build-and-inspect-python-package`. PR [#570](https://github.com/yezz123/authx/pull/570) by [@yezz123](https://github.com/yezz123).
