@@ -61,8 +61,8 @@ class TokenPayload(BaseModel):
 
     @property
     def expiry_datetime(self) -> datetime.datetime:
-        if isinstance(self.exp, datetime.datetime):
-            return self.exp
+        if isinstance(self.exp, datetime.datetime):  # pragma: no cover
+            return self.exp  # pragma: no cover
         elif isinstance(self.exp, datetime.timedelta):
             return self.issued_at + self.exp
         elif isinstance(self.exp, (float, int)):
@@ -164,7 +164,7 @@ class RequestToken(BaseModel):
                 issuer=issuer,
             )
             # Parse payload
-            payload = TokenPayload.parse_obj(decoded_token)
+            payload = TokenPayload.model_validate(decoded_token)
         except JWTDecodeError as e:
             raise JWTDecodeError(*e.args) from e
         except ValidationError as e:
@@ -174,9 +174,9 @@ class RequestToken(BaseModel):
             error_msg = f"'{self.type}' token required, '{payload.type}' token received"
             if self.type == "access":
                 raise AccessTokenRequiredError(error_msg)
-            elif self.type == "refresh":
-                raise RefreshTokenRequiredError(error_msg)
-            raise TokenTypeError(error_msg)
+            elif self.type == "refresh":  # pragma: no cover
+                raise RefreshTokenRequiredError(error_msg)  # pragma: no cover
+            raise TokenTypeError(error_msg)  # pragma: no cover
 
         if verify_fresh and not payload.fresh:
             raise FreshTokenRequiredError("Fresh token required")

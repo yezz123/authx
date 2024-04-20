@@ -16,5 +16,4 @@ cairosvg
 mkdocstrings[python]
 griffe-typingdoc==0.2.5
 httpx
-starlette
-authx_extra
+authx-extra @ git+https://github.com/yezz123/authx-extra.git@main
