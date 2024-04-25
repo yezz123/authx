@@ -16,7 +16,7 @@ The following example demonstrate how AuthX aliases can help you reduce verbosit
     security = AuthX()
     security.handle_errors(app)
 
-    @app.route('/', dependencies=[Depends(security.access_token_required)])
+    @app.get('/', dependencies=[Depends(security.access_token_required)])
     def root(subject = Depends(security.get_current_subject), token = Depends(security.get_token_from_request)):
         ...
     ```
@@ -31,7 +31,7 @@ The following example demonstrate how AuthX aliases can help you reduce verbosit
     security = AuthX()
     security.handle_errors(app)
 
-    @app.route('/', dependencies=[security.ACCESS_REQUIRED])
+    @app.get('/', dependencies=[security.ACCESS_REQUIRED])
     def root(subject = security.CURRENT_SUBJECT, token = security.RAW_ACCESS_TOKEN):
         ...
     ```
@@ -53,7 +53,7 @@ from authx import AuthX
 app = FastAPI()
 security = AuthX()
 
-@app.route('/protected')
+@app.get('/protected')
 def protected(payload = security.ACCESS_REQUIRED):
     return f"Your Access Token Payload is {payload}"
 ```
@@ -74,7 +74,7 @@ app = FastAPI()
 security = AuthX()
 
 # Use route dependency to enforce validation in conjunction with ACCESS_TOKEN
-@app.route('/protected', dependencies=[security.ACCESS_REQUIRED])
+@app.get('/protected', dependencies=[security.ACCESS_REQUIRED])
 def protected(token = security.ACCESS_TOKEN):
     return f"Your Access Token is {token}"
 ```
@@ -94,7 +94,7 @@ from authx import AuthX
 app = FastAPI()
 security = AuthX()
 
-@app.route('/refresh')
+@app.get('/refresh')
 def refresh(payload = security.REFRESH_REQUIRED):
     return f"Your Refresh Token Payload is {payload}"
 ```
@@ -115,7 +115,7 @@ app = FastAPI()
 security = AuthX()
 
 # Use route dependency to enforce validation in conjunction with REFRESH_TOKEN
-@app.route('/refresh', dependencies=[security.REFRESH_REQUIRED])
+@app.get('/refresh', dependencies=[security.REFRESH_REQUIRED])
 def refresh(token = security.REFRESH_TOKEN):
     return f"Your Refresh Token is {token}"
 ```
@@ -135,7 +135,7 @@ from authx import AuthX
 app = FastAPI()
 security = AuthX()
 
-@app.route('/protected', dependencies=[security.FRESH_REQUIRED])
+@app.get('/protected', dependencies=[security.FRESH_REQUIRED])
 def protected():
     return "Congratulations! Your have a fresh and valid access token."
 ```
@@ -158,7 +158,7 @@ from authx import AuthX
 app = FastAPI()
 security = AuthX()
 
-@app.route('/whoami')
+@app.get('/whoami')
 def whoami(subject = security.CURRENT_SUBJECT):
     return f"You are: {subject}"
 ```
@@ -178,7 +178,7 @@ from authx import AuthX
 app = FastAPI()
 security = AuthX()
 
-@app.route('/create_token')
+@app.get('/create_token')
 def create_token(auth = security.BUNDLE):
     token = auth.create_access_token(uid="test")
     auth.set_access_cookie(token)
