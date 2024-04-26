@@ -9,9 +9,9 @@ certifi==2024.2.2
     #   requests
 charset-normalizer==3.3.2
     # via requests
-coverage==7.4.4
+coverage==7.5.0
     # via pytest-cov
-freezegun==1.4.0
+freezegun==1.5.0
 h11==0.14.0
     # via httpcore
 httpcore==1.0.5
@@ -24,10 +24,10 @@ idna==3.7
     #   requests
 iniconfig==2.0.0
     # via pytest
-itsdangerous==2.1.2
+itsdangerous==2.2.0
 packaging==24.0
     # via pytest
-pluggy==1.4.0
+pluggy==1.5.0
     # via pytest
 pytest==8.1.1
     # via
