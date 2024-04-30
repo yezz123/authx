@@ -7,6 +7,7 @@ hide:
 
 ## Latest Changes
 
+* [pre-commit.ci] pre-commit autoupdate. PR [#579](https://github.com/yezz123/authx/pull/579) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * 🔧 remove linting step from CI. PR [#578](https://github.com/yezz123/authx/pull/578) by [@yezz123](https://github.com/yezz123).
 
 ### Docs
