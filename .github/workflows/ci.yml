@@ -53,6 +53,54 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
 
+  test-extra:
+
+    name: test py${{ matrix.python-version }} on ${{ matrix.os }} with extra
+
+    runs-on: ${{ matrix.os }}-latest
+
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    strategy:
+
+      matrix:
+
+        python-version: ["3.12"]
+
+        os: [ubuntu]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: setup UV
+        uses: yezz123/setup-uv@v4
+        with:
+          uv-version: "0.1.39"
+          uv-venv: ".venv"
+
+      - name: Clone authx extra
+        run: git clone https://github.com/yezz123/authx-extra.git --single-branch
+
+      - name: Test Suite - ${{ matrix.os }} - py${{ matrix.python-version }}
+        run: bash scripts/test_extra.sh
+        env:
+          ENV: test
+          REDIS_URL: "redis://0.0.0.0:6379"
+
   # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
   check:
     if: always()
