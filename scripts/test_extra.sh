@@ -5,7 +5,7 @@ set -e
 
 pushd "$(dirname $0)/../authx-extra"
 
-pip install -r requirements/all.txt
+pip install -r requirements/pyproject.txt && pip install -r requirements/testing.txt
 
 pip install -e ../
 
