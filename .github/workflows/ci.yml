@@ -74,7 +74,7 @@ jobs:
 
       matrix:
 
-        python-version: ["3.12"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
         os: [ubuntu]
 
@@ -101,7 +101,7 @@ jobs:
   # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
   check:
     if: always()
-    needs: [tests]
+    needs: [tests, test-extra]
     runs-on: ubuntu-latest
     steps:
       - name: Decide whether the needed jobs succeeded or failed
