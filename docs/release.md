@@ -15,6 +15,10 @@ hide:
 
 * 📝  Refactor route decorators to use `@app.get` instead of `@app.route`. PR [#576](https://github.com/yezz123/authx/pull/576) by [@yezz123](https://github.com/yezz123).
 
+### Internal
+
+* 👷 Add extra job to run additional tests with Redis service. PR [#581](https://github.com/yezz123/authx/pull/581) by [@yezz123](https://github.com/yezz123).
+
 ## 1.1.1
 
 ### Internal
