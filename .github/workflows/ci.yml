@@ -86,14 +86,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: setup UV
-        uses: yezz123/setup-uv@v4
-        with:
-          uv-version: "0.1.39"
-          uv-venv: ".venv"
-
       - name: Clone authx extra
         run: git clone https://github.com/yezz123/authx-extra.git --single-branch
+
+      - name: Update pip
+        run: python -m pip install --upgrade pip
 
       - name: Test Suite - ${{ matrix.os }} - py${{ matrix.python-version }}
         run: bash scripts/test_extra.sh
