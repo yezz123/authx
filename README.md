@@ -7,9 +7,16 @@
 <p align="center">
     <em>Ready-to-use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
 </p>
+</p>
+
+---
+
 <p align="center">
 <a href="https://github.com/yezz123/authx/actions/workflows/ci.yml" target="_blank">
     <img src="https://github.com/yezz123/authx/actions/workflows/ci.yml/badge.svg" alt="lint">
+</a>
+<a href="https://results.pre-commit.ci/latest/github/yezz123/authx/main" target="_blank">
+    <img src="https://results.pre-commit.ci/badge/github/yezz123/authx/main.svg" alt="pre-commit.ci status">
 </a>
 <a href="https://pypi.org/project/authx" target="_blank">
     <img src="https://img.shields.io/pypi/v/authx?color=%2334D058&label=pypi%20package" alt="Package version">
@@ -17,13 +24,20 @@
 <a href="https://codecov.io/gh/yezz123/authx">
     <img src="https://codecov.io/gh/yezz123/authx/branch/main/graph/badge.svg"/>
 </a>
+</p>
+
+---
+
+<p align="center">
 <a href="https://pepy.tech/project/authx" target="_blank">
     <img src="https://static.pepy.tech/badge/authx" alt="Test">
 </a>
 <a href="https://pydantic.dev" target="_blank">
     <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/pydantic/pydantic/main/docs/badge/v2.json" alt="Pydantic Version 2">
 </a>
-</p>
+<a href="https://github.com/astral-sh/ruff" target="_blank">
+    <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" alt="Ruff">
+</a>
 </p>
 
 ---
