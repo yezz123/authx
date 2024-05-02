@@ -33,7 +33,7 @@ jobs:
       - name: setup UV
         uses: yezz123/setup-uv@v4
         with:
-          uv-version: "0.1.17"
+          uv-version: "0.1.39"
           uv-venv: ".venv"
 
       - name: Install Dependencies
