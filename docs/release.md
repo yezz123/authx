@@ -7,10 +7,7 @@ hide:
 
 ## Latest Changes
 
-* ⬆️ Update `uv` version in CI. PR [#582](https://github.com/yezz123/authx/pull/582) by [@pinchXOXO](https://github.com/pinchXOXO).
-* :recycle: refactor `datetime` function. PR [#580](https://github.com/yezz123/authx/pull/580) by [@yezz123](https://github.com/yezz123).
-* [pre-commit.ci] pre-commit autoupdate. PR [#579](https://github.com/yezz123/authx/pull/579) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* 🔧 remove linting step from CI. PR [#578](https://github.com/yezz123/authx/pull/578) by [@yezz123](https://github.com/yezz123).
+## 1.1.2
 
 ### Docs
 
@@ -19,7 +16,14 @@ hide:
 
 ### Internal
 
+* 🔧 remove linting step from CI. PR [#578](https://github.com/yezz123/authx/pull/578) by [@yezz123](https://github.com/yezz123).
+* :recycle: refactor `datetime` function. PR [#580](https://github.com/yezz123/authx/pull/580) by [@yezz123](https://github.com/yezz123).
 * 👷 Add extra job to run additional tests with Redis service. PR [#581](https://github.com/yezz123/authx/pull/581) by [@yezz123](https://github.com/yezz123).
+
+### Dependencies
+
+* ⬆️ Update `uv` version in CI. PR [#582](https://github.com/yezz123/authx/pull/582) by [@pinchXOXO](https://github.com/pinchXOXO).
+* [pre-commit.ci] pre-commit autoupdate. PR [#579](https://github.com/yezz123/authx/pull/579) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 
 ## 1.1.1
 
