@@ -7,6 +7,7 @@ hide:
 
 ## Latest Changes
 
+* ⬆️ Update `uv` version in CI. PR [#582](https://github.com/yezz123/authx/pull/582) by [@pinchXOXO](https://github.com/pinchXOXO).
 * :recycle: refactor `datetime` function. PR [#580](https://github.com/yezz123/authx/pull/580) by [@yezz123](https://github.com/yezz123).
 * [pre-commit.ci] pre-commit autoupdate. PR [#579](https://github.com/yezz123/authx/pull/579) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * 🔧 remove linting step from CI. PR [#578](https://github.com/yezz123/authx/pull/578) by [@yezz123](https://github.com/yezz123).
