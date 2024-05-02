@@ -7,7 +7,7 @@ click==8.1.7
     # via black
 distlib==0.3.8
     # via virtualenv
-filelock==3.13.4
+filelock==3.14.0
     # via virtualenv
 identify==2.5.36
     # via pre-commit
@@ -37,5 +37,5 @@ tokenize-rt==5.2.0
     # via pyupgrade
 typing-extensions==4.11.0
     # via mypy
-virtualenv==20.26.0
+virtualenv==20.26.1
     # via pre-commit
