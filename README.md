@@ -24,11 +24,6 @@
 <a href="https://codecov.io/gh/yezz123/authx">
     <img src="https://codecov.io/gh/yezz123/authx/branch/main/graph/badge.svg"/>
 </a>
-</p>
-
----
-
-<p align="center">
 <a href="https://pepy.tech/project/authx" target="_blank">
     <img src="https://static.pepy.tech/badge/authx" alt="Test">
 </a>
