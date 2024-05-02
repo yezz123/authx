@@ -14,6 +14,7 @@ hide:
 
 ### Docs
 
+* 📝 Update badges and links in README. PR [#583](https://github.com/yezz123/authx/pull/583) by [@yezz123](https://github.com/yezz123).
 * 📝  Refactor route decorators to use `@app.get` instead of `@app.route`. PR [#576](https://github.com/yezz123/authx/pull/576) by [@yezz123](https://github.com/yezz123).
 
 ### Internal
