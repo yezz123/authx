@@ -7,6 +7,8 @@ hide:
 
 ## Latest Changes
 
+* ⬆️ Bump jinja2 from 3.1.3 to 3.1.4 in /requirements. PR [#584](https://github.com/yezz123/authx/pull/584) by [@dependabot[bot]](https://github.com/apps/dependabot).
+
 ## 1.1.2
 
 ### Docs
