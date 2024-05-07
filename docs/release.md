@@ -7,6 +7,7 @@ hide:
 
 ## Latest Changes
 
+* 🔧 Update CI workflow, by adding release process. PR [#586](https://github.com/yezz123/authx/pull/586) by [@yezz123](https://github.com/yezz123).
 * ☔ [pre-commit.ci] pre-commit autoupdate. PR [#585](https://github.com/yezz123/authx/pull/585) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump jinja2 from 3.1.3 to 3.1.4 in /requirements. PR [#584](https://github.com/yezz123/authx/pull/584) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
