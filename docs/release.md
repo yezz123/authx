@@ -7,6 +7,28 @@ hide:
 
 ## Latest Changes
 
+* 🔧 Update CI workflow, by adding release process. PR [#586](https://github.com/yezz123/authx/pull/586) by [@yezz123](https://github.com/yezz123).
+* ☔ [pre-commit.ci] pre-commit autoupdate. PR [#585](https://github.com/yezz123/authx/pull/585) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Bump jinja2 from 3.1.3 to 3.1.4 in /requirements. PR [#584](https://github.com/yezz123/authx/pull/584) by [@dependabot[bot]](https://github.com/apps/dependabot).
+
+## 1.1.2
+
+### Docs
+
+* 📝 Update badges and links in README. PR [#583](https://github.com/yezz123/authx/pull/583) by [@yezz123](https://github.com/yezz123).
+* 📝  Refactor route decorators to use `@app.get` instead of `@app.route`. PR [#576](https://github.com/yezz123/authx/pull/576) by [@yezz123](https://github.com/yezz123).
+
+### Internal
+
+* 🔧 remove linting step from CI. PR [#578](https://github.com/yezz123/authx/pull/578) by [@yezz123](https://github.com/yezz123).
+* :recycle: refactor `datetime` function. PR [#580](https://github.com/yezz123/authx/pull/580) by [@yezz123](https://github.com/yezz123).
+* 👷 Add extra job to run additional tests with Redis service. PR [#581](https://github.com/yezz123/authx/pull/581) by [@yezz123](https://github.com/yezz123).
+
+### Dependencies
+
+* ⬆️ Update `uv` version in CI. PR [#582](https://github.com/yezz123/authx/pull/582) by [@pinchXOXO](https://github.com/pinchXOXO).
+* [pre-commit.ci] pre-commit autoupdate. PR [#579](https://github.com/yezz123/authx/pull/579) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+
 ## 1.1.1
 
 ### Internal

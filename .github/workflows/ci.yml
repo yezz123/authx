@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - main
+    tags:
+      - '**'
   pull_request: {}
 
 jobs:
-  lint:
+  MyPy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -24,14 +26,11 @@ jobs:
       - name: setup uv
         uses: yezz123/setup-uv@v4
         with:
-          uv-version: "0.1.17"
+          uv-version: "0.1.41"
           uv-venv: ".venv"
 
       - name: Install Dependencies
         run: uv pip install -r requirements/pyproject.txt && uv pip install -r requirements/linting.txt
-
-      - name: Run Pre-commit
-        run: bash scripts/format.sh
 
       - name: Typecheck with mypy
         run: bash scripts/mypy.sh
@@ -62,7 +61,7 @@ jobs:
       - name: setup UV
         uses: yezz123/setup-uv@v4
         with:
-          uv-version: "0.1.17"
+          uv-version: "0.1.41"
           uv-venv: ".venv"
 
       - name: Install Dependencies
@@ -82,13 +81,142 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
 
-  # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
+  test-extra:
+
+    name: test py${{ matrix.python-version }} on ${{ matrix.os }} with extra
+
+    runs-on: ${{ matrix.os }}-latest
+
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    strategy:
+
+      matrix:
+
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+        os: [ubuntu]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Clone authx extra
+        run: git clone https://github.com/yezz123/authx-extra.git --single-branch
+
+      - name: Update pip
+        run: python -m pip install --upgrade pip
+
+      - name: Test Suite - ${{ matrix.os }} - py${{ matrix.python-version }}
+        run: bash scripts/test_extra.sh
+        env:
+          ENV: test
+          REDIS_URL: "redis://0.0.0.0:6379"
+
+  # https://github.com/marketplace/actions/alls-green#why
+  # used for branch protection checks
   check:
     if: always()
-    needs: [lint, tests]
+
+    outputs:
+      result: ${{ steps.all-green.outputs.result }}
+
+    needs: [MyPy, tests, test-extra]
     runs-on: ubuntu-latest
     steps:
       - name: Decide whether the needed jobs succeeded or failed
         uses: re-actors/alls-green@release/v1
         with:
           jobs: ${{ toJSON(needs) }}
+
+
+  # This CI Part is Inspired by Pydantic CI for releasing to PyPI and sending a tweet
+  # For refrerence: https://github.com/pydantic/pydantic/blob/main/.github/workflows/ci.yml
+
+  release:
+    needs: [check]
+    if: needs.check.outputs.result == 'success' && startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    environment: release
+
+    permissions:
+      id-token: write
+
+    outputs:
+      authx-version: ${{ steps.check-tag.outputs.VERSION }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: install
+        run: pip install -U build
+
+      - name: check version
+        id: check-tag
+        uses: samuelcolvin/check-python-version@v4.1
+        with:
+          version_file_path: authx/__init__.py
+
+      - name: build
+        run: python -m build
+
+      - name: Upload package to PyPI
+        uses: pypa/gh-action-pypi-publish@v1.8.14
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+
+  send-tweet:
+    name: Send tweet
+    needs: [release]
+    if: needs.release.result == 'success'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install tweepy==4.14.0
+      - name: Send tweet
+        shell: python
+        run: |
+          import os
+          import tweepy
+
+          client = tweepy.Client(
+              access_token=os.getenv("TWITTER_ACCESS_TOKEN"),
+              access_token_secret=os.getenv("TWITTER_ACCESS_TOKEN_SECRET"),
+              consumer_key=os.getenv("TWITTER_CONSUMER_KEY"),
+              consumer_secret=os.getenv("TWITTER_CONSUMER_SECRET"),
+          )
+          version = os.getenv("VERSION").strip('"')
+          tweet = os.getenv("TWEET").format(version=version)
+          client.create_tweet(text=tweet)
+        env:
+          VERSION: ${{ needs.release.outputs.authx-version }}
+          TWEET: |
+            Authx version {version} is out! 🎉
+
+            https://github.com/yezz123/authx/releases/tag/{version}
+          TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
+          TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}

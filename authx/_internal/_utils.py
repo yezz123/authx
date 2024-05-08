@@ -137,7 +137,7 @@ def IST_time() -> datetime:
 
 
 def tz_now(tz: BaseTzInfo = utc) -> datetime:
-    dt = datetime.utcnow()
+    dt = datetime.now(tz=tz)
     return dt.replace(tzinfo=tz)
 
 
