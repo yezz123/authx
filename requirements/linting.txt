@@ -5,6 +5,7 @@ cfgv==3.4.0
     # via pre-commit
 click==8.1.7
     # via black
+codespell==2.2.6
 distlib==0.3.8
     # via virtualenv
 filelock==3.14.0
@@ -30,7 +31,7 @@ pre-commit==3.7.0
 pyupgrade==3.15.2
 pyyaml==6.0.1
     # via pre-commit
-ruff==0.4.2
+ruff==0.4.3
 setuptools==69.5.1
     # via nodeenv
 tokenize-rt==5.2.0
