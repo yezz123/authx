@@ -136,3 +136,7 @@ filterwarnings = [
     'error',
     'ignore::DeprecationWarning',
 ]
+
+[tool.codespell]
+skip = '.git,env*,__pycache__,.venv'
+ignore-words-list = 'ines,ser'
