@@ -118,7 +118,7 @@ jobs:
 
 
   # This CI Part is Inspired by Pydantic CI for releasing to PyPI and sending a tweet
-  # For refrerence: https://github.com/pydantic/pydantic/blob/main/.github/workflows/ci.yml
+  # For reference: https://github.com/pydantic/pydantic/blob/main/.github/workflows/ci.yml
 
   release:
     needs: [check]
