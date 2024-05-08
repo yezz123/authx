@@ -219,11 +219,11 @@ def create_subject_routes(app: FastAPI, security: AuthX) -> None:
             return {"resource": data}
         return {"message": "Subject not found", "data": data}
 
-    @app.get("/entitiy/subjects", dependencies=[security.CURRENT_SUBJECT])
+    @app.get("/entity/subjects", dependencies=[security.CURRENT_SUBJECT])
     async def _subjects_route():
         return {"subjects": list(USER_DB.values())}
 
-    @app.get("/entitiy/subject")
+    @app.get("/entity/subject")
     async def _subject_route(subject: dict = security.CURRENT_SUBJECT):
         return {"subject": subject}
 

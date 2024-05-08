@@ -3,3 +3,4 @@ mypy
 black
 pyupgrade
 ruff
+codespell

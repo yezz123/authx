@@ -88,7 +88,7 @@ $ pip install authx_extra
 
 ## Implementation in FastAPI applications
 
-Thats Work by adding a Middleware to your FastAPI application, work on collecting prometheus metrics for each request, and then to handle that we need a function `get_metrics` work on handling exposing the prometheus metrics into `/metrics` endpoint.
+That's Work by adding a Middleware to your FastAPI application, work on collecting prometheus metrics for each request, and then to handle that we need a function `get_metrics` work on handling exposing the prometheus metrics into `/metrics` endpoint.
 
 ```python
 from fastapi import FastAPI
