@@ -1,4 +1,3 @@
-
 ## Latest Changes
 
 * 🔧 Update CI workflow, by adding release process. PR [#586](https://github.com/yezz123/authx/pull/586) by [@yezz123](https://github.com/yezz123).
@@ -7,6 +6,7 @@
 
 ### Internal
 
+* 🔧 Update build targets & add `hatch-fancy-pypi-readme`. PR [#588](https://github.com/yezz123/authx/pull/588) by [@yezz123](https://github.com/yezz123).
 * 🔧 Add codespell hook for spell checking. PR [#587](https://github.com/yezz123/authx/pull/587) by [@yezz123](https://github.com/yezz123).
 
 ## 1.1.2
