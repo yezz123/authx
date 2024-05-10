@@ -1,9 +1,3 @@
----
-hide:
-  - navigation
----
-
-# Release Notes
 
 ## Latest Changes
 
@@ -196,6 +190,8 @@ hide:
 
 !!! warning
     This is a beta release. Please do not use in production.
+
+<!-- package description limit -->
 
 ### Major Changes 🚑️
 

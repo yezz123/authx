@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-fancy-pypi-readme>=22.5.0"]
 build-backend = "hatchling.build"
 
 [project]
@@ -64,11 +64,39 @@ allow-direct-references = true
 Homepage = "https://github.com/yezz123/authx"
 Documentation = "https://authx.yezz.me/"
 Funding = 'https://github.com/sponsors/yezz123'
-
+Source = 'https://github.com/yezz123/authx'
+Changelog = 'https://authx.yezz.me/release/'
 
 [tool.hatch.version]
 path = "authx/__init__.py"
 
+[tool.hatch.build.targets.sdist]
+# limit which files are included in the sdist (.tar.gz) asset,
+# to exclude unnecessary files and directories from the distribution
+include = [
+    '/README.md',
+    '/docs/release.md',
+    '/scripts',
+    '/authx',
+    '/tests',
+    '/requirements',
+]
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = 'text/markdown'
+# construct the PyPI readme from README.md and HISTORY.md
+fragments = [
+    {path = "README.md"},
+    {text = "\n## Changelog\n\n"},
+    {path = "docs/release.md", pattern = "(.+?)<!-- package description limit -->"},
+    {text = "\n... see [here](https://authx.yezz.me/release/#100b0) for earlier changes.\n"},
+]
+# convert GitHuB issue/PR numbers and handles to links
+substitutions = [
+    {pattern = '(\s+)#(\d+)', replacement = '\1[#\2](https://github.com/yezz123/authx/issues/\2)'},
+    {pattern = '(\s+)@([\w\-]+)', replacement = '\1[@\2](https://github.com/\2)'},
+    {pattern = '@@', replacement = '@'},
+]
 
 [tool.ruff.lint]
 mccabe = { max-complexity = 14 }
