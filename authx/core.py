@@ -97,7 +97,7 @@ async def _get_token_from_query(
 async def _get_token_from_json(
     request: Request, config: AuthXConfig, refresh: bool = False, **kwargs
 ) -> RequestToken:
-    if not (request.headers.get("content-type") == "application/json"):
+    if request.headers.get("content-type") != "application/json":
         raise MissingTokenError("Invalid content-type. Must be application/json")
 
     key = config.JWT_JSON_KEY
