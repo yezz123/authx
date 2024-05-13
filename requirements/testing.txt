@@ -11,7 +11,7 @@ charset-normalizer==3.3.2
     # via requests
 coverage==7.5.1
     # via pytest-cov
-freezegun==1.5.0
+freezegun==1.5.1
 h11==0.14.0
     # via httpcore
 httpcore==1.0.5
