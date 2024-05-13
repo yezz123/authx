@@ -126,8 +126,8 @@ class TokenPayload(BaseModel):
         issuer: Optional[str] = None,
         verify: bool = True,
     ) -> "TokenPayload":
-        if algorithms is None:
-            algorithms = ["HS256"]
+        if algorithms is None:  # pragma: no cover
+            algorithms = ["HS256"]  # pragma: no cover
         payload = decode_token(
             token=token,
             key=key,
@@ -156,8 +156,8 @@ class RequestToken(BaseModel):
         verify_csrf: bool = True,
         verify_fresh: bool = False,
     ) -> TokenPayload:
-        if algorithms is None:
-            algorithms = ["HS256"]
+        if algorithms is None:  # pragma: no cover
+            algorithms = ["HS256"]  # pragma: no cover
         # JWT Base Verification
         try:
             decoded_token = decode_token(

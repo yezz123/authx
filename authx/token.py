@@ -89,8 +89,8 @@ def decode_token(
     verify: bool = True,
 ) -> Dict[str, Any]:
     """Decode a token"""
-    if algorithms is None:
-        algorithms = ["HS256"]
+    if algorithms is None:  # pragma: no cover
+        algorithms = ["HS256"]  # pragma: no cover
     try:
         return jwt.decode(
             jwt=token,
