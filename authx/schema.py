@@ -121,11 +121,13 @@ class TokenPayload(BaseModel):
         cls,
         token: str,
         key: str,
-        algorithms: Sequence[AlgorithmType] = ["HS256"],
+        algorithms: Sequence[AlgorithmType] = None,
         audience: Optional[StringOrSequence] = None,
         issuer: Optional[str] = None,
         verify: bool = True,
     ) -> "TokenPayload":
+        if algorithms is None:  # pragma: no cover
+            algorithms = ["HS256"]  # pragma: no cover
         payload = decode_token(
             token=token,
             key=key,
@@ -146,7 +148,7 @@ class RequestToken(BaseModel):
     def verify(
         self,
         key: str,
-        algorithms: Sequence[AlgorithmType] = ["HS256"],
+        algorithms: Sequence[AlgorithmType] = None,
         audience: Optional[StringOrSequence] = None,
         issuer: Optional[str] = None,
         verify_jwt: bool = True,
@@ -154,6 +156,8 @@ class RequestToken(BaseModel):
         verify_csrf: bool = True,
         verify_fresh: bool = False,
     ) -> TokenPayload:
+        if algorithms is None:  # pragma: no cover
+            algorithms = ["HS256"]  # pragma: no cover
         # JWT Base Verification
         try:
             decoded_token = decode_token(

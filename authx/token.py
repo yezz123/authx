@@ -83,12 +83,14 @@ def create_token(
 def decode_token(
     token: str,
     key: str,
-    algorithms: Sequence[AlgorithmType] = ["HS256"],
+    algorithms: Sequence[AlgorithmType] = None,
     audience: Optional[StringOrSequence] = None,
     issuer: Optional[str] = None,
     verify: bool = True,
 ) -> Dict[str, Any]:
     """Decode a token"""
+    if algorithms is None:  # pragma: no cover
+        algorithms = ["HS256"]  # pragma: no cover
     try:
         return jwt.decode(
             jwt=token,
