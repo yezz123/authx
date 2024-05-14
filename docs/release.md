@@ -8,6 +8,10 @@
 
 * ♻️ Replaces use of default mutable arguments. PR [#589](https://github.com/yezz123/authx/pull/589) by [@yezz123](https://github.com/yezz123).
 
+### Upgrades
+
+* ☔ [pre-commit.ci] pre-commit autoupdate. PR [#590](https://github.com/yezz123/authx/pull/590) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+
 ### Internal
 
 * 🔧 Update build targets & add `hatch-fancy-pypi-readme`. PR [#588](https://github.com/yezz123/authx/pull/588) by [@yezz123](https://github.com/yezz123).
