@@ -505,7 +505,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
     # in your route that would be outside of the route logic
 
     # Such methods includes setting and unsetting cookies without the need
-    # to generate a response object beforhand.
+    # to generate a response object beforehand.
 
     @property
     def DEPENDENCY(self) -> AuthXDependency:
@@ -560,7 +560,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             in your route that would be outside of the route logic
 
             Such methods includes setting and unsetting cookies without the need
-            to generate a response object beforhand
+            to generate a response object beforehand
 
         Returns:
             AuthXDeps: The contextful AuthX object
