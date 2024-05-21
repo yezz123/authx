@@ -212,7 +212,7 @@ redis==5.0.4
     # via authx-extra
 regex==2024.5.10
     # via mkdocs-material
-requests==2.31.0
+requests==2.32.0
     # via
     #   mkdocs-material
     #   mkdocs-mermaid2-plugin
