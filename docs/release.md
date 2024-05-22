@@ -1,9 +1,6 @@
 ## Latest Changes
 
-* Bump requests from 2.31.0 to 2.32.2 in /requirements. PR [#592](https://github.com/yezz123/authx/pull/592) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* 🔧 Update CI workflow, by adding release process. PR [#586](https://github.com/yezz123/authx/pull/586) by [@yezz123](https://github.com/yezz123).
-* ☔ [pre-commit.ci] pre-commit autoupdate. PR [#585](https://github.com/yezz123/authx/pull/585) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump jinja2 from 3.1.3 to 3.1.4 in /requirements. PR [#584](https://github.com/yezz123/authx/pull/584) by [@dependabot[bot]](https://github.com/apps/dependabot).
+## 1.1.3
 
 ### Features
 
@@ -11,10 +8,14 @@
 
 ### Upgrades
 
+* Bump requests from 2.31.0 to 2.32.2 in /requirements. PR [#592](https://github.com/yezz123/authx/pull/592) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ☔ [pre-commit.ci] pre-commit autoupdate. PR [#590](https://github.com/yezz123/authx/pull/590) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ☔ [pre-commit.ci] pre-commit autoupdate. PR [#585](https://github.com/yezz123/authx/pull/585) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Bump jinja2 from 3.1.3 to 3.1.4 in /requirements. PR [#584](https://github.com/yezz123/authx/pull/584) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
 ### Internal
 
+* 🔧 Update CI workflow, by adding release process. PR [#586](https://github.com/yezz123/authx/pull/586) by [@yezz123](https://github.com/yezz123).
 * 🔧 Update build targets & add `hatch-fancy-pypi-readme`. PR [#588](https://github.com/yezz123/authx/pull/588) by [@yezz123](https://github.com/yezz123).
 * 🔧 Add codespell hook for spell checking. PR [#587](https://github.com/yezz123/authx/pull/587) by [@yezz123](https://github.com/yezz123).
 
