@@ -28,14 +28,21 @@ jobs:
         run: |
           echo "VERSION=$(python -c '
           import re
-          with open("authx/__init__.py", "r") as file:
-              content = file.read()
-              match = re.search(r'\'__version__\s*=\s*"(?P<version>[\d\.]+)"\'', content)
-              if match:
-                  print(match.group("version"))
-              else:
-                  print("Version not found")')"
-          echo "::set-output name=version::$VERSION"
+          from typing import Optional
+
+          def get_version(file_path: str = 'authx/__init__.py') -> Optional[str]:
+              version_pattern = r'__version__\s*=\s*"(?P<version>[\d\.]+)"'
+              try:
+                  with open(file_path, 'r') as file:
+                      content = file.read()
+                      if match := re.search(version_pattern, content):
+                          return match['version']
+              except FileNotFoundError:
+                  print(f"File {file_path} not found.")
+              return None
+
+          print(get_version())
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
   send-tweet:
     name: Send Tweet
