@@ -25,8 +25,8 @@ jobs:
 
       - name: Get version from __init__.py
         id: get_version
+        shell: python
         run: |
-          echo "VERSION=$(python -c '
           import re
           from typing import Optional
 
@@ -42,7 +42,10 @@ jobs:
               return None
 
           print(get_version())
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Save version to output
+        run: echo "authx-version=${{ steps.get_version.outputs.version }}" >> $GITHUB_ENV
+
 
   send-tweet:
     name: Send Tweet
