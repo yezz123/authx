@@ -1,15 +1,43 @@
-name: Versioning and Release
+name: Publish and Tweet
 
 on:
-  push:
-    branches:
-      - main
-  pull_request: {}
+  release:
+    types:
+      - created
 
 jobs:
 
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: install
+        run: pip install -U build
+
+      - name: check version
+        id: check-tag
+        uses: samuelcolvin/check-python-version@v4.1
+        with:
+          version_file_path: authx/__init__.py
+
+      - name: build
+        run: python -m build
+
+      - name: Upload package to PyPI
+        uses: pypa/gh-action-pypi-publish@v1.8.14
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+
   send-tweet:
     name: Send Tweet
+    needs: [release]
     runs-on: ubuntu-latest
 
     steps:
@@ -31,8 +59,7 @@ jobs:
           import re
           from typing import Optional
 
-          # import tweepy
-
+          import tweepy
 
           def get_version(file_path: str = 'authx/__init__.py') -> Optional[str]:
               version_pattern = r'__version__\s*=\s*"(?P<version>[\d\.]+)"'
@@ -45,18 +72,17 @@ jobs:
                   print(f"File {file_path} not found.")
               return None
 
-
-
-          # client = tweepy.Client(
-          #     access_token=os.getenv("TWITTER_ACCESS_TOKEN"),
-          #     access_token_secret=os.getenv("TWITTER_ACCESS_TOKEN_SECRET"),
-          #     consumer_key=os.getenv("TWITTER_CONSUMER_KEY"),
-          #     consumer_secret=os.getenv("TWITTER_CONSUMER_SECRET"),
-          # )
+          client = tweepy.Client(
+              access_token=os.getenv("TWITTER_ACCESS_TOKEN"),
+              access_token_secret=os.getenv("TWITTER_ACCESS_TOKEN_SECRET"),
+              consumer_key=os.getenv("TWITTER_CONSUMER_KEY"),
+              consumer_secret=os.getenv("TWITTER_CONSUMER_SECRET"),
+          )
           version = get_version()
           tweet = os.getenv("TWEET").format(version=version)
           print(tweet)
-          # client.create_tweet(text=tweet)
+          client.create_tweet(text=tweet)
+
         env:
           TWEET: |
             Authx version {version} is out! 🎉
