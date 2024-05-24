@@ -1,0 +1,71 @@
+name: Versioning and Release
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+jobs:
+  retrieve-version:
+    name: Retrieve Version
+    runs-on: ubuntu-latest
+
+    outputs:
+      authx-version: ${{ steps.get_version.outputs.version }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Get version from __init__.py
+        id: get_version
+        run: |
+          echo "VERSION=$(python -c '
+          import re
+          with open("authx/__init__.py", "r") as file:
+              content = file.read()
+              match = re.search(r'\'__version__\s*=\s*"(?P<version>[\d\.]+)"\'', content)
+              if match:
+                  print(match.group("version"))
+              else:
+                  print("Version not found")')"
+          echo "::set-output name=version::$VERSION"
+
+  send-tweet:
+    name: Send Tweet
+    needs: retrieve-version
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # - name: Install dependencies
+      #   run: pip install tweepy==4.14.0
+
+      - name: Send tweet
+        shell: python
+        run: |
+          # TODO: Test this code
+          import os
+
+          version = os.getenv("VERSION").strip('"')
+          print(f"Authx version {version} is out! 🎉")
+        env:
+          VERSION: ${{ needs.retrieve-version.outputs.authx-version }}
+          # TWEET: |
+          #   Authx version {version} is out! 🎉
+
+          #   https://github.com/yezz123/authx/releases/tag/{version}
+          # TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
+          # TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+          # TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          # TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
