@@ -80,7 +80,6 @@ jobs:
           )
           version = get_version()
           tweet = os.getenv("TWEET").format(version=version)
-          print(tweet)
           client.create_tweet(text=tweet)
 
         env:
