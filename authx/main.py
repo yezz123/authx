@@ -445,7 +445,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         Args:
             token (str): Access token
             response (Response): response to set cookie on
-            max_age (Optional[int], optional): Max Age cookie paramater. Defaults to None.
+            max_age (Optional[int], optional): Max Age cookie parameter. Defaults to None.
         """
         self._set_cookies(
             token=token, type="access", response=response, max_age=max_age
@@ -462,7 +462,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         Args:
             token (str): Refresh token
             response (Response): response to set cookie on
-            max_age (Optional[int], optional): Max Age cookie paramater. Defaults to None.
+            max_age (Optional[int], optional): Max Age cookie parameter. Defaults to None.
         """
         self._set_cookies(
             token=token, type="refresh", response=response, max_age=max_age
@@ -501,11 +501,11 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
 
     # Notes:
     # The AuthXDeps is a utility class, to enable quick token operations
-    # within the route logic. It provides methods to avoid addtional code
+    # within the route logic. It provides methods to avoid additional code
     # in your route that would be outside of the route logic
 
     # Such methods includes setting and unsetting cookies without the need
-    # to generate a response object beforhand.
+    # to generate a response object beforehand.
 
     @property
     def DEPENDENCY(self) -> AuthXDependency:
@@ -556,11 +556,11 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
 
         Note:
             The AuthXDeps is a utility class, to enable quick token operations
-            within the route logic. It provides methods to avoid addtional code
+            within the route logic. It provides methods to avoid additional code
             in your route that would be outside of the route logic
 
             Such methods includes setting and unsetting cookies without the need
-            to generate a response object beforhand
+            to generate a response object beforehand
 
         Returns:
             AuthXDeps: The contextful AuthX object

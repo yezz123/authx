@@ -1,15 +1,33 @@
----
-hide:
-  - navigation
----
-
-# Release Notes
-
 ## Latest Changes
 
-* 🔧 Update CI workflow, by adding release process. PR [#586](https://github.com/yezz123/authx/pull/586) by [@yezz123](https://github.com/yezz123).
+* ⬆️ Update uv version to `0.2.3`. PR [#595](https://github.com/yezz123/authx/pull/595) by [@pinchXOXO](https://github.com/pinchXOXO).
+
+### Refactors
+
+* 🐛  remove `print()` in the release file. PR [#594](https://github.com/yezz123/authx/pull/594) by [@pinchXOXO](https://github.com/pinchXOXO).
+
+### Internal
+
+* 🔧 Separate CI of testing from Release one . PR [#593](https://github.com/yezz123/authx/pull/593) by [@yezz123](https://github.com/yezz123).
+
+## 1.1.3
+
+### Features
+
+* ♻️ Replaces use of default mutable arguments. PR [#589](https://github.com/yezz123/authx/pull/589) by [@yezz123](https://github.com/yezz123).
+
+### Upgrades
+
+* Bump requests from 2.31.0 to 2.32.2 in /requirements. PR [#592](https://github.com/yezz123/authx/pull/592) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ☔ [pre-commit.ci] pre-commit autoupdate. PR [#590](https://github.com/yezz123/authx/pull/590) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ☔ [pre-commit.ci] pre-commit autoupdate. PR [#585](https://github.com/yezz123/authx/pull/585) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump jinja2 from 3.1.3 to 3.1.4 in /requirements. PR [#584](https://github.com/yezz123/authx/pull/584) by [@dependabot[bot]](https://github.com/apps/dependabot).
+
+### Internal
+
+* 🔧 Update CI workflow, by adding release process. PR [#586](https://github.com/yezz123/authx/pull/586) by [@yezz123](https://github.com/yezz123).
+* 🔧 Update build targets & add `hatch-fancy-pypi-readme`. PR [#588](https://github.com/yezz123/authx/pull/588) by [@yezz123](https://github.com/yezz123).
+* 🔧 Add codespell hook for spell checking. PR [#587](https://github.com/yezz123/authx/pull/587) by [@yezz123](https://github.com/yezz123).
 
 ## 1.1.2
 
@@ -192,6 +210,8 @@ hide:
 
 !!! warning
     This is a beta release. Please do not use in production.
+
+<!-- package description limit -->
 
 ### Major Changes 🚑️
 
