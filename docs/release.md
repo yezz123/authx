@@ -6,6 +6,10 @@
 
 * 🐛  remove `print()` in the release file. PR [#594](https://github.com/yezz123/authx/pull/594) by [@pinchXOXO](https://github.com/pinchXOXO).
 
+### Upgrades
+
+* ⬆ Bump the python-packages group with 4 updates. PR [#596](https://github.com/yezz123/authx/pull/596) by [@dependabot[bot]](https://github.com/apps/dependabot).
+
 ### Internal
 
 * 🔧 Separate CI of testing from Release one . PR [#593](https://github.com/yezz123/authx/pull/593) by [@yezz123](https://github.com/yezz123).
