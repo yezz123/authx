@@ -1,5 +1,6 @@
 ## Latest Changes
 
+* ☔  [pre-commit.ci] pre-commit autoupdate. PR [#597](https://github.com/yezz123/authx/pull/597) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Update uv version to `0.2.3`. PR [#595](https://github.com/yezz123/authx/pull/595) by [@pinchXOXO](https://github.com/pinchXOXO).
 
 ### Refactors
