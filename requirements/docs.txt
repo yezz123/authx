@@ -2,16 +2,15 @@
 #    uv pip compile requirements/docs.in -o requirements/docs.txt
 annotated-types==0.7.0
     # via pydantic
-anyio==4.3.0
+anyio==4.4.0
     # via
     #   httpx
     #   starlette
-    #   watchfiles
 async-timeout==4.0.3
     # via redis
-authx==1.1.2
+authx==1.1.3
     # via authx-extra
-authx-extra @ git+https://github.com/yezz123/authx-extra.git@06ec79b130abc318a1409ad60e42e304016ea4f6
+authx-extra @ git+https://github.com/yezz123/authx-extra.git@5dbf2f42a0dad8645888fed584563db22f90ad81
 babel==2.15.0
     # via mkdocs-material
 beautifulsoup4==4.12.3
@@ -19,7 +18,7 @@ beautifulsoup4==4.12.3
 cairocffi==1.7.0
     # via cairosvg
 cairosvg==2.7.1
-certifi==2024.2.2
+certifi==2024.6.2
     # via
     #   httpcore
     #   httpx
@@ -35,12 +34,11 @@ click==8.1.7
     #   mkdocs
     #   mkdocstrings
     #   typer
-    #   uvicorn
 colorama==0.4.6
     # via
     #   griffe
     #   mkdocs-material
-cryptography==42.0.7
+cryptography==42.0.8
     # via pyjwt
 cssselect2==0.7.0
     # via cairosvg
@@ -48,44 +46,31 @@ cyclic==1.0.0
     # via mdx-include
 defusedxml==0.7.1
     # via cairosvg
-dnspython==2.6.1
-    # via email-validator
 ecdsa==0.19.0
     # via python-jose
 editorconfig==0.12.4
     # via jsbeautifier
-email-validator==2.1.1
-    # via fastapi
-fastapi==0.111.0
+fastapi-slim==0.111.0
     # via authx
-fastapi-cli==0.0.4
-    # via fastapi
 ghp-import==2.1.0
     # via mkdocs
-griffe==0.45.1
+griffe==0.45.2
     # via
     #   griffe-typingdoc
     #   mkdocstrings-python
 griffe-typingdoc==0.2.5
 h11==0.14.0
-    # via
-    #   httpcore
-    #   uvicorn
+    # via httpcore
 httpcore==1.0.5
     # via httpx
-httptools==0.6.1
-    # via uvicorn
 httpx==0.27.0
-    # via fastapi
 idna==3.7
     # via
     #   anyio
-    #   email-validator
     #   httpx
     #   requests
 jinja2==3.1.4
     # via
-    #   fastapi
     #   mkdocs
     #   mkdocs-material
     #   mkdocstrings
@@ -128,7 +113,7 @@ mkdocs-autorefs==1.0.1
 mkdocs-get-deps==0.2.0
     # via mkdocs
 mkdocs-markdownextradata-plugin==0.2.5
-mkdocs-material==9.5.24
+mkdocs-material==9.5.26
 mkdocs-material-extensions==1.3.1
     # via mkdocs-material
 mkdocs-mermaid2-plugin==1.1.1
@@ -136,8 +121,6 @@ mkdocstrings==0.25.1
     # via mkdocstrings-python
 mkdocstrings-python==1.10.3
     # via mkdocstrings
-orjson==3.10.3
-    # via fastapi
 packaging==24.0
     # via mkdocs
 paginate==0.5.6
@@ -158,14 +141,14 @@ pyasn1==0.6.0
     #   rsa
 pycparser==2.22
     # via cffi
-pydantic==2.7.1
+pydantic==2.7.3
     # via
     #   authx
-    #   fastapi
+    #   fastapi-slim
     #   pydantic-settings
-pydantic-core==2.18.2
+pydantic-core==2.18.4
     # via pydantic
-pydantic-settings==2.2.1
+pydantic-settings==2.3.1
     # via authx
 pygments==2.18.0
     # via
@@ -185,13 +168,9 @@ python-dateutil==2.9.0.post0
     #   authx
     #   ghp-import
 python-dotenv==1.0.1
-    # via
-    #   pydantic-settings
-    #   uvicorn
+    # via pydantic-settings
 python-jose==3.3.0
     # via authx
-python-multipart==0.0.9
-    # via fastapi
 pytz==2024.1
     # via authx
 pyyaml==6.0.1
@@ -201,7 +180,6 @@ pyyaml==6.0.1
     #   mkdocs-markdownextradata-plugin
     #   pymdown-extensions
     #   pyyaml-env-tag
-    #   uvicorn
 pyyaml-env-tag==0.1
     # via mkdocs
 rcslice==1.1.0
@@ -210,7 +188,7 @@ redis==5.0.4
     # via authx-extra
 regex==2024.5.15
     # via mkdocs-material
-requests==2.32.2
+requests==2.32.3
     # via
     #   mkdocs-material
     #   mkdocs-mermaid2-plugin
@@ -234,38 +212,26 @@ sniffio==1.3.1
 soupsieve==2.5
     # via beautifulsoup4
 starlette==0.37.2
-    # via fastapi
+    # via fastapi-slim
 tinycss2==1.3.0
     # via
     #   cairosvg
     #   cssselect2
 typer==0.12.3
-    # via
-    #   fastapi-cli
-    #   typer-cli
+    # via typer-cli
 typer-cli==0.12.3
-typing-extensions==4.11.0
+typing-extensions==4.12.1
     # via
-    #   fastapi
+    #   fastapi-slim
     #   griffe-typingdoc
     #   pydantic
     #   pydantic-core
     #   typer
-ujson==5.10.0
-    # via fastapi
 urllib3==2.2.1
     # via requests
-uvicorn==0.29.0
-    # via fastapi
-uvloop==0.19.0
-    # via uvicorn
-watchdog==4.0.0
+watchdog==4.0.1
     # via mkdocs
-watchfiles==0.21.0
-    # via uvicorn
 webencodings==0.5.1
     # via
     #   cssselect2
     #   tinycss2
-websockets==12.0
-    # via uvicorn
