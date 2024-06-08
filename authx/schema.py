@@ -1,8 +1,14 @@
 import datetime
+import sys
 from hmac import compare_digest
-from typing import Any, Dict, List, Optional, Sequence, Set, Union
+from typing import Any, Dict, List, Optional, Sequence, Union
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
+
+if sys.version_info >= (3, 8):
+    from typing import Set
+else:
+    from typing_extensions import Set
 
 from authx._internal._utils import get_now, get_now_ts, get_uuid
 from authx.exceptions import (
@@ -42,7 +48,7 @@ class TokenPayload(BaseModel):
 
     @property
     def _additional_fields(self) -> Set[str]:
-        return Set(self.__dict__) - Set(self.model_fields)
+        return set(self.__dict__) - set(self.model_fields)
 
     @property
     def extra_dict(self) -> Dict[str, Any]:
@@ -120,7 +126,7 @@ class TokenPayload(BaseModel):
         cls,
         token: str,
         key: str,
-        algorithms: Sequence[AlgorithmType] = None,
+        algorithms: Optional[Sequence[AlgorithmType]] = None,
         audience: Optional[StringOrSequence] = None,
         issuer: Optional[str] = None,
         verify: bool = True,
@@ -147,7 +153,7 @@ class RequestToken(BaseModel):
     def verify(
         self,
         key: str,
-        algorithms: Sequence[AlgorithmType] = None,
+        algorithms: Optional[Sequence[AlgorithmType]] = None,
         audience: Optional[StringOrSequence] = None,
         issuer: Optional[str] = None,
         verify_jwt: bool = True,
