@@ -1,8 +1,8 @@
 import datetime
 from hmac import compare_digest
-from typing import Any, Dict, List, Optional, Sequence, Union
+from typing import Any, Dict, List, Optional, Sequence, Set, Union
 
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, validator
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
 
 from authx._internal._utils import get_now, get_now_ts, get_uuid
 from authx.exceptions import (
@@ -41,8 +41,8 @@ class TokenPayload(BaseModel):
     fresh: bool = False
 
     @property
-    def _additional_fields(self) -> set[str]:
-        return set(self.__dict__) - set(self.model_fields)
+    def _additional_fields(self) -> Set[str]:
+        return Set(self.__dict__) - Set(self.model_fields)
 
     @property
     def extra_dict(self) -> Dict[str, Any]:
@@ -80,7 +80,7 @@ class TokenPayload(BaseModel):
     def time_since_issued(self) -> datetime.timedelta:
         return get_now() - self.issued_at
 
-    @validator("exp", "nbf", always=True)
+    @field_validator("exp", "nbf", check_fields=True)
     def _set_default_ts(cls, value: Union[float, int]) -> Union[float, int]:
         if isinstance(value, datetime.datetime):
             return value.timestamp()
