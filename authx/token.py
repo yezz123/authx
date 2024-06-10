@@ -39,10 +39,14 @@ def create_token(
             k: v for k, v in additional_data.items() if k not in RESERVED_CLAIMS
         }
 
-    jwt_claims = {"sub": uid, "jti": jti or get_uuid(), "type": type}
+    jwt_claims: Dict[str, Union[str, bool]] = {
+        "sub": uid,
+        "jti": jti or get_uuid(),
+        "type": type,
+    }
 
     if type == "access":
-        jwt_claims["fresh"] = str(fresh)
+        jwt_claims["fresh"] = fresh
 
     if csrf and not isinstance(csrf, str):
         jwt_claims["csrf"] = get_uuid()
