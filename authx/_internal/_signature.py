@@ -18,7 +18,7 @@ class SignatureSerializer:
         self.expired_in = expired_in
 
     def encode(self, dict_obj: Dict[str, Any]) -> str:
-        return self.ser.dumps(dict_obj)  # type: ignore[return-value]
+        return self.ser.dumps(dict_obj)
 
     def decode(self, token: str) -> Tuple[Optional[Dict[str, Any]], Optional[str]]:
         if token is None:
