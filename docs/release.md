@@ -6,6 +6,7 @@
 
 ### Upgrades
 
+* ⬆ Bump `ruff-pre-commit` from v0.4.7 to v0.4.8. PR [#601](https://github.com/yezz123/authx/pull/601) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump the python-packages group with 2 updates. PR [#600](https://github.com/yezz123/authx/pull/600) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump `ruff-pre-commit` from v0.4.5 to v0.4.7. PR [#598](https://github.com/yezz123/authx/pull/598) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ☔  [pre-commit.ci] pre-commit autoupdate. PR [#597](https://github.com/yezz123/authx/pull/597) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
