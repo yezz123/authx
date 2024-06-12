@@ -95,7 +95,7 @@ class TokenPayload(BaseModel):
         return value
 
     def has_scopes(self, *scopes: Sequence[str]) -> bool:
-        return all(s in self.scopes for s in scopes)  # type: ignore
+        return all(s in self.scopes for s in scopes)
 
     def encode(
         self,

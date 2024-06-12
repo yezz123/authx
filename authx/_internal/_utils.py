@@ -43,7 +43,7 @@ def time_diff(dt1: datetime, dt2: datetime) -> relativedelta:
     return relativedelta(dt1, dt2)
 
 
-def to_UTC(event_timestamp: Union[datetime, str], tz: pytz.timezone = utc) -> datetime:  # type: ignore
+def to_UTC(event_timestamp: Union[datetime, str], tz: pytz.timezone = utc) -> datetime:
     if isinstance(event_timestamp, datetime):  # pragma: no cover
         dt = event_timestamp
     else:
