@@ -1,6 +1,8 @@
-try:
+import sys
+
+if sys.version_info >= (3, 10):
     from typing import ParamSpecKwargs
-except Exception:
+else:
     from typing_extensions import ParamSpecKwargs
 
 from typing import Generic, Optional
