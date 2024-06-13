@@ -159,7 +159,6 @@ disable_error_code = [
     "call-arg",
     "return-value",
     "call-overload",
-    "type-arg"
 ]
 
 [[tool.mypy.overrides]]
