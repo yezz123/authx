@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Features
+
+* 🔧 Update Python versions for `mypy` workflow. PR [#603](https://github.com/yezz123/authx/pull/603) by [@yezz123](https://github.com/yezz123).
+
 ### Refactors
 
 * 🐛  remove `print()` in the release file. PR [#594](https://github.com/yezz123/authx/pull/594) by [@pinchXOXO](https://github.com/pinchXOXO).
