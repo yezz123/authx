@@ -79,6 +79,7 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - def_list
+  - tables
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.highlight:
