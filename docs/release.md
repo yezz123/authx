@@ -19,6 +19,10 @@
 * ⬆ Bump the python-packages group with 4 updates. PR [#596](https://github.com/yezz123/authx/pull/596) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Update uv version to `0.2.3`. PR [#595](https://github.com/yezz123/authx/pull/595) by [@pinchXOXO](https://github.com/pinchXOXO).
 
+### Docs
+
+* :memo: Update meta information. PR [#614](https://github.com/yezz123/authx/pull/614) by [@yezz123](https://github.com/yezz123).
+
 ### Internal
 
 * 🔨 Integrate `mypy` and enhance `typing` in code. PR [#532](https://github.com/yezz123/authx/pull/532) by [@yezz123](https://github.com/yezz123).
