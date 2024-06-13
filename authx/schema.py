@@ -95,7 +95,11 @@ class TokenPayload(BaseModel):
         return value
 
     def has_scopes(self, *scopes: Sequence[str]) -> bool:
-        return all(s in self.scopes for s in scopes)
+        # if `self.scopes`` is None, the function will immediately return False.
+        # If `self.scopes`` is not None, it will check if all elements in scopes are in `self.scopes``.
+        return (
+            all(s in self.scopes for s in scopes) if self.scopes is not None else False
+        )
 
     def encode(
         self,
