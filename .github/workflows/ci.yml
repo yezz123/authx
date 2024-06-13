@@ -28,7 +28,7 @@ jobs:
           uv-venv: ".venv"
 
       - name: Install Dependencies
-        run: uv pip install -r requirements/pyproject.txt && uv pip install -r requirements/linting.txt
+        run: uv pip install -r requirements/all.txt
 
       - name: Typecheck with mypy
         run: bash scripts/mypy.sh
