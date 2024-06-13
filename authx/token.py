@@ -39,7 +39,7 @@ def create_token(
             k: v for k, v in additional_data.items() if k not in RESERVED_CLAIMS
         }
 
-    jwt_claims: Dict[str, Union[str, bool]] = {
+    jwt_claims: Dict[str, Union[str, bool, float, int, Sequence[str]]] = {
         "sub": uid,
         "jti": jti or get_uuid(),
         "type": type,
