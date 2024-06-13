@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
       fail-fast: false
 
     steps:
@@ -28,7 +28,7 @@ jobs:
           uv-venv: ".venv"
 
       - name: Install Dependencies
-        run: uv pip install -r requirements/all.txt
+        run: uv pip install -r requirements/pyproject.txt && uv pip install -r requirements/linting.txt
 
       - name: Typecheck with mypy
         run: bash scripts/mypy.sh
