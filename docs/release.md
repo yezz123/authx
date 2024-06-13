@@ -6,6 +6,7 @@
 
 ### Refactors
 
+* 🔧 Remove `call-overload` from disabled error codes. PR [#613](https://github.com/yezz123/authx/pull/613) by [@yezz123](https://github.com/yezz123).
 * 🔧 Remove `type-arg` from disabled error codes. PR [#612](https://github.com/yezz123/authx/pull/612) by [@yezz123](https://github.com/yezz123).
 * 🐛  remove `print()` in the release file. PR [#594](https://github.com/yezz123/authx/pull/594) by [@pinchXOXO](https://github.com/pinchXOXO).
 
