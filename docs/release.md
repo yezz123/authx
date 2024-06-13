@@ -15,6 +15,7 @@
 
 ### Internal
 
+* 🔨 Integrate `mypy` and enhance `typing` in code. PR [#532](https://github.com/yezz123/authx/pull/532) by [@yezz123](https://github.com/yezz123).
 * 🔧 Separate CI of testing from Release one . PR [#593](https://github.com/yezz123/authx/pull/593) by [@yezz123](https://github.com/yezz123).
 
 ## 1.1.3
