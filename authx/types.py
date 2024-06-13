@@ -1,10 +1,11 @@
 import datetime
+import sys
 from typing import Callable, Literal, Optional, Sequence, TypeVar, Union
 
-try:
+if sys.version_info >= (3, 10):
     from typing import ParamSpecKwargs
-except Exception:  # pragma: no cover
-    from typing_extensions import ParamSpecKwargs  # pragma: no cover
+else:
+    from typing_extensions import ParamSpecKwargs
 
 T = TypeVar("T")
 Numeric = Union[float, int]
