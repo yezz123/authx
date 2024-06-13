@@ -148,7 +148,7 @@ pydantic==2.7.4
     #   pydantic-settings
 pydantic-core==2.18.4
     # via pydantic
-pydantic-settings==2.3.2
+pydantic-settings==2.3.3
     # via authx
 pygments==2.18.0
     # via
