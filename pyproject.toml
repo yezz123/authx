@@ -158,7 +158,6 @@ disable_error_code = [
     "dict-item",
     "call-arg",
     "return-value",
-    "call-overload",
 ]
 
 [[tool.mypy.overrides]]

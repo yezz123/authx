@@ -253,23 +253,27 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         refresh: bool = False,
         optional: bool = False,
     ) -> Optional[RequestToken]:
-        if refresh and locations is None:
+        # Simplify the setting of locations based on refresh status
+        if locations is None:
+            default_locations = set(self.config.JWT_TOKEN_LOCATION)
             locations = list(
-                set(self.config.JWT_TOKEN_LOCATION).intersection(["cookies", "json"])
+                default_locations.intersection(["cookies", "json"])
+                if refresh
+                else default_locations
             )
-        elif (not refresh) and locations is None:
-            locations = list(self.config.JWT_TOKEN_LOCATION)
         try:
+            # Directly call the internal function to get the token
             return await _get_token_from_request(
                 request=request,
                 refresh=refresh,
                 locations=locations,
                 config=self.config,
             )
-        except MissingTokenError as e:
+        except MissingTokenError:
+            # Return None if optional, else propagate the exception
             if optional:
                 return None
-            raise e
+            raise
 
     async def get_access_token_from_request(
         self, request: Request, locations: Optional[TokenLocations] = None
@@ -660,8 +664,14 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         """
 
         async def _token_getter(request: Request):
+            # Specify locations as None since it's not provided in this context
+            # Convert `optional` to a literal True or False based on its value
+            optional_literal: Literal[True, False] = optional
             return await self._get_token_from_request(
-                request, optional=optional, refresh=(type == "refresh")
+                request,
+                None,  # Explicitly passing None for locations
+                refresh=(type == "refresh"),
+                optional=optional_literal,
             )
 
         return _token_getter
@@ -721,11 +731,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         """
         response = await call_next(request)
 
-        request_condition = self.config.has_location(
+        if self.config.has_location(
             "cookies"
-        ) and self._implicit_refresh_enabled_for_request(request)
-
-        if request_condition:
+        ) and self._implicit_refresh_enabled_for_request(request):
             with contextlib.suppress(AuthXException):
                 # Refresh mechanism
                 token = await self._get_token_from_request(
