@@ -1,7 +1,7 @@
 import sys
 from typing import Any, Awaitable, Callable, Dict, List, Optional
 
-if sys.version_info >= (3, 9):
+if sys.version_info >= (3, 10):
     from typing import ParamSpecKwargs
 else:
     from typing_extensions import ParamSpecKwargs

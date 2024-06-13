@@ -2,7 +2,7 @@ import datetime
 import sys
 from typing import Callable, Literal, Optional, Sequence, TypeVar, Union
 
-if sys.version_info >= (3, 9):
+if sys.version_info >= (3, 10):
     from typing import ParamSpecKwargs
 else:
     from typing_extensions import ParamSpecKwargs
