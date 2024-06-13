@@ -1,8 +1,9 @@
+import sys
 from typing import Any, Awaitable, Callable, Dict, List, Optional
 
-try:
+if sys.version_info >= (3, 9):
     from typing import ParamSpecKwargs
-except Exception:
+else:
     from typing_extensions import ParamSpecKwargs
 
 from fastapi import Request
