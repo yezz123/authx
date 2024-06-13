@@ -509,12 +509,12 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
     # to generate a response object beforehand.
 
     @property
-    def DEPENDENCY(self) -> AuthXDependency:
+    def DEPENDENCY(self) -> AuthXDependency[Any]:
         """FastAPI Dependency to return an AuthX sub-object within the route context"""
         return Depends(self.get_dependency)
 
     @property
-    def BUNDLE(self) -> AuthXDependency:
+    def BUNDLE(self) -> AuthXDependency[Any]:
         """FastAPI Dependency to return a AuthX sub-object within the route context"""
         return self.DEPENDENCY
 
@@ -548,7 +548,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         """FastAPI Dependency to retrieve the current subject from request"""
         return Depends(self.get_current_subject)
 
-    def get_dependency(self, request: Request, response: Response) -> AuthXDependency:
+    def get_dependency(
+        self, request: Request, response: Response
+    ) -> AuthXDependency[Any]:
         """FastAPI Dependency to return a AuthX sub-object within the route context
 
         Args:
