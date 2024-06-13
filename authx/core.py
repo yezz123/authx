@@ -70,7 +70,11 @@ async def _get_token_from_cookies(
         if not csrf_token and config.JWT_CSRF_CHECK_FORM:
             form_data = await request.form()
             if form_data is not None:
-                csrf_token = form_data.get(csrf_field_key)
+                value = form_data.get(csrf_field_key)
+                if isinstance(value, str) or value is None:
+                    csrf_token = value
+                else:
+                    raise ValueError("Unexpected type for csrf_token")
         if not csrf_token:
             raise MissingCSRFTokenError("Missing CSRF token")
 

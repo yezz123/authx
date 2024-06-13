@@ -1,8 +1,14 @@
 import datetime
+import sys
 from hmac import compare_digest
-from typing import Any, Dict, List, Optional, Sequence
+from typing import Any, Dict, List, Optional, Sequence, Union
 
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, validator
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
+
+if sys.version_info >= (3, 8):
+    from typing import Set
+else:
+    from typing_extensions import Set
 
 from authx._internal._utils import get_now, get_now_ts, get_uuid
 from authx.exceptions import (
@@ -21,7 +27,6 @@ from authx.types import (
     StringOrSequence,
     TokenLocation,
     TokenType,
-    Union,
 )
 
 
@@ -42,11 +47,11 @@ class TokenPayload(BaseModel):
     fresh: bool = False
 
     @property
-    def _additional_fields(self):
+    def _additional_fields(self) -> Set[str]:
         return set(self.__dict__) - set(self.model_fields)
 
     @property
-    def extra_dict(self):
+    def extra_dict(self) -> Dict[str, Any]:
         return self.model_dump(include=self._additional_fields)
 
     @property
@@ -81,8 +86,8 @@ class TokenPayload(BaseModel):
     def time_since_issued(self) -> datetime.timedelta:
         return get_now() - self.issued_at
 
-    @validator("exp", "nbf", always=True)
-    def _set_default_ts(cls, value):
+    @field_validator("exp", "nbf", check_fields=True)
+    def _set_default_ts(cls, value: Union[float, int]) -> Union[float, int]:
         if isinstance(value, datetime.datetime):
             return value.timestamp()
         elif isinstance(value, datetime.timedelta):
@@ -90,19 +95,23 @@ class TokenPayload(BaseModel):
         return value
 
     def has_scopes(self, *scopes: Sequence[str]) -> bool:
-        return all(s in self.scopes for s in scopes)
+        # if `self.scopes`` is None, the function will immediately return False.
+        # If `self.scopes`` is not None, it will check if all elements in scopes are in `self.scopes``.
+        return (
+            all(s in self.scopes for s in scopes) if self.scopes is not None else False
+        )
 
     def encode(
         self,
         key: str,
-        algorithm: str,
+        algorithm: AlgorithmType = "HS256",
         ignore_errors: bool = True,
         headers: Optional[Dict[str, Any]] = None,
     ) -> str:
         return create_token(
             key=key,
             algorithm=algorithm,
-            uid=self.sub,
+            uid=str(self.sub),
             jti=self.jti,
             issued=self.iat,
             type=self.type,
@@ -121,7 +130,7 @@ class TokenPayload(BaseModel):
         cls,
         token: str,
         key: str,
-        algorithms: Sequence[AlgorithmType] = None,
+        algorithms: Optional[Sequence[AlgorithmType]] = None,
         audience: Optional[StringOrSequence] = None,
         issuer: Optional[str] = None,
         verify: bool = True,
@@ -148,7 +157,7 @@ class RequestToken(BaseModel):
     def verify(
         self,
         key: str,
-        algorithms: Sequence[AlgorithmType] = None,
+        algorithms: Optional[Sequence[AlgorithmType]] = None,
         audience: Optional[StringOrSequence] = None,
         issuer: Optional[str] = None,
         verify_jwt: bool = True,

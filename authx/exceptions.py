@@ -85,7 +85,7 @@ class RefreshTokenRequiredError(TokenTypeError):
 class InvalidToken(Exception):
     """When a token is invalid for all identity providers"""
 
-    def __init__(self, errors):
+    def __init__(self, errors: str) -> None:
         """Initialize InvalidToken Exception
 
         Args:

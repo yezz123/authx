@@ -7,6 +7,32 @@ on:
   pull_request: {}
 
 jobs:
+  mypy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: setup uv
+        uses: yezz123/setup-uv@v4
+        with:
+          uv-version: "0.2.11"
+          uv-venv: ".venv"
+
+      - name: Install Dependencies
+        run: uv pip install -r requirements/all.txt
+
+      - name: Typecheck with mypy
+        run: bash scripts/mypy.sh
+
   tests:
 
     name: test py${{ matrix.python-version }} on ${{ matrix.os }}
@@ -33,7 +59,7 @@ jobs:
       - name: setup UV
         uses: yezz123/setup-uv@v4
         with:
-          uv-version: "0.2.3"
+          uv-version: "0.2.11"
           uv-venv: ".venv"
 
       - name: Install Dependencies
@@ -103,7 +129,7 @@ jobs:
   check:
     if: always()
 
-    needs: [tests, test-extra]
+    needs: [mypy, tests, test-extra]
     runs-on: ubuntu-latest
     steps:
       - name: Decide whether the needed jobs succeeded or failed

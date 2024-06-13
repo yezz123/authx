@@ -38,7 +38,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
     """
 
     def __init__(
-        self, config: AuthXConfig = AuthXConfig(), model: Optional[T] = Dict[str, Any]
+        self, config: AuthXConfig = AuthXConfig(), model: Optional[T] = None
     ) -> None:
         """AuthX base object
 
@@ -46,6 +46,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             config (AuthXConfig, optional): Configuration instance to use. Defaults to AuthXConfig().
             model (Optional[T], optional): Model type hint. Defaults to Dict[str, Any].
         """
+        self.model = model if model is not None else {}
         super().__init__(model=model)
         super(_CallbackHandler, self).__init__()
         self._config = config
@@ -690,7 +691,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             return True
 
     async def implicit_refresh_middleware(
-        self, request: Request, call_next: Coroutine
+        self,
+        request: Request,
+        call_next: Callable[[Request], Coroutine[Any, Any, Response]],
     ) -> Response:
         """FastAPI Middleware to enable token refresh for an APIRouter
 

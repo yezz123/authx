@@ -19,13 +19,13 @@ pyasn1==0.6.0
     #   rsa
 pycparser==2.22
     # via cffi
-pydantic==2.7.3
+pydantic==2.7.4
     # via
     #   fastapi-slim
     #   pydantic-settings
 pydantic-core==2.18.4
     # via pydantic
-pydantic-settings==2.3.1
+pydantic-settings==2.3.2
 pyjwt==2.8.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1

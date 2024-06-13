@@ -39,7 +39,11 @@ def create_token(
             k: v for k, v in additional_data.items() if k not in RESERVED_CLAIMS
         }
 
-    jwt_claims = {"sub": uid, "jti": jti or get_uuid(), "type": type}
+    jwt_claims: Dict[str, Union[str, bool, float, int, Sequence[str]]] = {
+        "sub": uid,
+        "jti": jti or get_uuid(),
+        "type": type,
+    }
 
     if type == "access":
         jwt_claims["fresh"] = fresh
@@ -83,7 +87,7 @@ def create_token(
 def decode_token(
     token: str,
     key: str,
-    algorithms: Sequence[AlgorithmType] = None,
+    algorithms: Optional[Sequence[AlgorithmType]] = None,
     audience: Optional[StringOrSequence] = None,
     issuer: Optional[str] = None,
     verify: bool = True,
@@ -95,7 +99,7 @@ def decode_token(
         return jwt.decode(
             jwt=token,
             key=key,
-            algorithms=algorithms,
+            algorithms=algorithms if algorithms is not None else ["HS256"],
             audience=audience,
             issuer=issuer,
             options={"verify_signature": verify},

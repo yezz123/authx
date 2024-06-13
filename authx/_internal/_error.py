@@ -1,4 +1,4 @@
-from typing import Any, Coroutine, Optional, Type
+from typing import Optional, Type
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
@@ -22,41 +22,41 @@ class _ErrorHandler:
     MSG_CSRF_ERROR = "CSRF double submit does not match"
     MSG_DECODE_JWT_ERROR = "Invalid Token"
 
-    def _error_handler(
+    async def _error_handler(
         self,
-        exception: Type[exceptions.AuthXException],
+        request: Request,
+        exc: exceptions.AuthXException,
         status_code: int,
-        message: Optional[str] = None,
-    ) -> Coroutine[Any, Any, JSONResponse]:
+        message: str,
+    ) -> JSONResponse:
         """Generate the async function to be decorated by `FastAPI.exception_handler` decorator
 
         Args:
-            exception (Type[exceptions.AuthXException]): Exception type to handle with such function.
-            status_code (int): Status code relative to such exception.
-            message (Optional[str], optional): Default message. Defaults to None.
+            request (Request): The request object.
+            exc (exceptions.AuthXException): Exception object.
+            status_code (int): HTTP status code.
+            message (str): Default message.
 
         Returns:
-            Coroutine[Any, Any, JSONResponse]: Async function to be decorated by `FastAPI.exception_handler` decorator.
+            JSONResponse: The JSON response.
         """
-
-        async def _error_handler(request: Request, exc: exception):
-            msg = exc.args[0] if message is None else message
-            return JSONResponse(
-                status_code=status_code,
-                content={"message": msg, "error_type": exception.__name__},
-            )
-
-        return _error_handler
+        msg = exc.args[0] if message is None else message
+        return JSONResponse(
+            status_code=status_code,
+            content={"message": msg, "error_type": exc.__class__.__name__},
+        )
 
     def _set_app_exception_handler(
         self,
         app: FastAPI,
         exception: Type[exceptions.AuthXException],
         status_code: int,
-        message: str,
+        message: Optional[str],
     ) -> None:
         app.exception_handler(exception)(
-            self._error_handler(exception, status_code, message)
+            lambda request, exc=exception: self._error_handler(
+                request, exc, status_code, message or self.MSG_DEFAULT
+            )
         )
 
     def handle_errors(self, app: FastAPI) -> None:

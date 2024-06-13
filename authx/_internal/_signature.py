@@ -1,3 +1,5 @@
+from typing import Any, Dict, Optional, Tuple
+
 from itsdangerous import BadTimeSignature, SignatureExpired, URLSafeTimedSerializer
 
 CASUAL_UT = False
@@ -8,17 +10,17 @@ class SignatureSerializer:
     A class that implements a URL-safe timed serializer.
     """
 
-    def __init__(self, secret_key, expired_in=0):
+    def __init__(self, secret_key: str, expired_in: int = 0) -> None:
         """
         Initialize the serializer with a secret key and an optional expiration time.
         """
         self.ser = URLSafeTimedSerializer(secret_key)
         self.expired_in = expired_in
 
-    def encode(self, dict_obj):
+    def encode(self, dict_obj: Dict[str, Any]) -> str:
         return self.ser.dumps(dict_obj)
 
-    def decode(self, token):
+    def decode(self, token: str) -> Tuple[Optional[Dict[str, Any]], Optional[str]]:
         if token is None:
             return None, "NoTokenSpecified"
         try:

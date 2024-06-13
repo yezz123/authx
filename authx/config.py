@@ -126,11 +126,11 @@ class AuthXConfig(BaseSettings):
         return location in self.JWT_TOKEN_LOCATION
 
     @property
-    def private_key(self) -> str:
+    def private_key(self) -> Optional[str]:
         """Private key to encode token"""
         return self._get_key(self.JWT_PRIVATE_KEY)
 
     @property
-    def public_key(self) -> str:
+    def public_key(self) -> Optional[str]:
         """Public key to decode token"""
         return self._get_key(self.JWT_PUBLIC_KEY)

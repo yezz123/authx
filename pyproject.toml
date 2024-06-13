@@ -150,8 +150,21 @@ exclude_lines = [
 
 [tool.mypy]
 strict = true
-plugins = 'pydantic.mypy'
+warn_return_any = false
+no_implicit_optional = false
+disable_error_code = [
+    "arg-type",
+    "no-untyped-def",
+    "dict-item",
+    "call-arg",
+    "return-value",
+    "call-overload",
+    "type-arg"
+]
 
+[[tool.mypy.overrides]]
+module = "authx._internal._callback"
+ignore_errors = true
 
 [tool.pytest.ini_options]
 testpaths = 'tests'

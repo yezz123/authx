@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 from datetime import timezone as tz
 from typing import Union
 
-import pytz
 from dateutil import parser as dateutil_parser
 from dateutil.relativedelta import relativedelta
 from pytz import BaseTzInfo, timezone
@@ -43,7 +42,7 @@ def time_diff(dt1: datetime, dt2: datetime) -> relativedelta:
     return relativedelta(dt1, dt2)
 
 
-def to_UTC(event_timestamp: Union[datetime, str], tz: pytz.timezone = utc) -> datetime:  # type: ignore
+def to_UTC(event_timestamp: Union[datetime, str], tz: BaseTzInfo = utc) -> datetime:
     if isinstance(event_timestamp, datetime):  # pragma: no cover
         dt = event_timestamp
     else:

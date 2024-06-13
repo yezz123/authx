@@ -21,13 +21,12 @@ def app():
 @pytest.mark.asyncio
 async def test_error_handler(authx: AuthX):
     error_handler = authx._error_handler(
-        ValueError, status_code=100, message="Sample Message"
+        request=Request(scope={"type": "http", "method": "GET"}),
+        exc=ValueError(),
+        status_code=100,
+        message="Sample Message",
     )
-    try:
-        raise ValueError("Execution Message")
-    except ValueError as e:
-        req = Request(scope={"type": "http", "method": "GET"})
-        resp = await error_handler(req, e)
+    resp = await error_handler
 
     assert isinstance(resp, JSONResponse)
     assert resp.status_code == 100
@@ -39,12 +38,13 @@ async def test_error_handler(authx: AuthX):
 
 @pytest.mark.asyncio
 async def test_error_handler_without_message(authx: AuthX):
-    error_handler = authx._error_handler(ValueError, status_code=100, message=None)
-    try:
-        raise ValueError("Execution Message")
-    except ValueError as e:
-        req = Request(scope={"type": "http", "method": "GET"})
-        resp = await error_handler(req, e)
+    error_handler = authx._error_handler(
+        request=Request(scope={"type": "http", "method": "GET"}),
+        exc=ValueError("Execution Message"),
+        status_code=100,
+        message=None,
+    )
+    resp = await error_handler
 
     assert isinstance(resp, JSONResponse)
     assert resp.status_code == 100
