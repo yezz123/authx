@@ -1,5 +1,14 @@
 import contextlib
-from typing import Any, Callable, Coroutine, Dict, Literal, Optional, overload
+from typing import (
+    Any,
+    Awaitable,
+    Callable,
+    Coroutine,
+    Dict,
+    Literal,
+    Optional,
+    overload,
+)
 
 from fastapi import Depends, Request, Response
 
@@ -581,7 +590,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         verify_fresh: bool = False,
         verify_csrf: Optional[bool] = None,
         locations: Optional[TokenLocations] = None,
-    ) -> Callable[[Request], TokenPayload]:
+    ) -> Callable[[Request], Awaitable[TokenPayload]]:
         """Dependency to enforce valid token availability in request
 
         Args:
@@ -608,7 +617,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         return _auth_required
 
     @property
-    def fresh_token_required(self) -> Callable[[Request], TokenPayload]:
+    def fresh_token_required(self) -> Callable[[Request], Awaitable[TokenPayload]]:
         """FastAPI Dependency to enforce presence of a `fresh` `access` token in request"""
         return self.token_required(
             type="access",
@@ -618,7 +627,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         )
 
     @property
-    def access_token_required(self) -> Callable[[Request], TokenPayload]:
+    def access_token_required(self) -> Callable[[Request], Awaitable[TokenPayload]]:
         """FastAPI Dependency to enforce presence of an `access` token in request"""
         return self.token_required(
             type="access",
@@ -628,7 +637,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         )
 
     @property
-    def refresh_token_required(self) -> Callable[[Request], TokenPayload]:
+    def refresh_token_required(self) -> Callable[[Request], Awaitable[TokenPayload]]:
         """FastAPI Dependency to enforce presence of a `refresh` token in request"""
         return self.token_required(
             type="refresh",
@@ -644,7 +653,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
 
     def get_token_from_request(
         self, type: TokenType = "access", optional: bool = True
-    ) -> Optional[RequestToken]:
+    ) -> Callable[[Request], Awaitable[Optional[RequestToken]]]:
         """Return token from response if available
 
         Args:
@@ -663,7 +672,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             Optional[RequestToken]: The RequestToken if available
         """
 
-        async def _token_getter(request: Request):
+        async def _token_getter(request: Request) -> Optional[RequestToken]:
             # Specify locations as None since it's not provided in this context
             # Convert `optional` to a literal True or False based on its value
             optional_literal: Literal[True, False] = optional
