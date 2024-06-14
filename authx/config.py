@@ -46,7 +46,7 @@ class AuthXConfig(BaseSettings):
     JWT_PUBLIC_KEY: Optional[str] = None
     JWT_REFRESH_TOKEN_EXPIRES: Optional[timedelta] = timedelta(days=20)
     JWT_SECRET_KEY: Optional[str] = None
-    JWT_TOKEN_LOCATION: TokenLocations = Field(["headers"])
+    JWT_TOKEN_LOCATION: TokenLocations = Field(default_factory=lambda: ["headers"])
     # Header Options
     JWT_HEADER_NAME: str = "Authorization"
     JWT_HEADER_TYPE: str = "Bearer"
