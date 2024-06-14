@@ -15,7 +15,7 @@ from authx.types import TokenLocation, TokenLocations
 
 
 async def _get_token_from_headers(
-    request: Request, config: AuthXConfig, **kwargs
+    request: Request, config: AuthXConfig, refresh: bool = False, **kwargs
 ) -> RequestToken:
     """Get access token from headers"""
     # Get Header
@@ -88,7 +88,7 @@ async def _get_token_from_cookies(
 
 
 async def _get_token_from_query(
-    request: Request, config: AuthXConfig, **kwargs
+    request: Request, config: AuthXConfig, refresh: bool = False, **kwargs
 ) -> RequestToken:
     query_token = request.query_params.get(config.JWT_QUERY_STRING_NAME)
     if query_token is None:
@@ -151,7 +151,7 @@ async def _get_token_from_request(
     for location in locations:
         try:
             getter = TOKEN_GETTERS[location]
-            token = await getter(request, config=config, refresh=refresh)
+            token = await getter(request, config, refresh, **kwargs)
             if token is not None:
                 return token
         except MissingTokenError as e:
