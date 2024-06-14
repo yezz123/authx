@@ -156,7 +156,6 @@ disable_error_code = [
     "arg-type",
     "no-untyped-def",
     "dict-item",
-    "call-arg",
 ]
 
 [[tool.mypy.overrides]]
