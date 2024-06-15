@@ -1,17 +1,17 @@
 import sys
-from typing import Any, Awaitable, Callable, Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 if sys.version_info >= (3, 10):
-    from typing import ParamSpecKwargs
+    pass
 else:
-    from typing_extensions import ParamSpecKwargs
+    pass
 
 from fastapi import Request
 
 from authx.config import AuthXConfig
 from authx.exceptions import MissingCSRFTokenError, MissingTokenError
 from authx.schema import RequestToken
-from authx.types import TokenLocation, TokenLocations
+from authx.types import TokenLocations
 
 
 async def _get_token_from_headers(
@@ -125,10 +125,7 @@ async def _get_token_from_json(
     raise MissingTokenError("Missing token in json data")
 
 
-TOKEN_GETTERS: Dict[
-    TokenLocation,
-    Callable[[Request, AuthXConfig, ParamSpecKwargs], Awaitable[RequestToken]],
-] = {
+TOKEN_GETTERS = {
     "json": _get_token_from_json,
     "query": _get_token_from_query,
     "cookies": _get_token_from_cookies,
