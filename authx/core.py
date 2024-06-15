@@ -1,10 +1,4 @@
-import sys
 from typing import Any, Dict, List, Optional
-
-if sys.version_info >= (3, 10):
-    pass
-else:
-    pass
 
 from fastapi import Request
 
