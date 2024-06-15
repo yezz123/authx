@@ -6,6 +6,7 @@
 
 ### Refactors
 
+* 🔧 Remove `dict-item` from disabled error codes. PR [#617](https://github.com/yezz123/authx/pull/617) by [@yezz123](https://github.com/yezz123).
 * 🔧 Remove `call-arg` from disabled error codes. PR [#616](https://github.com/yezz123/authx/pull/616) by [@yezz123](https://github.com/yezz123).
 * 🔧 Remove return-value from disabled error codes. PR [#615](https://github.com/yezz123/authx/pull/615) by [@yezz123](https://github.com/yezz123).
 * 🔧 Remove `call-overload` from disabled error codes. PR [#613](https://github.com/yezz123/authx/pull/613) by [@yezz123](https://github.com/yezz123).
