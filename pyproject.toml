@@ -155,7 +155,6 @@ no_implicit_optional = false
 disable_error_code = [
     "arg-type",
     "no-untyped-def",
-    "dict-item",
 ]
 
 [[tool.mypy.overrides]]
