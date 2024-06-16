@@ -153,7 +153,6 @@ strict = true
 warn_return_any = false
 no_implicit_optional = false
 disable_error_code = [
-    "arg-type",
     "no-untyped-def",
 ]
 
