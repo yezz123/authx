@@ -1,5 +1,5 @@
 import datetime
-from typing import Any, Dict, Optional, Sequence, Union
+from typing import Any, Dict, List, Optional, Sequence, Union
 
 import jwt
 
@@ -93,13 +93,17 @@ def decode_token(
     verify: bool = True,
 ) -> Dict[str, Any]:
     """Decode a token"""
-    if algorithms is None:  # pragma: no cover
-        algorithms = ["HS256"]  # pragma: no cover
+    # Default to HS256 if no algorithms are provided
+    if algorithms is None:
+        algorithms = ["HS256"]
+    # Explicitly cast algorithms to list[str]
+    # to avoid mypy error: "Value of type "Optional[Sequence[AlgorithmType]]" is not indexable"
+    algorithm: List[str] = list(algorithms) if algorithms else ["HS256"]
     try:
         return jwt.decode(
             jwt=token,
             key=key,
-            algorithms=algorithms if algorithms is not None else ["HS256"],
+            algorithms=algorithm,
             audience=audience,
             issuer=issuer,
             options={"verify_signature": verify},
