@@ -104,7 +104,7 @@ class AuthXConfig(BaseSettings):
             and self.JWT_ALGORITHM in requires_cryptography
         )
 
-    def _get_key(self, crypto_value: str) -> str:
+    def _get_key(self, crypto_value: Optional[str]) -> str:
         """Get the key for the algorithm type (symmetric or asymmetric) and the algorithm"""
         if self.is_algo_symmetric:
             key = self.JWT_SECRET_KEY
