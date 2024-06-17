@@ -34,15 +34,15 @@ class TokenPayload(BaseModel):
     model_config = ConfigDict(extra="allow")
     jti: Optional[str] = Field(default_factory=get_uuid)
     iss: Optional[str] = None
-    sub: Optional[str] = None
-    aud: Optional[str] = None
+    sub: str
+    aud: Optional[StringOrSequence] = None
     exp: Optional[Union[Numeric, DateTimeExpression]] = None
     nbf: Optional[Union[Numeric, DateTimeExpression]] = None
     iat: Optional[Union[Numeric, DateTimeExpression]] = Field(
         default_factory=lambda: int(get_now_ts())
     )
     type: Optional[str] = None
-    csrf: Optional[str] = None
+    csrf: Optional[str] = ""
     scopes: Optional[List[str]] = None
     fresh: bool = False
 
