@@ -20,11 +20,11 @@ class AuthXDependency(Generic[T]):
         self._security = _from
 
     @property
-    def request(self):
+    def request(self) -> Request:
         return self._request
 
     @property
-    def response(self):
+    def response(self) -> Response:
         return self._response
 
     def create_access_token(
@@ -35,8 +35,8 @@ class AuthXDependency(Generic[T]):
         expiry: Optional[DateTimeExpression] = None,
         data: Optional[Dict[str, Any]] = None,
         audience: Optional[StringOrSequence] = None,
-        *args,
-        **kwargs,
+        *args: Any,
+        **kwargs: Any,
     ) -> str:
         return self._security.create_access_token(
             uid, fresh, headers, expiry, data, audience, *args, **kwargs
@@ -57,26 +57,32 @@ class AuthXDependency(Generic[T]):
         )
 
     def set_access_cookies(
-        self, token, response: Optional[Response] = None, max_age: Optional[int] = None
-    ):
+        self,
+        token: str,
+        response: Optional[Response] = None,
+        max_age: Optional[int] = None,
+    ) -> None:
         self._security.set_access_cookies(
             token=token, response=(response or self._response), max_age=max_age
         )
 
     def set_refresh_cookies(
-        self, token, response: Optional[Response] = None, max_age: Optional[int] = None
-    ):
+        self,
+        token: str,
+        response: Optional[Response] = None,
+        max_age: Optional[int] = None,
+    ) -> None:
         self._security.set_refresh_cookies(
             token=token, response=(response or self._response), max_age=max_age
         )
 
-    def unset_access_cookies(self, response: Optional[Response] = None):
+    def unset_access_cookies(self, response: Optional[Response] = None) -> None:
         self._security.unset_access_cookies(response=(response or self._response))
 
-    def unset_refresh_cookies(self, response: Optional[Response] = None):
+    def unset_refresh_cookies(self, response: Optional[Response] = None) -> None:
         self._security.unset_access_cookies(response=(response or self._response))
 
-    def unset_cookies(self, response: Optional[Response] = None):
+    def unset_cookies(self, response: Optional[Response] = None) -> None:
         self._security.unset_cookies(response=(response or self._response))
 
     async def get_current_subject(self) -> Optional[T]:
