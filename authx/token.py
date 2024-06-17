@@ -1,28 +1,34 @@
 import datetime
-from typing import Any, Dict, Optional, Sequence, Union
+from typing import Any, Dict, List, Optional, Sequence, Union
 
 import jwt
 
 from authx._internal._utils import RESERVED_CLAIMS, get_now, get_now_ts, get_uuid
 from authx.exceptions import JWTDecodeError
-from authx.types import AlgorithmType, DateTimeExpression, StringOrSequence, TokenType
+from authx.types import (
+    AlgorithmType,
+    DateTimeExpression,
+    Numeric,
+    StringOrSequence,
+    TokenType,
+)
 
 
 def create_token(
     uid: str,
     key: str,
-    type: TokenType,
+    type: TokenType = "access",
     jti: Optional[str] = None,
     expiry: Optional[DateTimeExpression] = None,
-    issued: Optional[DateTimeExpression] = None,
+    issued: Optional[Union[Numeric, DateTimeExpression]] = None,
     fresh: bool = False,
-    csrf: Union[str, bool] = True,
+    csrf: Optional[str] = None,
     algorithm: AlgorithmType = "HS256",
     headers: Optional[Dict[str, Any]] = None,
     audience: Optional[StringOrSequence] = None,
     issuer: Optional[str] = None,
     additional_data: Optional[Dict[str, Any]] = None,
-    not_before: Optional[Union[int, DateTimeExpression]] = None,
+    not_before: Optional[Union[Union[float, int], DateTimeExpression]] = None,
     ignore_errors: bool = True,
 ) -> str:
     """Encode a token"""
@@ -93,13 +99,17 @@ def decode_token(
     verify: bool = True,
 ) -> Dict[str, Any]:
     """Decode a token"""
-    if algorithms is None:  # pragma: no cover
-        algorithms = ["HS256"]  # pragma: no cover
+    # Default to HS256 if no algorithms are provided
+    if algorithms is None:
+        algorithms = ["HS256"]
+    # Explicitly cast algorithms to list[str]
+    # to avoid mypy error: "Value of type "Optional[Sequence[AlgorithmType]]" is not indexable"
+    algorithm: List[str] = list(algorithms) if algorithms else ["HS256"]
     try:
         return jwt.decode(
             jwt=token,
             key=key,
-            algorithms=algorithms if algorithms is not None else ["HS256"],
+            algorithms=algorithm,
             audience=audience,
             issuer=issuer,
             options={"verify_signature": verify},

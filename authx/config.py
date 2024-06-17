@@ -56,7 +56,7 @@ class AuthXConfig(BaseSettings):
     JWT_COOKIE_CSRF_PROTECT: bool = True
     JWT_COOKIE_DOMAIN: Optional[str] = None
     JWT_COOKIE_MAX_AGE: Optional[int] = None
-    JWT_COOKIE_SAMESITE: SameSitePolicy = "Lax"
+    JWT_COOKIE_SAMESITE: Optional[SameSitePolicy] = "lax"
     JWT_COOKIE_SECURE: bool = True
     JWT_REFRESH_COOKIE_NAME: str = "refresh_token_cookie"
     JWT_REFRESH_COOKIE_PATH: str = "/"
@@ -104,7 +104,7 @@ class AuthXConfig(BaseSettings):
             and self.JWT_ALGORITHM in requires_cryptography
         )
 
-    def _get_key(self, crypto_value: str) -> str:
+    def _get_key(self, crypto_value: Optional[str]) -> str:
         """Get the key for the algorithm type (symmetric or asymmetric) and the algorithm"""
         if self.is_algo_symmetric:
             key = self.JWT_SECRET_KEY
@@ -126,11 +126,11 @@ class AuthXConfig(BaseSettings):
         return location in self.JWT_TOKEN_LOCATION
 
     @property
-    def private_key(self) -> Optional[str]:
+    def private_key(self) -> str:
         """Private key to encode token"""
         return self._get_key(self.JWT_PRIVATE_KEY)
 
     @property
-    def public_key(self) -> Optional[str]:
+    def public_key(self) -> str:
         """Public key to decode token"""
         return self._get_key(self.JWT_PUBLIC_KEY)

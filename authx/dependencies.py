@@ -12,8 +12,8 @@ class AuthXDependency(Generic[T]):
     def __init__(
         self,
         _from: "AuthX[T]",
-        request: Optional[Request] = None,
-        response: Optional[Response] = None,
+        request: Request,
+        response: Response,
     ) -> None:
         self._response = response
         self._request = request

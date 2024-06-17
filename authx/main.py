@@ -99,7 +99,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
                 else self.config.JWT_REFRESH_TOKEN_EXPIRES
             )
         # Handle CSRF
-        csrf = None
+        csrf = ""
         if self.config.has_location("cookies") and self.config.JWT_COOKIE_CSRF_PROTECT:
             csrf = get_uuid()
         # Handle audience
@@ -196,9 +196,12 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         )
         # Set CSRF
         if self.config.JWT_COOKIE_CSRF_PROTECT and self.config.JWT_CSRF_IN_COOKIES:
+            # Set CSRF cookie to be string not None
+            csrf = self._decode_token(token=token, verify=True).csrf
+            str_csrf = csrf if csrf is not None else ""
             response.set_cookie(
                 key=csrf_key,
-                value=self._decode_token(token=token, verify=True).csrf,
+                value=str_csrf,
                 path=csrf_path,
                 domain=self.config.JWT_COOKIE_DOMAIN,
                 samesite=self.config.JWT_COOKIE_SAMESITE,
@@ -504,7 +507,10 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         """
         self._unset_cookies("refresh", response=response)
 
-    def unset_cookies(self, response: Response) -> None:
+    def unset_cookies(
+        self,
+        response: Response,
+    ) -> None:
         """Remove 'Set-Cookie' for tokens from response headers
 
         Args:

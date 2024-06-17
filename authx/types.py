@@ -37,7 +37,7 @@ AlgorithmType = Union[SymmetricAlgorithmType, AsymmetricAlgorithmType]
 
 HTTPMethod = Literal["GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
 HTTPMethods = Sequence[HTTPMethod]
-SameSitePolicy = Literal["None", "Lax", "Strict"]
+SameSitePolicy = Literal["lax", "strict", "none"]
 TokenType = Literal["access", "refresh"]
 TokenLocation = Literal["headers", "cookies", "json", "query"]
 TokenLocations = Sequence[TokenLocation]

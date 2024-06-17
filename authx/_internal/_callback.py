@@ -21,7 +21,7 @@ class _CallbackHandler(Generic[T]):
         AttributeError: If callback is not set
     """
 
-    def __init__(self, model: T) -> None:
+    def __init__(self, model: Optional[T] = None) -> None:
         """Base class for callback handlers in AuthX.
 
         Args:
@@ -87,7 +87,9 @@ class _CallbackHandler(Generic[T]):
         callback: Optional[ModelCallback[T]] = self.callback_get_model_instance
         return callback(uid, **kwargs) if callback is not None else None
 
-    def is_token_in_blocklist(self, token: str, **kwargs: ParamSpecKwargs) -> bool:
+    def is_token_in_blocklist(
+        self, token: Optional[str], **kwargs: ParamSpecKwargs
+    ) -> bool:
         """Check if token is in blocklist"""
         if self._check_token_callback_is_set(ignore_errors=True):
             callback: Optional[TokenCallback] = self.callback_is_token_in_blocklist

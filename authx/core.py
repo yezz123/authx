@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Literal, Optional
 
 from fastapi import Request
 
@@ -100,7 +100,7 @@ async def _get_token_from_json(
         raise MissingTokenError("Invalid content-type. Must be application/json")
 
     key = config.JWT_JSON_KEY
-    token_type = "access"
+    token_type: Literal["access", "refresh"] = "access"
     if refresh:
         token_type = "refresh"
         key = config.JWT_REFRESH_JSON_KEY
