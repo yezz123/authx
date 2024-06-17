@@ -36,12 +36,15 @@ class TokenPayload(BaseModel):
     iss: Optional[str] = None
     sub: str
     aud: Optional[StringOrSequence] = None
-    exp: Optional[Union[Numeric, DateTimeExpression]] = None
+    exp: Optional[DateTimeExpression] = None
     nbf: Optional[Union[Numeric, DateTimeExpression]] = None
     iat: Optional[Union[Numeric, DateTimeExpression]] = Field(
         default_factory=lambda: int(get_now_ts())
     )
-    type: Optional[str] = None
+    type: Optional[str] = Field(
+        default="access",
+        description="Token type",
+    )
     csrf: Optional[str] = ""
     scopes: Optional[List[str]] = None
     fresh: bool = False
@@ -114,7 +117,11 @@ class TokenPayload(BaseModel):
             uid=str(self.sub),
             jti=self.jti,
             issued=self.iat,
-            type=self.type,
+            # TODO: Fix type hinting for `type` Field
+            # it's caused because Type is a string & what we expect is a TokenType
+            # TokenType = Literal["access", "refresh"]
+            # Investigate if it's possible to fix this
+            type=self.type,  # type: ignore
             expiry=self.exp,
             fresh=self.fresh,
             csrf=self.csrf,
@@ -149,7 +156,7 @@ class TokenPayload(BaseModel):
 
 
 class RequestToken(BaseModel):
-    token: Optional[str] = None
+    token: str = Field(..., description="The token to verify")
     csrf: Optional[str] = None
     type: TokenType = "access"
     location: TokenLocation
