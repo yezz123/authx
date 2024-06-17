@@ -5,24 +5,30 @@ import jwt
 
 from authx._internal._utils import RESERVED_CLAIMS, get_now, get_now_ts, get_uuid
 from authx.exceptions import JWTDecodeError
-from authx.types import AlgorithmType, DateTimeExpression, StringOrSequence, TokenType
+from authx.types import (
+    AlgorithmType,
+    DateTimeExpression,
+    Numeric,
+    StringOrSequence,
+    TokenType,
+)
 
 
 def create_token(
     uid: str,
     key: str,
-    type: TokenType,
+    type: TokenType = "access",
     jti: Optional[str] = None,
     expiry: Optional[DateTimeExpression] = None,
-    issued: Optional[DateTimeExpression] = None,
+    issued: Optional[Union[Numeric, DateTimeExpression]] = None,
     fresh: bool = False,
-    csrf: Union[str, bool] = True,
+    csrf: Optional[str] = None,
     algorithm: AlgorithmType = "HS256",
     headers: Optional[Dict[str, Any]] = None,
     audience: Optional[StringOrSequence] = None,
     issuer: Optional[str] = None,
     additional_data: Optional[Dict[str, Any]] = None,
-    not_before: Optional[Union[int, DateTimeExpression]] = None,
+    not_before: Optional[Union[Union[float, int], DateTimeExpression]] = None,
     ignore_errors: bool = True,
 ) -> str:
     """Encode a token"""
