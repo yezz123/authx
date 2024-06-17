@@ -454,7 +454,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
     def set_access_cookies(
         self,
         token: str,
-        response: Optional[Response] = None,
+        response: Response,
         max_age: Optional[int] = None,
     ) -> None:
         """Add 'Set-Cookie' for access token in response header
@@ -471,7 +471,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
     def set_refresh_cookies(
         self,
         token: str,
-        response: Optional[Response] = None,
+        response: Response,
         max_age: Optional[int] = None,
     ) -> None:
         """Add 'Set-Cookie' for refresh token in response header
@@ -487,7 +487,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
 
     def unset_access_cookies(
         self,
-        response: Optional[Response] = None,
+        response: Response,
     ) -> None:
         """Remove 'Set-Cookie' for access token in response header
 
@@ -498,7 +498,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
 
     def unset_refresh_cookies(
         self,
-        response: Optional[Response] = None,
+        response: Response,
     ) -> None:
         """Remove 'Set-Cookie' for refresh token in response header
 
@@ -509,7 +509,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
 
     def unset_cookies(
         self,
-        response: Optional[Response] = None,
+        response: Response,
     ) -> None:
         """Remove 'Set-Cookie' for tokens from response headers
 

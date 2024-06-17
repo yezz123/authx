@@ -13,7 +13,7 @@ class AuthXDependency(Generic[T]):
         self,
         _from: "AuthX[T]",
         request: Request,
-        response: Optional[Response] = None,
+        response: Response,
     ) -> None:
         self._response = response
         self._request = request
