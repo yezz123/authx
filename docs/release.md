@@ -6,6 +6,7 @@
 
 ### Refactors
 
+* 🔧 Remove `no-untyped-def` from disabled error codes. PR [#621](https://github.com/yezz123/authx/pull/621) by [@yezz123](https://github.com/yezz123).
 * 🔧 Remove `arg-type` from disabled error codes. PR [#619](https://github.com/yezz123/authx/pull/619) by [@yezz123](https://github.com/yezz123).
 * 🔧 Remove `dict-item` from disabled error codes. PR [#617](https://github.com/yezz123/authx/pull/617) by [@yezz123](https://github.com/yezz123).
 * 🔧 Remove `call-arg` from disabled error codes. PR [#616](https://github.com/yezz123/authx/pull/616) by [@yezz123](https://github.com/yezz123).
