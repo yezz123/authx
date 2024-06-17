@@ -227,7 +227,7 @@ typing-extensions==4.12.2
     #   pydantic
     #   pydantic-core
     #   typer
-urllib3==2.2.1
+urllib3==2.2.2
     # via requests
 watchdog==4.0.1
     # via mkdocs
