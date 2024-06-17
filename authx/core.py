@@ -9,7 +9,7 @@ from authx.types import TokenLocations
 
 
 async def _get_token_from_headers(
-    request: Request, config: AuthXConfig, refresh: bool = False, **kwargs
+    request: Request, config: AuthXConfig, refresh: bool = False, **kwargs: Any
 ) -> RequestToken:
     """Get access token from headers"""
     # Get Header
@@ -28,7 +28,7 @@ async def _get_token_from_headers(
 
 
 async def _get_token_from_cookies(
-    request: Request, config: AuthXConfig, refresh: bool = False, **kwargs
+    request: Request, config: AuthXConfig, refresh: bool = False, **kwargs: Any
 ) -> RequestToken:
     """Get access token from cookies
 
@@ -82,7 +82,7 @@ async def _get_token_from_cookies(
 
 
 async def _get_token_from_query(
-    request: Request, config: AuthXConfig, refresh: bool = False, **kwargs
+    request: Request, config: AuthXConfig, refresh: bool = False, **kwargs: Any
 ) -> RequestToken:
     query_token = request.query_params.get(config.JWT_QUERY_STRING_NAME)
     if query_token is None:
@@ -94,7 +94,7 @@ async def _get_token_from_query(
 
 
 async def _get_token_from_json(
-    request: Request, config: AuthXConfig, refresh: bool = False, **kwargs
+    request: Request, config: AuthXConfig, refresh: bool = False, **kwargs: Any
 ) -> RequestToken:
     if request.headers.get("content-type") != "application/json":
         raise MissingTokenError("Invalid content-type. Must be application/json")
@@ -132,7 +132,7 @@ async def _get_token_from_request(
     config: AuthXConfig,
     refresh: bool = False,
     locations: Optional[TokenLocations] = None,
-    **kwargs,
+    **kwargs: Any,
 ) -> RequestToken:
     errors: List[MissingTokenError] = []
 

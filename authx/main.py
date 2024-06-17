@@ -85,7 +85,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         expiry: Optional[DateTimeExpression] = None,
         data: Optional[Dict[str, Any]] = None,
         audience: Optional[StringOrSequence] = None,
-        **kwargs,
+        **kwargs: Any,
     ) -> TokenPayload:
         # Handle additional data
         if data is None:
@@ -128,7 +128,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         expiry: Optional[DateTimeExpression] = None,
         data: Optional[Dict[str, Any]] = None,
         audience: Optional[StringOrSequence] = None,
-        **kwargs,
+        **kwargs: Any,
     ) -> str:
         payload = self._create_payload(
             uid=uid,
@@ -167,8 +167,8 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         type: str,
         response: Response,
         max_age: Optional[int] = None,
-        *args,
-        **kwargs,
+        *args: Any,
+        **kwargs: Any,
     ) -> None:
         if type == "access":
             token_key = self.config.JWT_ACCESS_COOKIE_NAME
@@ -394,8 +394,8 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         expiry: Optional[DateTimeExpression] = None,
         data: Optional[Dict[str, Any]] = None,
         audience: Optional[StringOrSequence] = None,
-        *args,
-        **kwargs,
+        *args: Any,
+        **kwargs: Any,
     ) -> str:
         """Generate an Access Token
 
@@ -427,8 +427,8 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         expiry: Optional[DateTimeExpression] = None,
         data: Optional[Dict[str, Any]] = None,
         audience: Optional[StringOrSequence] = None,
-        *args,
-        **kwargs,
+        *args: Any,
+        **kwargs: Any,
     ) -> str:
         """Generate a Refresh Token
 
@@ -610,7 +610,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             Callable[[Request], TokenPayload]: Dependency for Valid token Payload retrieval
         """
 
-        async def _auth_required(request: Request):
+        async def _auth_required(request: Request) -> Any:
             return await self._auth_required(
                 request=request,
                 type=type,
