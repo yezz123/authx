@@ -54,7 +54,7 @@ fastapi-slim==0.111.0
     # via authx
 ghp-import==2.1.0
     # via mkdocs
-griffe==0.45.3
+griffe==0.46.1
     # via
     #   griffe-typingdoc
     #   mkdocstrings-python
@@ -113,7 +113,7 @@ mkdocs-autorefs==1.0.1
 mkdocs-get-deps==0.2.0
     # via mkdocs
 mkdocs-markdownextradata-plugin==0.2.5
-mkdocs-material==9.5.26
+mkdocs-material==9.5.27
 mkdocs-material-extensions==1.3.1
     # via mkdocs-material
 mkdocs-mermaid2-plugin==1.1.1
