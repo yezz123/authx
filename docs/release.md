@@ -1,5 +1,7 @@
 ## Latest Changes
 
+## 1.2.0
+
 ### Features
 
 * 🔧 Update Python versions for `mypy` workflow. PR [#603](https://github.com/yezz123/authx/pull/603) by [@yezz123](https://github.com/yezz123).
@@ -17,19 +19,19 @@
 
 ### Upgrades
 
-* Bump urllib3 from 2.2.1 to 2.2.2 in /requirements. PR [#622](https://github.com/yezz123/authx/pull/622) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump `ruff-pre-commit` from v0.4.8 to v0.4.9. PR [#623](https://github.com/yezz123/authx/pull/623) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆ Bump pypa/gh-action-pypi-publish from 1.8.14 to 1.9.0. PR [#620](https://github.com/yezz123/authx/pull/620) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump `ruff-pre-commit` from v0.4.7 to v0.4.8. PR [#601](https://github.com/yezz123/authx/pull/601) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆ Bump the python-packages group with 2 updates. PR [#600](https://github.com/yezz123/authx/pull/600) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump `ruff-pre-commit` from v0.4.5 to v0.4.7. PR [#598](https://github.com/yezz123/authx/pull/598) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ☔  [pre-commit.ci] pre-commit autoupdate. PR [#597](https://github.com/yezz123/authx/pull/597) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆ Bump the python-packages group with 4 updates. PR [#596](https://github.com/yezz123/authx/pull/596) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump urllib3 from 2.2.1 to 2.2.2 in /requirements. PR [#622](https://github.com/yezz123/authx/pull/622) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump `ruff-pre-commit` from v0.4.8 to v0.4.9. PR [#623](https://github.com/yezz123/authx/pull/623) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Bump pypa/gh-action-pypi-publish from 1.8.14 to 1.9.0. PR [#620](https://github.com/yezz123/authx/pull/620) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump `ruff-pre-commit` from v0.4.7 to v0.4.8. PR [#601](https://github.com/yezz123/authx/pull/601) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Bump the python-packages group with 2 updates. PR [#600](https://github.com/yezz123/authx/pull/600) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump `ruff-pre-commit` from v0.4.5 to v0.4.7. PR [#598](https://github.com/yezz123/authx/pull/598) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ [pre-commit.ci] pre-commit autoupdate. PR [#597](https://github.com/yezz123/authx/pull/597) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Bump the python-packages group with 4 updates. PR [#596](https://github.com/yezz123/authx/pull/596) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Update uv version to `0.2.3`. PR [#595](https://github.com/yezz123/authx/pull/595) by [@pinchXOXO](https://github.com/pinchXOXO).
 
 ### Docs
 
-* :memo: Update meta information. PR [#614](https://github.com/yezz123/authx/pull/614) by [@yezz123](https://github.com/yezz123).
+* 📝 Update meta information. PR [#614](https://github.com/yezz123/authx/pull/614) by [@yezz123](https://github.com/yezz123).
 
 ### Internal
 
