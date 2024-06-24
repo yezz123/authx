@@ -23,7 +23,7 @@ pydantic==2.7.4
     # via
     #   fastapi-slim
     #   pydantic-settings
-pydantic-core==2.18.4
+pydantic-core==2.19.0
     # via pydantic
 pydantic-settings==2.3.3
 pyjwt==2.8.0
