@@ -8,7 +8,7 @@ click==8.1.7
 codespell==2.3.0
 distlib==0.3.8
     # via virtualenv
-filelock==3.15.1
+filelock==3.15.4
     # via virtualenv
 identify==2.5.36
     # via pre-commit
@@ -31,12 +31,12 @@ pre-commit==3.7.1
 pyupgrade==3.16.0
 pyyaml==6.0.1
     # via pre-commit
-ruff==0.4.9
+ruff==0.4.10
 tokenize-rt==5.2.0
     # via pyupgrade
 types-python-dateutil==2.9.0.20240316
 types-pytz==2024.1.0.20240417
 typing-extensions==4.12.2
     # via mypy
-virtualenv==20.26.2
+virtualenv==20.26.3
     # via pre-commit

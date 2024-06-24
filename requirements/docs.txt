@@ -8,14 +8,14 @@ anyio==4.4.0
     #   starlette
 async-timeout==4.0.3
     # via redis
-authx==1.1.3
+authx==1.2.0
     # via authx-extra
-authx-extra @ git+https://github.com/yezz123/authx-extra.git@30dbd15fb8a49c36cccdcaf37181f66aa4561d63
+authx-extra @ git+https://github.com/yezz123/authx-extra.git@399d3efb9f2ebf6cfcd758c674655ae87d1d6617
 babel==2.15.0
     # via mkdocs-material
 beautifulsoup4==4.12.3
     # via mkdocs-mermaid2-plugin
-cairocffi==1.7.0
+cairocffi==1.7.1
     # via cairosvg
 cairosvg==2.7.1
 certifi==2024.6.2
@@ -54,7 +54,7 @@ fastapi-slim==0.111.0
     # via authx
 ghp-import==2.1.0
     # via mkdocs
-griffe==0.46.1
+griffe==0.47.0
     # via
     #   griffe-typingdoc
     #   mkdocstrings-python
@@ -119,7 +119,7 @@ mkdocs-material-extensions==1.3.1
 mkdocs-mermaid2-plugin==1.1.1
 mkdocstrings==0.25.1
     # via mkdocstrings-python
-mkdocstrings-python==1.10.3
+mkdocstrings-python==1.10.5
     # via mkdocstrings
 packaging==24.1
     # via mkdocs
@@ -196,7 +196,7 @@ rich==13.7.1
     # via typer
 rsa==4.9
     # via python-jose
-setuptools==70.0.0
+setuptools==70.1.0
     # via mkdocs-mermaid2-plugin
 shellingham==1.5.4
     # via typer
