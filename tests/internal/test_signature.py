@@ -1,123 +1,92 @@
 import time
-import unittest
+from typing import Any, Dict
+
+import pytest
 
 from authx._internal import SignatureSerializer
 
 
-class SignatureSerializerTest(unittest.TestCase):
-    def test_encode_decode(self):
-        serializer = SignatureSerializer("MY_SECRET_KEY", expired_in=1)
-        session_id = 1
-        dict_obj = {"session_id": session_id}
-        token = serializer.encode(dict_obj)
-        data, err = serializer.decode(token)
-        self.assertIsNotNone(data)
-        self.assertIsNone(err)
-        self.assertEqual(data["session_id"], session_id)
-
-    def test_decode_with_no_token(self):
-        self.decode_serializer(None, "NoTokenSpecified")
-
-    def test_decode_with_expired_token(self):
-        serializer = SignatureSerializer("MY_SECRET_KEY", expired_in=1)
-        session_id = 1
-        dict_obj = {"session_id": session_id}
-        token = serializer.encode(dict_obj)
-        # Sleep for more than 1 second to simulate an expired token
-        time.sleep(2)
-        data, err = serializer.decode(token)
-        self.assertIsNone(data)
-        self.assertEqual(err, "SignatureExpired")
-
-    def test_decode_with_invalid_signature(self):
-        self.decode_serializer("tampered_token", "BadSignature")
-
-    def test_decode_with_malformed_token(self):
-        self.decode_serializer("malformedtoken", "BadSignature")
-
-    def decode_serializer(self, token, expected_data):
-        serializer = SignatureSerializer("MY_SECRET_KEY", expired_in=1)
-        token = token
-        data, err = serializer.decode(token)
-        self.assertIsNone(data)
-        self.assertEqual(err, expected_data)
+@pytest.fixture
+def serializer():
+    return SignatureSerializer("TEST_SECRET_KEY", expired_in=1)
 
 
-def test_token_expiration():
-    serializer = SignatureSerializer("MY_SECRET_KEY", expired_in=1)
-    dict_obj = {"session_id": 999}
-    token = serializer.encode(dict_obj)
-
-    time.sleep(2)
-    data, err = serializer.decode(token)
-    assert (
-        data is None and err == "SignatureExpired"
-    ), "Token did not expire as expected."
-
-
-def test_token_no_expiration():
-    serializer = SignatureSerializer("MY_SECRET_KEY", expired_in=0)
-    dict_obj = {"session_id": 999}
-    token = serializer.encode(dict_obj)
-
-    time.sleep(2)
-    data, err = serializer.decode(token)
-    assert (
-        data is not None and err is None and data["session_id"] == 999
-    ), "Failed to decode or session_id does not match."
-
-
-def test_decode_with_expired_token():
-    serializer = SignatureSerializer("MY_SECRET_KEY", expired_in=1)
+def test_encode_decode_success(serializer):
     dict_obj = {"session_id": 1}
     token = serializer.encode(dict_obj)
-    time.sleep(2)
+    data, err = serializer.decode(token)
+    assert data is not None and err is None
+    assert data["session_id"] == 1
+
+
+def test_decode_expired_token(serializer):
+    dict_obj = {"session_id": 1}
+    token = serializer.encode(dict_obj)
+    time.sleep(2)  # Wait for token to expire
     data, err = serializer.decode(token)
     assert data is None and err == "SignatureExpired"
 
 
-@unittest.skip("Skipping test for now")
-def test_decode_with_invalid_signature():
-    serializer = SignatureSerializer("MY_SECRET_KEY", expired_in=1)
+def test_decode_invalid_token(serializer):
+    invalid_token = "invalid.token.here"
+    data, err = serializer.decode(invalid_token)
+    assert data is None and err == "InvalidSignature"
+
+
+def test_decode_none_token(serializer):
+    data, err = serializer.decode(None)
+    assert data is None and err == "NoTokenSpecified"
+
+
+def test_decode_tampered_token(serializer):
     dict_obj = {"session_id": 1}
     token = serializer.encode(dict_obj)
-    tampered_token = f"{token[:-1]}a"
+    tampered_token = token[:-1] + (
+        "1" if token[-1] == "0" else "0"
+    )  # Change last character
     data, err = serializer.decode(tampered_token)
     assert data is None and err == "InvalidSignature"
 
 
-def test_decode_with_malformed_token():
-    serializer = SignatureSerializer("MY_SECRET_KEY", expired_in=1)
-    data, err = serializer.decode("malformedtoken")
+def test_no_expiration():
+    non_expiring_serializer = SignatureSerializer("TEST_SECRET_KEY", expired_in=0)
+    dict_obj = {"session_id": 1}
+    token = non_expiring_serializer.encode(dict_obj)
+    time.sleep(2)  # Wait, but token should not expire
+    data, err = non_expiring_serializer.decode(token)
+    assert data is not None and err is None
+    assert data["session_id"] == 1
+
+
+def test_different_secret_keys():
+    serializer1 = SignatureSerializer("SECRET_KEY_1")
+    serializer2 = SignatureSerializer("SECRET_KEY_2")
+    dict_obj = {"session_id": 1}
+    token = serializer1.encode(dict_obj)
+    data, err = serializer2.decode(token)
+    assert data is None and err == "InvalidSignature"
+
+
+def test_large_payload():
+    serializer = SignatureSerializer("TEST_SECRET_KEY")
+    large_dict = {
+        f"key_{i}": "x" * 1000 for i in range(100)
+    }  # 100 keys with 1000 character values
+    token = serializer.encode(large_dict)
+    data, err = serializer.decode(token)
+    assert data == large_dict and err is None
+
+
+def test_empty_dict():
+    serializer = SignatureSerializer("TEST_SECRET_KEY")
+    empty_dict: Dict[str, Any] = {}
+    token = serializer.encode(empty_dict)
+    data, err = serializer.decode(token)
+    assert data == empty_dict and err is None
+
+
+def test_malformed_token():
+    serializer = SignatureSerializer("TEST_SECRET_KEY")
+    malformed_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."  # Incomplete token
+    data, err = serializer.decode(malformed_token)
     assert data is None and err == "BadSignature"
-
-
-CASUAL_UT = False
-
-
-if CASUAL_UT:
-
-    def test_casual_ut():
-        secret_key = "MY_SECRET_KEY"
-        expired_in = 1
-        session_id = 1
-        dict_obj = {"session_id": session_id}
-
-        # Instantiate SignatureSerializer
-        serializer = SignatureSerializer(secret_key, expired_in=expired_in)
-
-        # Encode the dictionary object into a token
-        token = serializer.encode(dict_obj)
-
-        # Decode the token
-        data, err = serializer.decode(token)
-
-        # Assert the results
-        assert (
-            data is not None and err is None and data["session_id"] == session_id
-        ), "Failed to decode or session_id does not match."
-
-    def test_decode_with_no_token():
-        serializer = SignatureSerializer("MY_SECRET_KEY", expired_in=1)
-        data, err = serializer.decode(None)
-        assert data is None and err == "NoTokenSpecified"
