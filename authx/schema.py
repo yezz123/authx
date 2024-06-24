@@ -5,10 +5,10 @@ from typing import Any, Dict, List, Optional, Sequence, Union
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
 
-if sys.version_info >= (3, 8):
-    from typing import Set
+if sys.version_info >= (3, 8):  # pragma: no cover
+    from typing import Set  # pragma: no cover
 else:
-    from typing_extensions import Set
+    from typing_extensions import Set  # pragma: no cover
 
 from authx._internal._utils import get_now, get_now_ts, get_uuid
 from authx.exceptions import (
