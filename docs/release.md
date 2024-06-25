@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Internal
+
+* 🔧 automate Labeling PRs by Dependabot. PR [#628](https://github.com/yezz123/authx/pull/628) by [@yezz123](https://github.com/yezz123).
+
 ## 1.2.0
 
 ### Features
