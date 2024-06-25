@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Upgrades
+
+* ⬆ Bump `ruff-pre-commit` from v0.4.9 to v0.4.10. PR [#627](https://github.com/yezz123/authx/pull/627) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+
 ### Internal
 
 * 🔧 automate Labeling PRs by Dependabot. PR [#628](https://github.com/yezz123/authx/pull/628) by [@yezz123](https://github.com/yezz123).
