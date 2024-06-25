@@ -8,6 +8,8 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: ⬆
+    labels:
+      - "upgrade"
   # Python
   - package-ecosystem: "pip"
     directory: "/"
@@ -19,3 +21,5 @@ updates:
           - "*"
     commit-message:
       prefix: ⬆
+    labels:
+      - "upgrade"
