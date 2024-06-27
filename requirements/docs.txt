@@ -148,7 +148,7 @@ pydantic==2.7.4
     #   pydantic-settings
 pydantic-core==2.18.4
     # via pydantic
-pydantic-settings==2.3.3
+pydantic-settings==2.3.4
     # via authx
 pygments==2.18.0
     # via
@@ -196,7 +196,7 @@ rich==13.7.1
     # via typer
 rsa==4.9
     # via python-jose
-setuptools==70.1.0
+setuptools==70.1.1
     # via mkdocs-mermaid2-plugin
 shellingham==1.5.4
     # via typer

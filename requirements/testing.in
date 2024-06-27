@@ -7,3 +7,4 @@ SQLAlchemy
 itsdangerous
 websockets
 freezegun
+async-asgi-testclient
