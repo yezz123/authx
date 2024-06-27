@@ -1,9 +1,9 @@
 import sys
 
-if sys.version_info >= (3, 10):
-    from typing import ParamSpecKwargs
+if sys.version_info >= (3, 10):  # pragma: no cover
+    from typing import ParamSpecKwargs  # pragma: no cover
 else:
-    from typing_extensions import ParamSpecKwargs
+    from typing_extensions import ParamSpecKwargs  # pragma: no cover
 
 from typing import Generic, Optional
 

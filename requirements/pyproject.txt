@@ -25,7 +25,7 @@ pydantic==2.7.4
     #   pydantic-settings
 pydantic-core==2.18.4
     # via pydantic
-pydantic-settings==2.3.3
+pydantic-settings==2.3.4
 pyjwt==2.8.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
