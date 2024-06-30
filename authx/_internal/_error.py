@@ -40,10 +40,12 @@ class _ErrorHandler:
         Returns:
             JSONResponse: The JSON response.
         """
-        msg = exc.args[0] if message is None else message
         return JSONResponse(
             status_code=status_code,
-            content={"message": msg, "error_type": exc.__class__.__name__},
+            content={
+                "message": message or str(exc),
+                "error_type": exc.__class__.__name__,
+            },
         )
 
     def _set_app_exception_handler(
