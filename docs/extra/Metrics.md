@@ -79,7 +79,7 @@ Make sure to have the necessary dependencies installed (e.g., `prometheus_client
 <div class="termy">
 
 ```console
-$ pip install authx_extra
+$ pip install authx_extra[prometheus]
 
 ---> 100%
 ```

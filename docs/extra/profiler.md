@@ -97,7 +97,7 @@ Make sure to have the necessary dependencies installed:
 <div class="termy">
 
 ```console
-$ pip install authx_extra
+$ pip install authx_extra[profiler]
 
 ---> 100%
 ```
