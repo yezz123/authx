@@ -61,7 +61,7 @@ class _ErrorHandler:
     ) -> None:
         async def exception_handler_wrapper(
             request: Request, exc: exceptions.AuthXException
-        ):
+        ) -> JSONResponse:
             return await self._error_handler(request, exc, status_code, message)
 
         # Add the exception handler to the FastAPI application
