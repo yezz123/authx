@@ -101,6 +101,15 @@
       "contributions": [
         "infra"
       ]
+    },
+    {
+      "login": "pg365",
+      "name": "pg365",
+      "avatar_url": "https://avatars.githubusercontent.com/u/173273017?v=4",
+      "profile": "https://github.com/pg365",
+      "contributions": [
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,
