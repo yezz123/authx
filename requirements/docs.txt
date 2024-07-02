@@ -6,11 +6,9 @@ anyio==4.4.0
     # via
     #   httpx
     #   starlette
-async-timeout==4.0.3
-    # via redis
 authx==1.2.0
     # via authx-extra
-authx-extra @ git+https://github.com/yezz123/authx-extra.git@399d3efb9f2ebf6cfcd758c674655ae87d1d6617
+authx-extra @ git+https://github.com/yezz123/authx-extra.git@7f28bf34f3f4f90ad02abca38eff17ccffb2d28f
 babel==2.15.0
     # via mkdocs-material
 beautifulsoup4==4.12.3
@@ -113,7 +111,7 @@ mkdocs-autorefs==1.0.1
 mkdocs-get-deps==0.2.0
     # via mkdocs
 mkdocs-markdownextradata-plugin==0.2.5
-mkdocs-material==9.5.27
+mkdocs-material==9.5.28
 mkdocs-material-extensions==1.3.1
     # via mkdocs-material
 mkdocs-mermaid2-plugin==1.1.1
@@ -127,26 +125,24 @@ paginate==0.5.6
     # via mkdocs-material
 pathspec==0.12.1
     # via mkdocs
-pillow==10.3.0
+pillow==10.4.0
     # via cairosvg
 platformdirs==4.2.2
     # via
     #   mkdocs-get-deps
     #   mkdocstrings
-prometheus-client==0.20.0
-    # via authx-extra
 pyasn1==0.6.0
     # via
     #   python-jose
     #   rsa
 pycparser==2.22
     # via cffi
-pydantic==2.7.4
+pydantic==2.8.0
     # via
     #   authx
     #   fastapi-slim
     #   pydantic-settings
-pydantic-core==2.18.4
+pydantic-core==2.20.0
     # via pydantic
 pydantic-settings==2.3.4
     # via authx
@@ -154,8 +150,6 @@ pygments==2.18.0
     # via
     #   mkdocs-material
     #   rich
-pyinstrument==4.6.2
-    # via authx-extra
 pyjwt==2.8.0
     # via authx
 pymdown-extensions==10.8.1
@@ -184,8 +178,6 @@ pyyaml-env-tag==0.1
     # via mkdocs
 rcslice==1.1.0
     # via mdx-include
-redis==5.0.5
-    # via authx-extra
 regex==2024.5.15
     # via mkdocs-material
 requests==2.32.3
@@ -196,7 +188,7 @@ rich==13.7.1
     # via typer
 rsa==4.9
     # via python-jose
-setuptools==70.1.1
+setuptools==70.2.0
     # via mkdocs-mermaid2-plugin
 shellingham==1.5.4
     # via typer
