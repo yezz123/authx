@@ -448,3 +448,67 @@ async def test_get_token_from_request_with_locations(
         await _get_token_from_request(
             request=http_request, config=config, locations=[], refresh=True
         )
+
+
+@pytest.mark.asyncio
+async def test_get_token_from_cookies_with_csrf_form_data():
+    config = AuthXConfig()
+    config.JWT_COOKIE_CSRF_PROTECT = True
+    config.JWT_CSRF_CHECK_FORM = True
+    config.JWT_CSRF_METHODS = ["POST"]
+    config.JWT_ACCESS_COOKIE_NAME = "access_token_cookie"
+    config.JWT_ACCESS_CSRF_FIELD_NAME = "csrf_token"
+
+    def create_mock_request(form_data):
+        async def mock_form():
+            return form_data
+
+        req = Request(
+            scope={
+                "type": "http",
+                "method": "POST",
+                "headers": [
+                    (b"content-type", b"application/x-www-form-urlencoded"),
+                    (b"cookie", b"access_token_cookie=mock_access_token"),
+                ],
+            },
+            receive=lambda: {},
+        )
+        req.form = mock_form
+        return req
+
+    test_cases = [
+        ({"csrf_token": "valid_csrf_token"}, "valid_csrf_token", None),
+        ({"csrf_token": 12345}, 213, MissingCSRFTokenError),
+        ({"csrf_token": ["token"]}, None, MissingCSRFTokenError),
+        ({}, None, MissingCSRFTokenError),
+        ({"csrf_token": None}, None, MissingCSRFTokenError),
+    ]
+
+    for form_data, expected_csrf, expected_error in test_cases:
+        req = create_mock_request(form_data)
+
+        if expected_error:
+            with pytest.raises(expected_error):
+                await _get_token_from_cookies(request=req, config=config)
+        else:
+            request_token = await _get_token_from_cookies(request=req, config=config)
+            assert request_token.token == "mock_access_token"
+            assert request_token.csrf == expected_csrf
+
+    # Test case where form_data is None
+    req = Request(
+        scope={
+            "type": "http",
+            "method": "POST",
+            "headers": [
+                (b"content-type", b"application/x-www-form-urlencoded"),
+                (b"cookie", b"access_token_cookie=mock_access_token"),
+            ],
+        },
+        receive=lambda: {},
+    )
+    req.form = lambda: None
+
+    with pytest.raises(MissingCSRFTokenError):
+        await _get_token_from_cookies(request=req, config=config)
