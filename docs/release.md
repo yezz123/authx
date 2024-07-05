@@ -13,6 +13,7 @@
 
 ### Internal
 
+* ♻️ Refactor CSRF token retrieval. PR [#636](https://github.com/yezz123/authx/pull/636) by [@yezz123](https://github.com/yezz123).
 * 🐛 Add edge cases Tests for error module. PR [#631](https://github.com/yezz123/authx/pull/631) by [@yezz123](https://github.com/yezz123).
 * ♻️ Test Edge cases &  Refactor `SignatureSerializer` & `_CallbackHandler` tests. PR [#625](https://github.com/yezz123/authx/pull/625) by [@yezz123](https://github.com/yezz123).
 * 🔧 automate Labeling PRs by Dependabot. PR [#628](https://github.com/yezz123/authx/pull/628) by [@yezz123](https://github.com/yezz123).
