@@ -4,7 +4,7 @@ from typing import Any, Dict, List, Literal, Optional
 from fastapi import Request
 
 from authx.config import AuthXConfig
-from authx.exceptions import MissingCSRFTokenError, MissingTokenError
+from authx.exceptions import CSRFError, MissingCSRFTokenError, MissingTokenError
 from authx.schema import RequestToken
 from authx.types import TokenLocations
 
@@ -66,7 +66,7 @@ async def _get_token_from_cookies(
         if not csrf_token and config.JWT_CSRF_CHECK_FORM:
             form = getattr(request, "form", None)
             if form is not None and callable(form):
-                with contextlib.suppress(Exception):
+                with contextlib.suppress(Exception, CSRFError):
                     form_data = await form()
                     if form_data is not None:
                         value = form_data.get(csrf_field_key)
