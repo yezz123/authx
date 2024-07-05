@@ -479,8 +479,8 @@ async def test_get_token_from_cookies_with_csrf_form_data():
 
     test_cases = [
         ({"csrf_token": "valid_csrf_token"}, "valid_csrf_token", None),
-        ({"csrf_token": 12345}, None, ValueError),
-        ({"csrf_token": ["token"]}, None, ValueError),
+        ({"csrf_token": 12345}, 213, MissingCSRFTokenError),
+        ({"csrf_token": ["token"]}, None, MissingCSRFTokenError),
         ({}, None, MissingCSRFTokenError),
         ({"csrf_token": None}, None, MissingCSRFTokenError),
     ]
