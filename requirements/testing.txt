@@ -3,7 +3,7 @@
 anyio==4.4.0
     # via httpx
 async-asgi-testclient==1.4.11
-certifi==2024.6.2
+certifi==2024.7.4
     # via
     #   httpcore
     #   httpx
