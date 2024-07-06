@@ -16,7 +16,7 @@ beautifulsoup4==4.12.3
 cairocffi==1.7.1
     # via cairosvg
 cairosvg==2.7.1
-certifi==2024.6.2
+certifi==2024.7.4
     # via
     #   httpcore
     #   httpx
