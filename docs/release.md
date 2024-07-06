@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* ⬆️ Bump certifi from `2024.6.2` to `2024.7.4`. PR [#637](https://github.com/yezz123/authx/pull/637) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Update pydantic and pydantic-core versions to 2.8.0 and 2.20.0. PR [#635](https://github.com/yezz123/authx/pull/635) by [@yezz123](https://github.com/yezz123).
 * ⬆ Bump `ruff-pre-commit` from v0.4.10 to v0.5.0. PR [#634](https://github.com/yezz123/authx/pull/634) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump `uv` version to `0.2.18`. PR [#632](https://github.com/yezz123/authx/pull/632) by [@pg365](https://github.com/pg365).
