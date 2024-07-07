@@ -6,7 +6,7 @@ anyio==4.4.0
     # via
     #   httpx
     #   starlette
-authx==1.2.0
+authx==1.2.1
     # via authx-extra
 authx-extra @ git+https://github.com/yezz123/authx-extra.git@7f28bf34f3f4f90ad02abca38eff17ccffb2d28f
 babel==2.15.0
