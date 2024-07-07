@@ -63,7 +63,7 @@ jobs:
           uv-venv: ".venv"
 
       - name: Install Dependencies
-        run: uv pip install -r requirements/pyproject.txt && uv pip install -r requirements/testing.txt
+        run: uv pip install -e . && uv pip install -r requirements/testing.txt
 
       - name: Freeze Dependencies
         run: uv pip freeze
