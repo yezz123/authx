@@ -1,14 +1,24 @@
-import datetime
 import sys
-from hmac import compare_digest
-from typing import Any, Dict, List, Optional, Sequence, Union
-
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
 
 if sys.version_info >= (3, 8):  # pragma: no cover
     from typing import Set  # pragma: no cover
 else:
     from typing_extensions import Set  # pragma: no cover
+
+import datetime
+from hmac import compare_digest
+from typing import Any, Dict, List, Optional, Sequence, Union
+
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Extra,
+    Field,
+    ValidationError,
+    field_validator,
+    validator,
+)
+from pydantic.version import VERSION as PYDANTIC_VERSION
 
 from authx._internal._utils import get_now, get_now_ts, get_uuid
 from authx.exceptions import (
@@ -29,9 +39,56 @@ from authx.types import (
     TokenType,
 )
 
+PYDANTIC_V2 = PYDANTIC_VERSION.startswith("2.")
 
-class TokenPayload(BaseModel):
-    model_config = ConfigDict(extra="allow")
+
+class PydanticVersionSupportBase(BaseModel):
+    if PYDANTIC_V2:
+        model_config = ConfigDict(extra="allow")
+
+        @property
+        def _additional_fields(self) -> Set[str]:
+            return set(self.__dict__) - set(self.model_fields)
+
+        @property
+        def extra_dict(self) -> Dict[str, Any]:
+            return self.model_dump(include=self._additional_fields)
+
+        @field_validator("exp", "nbf", mode="before", check_fields=False)
+        def _set_default_ts(
+            cls, value: Union[float, int, datetime.datetime, datetime.timedelta]
+        ) -> Union[float, int]:
+            if isinstance(value, datetime.datetime):
+                return value.timestamp()
+            elif isinstance(value, datetime.timedelta):
+                return (cls.get_now() + value).timestamp()
+            return value
+
+    else:
+
+        class Config:
+            extra = Extra.allow
+
+        @property
+        def _additional_fields(self):
+            return set(self.__dict__) - set(self.__fields__)
+
+        @property
+        def extra_dict(self):
+            return self.dict(include=self._additional_fields)
+
+        @validator("exp", "nbf", pre=True)
+        def _set_default_ts(
+            cls, value: Union[float, int, datetime.datetime, datetime.timedelta]
+        ) -> Union[float, int]:
+            if isinstance(value, datetime.datetime):
+                return value.timestamp()
+            elif isinstance(value, datetime.timedelta):
+                return (cls.get_now() + value).timestamp()
+            return value
+
+
+class TokenPayload(PydanticVersionSupportBase):
     jti: Optional[str] = Field(default_factory=get_uuid)
     iss: Optional[str] = None
     sub: str
@@ -48,14 +105,6 @@ class TokenPayload(BaseModel):
     csrf: Optional[str] = ""
     scopes: Optional[List[str]] = None
     fresh: bool = False
-
-    @property
-    def _additional_fields(self) -> Set[str]:
-        return set(self.__dict__) - set(self.model_fields)
-
-    @property
-    def extra_dict(self) -> Dict[str, Any]:
-        return self.model_dump(include=self._additional_fields)
 
     @property
     def issued_at(self) -> datetime.datetime:
@@ -88,14 +137,6 @@ class TokenPayload(BaseModel):
     @property
     def time_since_issued(self) -> datetime.timedelta:
         return get_now() - self.issued_at
-
-    @field_validator("exp", "nbf", check_fields=True)
-    def _set_default_ts(cls, value: Union[float, int]) -> Union[float, int]:
-        if isinstance(value, datetime.datetime):
-            return value.timestamp()
-        elif isinstance(value, datetime.timedelta):
-            return (get_now() + value).timestamp()
-        return value
 
     def has_scopes(self, *scopes: Sequence[str]) -> bool:
         # if `self.scopes`` is None, the function will immediately return False.
@@ -152,7 +193,7 @@ class TokenPayload(BaseModel):
             issuer=issuer,
             verify=verify,
         )
-        return cls.model_validate(payload)
+        return cls.model_validate(payload) if PYDANTIC_V2 else cls.parse_obj(payload)
 
 
 class RequestToken(BaseModel):
@@ -185,7 +226,10 @@ class RequestToken(BaseModel):
                 issuer=issuer,
             )
             # Parse payload
-            payload = TokenPayload.model_validate(decoded_token)
+            if PYDANTIC_V2:
+                payload = TokenPayload.model_validate(decoded_token)
+            else:
+                payload = TokenPayload.parse_obj(decoded_token)
         except JWTDecodeError as e:
             raise JWTDecodeError(*e.args) from e
         except ValidationError as e:

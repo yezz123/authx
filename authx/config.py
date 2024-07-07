@@ -3,7 +3,7 @@ from typing import List, Optional, Sequence
 
 from jwt.algorithms import get_default_algorithms, requires_cryptography
 from pydantic import Field
-from pydantic_settings import BaseSettings
+from pydantic.version import VERSION as PYDANTIC_VERSION
 
 from authx.exceptions import BadConfigurationError
 from authx.types import (
@@ -13,6 +13,14 @@ from authx.types import (
     StringOrSequence,
     TokenLocations,
 )
+
+PYDANTIC_V2 = PYDANTIC_VERSION.startswith("2.")
+
+
+if PYDANTIC_V2:
+    from pydantic_settings import BaseSettings
+else:
+    from pydantic import BaseSettings
 
 
 class AuthXConfig(BaseSettings):
