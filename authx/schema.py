@@ -35,16 +35,18 @@ PYDANTIC_V2 = PYDANTIC_VERSION.startswith("2.")
 if PYDANTIC_V2:
     from pydantic import ConfigDict, field_validator  # pragma: no cover
 else:
-    from pydantic import validator  # pragma: no cover
+    from pydantic import Extra, validator  # pragma: no cover
 
 
 class TokenPayload(BaseModel):
     if PYDANTIC_V2:
-        model_config = ConfigDict(extra="allow")  # pragma: no cover
+        model_config = ConfigDict(
+            extra="allow", from_attributes=True
+        )  # pragma: no cover
     else:
 
         class Config:  # pragma: no cover
-            extra = "allow"  # pragma: no cover
+            extra = Extra.allow  # pragma: no cover
 
     jti: Optional[str] = Field(default_factory=get_uuid)
     iss: Optional[str] = None
