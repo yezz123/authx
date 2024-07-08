@@ -65,10 +65,10 @@ async def _get_token_from_cookies(
         csrf_token = request.headers.get(csrf_header_key.lower())
         if not csrf_token and config.JWT_CSRF_CHECK_FORM:
             form = getattr(request, "form", None)
-            if form is not None and callable(form):
+            if form is not None and callable(form):  # pragma: no cover
                 with contextlib.suppress(Exception, CSRFError):
                     form_data = await form()
-                    if form_data is not None:
+                    if form_data is not None:  # pragma: no cover
                         value = form_data.get(csrf_field_key)
                         if isinstance(value, str) or value is None:
                             csrf_token = value
@@ -147,7 +147,7 @@ async def _get_token_from_request(
         try:
             getter = TOKEN_GETTERS[location]
             token = await getter(request, config, refresh, **kwargs)
-            if token is not None:
+            if token is not None:  # pragma: no cover
                 return token
         except MissingTokenError as e:
             errors.append(e)

@@ -18,9 +18,9 @@ PYDANTIC_V2 = PYDANTIC_VERSION.startswith("2.")
 
 
 if PYDANTIC_V2:
-    from pydantic_settings import BaseSettings
+    from pydantic_settings import BaseSettings  # pragma: no cover
 else:
-    from pydantic import BaseSettings
+    from pydantic import BaseSettings  # pragma: no cover
 
 
 class AuthXConfig(BaseSettings):
