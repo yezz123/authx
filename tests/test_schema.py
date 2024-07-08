@@ -400,7 +400,7 @@ def test_token_payload_extra_fields(sample_payload):
     if PYDANTIC_V2:
         assert payload.extra_dict == {}
     else:
-        assert payload.extra_dict == {"extra_field": "extra_value"}
+        assert payload.extra_dict == {"extra_field": "extra_value", "name": "John Doe"}
 
 
 def test_token_payload_encode_decode():
