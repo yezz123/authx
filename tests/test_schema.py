@@ -3,7 +3,6 @@ import datetime
 import jwt
 import pytest
 
-from authx import RequestToken, TokenPayload
 from authx.exceptions import (
     CSRFError,
     FreshTokenRequiredError,
@@ -11,6 +10,7 @@ from authx.exceptions import (
     RefreshTokenRequiredError,
     TokenTypeError,
 )
+from authx.schema import PYDANTIC_V2, RequestToken, TokenPayload
 
 
 @pytest.fixture(scope="function")
@@ -352,7 +352,10 @@ def test_payload_extra_dict():
         ).timestamp(),
         extra="EXTRA",
     )
-    assert payload.extra_dict == {}
+    if PYDANTIC_V2:
+        assert payload.extra_dict == {}
+    else:
+        assert payload.extra_dict == {"extra": "EXTRA"}
 
 
 def test_verify_token_type_exception():
@@ -394,7 +397,10 @@ def test_token_payload_creation(sample_payload):
 def test_token_payload_extra_fields(sample_payload):
     sample_payload["extra_field"] = "extra_value"
     payload = TokenPayload(**sample_payload)
-    assert payload.extra_dict == {}
+    if PYDANTIC_V2:
+        assert payload.extra_dict == {}
+    else:
+        assert payload.extra_dict == {"extra_field": "extra_value"}
 
 
 def test_token_payload_encode_decode():
