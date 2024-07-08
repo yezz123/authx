@@ -93,6 +93,20 @@ def invalid_refresh_token(valid_payload: TokenPayload):
     )
 
 
+@pytest.fixture(scope="function")
+def sample_payload():
+    return {
+        "sub": "1234567890",
+        "name": "John Doe",
+        "iat": int(datetime.datetime.now().timestamp()),
+        "exp": int((datetime.datetime.now() + datetime.timedelta(hours=1)).timestamp()),
+        "type": "access",
+        "fresh": True,
+        "jti": "unique-identifier",
+        "scopes": ["read", "write"],
+    }
+
+
 def test_payload_has_scopes(valid_payload: TokenPayload):
     assert valid_payload.has_scopes("read")
     assert valid_payload.has_scopes("read", "write")
@@ -368,3 +382,58 @@ def test_verify_token_type_exception():
             verify_csrf=True,
             verify_fresh=False,
         )
+
+
+def test_token_payload_creation(sample_payload):
+    payload = TokenPayload(**sample_payload)
+    assert payload.sub == "1234567890"
+    assert payload.type == "access"
+    assert payload.scopes == ["read", "write"]
+
+
+def test_token_payload_extra_fields(sample_payload):
+    sample_payload["extra_field"] = "extra_value"
+    payload = TokenPayload(**sample_payload)
+    assert payload.extra_dict == {}
+
+
+def test_token_payload_encode_decode():
+    payload = TokenPayload(sub="1234567890", type="access")
+    encoded = payload.encode("secret_key")
+    decoded = TokenPayload.decode(encoded, "secret_key")
+    assert decoded.sub == "1234567890"
+    assert decoded.type == "access"
+
+
+def test_token_payload_expiry():
+    payload = TokenPayload(
+        sub="1234567890", exp=datetime.datetime.now() + datetime.timedelta(hours=1)
+    )
+    assert isinstance(payload.expiry_datetime, datetime.datetime)
+    assert isinstance(payload.time_until_expiry, datetime.timedelta)
+
+
+def test_token_payload_issued_at():
+    now = datetime.datetime.now()
+    payload = TokenPayload(sub="1234567890", iat=now.timestamp())
+    assert isinstance(payload.issued_at, datetime.datetime)
+    assert isinstance(payload.time_since_issued, datetime.timedelta)
+
+
+def test_token_payload_scopes():
+    payload = TokenPayload(sub="1234567890", scopes=["read", "write"])
+    assert payload.has_scopes("read")
+    assert payload.has_scopes("read", "write")
+    assert not payload.has_scopes("admin")
+
+
+def test_token_payload_invalid_decode():
+    with pytest.raises(JWTDecodeError):
+        TokenPayload.decode("invalid_token", "secret_key")
+
+
+def test_token_payload_nbf_validator():
+    future_time = datetime.datetime.now() + datetime.timedelta(minutes=5)
+    payload = TokenPayload(sub="1234567890", nbf=future_time)
+    assert isinstance(payload.nbf, float)
+    assert payload.nbf == pytest.approx(future_time.timestamp(), abs=1)
