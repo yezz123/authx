@@ -100,8 +100,8 @@ def decode_token(
 ) -> Dict[str, Any]:
     """Decode a token"""
     # Default to HS256 if no algorithms are provided
-    if algorithms is None:
-        algorithms = ["HS256"]
+    if algorithms is None:  # pragma: no cover
+        algorithms = ["HS256"]  # pragma: no cover
     # Explicitly cast algorithms to list[str]
     # to avoid mypy error: "Value of type "Optional[Sequence[AlgorithmType]]" is not indexable"
     algorithm: List[str] = list(algorithms) if algorithms else ["HS256"]

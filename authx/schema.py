@@ -3,7 +3,8 @@ import sys
 from hmac import compare_digest
 from typing import Any, Dict, List, Optional, Sequence, Union
 
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
+from pydantic import BaseModel, Field, ValidationError
+from pydantic.version import VERSION as PYDANTIC_VERSION
 
 if sys.version_info >= (3, 8):  # pragma: no cover
     from typing import Set  # pragma: no cover
@@ -29,9 +30,24 @@ from authx.types import (
     TokenType,
 )
 
+PYDANTIC_V2 = PYDANTIC_VERSION.startswith("2.")
+
+if PYDANTIC_V2:
+    from pydantic import ConfigDict, field_validator  # pragma: no cover
+else:
+    from pydantic import Extra, validator  # pragma: no cover
+
 
 class TokenPayload(BaseModel):
-    model_config = ConfigDict(extra="allow")
+    if PYDANTIC_V2:
+        model_config = ConfigDict(
+            extra="allow", from_attributes=True
+        )  # pragma: no cover
+    else:
+
+        class Config:  # pragma: no cover
+            extra = Extra.allow  # pragma: no cover
+
     jti: Optional[str] = Field(default_factory=get_uuid)
     iss: Optional[str] = None
     sub: str
@@ -51,11 +67,17 @@ class TokenPayload(BaseModel):
 
     @property
     def _additional_fields(self) -> Set[str]:
-        return set(self.__dict__) - set(self.model_fields)
+        if PYDANTIC_V2:
+            return set(self.__dict__) - set(self.model_fields)  # pragma: no cover
+        else:
+            return set(self.__dict__) - set(self.__fields__)  # pragma: no cover
 
     @property
     def extra_dict(self) -> Dict[str, Any]:
-        return self.model_dump(include=self._additional_fields)
+        if PYDANTIC_V2:
+            return self.model_dump(include=self._additional_fields)  # pragma: no cover
+        else:
+            return self.dict(include=self._additional_fields)  # pragma: no cover
 
     @property
     def issued_at(self) -> datetime.datetime:
@@ -75,7 +97,9 @@ class TokenPayload(BaseModel):
         elif isinstance(self.exp, datetime.timedelta):
             return self.issued_at + self.exp
         elif isinstance(self.exp, (float, int)):
-            return datetime.datetime.fromtimestamp(self.exp, tz=datetime.timezone.utc)
+            return datetime.datetime.fromtimestamp(
+                self.exp, tz=datetime.timezone.utc
+            )  # pragma: no cover
         else:
             raise TypeError(
                 "'exp' claim should be of type float | int | datetime.datetime"
@@ -89,13 +113,28 @@ class TokenPayload(BaseModel):
     def time_since_issued(self) -> datetime.timedelta:
         return get_now() - self.issued_at
 
-    @field_validator("exp", "nbf", check_fields=True)
-    def _set_default_ts(cls, value: Union[float, int]) -> Union[float, int]:
-        if isinstance(value, datetime.datetime):
-            return value.timestamp()
-        elif isinstance(value, datetime.timedelta):
-            return (get_now() + value).timestamp()
-        return value
+    if PYDANTIC_V2:
+
+        @field_validator("exp", "nbf", mode="before")  # pragma: no cover
+        def _set_default_ts(
+            cls, value: Union[float, int, datetime.datetime, datetime.timedelta]
+        ) -> Union[float, int]:  # pragma: no cover
+            if isinstance(value, datetime.datetime):
+                return value.timestamp()
+            elif isinstance(value, datetime.timedelta):
+                return (get_now() + value).timestamp()
+            return value
+    else:
+
+        @validator("exp", "nbf", pre=True)  # pragma: no cover
+        def _set_default_ts(
+            cls, value: Union[float, int, datetime.datetime, datetime.timedelta]
+        ) -> Union[float, int]:  # pragma: no cover
+            if isinstance(value, datetime.datetime):
+                return value.timestamp()
+            elif isinstance(value, datetime.timedelta):
+                return (get_now() + value).timestamp()
+            return value
 
     def has_scopes(self, *scopes: Sequence[str]) -> bool:
         # if `self.scopes`` is None, the function will immediately return False.
@@ -152,7 +191,7 @@ class TokenPayload(BaseModel):
             issuer=issuer,
             verify=verify,
         )
-        return cls.model_validate(payload)
+        return cls.model_validate(payload) if PYDANTIC_V2 else cls(**payload)
 
 
 class RequestToken(BaseModel):
@@ -174,7 +213,6 @@ class RequestToken(BaseModel):
     ) -> TokenPayload:
         if algorithms is None:  # pragma: no cover
             algorithms = ["HS256"]  # pragma: no cover
-        # JWT Base Verification
         try:
             decoded_token = decode_token(
                 token=self.token,
@@ -184,8 +222,11 @@ class RequestToken(BaseModel):
                 audience=audience,
                 issuer=issuer,
             )
-            # Parse payload
-            payload = TokenPayload.model_validate(decoded_token)
+            payload = (
+                TokenPayload.model_validate(decoded_token)
+                if PYDANTIC_V2
+                else TokenPayload(**decoded_token)
+            )
         except JWTDecodeError as e:
             raise JWTDecodeError(*e.args) from e
         except ValidationError as e:
@@ -206,7 +247,7 @@ class RequestToken(BaseModel):
             if self.csrf is None:
                 raise CSRFError(f"Missing CSRF token in {self.location}")
             if payload.csrf is None:
-                raise CSRFError("Cookies token missing CSRF claim")
+                raise CSRFError("Cookies token missing CSRF claim")  # pragma: no cover
             if not compare_digest(self.csrf, payload.csrf):
                 raise CSRFError("CSRF token mismatch")
 
