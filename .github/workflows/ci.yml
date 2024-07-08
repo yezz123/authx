@@ -35,7 +35,7 @@ jobs:
 
   tests-pydantic-v2:
 
-    name: test py${{ matrix.python-version }} on ${{ matrix.os }}
+    name: test py${{ matrix.python-version }} on ${{ matrix.os }} with pydantic v2
 
     runs-on: ${{ matrix.os }}-latest
 
@@ -81,7 +81,7 @@ jobs:
 
   tests-pydantic-v1:
 
-    name: test py${{ matrix.python-version }} on ${{ matrix.os }}
+    name: test py${{ matrix.python-version }} on ${{ matrix.os }} with pydantic v1
 
     runs-on: ${{ matrix.os }}-latest
 
