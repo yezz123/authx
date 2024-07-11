@@ -149,6 +149,7 @@ class TokenPayload(BaseModel):
         algorithm: AlgorithmType = "HS256",
         ignore_errors: bool = True,
         headers: Optional[Dict[str, Any]] = None,
+        data: Optional[Dict[str, Any]] = None,
     ) -> str:
         return create_token(
             key=key,
@@ -169,6 +170,7 @@ class TokenPayload(BaseModel):
             not_before=self.nbf,
             ignore_errors=ignore_errors,
             headers=headers,
+            data=data,
         )
 
     @classmethod

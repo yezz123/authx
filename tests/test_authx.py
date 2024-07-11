@@ -1,9 +1,12 @@
+import json
+
 import pytest
 from fastapi import Request
 from fastapi.responses import JSONResponse
 
 from authx import AuthX, RequestToken, TokenPayload
-from authx.exceptions import MissingTokenError
+from authx.config import AuthXConfig
+from authx.exceptions import AuthXException, MissingTokenError
 
 
 @pytest.fixture(scope="function")
@@ -12,6 +15,22 @@ def authx():
     authx._config.JWT_SECRET_KEY = "SECRET"
     authx._config.JWT_TOKEN_LOCATION = ["headers", "json", "cookies"]
     return authx
+
+
+@pytest.fixture(scope="function")
+def mock_request():
+    return Request(
+        scope={
+            "type": "http",
+            "headers": [],
+            "method": "GET",
+        }
+    )
+
+
+@pytest.fixture(scope="function")
+def mock_response():
+    return JSONResponse(content={})
 
 
 @pytest.fixture(scope="function")
@@ -228,3 +247,62 @@ async def test_token_required(authx: AuthX, access_token: str):
     dependency = authx.token_required(verify_fresh=True, type="access")
     access_token: TokenPayload = await dependency(request=req)
     assert access_token.type == "access"
+
+
+def test_load_config(authx):
+    new_config = AuthXConfig(JWT_SECRET_KEY="NEW_SECRET")
+    authx.load_config(new_config)
+    assert authx.config.JWT_SECRET_KEY == "NEW_SECRET"
+
+
+@pytest.mark.asyncio
+async def test_get_token_from_request_optional(authx, mock_request):
+    token = await authx._get_token_from_request(mock_request, optional=True)
+    assert token is None
+
+
+@pytest.mark.asyncio
+async def test_get_token_from_request_not_optional(authx, mock_request):
+    with pytest.raises(MissingTokenError):
+        await authx._get_token_from_request(mock_request, optional=False)
+
+
+def test_create_refresh_token_with_custom_data(authx):
+    custom_data = {"role": "admin"}
+    token = authx.create_access_token(uid="test_user", data=custom_data)
+    payload = authx._decode_token(token, verify=False)
+    payload_dict = json.loads(payload.json())
+    assert payload_dict.get("role") == "admin"
+
+
+def test_verify_token_with_csrf(authx):
+    token = authx.create_access_token(uid="test_user")
+    request_token = RequestToken(
+        token=token, csrf="test_csrf", location="cookies", type="access"
+    )
+
+    with pytest.raises(AuthXException):
+        authx.verify_token(request_token, verify_csrf=True)
+
+
+def test_set_and_unset_cookies(authx, mock_response):
+    access_token = authx.create_access_token(uid="test_user")
+    refresh_token = authx.create_refresh_token(uid="test_user")
+
+    authx.set_access_cookies(access_token, mock_response)
+    authx.set_refresh_cookies(refresh_token, mock_response)
+
+    assert (
+        len(mock_response.headers.getlist("set-cookie")) == 4
+    )  # 2 for access, 2 for refresh
+
+    authx.unset_cookies(mock_response)
+
+    assert (
+        len(mock_response.headers.getlist("set-cookie")) == 8
+    )  # 4 additional for unsetting
+
+
+def test_token_required_dependency(authx):
+    dependency = authx.token_required(type="access", verify_fresh=True)
+    assert callable(dependency)
