@@ -8,7 +8,7 @@ anyio==4.4.0
     #   starlette
 authx==1.2.1
     # via authx-extra
-authx-extra @ git+https://github.com/yezz123/authx-extra.git@7f28bf34f3f4f90ad02abca38eff17ccffb2d28f
+authx-extra @ git+https://github.com/yezz123/authx-extra.git@ed1936044d516b66574f626a88088a4a0a65d591
 babel==2.15.0
     # via mkdocs-material
 beautifulsoup4==4.12.3
@@ -188,7 +188,7 @@ rich==13.7.1
     # via typer
 rsa==4.9
     # via python-jose
-setuptools==70.2.0
+setuptools==70.3.0
     # via mkdocs-mermaid2-plugin
 shellingham==1.5.4
     # via typer

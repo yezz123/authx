@@ -155,15 +155,6 @@ strict = true
 warn_return_any = false
 no_implicit_optional = false
 
-[[tool.mypy.overrides]]
-module = "authx._internal._callback"
-ignore_errors = true
-
-[[tool.mypy.overrides]]
-module = "authx.config"
-ignore_errors = true
-
-
 [tool.pytest.ini_options]
 testpaths = 'tests'
 log_cli = "1"
