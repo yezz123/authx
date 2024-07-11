@@ -29,6 +29,7 @@ def create_token(
     issuer: Optional[str] = None,
     additional_data: Optional[Dict[str, Any]] = None,
     not_before: Optional[Union[Union[float, int], DateTimeExpression]] = None,
+    data: Optional[Dict[str, Any]] = None,
     ignore_errors: bool = True,
 ) -> str:
     """Encode a token"""
@@ -85,6 +86,9 @@ def create_token(
     elif isinstance(not_before, (int, float)):
         jwt_claims["nbf"] = not_before
 
+    if data:
+        jwt_claims.update(data)
+
     payload = {**additional_claims, **jwt_claims}
 
     return jwt.encode(payload=payload, key=key, algorithm=algorithm, headers=headers)
@@ -97,6 +101,7 @@ def decode_token(
     audience: Optional[StringOrSequence] = None,
     issuer: Optional[str] = None,
     verify: bool = True,
+    data: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """Decode a token"""
     # Default to HS256 if no algorithms are provided
@@ -113,6 +118,7 @@ def decode_token(
             audience=audience,
             issuer=issuer,
             options={"verify_signature": verify},
+            data=data,
         )
     except Exception as e:
         raise JWTDecodeError(*e.args) from e

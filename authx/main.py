@@ -143,6 +143,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             key=self.config.private_key,
             algorithm=self.config.JWT_ALGORITHM,
             headers=headers,
+            data=data,
         )
 
     def _decode_token(
