@@ -4,6 +4,10 @@
 
 * 🔧 Support both pydantic versions. PR [#638](https://github.com/yezz123/authx/pull/638) by [@yezz123](https://github.com/yezz123).
 
+### Fixes
+
+* 🐛 add support for additional data in JWT token creation and decoding. PR [#641](https://github.com/yezz123/authx/pull/641) by [@yezz123](https://github.com/yezz123).
+
 ### Refactors
 
 * ♻️ Refactor `_CallbackHandler` to handle optional model instances. PR [#640](https://github.com/yezz123/authx/pull/640) by [@yezz123](https://github.com/yezz123).
