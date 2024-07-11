@@ -10,7 +10,7 @@ distlib==0.3.8
     # via virtualenv
 filelock==3.15.4
     # via virtualenv
-identify==2.5.36
+identify==2.6.0
     # via pre-commit
 mypy==1.10.1
 mypy-extensions==1.0.0
