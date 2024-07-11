@@ -27,7 +27,7 @@ class _CallbackHandler(Generic[T]):
         Args:
             model (T): Model instance
         """
-        self._model: T = model
+        self._model: Optional[T] = model
         self.callback_get_model_instance: Optional[ModelCallback[T]] = None
         self.callback_is_token_in_blocklist: Optional[TokenCallback] = None
 
@@ -85,7 +85,7 @@ class _CallbackHandler(Generic[T]):
         """Get current model instance from callback"""
         self._check_model_callback_is_set()
         callback: Optional[ModelCallback[T]] = self.callback_get_model_instance
-        return callback(uid, **kwargs) if callback is not None else None
+        return callback(uid, **kwargs) if callback is not None else None  # type: ignore
 
     def is_token_in_blocklist(
         self, token: Optional[str], **kwargs: ParamSpecKwargs
@@ -93,6 +93,6 @@ class _CallbackHandler(Generic[T]):
         """Check if token is in blocklist"""
         if self._check_token_callback_is_set(ignore_errors=True):
             callback: Optional[TokenCallback] = self.callback_is_token_in_blocklist
-            if callback is not None:
-                return callback(token, **kwargs)
+            if callback is not None and token is not None:
+                return callback(token, **kwargs)  # type: ignore
         return False
