@@ -761,7 +761,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
                 )
                 payload = self.verify_token(token, verify_fresh=False)
                 if (
-                    datetime.timedelta(payload.time_until_expiry)
+                    datetime.timedelta(payload.time_until_expiry)  # type: ignore
                     < self.config.JWT_IMPLICIT_REFRESH_DELTATIME
                 ):
                     new_token = self.create_access_token(
