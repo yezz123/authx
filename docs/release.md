@@ -6,6 +6,7 @@
 
 ### Fixes
 
+* 🐛 fix unsupported comparison between two type instances. PR [#643](https://github.com/yezz123/authx/pull/643) by [@yezz123](https://github.com/yezz123).
 * 🐛 add support for additional data in JWT token creation and decoding. PR [#641](https://github.com/yezz123/authx/pull/641) by [@yezz123](https://github.com/yezz123).
 
 ### Refactors
