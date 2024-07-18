@@ -1,5 +1,7 @@
 ## Latest Changes
 
+## 1.3.0
+
 ### Features
 
 * 🔧 Support both pydantic versions. PR [#638](https://github.com/yezz123/authx/pull/638) by [@yezz123](https://github.com/yezz123).
