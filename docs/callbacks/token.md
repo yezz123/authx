@@ -34,7 +34,7 @@ get_optional_token_dep = security.get_token_from_request(
 
 @app.get("/login")
 def login():
-    token = security.create_access_token(uid="john.doe@fastwt.com")
+    token = security.create_access_token(uid="john@doe.com")
     return {"access_token": token}
 
 @app.get("/token/optional")
@@ -300,7 +300,7 @@ get_optional_token_dep = security.get_token_from_request(
 
 @app.get("/login")
 def login():
-    token = security.create_access_token(uid="john.doe@fastwt.com")
+    token = security.create_access_token(uid="john@doe.com")
     return {"access_token": token}
 
 @app.get("/token/optional")

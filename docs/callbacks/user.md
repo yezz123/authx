@@ -15,8 +15,8 @@ from pydantic import BaseModel
 
 # Mockup user database
 FAKE_DB = {
-    "hello@yezz.me": {
-        "email": "hello@yezz.me",
+    "john@doe.com": {
+        "email": "john@doe.com",
         "password": "testpassword",
         "firstname": "John",
         "lastname": "Doe"
@@ -145,7 +145,7 @@ From the `whoami` function dependency you can access the `User` instance directl
 
     ```shell
     $ curl -X POST -s \
-        --json '{"email":"hello@yezz.me", "password":"testpassword"}'\
+        --json '{"email":"john@doe.com", "password":"testpassword"}'\
         http://0.0.0.0:8000/login
     {"access_token": $TOKEN}
     ```
