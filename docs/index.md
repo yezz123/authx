@@ -1,7 +1,3 @@
----
-hide:
-  - navigation
----
 
 <p align="center">
 <a href="https://authx.yezz.me" target="_blank">

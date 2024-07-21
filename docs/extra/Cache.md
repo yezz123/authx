@@ -10,12 +10,12 @@ faster retrieval the next time the resource is required. As your application
 serves resources it can attach cache headers to the response specifying the
 desired cache behavior.
 
-![Overview](https://devcenter1.assets.heroku.com/article-images/782-imported-1443570279-782-imported-1443554749-55-original.jpg)
+![Overview](../img/data/1.png)
 
 When an item is fully cached, the browser may choose to not contact the server
 at all and simply use its own cached copy:
 
-![Overview](https://devcenter1.assets.heroku.com/article-images/782-imported-1443570282-782-imported-1443554751-54-original.jpg)
+![Overview](../img/data/2.png)
 
 ## HTTP cache headers
 

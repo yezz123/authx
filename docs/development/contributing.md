@@ -1,8 +1,3 @@
----
-hide:
-  - navigation
----
-
 First, you might want to see the basic ways to
 [help AuthX and get help](../faq/help.md)
 

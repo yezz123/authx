@@ -1,43 +1,97 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+
+# Project information
 site_name: Authx
 site_description: Ready to use and customizable Authentications and Oauth2 management for FastAPI
 site_url: https://authx.yezz.me/
+site_author: dev@yezz.me (Yasser Tahiri)
+copyright: "Copyright (c) 2021 to present Yezz LLC. and individual contributors."
 
-theme:
-  name: 'material'
-  palette:
-    - scheme: default
-      primary: teal
-      accent: amber
-      toggle:
-          icon: material/lightbulb
-          name: Switch to dark mode
-    - scheme: slate
-      primary: teal
-      accent: amber
-      toggle:
-          icon: material/lightbulb-outline
-          name: Switch to light mode
-  logo: img/logo.png
-  favicon: img/icon.ico
-  features:
-  - search.suggest
-  - search.highlight
-  - content.tabs.link
-  - navigation.indexes
-  - content.tooltips
-  - navigation.path
-  - content.code.annotate
-  - content.code.copy
-  - content.code.select
-  - navigation.tabs
-  icon:
-    repo: fontawesome/brands/github
-  language: en
-repo_name: Yezz123/AuthX
-repo_url: https://github.com/yezz123/AuthX
-edit_uri: edit/main/docs/
+# Repository
+repo_name: yezz123/authx
+repo_url: https://github.com/yezz123/authx
+edit_uri: blob/main/docs/
 
+# Custom folder structure
+docs_dir: "docs/"
+use_directory_urls: true
+
+# Extra configuration
+extra:
+  generator: true
+  analytics:
+    provider: google
+    property: G-7RF17YL4KP
+  social:
+  - icon: fontawesome/brands/github-alt
+    link: https://github.com/yezz123/authx
+    name: "Follow me on Github"
+  - icon: fontawesome/brands/x-twitter
+    link: https://x.com/THyasser1
+    name: "Follow me on X(Formerly Twitter)"
+  - icon: "fontawesome/solid/hand-holding-dollar"
+    link: https://github.com/sponsors/yezz123
+    name: "Sponsor me on Github"
+
+
+# Markdown extensions configuration
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - abbr
+  - admonition
+  - pymdownx.details
+  - def_list
+  - meta
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - markdown.extensions.tables:
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.tabbed:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      base_path:
+        - "."
+      check_paths: true
+  - pymdownx.superfences
+  - toc:
+      permalink: "#"
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+
+# Plugins configuration
 plugins:
+  - git-committers:
+      enabled: true
+      repository: yezz123/authx
+      branch: main
+      docs_path: docs/
+      cache_dir: .cache/plugin/git-committers
+  - git-revision-date-localized:
+      enabled: true
+      enable_creation_date: true
+      fallback_to_build_date: true
+      locale: en
+  - minify:
+      minify_html: true
+      htmlmin_opts:
+        remove_comments: true
   - search: null
   - social:
       cards_layout_options:
@@ -68,32 +122,77 @@ plugins:
             allow_inspection: true
             show_symbol_type_heading: true
             show_symbol_type_toc: true
+  - privacy:
+      enabled: true
+  - rss:
+      abstract_chars_count: 160
+      abstract_delimiter: <!-- more -->
+      date_from_meta:
+        as_creation: "date"
+        datetime_format: "%Y-%m-%d %H:%M"
+        default_timezone: "Europe/Paris"
+        default_time: "22:00"
+      enabled: true
+      image: https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Feed-icon.svg/128px-Feed-icon.svg.png
+      json_feed_enabled: true
+      match_path: ".*"
+      pretty_print: true
+      rss_feed_enabled: true
+      url_parameters:
+        utm_source: "documentation"
+        utm_medium: "RSS"
+        utm_campaign: "feed-syndication"
+      use_git: true
+      use_material_social_cards: true
+  - termynal:
+      prompt_literal_start:
+        - "$"
+        - ">"
 
-markdown_extensions:
-  - attr_list
-  - md_in_html
-  - pymdownx.superfences
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - abbr
-  - admonition
-  - pymdownx.details
-  - def_list
-  - markdown.extensions.tables:
-  - pymdownx.tasklist:
-      custom_checkbox: true
-  - pymdownx.highlight:
-      anchor_linenums: true
-      line_spans: __span
-      pygments_lang_class: true
-  - pymdownx.tabbed:
-      alternate_style: true
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
 
+# Theme configuration
+theme:
+  name: 'material'
+  palette:
+    - scheme: default
+      primary: teal
+      accent: amber
+      toggle:
+          icon: material/lightbulb
+          name: Switch to dark mode
+    - scheme: slate
+      primary: teal
+      accent: amber
+      toggle:
+          icon: material/lightbulb-outline
+          name: Switch to light mode
+  logo: img/logo.png
+  favicon: img/icon.ico
+  features:
+  - navigation.indexes
+  - navigation.path
+  - content.code.annotate
+  - content.code.select
+  - content.action.edit
+  - content.action.view
+  - content.code.copy
+  - content.tabs.link
+  - content.tooltips
+  - navigation.footer
+  - navigation.tabs
+  - navigation.tabs.sticky
+  - navigation.top
+  - navigation.tracking
+  - search.highlight
+  - search.share
+  - search.suggest
+  - toc.follow
+  - toc.integrate
+  icon:
+    repo: fontawesome/brands/github
+  language: en
+
+# Navigation configuration
 nav:
   - Authx: index.md
   - Get Started:
@@ -145,24 +244,25 @@ nav:
     - License: faq/license.md
   - Release Notes: release.md
 
+# Search configuration
+validation:
+  links:
+    absolute_links: warn
+    not_found: warn
+    unrecognized_links: warn
+  nav:
+    absolute_links: warn
+    not_found: warn
+    omitted_files: warn
 
-extra:
-  generator: true
-  analytics:
-    provider: google
-    property: G-7RF17YL4KP
-  social:
-  - icon: fontawesome/brands/github-alt
-    link: https://github.com/yezz123/authx
-  - icon: fontawesome/brands/x-twitter
-    link: https://x.com/THyasser1
-  - icon: fontawesome/solid/globe
-    link: https://authx.yezz.me
+# Search configuration
+watch:
+  - README.md
 
+# Extra CSS and JavaScript
 extra_css:
   - css/termynal.css
   - css/custom.css
-
 extra_javascript:
   - js/termynal.js
   - js/custom.js
