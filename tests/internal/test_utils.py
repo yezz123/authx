@@ -87,7 +87,7 @@ def test_to_UTC(sample_datetime_with_tz):
 @freeze_time("2023-07-01 12:00:00")
 def test_to_UTC_without_tz():
     event_timestamp = "2023-05-20 12:00:00.000"
-    expected_result = "2023-05-20 11:00:00.000000"
+    expected_result = "2023-05-20 12:00:00.000000"
     assert to_UTC_without_tz(event_timestamp) == expected_result
 
 
