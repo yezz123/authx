@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Docs
+
+* 🔧 Re-organize `mkdocs` configuration & add new plugins. PR [#646](https://github.com/yezz123/authx/pull/646) by [@yezz123](https://github.com/yezz123).
+
 ## 1.3.0
 
 ### Features
