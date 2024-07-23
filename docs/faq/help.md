@@ -59,11 +59,9 @@ example:
 
 ## Sponsor the author
 
-<p align="center">
-<a href="https://github.com/sponsors/yezz123" target="_blank">
-<img src="https://www.pngitem.com/pimgs/m/330-3302960_github-sponsorship-logo-with-smiling-cat-and-heart.png" alt="Buy Me A Coffee"/>
-</a>
-</p>
+<div class="my-3">
+  <iframe class="text-center inline-block" src="https://github.com/sponsors/yezz123/button" title="Sponsor yezz123" height="35" width="116" style="border: 0;"></iframe>
+</div>
 
 And you can also become a Silver or Gold sponsor for AuthX, just contact me by email. 🏅🎉
 

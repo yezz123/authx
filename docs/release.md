@@ -162,7 +162,7 @@
 
 ### Core
 
-* ✨ AuthX Revamp - V1.0.0. PR [#446](https://github.com/yezz123/authx/pull/446) by [@yezz123](https://github.com/yezz123)
+* ✨ authx Revamp - V1.0.0. PR [#446](https://github.com/yezz123/authx/pull/446) by [@yezz123](https://github.com/yezz123)
 * ♻️ Refactor & Rebuild Functionalities in authx. PR [#454](https://github.com/yezz123/authx/pull/454) by [@yezz123](https://github.com/yezz123)
 * ✨ Migrate Authx to use pydantic v2. PR [#531](https://github.com/yezz123/authx/pull/531) by [@yezz123](https://github.com/yezz123)
 * ✨ Handle catch-all signature errors. PR [#538](https://github.com/yezz123/authx/pull/538) by [@yezz123](https://github.com/yezz123)
@@ -188,9 +188,9 @@
 ### Documentation
 
 * 📝 overrides template & Include google analytics. PR [#482](https://github.com/yezz123/authx/pull/482) by [@yezz123](https://github.com/yezz123)
-* 📝 Add Extra documentation to AuthX. PR [#483](https://github.com/yezz123/authx/pull/483) by [@yezz123](https://github.com/yezz123)
+* 📝 Add Extra documentation to authx. PR [#483](https://github.com/yezz123/authx/pull/483) by [@yezz123](https://github.com/yezz123)
 * 📝 Update `OAuth2` external middleware. PR [#514](https://github.com/yezz123/authx/pull/514) by [@yezz123](https://github.com/yezz123)
-* 📝 Add Basic Documentation for AuthX core. PR [#513](https://github.com/yezz123/authx/pull/513) by [@yezz123](https://github.com/yezz123)
+* 📝 Add Basic Documentation for authx core. PR [#513](https://github.com/yezz123/authx/pull/513) by [@yezz123](https://github.com/yezz123)
 * 📝 Add `mkdocstrings` to mkdocs configuration. PR [#552](https://github.com/yezz123/authx/pull/552) by [@yezz123](https://github.com/yezz123)
 * ♻️ refactor documentation. PR [#557](https://github.com/yezz123/authx/pull/557) by [@yezz123](https://github.com/yezz123)
 * 📝 Add guide on accessing payload data in routes. PR [#558](https://github.com/yezz123/authx/pull/558) by [@yezz123](https://github.com/yezz123)
@@ -262,8 +262,8 @@
 
 ### Documentations
 
-* 📝 Add Basic Documentation for AuthX core. PR [#513](https://github.com/yezz123/authx/pull/513) by [@yezz123](https://github.com/yezz123).
-* 📝 Add Documentation for AuthX core. PR [#562](https://github.com/yezz123/authx/pull/562) by [@yezz123](https://github.com/yezz123).
+* 📝 Add Basic Documentation for authx core. PR [#513](https://github.com/yezz123/authx/pull/513) by [@yezz123](https://github.com/yezz123).
+* 📝 Add Documentation for authx core. PR [#562](https://github.com/yezz123/authx/pull/562) by [@yezz123](https://github.com/yezz123).
 
 ### Core
 
@@ -294,13 +294,13 @@
 ### Major Changes 🚑️
 
 * ➖ Remove Documentation Workflow. PR [#414](https://github.com/yezz123/authx/pull/414) by [@yezz123](https://github.com/yezz123).
-* ♻️ chore(revamp): AuthX Revamp - V1.0.0. PR [#446](https://github.com/yezz123/authx/pull/446) by [@yezz123](https://github.com/yezz123).
+* ♻️ chore(revamp): authx Revamp - V1.0.0. PR [#446](https://github.com/yezz123/authx/pull/446) by [@yezz123](https://github.com/yezz123).
 * 🔧 Feat: Refactor & Rebuild Functionalities in authx. PR [#454](https://github.com/yezz123/authx/pull/454) by [@yezz123](https://github.com/yezz123).
 * 🐛 fix Continuous Integration Badge. [PR #455](https://github.com/yezz123/authx/pull/455) by [@yezz123](https://github.com/yezz123).
 * ♻️ use pip-tool to autogenerate dependencies[PR #478](https://github.com/yezz123/authx/pull/478) by [@yezz123](https://github.com/yezz123)
 * 🔧 Run tests against `py38`. [PR #480](https://github.com/yezz123/authx/pull/480) by [@yezz123](https://github.com/yezz123)
 * 📝 overrides template & Include google analytics. [PR #482](https://github.com/yezz123/authx/pull/482) by [@yezz123](https://github.com/yezz123)
-* 📝 Add Extra documentation to AuthX. [PR #483](https://github.com/yezz123/authx/pull/483) by [@yezz123](https://github.com/yezz123)
+* 📝 Add Extra documentation to authx. [PR #483](https://github.com/yezz123/authx/pull/483) by [@yezz123](https://github.com/yezz123)
 * 🔧 Include Python 3.12. [PR #494](https://github.com/yezz123/authx/pull/494) by [@yezz123](https://github.com/yezz123)
 * ✨ add support for ruff linter. [PR #497](https://github.com/yezz123/authx/pull/497) by [@yezz123](https://github.com/yezz123)
 * ♻️ Drop External Libraries in favour of `authx-extra`. [PR #506](https://github.com/yezz123/authx/pull/506) by [@yezz123](https://github.com/yezz123)
@@ -535,7 +535,7 @@
 * Fix Issue of Missing requirements by @yezz123. PR [#225](https://github.com/yezz123/authx/pull/225) by @yezz123.
 * Update dependencies by @yezz123. PR [#233](https://github.com/yezz123/authx/pull/233) by @yezz123.
 * Change domain from `.codes` to `.me` by @yezz123. PR [#235](https://github.com/yezz123/authx/pull/235) by @yezz123.
-* Support SocketIO in AuthX ✨ by @yezz123. PR [#234](https://github.com/yezz123/authx/pull/234) by @yezz123.
+* Support SocketIO in authx ✨ by @yezz123. PR [#234](https://github.com/yezz123/authx/pull/234) by @yezz123.
 
 ## 0.4.0
 
@@ -544,8 +544,8 @@
 * Ref: Use the built-in function `next` instead of a for-loop. PR [#213](https://github.com/yezz123/authx/pull/213) by @yezz123.
 * Chore(docs): Add New Sponsors ✨❤️. PR [#214](https://github.com/yezz123/authx/pull/214) by @yezz123.
 * Docs(mkdocs.yml): Change name from `middlewares` to `middleware`. PR [#215](https://github.com/yezz123/authx/pull/215) by @theoohoho.
-* Chore(f/l): Integrate `Pyupgrade` to AuthX Environment. PR [#216](https://github.com/yezz123/authx/pull/216) by @yezz123.
-* Chore(feat): Integrate HTTP Caching Model for AuthX ✨. PR [#217](https://github.com/yezz123/authx/pull/217) by @yezz123.
+* Chore(f/l): Integrate `Pyupgrade` to authx Environment. PR [#216](https://github.com/yezz123/authx/pull/216) by @yezz123.
+* Chore(feat): Integrate HTTP Caching Model for authx ✨. PR [#217](https://github.com/yezz123/authx/pull/217) by @yezz123.
 * Docs: Add theoohoho as a contributor for doc. PR [#218](https://github.com/yezz123/authx/pull/218) by @allcontributors.
 * Chore(Example): Provide New Cache Example✨. PR [#219](https://github.com/yezz123/authx/pull/219) by @yezz123.
 
@@ -614,7 +614,7 @@
   [PR #128](https://github.com/yezz123/authx/pull/128)
 * chore: fix dockerfile commands by @yezz123 in
   [PR #130](https://github.com/yezz123/authx/pull/130)
-* Chore: change Name from `AuthX` to `authx` ✨ by @yezz123 in
+* Chore: change Name from `authx` to `authx` ✨ by @yezz123 in
   [PR #131](https://github.com/yezz123/authx/pull/131)
 * Bump version from 0.1.1 to 0.1.2 ✨ by @yezz123 in
   [PR #132](https://github.com/yezz123/authx/pull/132)
@@ -622,99 +622,99 @@
 ## 0.1.1
 
 * Add a partial router to Database ✨ by @yezz123 in
-  [PR #97](https://github.com/yezz123/AuthX/pull/97)
+  [PR #97](https://github.com/yezz123/authx/pull/97)
 * Docs: Update documentation by @yezz123 in
-  [PR #98](https://github.com/yezz123/AuthX/pull/98)
+  [PR #98](https://github.com/yezz123/authx/pull/98)
 * Bump from 0.1.0 to 0.1.1 ✨ by @yezz123 in
-  [PR #99](https://github.com/yezz123/AuthX/pull/99)
+  [PR #99](https://github.com/yezz123/authx/pull/99)
 
 ## 0.1.0
 
 * docs: Add All Contributor by @yezz123 in
-  [PR #89](https://github.com/yezz123/AuthX/pull/89)
+  [PR #89](https://github.com/yezz123/authx/pull/89)
 * 📃 Docs: Add Codacy Review ✨ by @yezz123 in
-  [PR #90](https://github.com/yezz123/AuthX/pull/90)
-* CI: Fix Workflows ✨. [PR #92](https://github.com/yezz123/AuthX/pull/92)
+  [PR #90](https://github.com/yezz123/authx/pull/90)
+* CI: Fix Workflows ✨. [PR #92](https://github.com/yezz123/authx/pull/92)
 * chore: Provide all requirements relate to `Setup.py` ✨ by @yezz123 in
-  [PR #93](https://github.com/yezz123/AuthX/pull/93)
+  [PR #93](https://github.com/yezz123/authx/pull/93)
 * ⬆️ Bump from 0.0.9 to 0.1.0 by @yezz123 in
-  [PR #94](https://github.com/yezz123/AuthX/pull/94)
+  [PR #94](https://github.com/yezz123/authx/pull/94)
 
 ## 0.0.9
 
 * Bump mkdocs from 1.2.2 to 1.2.3 by @dependabot in
-  [PR #78](https://github.com/yezz123/AuthX/pull/78)
+  [PR #78](https://github.com/yezz123/authx/pull/78)
 * Bump pytest-asyncio from 0.14.0 to 0.16.0 by @dependabot in
-  [PR #77](https://github.com/yezz123/AuthX/pull/77)
+  [PR #77](https://github.com/yezz123/authx/pull/77)
 * 🐳 DockerFile Checker ✨ by @yezz123 in
-  [PR #80](https://github.com/yezz123/AuthX/pull/80)
+  [PR #80](https://github.com/yezz123/authx/pull/80)
 * chore: Provide DocString for Functions ✨ by @yezz123 in
-  [PR #84](https://github.com/yezz123/AuthX/pull/84)
+  [PR #84](https://github.com/yezz123/authx/pull/84)
 * Docs: Create a Release Notes ✨ by @yezz123 in
-  [PR #85](https://github.com/yezz123/AuthX/pull/85)
+  [PR #85](https://github.com/yezz123/authx/pull/85)
 * Chore: Add Local Testing & Code Coverage ✨ by @yezz123 in
-  [PR #86](https://github.com/yezz123/AuthX/pull/86)
+  [PR #86](https://github.com/yezz123/authx/pull/86)
 * Docs: Add Coverage Badge ✨ by @yezz123 in
-  [PR #87](https://github.com/yezz123/AuthX/pull/87)
+  [PR #87](https://github.com/yezz123/authx/pull/87)
 * ⬆️ Bump Version from 0.0.8 to 0.0.9 by @yezz123 in
-  [PR #88](https://github.com/yezz123/AuthX/pull/88)
+  [PR #88](https://github.com/yezz123/authx/pull/88)
 
 ## 0.0.8
 
 * Fix Highlighting Issue ✨ by @yezz123 in
-  [PR #69](https://github.com/yezz123/AuthX/pull/69)
+  [PR #69](https://github.com/yezz123/authx/pull/69)
 * Docs: Add some Typo ✨ by @yezz123 in
-  [PR #70](https://github.com/yezz123/AuthX/pull/70)
+  [PR #70](https://github.com/yezz123/authx/pull/70)
 * Add Code of Conducts & License ✨ by @yezz123 in
-  [PR #71](https://github.com/yezz123/AuthX/pull/71)
+  [PR #71](https://github.com/yezz123/authx/pull/71)
 * Switch to MIT License ✨ by @yezz123 in
-  [PR #73](https://github.com/yezz123/AuthX/pull/73)
+  [PR #73](https://github.com/yezz123/authx/pull/73)
 * Test Documentation Build ✨ by @yezz123 in
-  [PR #74](https://github.com/yezz123/AuthX/pull/74)
+  [PR #74](https://github.com/yezz123/authx/pull/74)
 * ⬆️ Bump from 0.0.7 to 0.0.8 ✨ by @yezz123 in
-  [PR #75](https://github.com/yezz123/AuthX/pull/75)
+  [PR #75](https://github.com/yezz123/authx/pull/75)
 
 ## 0.0.7
 
-* Implement DocStrings ✨. PR [#60](https://github.com/yezz123/AuthX/pull/60) by @yezz123.
-* Create a Global Documentation using Mkdocs. PR [#63](https://github.com/yezz123/AuthX/pull/63) by @yezz123.
-* Fix Requirements. PR [#66](https://github.com/yezz123/AuthX/pull/66) by @yezz123.
-* Fix Documentation. PR [#67](https://github.com/yezz123/AuthX/pull/67) by @yezz123.
-* Version 0.0.7 ✨. PR [#68](https://github.com/yezz123/AuthX/pull/68) by @yezz123.
+* Implement DocStrings ✨. PR [#60](https://github.com/yezz123/authx/pull/60) by @yezz123.
+* Create a Global Documentation using Mkdocs. PR [#63](https://github.com/yezz123/authx/pull/63) by @yezz123.
+* Fix Requirements. PR [#66](https://github.com/yezz123/authx/pull/66) by @yezz123.
+* Fix Documentation. PR [#67](https://github.com/yezz123/authx/pull/67) by @yezz123.
+* Version 0.0.7 ✨. PR [#68](https://github.com/yezz123/authx/pull/68) by @yezz123.
 
 ## 0.0.6
 
-* Fix Environment Files. PR [#54](https://github.com/yezz123/AuthX/pull/54) by @yezz123.
-* Provide More Classifiers ✨. PR [#57](https://github.com/yezz123/AuthX/pull/57) by @yezz123.
-* Setup Tests DocStrings ✨. PR [#58](https://github.com/yezz123/AuthX/pull/58) by @yezz123.
+* Fix Environment Files. PR [#54](https://github.com/yezz123/authx/pull/54) by @yezz123.
+* Provide More Classifiers ✨. PR [#57](https://github.com/yezz123/authx/pull/57) by @yezz123.
+* Setup Tests DocStrings ✨. PR [#58](https://github.com/yezz123/authx/pull/58) by @yezz123.
 
 ## 0.0.5
 
-* ✨ Fix Documentation issue. PR [#45](https://github.com/yezz123/AuthX/pull/45) by @yezz123.
+* ✨ Fix Documentation issue. PR [#45](https://github.com/yezz123/authx/pull/45) by @yezz123.
 
 ## 0.0.4
 
-* Setup docstring & Create Documentation. PR [#44](https://github.com/yezz123/AuthX/pull/44) by @yezz123.
+* Setup docstring & Create Documentation. PR [#44](https://github.com/yezz123/authx/pull/44) by @yezz123.
 
 ## 0.0.3
 
-* Test: All functions in the Services and Fix some issues related to Raise(). PR [#23](https://github.com/yezz123/AuthX/pull/23) by @yezz123.
-* Release the first Version of AuthX ✨. PR [#28](https://github.com/yezz123/AuthX/pull/28) by @yezz123.
-* Create a Simple Readme. PR [#42](https://github.com/yezz123/AuthX/pull/42) by @yezz123.
-* Create 0.0.3 version. PR [#43](https://github.com/yezz123/AuthX/pull/43) by @yezz123.
+* Test: All functions in the Services and Fix some issues related to Raise(). PR [#23](https://github.com/yezz123/authx/pull/23) by @yezz123.
+* Release the first Version of authx ✨. PR [#28](https://github.com/yezz123/authx/pull/28) by @yezz123.
+* Create a Simple Readme. PR [#42](https://github.com/yezz123/authx/pull/42) by @yezz123.
+* Create 0.0.3 version. PR [#43](https://github.com/yezz123/authx/pull/43) by @yezz123.
 
 ## 0.0.2
 
-* Create a test for Email ✨. PR [#25](https://github.com/yezz123/AuthX/pull/25) by @yezz123.
+* Create a test for Email ✨. PR [#25](https://github.com/yezz123/authx/pull/25) by @yezz123.
 
 ## 0.0.1
 
-* Chore: Create Package Core. PR [#1](https://github.com/yezz123/AuthX/pull/1) by @yezz123.
-* Chore: Provide The Full Functionality of Routers and Services. PR [#2](https://github.com/yezz123/AuthX/pull/2) by @yezz123.
-* Chore: Create the Package Main file. PR [#3](https://github.com/yezz123/AuthX/pull/3) by @yezz123.
-* Chore: Add Testing and Building Configuration. PR [#5](https://github.com/yezz123/AuthX/pull/5) by @yezz123.
-* Chore: Add Last Build Addons to Test Branch. PR [#8](https://github.com/yezz123/AuthX/pull/8) by @yezz123.
-* Chore: Create Dev work for testing the Package. PR [#4](https://github.com/yezz123/AuthX/pull/4) by @yezz123.
-* Chore: Fix Build Files. PR [#10](https://github.com/yezz123/AuthX/pull/10) by @yezz123.
-* Isort AuthX path and Fix Missing packages for test. PR [#18](https://github.com/yezz123/AuthX/pull/18) by @yezz123.
-* Adding test case to workflow. PR [#19](https://github.com/yezz123/AuthX/pull/19) by @yezz123.
+* Chore: Create Package Core. PR [#1](https://github.com/yezz123/authx/pull/1) by @yezz123.
+* Chore: Provide The Full Functionality of Routers and Services. PR [#2](https://github.com/yezz123/authx/pull/2) by @yezz123.
+* Chore: Create the Package Main file. PR [#3](https://github.com/yezz123/authx/pull/3) by @yezz123.
+* Chore: Add Testing and Building Configuration. PR [#5](https://github.com/yezz123/authx/pull/5) by @yezz123.
+* Chore: Add Last Build Addons to Test Branch. PR [#8](https://github.com/yezz123/authx/pull/8) by @yezz123.
+* Chore: Create Dev work for testing the Package. PR [#4](https://github.com/yezz123/authx/pull/4) by @yezz123.
+* Chore: Fix Build Files. PR [#10](https://github.com/yezz123/authx/pull/10) by @yezz123.
+* Isort authx path and Fix Missing packages for test. PR [#18](https://github.com/yezz123/authx/pull/18) by @yezz123.
+* Adding test case to workflow. PR [#19](https://github.com/yezz123/authx/pull/19) by @yezz123.
