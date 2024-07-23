@@ -32,6 +32,9 @@ extra:
   - icon: "fontawesome/solid/hand-holding-dollar"
     link: https://github.com/sponsors/yezz123
     name: "Sponsor me on Github"
+  - icon: "fontawesome/solid/rss"
+    link: /feed_rss_updated.xml
+    name: "RSS Feed"
 
 
 # Markdown extensions configuration
