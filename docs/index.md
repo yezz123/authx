@@ -1,7 +1,7 @@
 
 <p align="center">
 <a href="https://authx.yezz.me" target="_blank">
-    <img src="https://user-images.githubusercontent.com/52716203/136962014-280d82b0-0640-4ee5-9a11-b451b338f6d8.png" alt="AuthX">
+    <img src="https://user-images.githubusercontent.com/52716203/136962014-280d82b0-0640-4ee5-9a11-b451b338f6d8.png" alt="authx">
 </a>
 <p align="center">
     <em>Ready-to-use and customizable Authentications and Oauth2 management for FastAPI ⚡</em>
@@ -24,7 +24,7 @@
 ---
 
 Add a Fully registration and authentication or authorization system to your
-[FastAPI](https://fastapi.tiangolo.com/) project. **AuthX** is designed to be as
+[FastAPI](https://fastapi.tiangolo.com/) project. **authx** is designed to be as
 customizable and adaptable as possible.
 
 ## Installation
@@ -58,7 +58,7 @@ $ pip install authx
 
 !!! notes
 
-    AuthX is designed to be as customizable and adaptable as possible.
+    authx is designed to be as customizable and adaptable as possible.
 
     So you need to install [`authx-extra`](https://github.com/yezz123/authx-extra) to get extra features.
 
@@ -72,7 +72,7 @@ $ pip install authx
 
 ## Project using
 
-Here is a simple way to kickstart your project with AuthX:
+Here is a simple way to kickstart your project with authx:
 
 ```python
 from fastapi import FastAPI, Depends, HTTPException
