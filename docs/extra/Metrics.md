@@ -28,7 +28,7 @@ class MetricsMiddleware(BaseHTTPMiddleware):
 
 Clients have only one responsibility: make their metrics available for a Prometheus server to scrape. This is done by exposing an HTTP endpoint, usually /metrics, which returns the full list of metrics (with label sets) and their values. This endpoint is very cheap to call as it simply outputs the current value of each metric, without doing any calculation.
 
-![Prometheus scraping](https://blog.pvincent.io/images/prometheus-series/prometheus-service-scrape.png)
+![Prometheus scraping](../img/data/3.png)
 
 On the Prometheus server side, each target (statically defined, or dynamically discovered) is scraped at a regular interval (scrape interval). Each scrape reads the /metrics to get the current state of the client metrics, and persists the values in the Prometheus time-series database.
 

@@ -1,8 +1,6 @@
 # License
 
-<p>
-     <img align="right" src="https://i0.wp.com/opensource.org/wp-content/uploads/2023/03/cropped-OSI-horizontal-large.png">
-</p>
+![License](../img/license.png)
 
 The class is licensed under the [MIT License](https://opensource.org/licenses/mit)
 

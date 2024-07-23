@@ -38,6 +38,6 @@ I use the following reference to get The package done:
 - <https://camillovisini.com/article/abstracting-fastapi-services/>
 - <https://pyjwt.readthedocs.io/en/latest/>
 
-## License 📝
+## [License](license.md)
 
-This project is licensed under the terms of the MIT License.
+This project is licensed under the terms of the MIT License - Check [LICENSE](license.md) file for more information.
