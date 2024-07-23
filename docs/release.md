@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Upgrades
+
+* ⬆ Bump ruff-pre-commit from v0.5.2 to v0.5.4. PR [#648](https://github.com/yezz123/authx/pull/648) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+
 ### Docs
 
 * 🔧 Re-organize `mkdocs` configuration & add new plugins. PR [#646](https://github.com/yezz123/authx/pull/646) by [@yezz123](https://github.com/yezz123).
