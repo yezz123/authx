@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* ⬆ Bump ruff-pre-commit from v0.5.4 to v0.5.5. PR [#653](https://github.com/yezz123/authx/pull/653) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Update uv version to `0.2.30`. PR [#650](https://github.com/yezz123/authx/pull/650) by [@pinchXOXO](https://github.com/pinchXOXO).
 * ⬆ Bump ruff-pre-commit from v0.5.2 to v0.5.4. PR [#648](https://github.com/yezz123/authx/pull/648) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 
