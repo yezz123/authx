@@ -8,6 +8,7 @@
 
 ### Docs
 
+* 🍱 Optimize images sizes. PR [#651](https://github.com/yezz123/authx/pull/651) by [@imgbot[bot]](https://github.com/apps/imgbot).
 * 📝 Update image URL in different pages & Fix naming typo. PR [#649](https://github.com/yezz123/authx/pull/649) by [@yezz123](https://github.com/yezz123).
 * 🔧 Re-organize `mkdocs` configuration & add new plugins. PR [#646](https://github.com/yezz123/authx/pull/646) by [@yezz123](https://github.com/yezz123).
 
