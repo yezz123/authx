@@ -23,7 +23,7 @@ pydantic==2.8.2
     # via
     #   fastapi
     #   pydantic-settings
-pydantic-core==2.20.1
+pydantic-core==2.21.0
     # via pydantic
 pydantic-settings==2.4.0
 pyjwt==2.9.0
@@ -40,7 +40,7 @@ six==1.16.0
     #   python-dateutil
 sniffio==1.3.1
     # via anyio
-starlette==0.37.2
+starlette==0.38.2
     # via fastapi
 typing-extensions==4.12.2
     # via
