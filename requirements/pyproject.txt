@@ -10,7 +10,7 @@ cryptography==43.0.0
     # via pyjwt
 ecdsa==0.19.0
     # via python-jose
-fastapi==0.112.0
+fastapi==0.112.1
 idna==3.7
     # via anyio
 pyasn1==0.6.0
@@ -23,7 +23,7 @@ pydantic==2.8.2
     # via
     #   fastapi
     #   pydantic-settings
-pydantic-core==2.21.0
+pydantic-core==2.20.1
     # via pydantic
 pydantic-settings==2.4.0
 pyjwt==2.9.0
