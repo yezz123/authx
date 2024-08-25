@@ -12,6 +12,9 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.9", "3.10", "3.11", "3.12"]
+        uv-version: ["latest"]
+        uv-venv: [".venv"]
+        uv-cache: [true]
       fail-fast: false
 
     steps:
@@ -22,10 +25,11 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: setup uv
-        uses: yezz123/setup-uv@v4
+        uses: yezz123/setup-uv@dev
         with:
-          uv-version: "0.2.30"
-          uv-venv: ".venv"
+          uv-version: ${{ matrix.uv-version }}
+          uv-venv: ${{ matrix.uv-venv }}
+          uv-cache: ${{ matrix.uv-cache }}
 
       - name: Install Dependencies
         run: uv pip install -r requirements/all.txt
@@ -45,6 +49,9 @@ jobs:
       matrix:
 
         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        uv-version: ["latest"]
+        uv-venv: [".venv"]
+        uv-cache: [true]
 
         os: [ubuntu, macos, windows]
 
@@ -56,11 +63,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: setup UV
-        uses: yezz123/setup-uv@v4
+      - uses: yezz123/setup-uv@dev
         with:
-          uv-version: "0.2.30"
-          uv-venv: ".venv"
+          uv-version: ${{ matrix.uv-version }}
+          uv-venv: ${{ matrix.uv-venv }}
+          uv-cache: ${{ matrix.uv-cache }}
 
       - name: Install Dependencies
         run: uv pip install -e . && uv pip install -r requirements/testing.txt
@@ -91,6 +98,9 @@ jobs:
       matrix:
 
         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        uv-version: ["latest"]
+        uv-venv: [".venv"]
+        uv-cache: [true]
 
         os: [ubuntu, macos, windows]
 
@@ -102,11 +112,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: setup UV
-        uses: yezz123/setup-uv@v4
+      - uses: yezz123/setup-uv@dev
         with:
-          uv-version: "0.2.30"
-          uv-venv: ".venv"
+          uv-version: ${{ matrix.uv-version }}
+          uv-venv: ${{ matrix.uv-venv }}
+          uv-cache: ${{ matrix.uv-cache }}
 
       - name: Install Dependencies
         run: uv pip install -e . && uv pip install -r requirements/testing.txt
