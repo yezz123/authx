@@ -17,6 +17,10 @@
 * 📝 Update image URL in different pages & Fix naming typo. PR [#649](https://github.com/yezz123/authx/pull/649) by [@yezz123](https://github.com/yezz123).
 * 🔧 Re-organize `mkdocs` configuration & add new plugins. PR [#646](https://github.com/yezz123/authx/pull/646) by [@yezz123](https://github.com/yezz123).
 
+### Internal
+
+* 🐛  add `itsdangerous` to project dependencies level. PR [#664](https://github.com/yezz123/authx/pull/664) by [@jor-rit](https://github.com/jor-rit).
+
 ## 1.3.0
 
 ### Features
