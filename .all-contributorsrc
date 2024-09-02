@@ -110,6 +110,15 @@
       "contributions": [
         "infra"
       ]
+    },
+    {
+      "login": "jor-rit",
+      "name": "Jorrit",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16398756?v=4",
+      "profile": "https://github.com/jor-rit",
+      "contributions": [
+        "platform"
+      ]
     }
   ],
   "contributorsPerLine": 7,
