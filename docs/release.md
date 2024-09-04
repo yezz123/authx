@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* ⬆️ Bump cryptography from 43.0.0 to 43.0.1. PR [#668](https://github.com/yezz123/authx/pull/668) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump ruff-pre-commit from v0.6.2 to v0.6.3. PR [#667](https://github.com/yezz123/authx/pull/667) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump ruff-pre-commit from v0.6.1 to v0.6.2. PR [#662](https://github.com/yezz123/authx/pull/662) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump pypa/gh-action-pypi-publish from 1.9.0 to 1.10.0. PR [#665](https://github.com/yezz123/authx/pull/665) by [@dependabot[bot]](https://github.com/apps/dependabot).
