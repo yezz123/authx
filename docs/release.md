@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* ⬆ Bump pypa/gh-action-pypi-publish from 1.10.1 to 1.10.2. PR [#672](https://github.com/yezz123/authx/pull/672) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump ruff-pre-commit from v0.6.4 to v0.6.5. PR [#671](https://github.com/yezz123/authx/pull/671) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump ruff-pre-commit from v0.6.3 to v0.6.4. PR [#670](https://github.com/yezz123/authx/pull/670) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump pypa/gh-action-pypi-publish from 1.10.0 to 1.10.1. PR [#669](https://github.com/yezz123/authx/pull/669) by [@dependabot[bot]](https://github.com/apps/dependabot).
