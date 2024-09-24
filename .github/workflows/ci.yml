@@ -25,7 +25,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: setup uv
-        uses: yezz123/setup-uv@dev
+        uses: yezz123/setup-uv@main
         with:
           uv-version: ${{ matrix.uv-version }}
           uv-venv: ${{ matrix.uv-venv }}
@@ -63,7 +63,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: yezz123/setup-uv@dev
+      - uses: yezz123/setup-uv@main
         with:
           uv-version: ${{ matrix.uv-version }}
           uv-venv: ${{ matrix.uv-venv }}
@@ -112,7 +112,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: yezz123/setup-uv@dev
+      - uses: yezz123/setup-uv@main
         with:
           uv-version: ${{ matrix.uv-version }}
           uv-venv: ${{ matrix.uv-venv }}
