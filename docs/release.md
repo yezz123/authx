@@ -21,6 +21,7 @@
 
 ### Docs
 
+* ♻️ Refactor documentation requirements. PR [#674](https://github.com/yezz123/authx/pull/674) by [@yezz123](https://github.com/yezz123).
 * 📝 add @jor-rit as a contributor for platform. PR [#666](https://github.com/yezz123/authx/pull/666) by [@allcontributors[bot]](https://github.com/apps/allcontributors).
 * 🍱 Optimize images sizes. PR [#651](https://github.com/yezz123/authx/pull/651) by [@imgbot[bot]](https://github.com/apps/imgbot).
 * 📝 Update image URL in different pages & Fix naming typo. PR [#649](https://github.com/yezz123/authx/pull/649) by [@yezz123](https://github.com/yezz123).
