@@ -29,6 +29,7 @@
 
 ### Internal
 
+* :wrench: Drop Python 3.8 version matrix in CI workflow. PR [#675](https://github.com/yezz123/authx/pull/675) by [@yezz123](https://github.com/yezz123).
 * 🐛  add `itsdangerous` to project dependencies level. PR [#664](https://github.com/yezz123/authx/pull/664) by [@jor-rit](https://github.com/jor-rit).
 
 ## 1.3.0
