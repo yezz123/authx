@@ -1,5 +1,7 @@
 ## Latest Changes
 
+## 1.3.1
+
 ### Upgrades
 
 * ⬆️ Bump `ruff-pre-commit` from v0.6.5 to v0.6.7. PR [#673](https://github.com/yezz123/authx/pull/673) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
