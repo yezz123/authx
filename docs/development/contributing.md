@@ -156,6 +156,16 @@ The documentation uses
 
 All the documentation is in Markdown format in the directory `./docs`.
 
+<div class="termy">
+
+```console
+uv pip install requirements-docs.txt
+
+bash scripts/docs_build.sh
+```
+
+</div>
+
 ### Including
 
 To Build AuthX Documentation we need the following packages, which are:
