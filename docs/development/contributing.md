@@ -98,7 +98,7 @@ After activating the environment as described above, Now lets install all the pa
 <div class="termy">
 
 ```console
-$ uv pip install -r requirements/all.txt
+$ uv sync
 
 ---> 100%
 ```
@@ -155,6 +155,16 @@ The documentation uses
 <a href="https://www.mkdocs.org/" class="external-link" target="_blank">MkDocs</a>.
 
 All the documentation is in Markdown format in the directory `./docs`.
+
+<div class="termy">
+
+```console
+uv pip install requirements-docs.txt
+
+bash scripts/docs_build.sh
+```
+
+</div>
 
 ### Including
 

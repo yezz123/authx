@@ -61,6 +61,28 @@ dynamic = ["version"]
 [tool.hatch.metadata]
 allow-direct-references = true
 
+[tool.uv]
+dev-dependencies = [
+    'pytest',
+    'pytest-asyncio',
+    'pytest-cov',
+    'httpx',
+    'requests',
+    'SQLAlchemy',
+    'itsdangerous',
+    'websockets',
+    'freezegun',
+    'async-asgi-testclient',
+    'pre-commit',
+    'mypy',
+    'black',
+    'pyupgrade',
+    'ruff',
+    'types-python-dateutil',
+    'types-pytz',
+    'codespell',
+]
+
 [project.urls]
 Homepage = "https://github.com/yezz123/authx"
 Documentation = "https://authx.yezz.me/"

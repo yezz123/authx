@@ -46,10 +46,6 @@ $ pip install authx_extra
 $ git clone https://github.com/yezz123/authx.git
 
 ---> 100%
-
-$ cd authx
-
-$ bash scripts/install.sh
 ```
 
 </div>

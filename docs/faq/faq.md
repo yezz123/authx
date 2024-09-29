@@ -34,8 +34,6 @@ I use the following reference to get The package done:
 
 - <https://fastapi.tiangolo.com/>
 - <https://pydantic-docs.helpmanual.io/>
-- <https://indominusbyte.github.io/fastapi-jwt-auth/>
-- <https://camillovisini.com/article/abstracting-fastapi-services/>
 - <https://pyjwt.readthedocs.io/en/latest/>
 
 ## [License](license.md)

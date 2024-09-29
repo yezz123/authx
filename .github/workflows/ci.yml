@@ -24,11 +24,10 @@ jobs:
       - name: setup uv
         uses: yezz123/setup-uv@v4
         with:
-          uv-version: "0.2.30"
           uv-venv: ".venv"
 
       - name: Install Dependencies
-        run: uv pip install -r requirements/all.txt
+        run: uv sync
 
       - name: Typecheck with mypy
         run: bash scripts/mypy.sh
@@ -59,11 +58,10 @@ jobs:
       - name: setup UV
         uses: yezz123/setup-uv@v4
         with:
-          uv-version: "0.2.30"
           uv-venv: ".venv"
 
       - name: Install Dependencies
-        run: uv pip install -e . && uv pip install -r requirements/testing.txt
+        run: uv sync
 
       - name: Freeze Dependencies
         run: uv pip freeze
@@ -105,11 +103,10 @@ jobs:
       - name: setup UV
         uses: yezz123/setup-uv@v4
         with:
-          uv-version: "0.2.30"
           uv-venv: ".venv"
 
       - name: Install Dependencies
-        run: uv pip install -e . && uv pip install -r requirements/testing.txt
+        run: uv sync
 
       - name: Install pydantic v1
         run: uv pip install pydantic==1.10.17
