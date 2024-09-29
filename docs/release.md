@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Internal
+
+* ♻️ Refactor pyproject to add dev dependencies in uv tool. PR [#676](https://github.com/yezz123/authx/pull/676) by [@yezz123](https://github.com/yezz123).
+
 ## 1.3.1
 
 ### Upgrades
