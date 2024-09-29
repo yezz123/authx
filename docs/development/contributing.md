@@ -98,7 +98,7 @@ After activating the environment as described above, Now lets install all the pa
 <div class="termy">
 
 ```console
-$ uv pip install -r requirements/all.txt
+$ uv sync
 
 ---> 100%
 ```
