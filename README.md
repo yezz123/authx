@@ -30,7 +30,7 @@ customizable and adaptable as possible.
 
 ## Features
 
-- [x] Support Python 3.8+ & Pydantic 2.0+.
+- [x] Support Python 3.8+ & Pydantic 1.7+.
 - [x] Multiple customizable authentication backend:
   - [x] JWT authentication backend included
     - [x] JWT encoding/decoding for application authentication
