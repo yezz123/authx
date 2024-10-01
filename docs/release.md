@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Upgrades
+
+* ⬆ Bump `ruff-pre-commit` from v0.6.7 to v0.6.8. PR [#678](https://github.com/yezz123/authx/pull/678) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+
 ### Internal
 
 * ♻️ Refactor pyproject to add dev dependencies in uv tool. PR [#676](https://github.com/yezz123/authx/pull/676) by [@yezz123](https://github.com/yezz123).
