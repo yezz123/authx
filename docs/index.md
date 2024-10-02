@@ -41,7 +41,7 @@ $ pip install authx
 
 ## Features
 
-- Support Python 3.8+ & Pydantic 2.0+.
+- [x] Support Python 3.8+ & Pydantic 1.7+.
 - Multiple customizable authentication backend:
   - JWT authentication backend included
     - JWT encoding/decoding for application authentication
