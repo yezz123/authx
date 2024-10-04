@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* :arrow_up: Update dependencies in `uv.lock`. PR [#680](https://github.com/yezz123/authx/pull/680) by [@yezz123](https://github.com/yezz123).
 * ⬆ Bump `ruff-pre-commit` from v0.6.7 to v0.6.8. PR [#678](https://github.com/yezz123/authx/pull/678) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 
 ### Docs
