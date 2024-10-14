@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* ⬆ Bump the python-packages group with 16 updates. PR [#685](https://github.com/yezz123/authx/pull/685) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump the Pre-commit Dependencies Version. PR [#684](https://github.com/yezz123/authx/pull/684) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump pypa/gh-action-pypi-publish from 1.10.2 to 1.10.3. PR [#681](https://github.com/yezz123/authx/pull/681) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * :arrow_up: Update dependencies in `uv.lock`. PR [#680](https://github.com/yezz123/authx/pull/680) by [@yezz123](https://github.com/yezz123).
