@@ -64,9 +64,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
 
     def load_config(self, config: AuthXConfig) -> None:
         """Loads a AuthXConfig as the new configuration
-b
-        Args:
-            config (AuthXConfig): Configuration to load
+        b
+                Args:
+                    config (AuthXConfig): Configuration to load
         """
         self._config = config
 
