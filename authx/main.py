@@ -386,6 +386,8 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             verify_fresh=verify_fresh,
             verify_type=verify_type,
             verify_csrf=verify_csrf,
+            audience=self.config.JWT_DECODE_AUDIENCE,
+            issuer=self.config.JWT_DECODE_ISSUER,
         )
 
     def create_access_token(
