@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Fixes
+
+* :bug: fix Missing `Audience` & `Issuer` in the verify token. PR [#686](https://github.com/yezz123/authx/pull/686) by [@yezz123](https://github.com/yezz123).
+
 ### Upgrades
 
 * ⬆ Bump the python-packages group with 16 updates. PR [#685](https://github.com/yezz123/authx/pull/685) by [@dependabot[bot]](https://github.com/apps/dependabot).
