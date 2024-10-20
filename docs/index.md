@@ -42,17 +42,17 @@ $ pip install authx
 ## Features
 
 - [x] Support Python 3.8+ & Pydantic 1.7+.
-- Multiple customizable authentication backend:
-  - JWT authentication backend included
-    - JWT encoding/decoding for application authentication
-    - Automatic detection of JWTs in requests:
-      - JWTs in headers
-      - JWTs in cookies
-      - JWTs in query parameters
-      - JWTs in request bodies
-  - Cookie authentication backend included
-- Middleware for authentication and authorization through JWT.
-- Extensible Error Handling System.
+- [x] Multiple customizable authentication backend:
+  - [x] JWT authentication backend included
+    - [x] JWT encoding/decoding for application authentication
+    - [x] Automatic detection of JWTs in requests:
+      - [x] JWTs in headers
+      - [x] JWTs in cookies
+      - [x] JWTs in query parameters
+      - [x] JWTs in request bodies
+  - [x] Cookie authentication backend included
+- [x] Middleware for authentication and authorization through JWT.
+- [x] Extensible Error Handling System.
 
 ### Extra Features
 
