@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Breaking Changes
+
+* 🔧 Add support for Python 3.13. PR [#687](https://github.com/yezz123/authx/pull/687) by [@yezz123](https://github.com/yezz123).
+
 ### Fixes
 
 * :bug: fix Missing `Audience` & `Issuer` in the verify token. PR [#686](https://github.com/yezz123/authx/pull/686) by [@yezz123](https://github.com/yezz123).
