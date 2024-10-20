@@ -338,7 +338,8 @@ def test_payload_has_scopes_empty(valid_payload: TokenPayload):
     assert not valid_payload.has_scopes("read", "write")
 
 
-def test_payload_extra_dict():
+@pytest.mark.skipif(not PYDANTIC_V2, reason="Test for Pydantic V2")
+def test_payload_extra_dict_pydantic_v2():
     payload = TokenPayload(
         type="access",
         fresh=True,
@@ -352,10 +353,25 @@ def test_payload_extra_dict():
         ).timestamp(),
         extra="EXTRA",
     )
-    if PYDANTIC_V2:
-        assert payload.extra_dict == {}
-    else:
-        assert payload.extra_dict == {"extra": "EXTRA"}
+    assert payload.extra_dict == {}
+
+
+@pytest.mark.skipif(PYDANTIC_V2, reason="Test for Pydantic V1")
+def test_payload_extra_dict_pydantic_v1():
+    payload = TokenPayload(
+        type="access",
+        fresh=True,
+        sub="BOOOM",
+        csrf="CSRF_TOKEN",
+        scopes=["read", "write"],
+        exp=datetime.timedelta(minutes=20),
+        nbf=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc),
+        iat=datetime.datetime(
+            2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc
+        ).timestamp(),
+        extra="EXTRA",
+    )
+    assert payload.extra_dict == {"extra": "EXTRA"}
 
 
 def test_verify_token_type_exception():
@@ -394,13 +410,18 @@ def test_token_payload_creation(sample_payload):
     assert payload.scopes == ["read", "write"]
 
 
-def test_token_payload_extra_fields(sample_payload):
+@pytest.mark.skipif(not PYDANTIC_V2, reason="Test for Pydantic V2")
+def test_token_payload_extra_fields_pydantic_v2(sample_payload):
     sample_payload["extra_field"] = "extra_value"
     payload = TokenPayload(**sample_payload)
-    if PYDANTIC_V2:
-        assert payload.extra_dict == {}
-    else:
-        assert payload.extra_dict == {"extra_field": "extra_value", "name": "John Doe"}
+    assert payload.extra_dict == {}
+
+
+@pytest.mark.skipif(PYDANTIC_V2, reason="Test for Pydantic V1")
+def test_token_payload_extra_fields_pydantic_v1(sample_payload):
+    sample_payload["extra_field"] = "extra_value"
+    payload = TokenPayload(**sample_payload)
+    assert payload.extra_dict == {"extra_field": "extra_value", "name": "John Doe"}
 
 
 def test_token_payload_encode_decode():
