@@ -89,7 +89,7 @@ def create_token(
     if data:
         jwt_claims.update(data)
 
-    payload = {**additional_claims, **jwt_claims}
+    payload = additional_claims | jwt_claims
 
     return jwt.encode(payload=payload, key=key, algorithm=algorithm, headers=headers)
 

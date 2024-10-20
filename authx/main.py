@@ -8,6 +8,7 @@ from typing import (
     Dict,
     Literal,
     Optional,
+    Union,
     overload,
 )
 
@@ -56,16 +57,16 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             config (AuthXConfig, optional): Configuration instance to use. Defaults to AuthXConfig().
             model (Optional[T], optional): Model type hint. Defaults to Dict[str, Any].
         """
-        self.model = model if model is not None else {}
+        self.model: Union[T, Dict[str, Any]] = model if model is not None else {}
         super().__init__(model=model)
         super(_CallbackHandler, self).__init__()
         self._config = config
 
     def load_config(self, config: AuthXConfig) -> None:
         """Loads a AuthXConfig as the new configuration
-
-        Args:
-            config (AuthXConfig): Configuration to load
+        b
+                Args:
+                    config (AuthXConfig): Configuration to load
         """
         self._config = config
 

@@ -30,9 +30,7 @@ from authx.types import (
     TokenType,
 )
 
-PYDANTIC_V2 = PYDANTIC_VERSION.startswith("2.")
-
-if PYDANTIC_V2:
+if PYDANTIC_V2 := PYDANTIC_VERSION.startswith("2."):
     from pydantic import ConfigDict, field_validator  # pragma: no cover
 else:
     from pydantic import Extra, validator  # pragma: no cover

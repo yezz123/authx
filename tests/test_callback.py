@@ -126,24 +126,37 @@ def test_edge_case_none_inputs():
     assert not handler.is_token_in_blocklist(None)
 
 
-def test_edge_case_kwargs_passing():
+def model_callback(uid: str, **kwargs) -> Optional[DummyModel]:
+    if "extra" in kwargs and kwargs["extra"] == "special":
+        return DummyModel(f"special_{uid}")
+    return DummyModel(uid)
+
+
+def token_callback(token: str, **kwargs) -> bool:
+    return "block_all" in kwargs and kwargs["block_all"]
+
+
+@pytest.fixture
+def handler():
     handler = _CallbackHandler()
-
-    def model_callback(uid: str, **kwargs) -> Optional[DummyModel]:
-        if "extra" in kwargs and kwargs["extra"] == "special":
-            return DummyModel(f"special_{uid}")
-        return DummyModel(uid)
-
-    def token_callback(token: str, **kwargs) -> bool:
-        return "block_all" in kwargs and kwargs["block_all"]
-
     handler.set_callback_get_model_instance(model_callback)
     handler.set_callback_token_blocklist(token_callback)
+    return handler
 
+
+def test_edge_case_kwargs_passing_special(handler):
     assert handler._get_current_subject("123", extra="special").id == "special_123"
+
+
+def test_edge_case_kwargs_passing_normal(handler):
     assert handler._get_current_subject("123").id == "123"
 
+
+def test_token_in_blocklist(handler):
     assert handler.is_token_in_blocklist("any_token", block_all=True)
+
+
+def test_token_not_in_blocklist(handler):
     assert not handler.is_token_in_blocklist("any_token", block_all=False)
 
 
@@ -190,6 +203,15 @@ def test_check_token_callback_is_set():
     assert handler._check_token_callback_is_set(ignore_errors=True) == True
 
 
+def complex_callback(token, **kwargs):
+    if token == "blocked":
+        return True
+    elif token == "none":
+        return None
+    else:
+        return False
+
+
 def test_is_token_in_blocklist_detailed():
     handler = _CallbackHandler()
 
@@ -207,15 +229,6 @@ def test_is_token_in_blocklist_detailed():
     # Set a callback that returns None
     handler.set_callback_token_blocklist(lambda token, **kwargs: None)
     assert not handler.is_token_in_blocklist("token")
-
-    # Test with a more complex callback
-    def complex_callback(token, **kwargs):
-        if token == "blocked":
-            return True
-        elif token == "none":
-            return None
-        else:
-            return False
 
     handler.set_callback_token_blocklist(complex_callback)
     assert handler.is_token_in_blocklist("blocked")

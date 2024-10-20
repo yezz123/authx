@@ -5,9 +5,11 @@ set -e
 
 pushd "$(dirname $0)/../authx-extra"
 
-pip install -r requirements/pyproject.txt && pip install -r requirements/testing.txt
+pip install uv
 
-pip install -e ../
+uv sync
+
+source .venv/bin/activate
 
 pytest --cov=authx_extra --cov-report=xml
 

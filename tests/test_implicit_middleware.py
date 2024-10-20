@@ -70,12 +70,12 @@ async def test_implicit_refresh_middleware_with_refresh_once(authx, app):
     mock_token = Mock()
     mock_payload = Mock(time_until_expiry=100, sub="user123", extra_dict={})
 
-    with patch.object(
-        authx, "_get_token_from_request", return_value=mock_token
-    ), patch.object(authx, "verify_token", return_value=mock_payload), patch.object(
-        authx, "create_access_token", return_value="new_token"
-    ), patch.object(authx, "set_access_cookies"), patch.object(
-        authx, "_implicit_refresh_enabled_for_request", return_value=True
+    with (
+        patch.object(authx, "_get_token_from_request", return_value=mock_token),
+        patch.object(authx, "verify_token", return_value=mock_payload),
+        patch.object(authx, "create_access_token", return_value="new_token"),
+        patch.object(authx, "set_access_cookies"),
+        patch.object(authx, "_implicit_refresh_enabled_for_request", return_value=True),
     ):
         response = client.get("/test")
         assert response.status_code == 200
@@ -98,11 +98,12 @@ async def test_implicit_refresh_middleware_with_refresh(authx, app):
     mock_token = Mock()
     mock_payload = Mock(time_until_expiry=100, sub="user123", extra_dict={})
 
-    with patch.object(
-        authx, "_get_token_from_request", return_value=mock_token
-    ), patch.object(authx, "verify_token", return_value=mock_payload), patch.object(
-        authx, "create_access_token", return_value="new_token"
-    ), patch.object(authx, "set_access_cookies"):
+    with (
+        patch.object(authx, "_get_token_from_request", return_value=mock_token),
+        patch.object(authx, "verify_token", return_value=mock_payload),
+        patch.object(authx, "create_access_token", return_value="new_token"),
+        patch.object(authx, "set_access_cookies"),
+    ):
         response = client.get("/test")
         assert response.status_code == 200
         assert response.json() == {"message": "success"}
@@ -124,13 +125,12 @@ async def test_implicit_refresh_middleware_no_refresh_needed(authx, app):
     mock_token = Mock()
     mock_payload = Mock(time_until_expiry=1000, sub="user123", extra_dict={})
 
-    with patch.object(
-        authx, "_get_token_from_request", return_value=mock_token
-    ), patch.object(authx, "verify_token", return_value=mock_payload), patch.object(
-        authx, "create_access_token"
-    ) as mock_create_token, patch.object(
-        authx, "set_access_cookies"
-    ) as mock_set_cookies:
+    with (
+        patch.object(authx, "_get_token_from_request", return_value=mock_token),
+        patch.object(authx, "verify_token", return_value=mock_payload),
+        patch.object(authx, "create_access_token") as mock_create_token,
+        patch.object(authx, "set_access_cookies") as mock_set_cookies,
+    ):
         response = client.get("/test")
         assert response.status_code == 200
         assert response.json() == {"message": "success"}

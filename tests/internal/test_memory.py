@@ -72,15 +72,19 @@ def test_get_store():
     assert store.get_store("nonexistent-id") is None
 
 
+def populate_old_sessions(memory_io, count, created_at):
+    for i in range(count):
+        memory_io.raw_memory_store[str(i)] = {
+            "created_at": created_at,
+            "store": {},
+        }
+
+
 def test_gc_cleanup_old_sessions(memory_io):
     # Populate raw_memory_store with 100 sessions older than 12 hours
     current_time = int(time())
     twelve_hours_ago = current_time - 3600 * 12
-    for i in range(100):
-        memory_io.raw_memory_store[str(i)] = {
-            "created_at": twelve_hours_ago,
-            "store": {},
-        }
+    populate_old_sessions(memory_io, 100, twelve_hours_ago)
 
     # Add one more session within 12 hours
     extra_session_id = "1000"
