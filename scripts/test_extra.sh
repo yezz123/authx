@@ -9,6 +9,8 @@ pip install uv
 
 uv sync
 
+source .venv/bin/activate
+
 pytest --cov=authx_extra --cov-report=xml
 
 popd
