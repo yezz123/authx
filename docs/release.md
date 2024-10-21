@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Upgrades
+
+* ⬆ Bump the python-packages group with 12 updates. PR [#689](https://github.com/yezz123/authx/pull/689) by [@dependabot[bot]](https://github.com/apps/dependabot).
+
 ## 1.4.0
 
 __Note:__ This release contains breaking changes, Dropping support for Python 3.8, and adding support for Python 3.13.
