@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* ⬆️ Bump `ruff-pre-commit` from v0.7.1 to v0.7.2. PR [#696](https://github.com/yezz123/authx/pull/696) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump the python-packages group with 8 updates. PR [#694](https://github.com/yezz123/authx/pull/694) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump pypa/gh-action-pypi-publish from 1.10.3 to 1.11.0. PR [#695](https://github.com/yezz123/authx/pull/695) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Bump `ruff-pre-commit` from v0.7.0 to v0.7.1. PR [#693](https://github.com/yezz123/authx/pull/693) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
