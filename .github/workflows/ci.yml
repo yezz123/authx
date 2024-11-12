@@ -22,7 +22,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: setup uv
-        uses: yezz123/setup-uv@v4
+        uses: yezz123/setup-uv@uv-fix
         with:
           uv-venv: ".venv"
 
@@ -48,7 +48,7 @@ jobs:
         os: [ubuntu, macos, windows]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@uv-fix
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -101,7 +101,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: setup UV
-        uses: yezz123/setup-uv@v4
+        uses: yezz123/setup-uv@uv-fix
         with:
           uv-venv: ".venv"
 
