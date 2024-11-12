@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* ⬆ Bump pypa/gh-action-pypi-publish from 1.11.0 to 1.12.2. PR [#697](https://github.com/yezz123/authx/pull/697) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Upgrade the uv setup package to 4.1. PR [#700](https://github.com/yezz123/authx/pull/700) by [@yezz123](https://github.com/yezz123).
 * ⬆️ Bump `ruff-pre-commit` from v0.7.1 to v0.7.2. PR [#696](https://github.com/yezz123/authx/pull/696) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump the python-packages group with 8 updates. PR [#694](https://github.com/yezz123/authx/pull/694) by [@dependabot[bot]](https://github.com/apps/dependabot).
