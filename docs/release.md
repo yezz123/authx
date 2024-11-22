@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* ⬆ Bump codecov/codecov-action from 4 to 5. PR [#701](https://github.com/yezz123/authx/pull/701) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Bump `ruff-pre-commit` from v0.7.2 to v0.7.3. PR [#699](https://github.com/yezz123/authx/pull/699) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump pypa/gh-action-pypi-publish from 1.11.0 to 1.12.2. PR [#697](https://github.com/yezz123/authx/pull/697) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Upgrade the uv setup package to 4.1. PR [#700](https://github.com/yezz123/authx/pull/700) by [@yezz123](https://github.com/yezz123).
