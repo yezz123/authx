@@ -1,5 +1,7 @@
 ## Latest Changes
 
+* ⬆️ Bump `ruff-pre-commit` from v0.7.3 to v0.7.4. PR [#703](https://github.com/yezz123/authx/pull/703) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+
 ### Upgrades
 
 * ⬆ Bump codecov/codecov-action from 4 to 5. PR [#701](https://github.com/yezz123/authx/pull/701) by [@dependabot[bot]](https://github.com/apps/dependabot).
