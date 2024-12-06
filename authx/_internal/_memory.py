@@ -2,6 +2,7 @@ import asyncio
 import time
 from typing import Dict, Any, Optional
 
+
 class MemoryIO:
     raw_memory_store: Dict[str, Dict[str, Any]]
 
@@ -55,4 +56,3 @@ class MemoryIO:
         ]
         for session_id in sessions_to_delete:
             del self.raw_memory_store[session_id]
-
