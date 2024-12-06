@@ -55,6 +55,7 @@ def to_UTC_without_tz(
     event_timestamp: str, format: str = "%Y-%m-%d %H:%M:%S.%f"
 ) -> str:
     dt = datetime.strptime(event_timestamp, format)
+    dt = dt.replace(tzinfo=tz.utc)
     return dt.astimezone(tz.utc).strftime(format)
 
 
