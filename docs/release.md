@@ -2,6 +2,10 @@
 
 * ⬆️ Bump `ruff-pre-commit` from v0.7.3 to v0.7.4. PR [#703](https://github.com/yezz123/authx/pull/703) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 
+### Features
+
+* ✨ Support async sessions. PR [#709](https://github.com/yezz123/authx/pull/709) by [@callamd](https://github.com/callamd).
+
 ### Upgrades
 
 * ⬆️ Bump ruff-pre-commit from v0.8.0 to v0.8.1. PR [#707](https://github.com/yezz123/authx/pull/707) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
