@@ -12,8 +12,7 @@ class MemoryIO:
     """
 
     def __init__(self) -> None:
-        """
-        Initialize an instance of MemoryIO.
+        """Initialize an instance of MemoryIO.
 
         Creates a dictionary to store the session data.
         """

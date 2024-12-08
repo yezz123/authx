@@ -1,5 +1,6 @@
 import datetime
-from typing import Any, Dict, List, Optional, Sequence, Union
+from collections.abc import Sequence
+from typing import Any, Dict, List, Optional, Union
 
 import jwt
 

@@ -6,14 +6,10 @@ CASUAL_UT = False
 
 
 class SignatureSerializer:
-    """
-    A class that implements a URL-safe timed serializer.
-    """
+    """A class that implements a URL-safe timed serializer."""
 
     def __init__(self, secret_key: str, expired_in: int = 0) -> None:
-        """
-        Initialize the serializer with a secret key and an optional expiration time.
-        """
+        """Initialize the serializer with a secret key and an optional expiration time."""
         self.ser = URLSafeTimedSerializer(secret_key)
         self.expired_in = expired_in
 

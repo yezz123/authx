@@ -18,7 +18,6 @@ from tests.utils import (
 @pytest.fixture(scope="function")
 def config():
     """Fixture for AuthX Configuration"""
-
     return AuthXConfig(
         JWT_SECRET_KEY="secret",
         JWT_TOKEN_LOCATION=["headers", "json", "query", "cookies"],
@@ -28,7 +27,6 @@ def config():
 @pytest.fixture(scope="function")
 def api(config: AuthXConfig):
     """Fixture for FastAPI TestClient"""
-
     app, security = init_app(config=config)
     create_protected_routes(app, security)
     create_token_routes(app, security)

@@ -1,10 +1,9 @@
 import contextlib
 import datetime
+from collections.abc import Awaitable, Coroutine
 from typing import (
     Any,
-    Awaitable,
     Callable,
-    Coroutine,
     Dict,
     Literal,
     Optional,

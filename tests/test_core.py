@@ -1,5 +1,6 @@
 import json
-from typing import Any, Coroutine, Dict, List
+from collections.abc import Coroutine
+from typing import Any, Dict, List
 
 import pytest
 from fastapi import Request

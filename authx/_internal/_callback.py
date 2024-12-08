@@ -11,8 +11,7 @@ from authx.types import ModelCallback, T, TokenCallback
 
 
 class _CallbackHandler(Generic[T]):
-    """
-    Base class for callback handlers in AuthX.
+    """Base class for callback handlers in AuthX.
 
     Args:
         Generic (T): Model type
