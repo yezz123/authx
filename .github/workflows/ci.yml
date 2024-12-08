@@ -27,7 +27,7 @@ jobs:
           uv-venv: ".venv"
 
       - name: Install Dependencies
-        run: uv sync
+        run: uv sync --group lint --all-extras
 
       - name: Typecheck with mypy
         run: bash scripts/mypy.sh
@@ -61,7 +61,7 @@ jobs:
           uv-venv: ".venv"
 
       - name: Install Dependencies
-        run: uv sync
+        run: uv sync --group test --all-extras
 
       - name: Freeze Dependencies
         run: uv pip freeze
@@ -75,7 +75,7 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.xml
+          files: ./coverage.xml
 
   tests-pydantic-v1:
 
@@ -106,7 +106,7 @@ jobs:
           uv-venv: ".venv"
 
       - name: Install Dependencies
-        run: uv sync
+        run: uv sync --group test --all-extras
 
       - name: Install pydantic v1
         run: uv pip install pydantic==1.10.17
@@ -123,7 +123,7 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.xml
+          files: ./coverage.xml
 
   test-extra:
 

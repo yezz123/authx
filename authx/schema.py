@@ -1,7 +1,8 @@
 import datetime
 import sys
+from collections.abc import Sequence
 from hmac import compare_digest
-from typing import Any, Dict, List, Optional, Sequence, Union
+from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel, Field, ValidationError
 from pydantic.version import VERSION as PYDANTIC_VERSION
@@ -9,7 +10,7 @@ from pydantic.version import VERSION as PYDANTIC_VERSION
 if sys.version_info >= (3, 8):  # pragma: no cover
     from typing import Set  # pragma: no cover
 else:
-    from typing_extensions import Set  # pragma: no cover
+    from typing import Set  # pragma: no cover
 
 from authx._internal._utils import get_now, get_now_ts, get_uuid
 from authx.exceptions import (

@@ -1,5 +1,6 @@
+from collections.abc import Sequence
 from datetime import timedelta
-from typing import List, Optional, Sequence
+from typing import List, Optional
 
 from jwt.algorithms import get_default_algorithms, requires_cryptography
 from pydantic import Field
