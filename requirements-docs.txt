@@ -1,6 +1,6 @@
 annotated-types==0.7.0
     # via pydantic
-anyio==4.6.2.post1
+anyio==4.7.0
     # via
     #   httpx
     #   starlette
@@ -56,7 +56,7 @@ ecdsa==0.19.0
     # via python-jose
 editorconfig==0.12.4
     # via jsbeautifier
-fastapi==0.115.5
+fastapi==0.115.6
     # via authx
 filelock==3.16.1
     # via cachecontrol
@@ -81,7 +81,7 @@ htmlmin2==0.1.13
     # via mkdocs-minify-plugin
 httpcore==1.0.7
     # via httpx
-httpx==0.28.0
+httpx==0.28.1
     # via -r requirements/docs.in
 idna==3.10
     # via
@@ -150,7 +150,7 @@ mkdocs-git-revision-date-localized-plugin==1.3.0
     # via -r requirements/docs.in
 mkdocs-markdownextradata-plugin==0.2.6
     # via -r requirements/docs.in
-mkdocs-material==9.5.47
+mkdocs-material==9.5.48
     # via -r requirements/docs.in
 mkdocs-material-extensions==1.3.1
     # via mkdocs-material
@@ -158,7 +158,7 @@ mkdocs-mermaid2-plugin==1.2.1
     # via -r requirements/docs.in
 mkdocs-minify-plugin==0.8.0
     # via -r requirements/docs.in
-mkdocs-rss-plugin==1.16.0
+mkdocs-rss-plugin==1.17.0
     # via -r requirements/docs.in
 mkdocstrings==0.27.0
     # via
@@ -189,7 +189,7 @@ pyasn1==0.6.1
     #   rsa
 pycparser==2.22
     # via cffi
-pydantic==2.10.2
+pydantic==2.10.3
     # via
     #   authx
     #   fastapi
@@ -251,7 +251,7 @@ setuptools==75.6.0
     # via mkdocs-mermaid2-plugin
 shellingham==1.5.4
     # via typer
-six==1.16.0
+six==1.17.0
     # via
     #   ecdsa
     #   jsbeautifier
@@ -272,11 +272,11 @@ tinycss2==1.4.0
     # via
     #   cairosvg
     #   cssselect2
-typer==0.14.0
+typer==0.15.1
     # via
     #   -r requirements/docs.in
     #   typer-cli
-typer-cli==0.14.0
+typer-cli==0.15.1
     # via -r requirements/docs.in
 typing-extensions==4.12.2
     # via
