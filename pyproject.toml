@@ -192,6 +192,7 @@ ignore = [
 "__init__.py" = ["F401"]
 "authx/token.py" = ["C901"]
 "authx/main.py" = ["B008"]
+"authx/*" = ["D417"]
 "tests/*" = ["D100","D101","D102","D103","D104","D107"]
 "tests/utils.py" = ["B008"]
 "tests/test_callback.py" = ["E712"]
