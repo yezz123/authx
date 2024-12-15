@@ -60,10 +60,7 @@ def test_util_get_now():
 @freeze_time("2023-07-01 12:00:00")
 def test_util_get_now_ts():
     assert isinstance(get_now_ts(), float)
-    assert (
-        get_now_ts()
-        == datetime(2023, 7, 1, 12, 0, 0, tzinfo=datetimezone.utc).timestamp()
-    )
+    assert get_now_ts() == datetime(2023, 7, 1, 12, 0, 0, tzinfo=datetimezone.utc).timestamp()
 
 
 def test_util_get_uuid():
@@ -159,12 +156,8 @@ def test_is_today():
 
 @freeze_time("2023-07-01 12:00:00")
 def test_is_yesterday():
-    assert (
-        is_yesterday(datetime(2023, 6, 30, 12, 0, 0, tzinfo=datetimezone.utc)) is True
-    )
-    assert (
-        is_yesterday(datetime(2023, 7, 1, 12, 0, 0, tzinfo=datetimezone.utc)) is False
-    )
+    assert is_yesterday(datetime(2023, 6, 30, 12, 0, 0, tzinfo=datetimezone.utc)) is True
+    assert is_yesterday(datetime(2023, 7, 1, 12, 0, 0, tzinfo=datetimezone.utc)) is False
 
 
 @freeze_time("2023-07-01 12:00:00")

@@ -51,9 +51,7 @@ def to_UTC(event_timestamp: Union[datetime, str], tz: BaseTzInfo = utc) -> datet
     return dt.astimezone(tz)
 
 
-def to_UTC_without_tz(
-    event_timestamp: str, format: str = "%Y-%m-%d %H:%M:%S.%f"
-) -> str:
+def to_UTC_without_tz(event_timestamp: str, format: str = "%Y-%m-%d %H:%M:%S.%f") -> str:
     dt = datetime.strptime(event_timestamp, format)
     dt = dt.replace(tzinfo=tz.utc)
     return dt.astimezone(tz.utc).strftime(format)
@@ -69,27 +67,19 @@ def end_of_day(dt: datetime) -> datetime:
     return dt
 
 
-def minutes_ago(
-    dt: datetime, days: int = 0, hours: int = 0, minutes: int = 1, seconds: int = 0
-) -> datetime:
+def minutes_ago(dt: datetime, days: int = 0, hours: int = 0, minutes: int = 1, seconds: int = 0) -> datetime:
     return dt - timedelta(days=days, hours=hours, minutes=minutes, seconds=seconds)
 
 
-def minutes_after(
-    dt: datetime, days: int = 0, hours: int = 0, minutes: int = 1, seconds: int = 0
-) -> datetime:
+def minutes_after(dt: datetime, days: int = 0, hours: int = 0, minutes: int = 1, seconds: int = 0) -> datetime:
     return dt + timedelta(days=days, hours=hours, minutes=minutes, seconds=seconds)
 
 
-def hours_ago(
-    dt: datetime, days: int = 0, hours: int = 1, minutes: int = 0, seconds: int = 0
-) -> datetime:
+def hours_ago(dt: datetime, days: int = 0, hours: int = 1, minutes: int = 0, seconds: int = 0) -> datetime:
     return dt - timedelta(days=days, hours=hours, minutes=minutes, seconds=seconds)
 
 
-def days_ago(
-    dt: datetime, days: int = 1, hours: int = 0, minutes: int = 0, seconds: int = 0
-) -> datetime:
+def days_ago(dt: datetime, days: int = 1, hours: int = 0, minutes: int = 0, seconds: int = 0) -> datetime:
     past = dt - timedelta(days=days, hours=hours, minutes=minutes, seconds=seconds)
     if dt.tzinfo:
         past = past.replace(tzinfo=dt.tzinfo)
@@ -111,9 +101,7 @@ def years_ago(dt: datetime, years: int = 1) -> datetime:
     return past
 
 
-def days_after(
-    dt: datetime, days: int = 1, hours: int = 0, minutes: int = 0, seconds: int = 0
-) -> datetime:
+def days_after(dt: datetime, days: int = 1, hours: int = 0, minutes: int = 0, seconds: int = 0) -> datetime:
     future = dt + timedelta(days=days, hours=hours, minutes=minutes, seconds=seconds)
     if dt.tzinfo:
         future = future.replace(tzinfo=dt.tzinfo)
@@ -141,9 +129,7 @@ def tz_now(tz: BaseTzInfo = utc) -> datetime:
     return dt.replace(tzinfo=tz)
 
 
-def tz_from_iso(
-    dt: str, to_tz: BaseTzInfo = utc, format: str = "%Y-%m-%dT%H:%M:%S.%f%z"
-) -> datetime:
+def tz_from_iso(dt: str, to_tz: BaseTzInfo = utc, format: str = "%Y-%m-%dT%H:%M:%S.%f%z") -> datetime:
     date_time = datetime.strptime(dt, format)
     return date_time.astimezone(to_tz)
 

@@ -1,3 +1,5 @@
+"""This is a type hinting file for the authx package."""
+
 import datetime
 import sys
 from collections.abc import Sequence

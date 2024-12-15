@@ -2,9 +2,7 @@ from authx.config import AuthXConfig
 
 
 def test_access_location_headers(api, access_token: str):
-    response = api.post(
-        "/read/access", headers={"Authorization": f"Bearer {access_token}"}
-    )
+    response = api.post("/read/access", headers={"Authorization": f"Bearer {access_token}"})
     assert response.json()["location"] == "headers"
     assert response.json()["type"] == "access"
 
@@ -16,16 +14,12 @@ def test_access_location_json(api, access_token: str, config: AuthXConfig):
 
 
 def test_access_location_query(api, access_token: str, config: AuthXConfig):
-    response = api.post(
-        "/read/access", params={config.JWT_QUERY_STRING_NAME: access_token}
-    )
+    response = api.post("/read/access", params={config.JWT_QUERY_STRING_NAME: access_token})
     assert response.json()["location"] == "query"
     assert response.json()["type"] == "access"
 
 
-def test_access_location_cookies(
-    api, access_token: str, access_csrf_token: str, config: AuthXConfig
-):
+def test_access_location_cookies(api, access_token: str, access_csrf_token: str, config: AuthXConfig):
     response = api.post(
         "/read/access",
         cookies={config.JWT_ACCESS_COOKIE_NAME: access_token},

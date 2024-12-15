@@ -1,9 +1,9 @@
 import time
-from typing import Any, Dict, Optional
+from typing import Any, Optional
 
 
 class MemoryIO:
-    raw_memory_store: Dict[str, Dict[str, Any]]
+    raw_memory_store: dict[str, dict[str, Any]]
 
     """
     MemoryIO is a class that implements the IO interface for the session store.
@@ -24,7 +24,7 @@ class MemoryIO:
     async def has_no_session_id(self, session_id: str) -> bool:
         return session_id not in self.raw_memory_store
 
-    async def create_store(self, session_id: str) -> Dict[str, Any]:
+    async def create_store(self, session_id: str) -> dict[str, Any]:
         self.raw_memory_store[session_id] = {
             "created_at": int(time.time()),
             "store": {},
@@ -32,7 +32,7 @@ class MemoryIO:
         await self.save_store(session_id)
         return self.raw_memory_store.get(session_id, {}).get("store", {})
 
-    async def get_store(self, session_id: str) -> Optional[Dict[str, Any]]:
+    async def get_store(self, session_id: str) -> Optional[dict[str, Any]]:
         if self.raw_memory_store.get(session_id):
             return self.raw_memory_store.get(session_id, {}).get("store")
         else:

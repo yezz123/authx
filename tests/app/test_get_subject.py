@@ -9,9 +9,7 @@ def test_no_authorization_get_subject(api):
 
 
 def test_get_subject_access_token(api, access_token: str):
-    response = api.get(
-        "/entity/subject", headers={"Authorization": f"Bearer {access_token}"}
-    )
+    response = api.get("/entity/subject", headers={"Authorization": f"Bearer {access_token}"})
     assert response.status_code == 200
 
 
@@ -21,9 +19,7 @@ def test_get_subject_refresh_token(api, refresh_token: str):
 
 
 def test_get_subject(api, access_token: str):
-    response = api.get(
-        "/entity/subject", headers={"Authorization": f"Bearer {access_token}"}
-    )
+    response = api.get("/entity/subject", headers={"Authorization": f"Bearer {access_token}"})
     assert response.status_code == 200
     assert response.json()["subject"]["uid"] == "test"
     assert response.json()["subject"]["email"] == "test@test.com"

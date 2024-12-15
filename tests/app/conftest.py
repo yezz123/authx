@@ -17,7 +17,7 @@ from tests.utils import (
 
 @pytest.fixture(scope="function")
 def config():
-    """Fixture for AuthX Configuration"""
+    """Fixture for AuthX Configuration."""
     return AuthXConfig(
         JWT_SECRET_KEY="secret",
         JWT_TOKEN_LOCATION=["headers", "json", "query", "cookies"],
@@ -26,7 +26,7 @@ def config():
 
 @pytest.fixture(scope="function")
 def api(config: AuthXConfig):
-    """Fixture for FastAPI TestClient"""
+    """Fixture for FastAPI TestClient."""
     app, security = init_app(config=config)
     create_protected_routes(app, security)
     create_token_routes(app, security)
@@ -39,7 +39,7 @@ def api(config: AuthXConfig):
 
 @pytest.fixture(scope="function")
 def no_csrf_api():
-    """Fixture for FastAPI TestClient with CSRF Protection disabled"""
+    """Fixture for FastAPI TestClient with CSRF Protection disabled."""
     app, security = init_app(
         config=AuthXConfig(
             JWT_COOKIE_CSRF_PROTECT=False,
@@ -58,59 +58,59 @@ def no_csrf_api():
 
 @pytest.fixture(scope="function")
 def access_response(api: TestClient):
-    """Fixture for Access Token Response"""
+    """Fixture for Access Token Response."""
     return api.get("/token/access")
 
 
 @pytest.fixture(scope="function")
 def access_token(access_response: Response) -> str:
-    """Fixture for Access Token"""
+    """Fixture for Access Token."""
     assert access_response.status_code == 200
     return access_response.json()["token"]
 
 
 @pytest.fixture(scope="function")
 def access_csrf_token(access_response: Response, config: AuthXConfig) -> str:
-    """Fixture for Access CSRF Token"""
+    """Fixture for Access CSRF Token."""
     assert access_response.status_code == 200
     return access_response.cookies.get(config.JWT_ACCESS_CSRF_COOKIE_NAME)
 
 
 @pytest.fixture(scope="function")
 def refresh_response(api: TestClient):
-    """Fixture for Refresh Token Response"""
+    """Fixture for Refresh Token Response."""
     return api.get("/token/refresh")
 
 
 @pytest.fixture(scope="function")
 def refresh_token(refresh_response: Response) -> str:
-    """Fixture for Refresh Token"""
+    """Fixture for Refresh Token."""
     assert refresh_response.status_code == 200
     return refresh_response.json()["token"]
 
 
 @pytest.fixture(scope="function")
 def refresh_csrf_token(refresh_response: Response, config: AuthXConfig) -> str:
-    """Fixture for Refresh CSRF Token"""
+    """Fixture for Refresh CSRF Token."""
     assert refresh_response.status_code == 200
     return refresh_response.cookies.get(config.JWT_REFRESH_CSRF_COOKIE_NAME)
 
 
 @pytest.fixture(scope="function")
 def fresh_response(api: TestClient) -> Response:
-    """Fixture for Fresh Token Response"""
+    """Fixture for Fresh Token Response."""
     return api.get("/token/fresh")
 
 
 @pytest.fixture(scope="function")
 def fresh_token(fresh_response: Response) -> str:
-    """Fixture for Fresh Token"""
+    """Fixture for Fresh Token."""
     assert fresh_response.status_code == 200
     return fresh_response.json()["token"]
 
 
 @pytest.fixture(scope="function")
 def fresh_csrf_token(fresh_response: Response, config: AuthXConfig) -> str:
-    """Fixture for Fresh CSRF Token"""
+    """Fixture for Fresh CSRF Token."""
     assert fresh_response.status_code == 200
     return fresh_response.cookies.get(config.JWT_ACCESS_CSRF_COOKIE_NAME)
