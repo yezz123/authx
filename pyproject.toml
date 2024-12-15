@@ -112,6 +112,7 @@ docs = [
     "mkdocs-minify-plugin>=0.8.0",
     "mkdocs-rss-plugin>=1.16.0",
     "griffe-typingdoc>=0.2.7",
+    "urllib3==1.26.15",
     "authx-extra @ git+https://github.com/yezz123/authx-extra.git@main"
 ]
 
@@ -159,6 +160,10 @@ substitutions = [
     {pattern = '@@', replacement = '@'},
 ]
 
+[tool.ruff]
+line-length = 120
+target-version = 'py39'
+
 [tool.ruff.lint]
 mccabe = { max-complexity = 14 }
 pydocstyle = { convention = 'google' }
@@ -187,6 +192,7 @@ ignore = [
 "__init__.py" = ["F401"]
 "authx/token.py" = ["C901"]
 "authx/main.py" = ["B008"]
+"tests/*" = ["D100","D101","D102","D103","D104","D107"]
 "tests/utils.py" = ["B008"]
 "tests/test_callback.py" = ["E712"]
 
