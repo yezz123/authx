@@ -1,5 +1,8 @@
+"""Token encoding and decoding functions."""
+
 import datetime
-from typing import Any, Dict, List, Optional, Sequence, Union
+from collections.abc import Sequence
+from typing import Any, Optional, Union
 
 import jwt
 
@@ -24,29 +27,25 @@ def create_token(
     fresh: bool = False,
     csrf: Optional[str] = None,
     algorithm: AlgorithmType = "HS256",
-    headers: Optional[Dict[str, Any]] = None,
+    headers: Optional[dict[str, Any]] = None,
     audience: Optional[StringOrSequence] = None,
     issuer: Optional[str] = None,
-    additional_data: Optional[Dict[str, Any]] = None,
+    additional_data: Optional[dict[str, Any]] = None,
     not_before: Optional[Union[Union[float, int], DateTimeExpression]] = None,
-    data: Optional[Dict[str, Any]] = None,
+    data: Optional[dict[str, Any]] = None,
     ignore_errors: bool = True,
 ) -> str:
-    """Encode a token"""
+    """Encode a token."""
     now = get_now()
 
     # Filter additional data to remove JWT claims
     additional_claims = {}
     if additional_data is not None:
-        if not ignore_errors and set(additional_data.keys()).intersection(
-            RESERVED_CLAIMS
-        ):
+        if not ignore_errors and set(additional_data.keys()).intersection(RESERVED_CLAIMS):
             raise ValueError(f"{RESERVED_CLAIMS} are forbidden in additional claims")
-        additional_claims = {
-            k: v for k, v in additional_data.items() if k not in RESERVED_CLAIMS
-        }
+        additional_claims = {k: v for k, v in additional_data.items() if k not in RESERVED_CLAIMS}
 
-    jwt_claims: Dict[str, Union[str, bool, float, int, Sequence[str]]] = {
+    jwt_claims: dict[str, Union[str, bool, float, int, Sequence[str]]] = {
         "sub": uid,
         "jti": jti or get_uuid(),
         "type": type,
@@ -101,15 +100,15 @@ def decode_token(
     audience: Optional[StringOrSequence] = None,
     issuer: Optional[str] = None,
     verify: bool = True,
-    data: Optional[Dict[str, Any]] = None,
-) -> Dict[str, Any]:
-    """Decode a token"""
+    data: Optional[dict[str, Any]] = None,
+) -> dict[str, Any]:
+    """Decode a token."""
     # Default to HS256 if no algorithms are provided
     if algorithms is None:  # pragma: no cover
         algorithms = ["HS256"]  # pragma: no cover
     # Explicitly cast algorithms to list[str]
     # to avoid mypy error: "Value of type "Optional[Sequence[AlgorithmType]]" is not indexable"
-    algorithm: List[str] = list(algorithms) if algorithms else ["HS256"]
+    algorithm: list[str] = list(algorithms) if algorithms else ["HS256"]
     try:
         return jwt.decode(
             jwt=token,

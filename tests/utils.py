@@ -20,7 +20,6 @@ class SecuritiesTuple(NamedTuple):
 
 def init_app(config: Optional[AuthXConfig] = None) -> "tuple[FastAPI, AuthX]":
     """Initialize FastAPI app and AuthX instance."""
-
     app = FastAPI()
     security = AuthX(config=(config or AuthXConfig()))
 
@@ -29,7 +28,6 @@ def init_app(config: Optional[AuthXConfig] = None) -> "tuple[FastAPI, AuthX]":
 
 def create_securities(security: AuthX) -> SecuritiesTuple:
     """Create a named tuple with all AuthX dependencies."""
-
     return SecuritiesTuple(
         access_token_headers=Depends(
             security.token_required(
@@ -170,7 +168,6 @@ def create_protected_routes(app: FastAPI, security: AuthX) -> None:
 
 def create_blocklist_routes(app: FastAPI, security: AuthX) -> None:
     """Create routes to test AuthX dependencies."""
-
     BLOCKLIST = set()
 
     @security.set_callback_token_blocklist
@@ -195,7 +192,6 @@ def create_blocklist_routes(app: FastAPI, security: AuthX) -> None:
 
 def create_subject_routes(app: FastAPI, security: AuthX) -> None:
     """Create routes to test AuthX dependencies."""
-
     USER_DB = {
         "test": {"uid": "test", "email": "test@test.com"},
         "foo": {"uid": "foo", "email": "foo@bar.com"},

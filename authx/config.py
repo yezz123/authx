@@ -1,5 +1,8 @@
+"""AuthX Configuration Module."""
+
+from collections.abc import Sequence
 from datetime import timedelta
-from typing import List, Optional, Sequence
+from typing import Optional
 
 from jwt.algorithms import get_default_algorithms, requires_cryptography
 from pydantic import Field
@@ -21,7 +24,7 @@ else:
 
 
 class AuthXConfig(BaseSettings):
-    """AuthX Base Configuration Object
+    """AuthX Base Configuration Object.
 
     Args:
         BaseSettings (BaseSettings): BaseSettings class from Pydantic
@@ -36,9 +39,7 @@ class AuthXConfig(BaseSettings):
 
     JWT_ACCESS_TOKEN_EXPIRES: Optional[timedelta] = timedelta(minutes=15)
     JWT_ALGORITHM: AlgorithmType = "HS256"
-    JWT_DECODE_ALGORITHMS: Sequence[AlgorithmType] = Field(
-        default_factory=lambda: ["HS256"]
-    )
+    JWT_DECODE_ALGORITHMS: Sequence[AlgorithmType] = Field(default_factory=lambda: ["HS256"])  # type: ignore
     JWT_DECODE_AUDIENCE: Optional[StringOrSequence] = None
     JWT_DECODE_ISSUER: Optional[str] = None
     JWT_DECODE_LEEWAY: Optional[int] = 0
@@ -51,7 +52,7 @@ class AuthXConfig(BaseSettings):
     JWT_PUBLIC_KEY: Optional[str] = None
     JWT_REFRESH_TOKEN_EXPIRES: Optional[timedelta] = timedelta(days=20)
     JWT_SECRET_KEY: Optional[str] = None
-    JWT_TOKEN_LOCATION: TokenLocations = Field(default_factory=lambda: ["headers"])
+    JWT_TOKEN_LOCATION: TokenLocations = Field(default_factory=lambda: ["headers"])  # type: ignore
     # Header Options
     JWT_HEADER_NAME: str = "Authorization"
     JWT_HEADER_TYPE: str = "Bearer"
@@ -73,9 +74,7 @@ class AuthXConfig(BaseSettings):
     JWT_ACCESS_CSRF_HEADER_NAME: str = "X-CSRF-TOKEN"
     JWT_CSRF_CHECK_FORM: bool = False
     JWT_CSRF_IN_COOKIES: bool = True
-    JWT_CSRF_METHODS: HTTPMethods = Field(
-        default_factory=lambda: ["POST", "PUT", "PATCH", "DELETE"]
-    )
+    JWT_CSRF_METHODS: HTTPMethods = Field(default_factory=lambda: ["POST", "PUT", "PATCH", "DELETE"])  # type: ignore
     JWT_REFRESH_CSRF_COOKIE_NAME: str = "csrf_refresh_token"
     JWT_REFRESH_CSRF_COOKIE_PATH: str = "/"
     JWT_REFRESH_CSRF_FIELD_NAME: str = "csrf_token"
@@ -87,30 +86,24 @@ class AuthXConfig(BaseSettings):
     JWT_REFRESH_JSON_KEY: str = "refresh_token"
 
     # Implicit Refresh Options
-    JWT_IMPLICIT_REFRESH_ROUTE_EXCLUDE: List[str] = Field(default_factory=list)
-    JWT_IMPLICIT_REFRESH_ROUTE_INCLUDE: List[str] = Field(default_factory=list)
+    JWT_IMPLICIT_REFRESH_ROUTE_EXCLUDE: list[str] = Field(default_factory=list)
+    JWT_IMPLICIT_REFRESH_ROUTE_INCLUDE: list[str] = Field(default_factory=list)
     JWT_IMPLICIT_REFRESH_METHOD_EXCLUDE: HTTPMethods = Field(default_factory=list)
     JWT_IMPLICIT_REFRESH_METHOD_INCLUDE: HTTPMethods = Field(default_factory=list)
     JWT_IMPLICIT_REFRESH_DELTATIME: timedelta = timedelta(minutes=10)
 
     @property
     def is_algo_symmetric(self) -> bool:
-        """Check if the JWT_ALGORITHM is a symmetric encryption algorithm"""
-        return (
-            self.JWT_ALGORITHM in get_default_algorithms()
-            and self.JWT_ALGORITHM not in requires_cryptography
-        )
+        """Check if the JWT_ALGORITHM is a symmetric encryption algorithm."""
+        return self.JWT_ALGORITHM in get_default_algorithms() and self.JWT_ALGORITHM not in requires_cryptography
 
     @property
     def is_algo_asymmetric(self) -> bool:
-        """Check if the JWT_ALGORITHM is an asymmetric encryption algorithm"""
-        return (
-            self.JWT_ALGORITHM in get_default_algorithms()
-            and self.JWT_ALGORITHM in requires_cryptography
-        )
+        """Check if the JWT_ALGORITHM is an asymmetric encryption algorithm."""
+        return self.JWT_ALGORITHM in get_default_algorithms() and self.JWT_ALGORITHM in requires_cryptography
 
     def _get_key(self, crypto_value: Optional[str]) -> str:
-        """Get the key for the algorithm type (symmetric or asymmetric) and the algorithm"""
+        """Get the key for the algorithm type (symmetric or asymmetric) and the algorithm."""
         if self.is_algo_symmetric:
             key = self.JWT_SECRET_KEY
         elif self.is_algo_asymmetric:
@@ -127,15 +120,15 @@ class AuthXConfig(BaseSettings):
         return key
 
     def has_location(self, location: str) -> bool:
-        """Check if the token location is enabled"""
+        """Check if the token location is enabled."""
         return location in self.JWT_TOKEN_LOCATION
 
     @property
     def private_key(self) -> str:
-        """Private key to encode token"""
+        """Private key to encode token."""
         return self._get_key(self.JWT_PRIVATE_KEY)
 
     @property
     def public_key(self) -> str:
-        """Public key to decode token"""
+        """Public key to decode token."""
         return self._get_key(self.JWT_PUBLIC_KEY)

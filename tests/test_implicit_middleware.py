@@ -33,9 +33,7 @@ def client(app):
 def test_implicit_refresh_enabled_for_request(authx):
     # Test excluded route
     request = Mock(url=Mock(path="/excluded"))
-    assert authx._implicit_refresh_enabled_for_request(
-        request
-    )  # Changed to assert True
+    assert authx._implicit_refresh_enabled_for_request(request)  # Changed to assert True
 
     # Test included route
     request = Mock(url=Mock(path="/included"))

@@ -23,9 +23,7 @@ def valid_payload():
         scopes=["read", "write"],
         exp=datetime.timedelta(minutes=20),
         nbf=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc),
-        iat=datetime.datetime(
-            2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc
-        ).timestamp(),
+        iat=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc).timestamp(),
     )
 
 
@@ -39,9 +37,7 @@ def valid_refresh_payload():
         scopes=["read", "write"],
         exp=datetime.timedelta(minutes=20),
         nbf=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc),
-        iat=datetime.datetime(
-            2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc
-        ).timestamp(),
+        iat=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc).timestamp(),
     )
 
 
@@ -348,9 +344,7 @@ def test_payload_extra_dict_pydantic_v2():
         scopes=["read", "write"],
         exp=datetime.timedelta(minutes=20),
         nbf=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc),
-        iat=datetime.datetime(
-            2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc
-        ).timestamp(),
+        iat=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc).timestamp(),
         extra="EXTRA",
     )
     assert payload.extra_dict == {}
@@ -366,9 +360,7 @@ def test_payload_extra_dict_pydantic_v1():
         scopes=["read", "write"],
         exp=datetime.timedelta(minutes=20),
         nbf=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc),
-        iat=datetime.datetime(
-            2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc
-        ).timestamp(),
+        iat=datetime.datetime(2000, 1, 1, 12, 0, tzinfo=datetime.timezone.utc).timestamp(),
         extra="EXTRA",
     )
     assert payload.extra_dict == {"extra": "EXTRA"}
@@ -433,9 +425,7 @@ def test_token_payload_encode_decode():
 
 
 def test_token_payload_expiry():
-    payload = TokenPayload(
-        sub="1234567890", exp=datetime.datetime.now() + datetime.timedelta(hours=1)
-    )
+    payload = TokenPayload(sub="1234567890", exp=datetime.datetime.now() + datetime.timedelta(hours=1))
     assert isinstance(payload.expiry_datetime, datetime.datetime)
     assert isinstance(payload.time_until_expiry, datetime.timedelta)
 

@@ -1,4 +1,4 @@
-from typing import Optional, Type
+from typing import Optional
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
@@ -7,7 +7,7 @@ from authx import exceptions
 
 
 class _ErrorHandler:
-    """Base Handler for FastAPI handling AuthX exceptions"""
+    """Base Handler for FastAPI handling AuthX exceptions."""
 
     MSG_TokenError = "Token Error"
     MSG_MissingTokenError = "Missing JWT in request"
@@ -28,7 +28,7 @@ class _ErrorHandler:
         status_code: int,
         message: Optional[str],
     ) -> JSONResponse:
-        """Generate the async function to be decorated by `FastAPI.exception_handler` decorator
+        """Generate the async function to be decorated by `FastAPI.exception_handler` decorator.
 
         Args:
             request (Request): The request object.
@@ -55,13 +55,11 @@ class _ErrorHandler:
     def _set_app_exception_handler(
         self,
         app: FastAPI,
-        exception: Type[exceptions.AuthXException],
+        exception: type[exceptions.AuthXException],
         status_code: int,
         message: Optional[str],
     ) -> None:
-        async def exception_handler_wrapper(
-            request: Request, exc: exceptions.AuthXException
-        ) -> JSONResponse:
+        async def exception_handler_wrapper(request: Request, exc: exceptions.AuthXException) -> JSONResponse:
             return await self._error_handler(request, exc, status_code, message)
 
         # Add the exception handler to the FastAPI application
@@ -70,14 +68,12 @@ class _ErrorHandler:
         app.exception_handler(exception)(exception_handler_wrapper)
 
     def handle_errors(self, app: FastAPI) -> None:
-        """Add the `FastAPI.exception_handlers` relative to AuthX exceptions
+        """Add the `FastAPI.exception_handlers` relative to AuthX exceptions.
 
         Args:
             app (FastAPI): the FastAPI application to handle errors for
         """
-        self._set_app_exception_handler(
-            app, exception=exceptions.JWTDecodeError, status_code=422, message=None
-        )
+        self._set_app_exception_handler(app, exception=exceptions.JWTDecodeError, status_code=422, message=None)
         self._set_app_exception_handler(
             app,
             exception=exceptions.MissingTokenError,

@@ -9,14 +9,10 @@ class MockAuthX:
     def __init__(self):
         pass
 
-    def create_access_token(
-        self, uid, fresh=False, headers=None, expiry=None, data=None, audience=None
-    ):
+    def create_access_token(self, uid, fresh=False, headers=None, expiry=None, data=None, audience=None):
         return "access_token"
 
-    def create_refresh_token(
-        self, uid, headers=None, expiry=None, data=None, audience=None
-    ):
+    def create_refresh_token(self, uid, headers=None, expiry=None, data=None, audience=None):
         return "refresh_token"
 
     def set_access_cookies(self, token, response=None, max_age=None):

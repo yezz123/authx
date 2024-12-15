@@ -10,39 +10,27 @@ def test_no_token_protected_access(api):
 
 
 def test_fresh_token_protected_access_headers(api, fresh_token: str):
-    response = api.post(
-        "/protected/access", headers={"Authorization": f"Bearer {fresh_token}"}
-    )
+    response = api.post("/protected/access", headers={"Authorization": f"Bearer {fresh_token}"})
     assert response.status_code == 200
 
 
 def test_refresh_token_protected_access_headers(api, refresh_token: str):
     with pytest.raises(exc.AccessTokenRequiredError):
-        api.post(
-            "/protected/access", headers={"Authorization": f"Bearer {refresh_token}"}
-        )
+        api.post("/protected/access", headers={"Authorization": f"Bearer {refresh_token}"})
 
 
 def test_access_token_protected_access_headers(api, access_token: str):
-    response = api.post(
-        "/protected/access", headers={"Authorization": f"Bearer {access_token}"}
-    )
+    response = api.post("/protected/access", headers={"Authorization": f"Bearer {access_token}"})
     assert response.status_code == 200
 
 
-def test_access_token_protected_access_json(
-    api, config: AuthXConfig, access_token: str
-):
+def test_access_token_protected_access_json(api, config: AuthXConfig, access_token: str):
     response = api.post("/protected/access", json={config.JWT_JSON_KEY: access_token})
     assert response.status_code == 200
 
 
-def test_access_token_protected_access_query(
-    api, config: AuthXConfig, access_token: str
-):
-    response = api.post(
-        "/protected/access", params={config.JWT_QUERY_STRING_NAME: access_token}
-    )
+def test_access_token_protected_access_query(api, config: AuthXConfig, access_token: str):
+    response = api.post("/protected/access", params={config.JWT_QUERY_STRING_NAME: access_token})
     assert response.status_code == 200
 
 
@@ -52,9 +40,7 @@ def test_access_token_protected_access_cookies_no_csrf(api, config: AuthXConfig)
     assert "token" in response.json()
     access_token = response.json()["token"]
 
-    response = api.post(
-        "/read/access", headers={"Authorization": f"Bearer {access_token}"}
-    )
+    response = api.post("/read/access", headers={"Authorization": f"Bearer {access_token}"})
 
     with pytest.raises(exc.MissingTokenError) as err:
         api.post(

@@ -11,22 +11,16 @@ def test_no_token_protected_fresh(api):
 
 def test_access_fresh_token_protected_fresh(api, access_token: str):
     with pytest.raises(exc.FreshTokenRequiredError):
-        api.post(
-            "/protected/fresh", headers={"Authorization": f"Bearer {access_token}"}
-        )
+        api.post("/protected/fresh", headers={"Authorization": f"Bearer {access_token}"})
 
 
 def test_refresh_fresh_token_protected_fresh(api, refresh_token: str):
     with pytest.raises(exc.AccessTokenRequiredError):
-        api.post(
-            "/protected/fresh", headers={"Authorization": f"Bearer {refresh_token}"}
-        )
+        api.post("/protected/fresh", headers={"Authorization": f"Bearer {refresh_token}"})
 
 
 def test_fresh_token_protected_fresh_headers(api, fresh_token: str):
-    response = api.post(
-        "/protected/fresh", headers={"Authorization": f"Bearer {fresh_token}"}
-    )
+    response = api.post("/protected/fresh", headers={"Authorization": f"Bearer {fresh_token}"})
     assert response.status_code == 200
 
 
@@ -36,9 +30,7 @@ def test_fresh_token_protected_fresh_json(api, config: AuthXConfig, fresh_token:
 
 
 def test_fresh_token_protected_fresh_query(api, config: AuthXConfig, fresh_token: str):
-    response = api.post(
-        "/protected/fresh", params={config.JWT_QUERY_STRING_NAME: fresh_token}
-    )
+    response = api.post("/protected/fresh", params={config.JWT_QUERY_STRING_NAME: fresh_token})
     assert response.status_code == 200
 
 
@@ -60,9 +52,7 @@ def test_no_token_protected_refresh(api):
         api.post("/protected/refresh")
 
 
-def test_access_token_protected_refresh(
-    api, config: AuthXConfig, access_token: str, access_csrf_token: str
-):
+def test_access_token_protected_refresh(api, config: AuthXConfig, access_token: str, access_csrf_token: str):
     with pytest.raises(exc.RefreshTokenRequiredError):
         api.post(
             "/protected/refresh",
@@ -73,9 +63,7 @@ def test_access_token_protected_refresh(
         )
 
 
-def test_fresh_token_protected_refresh(
-    api, config: AuthXConfig, fresh_token: str, fresh_csrf_token: str
-):
+def test_fresh_token_protected_refresh(api, config: AuthXConfig, fresh_token: str, fresh_csrf_token: str):
     with pytest.raises(exc.RefreshTokenRequiredError):
         api.post(
             "/protected/refresh",
@@ -86,9 +74,7 @@ def test_fresh_token_protected_refresh(
         )
 
 
-def test_refresh_token_protected_refresh(
-    api, config: AuthXConfig, refresh_token: str, refresh_csrf_token: str
-):
+def test_refresh_token_protected_refresh(api, config: AuthXConfig, refresh_token: str, refresh_csrf_token: str):
     response = api.post(
         "/protected/refresh",
         cookies={
