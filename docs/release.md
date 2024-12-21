@@ -27,6 +27,10 @@
 
 * 📝 add @callamd as a contributor for code. PR [#710](https://github.com/yezz123/authx/pull/710) by [@allcontributors[bot]](https://github.com/apps/allcontributors).
 
+### Internal
+
+* 🔧  Enhance the Project Dependencies to be fully migrated to UV. PR [#711](https://github.com/yezz123/authx/pull/711) by [@yezz123](https://github.com/yezz123).
+
 ## 1.4.0
 
 __Note:__ This release contains breaking changes, Dropping support for Python 3.8, and adding support for Python 3.13.
