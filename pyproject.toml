@@ -99,7 +99,6 @@ docs = [
     "mdx-include>=1.4.2",
     "pymdown-extensions>=10.12",
     "typer>=0.14.0",
-    "typer-cli>=0.14.0",
     "httpx>=0.28.0",
     "jinja2>=3.1.4",
     "markdown-include>=0.8.1",
@@ -111,6 +110,7 @@ docs = [
     "mkdocs-mermaid2-plugin>=1.2.1",
     "mkdocs-minify-plugin>=0.8.0",
     "mkdocs-rss-plugin>=1.16.0",
+    "termynal>=0.12.0",
     "griffe-typingdoc>=0.2.7",
     "urllib3==1.26.15",
     "authx-extra @ git+https://github.com/yezz123/authx-extra.git@main"
