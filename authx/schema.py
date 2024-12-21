@@ -66,7 +66,7 @@ class TokenPayload(BaseModel):
     """
 
     if PYDANTIC_V2:
-        model_config = ConfigDict(extra="allow", from_attributes=True)  # type: ignore   # pragma: no cover
+        model_config = ConfigDict(extra="allow", from_attributes=True)  # pragma: no cover
     else:
 
         class Config:  # pragma: no cover
