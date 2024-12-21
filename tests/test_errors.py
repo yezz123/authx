@@ -1,5 +1,4 @@
 import json
-from typing import Type
 
 import pytest
 from fastapi import FastAPI, Request
@@ -88,7 +87,7 @@ def test_invalid_token_init():
     assert exception.errors == errors
 
 
-async def create_exception_route(app: FastAPI, exception: Type[Exception]):
+async def create_exception_route(app: FastAPI, exception: type[Exception]):
     @app.get("/")
     async def route():
         raise exception
@@ -147,9 +146,7 @@ async def create_exception_route(app: FastAPI, exception: Type[Exception]):
         (exc.AuthXException, 500, "Custom message", "Custom message"),
     ],
 )
-async def test_set_app_exception_handler(
-    app, client, error_handler, exception, status_code, message, expected_message
-):
+async def test_set_app_exception_handler(app, client, error_handler, exception, status_code, message, expected_message):
     error_handler._set_app_exception_handler(app, exception, status_code, message)
 
     await create_exception_route(app, exception)

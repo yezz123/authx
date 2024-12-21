@@ -1,5 +1,7 @@
+"""Core functions for AuthX."""
+
 import contextlib
-from typing import Any, Dict, List, Literal, Optional
+from typing import Any, Literal, Optional
 
 from fastapi import Request
 
@@ -12,13 +14,11 @@ from authx.types import TokenLocations
 async def _get_token_from_headers(
     request: Request, config: AuthXConfig, refresh: bool = False, **kwargs: Any
 ) -> RequestToken:
-    """Get access token from headers"""
+    """Get access token from headers."""
     # Get Header
     auth_header: Optional[str] = request.headers.get(config.JWT_HEADER_NAME)
     if auth_header is None:
-        raise MissingTokenError(
-            f"Missing '{config.JWT_HEADER_TYPE}' in '{config.JWT_HEADER_NAME}' header."
-        )
+        raise MissingTokenError(f"Missing '{config.JWT_HEADER_TYPE}' in '{config.JWT_HEADER_NAME}' header.")
 
     if config.JWT_HEADER_TYPE:
         token = auth_header.replace(f"{config.JWT_HEADER_TYPE} ", "")
@@ -31,7 +31,7 @@ async def _get_token_from_headers(
 async def _get_token_from_cookies(
     request: Request, config: AuthXConfig, refresh: bool = False, **kwargs: Any
 ) -> RequestToken:
-    """Get access token from cookies
+    """Get access token from cookies.
 
     Args:
         request (Request): FastAPI Request
@@ -58,10 +58,7 @@ async def _get_token_from_cookies(
         raise MissingTokenError(f"Missing cookie '{cookie_key}'.")
 
     csrf_token = None
-    if (
-        config.JWT_COOKIE_CSRF_PROTECT
-        and request.method.upper() in config.JWT_CSRF_METHODS
-    ):
+    if config.JWT_COOKIE_CSRF_PROTECT and request.method.upper() in config.JWT_CSRF_METHODS:
         csrf_token = request.headers.get(csrf_header_key.lower())
         if not csrf_token and config.JWT_CSRF_CHECK_FORM:
             form = getattr(request, "form", None)
@@ -90,9 +87,7 @@ async def _get_token_from_query(
 ) -> RequestToken:
     query_token = request.query_params.get(config.JWT_QUERY_STRING_NAME)
     if query_token is None:
-        raise MissingTokenError(
-            f"Missing '{config.JWT_QUERY_STRING_NAME}' in query parameters"
-        )
+        raise MissingTokenError(f"Missing '{config.JWT_QUERY_STRING_NAME}' in query parameters")
 
     return RequestToken(token=query_token, location="query")
 
@@ -110,7 +105,7 @@ async def _get_token_from_json(
         key = config.JWT_REFRESH_JSON_KEY
 
     try:
-        json_data: Dict[str, Any] = await request.json()
+        json_data: dict[str, Any] = await request.json()
         json_token = json_data.get(key)
         if isinstance(json_token, str):
             return RequestToken(
@@ -138,7 +133,7 @@ async def _get_token_from_request(
     locations: Optional[TokenLocations] = None,
     **kwargs: Any,
 ) -> RequestToken:
-    errors: List[MissingTokenError] = []
+    errors: list[MissingTokenError] = []
 
     if locations is None:
         locations = config.JWT_TOKEN_LOCATION

@@ -11,8 +11,7 @@ from authx.types import ModelCallback, T, TokenCallback
 
 
 class _CallbackHandler(Generic[T]):
-    """
-    Base class for callback handlers in AuthX.
+    """Base class for callback handlers in AuthX.
 
     Args:
         Generic (T): Model type
@@ -41,16 +40,16 @@ class _CallbackHandler(Generic[T]):
 
     @property
     def is_model_callback_set(self) -> bool:
-        """Check if callback is set for model instance"""
+        """Check if callback is set for model instance."""
         return self.callback_get_model_instance is not None
 
     @property
     def is_token_callback_set(self) -> bool:
-        """Check if callback is set for token"""
+        """Check if callback is set for token."""
         return self.callback_is_token_in_blocklist is not None
 
     def _check_model_callback_is_set(self, ignore_errors: bool = False) -> bool:
-        """Check if callback is set for model instance and raise exception if not set"""
+        """Check if callback is set for model instance and raise exception if not set."""
         if self.is_model_callback_set:
             return True
         if not ignore_errors:
@@ -58,7 +57,7 @@ class _CallbackHandler(Generic[T]):
         return False
 
     def _check_token_callback_is_set(self, ignore_errors: bool = False) -> bool:
-        """Check if callback is set for token and raise exception if not set"""
+        """Check if callback is set for token and raise exception if not set."""
         if self.is_token_callback_set:
             return True
         if not ignore_errors:
@@ -66,31 +65,29 @@ class _CallbackHandler(Generic[T]):
         return False
 
     def set_callback_get_model_instance(self, callback: ModelCallback[T]) -> None:
-        """Set callback for model instance"""
+        """Set callback for model instance."""
         self.callback_get_model_instance = callback
 
     def set_callback_token_blocklist(self, callback: TokenCallback) -> None:
-        """Set callback for token"""
+        """Set callback for token."""
         self.callback_is_token_in_blocklist = callback
 
     def set_subject_getter(self, callback: ModelCallback[T]) -> None:
-        """Set the callback to run for subject retrieval and serialization"""
+        """Set the callback to run for subject retrieval and serialization."""
         self.set_callback_get_model_instance(callback)
 
     def set_token_blocklist(self, callback: TokenCallback) -> None:
-        """Set the callback to run for validation of revoked tokens"""
+        """Set the callback to run for validation of revoked tokens."""
         self.set_callback_token_blocklist(callback)
 
     def _get_current_subject(self, uid: str, **kwargs: ParamSpecKwargs) -> Optional[T]:
-        """Get current model instance from callback"""
+        """Get current model instance from callback."""
         self._check_model_callback_is_set()
         callback: Optional[ModelCallback[T]] = self.callback_get_model_instance
         return callback(uid, **kwargs) if callback is not None else None  # type: ignore
 
-    def is_token_in_blocklist(
-        self, token: Optional[str], **kwargs: ParamSpecKwargs
-    ) -> bool:
-        """Check if token is in blocklist"""
+    def is_token_in_blocklist(self, token: Optional[str], **kwargs: ParamSpecKwargs) -> bool:
+        """Check if token is in blocklist."""
         if self._check_token_callback_is_set(ignore_errors=True):
             callback: Optional[TokenCallback] = self.callback_is_token_in_blocklist
             if callback is not None and token is not None:

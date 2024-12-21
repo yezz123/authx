@@ -8,9 +8,7 @@ from authx.token import create_token, decode_token
 
 
 def test_create_token():
-    token = create_token(
-        uid="TEST", key="SECRET", algorithm="HS256", type="TYPE", csrf=False
-    )
+    token = create_token(uid="TEST", key="SECRET", algorithm="HS256", type="TYPE", csrf=False)
     assert isinstance(token, str)
 
 
@@ -78,9 +76,7 @@ def test_create_token_with_timed_claims(claim, argument):
 
     # Expiry as datetime.datetime
     now = datetime.now(tz=timezone.utc)
-    token = create_token(
-        uid="TEST", key=KEY, algorithm=ALGO, type="TYPE", csrf=False, **{argument: now}
-    )
+    token = create_token(uid="TEST", key=KEY, algorithm=ALGO, type="TYPE", csrf=False, **{argument: now})
     payload = decode_token(token, key=KEY, algorithms=[ALGO], verify=False)
 
     assert payload.get(claim) is not None
@@ -105,9 +101,7 @@ def test_create_token_with_timed_claims(claim, argument):
     # Expiry as numeric
     now = datetime.now(tz=timezone.utc)
     dt = timedelta(minutes=10)
-    token = create_token(
-        uid="TEST", key=KEY, algorithm=ALGO, type="TYPE", csrf=False, **{argument: dt}
-    )
+    token = create_token(uid="TEST", key=KEY, algorithm=ALGO, type="TYPE", csrf=False, **{argument: dt})
     payload = decode_token(token, key=KEY, algorithms=[ALGO], verify=False)
 
     assert payload.get(claim) is not None
@@ -179,15 +173,11 @@ def test_create_token_with_issuer():
     )
 
     with pytest.raises(JWTDecodeError):
-        decode_token(
-            token, key=KEY, algorithms=[ALGO], verify=True, issuer="BAD_ISSUER"
-        )
+        decode_token(token, key=KEY, algorithms=[ALGO], verify=True, issuer="BAD_ISSUER")
 
     payload = decode_token(token, key=KEY, algorithms=[ALGO], verify=True)
     assert payload.get("iss") == "TESTING"
-    payload = decode_token(
-        token, key=KEY, algorithms=[ALGO], verify=True, issuer="TESTING"
-    )
+    payload = decode_token(token, key=KEY, algorithms=[ALGO], verify=True, issuer="TESTING")
     assert payload.get("iss") == "TESTING"
 
 
@@ -208,26 +198,14 @@ def test_create_token_with_audience():
     )
 
     with pytest.raises(JWTDecodeError):
-        decode_token(
-            token, key=KEY, algorithms=[ALGO], verify=True, audience="BAD_AUDIENCE"
-        )
+        decode_token(token, key=KEY, algorithms=[ALGO], verify=True, audience="BAD_AUDIENCE")
         decode_token(token, key=KEY, algorithms=[ALGO], verify=True)
 
-    payload = decode_token(
-        token, key=KEY, algorithms=[ALGO], verify=True, audience=["TESTING"]
-    )
-    payload = decode_token(
-        token, key=KEY, algorithms=[ALGO], verify=True, audience="TESTING"
-    )
-    payload = decode_token(
-        token, key=KEY, algorithms=[ALGO], verify=True, audience=["AUTHX"]
-    )
-    payload = decode_token(
-        token, key=KEY, algorithms=[ALGO], verify=True, audience="AUTHX"
-    )
-    payload = decode_token(
-        token, key=KEY, algorithms=[ALGO], verify=True, audience=["TESTING", "AUTHX"]
-    )
+    payload = decode_token(token, key=KEY, algorithms=[ALGO], verify=True, audience=["TESTING"])
+    payload = decode_token(token, key=KEY, algorithms=[ALGO], verify=True, audience="TESTING")
+    payload = decode_token(token, key=KEY, algorithms=[ALGO], verify=True, audience=["AUTHX"])
+    payload = decode_token(token, key=KEY, algorithms=[ALGO], verify=True, audience="AUTHX")
+    payload = decode_token(token, key=KEY, algorithms=[ALGO], verify=True, audience=["TESTING", "AUTHX"])
     assert payload.get("aud") == ["TESTING", "AUTHX"]
 
 
@@ -251,9 +229,7 @@ def test_create_token_with_csrf_claim():
     assert payload.get("csrf") == "Test"
 
 
-@pytest.mark.parametrize(
-    "claim", ["fresh", "csrf", "iat", "exp", "iss", "aud", "type", "jti", "nbf", "sub"]
-)
+@pytest.mark.parametrize("claim", ["fresh", "csrf", "iat", "exp", "iss", "aud", "type", "jti", "nbf", "sub"])
 def test_create_token_with_additional_claims_exception(claim):
     KEY = "SECRET"
     ALGO = "HS256"
@@ -288,9 +264,7 @@ def test_verify_token():
 
     # Test iat Valid
     iat = datetime(2000, 1, 1, 12, 0)
-    token = create_token(
-        uid="TEST", key=KEY, algorithm=ALGO, type="TYPE", csrf=False, issued=iat
-    )
+    token = create_token(uid="TEST", key=KEY, algorithm=ALGO, type="TYPE", csrf=False, issued=iat)
     decode_token(token, key=KEY, algorithms=[ALGO], verify=True)
 
     # Test exp Valid

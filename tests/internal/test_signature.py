@@ -1,5 +1,5 @@
 import time
-from typing import Any, Dict
+from typing import Any
 
 import pytest
 
@@ -42,9 +42,7 @@ def test_decode_none_token(serializer):
 def test_decode_tampered_token(serializer):
     dict_obj = {"session_id": 1}
     token = serializer.encode(dict_obj)
-    tampered_token = token[:-1] + (
-        "1" if token[-1] == "0" else "0"
-    )  # Change last character
+    tampered_token = token[:-1] + ("1" if token[-1] == "0" else "0")  # Change last character
     data, err = serializer.decode(tampered_token)
     assert data is None and err == "InvalidSignature"
 
@@ -70,9 +68,7 @@ def test_different_secret_keys():
 
 def test_large_payload():
     serializer = SignatureSerializer("TEST_SECRET_KEY")
-    large_dict = {
-        f"key_{i}": "x" * 1000 for i in range(100)
-    }  # 100 keys with 1000 character values
+    large_dict = {f"key_{i}": "x" * 1000 for i in range(100)}  # 100 keys with 1000 character values
     token = serializer.encode(large_dict)
     data, err = serializer.decode(token)
     assert data == large_dict and err is None
@@ -80,7 +76,7 @@ def test_large_payload():
 
 def test_empty_dict():
     serializer = SignatureSerializer("TEST_SECRET_KEY")
-    empty_dict: Dict[str, Any] = {}
+    empty_dict: dict[str, Any] = {}
     token = serializer.encode(empty_dict)
     data, err = serializer.decode(token)
     assert data == empty_dict and err is None

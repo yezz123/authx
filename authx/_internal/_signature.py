@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Optional
 
 from itsdangerous import BadTimeSignature, SignatureExpired, URLSafeTimedSerializer
 
@@ -6,21 +6,17 @@ CASUAL_UT = False
 
 
 class SignatureSerializer:
-    """
-    A class that implements a URL-safe timed serializer.
-    """
+    """A class that implements a URL-safe timed serializer."""
 
     def __init__(self, secret_key: str, expired_in: int = 0) -> None:
-        """
-        Initialize the serializer with a secret key and an optional expiration time.
-        """
+        """Initialize the serializer with a secret key and an optional expiration time."""
         self.ser = URLSafeTimedSerializer(secret_key)
         self.expired_in = expired_in
 
-    def encode(self, dict_obj: Dict[str, Any]) -> str:
+    def encode(self, dict_obj: dict[str, Any]) -> str:
         return self.ser.dumps(dict_obj)
 
-    def decode(self, token: str) -> Tuple[Optional[Dict[str, Any]], Optional[str]]:
+    def decode(self, token: str) -> tuple[Optional[dict[str, Any]], Optional[str]]:
         if token is None:
             return None, "NoTokenSpecified"
         try:

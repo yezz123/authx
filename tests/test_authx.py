@@ -64,9 +64,7 @@ def test_create_refresh_token(authx: AuthX):
 def test_verify_token(authx: AuthX):
     token = authx.create_access_token(uid="blablah", fresh=True)
     payload = authx._decode_token(token, verify=False)
-    request_token = RequestToken(
-        token=token, csrf=None, location="headers", type="access"
-    )
+    request_token = RequestToken(token=token, csrf=None, location="headers", type="access")
     payload = authx.verify_token(request_token, verify_csrf=False)
     assert payload.fresh
     assert payload.sub == "blablah"
@@ -158,9 +156,7 @@ async def test_get_token_from_request_without_auth(authx: AuthX):
         }
     )
     with pytest.raises(MissingTokenError):
-        await authx._get_token_from_request(
-            request=req, refresh=False, locations=["headers"]
-        )
+        await authx._get_token_from_request(request=req, refresh=False, locations=["headers"])
 
 
 @pytest.mark.asyncio
@@ -217,13 +213,9 @@ async def test__auth_required(authx: AuthX, refresh_token: str, access_token: st
         }
     )
 
-    refresh_token: TokenPayload = await authx._auth_required(
-        request=req, verify_fresh=False, type="refresh"
-    )
+    refresh_token: TokenPayload = await authx._auth_required(request=req, verify_fresh=False, type="refresh")
     assert refresh_token.type == "refresh"
-    access_token: TokenPayload = await authx._auth_required(
-        request=req, verify_fresh=True, type="access"
-    )
+    access_token: TokenPayload = await authx._auth_required(request=req, verify_fresh=True, type="access")
     assert access_token.type == "access"
 
 
@@ -277,9 +269,7 @@ def test_create_refresh_token_with_custom_data(authx):
 
 def test_verify_token_with_csrf(authx):
     token = authx.create_access_token(uid="test_user")
-    request_token = RequestToken(
-        token=token, csrf="test_csrf", location="cookies", type="access"
-    )
+    request_token = RequestToken(token=token, csrf="test_csrf", location="cookies", type="access")
 
     with pytest.raises(AuthXException):
         authx.verify_token(request_token, verify_csrf=True)
@@ -292,15 +282,11 @@ def test_set_and_unset_cookies(authx, mock_response):
     authx.set_access_cookies(access_token, mock_response)
     authx.set_refresh_cookies(refresh_token, mock_response)
 
-    assert (
-        len(mock_response.headers.getlist("set-cookie")) == 4
-    )  # 2 for access, 2 for refresh
+    assert len(mock_response.headers.getlist("set-cookie")) == 4  # 2 for access, 2 for refresh
 
     authx.unset_cookies(mock_response)
 
-    assert (
-        len(mock_response.headers.getlist("set-cookie")) == 8
-    )  # 4 additional for unsetting
+    assert len(mock_response.headers.getlist("set-cookie")) == 8  # 4 additional for unsetting
 
 
 def test_token_required_dependency(authx):
