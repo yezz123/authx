@@ -32,7 +32,7 @@ from authx.types import (
 )
 
 if PYDANTIC_V2 := PYDANTIC_VERSION.startswith("2."):
-    from pydantic import Configdict, field_validator  # pragma: no cover
+    from pydantic import ConfigDict, field_validator  # pragma: no cover
 else:
     from pydantic import Extra, validator  # pragma: no cover
 
@@ -66,7 +66,7 @@ class TokenPayload(BaseModel):
     """
 
     if PYDANTIC_V2:
-        model_config = Configdict(extra="allow", from_attributes=True)  # type: ignore   # pragma: no cover
+        model_config = ConfigDict(extra="allow", from_attributes=True)  # type: ignore   # pragma: no cover
     else:
 
         class Config:  # pragma: no cover
