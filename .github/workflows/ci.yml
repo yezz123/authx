@@ -63,6 +63,9 @@ jobs:
       - name: Install Dependencies
         run: uv sync --group test --all-extras
 
+      - name: Install pydantic v2
+        run: uv pip install pydantic==2.10.4
+
       - name: Freeze Dependencies
         run: uv pip freeze
 
