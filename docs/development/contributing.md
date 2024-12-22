@@ -159,7 +159,7 @@ All the documentation is in Markdown format in the directory `./docs`.
 <div class="termy">
 
 ```console
-uv pip install requirements-docs.txt
+uv sync --group docs --all-extras
 
 bash scripts/docs_build.sh
 ```
@@ -245,6 +245,8 @@ If you want to generate the test report:
 <div class="termy">
 
 ```console
+$ uv sync --group test --all-extras
+
 $ bash scripts/test.sh
 ```
 
