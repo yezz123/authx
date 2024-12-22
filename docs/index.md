@@ -49,8 +49,6 @@ customizable and adaptable as possible.
 
     </div>
 
-</div>
-
 ## Features
 
 - [x] Support Python 3.8+ & Pydantic 1.7+.
