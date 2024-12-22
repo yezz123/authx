@@ -29,13 +29,25 @@ customizable and adaptable as possible.
 
 ## Installation
 
-<div class="termy">
+=== "pip"
 
-```console
-$ pip install authx
+    <div class="termy">
 
----> 100%
-```
+    ```console
+    $ pip install authx
+    ```
+
+    </div>
+
+=== "uv"
+
+    <div class="termy">
+
+    ```console
+    $ uv add authx
+    ```
+
+    </div>
 
 </div>
 
