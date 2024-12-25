@@ -230,8 +230,8 @@ nav:
     - Internal:
       - api/internal/callback.md
       - api/internal/errors.md
-      - api/internal/memory.md
       - api/internal/signature.md
+      - api/internal/extra/memory.md
     - Extra:
       - api/extra/session.md
       - api/extra/profiler.md
