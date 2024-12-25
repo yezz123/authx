@@ -10,6 +10,9 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
+    permissions:
+      id-token: write
+
     steps:
       - uses: actions/checkout@v4
 
@@ -31,9 +34,7 @@ jobs:
         run: python -m build
 
       - name: Upload package to PyPI
-        uses: pypa/gh-action-pypi-publish@v1.12.2
-        with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
+        uses: pypa/gh-action-pypi-publish@release/v1
 
   send-tweet:
     name: Send Tweet
