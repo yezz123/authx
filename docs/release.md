@@ -25,6 +25,7 @@
 
 ### Docs
 
+* 📝 Update installation instructions to simplify pip install command. PR [#722](https://github.com/yezz123/authx/pull/722) by [@yezz123](https://github.com/yezz123).
 * 📝 Update documentation for installation and command usage. PR [#718](https://github.com/yezz123/authx/pull/718) by [@yezz123](https://github.com/yezz123).
 * 📝 add @callamd as a contributor for code. PR [#710](https://github.com/yezz123/authx/pull/710) by [@allcontributors[bot]](https://github.com/apps/allcontributors).
 
