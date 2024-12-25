@@ -1,8 +1,21 @@
 ## Latest Changes
 
+## 1.4.1
+
 ### Features
 
 * ✨ Support async sessions. PR [#709](https://github.com/yezz123/authx/pull/709) by [@callamd](https://github.com/callamd).
+
+### Internal
+
+* 🗑️ Deprecate MemoryIO class and associated tests. PR [#721](https://github.com/yezz123/authx/pull/721) by [@yezz123](https://github.com/yezz123).
+* 🔧  Enhance the Project Dependencies to be fully migrated to UV. PR [#711](https://github.com/yezz123/authx/pull/711) by [@yezz123](https://github.com/yezz123).
+
+### Docs
+
+* 📝 Update installation instructions to simplify pip install command. PR [#722](https://github.com/yezz123/authx/pull/722) by [@yezz123](https://github.com/yezz123).
+* 📝 Update documentation for installation and command usage. PR [#718](https://github.com/yezz123/authx/pull/718) by [@yezz123](https://github.com/yezz123).
+* 📝 add @callamd as a contributor for code. PR [#710](https://github.com/yezz123/authx/pull/710) by [@allcontributors[bot]](https://github.com/apps/allcontributors).
 
 ### Upgrades
 
@@ -22,17 +35,6 @@
 * ⬆️ Bump the python-packages group with 7 updates. PR [#692](https://github.com/yezz123/authx/pull/692) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️️ Bump `ruff-pre-commit` from v0.6.9 to v0.7.0. PR [#690](https://github.com/yezz123/authx/pull/690) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump the python-packages group with 12 updates. PR [#689](https://github.com/yezz123/authx/pull/689) by [@dependabot[bot]](https://github.com/apps/dependabot).
-
-### Docs
-
-* 📝 Update installation instructions to simplify pip install command. PR [#722](https://github.com/yezz123/authx/pull/722) by [@yezz123](https://github.com/yezz123).
-* 📝 Update documentation for installation and command usage. PR [#718](https://github.com/yezz123/authx/pull/718) by [@yezz123](https://github.com/yezz123).
-* 📝 add @callamd as a contributor for code. PR [#710](https://github.com/yezz123/authx/pull/710) by [@allcontributors[bot]](https://github.com/apps/allcontributors).
-
-### Internal
-
-* 🗑️ Deprecate MemoryIO class and associated tests. PR [#721](https://github.com/yezz123/authx/pull/721) by [@yezz123](https://github.com/yezz123).
-* 🔧  Enhance the Project Dependencies to be fully migrated to UV. PR [#711](https://github.com/yezz123/authx/pull/711) by [@yezz123](https://github.com/yezz123).
 
 ## 1.4.0
 
