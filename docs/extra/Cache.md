@@ -48,7 +48,7 @@ Make sure to have the necessary dependencies installed:
 <div class="termy">
 
 ```console
-$ pip install authx_extra[redis]
+$ pip install authx_extra
 
 ---> 100%
 ```
