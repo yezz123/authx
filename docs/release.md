@@ -31,6 +31,7 @@
 
 ### Internal
 
+* 🗑️ Deprecate MemoryIO class and associated tests. PR [#721](https://github.com/yezz123/authx/pull/721) by [@yezz123](https://github.com/yezz123).
 * 🔧  Enhance the Project Dependencies to be fully migrated to UV. PR [#711](https://github.com/yezz123/authx/pull/711) by [@yezz123](https://github.com/yezz123).
 
 ## 1.4.0
