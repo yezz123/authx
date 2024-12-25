@@ -7,7 +7,6 @@ from authx._internal._logger import (
     log_info,
     set_log_level,
 )
-from authx._internal._memory import MemoryIO
 from authx._internal._signature import SignatureSerializer
 from authx._internal._utils import (
     RESERVED_CLAIMS,
@@ -36,6 +35,5 @@ __all__ = (
     "utc",
     "end_of_day",
     "end_of_week",
-    "MemoryIO",
     "SignatureSerializer",
 )
