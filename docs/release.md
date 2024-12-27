@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Internal
+
+* 🔧 Update release workflow to use `astral-sh/setup-uv`. PR [#723](https://github.com/yezz123/authx/pull/723) by [@yezz123](https://github.com/yezz123).
+
 ## 1.4.1
 
 ### Features
