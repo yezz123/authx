@@ -63,9 +63,6 @@ jobs:
       - name: Install Dependencies
         run: uv sync --group test --all-extras
 
-      - name: Freeze Dependencies
-        run: uv pip freeze
-
       - name: Test with pytest - ${{ matrix.os }} - py${{ matrix.python-version }}
         run: bash scripts/test.sh
         env:
@@ -110,9 +107,6 @@ jobs:
 
       - name: Install pydantic v1
         run: uv pip install pydantic==1.10.17
-
-      - name: Freeze Dependencies
-        run: uv pip freeze
 
       - name: Test with pytest - ${{ matrix.os }} - py${{ matrix.python-version }}
         run: bash scripts/test.sh
