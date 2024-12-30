@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Upgrades
+
+* ⬆ Bump astral-sh/setup-uv from 4 to 5. PR [#724](https://github.com/yezz123/authx/pull/724) by [@dependabot[bot]](https://github.com/apps/dependabot).
+
 ### Internal
 
 * 🔧 Update release workflow to use `astral-sh/setup-uv`. PR [#723](https://github.com/yezz123/authx/pull/723) by [@yezz123](https://github.com/yezz123).
