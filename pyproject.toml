@@ -141,7 +141,6 @@ include = [
     '/scripts',
     '/authx',
     '/tests',
-    '/requirements',
 ]
 
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
