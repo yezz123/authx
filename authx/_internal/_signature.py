@@ -39,6 +39,6 @@ if CASUAL_UT:
     dict_obj = {"session_id": session_id}
     token = serializer.encode(dict_obj)
     data, err = serializer.decode(token)
-    assert (
-        data is not None and err is None and data["session_id"] == 1
-    ), "Failed to decode or session_id does not match."
+    assert data is not None and err is None and data["session_id"] == 1, (
+        "Failed to decode or session_id does not match."
+    )
