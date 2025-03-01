@@ -35,19 +35,20 @@ Authentication is based solely on the presence of the `JWT_HEADER_NAME` header i
      $ curl --oauth2-bearer $TOKEN http://0.0.0.0:8000/protected
      "OK"
      # OR
-     $ curl -H 'Authorization: "Bearer $TOKEN"' http://0.0.0.0:8000/protected
+     $ curl -H 'Authorization: Bearer $TOKEN' http://0.0.0.0:8000/protected
+     "OK"
      ```
 === "JavaScript"
 
      ```js
      async function requestProtectedRoute(TOKEN){
-     const response = await fetch("http://0.0.0.0:8000/protected", {
-          method: "GET",
-          headers: {
-               "Authorization": `Bearer ${TOKEN}`
-          }
-     })
-     return response
+       const response = await fetch("http://0.0.0.0:8000/protected", {
+         method: "GET",
+         headers: {
+           "Authorization": `Bearer ${TOKEN}`
+         }
+       });
+       return response;
      }
      ```
 === "Python"
@@ -55,11 +56,11 @@ Authentication is based solely on the presence of the `JWT_HEADER_NAME` header i
      ```python
      import requests
 
-     r = request.get(
-     "http://0.0.0.0:8000/protected",
-     headers={
-          "Authorization": f"Bearer {TOKEN}"
-     }
+     response = requests.get(
+       "http://0.0.0.0:8000/protected",
+       headers={
+         "Authorization": f"Bearer {TOKEN}"
+       }
      )
      ```
 
@@ -83,8 +84,8 @@ JWTs in query strings can be used by suffixing the URL with `?token=$TOKEN`.
 
      ```js
      async function requestProtectedRoute(TOKEN){
-     const response = await fetch(`http://0.0.0.0:8000/protected?token=${TOKEN}`)
-     return response
+       const response = await fetch(`http://0.0.0.0:8000/protected?token=${TOKEN}`);
+       return response;
      }
      ```
 === "Python"
@@ -92,38 +93,38 @@ JWTs in query strings can be used by suffixing the URL with `?token=$TOKEN`.
      ```python
      import requests
 
-     r = request.get(f"http://0.0.0.0:8000/protected?token={TOKEN}")
+     response = requests.get(f"http://0.0.0.0:8000/protected?token={TOKEN}")
      ```
 
 ## JSON Body
 
 JWT via JSON Body is controlled by the following parameters:
 
-- `JWT_JSON_KEY`: The JSON key relative to the access token. By default, it's `'access_token'`.
-- `JWT_REFRESH_JSON_KEY`: The JSON key relative to the refresh token. By default, it's `'refresh_token'`.
+- `JWT_JSON_KEY`: The JSON key for the access token. By default, it's `'access_token'`.
+- `JWT_REFRESH_JSON_KEY`: The JSON key for the refresh token. By default, it's `'refresh_token'`.
 
 Sending JWT via JSON Body cannot be accomplished with GET requests and requires the `Content-Type: application/json` header.
 
 === "cURL"
 
      ```shell
-     curl -X POST -s --json '{"access_token":"$TOKEN"}' http://0.0.0.0:8000/protected
+     $ curl -X POST -s -H "Content-Type: application/json" -d '{"access_token":"$TOKEN"}' http://0.0.0.0:8000/protected
      "OK"
      ```
 === "JavaScript"
 
      ```js
      async function requestProtectedRoute(TOKEN){
-     const response = await fetch("http://0.0.0.0:8000/protected", {
-          method: "POST",
-          headers: {
-               "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-               "access_token": TOKEN
-          })
-     })
-     return response
+       const response = await fetch("http://0.0.0.0:8000/protected", {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json"
+         },
+         body: JSON.stringify({
+           "access_token": TOKEN
+         })
+       });
+       return response;
      }
      ```
 === "Python"
@@ -131,11 +132,11 @@ Sending JWT via JSON Body cannot be accomplished with GET requests and requires 
      ```python
      import requests
 
-     r = request.post(
-     "http://0.0.0.0:8000/protected",
-     json={
-          "access_token": TOKEN
-     }
+     response = requests.post(
+       "http://0.0.0.0:8000/protected",
+       json={
+         "access_token": TOKEN
+       }
      )
      ```
 

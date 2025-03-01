@@ -1,6 +1,6 @@
 # Basic Usage
 
-The core concept of Authx relies on generating access tokens and protecting routes. The following examples demonstrate how to use Authx to quickly integrate those systems within your FastAPI application.
+The core concept of AuthX relies on generating access tokens and protecting routes. The following examples demonstrate how to use AuthX to quickly integrate these systems within your FastAPI application.
 
 ```py
 from fastapi import FastAPI, Depends, HTTPException
@@ -28,7 +28,7 @@ def get_protected():
 
 ## Getting Started
 
-Let's build our first FastAPI application with Authx.
+Let's build our first FastAPI application with AuthX.
 
 As usual, you create your application with the `fastapi.FastAPI` object
 
@@ -97,7 +97,7 @@ security = AuthX(config=config)
 
 ### Create `AuthX` instance
 
-You can now instantiate the `AuthX` object with the your configuration
+You can now instantiate the `AuthX` object with your configuration
 
 ```py hl_lines="2 10"
 from fastapi import FastAPI
@@ -116,7 +116,7 @@ security = AuthX(config=config)
     You can also load the configuration after the `AuthX` object is created. This is useful when you want to use the same `AuthX` object for multiple FastAPI applications.
 
     ```py
-    config = AuthX()
+    config = AuthXConfig()
     config.JWT_SECRET_KEY = "SECRET_KEY"
 
     security = AuthX()
@@ -149,8 +149,8 @@ Once a user has provided valid credentials, use the `AuthX.create_access_token` 
 === "Request Access Token"
 
     ```sh
-    $ curl -s -X POST http://0.0.0.0:8000/login?username=test&password=test
-     {"access_token": $TOKEN}
+    $ curl -s -X GET "http://0.0.0.0:8000/login?username=test&password=test"
+    {"access_token": "$TOKEN"}
     ```
 
 ### Protected Routes
@@ -175,13 +175,13 @@ Whether a bad token or no token is provided, the server will prevent the executi
 
 === "With a bad JsonWebToken"
     ```bash
-    $ curl -s --oauth2-bearer "dummytoken" http://0.0.0.0:8000/protected
+    $ curl -s -H "Authorization: Bearer dummytoken" http://0.0.0.0:8000/protected
     {"detail":"Unauthorized"}
     ```
 
 === "With a valid JsonWebToken"
     ```bash
-    $ curl -s --oauth2-bearer $TOKEN http://0.0.0.0:8000/protected
+    $ curl -s -H "Authorization: Bearer $TOKEN" http://0.0.0.0:8000/protected
     {"message": "Hello World"}
     ```
 
