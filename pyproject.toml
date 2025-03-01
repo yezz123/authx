@@ -195,6 +195,7 @@ ignore = [
 "tests/*" = ["D100","D101","D102","D103","D104","D107"]
 "tests/utils.py" = ["B008"]
 "tests/test_callback.py" = ["E712"]
+"examples/*" = ["D100","D101","D102","D103","D104","D105","D107","D205","F841","T201"]
 
 [tool.ruff.lint.isort]
 known-third-party = ["pydantic", "typing_extensions", "sqlalchemy"]
