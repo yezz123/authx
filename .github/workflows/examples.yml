@@ -1,0 +1,59 @@
+name: Test AuthX Examples
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "examples/**"
+      - ".github/workflows/examples.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "examples/**"
+      - ".github/workflows/examples.yml"
+  workflow_dispatch:
+
+jobs:
+  test-examples:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install authx fastapi uvicorn pytest pytest-asyncio httpx
+
+      - name: Verify examples syntax
+        run: |
+          for example in examples/*.py; do
+            if [ -f "$example" ]; then
+              echo "Checking syntax for $example"
+              python -m py_compile "$example"
+            fi
+          done
+
+      - name: Run example tests
+        run: |
+          cd examples
+          python -m pytest -xvs test_examples.py || {
+            echo "Tests failed. Checking server logs..."
+            for log in *.log; do
+              if [ -f "$log" ]; then
+                echo "=== Contents of $log ==="
+                cat "$log"
+                echo "========================="
+              fi
+            done
+            exit 1
+          }
