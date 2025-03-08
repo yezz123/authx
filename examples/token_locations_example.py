@@ -65,21 +65,25 @@ def login(user: User, response: Response):
     """Login endpoint that validates credentials and returns tokens."""
     # Check if user exists and password is correct
     if user.username in USERS and USERS[user.username]["password"] == user.password:
-        # Create access and refresh tokens
-        access_token = auth.create_access_token(user.username)
-        refresh_token = auth.create_refresh_token(user.username)
+        try:
+            # Create access and refresh tokens
+            access_token = auth.create_access_token(user.username)
+            refresh_token = auth.create_refresh_token(user.username)
 
-        # Set tokens in cookies
-        auth.set_access_cookies(response, access_token)
-        auth.set_refresh_cookies(response, refresh_token)
+            # Set tokens in cookies if cookies are enabled
+            if "cookies" in auth_config.JWT_TOKEN_LOCATION:
+                auth.set_access_cookies(response, access_token)
+                auth.set_refresh_cookies(response, refresh_token)
 
-        # Return tokens in response body
-        return {
-            "access_token": access_token,
-            "refresh_token": refresh_token,
-            "token_type": "bearer",
-            "message": "Tokens are set in cookies and returned in the response body",
-        }
+            # Return tokens in response body
+            return {
+                "access_token": access_token,
+                "refresh_token": refresh_token,
+                "token_type": "bearer",
+                "message": "Tokens are set in cookies and returned in the response body",
+            }
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     # Return error if credentials are invalid
     raise HTTPException(status_code=401, detail="Invalid username or password")
