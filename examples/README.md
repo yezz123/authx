@@ -1,130 +1,55 @@
 # AuthX Examples
 
-This directory contains several examples demonstrating how to use AuthX with FastAPI for authentication and authorization.
+Simple examples showing how to use AuthX with FastAPI for authentication and authorization.
 
-## Prerequisites
-
-Before running these examples, make sure you have installed AuthX:
+## Installation
 
 ```bash
-uv add authx
+uv sync
 ```
 
-## Examples Overview
+## Available Examples
 
-### 1. Basic Authentication Example (`basic_auth_example.py`)
+1. **Basic Authentication** (`basic_auth_example.py`)
+   - JWT token authentication
+   - Protected routes
 
-A simple example demonstrating basic authentication with JWT tokens.
+2. **Refresh Tokens** (`refresh_token_example.py`)
+   - Access and refresh token handling
+   - Token refresh flow
 
-**Features demonstrated:**
+3. **Token Blocklist** (`token_blocklist_example.py`)
+   - Token revocation
+   - Logout functionality
 
-- Configuring AuthX
-- User login with JWT token generation
-- Protected routes requiring authentication
-- Token verification
+4. **Token Locations** (`token_locations_example.py`)
+   - Authorization headers
+   - Cookies
+   - Request body
+   - Query parameters
 
-**To run:**
+5. **Fresh Tokens** (`fresh_token_example.py`)
+   - Fresh vs non-fresh tokens
+   - Sensitive operations protection
 
-```bash
-python basic_auth_example.py
-```
+## Running Examples
 
-### 2. Refresh Token Example (`refresh_token_example.py`)
+1. Start an example:
 
-Demonstrates how to use refresh tokens to obtain new access tokens without requiring the user to log in again.
+   ```bash
+   python example_name.py
+   ```
 
-**Features demonstrated:**
+2. Access the API docs:
+   - Open <http://localhost:8000/docs>
+   - Test endpoints through the interactive UI
 
-- Access token and refresh token generation
-- Using refresh tokens to get new access tokens
-- Token expiration configuration
+## Note
 
-**To run:**
+These examples are for demonstration purposes. For production use:
 
-```bash
-python refresh_token_example.py
-```
+- Use environment variables for secrets
+- Enable HTTPS
+- Implement proper database storage
 
-### 3. Token Blocklist Example (`token_blocklist_example.py`)
-
-Shows how to implement a token blocklist (revocation) system to invalidate tokens before they expire.
-
-**Features demonstrated:**
-
-- Token blocklisting/revocation
-- Custom blocklist callback
-- Logout functionality
-
-**To run:**
-
-```bash
-python token_blocklist_example.py
-```
-
-### 4. Token Locations Example (`token_locations_example.py`)
-
-Demonstrates the different ways tokens can be provided in requests.
-
-**Features demonstrated:**
-
-- Configuring multiple token locations
-- Accepting tokens in:
-  - Authorization headers
-  - Cookies (with CSRF protection)
-  - JSON request body
-  - Query parameters
-- Setting and unsetting cookies
-
-**To run:**
-
-```bash
-python token_locations_example.py
-```
-
-### 5. Fresh Token Example (`fresh_token_example.py`)
-
-Shows how to use fresh tokens for sensitive operations.
-
-**Features demonstrated:**
-
-- Fresh vs non-fresh tokens
-- Requiring fresh tokens for sensitive operations
-- Converting refresh tokens to non-fresh access tokens
-
-**To run:**
-
-```bash
-python fresh_token_example.py
-```
-
-## Testing the Examples
-
-After starting any of the examples, you can interact with them using tools like:
-
-1. **curl** from the command line
-2. **Postman** or similar API testing tools
-3. **FastAPI's automatic documentation** at http://localhost:8000/docs
-
-## Example Workflow
-
-Here's a typical workflow for testing these examples:
-
-1. Start the example server: `python example_name.py`
-2. Access the documentation at http://localhost:8000/docs
-3. Use the `/login` endpoint to get tokens
-4. Use the tokens to access protected endpoints
-5. Try different token locations or features depending on the example
-
-## Security Notes
-
-These examples are for demonstration purposes only and include simplified security practices:
-
-- Secret keys are hardcoded (in production, use environment variables)
-- HTTPS is not enforced (in production, always use HTTPS)
-- User data is stored in memory (in production, use a proper database)
-
-## Additional Resources
-
-- [AuthX Documentation](https://authx.yezz.me/)
-- [FastAPI Documentation](https://fastapi.tiangolo.com/)
-- [JWT.io](https://jwt.io/) - Useful for inspecting JWT tokens
+For more details, visit [AuthX Documentation](https://authx.yezz.me/)
