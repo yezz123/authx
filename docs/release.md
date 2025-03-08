@@ -19,6 +19,7 @@
 
 ### Internal
 
+* ✨ Add examples for AuthX authentication. PR [#738](https://github.com/yezz123/authx/pull/738) by [@yezz123](https://github.com/yezz123).
 * 🏗️ Update CI workflow to use only Ubuntu. PR [#736](https://github.com/yezz123/authx/pull/736) by [@yezz123](https://github.com/yezz123).
 * 🔧  Remove requirements from the build target. PR [#726](https://github.com/yezz123/authx/pull/726) by [@yezz123](https://github.com/yezz123).
 * 🔧 Update release workflow to use `astral-sh/setup-uv`. PR [#723](https://github.com/yezz123/authx/pull/723) by [@yezz123](https://github.com/yezz123).
