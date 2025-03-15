@@ -1,6 +1,7 @@
 """Token encoding and decoding functions."""
 
 import datetime
+import warnings
 from collections.abc import Sequence
 from typing import Any, Optional, Union
 
@@ -103,6 +104,13 @@ def decode_token(
     data: Optional[dict[str, Any]] = None,
 ) -> dict[str, Any]:
     """Decode a token."""
+    if data is not None:
+        warnings.warn(
+            "passing data keyword argument to decode_token() is deprecated and will be removed in authx version 2.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+
     # Default to HS256 if no algorithms are provided
     if algorithms is None:  # pragma: no cover
         algorithms = ["HS256"]  # pragma: no cover
@@ -117,7 +125,6 @@ def decode_token(
             audience=audience,
             issuer=issuer,
             options={"verify_signature": verify},
-            data=data,
         )
     except Exception as e:
         raise JWTDecodeError(*e.args) from e
