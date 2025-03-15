@@ -1,9 +1,9 @@
 """Token encoding and decoding functions."""
 
 import datetime
+import warnings
 from collections.abc import Sequence
 from typing import Any, Optional, Union
-import warnings
 
 import jwt
 
@@ -106,8 +106,7 @@ def decode_token(
     """Decode a token."""
     if data is not None:
         warnings.warn(
-            "passing data keyword argument to decode_token() is deprecated "
-            "and will be removed in authx version 2.",
+            "passing data keyword argument to decode_token() is deprecated and will be removed in authx version 2.",
             DeprecationWarning,
             stacklevel=2,
         )
