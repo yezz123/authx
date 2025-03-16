@@ -95,3 +95,9 @@ class InvalidToken(Exception):
             errors (list[str]): list of errors
         """
         self.errors = errors
+
+
+class AuthxArgumentDeprecationWarning(DeprecationWarning):
+    """Raised when deprecated argument is used."""
+
+    pass

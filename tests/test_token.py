@@ -3,7 +3,7 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from authx.exceptions import JWTDecodeError
+from authx.exceptions import AuthxArgumentDeprecationWarning, JWTDecodeError
 from authx.token import create_token, decode_token
 
 
@@ -298,3 +298,15 @@ def test_verify_token():
         decode_token(token, key=KEY, algorithms=[ALGO], verify=True)
     time.sleep(SLEEP_TIME)
     decode_token(token, key=KEY, algorithms=[ALGO], verify=True)
+
+
+def test_decode_token_raise_data_argument_deprecated():
+    KEY = "SECRET"
+
+    token = create_token(uid="TEST", key="SECRET")
+    expected_warning_message = (
+        r".*passing data keyword argument to decode_token\(\) is deprecated and will be removed in authx version 2.*"
+    )
+
+    with pytest.warns(AuthxArgumentDeprecationWarning, match=expected_warning_message):
+        decode_token(token, key=KEY, data={})

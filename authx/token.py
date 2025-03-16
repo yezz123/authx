@@ -8,7 +8,7 @@ from typing import Any, Optional, Union
 import jwt
 
 from authx._internal._utils import RESERVED_CLAIMS, get_now, get_now_ts, get_uuid
-from authx.exceptions import JWTDecodeError
+from authx.exceptions import AuthxArgumentDeprecationWarning, JWTDecodeError
 from authx.types import (
     AlgorithmType,
     DateTimeExpression,
@@ -107,7 +107,7 @@ def decode_token(
     if data is not None:
         warnings.warn(
             "passing data keyword argument to decode_token() is deprecated and will be removed in authx version 2.",
-            DeprecationWarning,
+            AuthxArgumentDeprecationWarning,
             stacklevel=2,
         )
 
