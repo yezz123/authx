@@ -19,6 +19,7 @@
 
 ### Docs
 
+* 📝 add @lmasikl as a contributor for code. PR [#742](https://github.com/yezz123/authx/pull/742) by [@allcontributors[bot]](https://github.com/apps/allcontributors).
 * 📝 Update documentation for AuthX. PR [#737](https://github.com/yezz123/authx/pull/737) by [@yezz123](https://github.com/yezz123).
 
 ### Internal
