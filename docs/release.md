@@ -6,6 +6,7 @@
 
 ### Upgrades
 
+* ⬆️ Bump `ruff-pre-commit` from v0.9.9 to v0.9.10. PR [#740](https://github.com/yezz123/authx/pull/740) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump `ruff-pre-commit` from v0.9.7 to v0.9.9. PR [#739](https://github.com/yezz123/authx/pull/739) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump `ruff-pre-commit` from v0.9.6 to v0.9.7. PR [#735](https://github.com/yezz123/authx/pull/735) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump `ruff-pre-commit` from v0.9.4 to v0.9.6. PR [#733](https://github.com/yezz123/authx/pull/733) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
