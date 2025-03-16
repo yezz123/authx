@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Features
+
+* ♻️ Deprecate data keyword argument in `decode_token`. PR [#741](https://github.com/yezz123/authx/pull/741) by [@lmasikl](https://github.com/lmasikl).
+
 ### Upgrades
 
 * ⬆️ Bump `ruff-pre-commit` from v0.9.7 to v0.9.9. PR [#739](https://github.com/yezz123/authx/pull/739) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
