@@ -1,5 +1,7 @@
 ## Latest Changes
 
+## 1.4.2
+
 ### Features
 
 * ♻️ Deprecate data keyword argument in `decode_token`. PR [#741](https://github.com/yezz123/authx/pull/741) by [@lmasikl](https://github.com/lmasikl).
@@ -11,13 +13,13 @@
 * ⬆️ Bump `ruff-pre-commit` from v0.9.7 to v0.9.9. PR [#739](https://github.com/yezz123/authx/pull/739) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump `ruff-pre-commit` from v0.9.6 to v0.9.7. PR [#735](https://github.com/yezz123/authx/pull/735) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump `ruff-pre-commit` from v0.9.4 to v0.9.6. PR [#733](https://github.com/yezz123/authx/pull/733) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆ [pre-commit.ci] pre-commit autoupdate. PR [#732](https://github.com/yezz123/authx/pull/732) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆ Update pytz requirement in the python-packages group. PR [#731](https://github.com/yezz123/authx/pull/731) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ [pre-commit.ci] pre-commit autoupdate. PR [#730](https://github.com/yezz123/authx/pull/730) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ [pre-commit.ci] pre-commit autoupdate. PR [#732](https://github.com/yezz123/authx/pull/732) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Update pytz requirement in the python-packages group. PR [#731](https://github.com/yezz123/authx/pull/731) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ [pre-commit.ci] pre-commit autoupdate. PR [#730](https://github.com/yezz123/authx/pull/730) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump `ruff-pre-commit` from v0.9.1 to v0.9.2. PR [#729](https://github.com/yezz123/authx/pull/729) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump `ruff-pre-commit` from v0.8.6 to v0.9.1. PR [#728](https://github.com/yezz123/authx/pull/728) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump `ruff-pre-commit` from v0.8.4 to v0.8.6 . PR [#727](https://github.com/yezz123/authx/pull/727) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆ Bump astral-sh/setup-uv from 4 to 5. PR [#724](https://github.com/yezz123/authx/pull/724) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump astral-sh/setup-uv from 4 to 5. PR [#724](https://github.com/yezz123/authx/pull/724) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
 ### Docs
 
