@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Internal
+
+* :recycle: change the Package ecosystem to `uv`. PR [#744](https://github.com/yezz123/authx/pull/744) by [@yezz123](https://github.com/yezz123).
+
 ## 1.4.2
 
 ### Features
