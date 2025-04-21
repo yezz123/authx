@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Upgrades
+
+* ⬆️ Bump `ruff-pre-commit` from v0.11.2 to v0.11.5. PR [#747](https://github.com/yezz123/authx/pull/747) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+
 ### Internal
 
 * :recycle: change the Package ecosystem to `uv`. PR [#744](https://github.com/yezz123/authx/pull/744) by [@yezz123](https://github.com/yezz123).
