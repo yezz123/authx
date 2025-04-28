@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* ⬆ Bump astral-sh/setup-uv from 5 to 6. PR [#749](https://github.com/yezz123/authx/pull/749) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Bump `ruff-pre-commit` from v0.11.5 to v0.11.6. PR [#748](https://github.com/yezz123/authx/pull/748) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump `ruff-pre-commit` from v0.11.2 to v0.11.5. PR [#747](https://github.com/yezz123/authx/pull/747) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 
