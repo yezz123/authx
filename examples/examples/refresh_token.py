@@ -74,19 +74,17 @@ async def refresh_token(request: Request):
 
 @app.get("/protected")
 async def protected_route(request: Request):
-    """Protected route that requires a valid access token."""
+    """Protected route that requires a valid access token from the request."""
     try:
-        # Get the token from the request
-        token = await auth.get_access_token_from_request(request)
-        # Verify the token
-        payload = auth.verify_token(token)
+        # get the token from the request and verify the token
+        payload = auth.verify_token(await auth.get_access_token_from_request(request))
 
         # Get the username from the token subject
         username = payload.sub
 
         # Return user information
         return {
-            "message": "You have access to this protected resource",
+            "message": "You have an appropriate access to this protected resource",
             "username": username,
             "email": USERS.get(username, {}).get("email"),
         }
