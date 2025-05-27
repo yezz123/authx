@@ -262,7 +262,7 @@ def token_locations():
     assert response.status_code == 200
 
     # Test token in cookies
-    cookies = {"access_token": access_token}
+    cookies = {"access_token_cookie": access_token}
     response = httpx.get(f"{BASE_URL}/protected", cookies=cookies, timeout=5)
     assert response.status_code == 200
 

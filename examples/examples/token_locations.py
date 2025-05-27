@@ -72,8 +72,8 @@ def login(user: User, response: Response):
 
             # Set tokens in cookies if cookies are enabled
             if "cookies" in auth_config.JWT_TOKEN_LOCATION:
-                auth.set_access_cookies(response, access_token)
-                auth.set_refresh_cookies(response, refresh_token)
+                auth.set_access_cookies(access_token, response)
+                auth.set_refresh_cookies(refresh_token, response)
 
             # Return tokens in response body
             return {
@@ -92,7 +92,7 @@ def login(user: User, response: Response):
 @app.post("/logout")
 def logout(response: Response):
     """Logout endpoint that clears the cookies."""
-    auth.unset_jwt_cookies(response)
+    auth.unset_cookies(response)
     return {"message": "Successfully logged out"}
 
 
@@ -100,14 +100,11 @@ def logout(response: Response):
 async def protected_route(request: Request):
     """Protected route that requires a valid access token from any location."""
     try:
-        # Get and verify the token from the request
-        token = await auth.get_token_from_request(request)
-        payload = auth.verify_token(token)
+        # get and verify the token from the request
+        token = await auth.get_access_token_from_request(request)
+        payload = auth.verify_token(token, verify_csrf=False)
 
-        # Get the token location
-        token_location = auth.get_token_location(request)
-
-        return {"message": "Access granted", "username": payload.sub, "token_location": token_location}
+        return {"message": "Access granted", "username": payload.sub, "token_location": token.location}
     except Exception as e:
         raise HTTPException(status_code=401, detail=str(e)) from e
 
@@ -117,13 +114,10 @@ async def protected_post_route(request: Request, token_body: TokenBody = None):
     """Protected route that requires a valid access token from any location."""
     try:
         # Get and verify the token from the request
-        token = await auth.get_token_from_request(request)
+        token = await auth.get_access_token_from_request(request)
         payload = auth.verify_token(token)
 
-        # Get the token location
-        token_location = auth.get_token_location(request)
-
-        return {"message": "Access granted", "username": payload.sub, "token_location": token_location}
+        return {"message": "Access granted", "username": payload.sub, "token_location": token.location}
     except Exception as e:
         raise HTTPException(status_code=401, detail=str(e)) from e
 
@@ -133,16 +127,13 @@ async def protected_headers(request: Request):
     """Protected route that expects the token in the Authorization header."""
     try:
         # Get and verify the token from the request
-        token = await auth.get_token_from_request(request)
+        token = await auth.get_access_token_from_request(request)
         payload = auth.verify_token(token)
-
-        # Get the token location
-        token_location = auth.get_token_location(request)
 
         return {
             "message": "Access granted via Authorization header",
             "username": payload.sub,
-            "token_location": token_location,
+            "token_location": token.location,
         }
     except Exception as e:
         raise HTTPException(status_code=401, detail=str(e)) from e
@@ -153,13 +144,10 @@ async def protected_cookies(request: Request):
     """Protected route that expects the token in cookies."""
     try:
         # Get and verify the token from the request
-        token = await auth.get_token_from_request(request)
+        token = await auth.get_access_token_from_request(request)
         payload = auth.verify_token(token)
 
-        # Get the token location
-        token_location = auth.get_token_location(request)
-
-        return {"message": "Access granted via cookies", "username": payload.sub, "token_location": token_location}
+        return {"message": "Access granted via cookies", "username": payload.sub, "token_location": token.location}
     except Exception as e:
         raise HTTPException(status_code=401, detail=str(e)) from e
 
@@ -169,13 +157,10 @@ async def protected_json(request: Request, token_body: TokenBody = None):
     """Protected route that expects the token in the JSON body."""
     try:
         # Get and verify the token from the request
-        token = await auth.get_token_from_request(request)
+        token = await auth.get_access_token_from_request(request)
         payload = auth.verify_token(token)
 
-        # Get the token location
-        token_location = auth.get_token_location(request)
-
-        return {"message": "Access granted via JSON body", "username": payload.sub, "token_location": token_location}
+        return {"message": "Access granted via JSON body", "username": payload.sub, "token_location": token.location}
     except Exception as e:
         raise HTTPException(status_code=401, detail=str(e)) from e
 
@@ -185,13 +170,10 @@ async def protected_query(request: Request):
     """Protected route that expects the token in the query string."""
     try:
         # Get and verify the token from the request
-        token = await auth.get_token_from_request(request)
+        token = await auth.get_access_token_from_request(request)
         payload = auth.verify_token(token)
 
-        # Get the token location
-        token_location = auth.get_token_location(request)
-
-        return {"message": "Access granted via query string", "username": payload.sub, "token_location": token_location}
+        return {"message": "Access granted via query string", "username": payload.sub, "token_location": token.location}
     except Exception as e:
         raise HTTPException(status_code=401, detail=str(e)) from e
 
