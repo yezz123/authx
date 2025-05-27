@@ -68,7 +68,6 @@ async def logout(request: Request):
     try:
         # Get the token from the request
         token = await auth.get_access_token_from_request(request)
-
         # Verify the token
         payload = auth.verify_token(token)
 
@@ -93,7 +92,6 @@ async def protected_route(request: Request):
     try:
         # Get the token from the request
         token = await auth.get_access_token_from_request(request)
-
         # Verify the token (this will also check if it's blocklisted)
         payload = auth.verify_token(token)
         if payload.jti in list(TOKEN_BLOCKLIST):

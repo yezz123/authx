@@ -60,9 +60,9 @@ async def refresh_token(request: Request):
     """Refresh endpoint that creates a new access token using a refresh token."""
     try:
         # get refresh_token from the request payload
-        refresh_token = await auth.get_refresh_token_from_request(request)
+        _refresh_token = await auth.get_refresh_token_from_request(request)
         # Verify the refresh token
-        refresh_payload = auth.verify_token(refresh_token, verify_type=True)
+        refresh_payload = auth.verify_token(_refresh_token, verify_type=True)
 
         # Create a new access token
         access_token = auth.create_access_token(refresh_payload.sub)
@@ -78,7 +78,6 @@ async def protected_route(request: Request):
     try:
         # Get the token from the request
         token = await auth.get_access_token_from_request(request)
-
         # Verify the token
         payload = auth.verify_token(token)
 
