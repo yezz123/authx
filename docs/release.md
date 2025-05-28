@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Fixes
+
+* 🐛  Fix Examples bugs. PR [#753](https://github.com/yezz123/authx/pull/753) by [@Evergreenies](https://github.com/Evergreenies).
+
 ### Upgrades
 
 * ⬆️ Bump `ruff-pre-commit` from v0.11.6 to v0.11.9. PR [#750](https://github.com/yezz123/authx/pull/750) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
