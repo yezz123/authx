@@ -11,6 +11,10 @@
 * ⬆️ Bump `ruff-pre-commit` from v0.11.5 to v0.11.6. PR [#748](https://github.com/yezz123/authx/pull/748) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump `ruff-pre-commit` from v0.11.2 to v0.11.5. PR [#747](https://github.com/yezz123/authx/pull/747) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 
+### Docs
+
+* 📝 add @Evergreenies as a contributor for code. PR [#754](https://github.com/yezz123/authx/pull/754) by [@allcontributors[bot]](https://github.com/apps/allcontributors).
+
 ### Internal
 
 * :recycle: change the Package ecosystem to `uv`. PR [#744](https://github.com/yezz123/authx/pull/744) by [@yezz123](https://github.com/yezz123).
