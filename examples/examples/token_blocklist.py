@@ -67,8 +67,7 @@ async def logout(request: Request):
     """Logout endpoint that adds the current token to the blocklist."""
     try:
         # Get the token from the request
-        token = await auth.get_token_from_request(request)
-
+        token = await auth.get_access_token_from_request(request)
         # Verify the token
         payload = auth.verify_token(token)
 
@@ -92,10 +91,11 @@ async def protected_route(request: Request):
     """Protected route that requires a valid access token."""
     try:
         # Get the token from the request
-        token = await auth.get_token_from_request(request)
-
+        token = await auth.get_access_token_from_request(request)
         # Verify the token (this will also check if it's blocklisted)
         payload = auth.verify_token(token)
+        if payload.jti in list(TOKEN_BLOCKLIST):
+            raise HTTPException(status_code=401, detail="token blocklisted")
 
         # Get the username from the token subject
         username = payload.sub

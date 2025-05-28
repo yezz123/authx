@@ -56,11 +56,13 @@ def login(user: User):
 
 
 @app.post("/refresh")
-async def refresh_token(refresh_data: RefreshRequest):
+async def refresh_token(request: Request):
     """Refresh endpoint that creates a new access token using a refresh token."""
     try:
+        # get refresh_token from the request payload
+        _refresh_token = await auth.get_refresh_token_from_request(request)
         # Verify the refresh token
-        refresh_payload = auth.verify_token(refresh_data.refresh_token, verify_type=True, type="refresh")
+        refresh_payload = auth.verify_token(_refresh_token, verify_type=True)
 
         # Create a new access token
         access_token = auth.create_access_token(refresh_payload.sub)
@@ -72,20 +74,17 @@ async def refresh_token(refresh_data: RefreshRequest):
 
 @app.get("/protected")
 async def protected_route(request: Request):
-    """Protected route that requires a valid access token."""
+    """Protected route that requires a valid access token from the request."""
     try:
-        # Get the token from the request
-        token = await auth.get_token_from_request(request)
-
-        # Verify the token
-        payload = auth.verify_token(token)
+        # get the token from the request and verify the token
+        payload = auth.verify_token(await auth.get_access_token_from_request(request))
 
         # Get the username from the token subject
         username = payload.sub
 
         # Return user information
         return {
-            "message": "You have access to this protected resource",
+            "message": "You have an appropriate access to this protected resource",
             "username": username,
             "email": USERS.get(username, {}).get("email"),
         }

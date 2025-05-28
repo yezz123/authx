@@ -52,7 +52,7 @@ async def refresh_token(request: Request):
     """Refresh endpoint that creates a non-fresh token using a fresh token."""
     try:
         # Get the token from the request
-        token = await auth.get_token_from_request(request)
+        token = await auth.get_access_token_from_request(request)
 
         # Verify the token
         payload = auth.verify_token(token)
@@ -71,7 +71,7 @@ async def protected_route(request: Request):
     """Protected route that requires a valid token (fresh or non-fresh)."""
     try:
         # Get the token from the request
-        token = await auth.get_token_from_request(request)
+        token = await auth.get_access_token_from_request(request)
 
         # Verify the token
         payload = auth.verify_token(token)
@@ -96,7 +96,7 @@ async def fresh_required_route(request: Request):
     """Protected route that requires a fresh token."""
     try:
         # Get the token from the request
-        token = await auth.get_token_from_request(request)
+        token = await auth.get_access_token_from_request(request)
 
         # Verify the token
         payload = auth.verify_token(token)
