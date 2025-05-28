@@ -95,7 +95,7 @@ def get_protected(token: RequestToken = Depends()):
 ## Contributors and sponsors
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people
@@ -123,6 +123,9 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/jor-rit"><img src="https://avatars.githubusercontent.com/u/16398756?v=4?s=100" width="100px;" alt="Jorrit"/><br /><sub><b>Jorrit</b></sub></a><br /><a href="#platform-jor-rit" title="Packaging/porting to new platform">📦</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/callamd"><img src="https://avatars.githubusercontent.com/u/1664656?v=4?s=100" width="100px;" alt="Callam"/><br /><sub><b>Callam</b></sub></a><br /><a href="https://github.com/yezz123/authx/commits?author=callamd" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/lmasikl"><img src="https://avatars.githubusercontent.com/u/1556136?v=4?s=100" width="100px;" alt="Maxim"/><br /><sub><b>Maxim</b></sub></a><br /><a href="https://github.com/yezz123/authx/commits?author=lmasikl" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://evergreenies.github.io"><img src="https://avatars.githubusercontent.com/u/33820365?v=4?s=100" width="100px;" alt="Suyog Shimpi"/><br /><sub><b>Suyog Shimpi</b></sub></a><br /><a href="https://github.com/yezz123/authx/commits?author=Evergreenies" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
