@@ -64,6 +64,7 @@ class AuthXConfig(BaseSettings):
     JWT_COOKIE_MAX_AGE: Optional[int] = None
     JWT_COOKIE_SAMESITE: Optional[SameSitePolicy] = "lax"
     JWT_COOKIE_SECURE: bool = True
+    JWT_COOKIE_HTTP_ONLY: bool = True
     JWT_REFRESH_COOKIE_NAME: str = "refresh_token_cookie"
     JWT_REFRESH_COOKIE_PATH: str = "/"
     JWT_SESSION_COOKIE: bool = True

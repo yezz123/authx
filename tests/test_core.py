@@ -28,7 +28,7 @@ def config() -> AuthXConfig:
 
 
 @pytest.fixture(scope="function")
-def request_headers(config: AuthXConfig) -> list[list[str]]:
+def request_headers(config: AuthXConfig) -> list[list[bytes]]:
     return [
         [
             f"{config.JWT_HEADER_NAME.lower()}".encode(),
@@ -38,7 +38,7 @@ def request_headers(config: AuthXConfig) -> list[list[str]]:
 
 
 @pytest.fixture(scope="function")
-def request_csrf_headers(config: AuthXConfig) -> list[list[str]]:
+def request_csrf_headers(config: AuthXConfig) -> list[list[bytes]]:
     return [
         [
             f"{config.JWT_ACCESS_CSRF_HEADER_NAME.lower()}".encode(),
@@ -52,7 +52,7 @@ def request_csrf_headers(config: AuthXConfig) -> list[list[str]]:
 
 
 @pytest.fixture(scope="function")
-def request_cookies(config: AuthXConfig) -> list[list[str]]:
+def request_cookies(config: AuthXConfig) -> list[list[bytes]]:
     return [
         [b"content-type", b"application/json"],
         [
