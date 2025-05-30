@@ -193,7 +193,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             domain=self.config.JWT_COOKIE_DOMAIN,
             samesite=self.config.JWT_COOKIE_SAMESITE,
             secure=self.config.JWT_COOKIE_SECURE,
-            httponly=True,
+            httponly=self.config.JWT_COOKIE_HTTP_ONLY,
             max_age=max_age or self.config.JWT_COOKIE_MAX_AGE,
         )
         # Set CSRF
