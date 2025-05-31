@@ -1,5 +1,7 @@
 ## Latest Changes
 
+## 1.4.3
+
 ### Features
 
 * ✨ added support for `JWT_COOKIE_HTTP_ONLY`. PR [#755](https://github.com/yezz123/authx/pull/755) by [@Evergreenies](https://github.com/Evergreenies).
