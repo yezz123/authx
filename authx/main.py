@@ -679,15 +679,31 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         """
 
         async def _token_getter(request: Request) -> Optional[RequestToken]:
-            # Specify locations as None since it's not provided in this context
-            # Convert `optional` to a literal True or False based on its value
-            optional_literal: Literal[True, False] = optional
-            return await self._get_token_from_request(
-                request,
-                None,  # Explicitly passing None for locations
-                refresh=(type == "refresh"),
-                optional=optional_literal,
-            )
+            try:
+                # Get token from request
+                token = await self._get_token_from_request(
+                    request=request,
+                    config=self.config,
+                    refresh=(type == "refresh"),
+                    locations=None,
+                )
+
+                if token is None:
+                    return None
+
+                # Verify the token
+                self.verify_token(
+                    token,
+                    verify_type=True,
+                    verify_fresh=False,
+                    verify_csrf=True,
+                )
+
+                return token
+            except Exception as e:
+                if optional:
+                    return None
+                raise e
 
         return _token_getter
 

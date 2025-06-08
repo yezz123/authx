@@ -292,3 +292,46 @@ def test_set_and_unset_cookies(authx, mock_response):
 def test_token_required_dependency(authx):
     dependency = authx.token_required(type="access", verify_fresh=True)
     assert callable(dependency)
+
+
+@pytest.mark.asyncio
+async def test_get_token_from_request_with_verification(authx: AuthX):
+    """Test get_token_from_request with token verification."""
+    # Create a valid token
+    token = authx.create_access_token(uid="test_user")
+
+    # Create request with token
+    req = Request(
+        scope={
+            "method": "GET",
+            "type": "http",
+            "headers": [[b"authorization", f"Bearer {token}".encode()]],
+        }
+    )
+
+    # Get token getter function
+    token_getter = authx.get_token_from_request(type="access", optional=False)
+
+    # Get and verify token
+    request_token = await token_getter(req)
+    assert request_token is not None
+    assert request_token.token == token
+    assert request_token.location == "headers"
+    assert request_token.type == "access"
+
+    # Test with invalid token
+    req = Request(
+        scope={
+            "method": "GET",
+            "type": "http",
+            "headers": [[b"authorization", b"Bearer invalid_token"]],
+        }
+    )
+
+    with pytest.raises(Exception):  # noqa: B017
+        await token_getter(req)
+
+    # Test with optional=True
+    token_getter = authx.get_token_from_request(type="access", optional=True)
+    request_token = await token_getter(req)
+    assert request_token is None
