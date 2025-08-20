@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* ⬆️ Bump `ruff-pre-commit` from v0.12.3 to v0.12.9. PR [#764](https://github.com/yezz123/authx/pull/764) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump actions/checkout from 4 to 5. PR [#766](https://github.com/yezz123/authx/pull/766) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump samuelcolvin/check-python-version from 4.1 to 5. PR [#765](https://github.com/yezz123/authx/pull/765) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Bump `ruff-pre-commit` from v0.12.2 to v0.12.3. PR [#762](https://github.com/yezz123/authx/pull/762) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
