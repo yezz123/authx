@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* ⬆️ Bump `ruff-pre-commit` from v0.12.10 to v0.12.11. PR [#768](https://github.com/yezz123/authx/pull/768) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump `ruff-pre-commit` from v0.12.9 to v0.12.10. PR [#767](https://github.com/yezz123/authx/pull/767) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump `ruff-pre-commit` from v0.12.3 to v0.12.9. PR [#764](https://github.com/yezz123/authx/pull/764) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump actions/checkout from 4 to 5. PR [#766](https://github.com/yezz123/authx/pull/766) by [@dependabot[bot]](https://github.com/apps/dependabot).
