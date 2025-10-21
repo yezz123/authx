@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* ⬆️ Bump `ruff-pre-commit` from v0.12.11 to v0.14.1. PR [#770](https://github.com/yezz123/authx/pull/770) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump astral-sh/setup-uv from 6 to 7. PR [#772](https://github.com/yezz123/authx/pull/772) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump actions/setup-python from 5 to 6. PR [#769](https://github.com/yezz123/authx/pull/769) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Bump `ruff-pre-commit` from v0.12.10 to v0.12.11. PR [#768](https://github.com/yezz123/authx/pull/768) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
