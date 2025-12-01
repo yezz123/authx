@@ -25,7 +25,12 @@ async def _get_token_from_headers(
     else:
         token = auth_header
 
-    return RequestToken(token=token, csrf=None, location="headers")
+    return RequestToken(
+        token=token,
+        csrf=None,
+        type=("refresh" if refresh else "access"),
+        location="headers",
+    )
 
 
 async def _get_token_from_cookies(
