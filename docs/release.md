@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Fixes
+
+* 🐛  use refresh parameter in `_get_token_from_headers()`. PR [#776](https://github.com/yezz123/authx/pull/776) by [@NeViNez](https://github.com/NeViNez).
+
 ### Upgrades
 
 * ⬆️ Bump `ruff-pre-commit` from v0.12.11 to v0.14.1. PR [#770](https://github.com/yezz123/authx/pull/770) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
