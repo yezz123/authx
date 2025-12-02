@@ -146,6 +146,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "NeViNez",
+      "name": "NeViNez",
+      "avatar_url": "https://avatars.githubusercontent.com/u/91369880?v=4",
+      "profile": "https://github.com/NeViNez",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
