@@ -95,7 +95,7 @@ def get_protected(token: RequestToken = Depends()):
 ## Contributors and sponsors
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people
@@ -126,6 +126,7 @@ Thanks goes to these wonderful people
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://evergreenies.github.io"><img src="https://avatars.githubusercontent.com/u/33820365?v=4?s=100" width="100px;" alt="Suyog Shimpi"/><br /><sub><b>Suyog Shimpi</b></sub></a><br /><a href="https://github.com/yezz123/authx/commits?author=Evergreenies" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/NeViNez"><img src="https://avatars.githubusercontent.com/u/91369880?v=4?s=100" width="100px;" alt="NeViNez"/><br /><sub><b>NeViNez</b></sub></a><br /><a href="https://github.com/yezz123/authx/issues?q=author%3ANeViNez" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
