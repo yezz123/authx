@@ -22,6 +22,10 @@
 * ⬆️ Bump `ruff-pre-commit` from v0.11.12 to v0.11.13. PR [#759](https://github.com/yezz123/authx/pull/759) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump `ruff-pre-commit` from v0.11.11 to v0.11.12. PR [#757](https://github.com/yezz123/authx/pull/757) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 
+### Docs
+
+* 📝  add @NeViNez as a contributor for bug. PR [#778](https://github.com/yezz123/authx/pull/778) by [@allcontributors[bot]](https://github.com/apps/allcontributors).
+
 ## 1.4.3
 
 ### Features
