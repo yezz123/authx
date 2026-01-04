@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Features
+
+* :sparkles: Drop pydantic v1 & support only pydantic v2. PR [#781](https://github.com/yezz123/authx/pull/781) by [@yezz123](https://github.com/yezz123).
+
 ### Fixes
 
 * 🔧 Refactor token retrieval methods in AuthX class. PR [#780](https://github.com/yezz123/authx/pull/780) by [@yezz123](https://github.com/yezz123).
