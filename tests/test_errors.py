@@ -104,12 +104,6 @@ async def create_exception_route(app: FastAPI, exception: type[Exception]):
             None,
             _ErrorHandler.MSG_MissingTokenError,
         ),
-        (
-            exc.MissingCSRFTokenError,
-            401,
-            None,
-            _ErrorHandler.MSG_MissingCSRFTokenError,
-        ),
         (exc.TokenTypeError, 401, None, _ErrorHandler.MSG_TokenTypeError),
         (
             exc.RevokedTokenError,
@@ -158,3 +152,36 @@ async def test_set_app_exception_handler(app, client, error_handler, exception, 
         "message": expected_message,
         "error_type": exception.__name__,
     }
+
+
+@pytest.mark.asyncio
+async def test_missing_csrf_token_error_shows_detailed_message(app, client, error_handler):
+    """Test that MissingCSRFTokenError shows detailed exception message (fixes #720).
+
+    This ensures users get helpful guidance when they encounter CSRF errors,
+    including how to use set_access_cookies or disable CSRF protection.
+    """
+    detailed_message = (
+        "Missing CSRF token. Expected in 'X-CSRF-TOKEN' header. "
+        "Ensure you're using 'set_access_cookies'/'set_refresh_cookies' to set cookies "
+        "(which also sets the CSRF cookie), then include the CSRF token from that cookie "
+        "in your request header. To disable CSRF protection, set JWT_COOKIE_CSRF_PROTECT=False."
+    )
+
+    # Create a route that raises MissingCSRFTokenError with detailed message
+    @app.get("/csrf-error")
+    async def csrf_error_route():
+        raise exc.MissingCSRFTokenError(detailed_message)
+
+    # Register the handler with message=None so it uses the exception message
+    error_handler._set_app_exception_handler(app, exc.MissingCSRFTokenError, 401, None)
+
+    response = client.get("/csrf-error")
+
+    assert response.status_code == 401
+    response_json = response.json()
+    assert response_json["error_type"] == "MissingCSRFTokenError"
+    # The detailed message should be preserved
+    assert response_json["message"] == detailed_message
+    assert "set_access_cookies" in response_json["message"]
+    assert "JWT_COOKIE_CSRF_PROTECT=False" in response_json["message"]

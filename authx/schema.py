@@ -351,7 +351,11 @@ class RequestToken(BaseModel):
 
         if verify_csrf and self.location == "cookies":
             if self.csrf is None:
-                raise CSRFError(f"Missing CSRF token in {self.location}")
+                raise CSRFError(
+                    f"Missing CSRF token in request. Include CSRF token from the "
+                    f"'{self.location}' in the 'X-CSRF-TOKEN' header. "
+                    f"To disable CSRF protection, set JWT_COOKIE_CSRF_PROTECT=False."
+                )
             if payload.csrf is None:
                 raise CSRFError("Cookies token missing CSRF claim")  # pragma: no cover
             if not compare_digest(self.csrf, payload.csrf):
