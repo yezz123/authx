@@ -1,51 +1,80 @@
 # Installation
 
-## Getting Started
+## Install AuthX
 
-You can add AuthX to your FastAPI project in a few easy steps. First of all,
-install the dependency:
+=== "pip"
+    ```bash
+    pip install authx
+    ```
 
-### Default Dependency
+=== "uv"
+    ```bash
+    uv add authx
+    ```
 
-<div class="termy">
+=== "poetry"
+    ```bash
+    poetry add authx
+    ```
 
-```console
-$ pip install authx
+## Verify Installation
 
----> 100%
+```python
+import authx
+print(authx.__version__)
 ```
 
-</div>
+## Quick Start
 
-### Extra Dependencies
+```python
+from fastapi import FastAPI, Depends, HTTPException
+from authx import AuthX, AuthXConfig
 
-After installing the dependency, you can install the extra dependencies, which we have in the [`authx-extra`](https://github.com/yezz123/authx-extra) repository.
+app = FastAPI()
 
-<div class="termy">
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["headers"],
+)
 
-```console
-$ pip install authx_extra
+auth = AuthX(config=config)
+auth.handle_errors(app)
 
----> 100%
+
+@app.post("/login")
+def login(username: str, password: str):
+    if username == "test" and password == "test":
+        return {"access_token": auth.create_access_token(uid=username)}
+    raise HTTPException(401, detail="Invalid credentials")
+
+
+@app.get("/protected", dependencies=[Depends(auth.access_token_required)])
+def protected():
+    return {"message": "Hello World"}
 ```
 
-</div>
+Run it:
 
-!!! warning
-     Once you install the extra dependency you are aiming to use, ex:
-
-     - for `cache` you will have Redis installed as a dependency.
-     - for `profiler` you will have Pyinstruments Profiler installed as a dependency.
-     - for `metrics` you will have Prometheus installed as a dependency.
-
-### Development Dependencies
-
-<div class="termy">
-
-```console
-$ git clone https://github.com/yezz123/authx.git
-
----> 100%
+```bash
+uvicorn main:app --reload
 ```
 
-</div>
+## Extra Features
+
+Install [`authx-extra`](https://github.com/yezz123/authx-extra) for additional features:
+
+```bash
+pip install authx-extra
+```
+
+This adds:
+
+- **Redis cache** - Session storage and caching
+- **Profiler** - Performance monitoring with pyinstrument
+- **Metrics** - Prometheus metrics collection
+
+## Requirements
+
+- Python 3.9+
+- FastAPI
+- Pydantic 2.0+

@@ -1,186 +1,149 @@
 # Dependency Aliases
 
-If you are familiar with [FastAPI Dependency Injection system](https://fastapi.tiangolo.com/tutorial/dependencies/),
-you know you need to import the `Depends` object to declare a dependency.
-Since AuthX is designed to work with FastAPI, we provide quick aliases to get the most accessed dependencies.
+AuthX provides shorthand properties to reduce verbosity when using dependencies.
 
-The following example demonstrate how AuthX aliases can help you reduce verbosity.
+## Before and After
 
-=== "Without aliases"
-
-    ```py
+=== "Without Aliases"
+    ```python
     from fastapi import FastAPI, Depends
-    from authx import AuthX
+    from authx import AuthX, AuthXConfig
 
     app = FastAPI()
-    security = AuthX()
-    security.handle_errors(app)
+    auth = AuthX(config=AuthXConfig(JWT_SECRET_KEY="secret"))
+    auth.handle_errors(app)
 
-    @app.get('/', dependencies=[Depends(security.access_token_required)])
-    def root(subject = Depends(security.get_current_subject), token = Depends(security.get_token_from_request)):
-        ...
+    @app.get("/", dependencies=[Depends(auth.access_token_required)])
+    def root(payload=Depends(auth.access_token_required)):
+        return {"user": payload.sub}
     ```
 
-=== "With aliases"
-
-    ```py
+=== "With Aliases"
+    ```python
     from fastapi import FastAPI
-    from authx import AuthX
+    from authx import AuthX, AuthXConfig
 
     app = FastAPI()
-    security = AuthX()
-    security.handle_errors(app)
+    auth = AuthX(config=AuthXConfig(JWT_SECRET_KEY="secret"))
+    auth.handle_errors(app)
 
-    @app.get('/', dependencies=[security.ACCESS_REQUIRED])
-    def root(subject = security.CURRENT_SUBJECT, token = security.RAW_ACCESS_TOKEN):
-        ...
+    @app.get("/", dependencies=[auth.ACCESS_REQUIRED])
+    def root(payload=auth.ACCESS_REQUIRED):
+        return {"user": payload.sub}
     ```
 
-## Aliases
+## Available Aliases
 
-### `ACCESS_REQUIRED`
+### ACCESS_REQUIRED
 
-- [`TokenPayload`](../api/token.md)
+Requires a valid access token. Returns `TokenPayload`.
 
-Returns the access token payload if valid. Enforce the access token validation
-
-#### example
-
-```py
-from fastapi import FastAPI
-from authx import AuthX
-
-app = FastAPI()
-security = AuthX()
-
-@app.get('/protected')
-def protected(payload = security.ACCESS_REQUIRED):
-    return f"Your Access Token Payload is {payload}"
+```python
+@app.get("/protected")
+def protected(payload=auth.ACCESS_REQUIRED):
+    return {"user": payload.sub}
 ```
 
-### `ACCESS_TOKEN`
+### REFRESH_REQUIRED
 
-- [`RequestToken`](../api/request.md)
+Requires a valid refresh token. Returns `TokenPayload`.
 
-Returns the encoded access token. **DOES NOT** Enforce the access token validation
-
-#### example
-
-```py
-from fastapi import FastAPI
-from authx import AuthX
-
-app = FastAPI()
-security = AuthX()
-
-# Use route dependency to enforce validation in conjunction with ACCESS_TOKEN
-@app.get('/protected', dependencies=[security.ACCESS_REQUIRED])
-def protected(token = security.ACCESS_TOKEN):
-    return f"Your Access Token is {token}"
+```python
+@app.post("/refresh")
+def refresh(payload=auth.REFRESH_REQUIRED):
+    new_token = auth.create_access_token(uid=payload.sub)
+    return {"access_token": new_token}
 ```
 
-### `REFRESH_REQUIRED`
+### FRESH_REQUIRED
 
-- [`TokenPayload`](../api/token.md)
+Requires a valid **fresh** access token. Returns `TokenPayload`.
 
-Returns the refresh token payload if valid. Enforce the refresh token validation
-
-#### example
-
-```py
-from fastapi import FastAPI
-from authx import AuthX
-
-app = FastAPI()
-security = AuthX()
-
-@app.get('/refresh')
-def refresh(payload = security.REFRESH_REQUIRED):
-    return f"Your Refresh Token Payload is {payload}"
+```python
+@app.post("/change-password", dependencies=[auth.FRESH_REQUIRED])
+def change_password():
+    return {"message": "Password changed"}
 ```
 
-### `REFRESH_TOKEN`
+### ACCESS_TOKEN
 
-- [`RequestToken`](../api/request.md)
+Gets the raw access token (not validated). Returns `RequestToken` or `None`.
 
-Returns the encoded refresh token. **DOES NOT** Enforce the refresh token validation
-
-#### example
-
-```py
-from fastapi import FastAPI
-from authx import AuthX
-
-app = FastAPI()
-security = AuthX()
-
-# Use route dependency to enforce validation in conjunction with REFRESH_TOKEN
-@app.get('/refresh', dependencies=[security.REFRESH_REQUIRED])
-def refresh(token = security.REFRESH_TOKEN):
-    return f"Your Refresh Token is {token}"
+```python
+@app.get("/token-info", dependencies=[auth.ACCESS_REQUIRED])
+def token_info(token=auth.ACCESS_TOKEN):
+    return {"location": token.location}
 ```
 
-### `FRESH_REQUIRED`
+### REFRESH_TOKEN
 
-- [`TokenPayload`](../api/token.md)
+Gets the raw refresh token (not validated). Returns `RequestToken` or `None`.
 
-Returns the access token payload if valid & **FRESH**. Enforce the access token validation
+```python
+@app.post("/refresh-info", dependencies=[auth.REFRESH_REQUIRED])
+def refresh_info(token=auth.REFRESH_TOKEN):
+    return {"token": token.token[:20] + "..."}
+```
 
-#### example
+### CURRENT_SUBJECT
 
-```py
+Gets the current user via subject getter. Requires `@auth.set_subject_getter`.
+
+```python
+@auth.set_subject_getter
+def get_user(uid: str):
+    return {"id": uid, "name": "User"}
+
+@app.get("/me")
+def get_me(user=auth.CURRENT_SUBJECT):
+    return user
+```
+
+### BUNDLE / DEPENDENCY
+
+Gets `AuthXDependency` for cookie operations within routes.
+
+```python
+@app.post("/login")
+def login(deps=auth.BUNDLE):
+    token = deps.create_access_token(uid="user")
+    deps.set_access_cookies(token)
+    return {"message": "Logged in"}
+```
+
+## Complete Example
+
+```python
 from fastapi import FastAPI
-from authx import AuthX
+from authx import AuthX, AuthXConfig
 
 app = FastAPI()
-security = AuthX()
 
-@app.get('/protected', dependencies=[security.FRESH_REQUIRED])
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["headers"],
+)
+
+auth = AuthX(config=config)
+auth.handle_errors(app)
+
+
+@app.get("/login")
+def login():
+    return {"access_token": auth.create_access_token(uid="user123", fresh=True)}
+
+
+@app.get("/protected", dependencies=[auth.ACCESS_REQUIRED])
 def protected():
-    return "Congratulations! Your have a fresh and valid access token."
-```
+    return {"message": "Access granted"}
 
-### `CURRENT_SUBJECT`
 
-- `Any`
+@app.get("/me")
+def get_me(payload=auth.ACCESS_REQUIRED):
+    return {"user_id": payload.sub}
 
-Returns the current subject. Enforce the access token validation
 
-!!! note
-    You must set a subject getter to use this dependency. See [Callbacks > User Serialization](../callbacks/user.md)
-
-#### example
-
-```py
-from fastapi import FastAPI
-from authx import AuthX
-
-app = FastAPI()
-security = AuthX()
-
-@app.get('/whoami')
-def whoami(subject = security.CURRENT_SUBJECT):
-    return f"You are: {subject}"
-```
-
-### `BUNDLE` / `DEPENDENCY`
-
-- [`AuthXDependency`](../api/dependencies.md)
-
-Returns the [`AuthXDependency`](./bundle.md) dependency bundle to be used within the route
-
-#### example
-
-```py
-from fastapi import FastAPI
-from authx import AuthX
-
-app = FastAPI()
-security = AuthX()
-
-@app.get('/create_token')
-def create_token(auth = security.BUNDLE):
-    token = auth.create_access_token(uid="test")
-    auth.set_access_cookie(token)
-    return "OK"
+@app.post("/sensitive", dependencies=[auth.FRESH_REQUIRED])
+def sensitive():
+    return {"message": "Sensitive operation complete"}
 ```

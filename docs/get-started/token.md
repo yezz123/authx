@@ -1,154 +1,141 @@
 # Token Freshness
 
-Token freshness mechanisms provide additional protection for sensitive operations. Fresh tokens should only be generated when the user provides credential information during a login operation.
+Fresh tokens provide extra security for sensitive operations. A token is "fresh" only when the user has just authenticated with their credentials.
 
-Every time a user authenticates itself with credentials, it receives a `fresh` token. However, when an access token is refreshed (implicitly or explicitly), the generated access token SHOULD NOT be marked as `fresh`.
+## When to Use Fresh Tokens
 
-Most protected endpoints should not consider the `fresh` state of the access token. However, in specific application cases, the use of a `fresh` token enables an additional layer of protection by requiring the user to authenticate itself.
+Require fresh tokens for sensitive operations:
 
-These operations include but are not limited to:
+- Password changes
+- Email updates
+- Payment actions
+- Account deletion
 
-- Password update
-- User information update
-- Privilege/Permission management
+Regular protected routes don't need fresh tokens.
 
-## Combined with an explicit refresh mechanism
-
-Let's use the example from the previous section on [Refreshing tokens](./refresh.md#explicit-refresh).
+## Complete Example
 
 ```python
-from pydantic import BaseModel
 from fastapi import FastAPI, Depends, HTTPException
-from authx import AuthX, TokenPayload
+from pydantic import BaseModel
+from authx import AuthX, AuthXConfig, TokenPayload
 
 app = FastAPI()
-security = AuthX()
 
-class LoginForm(BaseModel):
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["headers"],
+)
+
+auth = AuthX(config=config)
+auth.handle_errors(app)
+
+
+class LoginRequest(BaseModel):
     username: str
     password: str
 
-@app.post('/login')
-def login(data: LoginForm):
+
+@app.post("/login")
+def login(data: LoginRequest):
+    """Login returns a FRESH access token and a refresh token."""
     if data.username == "test" and data.password == "test":
-        access_token = security.create_access_token(
-            data.username,
-            fresh=True
-        )
-        refresh_token = security.create_refresh_token(data.username)
+        # fresh=True because user just entered credentials
+        access_token = auth.create_access_token(uid=data.username, fresh=True)
+        refresh_token = auth.create_refresh_token(uid=data.username)
         return {
             "access_token": access_token,
-            "refresh_token": refresh_token
+            "refresh_token": refresh_token,
         }
-    raise HTTPException(401, "Bad username/password")
+    raise HTTPException(401, detail="Invalid credentials")
 
-@app.post('/refresh')
-def refresh(
-    refresh_payload: TokenPayload = Depends(security.refresh_token_required)
-):
-    access_token = security.create_access_token(
-        refresh_payload.sub,
-        fresh=False
-    )
+
+@app.post("/refresh")
+def refresh(payload: TokenPayload = Depends(auth.refresh_token_required)):
+    """Refresh returns a NON-FRESH access token."""
+    # fresh=False because user didn't re-enter credentials
+    access_token = auth.create_access_token(uid=payload.sub, fresh=False)
     return {"access_token": access_token}
 
-@app.get('/protected', dependencies=[Depends(security.access_token_required)])
-def protected():
-    return "You have access to this protected resource"
 
-@app.get('/sensitive_operation', dependencies=[Depends(security.fresh_token_required)])
-def sensitive_operation():
-    return "You have access to this sensitive operation"
+@app.get("/protected", dependencies=[Depends(auth.access_token_required)])
+def protected():
+    """Any valid token works here."""
+    return {"message": "You have access"}
+
+
+@app.post("/change-password", dependencies=[Depends(auth.fresh_token_required)])
+def change_password():
+    """Only FRESH tokens work here."""
+    return {"message": "Password changed"}
 ```
 
-### Creating fresh access tokens
+## How It Works
 
-To create a `fresh` access token, use the `fresh=True` argument in the `AuthX.create_access_token` method.
+### 1. Login Creates Fresh Token
 
-In the `/login` route, we set the `fresh` argument to `True` because the token is generated after the user explicitly provides a username/password combo.
+When the user logs in with username/password, create a fresh token:
 
 ```python
-@app.post('/login')
-def login(data: LoginForm):
-    if data.username == "test" and data.password == "test":
-        access_token = security.create_access_token(
-            data.username,
-            fresh=True
-        )
-        refresh_token = security.create_refresh_token(data.username)
-        return {
-            "access_token": access_token,
-            "refresh_token": refresh_token
-        }
-    raise HTTPException(401, "Bad username/password")
+access_token = auth.create_access_token(uid=data.username, fresh=True)
+```
+
+### 2. Refresh Creates Non-Fresh Token
+
+When refreshing, the user didn't re-authenticate, so the token is not fresh:
+
+```python
+access_token = auth.create_access_token(uid=payload.sub, fresh=False)
 ```
 
 !!! note
-     By default, `AuthX.create_access_token` has `fresh=False` to avoid implicit fresh token generation.
+    `fresh=False` is the default, so you can omit it.
 
-### Refreshing tokens
+### 3. Protect Sensitive Routes
 
-When refreshing tokens, you should always generate **non**-`fresh` tokens. In the example below, the `fresh` argument is explicitly set to `False`, which is also the default behavior for `AuthX.create_access_token`.
-
-```python
-@app.post('/refresh')
-def refresh(
-    refresh_payload: TokenPayload = Depends(security.refresh_token_required)
-):
-    access_token = security.create_access_token(
-        refresh_payload.sub,
-        fresh=False
-    )
-    return {"access_token": access_token}
-```
-
-### Requiring fresh tokens
-
-The `/protected` route behaves as usual, regardless of the `fresh` token's state.
-
-In contrast, the `/sensitive_operation` route requires a fresh token to be executed. This behavior is defined by the `AuthX.fresh_token_required` dependency.
+Use `fresh_token_required` for operations that need recent authentication:
 
 ```python
-@app.get('/protected', dependencies=[Depends(security.access_token_required)])
-def protected():
-    return "You have access to this protected resource"
-
-@app.get('/sensitive_operation', dependencies=[Depends(security.fresh_token_required)])
-def sensitive_operation():
-    return "You have access to this sensitive operation"
+@app.post("/change-password", dependencies=[Depends(auth.fresh_token_required)])
+def change_password():
+    return {"message": "Password changed"}
 ```
 
-=== "1. Login"
+If a non-fresh token is used, the user gets a `401 Fresh token required` error.
 
-    ```shell
-    # Logging in to obtain a fresh token
-    $ curl -s -X POST --json '{"username":"test", "password":"test"}' http://0.0.0.0:8000/login
-    {"access_token": $FRESH_TOKEN, "refresh_token": $REFRESH_TOKEN}
-    ```
+## Testing the Flow
 
-=== "2. Sensitive Operation"
+```bash
+# 1. Login to get a fresh token
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"username":"test", "password":"test"}' \
+  http://localhost:8000/login
+# Returns: {"access_token": "...", "refresh_token": "..."}
 
-    ```shell
-    # Requesting the sensitive operation with the fresh token
-    $ curl -s --oauth2-bearer $FRESH_TOKEN http://0.0.0.0:8000/sensitive_operation
-    "You have access to this sensitive operation"
-    ```
+# 2. Access sensitive route with fresh token - WORKS
+curl -H "Authorization: Bearer <fresh-token>" \
+  -X POST http://localhost:8000/change-password
+# Returns: {"message": "Password changed"}
 
-=== "3. Refresh access token"
+# 3. Refresh the token
+curl -H "Authorization: Bearer <refresh-token>" \
+  -X POST http://localhost:8000/refresh
+# Returns: {"access_token": "..."}  (non-fresh)
 
-    ```shell
-    # Refreshing the access token to get a new non-fresh one
-    $ curl -s --oauth2-bearer $REFRESH_TOKEN http://0.0.0.0:8000/refresh
-    {"access_token": $NON_FRESH_TOKEN}
-    ```
+# 4. Access sensitive route with non-fresh token - FAILS
+curl -H "Authorization: Bearer <non-fresh-token>" \
+  -X POST http://localhost:8000/change-password
+# Returns: {"message": "Fresh token required", "error_type": "FreshTokenRequiredError"}
 
-=== "4. Sensitive operation"
+# 5. Access regular protected route with non-fresh token - WORKS
+curl -H "Authorization: Bearer <non-fresh-token>" \
+  http://localhost:8000/protected
+# Returns: {"message": "You have access"}
+```
 
-    ```shell
-    # Requesting the sensitive operation with the non-fresh token
-    $ curl -s --oauth2-bearer $FRESH_TOKEN http://0.0.0.0:8000/sensitive_operation
-    Internal server error
-    ```
+## Summary
 
-??? note "Note on Internal server error"
-     As you might notice, step 4 results in a 500 HTTP Internal Server Error. This is the expected behavior since error handling is by default disabled on AuthX and should be enabled or handled by you to avoid errors.
+| Token Type | Created When | Can Access `/protected` | Can Access `/change-password` |
+|------------|--------------|-------------------------|-------------------------------|
+| Fresh | User logs in with credentials | Yes | Yes |
+| Non-Fresh | Token is refreshed | Yes | No |

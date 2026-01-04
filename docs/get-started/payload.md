@@ -1,61 +1,165 @@
-# Accessing Payload Data
+# Token Payload
 
-When working with routes, it's often necessary to access data from a payload. This guide will show you how to accomplish this using Authx.
+The `TokenPayload` contains all the data stored in a JWT. You can access it in your routes and store custom data in tokens.
 
-Authx introduces the `TokenPayload` class, a Pydantic `BaseModel` designed to handle JWT claims and operations. When Authx generates a token, it can be serialized into an easy-to-use `TokenPayload` instance.
+## Accessing Payload Data
 
-## Storing Additional Data
-
-By default, the `authx.create_[access|refresh]_token` methods handle standard JWT claims such as issue date, expiry time, and issuer identity. However, you can store additional data by passing keyword arguments to these methods.
-
-For instance:
-
-```python
-token = security.create_access_token(uid="USER_UNIQUE_IDENTIFIER", foo="bar")
-```
-
-Keep in mind that the additional data passed as keyword arguments must be JSON serializable. Failure to adhere to this requirement will result in a `TypeError`. For example:
-
-```python
-from datetime import datetime
-security.create_access_token(uid="USER_UNIQUE_IDENTIFIER", foo=datetime(2023, 1, 1, 12, 0))
-```
-
-## Accessing Data in Routes
-
-JWT authentication allows you to scope an endpoint's logic to a specific user or recipient without explicitly referencing them. This is particularly useful for endpoints like `/me` or `/profile`.
-
-To access data within your routes, you can use the `authx.access_token_required` dependency. When used as a parameter dependency, it returns a `TokenPayload` instance from a valid JWT. This payload can then be used to retrieve user data within your route logic.
-
-However, using `authx.access_token_required` as a function dependency may lead to code repetition and the inclusion of fetching code outside your route logic.
-
-Here's an example of how to use `authx.access_token_required` in a FastAPI application:
+Use `access_token_required` as a dependency to get the payload:
 
 ```python
 from fastapi import FastAPI, Depends
-from authx import AuthX, TokenPayload, AuthXConfig
+from authx import AuthX, AuthXConfig, TokenPayload
 
 app = FastAPI()
-config = AuthXConfig()
-config.JWT_SECRET_KEY = "SECRET_KEY"
-security = AuthX(config=config)
 
-@app.get('/token')
-def get_token():
-    token = security.create_access_token(uid="USER_ID", foo="bar", age=22)
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["headers"],
+)
+
+auth = AuthX(config=config)
+auth.handle_errors(app)
+
+
+@app.get("/login")
+def login():
+    token = auth.create_access_token(uid="user123")
     return {"access_token": token}
 
-@app.get('/profile')
-def get_profile(payload: TokenPayload = Depends(security.access_token_required)):
+
+@app.get("/me")
+def get_me(payload: TokenPayload = Depends(auth.access_token_required)):
     return {
-        "id": payload.sub,
-        "age": getattr(payload, "age"),
-        "foo": getattr(payload, "foo"),
+        "user_id": payload.sub,
+        "token_type": payload.type,
+        "is_fresh": payload.fresh,
     }
 ```
 
-In this example, the `get_token` endpoint generates a token, while the `get_profile` endpoint utilizes `authx.access_token_required` to retrieve and utilize the token payload within its logic.
+## TokenPayload Fields
 
-Whether used as a function argument or a route/decorator argument, `authx.access_token_required` enforces the validity of the token, throwing an exception if the token is invalid.
+| Field | Type | Description |
+|-------|------|-------------|
+| `sub` | `str` | Subject - the user ID you passed to `create_access_token(uid=...)` |
+| `type` | `str` | Token type: "access" or "refresh" |
+| `exp` | `datetime` | Expiration time |
+| `iat` | `datetime` | Issued at time |
+| `fresh` | `bool` | Whether token is fresh |
+| `jti` | `str` | Unique token identifier |
 
-With access to the `payload` object, you can incorporate additional fields included with `authx.create_[access|refresh]_token` into your route logic.
+## Storing Custom Data
+
+Pass additional data when creating tokens:
+
+```python
+@app.get("/login")
+def login():
+    token = auth.create_access_token(
+        uid="user123",
+        data={
+            "role": "admin",
+            "permissions": ["read", "write"],
+        }
+    )
+    return {"access_token": token}
+
+
+@app.get("/me")
+def get_me(payload: TokenPayload = Depends(auth.access_token_required)):
+    return {
+        "user_id": payload.sub,
+        "role": payload.extra_dict.get("role"),
+        "permissions": payload.extra_dict.get("permissions"),
+    }
+```
+
+## Complete Example
+
+```python
+from fastapi import FastAPI, Depends, HTTPException
+from pydantic import BaseModel
+from authx import AuthX, AuthXConfig, TokenPayload
+
+app = FastAPI()
+
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["headers"],
+)
+
+auth = AuthX(config=config)
+auth.handle_errors(app)
+
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+
+# Mock user database
+USERS = {
+    "admin": {"password": "admin123", "role": "admin"},
+    "user": {"password": "user123", "role": "user"},
+}
+
+
+@app.post("/login")
+def login(data: LoginRequest):
+    user = USERS.get(data.username)
+    if user and user["password"] == data.password:
+        token = auth.create_access_token(
+            uid=data.username,
+            data={"role": user["role"]}
+        )
+        return {"access_token": token}
+    raise HTTPException(401, detail="Invalid credentials")
+
+
+@app.get("/me")
+def get_me(payload: TokenPayload = Depends(auth.access_token_required)):
+    return {
+        "username": payload.sub,
+        "role": payload.extra_dict.get("role"),
+        "expires_in": str(payload.time_until_expiry),
+    }
+
+
+@app.get("/admin-only")
+def admin_only(payload: TokenPayload = Depends(auth.access_token_required)):
+    if payload.extra_dict.get("role") != "admin":
+        raise HTTPException(403, detail="Admin access required")
+    return {"message": "Welcome, admin!"}
+```
+
+## Testing
+
+```bash
+# Login as admin
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"username":"admin", "password":"admin123"}' \
+  http://localhost:8000/login
+
+# Get user info
+curl -H "Authorization: Bearer <token>" http://localhost:8000/me
+# {"username": "admin", "role": "admin", "expires_in": "0:14:59.123456"}
+
+# Access admin route
+curl -H "Authorization: Bearer <token>" http://localhost:8000/admin-only
+# {"message": "Welcome, admin!"}
+```
+
+## Useful Payload Properties
+
+```python
+@app.get("/token-info")
+def token_info(payload: TokenPayload = Depends(auth.access_token_required)):
+    return {
+        "user_id": payload.sub,
+        "issued_at": payload.issued_at.isoformat(),
+        "expires_at": payload.expiry_datetime.isoformat(),
+        "time_until_expiry": str(payload.time_until_expiry),
+        "time_since_issued": str(payload.time_since_issued),
+        "is_fresh": payload.fresh,
+        "custom_data": payload.extra_dict,
+    }
+```

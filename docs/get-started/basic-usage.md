@@ -1,189 +1,180 @@
 # Basic Usage
 
-The core concept of AuthX relies on generating access tokens and protecting routes. The following examples demonstrate how to use AuthX to quickly integrate these systems within your FastAPI application.
+This guide shows you how to add JWT authentication to your FastAPI application using AuthX.
 
-```py
+## Complete Example
+
+Here's a fully working example you can copy and run:
+
+```python
 from fastapi import FastAPI, Depends, HTTPException
 from authx import AuthX, AuthXConfig
 
-app = FastAPI(title="My Base App")
+app = FastAPI()
 
-config = AuthXConfig()
-config.JWT_ALGORITHM = "HS256"
-config.JWT_SECRET_KEY = "SECRET_KEY"
+# Step 1: Configure AuthX
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",  # Required: use env variable in production
+    JWT_TOKEN_LOCATION=["headers"],    # Where to look for tokens
+)
 
-security = AuthX(config=config)
+# Step 2: Create AuthX instance
+auth = AuthX(config=config)
 
-@app.get('/login')
+# Step 3: Register error handlers (important!)
+auth.handle_errors(app)
+
+# Step 4: Create login endpoint
+@app.post("/login")
 def login(username: str, password: str):
     if username == "test" and password == "test":
-        token = security.create_access_token(uid=username)
+        token = auth.create_access_token(uid=username)
         return {"access_token": token}
-    raise HTTPException(401, detail={"message": "Bad credentials"})
+    raise HTTPException(401, detail="Invalid credentials")
 
-@app.get("/protected", dependencies=[Depends(security.access_token_required)])
-def get_protected():
+# Step 5: Protect your routes
+@app.get("/protected", dependencies=[Depends(auth.access_token_required)])
+def protected():
     return {"message": "Hello World"}
 ```
 
-## Getting Started
+**Run it:**
 
-Let's build our first FastAPI application with AuthX.
-
-As usual, you create your application with the `fastapi.FastAPI` object
-
-```py hl_lines="1 4"
-from fastapi import FastAPI, Depends, HTTPException
-from authx import AuthX, AuthXConfig
-
-app = FastAPI(title="My Base App")
-
-config = AuthXConfig()
-config.JWT_ALGORITHM = "HS256"
-config.JWT_SECRET_KEY = "SECRET_KEY"
-
-security = AuthX(config=config)
+```bash
+uvicorn main:app --reload
 ```
 
-### Create the `AuthXConfig` Instance
+**Test it:**
 
-```py hl_lines="2 6-7"
-from fastapi import FastAPI, Depends, HTTPException
-from authx import AuthX, AuthXConfig
+```bash
+# Get a token
+curl -X POST "http://localhost:8000/login?username=test&password=test"
 
-app = FastAPI(title="My Base App")
-
-config = AuthXConfig()
-config.JWT_ALGORITHM = "HS256"
-config.JWT_SECRET_KEY = "SECRET_KEY"
-
-security = AuthX(config=config)
+# Use the token
+curl -H "Authorization: Bearer <your-token>" http://localhost:8000/protected
 ```
 
-AuthX provides an `AuthXConfig` object (based on Pydantic's `BaseSettings`) to customize the behavior of JWT management.
+## Step-by-Step Breakdown
 
-Here, we enforce a **symmetric** encryption algorithm, specifically `"HS256"`, and set the `SECRET_KEY` as the key for encoding and decoding.
+### 1. Configure AuthX
 
-#### Handling Secrets with `AuthXConfig`
+AuthX uses `AuthXConfig` to customize JWT behavior:
 
-By design, JSON Web Tokens are not encrypted; you can try your own JWT on [https://jwt.io/](https://jwt.io/). However, your server will need secrets to sign tokens.
+```python
+from authx import AuthXConfig
 
-```py  hl_lines="8"
-from fastapi import FastAPI
-from authx import AuthX, AuthXConfig
-
-app = FastAPI(title="My Base App")
-
-config = AuthXConfig()
-config.JWT_ALGORITHM = "HS256"
-config.JWT_SECRET_KEY = "SECRET_KEY"
-
-security = AuthX(config=config)
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",  # Required for signing tokens
+    JWT_ALGORITHM="HS256",             # Default algorithm
+    JWT_TOKEN_LOCATION=["headers"],    # Accept tokens in headers
+)
 ```
 
-!!! warning "Secrets Location"
-    As a best practice, do not use explicit secrets within your code. It is recommended to use environment variables to avoid any credential leakage.
-    ```py
+!!! warning "Keep Secrets Safe"
+    Never hardcode secrets in production. Use environment variables:
+
+    ```python
     import os
-    from authx import AuthXConfig
 
-    config = AuthXConfig()
-    config.JWT_SECRET_KEY = os.getenv("SECRET_KEY")
+    config = AuthXConfig(
+        JWT_SECRET_KEY=os.getenv("JWT_SECRET_KEY"),
+    )
     ```
 
-!!! info "Note on Algorithm"
-    For demonstration ease, we use a **symmetric** algorithm. Note that an **asymmetric** algorithm offers additional layers of protection.
-    `"RS256"` is the recommended algorithm when signing JWTs.
+### 2. Create AuthX Instance
 
-### Create `AuthX` instance
+```python
+from authx import AuthX
 
-You can now instantiate the `AuthX` object with your configuration
-
-```py hl_lines="2 10"
-from fastapi import FastAPI
-from authx import AuthX, AuthXConfig
-
-app = FastAPI(title="My Base App")
-
-config = AuthXConfig()
-config.JWT_ALGORITHM = "HS256"
-config.JWT_SECRET_KEY = "SECRET_KEY"
-
-security = AuthX(config=config)
+auth = AuthX(config=config)
 ```
 
-!!! tip "Loading Configuration after `AuthX.__init__`"
-    You can also load the configuration after the `AuthX` object is created. This is useful when you want to use the same `AuthX` object for multiple FastAPI applications.
+You can also load config after creation:
 
-    ```py
-    config = AuthXConfig()
-    config.JWT_SECRET_KEY = "SECRET_KEY"
+```python
+auth = AuthX()
+auth.load_config(config)
+```
 
-    security = AuthX()
-    security.load_config(config)
-    ```
+### 3. Register Error Handlers
 
-## Authentication
+This ensures authentication errors return proper HTTP responses instead of 500 errors:
 
-### Create the access token
+```python
+auth.handle_errors(app)
+```
 
-To authenticate a user, create a `/login` route in the usual way with FastAPI.
+Without this, authentication failures will raise unhandled exceptions.
 
-```py hl_lines="4"
-@app.get('/login')
+### 4. Create Access Tokens
+
+Use `create_access_token` to generate a signed JWT for a user:
+
+```python
+@app.post("/login")
 def login(username: str, password: str):
     if username == "test" and password == "test":
-        token = security.create_access_token(uid=username)
+        token = auth.create_access_token(uid=username)
         return {"access_token": token}
-    raise HTTPException(401, detail={"message": "Bad credentials"})
+    raise HTTPException(401, detail="Invalid credentials")
 ```
 
-Once a user has provided valid credentials, use the `AuthX.create_access_token` method to generate a signed token. To associate the user with the token, utilize the `uid` argument.
+The `uid` parameter identifies the user. Use a user ID or UUID, not personal information.
 
-!!! info "Note on Privacy"
-    Avoid including personally identifiable information (PIDs) in the JWT since its content is fully readable. As a best practice, `uid` should typically be a user database index (not ordered). Consider using UUIDs for additional privacy.
+!!! tip "Security Tip"
+    In production, use POST with a request body for login, not query parameters:
 
-!!! info "Note on Login Protection"
-    The `/login` route above serves as a simple example. **Avoid passing credentials through query parameters** for security reasons. Implement thorough authentication logic to ensure a more robust login process.
+    ```python
+    from pydantic import BaseModel
 
-=== "Request Access Token"
+    class LoginRequest(BaseModel):
+        username: str
+        password: str
 
-    ```sh
-    $ curl -s -X GET "http://0.0.0.0:8000/login?username=test&password=test"
-    {"access_token": "$TOKEN"}
+    @app.post("/login")
+    def login(data: LoginRequest):
+        # Validate credentials...
+        token = auth.create_access_token(uid=data.username)
+        return {"access_token": token}
     ```
 
-### Protected Routes
+### 5. Protect Routes
 
-Let's implement a simple `GET` route that can only be accessed by authenticated users.
+Use `access_token_required` as a dependency to protect routes:
 
-```py
-@app.get("/protected", dependencies=[Depends(security.access_token_required)])
-def get_protected():
+```python
+@app.get("/protected", dependencies=[Depends(auth.access_token_required)])
+def protected():
     return {"message": "Hello World"}
 ```
 
-AuthX is compliant with FastAPI's [dependency injection system](https://fastapi.tiangolo.com/tutorial/dependencies/). It provides the `AuthX.access_token_required` method to enforce this behavior.
+**What happens:**
 
-Whether a bad token or no token is provided, the server will prevent the execution of the route logic defined in `/protected`.
+- No token → `401 Missing JWT in request`
+- Invalid token → `401 Invalid Token`
+- Valid token → Route executes normally
 
-=== "curl without JsonWebToken"
-    ```bash
-    $ curl -s http://0.0.0.0:8000/protected
-    {"detail":"Missing JWT in request"}
-    ```
+## Getting the Current User
 
-=== "With a bad JsonWebToken"
-    ```bash
-    $ curl -s -H "Authorization: Bearer dummytoken" http://0.0.0.0:8000/protected
-    {"detail":"Unauthorized"}
-    ```
+To access the token payload in your route:
 
-=== "With a valid JsonWebToken"
-    ```bash
-    $ curl -s -H "Authorization: Bearer $TOKEN" http://0.0.0.0:8000/protected
-    {"message": "Hello World"}
-    ```
+```python
+from authx import TokenPayload
 
-!!! failure "Default Exception Behavior"
-    In the curl requests above, a `401` HTTP Error is raised when the token is not valid. By default, AuthX triggers a `500 Internal Server Error` HTTP Error. For the sake of simplicity, we won't delve into error handling in this section.
+@app.get("/me")
+def get_me(payload: TokenPayload = Depends(auth.access_token_required)):
+    return {"user_id": payload.sub}
+```
+
+The `TokenPayload` contains:
+
+- `sub` - Subject (the `uid` you passed to `create_access_token`)
+- `exp` - Expiration time
+- `iat` - Issued at time
+- `type` - Token type ("access" or "refresh")
+
+## Next Steps
+
+- [Token Locations](./location.md) - Accept tokens from cookies, query params, or JSON body
+- [Refresh Tokens](./refresh.md) - Keep users logged in with refresh tokens
+- [Token Freshness](./token.md) - Require re-authentication for sensitive operations
