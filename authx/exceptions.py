@@ -85,6 +85,34 @@ class RefreshTokenRequiredError(TokenTypeError):
     pass
 
 
+class InsufficientScopeError(TokenError):
+    """Exception raised when token lacks required scopes.
+
+    Attributes:
+        required: List of scopes that were required.
+        provided: List of scopes that were provided in the token.
+    """
+
+    def __init__(
+        self,
+        required: list[str],
+        provided: list[str] | None = None,
+        message: str | None = None,
+    ) -> None:
+        """Initialize InsufficientScopeError.
+
+        Args:
+            required: List of scopes that were required.
+            provided: List of scopes that were provided in the token.
+            message: Optional custom error message.
+        """
+        self.required = required
+        self.provided = provided or []
+        if message is None:
+            message = f"Missing required scopes: {required}. Provided: {self.provided}"
+        super().__init__(message)
+
+
 class InvalidToken(Exception):
     """When a token is invalid for all identity providers."""
 

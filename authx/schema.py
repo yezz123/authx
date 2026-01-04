@@ -11,6 +11,7 @@ from typing import (
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
 
+from authx._internal._scopes import has_required_scopes
 from authx._internal._utils import get_now, get_now_ts, get_uuid
 from authx.exceptions import (
     AccessTokenRequiredError,
@@ -160,20 +161,43 @@ class TokenPayload(BaseModel):
             return (get_now() + value).timestamp()
         return value
 
-    def has_scopes(self, *scopes: Sequence[str]) -> bool:
-        """Check if the token contains all specified scopes.
+    def has_scopes(self, *scopes: str, all_required: bool = True) -> bool:
+        """Check if the token contains the specified scopes.
 
-        Verifies whether the token's scopes include all the requested scope values.
+        Verifies whether the token's scopes satisfy the required scope values.
+        Supports wildcard matching where a scope ending with ":*" matches
+        any scope under that namespace (e.g., "admin:*" matches "admin:users").
 
         Args:
             *scopes: Variable number of scope strings to check against the token's scopes.
+            all_required: If True (default), all scopes must be present (AND logic).
+                         If False, at least one scope must be present (OR logic).
 
         Returns:
-            A boolean indicating whether all specified scopes are present in the token.
+            A boolean indicating whether the scope requirements are satisfied.
+
+        Examples:
+            >>> payload.scopes = ["users:read", "posts:write"]
+            >>> payload.has_scopes("users:read")
+            True
+            >>> payload.has_scopes("users:read", "posts:write")
+            True
+            >>> payload.has_scopes("admin")
+            False
+
+            # With wildcard scopes in token
+            >>> payload.scopes = ["admin:*"]
+            >>> payload.has_scopes("admin:users")
+            True
+            >>> payload.has_scopes("admin:settings")
+            True
+
+            # OR logic
+            >>> payload.scopes = ["read"]
+            >>> payload.has_scopes("read", "admin", all_required=False)
+            True
         """
-        # if `self.scopes`` is None, the function will immediately return False.
-        # If `self.scopes`` is not None, it will check if all elements in scopes are in `self.scopes``.
-        return all(s in self.scopes for s in scopes) if self.scopes is not None else False
+        return has_required_scopes(list(scopes), self.scopes, all_required=all_required)
 
     def encode(
         self,
@@ -197,6 +221,11 @@ class TokenPayload(BaseModel):
         Returns:
             A string representing the encoded and signed JWT.
         """
+        # Include scopes in data if present
+        token_data = data.copy() if data else {}
+        if self.scopes is not None:
+            token_data["scopes"] = self.scopes
+
         return create_token(
             key=key,
             algorithm=algorithm,
@@ -216,7 +245,7 @@ class TokenPayload(BaseModel):
             not_before=self.nbf,
             ignore_errors=ignore_errors,
             headers=headers,
-            data=data,
+            data=token_data if token_data else None,
         )
 
     @classmethod

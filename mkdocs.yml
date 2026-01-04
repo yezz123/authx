@@ -203,6 +203,7 @@ nav:
     - Basic Usage: get-started/basic-usage.md
     - Payload Data: get-started/payload.md
     - JWT Locations: get-started/location.md
+    - Scope Management: get-started/scopes.md
     - Refreshing Tokens: get-started/refresh.md
     - Freshness Tokens: get-started/token.md
   - Callbacks:
