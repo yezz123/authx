@@ -214,6 +214,7 @@ nav:
     - Dependency Aliases: dependencies/aliases.md
     - Dependency Bundle: dependencies/bundle.md
   - Extra Features:
+    - Template Engines (Jinja2): extra/templates.md
     - Oauth2 Features: extra/OAuth2.md
     - Metrics Features: extra/Metrics.md
     - Cache Features: extra/Cache.md

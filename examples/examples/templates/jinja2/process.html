@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}{{ current_route | capitalize }} - AuthX Jinja2 Example{% endblock %}
+
+{% block content %}
+<div class="layout-sidebar">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <h3 style="margin-bottom: 1rem; color: var(--text-secondary); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em;">
+            Navigation
+        </h3>
+        <ul class="sidebar-nav">
+            <li>
+                <a href="/process" {% if current_route == 'process' %}class="active"{% endif %}>
+                    📋 Process Home
+                </a>
+            </li>
+            <li>
+                <a href="/route1" {% if current_route == 'route1' %}class="active"{% endif %}>
+                    📊 Route 1 - Data
+                </a>
+            </li>
+            <li>
+                <a href="/route2" {% if current_route == 'route2' %}class="active"{% endif %}>
+                    📈 Route 2 - Reports
+                </a>
+            </li>
+            <li>
+                <a href="/route3" {% if current_route == 'route3' %}class="active"{% endif %}>
+                    ⚙️ Route 3 - Settings
+                </a>
+            </li>
+            <li>
+                <a href="/route4" {% if current_route == 'route4' %}class="active"{% endif %}>
+                    📉 Route 4 - Analytics
+                </a>
+            </li>
+        </ul>
+
+        <hr style="border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;">
+
+        <a href="/dashboard" class="btn btn-secondary btn-sm" style="width: 100%; text-align: center;">
+            ← Back to Dashboard
+        </a>
+    </aside>
+
+    <!-- Main Content -->
+    <div>
+        {% if message %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    {% if current_route == 'process' %}
+                        Process Center
+                    {% elif current_route == 'route1' %}
+                        Data Processing
+                    {% elif current_route == 'route2' %}
+                        Reports
+                    {% elif current_route == 'route3' %}
+                        Settings
+                    {% elif current_route == 'route4' %}
+                        Analytics
+                    {% endif %}
+                </h1>
+                <p class="card-subtitle">
+                    You are viewing: <code style="background: var(--bg-tertiary); padding: 0.25rem 0.5rem; border-radius: 0.25rem;">/{{ current_route }}</code>
+                </p>
+            </div>
+
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                This is a protected route. You can only see this because you're authenticated as
+                <strong>{{ user.name }}</strong>.
+            </p>
+
+            <!-- Example Form with CSRF Protection -->
+            <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.5rem;">
+                <h3 style="margin-bottom: 1rem;">Example Action (with CSRF)</h3>
+                <form action="/process/action" method="post">
+                    <!-- CSRF Token - Required for POST requests with cookie auth -->
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+                    <div class="form-group">
+                        <label for="action">Select Action</label>
+                        <select id="action" name="action" class="form-control">
+                            <option value="process_data">Process Data</option>
+                            <option value="generate_report">Generate Report</option>
+                            <option value="update_settings">Update Settings</option>
+                            <option value="run_analytics">Run Analytics</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Execute Action
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mt-2">
+            <div class="card-header">
+                <h3 class="card-title">CSRF Protection Explained</h3>
+            </div>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                The form above includes a hidden <code>csrf_token</code> field. This is required for
+                POST/PUT/PATCH/DELETE requests when using cookie-based authentication.
+            </p>
+            <pre style="background: var(--bg-tertiary); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; font-size: 0.875rem;">
+&lt;form action="/process/action" method="post"&gt;
+    &lt;!-- CSRF Token from cookie --&gt;
+    &lt;input type="hidden" name="csrf_token" value="<span style="color: var(--accent);">{{ csrf_token }}</span>"&gt;
+
+    &lt;!-- Your form fields --&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</pre>
+            <p style="color: var(--text-secondary); margin-top: 1rem;">
+                The CSRF token is set in a cookie (<code>csrf_access_token</code>) that JavaScript can read,
+                allowing you to include it in forms or AJAX requests.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

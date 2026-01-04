@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Login - AuthX Jinja2 Example{% endblock %}
+
+{% block content %}
+<div style="max-width: 400px; margin: 4rem auto;">
+    <div class="card">
+        <div class="card-header text-center">
+            <h2 class="card-title">Welcome Back</h2>
+            <p class="card-subtitle">Sign in to your account</p>
+        </div>
+
+        {% if error %}
+        <div class="alert alert-error">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="/login" method="post">
+            <!-- Hidden field to preserve redirect destination -->
+            <input type="hidden" name="next" value="{{ next }}">
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    class="form-control"
+                    placeholder="Enter your username"
+                    required
+                    autofocus
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Enter your password"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                Sign In
+            </button>
+        </form>
+
+        <div class="text-center mt-2">
+            <p style="color: var(--text-secondary); font-size: 0.875rem;">
+                Test credentials: <code>admin</code> / <code>admin123</code>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

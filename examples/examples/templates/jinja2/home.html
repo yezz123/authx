@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}Home - AuthX Jinja2 Example{% endblock %}
+
+{% block content %}
+<div class="text-center" style="padding: 4rem 0;">
+    <h1 style="font-size: 3rem; margin-bottom: 1rem;">
+        Welcome to <span style="color: var(--accent);">AuthX</span>
+    </h1>
+    <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem;">
+        A demonstration of AuthX authentication with Jinja2 templates for
+        server-side rendered web applications.
+    </p>
+
+    {% if user %}
+        <p style="margin-bottom: 2rem;">
+            Welcome back, <strong>{{ user.name }}</strong>!
+        </p>
+        <a href="/dashboard" class="btn btn-primary">Go to Dashboard</a>
+    {% else %}
+        <a href="/login" class="btn btn-primary" style="margin-right: 1rem;">Login</a>
+        <a href="#features" class="btn btn-secondary">Learn More</a>
+    {% endif %}
+</div>
+
+<div id="features" class="grid grid-2 mt-2">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">🔐 Cookie-Based Auth</h3>
+        </div>
+        <p style="color: var(--text-secondary);">
+            Tokens are stored in HTTP-only cookies for secure, automatic authentication
+            on every request. Perfect for traditional web applications.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">🛡️ CSRF Protection</h3>
+        </div>
+        <p style="color: var(--text-secondary);">
+            Built-in CSRF protection for form submissions. AuthX automatically
+            generates and validates CSRF tokens.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">🔄 Redirect Flow</h3>
+        </div>
+        <p style="color: var(--text-secondary);">
+            Traditional login/logout flow with redirects instead of JSON responses.
+            Unauthenticated users are redirected to the login page.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">📄 Jinja2 Templates</h3>
+        </div>
+        <p style="color: var(--text-secondary);">
+            Server-side rendering with Jinja2 templates. User context is
+            passed to templates for personalized content.
+        </p>
+    </div>
+</div>
+
+<div class="card mt-2">
+    <div class="card-header">
+        <h3 class="card-title">Test Credentials</h3>
+    </div>
+    <div class="grid grid-2">
+        <div>
+            <h4 style="margin-bottom: 0.5rem;">Admin User</h4>
+            <p style="color: var(--text-secondary);">
+                Username: <code style="background: var(--bg-tertiary); padding: 0.25rem 0.5rem; border-radius: 0.25rem;">admin</code><br>
+                Password: <code style="background: var(--bg-tertiary); padding: 0.25rem 0.5rem; border-radius: 0.25rem;">admin123</code>
+            </p>
+        </div>
+        <div>
+            <h4 style="margin-bottom: 0.5rem;">Regular User</h4>
+            <p style="color: var(--text-secondary);">
+                Username: <code style="background: var(--bg-tertiary); padding: 0.25rem 0.5rem; border-radius: 0.25rem;">user</code><br>
+                Password: <code style="background: var(--bg-tertiary); padding: 0.25rem 0.5rem; border-radius: 0.25rem;">user123</code>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
