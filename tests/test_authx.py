@@ -331,3 +331,77 @@ def test_set_and_unset_cookies(authx, mock_response):
 def test_token_required_dependency(authx):
     dependency = authx.token_required(type="access", verify_fresh=True)
     assert callable(dependency)
+
+
+@pytest.mark.asyncio
+async def test_get_token_from_request_direct_access(authx: AuthX, access_token: str):
+    """Test that get_token_from_request works as a direct async method for access tokens.
+
+    This test verifies the fix for the issue where users expected to call
+    `await auth.get_token_from_request(request)` but got TypeError because
+    the old implementation returned a callable instead of being awaitable.
+    """
+    req = Request(
+        scope={
+            "method": "GET",
+            "type": "http",
+            "headers": [[b"authorization", f"Bearer {access_token}".encode()]],
+        }
+    )
+
+    # This should work directly without needing to call the result
+    token = await authx.get_token_from_request(req)
+    assert token is not None
+    assert token.token == access_token
+    assert token.location == "headers"
+    assert token.type == "access"
+
+
+@pytest.mark.asyncio
+async def test_get_token_from_request_direct_refresh(authx: AuthX, refresh_token: str):
+    """Test that get_token_from_request works as a direct async method for refresh tokens."""
+    req = Request(
+        scope={
+            "method": "GET",
+            "type": "http",
+            "headers": [[b"authorization", f"Bearer {refresh_token}".encode()]],
+        }
+    )
+
+    token = await authx.get_token_from_request(req, type="refresh")
+    assert token is not None
+    assert token.token == refresh_token
+    assert token.location == "headers"
+    assert token.type == "refresh"
+
+
+@pytest.mark.asyncio
+async def test_get_token_from_request_direct_optional(authx: AuthX):
+    """Test that get_token_from_request returns None when optional=True and no token."""
+    req = Request(
+        scope={
+            "method": "GET",
+            "type": "http",
+            "headers": [],
+        }
+    )
+
+    # With optional=True (default), should return None
+    token = await authx.get_token_from_request(req, optional=True)
+    assert token is None
+
+
+@pytest.mark.asyncio
+async def test_get_token_from_request_direct_not_optional(authx: AuthX):
+    """Test that get_token_from_request raises when optional=False and no token."""
+    req = Request(
+        scope={
+            "method": "GET",
+            "type": "http",
+            "headers": [],
+        }
+    )
+
+    # With optional=False, should raise MissingTokenError
+    with pytest.raises(MissingTokenError):
+        await authx.get_token_from_request(req, optional=False)
