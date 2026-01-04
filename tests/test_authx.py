@@ -197,26 +197,65 @@ async def test_get_token_from_request_refresh(authx: AuthX, refresh_token: str):
 
 
 @pytest.mark.asyncio
-async def test__auth_required(authx: AuthX, refresh_token: str, access_token: str):
+async def test_get_refresh_token_from_headers():
+    """Test that refresh tokens can be retrieved from headers when configured.
+
+    This test verifies the fix for the issue where refresh_token_required
+    would fail with 'No token found in request from []' when JWT_TOKEN_LOCATION
+    was set to only ['headers'].
+    """
+    # Create AuthX with only headers as token location
+    authx_headers_only = AuthX()
+    authx_headers_only._config.JWT_SECRET_KEY = "SECRET"
+    authx_headers_only._config.JWT_TOKEN_LOCATION = ["headers"]
+
+    refresh_token = authx_headers_only.create_refresh_token(uid="test_user")
+
     req = Request(
+        scope={
+            "method": "POST",
+            "type": "http",
+            "headers": [[b"authorization", f"Bearer {refresh_token}".encode()]],
+        }
+    )
+
+    # This should work now - previously it would raise MissingTokenError
+    request_token = await authx_headers_only.get_refresh_token_from_request(request=req)
+    assert request_token.token == refresh_token
+    assert request_token.location == "headers"
+    assert request_token.csrf is None
+    assert request_token.type == "refresh"
+
+
+@pytest.mark.asyncio
+async def test__auth_required(authx: AuthX, refresh_token: str, access_token: str):
+    # Test access token required from headers
+    access_req = Request(
         scope={
             "method": "GET",
             "type": "http",
             "headers": [
                 [b"content-type", b"application/json"],
                 [b"authorization", f"Bearer {access_token}".encode()],
-                [
-                    b"cookie",
-                    f"{authx.config.JWT_REFRESH_COOKIE_NAME}={refresh_token};".encode(),
-                ],
             ],
         }
     )
+    access_payload: TokenPayload = await authx._auth_required(request=access_req, verify_fresh=True, type="access")
+    assert access_payload.type == "access"
 
-    refresh_token: TokenPayload = await authx._auth_required(request=req, verify_fresh=False, type="refresh")
-    assert refresh_token.type == "refresh"
-    access_token: TokenPayload = await authx._auth_required(request=req, verify_fresh=True, type="access")
-    assert access_token.type == "access"
+    # Test refresh token required from headers
+    refresh_req = Request(
+        scope={
+            "method": "GET",
+            "type": "http",
+            "headers": [
+                [b"content-type", b"application/json"],
+                [b"authorization", f"Bearer {refresh_token}".encode()],
+            ],
+        }
+    )
+    refresh_payload: TokenPayload = await authx._auth_required(request=refresh_req, verify_fresh=False, type="refresh")
+    assert refresh_payload.type == "refresh"
 
 
 @pytest.mark.asyncio
