@@ -1,5 +1,7 @@
 """Exceptions for AuthX."""
 
+from typing import Optional
+
 
 class AuthXException(Exception):
     """Base AuthXException Exception."""
@@ -96,8 +98,8 @@ class InsufficientScopeError(TokenError):
     def __init__(
         self,
         required: list[str],
-        provided: list[str] | None = None,
-        message: str | None = None,
+        provided: Optional[list[str]] = None,
+        message: Optional[str] = None,
     ) -> None:
         """Initialize InsufficientScopeError.
 

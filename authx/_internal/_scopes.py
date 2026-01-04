@@ -7,6 +7,7 @@ This module provides functions for matching and validating scopes with support f
 """
 
 from collections.abc import Sequence
+from typing import Optional
 
 
 def match_scope(required: str, provided: str) -> bool:
@@ -50,7 +51,7 @@ def match_scope(required: str, provided: str) -> bool:
 
 def has_required_scopes(
     required: Sequence[str],
-    provided: Sequence[str] | None,
+    provided: Optional[Sequence[str]],
     all_required: bool = True,
 ) -> bool:
     """Check if the provided scopes satisfy the required scopes.
