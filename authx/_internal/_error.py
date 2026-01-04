@@ -20,6 +20,7 @@ class _ErrorHandler:
     MSG_RefreshTokenRequiredError = "Refresh token required"
     MSG_CSRFError = "CSRF double submit does not match"
     MSG_JWTDecodeError = "Invalid Token"
+    MSG_InsufficientScopeError = None  # Use detailed exception message showing required vs provided scopes
 
     async def _error_handler(
         self,
@@ -129,4 +130,10 @@ class _ErrorHandler:
             exception=exceptions.CSRFError,
             status_code=401,
             message=self.MSG_CSRFError,
+        )
+        self._set_app_exception_handler(
+            app,
+            exception=exceptions.InsufficientScopeError,
+            status_code=403,
+            message=None,  # Use detailed exception message showing required vs provided scopes
         )

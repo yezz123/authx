@@ -16,11 +16,12 @@ from fastapi import Depends, Request, Response
 
 from authx._internal._callback import _CallbackHandler
 from authx._internal._error import _ErrorHandler
+from authx._internal._scopes import has_required_scopes
 from authx._internal._utils import get_uuid
 from authx.config import AuthXConfig
 from authx.core import _get_token_from_request
 from authx.dependencies import AuthXDependency
-from authx.exceptions import AuthXException, MissingTokenError, RevokedTokenError
+from authx.exceptions import AuthXException, InsufficientScopeError, MissingTokenError, RevokedTokenError
 from authx.schema import RequestToken, TokenPayload
 from authx.types import (
     DateTimeExpression,
@@ -90,6 +91,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         expiry: Optional[DateTimeExpression] = None,
         data: Optional[dict[str, Any]] = None,
         audience: Optional[StringOrSequence] = None,
+        scopes: Optional[list[str]] = None,
         **kwargs: Any,
     ) -> TokenPayload:
         # Handle additional data
@@ -115,6 +117,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             iss=self.config.JWT_ENCODE_ISSUER,
             aud=aud,
             csrf=csrf,
+            scopes=scopes,
             # Handle NBF
             nbf=None,
             **data,
@@ -129,6 +132,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         expiry: Optional[DateTimeExpression] = None,
         data: Optional[dict[str, Any]] = None,
         audience: Optional[StringOrSequence] = None,
+        scopes: Optional[list[str]] = None,
         **kwargs: Any,
     ) -> str:
         payload = self._create_payload(
@@ -138,6 +142,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             expiry=expiry,
             data=data,
             audience=audience,
+            scopes=scopes,
             **kwargs,
         )
         return payload.encode(
@@ -389,6 +394,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         expiry: Optional[DateTimeExpression] = None,
         data: Optional[dict[str, Any]] = None,
         audience: Optional[StringOrSequence] = None,
+        scopes: Optional[list[str]] = None,
         *args: Any,
         **kwargs: Any,
     ) -> str:
@@ -397,13 +403,23 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         Args:
             uid (str): Unique identifier to generate token for
             fresh (bool, optional): Generate fresh token. Defaults to False.
-            headers (Optional[dict[str, Any]], optional): TODO. Defaults to None.
+            headers (Optional[dict[str, Any]], optional): Custom JWT headers. Defaults to None.
             expiry (Optional[DateTimeExpression], optional): Use a user defined expiry claim. Defaults to None.
             data (Optional[dict[str, Any]], optional): Additional data to store in token. Defaults to None.
             audience (Optional[StringOrSequence], optional): Audience claim. Defaults to None.
+            scopes (Optional[list[str]], optional): List of scopes to include in the token. Defaults to None.
 
         Returns:
             str: Access Token
+
+        Example:
+            ```python
+            # Token with scopes
+            token = auth.create_access_token(
+                uid="user123",
+                scopes=["users:read", "posts:write"]
+            )
+            ```
         """
         return self._create_token(
             uid=uid,
@@ -413,6 +429,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             expiry=expiry,
             data=data,
             audience=audience,
+            scopes=scopes,
         )
 
     def create_refresh_token(
@@ -422,6 +439,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         expiry: Optional[DateTimeExpression] = None,
         data: Optional[dict[str, Any]] = None,
         audience: Optional[StringOrSequence] = None,
+        scopes: Optional[list[str]] = None,
         *args: Any,
         **kwargs: Any,
     ) -> str:
@@ -429,10 +447,11 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
 
         Args:
             uid (str): Unique identifier to generate token for
-            headers (Optional[dict[str, Any]], optional): TODO. Defaults to None.
+            headers (Optional[dict[str, Any]], optional): Custom JWT headers. Defaults to None.
             expiry (Optional[DateTimeExpression], optional): Use a user defined expiry claim. Defaults to None.
             data (Optional[dict[str, Any]], optional): Additional data to store in token. Defaults to None.
             audience (Optional[StringOrSequence], optional): Audience claim. Defaults to None.
+            scopes (Optional[list[str]], optional): List of scopes to include in the token. Defaults to None.
 
         Returns:
             str: Refresh Token
@@ -444,6 +463,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             expiry=expiry,
             data=data,
             audience=audience,
+            scopes=scopes,
         )
 
     def set_access_cookies(
@@ -648,6 +668,74 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             verify_fresh=False,
             verify_type=True,
         )
+
+    def scopes_required(
+        self,
+        *scopes: str,
+        all_required: bool = True,
+        verify_type: bool = True,
+        verify_fresh: bool = False,
+        verify_csrf: Optional[bool] = None,
+        locations: Optional[TokenLocations] = None,
+    ) -> Callable[[Request], Awaitable[TokenPayload]]:
+        """Dependency to enforce required scopes in token.
+
+        Creates a FastAPI dependency that validates that the token contains
+        the required scopes. Supports both simple and hierarchical scopes
+        with wildcard matching (e.g., "admin:*" matches "admin:users").
+
+        Args:
+            *scopes: Variable number of scope strings required.
+            all_required: If True (default), ALL scopes must be present (AND logic).
+                         If False, at least ONE scope must be present (OR logic).
+            verify_type: Apply token type verification. Defaults to True.
+            verify_fresh: Require token freshness. Defaults to False.
+            verify_csrf: Enable CSRF verification. Defaults to None (uses config).
+            locations: Locations to retrieve token from. Defaults to None.
+
+        Returns:
+            Callable[[Request], Awaitable[TokenPayload]]: Dependency for scope validation.
+
+        Raises:
+            InsufficientScopeError: When token lacks required scopes.
+
+        Example:
+            ```python
+            # Require single scope
+            @app.get("/users", dependencies=[Depends(auth.scopes_required("users:read"))])
+            async def list_users(): ...
+
+            # Require multiple scopes (AND)
+            @app.delete("/users/{id}", dependencies=[Depends(auth.scopes_required("users:read", "users:delete"))])
+            async def delete_user(id: int): ...
+
+            # Require any of the scopes (OR)
+            @app.get("/admin", dependencies=[Depends(auth.scopes_required("admin", "superuser", all_required=False))])
+            async def admin_panel(): ...
+
+            # Wildcard scope
+            @app.get("/admin/users", dependencies=[Depends(auth.scopes_required("admin:*"))])
+            async def admin_users(): ...
+            ```
+        """
+        required_scopes = list(scopes)
+
+        async def _scopes_required(request: Request) -> TokenPayload:
+            payload = await self._auth_required(
+                request=request,
+                type="access",
+                verify_type=verify_type,
+                verify_fresh=verify_fresh,
+                verify_csrf=verify_csrf,
+                locations=locations,
+            )
+
+            if not has_required_scopes(required_scopes, payload.scopes, all_required=all_required):
+                raise InsufficientScopeError(required=required_scopes, provided=payload.scopes)
+
+            return payload
+
+        return _scopes_required
 
     async def get_current_subject(self, request: Request) -> Optional[T]:
         """Retrieve the currently authenticated subject from the request.

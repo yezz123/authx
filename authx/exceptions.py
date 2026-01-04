@@ -1,5 +1,7 @@
 """Exceptions for AuthX."""
 
+from typing import Optional
+
 
 class AuthXException(Exception):
     """Base AuthXException Exception."""
@@ -83,6 +85,34 @@ class RefreshTokenRequiredError(TokenTypeError):
     """Exception raised when an `refresh` token is missing from request."""
 
     pass
+
+
+class InsufficientScopeError(TokenError):
+    """Exception raised when token lacks required scopes.
+
+    Attributes:
+        required: List of scopes that were required.
+        provided: List of scopes that were provided in the token.
+    """
+
+    def __init__(
+        self,
+        required: list[str],
+        provided: Optional[list[str]] = None,
+        message: Optional[str] = None,
+    ) -> None:
+        """Initialize InsufficientScopeError.
+
+        Args:
+            required: List of scopes that were required.
+            provided: List of scopes that were provided in the token.
+            message: Optional custom error message.
+        """
+        self.required = required
+        self.provided = provided or []
+        if message is None:
+            message = f"Missing required scopes: {required}. Provided: {self.provided}"
+        super().__init__(message)
 
 
 class InvalidToken(Exception):
