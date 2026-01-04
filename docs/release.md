@@ -1,5 +1,7 @@
 ## Latest Changes
 
+## 1.5.0
+
 ### Breaking Changes
 
 * ✨ Implement scope management features. PR [#788](https://github.com/yezz123/authx/pull/788) by [@yezz123](https://github.com/yezz123).
