@@ -39,6 +39,7 @@
 
 ### Internal
 
+* ✨ Add Jinja2 template engine support documentation and examples. PR [#787](https://github.com/yezz123/authx/pull/787) by [@yezz123](https://github.com/yezz123).
 * :sparkles: Add dual token location pattern documentation and example. PR [#786](https://github.com/yezz123/authx/pull/786) by [@yezz123](https://github.com/yezz123).
 
 ## 1.4.3
