@@ -77,7 +77,12 @@ async def _get_token_from_cookies(
                         else:
                             raise ValueError("Unexpected type for csrf_token")
         if not csrf_token:
-            raise MissingCSRFTokenError("Missing CSRF token")
+            raise MissingCSRFTokenError(
+                f"Missing CSRF token. Expected in '{csrf_header_key}' header. "
+                f"Ensure you're using 'set_access_cookies'/'set_refresh_cookies' to set cookies "
+                f"(which also sets the CSRF cookie), then include the CSRF token from that cookie "
+                f"in your request header. To disable CSRF protection, set JWT_COOKIE_CSRF_PROTECT=False."
+            )
 
     return RequestToken(
         token=cookie_token,
