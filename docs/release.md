@@ -7,6 +7,7 @@
 
 ### Fixes
 
+* :bug: Improve CSRF error handling and messaging. PR [#783](https://github.com/yezz123/authx/pull/783) by [@yezz123](https://github.com/yezz123).
 * 🔧 Refactor token retrieval methods in AuthX class. PR [#780](https://github.com/yezz123/authx/pull/780) by [@yezz123](https://github.com/yezz123).
 * 🐛 Enhance CSRF token error handling and simplify token location. PR [#779](https://github.com/yezz123/authx/pull/779) by [@yezz123](https://github.com/yezz123).
 * 🐛  use refresh parameter in `_get_token_from_headers()`. PR [#776](https://github.com/yezz123/authx/pull/776) by [@NeViNez](https://github.com/NeViNez).
