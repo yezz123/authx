@@ -11,7 +11,7 @@ class _ErrorHandler:
 
     MSG_TokenError = "Token Error"
     MSG_MissingTokenError = "Missing JWT in request"
-    MSG_MissingCSRFTokenError = "Missing CSRF double submit token in request"
+    MSG_MissingCSRFTokenError = None  # Use detailed exception message
     MSG_TokenTypeError = "Bad token type"
     MSG_RevokedTokenError = "Invalid token"
     MSG_TokenRequiredError = "Token required"
@@ -42,7 +42,9 @@ class _ErrorHandler:
         if message is None:
             default_message = str(exc)
             attr_name = f"MSG_{exc.__class__.__name__}"
-            message = getattr(self, attr_name, default_message)
+            attr_message = getattr(self, attr_name, None)
+            # Use attribute message if available, otherwise use exception message
+            message = attr_message if attr_message is not None else default_message
 
         return JSONResponse(
             status_code=status_code,
@@ -84,7 +86,7 @@ class _ErrorHandler:
             app,
             exception=exceptions.MissingCSRFTokenError,
             status_code=401,
-            message=self.MSG_MissingCSRFTokenError,
+            message=None,  # Use detailed exception message for better user guidance
         )
         self._set_app_exception_handler(
             app,

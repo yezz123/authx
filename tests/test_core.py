@@ -263,6 +263,27 @@ async def test_get_token_from_cookies_post_with_csrf_exception(config: AuthXConf
 
 
 @pytest.mark.asyncio
+async def test_csrf_error_message_is_detailed(config: AuthXConfig, request_cookies: list[list[str]]):
+    """Test that CSRF error message provides helpful guidance to users (fixes #720)."""
+    req = Request(
+        scope={
+            "method": "POST",
+            "type": "http",
+            "headers": [*request_cookies],
+        }
+    )
+    with pytest.raises(MissingCSRFTokenError) as exc_info:
+        await _get_token_from_cookies(request=req, config=config)
+
+    error_message = str(exc_info.value)
+    # Verify the error message contains helpful information
+    assert "Missing CSRF token" in error_message
+    assert "set_access_cookies" in error_message or "set_refresh_cookies" in error_message
+    assert "JWT_COOKIE_CSRF_PROTECT=False" in error_message
+    assert config.JWT_ACCESS_CSRF_HEADER_NAME in error_message
+
+
+@pytest.mark.asyncio
 async def test_get_token_from_cookies_post_with_missing_token_exception(
     config: AuthXConfig,
 ):
