@@ -33,6 +33,7 @@
 
 ### Docs
 
+* 📝 Update documentation for AuthX features and usage. PR [#784](https://github.com/yezz123/authx/pull/784) by [@yezz123](https://github.com/yezz123).
 * 📝  add @NeViNez as a contributor for bug. PR [#778](https://github.com/yezz123/authx/pull/778) by [@allcontributors[bot]](https://github.com/apps/allcontributors).
 
 ## 1.4.3
