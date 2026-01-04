@@ -9,8 +9,7 @@ from typing import (
     Union,
 )
 
-from pydantic import BaseModel, Field, ValidationError
-from pydantic.version import VERSION as PYDANTIC_VERSION
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
 
 from authx._internal._utils import get_now, get_now_ts, get_uuid
 from authx.exceptions import (
@@ -30,11 +29,6 @@ from authx.types import (
     TokenLocation,
     TokenType,
 )
-
-if PYDANTIC_V2 := PYDANTIC_VERSION.startswith("2."):
-    from pydantic import ConfigDict, field_validator  # pragma: no cover
-else:
-    from pydantic import Extra, validator  # pragma: no cover
 
 
 class TokenPayload(BaseModel):
@@ -65,17 +59,7 @@ class TokenPayload(BaseModel):
         decode: Decodes and validates a JWT token.
     """
 
-    if PYDANTIC_V2:
-        model_config = ConfigDict(extra="allow", from_attributes=True)  # pragma: no cover
-    else:
-
-        class Config:  # pragma: no cover
-            """Configuration class for Pydantic model with extra field handling.
-
-            Allows additional fields beyond the defined model schema to be included during model creation.
-            """
-
-            extra = Extra.allow  # pragma: no cover
+    model_config = ConfigDict(extra="allow", from_attributes=True)
 
     jti: Optional[str] = Field(default_factory=get_uuid)
     iss: Optional[str] = None
@@ -94,24 +78,16 @@ class TokenPayload(BaseModel):
 
     @property
     def _additional_fields(self) -> set[str]:
-        if PYDANTIC_V2:
-            return set(self.__dict__) - set(self.model_fields)  # pragma: no cover
-        else:
-            return set(self.__dict__) - set(self.__fields__)  # pragma: no cover
+        return set(self.__dict__) - set(self.model_fields)
 
     @property
     def extra_dict(self) -> dict[str, Any]:
         """Retrieve additional fields not defined in the base Pydantic model schema.
 
-        Provides a dictionary of extra fields with version-specific compatibility for Pydantic v1 and v2.
-
         Returns:
             A dictionary containing additional fields beyond the model's defined schema.
         """
-        if PYDANTIC_V2:
-            return self.model_dump(include=self._additional_fields)  # pragma: no cover
-        else:
-            return self.dict(include=self._additional_fields)  # pragma: no cover
+        return self.model_dump(include=self._additional_fields)
 
     @property
     def issued_at(self) -> datetime.datetime:
@@ -175,28 +151,14 @@ class TokenPayload(BaseModel):
         """
         return get_now() - self.issued_at
 
-    if PYDANTIC_V2:
-
-        @field_validator("exp", "nbf", mode="before")  # pragma: no cover
-        def _set_default_ts(
-            cls, value: Union[float, int, datetime.datetime, datetime.timedelta]
-        ) -> Union[float, int]:  # pragma: no cover
-            if isinstance(value, datetime.datetime):
-                return value.timestamp()
-            elif isinstance(value, datetime.timedelta):
-                return (get_now() + value).timestamp()
-            return value
-    else:
-
-        @validator("exp", "nbf", pre=True)  # pragma: no cover
-        def _set_default_ts(
-            cls, value: Union[float, int, datetime.datetime, datetime.timedelta]
-        ) -> Union[float, int]:  # pragma: no cover
-            if isinstance(value, datetime.datetime):
-                return value.timestamp()
-            elif isinstance(value, datetime.timedelta):
-                return (get_now() + value).timestamp()
-            return value
+    @field_validator("exp", "nbf", mode="before")
+    @classmethod
+    def _set_default_ts(cls, value: Union[float, int, datetime.datetime, datetime.timedelta]) -> Union[float, int]:
+        if isinstance(value, datetime.datetime):
+            return value.timestamp()
+        elif isinstance(value, datetime.timedelta):
+            return (get_now() + value).timestamp()
+        return value
 
     def has_scopes(self, *scopes: Sequence[str]) -> bool:
         """Check if the token contains all specified scopes.
@@ -292,7 +254,7 @@ class TokenPayload(BaseModel):
             issuer=issuer,
             verify=verify,
         )
-        return cls.model_validate(payload) if PYDANTIC_V2 else cls(**payload)
+        return cls.model_validate(payload)
 
 
 class RequestToken(BaseModel):
@@ -370,7 +332,7 @@ class RequestToken(BaseModel):
                 audience=audience,
                 issuer=issuer,
             )
-            payload = TokenPayload.model_validate(decoded_token) if PYDANTIC_V2 else TokenPayload(**decoded_token)
+            payload = TokenPayload.model_validate(decoded_token)
         except JWTDecodeError as e:
             raise JWTDecodeError(*e.args) from e
         except ValidationError as e:
