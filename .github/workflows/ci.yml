@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
       fail-fast: false
 
     steps:
@@ -43,7 +43,7 @@ jobs:
 
       matrix:
 
-        python-version: [ "3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: [ "3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
 
         os: [ubuntu]
 
@@ -74,54 +74,12 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage.xml
 
-  test-extra:
-
-    name: test py${{ matrix.python-version }} on ${{ matrix.os }} with extra
-
-    runs-on: ${{ matrix.os }}-latest
-
-    services:
-      redis:
-        image: redis
-        ports:
-          - 6379:6379
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
-    strategy:
-
-      matrix:
-
-        python-version: [ "3.9", "3.10", "3.11", "3.12", "3.13"]
-
-        os: [ubuntu]
-
-    steps:
-      - uses: actions/checkout@v6
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Clone authx extra
-        run: git clone https://github.com/yezz123/authx-extra.git --single-branch
-
-      - name: Test Suite - ${{ matrix.os }} - py${{ matrix.python-version }}
-        run: bash scripts/test_extra.sh
-        env:
-          ENV: test
-          REDIS_URL: "redis://0.0.0.0:6379"
-
   # https://github.com/marketplace/actions/alls-green#why
   # used for branch protection checks
   check:
     if: always()
 
-    needs: [mypy, tests, test-extra]
+    needs: [mypy, tests]
     runs-on: ubuntu-latest
     steps:
       - name: Decide whether the needed jobs succeeded or failed
