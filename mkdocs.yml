@@ -234,6 +234,7 @@ nav:
       - api/internal/errors.md
       - api/internal/signature.md
       - api/internal/extra/memory.md
+      - api/internal/scopes.md
     - Extra:
       - api/extra/session.md
       - api/extra/profiler.md
