@@ -2,6 +2,7 @@
 
 ### Features
 
+* :recycle: Update CI workflow and add support for Python 3.14. PR [#782](https://github.com/yezz123/authx/pull/782) by [@yezz123](https://github.com/yezz123).
 * :sparkles: Drop pydantic v1 & support only pydantic v2. PR [#781](https://github.com/yezz123/authx/pull/781) by [@yezz123](https://github.com/yezz123).
 
 ### Fixes
