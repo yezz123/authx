@@ -664,6 +664,24 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         uid = token.sub
         return self._get_current_subject(uid=uid)
 
+    @overload
+    async def get_token_from_request(
+        self,
+        request: Request,
+        type: TokenType = "access",
+        optional: Literal[True] = True,
+        locations: Optional[TokenLocations] = None,
+    ) -> Optional[RequestToken]: ...
+
+    @overload
+    async def get_token_from_request(
+        self,
+        request: Request,
+        type: TokenType = "access",
+        optional: Literal[False] = False,
+        locations: Optional[TokenLocations] = None,
+    ) -> RequestToken: ...
+
     async def get_token_from_request(
         self,
         request: Request,
@@ -698,12 +716,20 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             token = await auth.get_token_from_request(request, optional=False)
             ```
         """
-        return await self._get_token_from_request(
-            request,
-            locations=locations,
-            refresh=(type == "refresh"),
-            optional=optional,
-        )
+        if optional:
+            return await self._get_token_from_request(
+                request,
+                locations=locations,
+                refresh=(type == "refresh"),
+                optional=True,
+            )
+        else:
+            return await self._get_token_from_request(
+                request,
+                locations=locations,
+                refresh=(type == "refresh"),
+                optional=False,
+            )
 
     def _implicit_refresh_enabled_for_request(self, request: Request) -> bool:
         """Check if a request should implement implicit token refresh.
