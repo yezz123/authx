@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - AuthX Jinja2 Example{% endblock %}
+
+{% block content %}
+<div class="card mb-1">
+    <div class="card-header">
+        <h1 class="card-title">Dashboard</h1>
+        <p class="card-subtitle">Welcome back, {{ user.name }}!</p>
+    </div>
+
+    <div class="grid grid-2">
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.5rem;">
+            <h4 style="color: var(--text-secondary); margin-bottom: 0.5rem;">Username</h4>
+            <p style="font-size: 1.25rem;">{{ user.username }}</p>
+        </div>
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.5rem;">
+            <h4 style="color: var(--text-secondary); margin-bottom: 0.5rem;">Role</h4>
+            <p style="font-size: 1.25rem;">{{ user.role | capitalize }}</p>
+        </div>
+    </div>
+</div>
+
+<h2 style="margin-bottom: 1rem;">Quick Actions</h2>
+
+<div class="grid grid-4">
+    <a href="/route1" class="card" style="text-decoration: none; transition: transform 0.2s;">
+        <h3 style="color: var(--accent); margin-bottom: 0.5rem;">📊 Route 1</h3>
+        <p style="color: var(--text-secondary); font-size: 0.875rem;">Data Processing</p>
+    </a>
+
+    <a href="/route2" class="card" style="text-decoration: none; transition: transform 0.2s;">
+        <h3 style="color: var(--accent); margin-bottom: 0.5rem;">📈 Route 2</h3>
+        <p style="color: var(--text-secondary); font-size: 0.875rem;">Reports</p>
+    </a>
+
+    <a href="/route3" class="card" style="text-decoration: none; transition: transform 0.2s;">
+        <h3 style="color: var(--accent); margin-bottom: 0.5rem;">⚙️ Route 3</h3>
+        <p style="color: var(--text-secondary); font-size: 0.875rem;">Settings</p>
+    </a>
+
+    <a href="/route4" class="card" style="text-decoration: none; transition: transform 0.2s;">
+        <h3 style="color: var(--accent); margin-bottom: 0.5rem;">📉 Route 4</h3>
+        <p style="color: var(--text-secondary); font-size: 0.875rem;">Analytics</p>
+    </a>
+</div>
+
+<div class="card mt-2">
+    <div class="card-header">
+        <h3 class="card-title">How It Works</h3>
+    </div>
+    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        This dashboard is a <strong>protected route</strong>. When you logged in:
+    </p>
+    <ol style="color: var(--text-secondary); padding-left: 1.5rem;">
+        <li style="margin-bottom: 0.5rem;">Your credentials were validated on the server</li>
+        <li style="margin-bottom: 0.5rem;">An access token was created and stored in an HTTP-only cookie</li>
+        <li style="margin-bottom: 0.5rem;">A CSRF token was also set in a cookie (readable by JavaScript)</li>
+        <li style="margin-bottom: 0.5rem;">You were redirected to this dashboard</li>
+    </ol>
+    <p style="color: var(--text-secondary); margin-top: 1rem;">
+        Every request to protected routes automatically includes the cookie. If not authenticated,
+        you'll be redirected to the login page.
+    </p>
+</div>
+{% endblock %}
