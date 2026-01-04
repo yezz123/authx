@@ -1,6 +1,6 @@
 from typing import NamedTuple, Optional
 
-from fastapi import Depends, FastAPI
+from fastapi import Depends, FastAPI, Request
 
 from authx import AuthX, AuthXConfig, AuthXDependency, RequestToken, TokenPayload
 
@@ -79,15 +79,21 @@ def create_securities(security: AuthX) -> SecuritiesTuple:
 def create_get_token_routes(app: FastAPI, security: AuthX) -> None:
     """Create routes to get tokens from request."""
 
+    async def _get_access_token(request: Request) -> Optional[RequestToken]:
+        return await security.get_token_from_request(request)
+
+    async def _get_refresh_token(request: Request) -> Optional[RequestToken]:
+        return await security.get_token_from_request(request, type="refresh")
+
     @app.post("/read/access")
     def _access_token_route(
-        token: RequestToken = Depends(security.get_token_from_request()),
+        token: RequestToken = Depends(_get_access_token),
     ):
         return token
 
     @app.post("/read/refresh")
     def _refresh_token_route(
-        token: RequestToken = Depends(security.get_token_from_request(type="refresh")),
+        token: RequestToken = Depends(_get_refresh_token),
     ):
         return token
 
