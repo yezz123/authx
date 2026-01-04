@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Breaking Changes
+
+* ✨ Implement scope management features. PR [#788](https://github.com/yezz123/authx/pull/788) by [@yezz123](https://github.com/yezz123).
+
 ### Features
 
 * :recycle: Update CI workflow and add support for Python 3.14. PR [#782](https://github.com/yezz123/authx/pull/782) by [@yezz123](https://github.com/yezz123).
