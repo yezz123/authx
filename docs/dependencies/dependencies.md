@@ -1,127 +1,228 @@
 # Dependencies
 
-## Request token dependencies
+AuthX provides FastAPI dependencies for token validation and retrieval.
 
-Sometimes, you may need to access data relative to JWT authentication in a request. Such data might include the encoded JWT, the CSRF double submit token, or the location of the JWT.
+## Token Validation Dependencies
 
-To retrieve this information from a request, AuthX provides `AuthX.get_token_from_request`.
+These dependencies protect routes and return the validated token payload.
 
-`get_token_from_request` allows you to specify the token type you wish to retrieve with the `type` argument and to enforce token availability with the `optional` argument.
+### `access_token_required`
 
-```py
+Requires a valid access token:
+
+```python
 from fastapi import FastAPI, Depends
-from authx import AuthX, RequestToken
+from authx import AuthX, AuthXConfig, TokenPayload
 
 app = FastAPI()
-security = AuthX()
-
-TokenGetter = Callable[[Request], Awaitable[RequestToken]]
-OptTokenGetter = Callable[[Request], Awaitable[RequestToken | None]]
+auth = AuthX(config=AuthXConfig(JWT_SECRET_KEY="your-secret-key"))
+auth.handle_errors(app)
 
 
-get_access_from_request: TokenGetter = security.get_token_from_request(
-    type: TokenType = "access",
-    optional: bool = False
-)
+@app.get("/protected", dependencies=[Depends(auth.access_token_required)])
+def protected():
+    return {"message": "Access granted"}
 
-get_optional_refresh_from_request: OptTokenGetter = security.get_token_from_request(
-    type: TokenType = "access",
-    optional: bool = False
-)
 
-@app.get('/get_token')
-async def get_token(token: RequestToken = Depends(get_access_from_request)):
-    ...
+# Or get the payload:
+@app.get("/me")
+def get_me(payload: TokenPayload = Depends(auth.access_token_required)):
+    return {"user_id": payload.sub}
 ```
 
-Please note that even if `optional` is set to `False`, the route will raise an error only because no token is available in the request and not because the token in the request has been invalidated.
+**Validates:**
 
-`get_token_from_request` dependencies do not provide token validation. This dependency only looks for the token's presence in the request.
+- JWT signature and expiration
+- Token type is "access"
+- CSRF token (if using cookies)
 
-## Token validation dependencies
+### `refresh_token_required`
 
-AuthX provides three main dependencies for token requirements.
+Requires a valid refresh token:
 
-These methods are AuthX properties returning a FastAPI dependency `Callable[[Request], TokenPayload]`. When these dependencies are resolved, they return a `TokenPayload`.
+```python
+@app.post("/refresh")
+def refresh(payload: TokenPayload = Depends(auth.refresh_token_required)):
+    new_token = auth.create_access_token(uid=payload.sub)
+    return {"access_token": new_token}
+```
 
-### `AuthX.access_token_required`
+**Validates:**
 
-`access_token_required` is a property returning a FastAPI dependency to enforce the presence and validity of an `access` token in the request. This dependency will apply the following verification:
+- JWT signature and expiration
+- Token type is "refresh"
+- CSRF token (if using cookies)
 
-- [X] JWT Validation: verify `exp`, `iat`, `nbf`, `iss`, `aud` claims
-- [X] Token type verification: `access` only
-- [X] CSRF double submit verification: if CSRF enabled and token location in cookies
-- [ ] Token freshness: not required for this dependency
+### `fresh_token_required`
 
-### `AuthX.refresh_token_required`
+Requires a valid **fresh** access token (for sensitive operations):
 
-`refresh_token_required` is a property returning a FastAPI dependency to enforce the presence and validity of a `refresh` token in the request. This dependency will apply the following verification:
+```python
+@app.post("/change-password", dependencies=[Depends(auth.fresh_token_required)])
+def change_password():
+    return {"message": "Password changed"}
+```
 
-- [X] JWT Validation: verify `exp`, `iat`, `nbf`, `iss`, `aud` claims
-- [X] Token type verification: `request` only
-- [X] CSRF double submit verification: if CSRF enabled and token location in cookies
-- [ ] Token freshness: not required for this dependency
+**Validates:**
 
-### `AuthX.fresh_token_required`
+- Everything `access_token_required` checks
+- Token must be fresh (`fresh=True` when created)
 
-`access_token_required` is a property returning a FastAPI dependency to enforce the presence and validity of an `access` token in the request. It also needs the token to be `fresh`. This dependency will apply the following verification:
+## Custom Token Requirements
 
-- [X] JWT Validation: verify `exp`, `iat`, `nbf`, `iss`, `aud` claims
-- [X] Token type verification: `access` only
-- [X] CSRF double submit verification: if CSRF enabled and token location in cookies
-- [X] Token freshness: not required for this dependency
+Use `token_required()` for custom validation:
 
-## Additional token dependency
+```python
+# Disable CSRF check for a specific route
+no_csrf_required = auth.token_required(
+    type="access",
+    verify_type=True,
+    verify_fresh=False,
+    verify_csrf=False,  # Disable CSRF
+)
 
-In addition to the three dependencies specified above, AuthX provides `AuthX.token_required` as an additional layer of customization for token requirements.
+@app.post("/api-only")
+def api_only(payload: TokenPayload = Depends(no_csrf_required)):
+    return {"user_id": payload.sub}
+```
 
-```py
-from fastapi import FastAPI, Depends
-from authx import AuthX, TokenPayload
+**Parameters:**
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `type` | `str` | `"access"` | Token type: "access" or "refresh" |
+| `verify_type` | `bool` | `True` | Check token type matches |
+| `verify_fresh` | `bool` | `False` | Require fresh token |
+| `verify_csrf` | `bool` | `None` | Override CSRF check (None = use config) |
+
+## Token Retrieval Dependencies
+
+These dependencies retrieve the token without validating it.
+
+### `get_token_from_request()`
+
+Get a token from the request (may be None):
+
+```python
+from authx import RequestToken
+
+
+@app.get("/check")
+async def check_token(request):
+    token = await auth.get_token_from_request(request, optional=True)
+
+    if token is None:
+        return {"authenticated": False}
+
+    try:
+        payload = auth.verify_token(token)
+        return {"authenticated": True, "user": payload.sub}
+    except Exception:
+        return {"authenticated": False, "reason": "invalid token"}
+```
+
+**Parameters:**
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `type` | `str` | `"access"` | Token type to look for |
+| `optional` | `bool` | `True` | If False, raises error when no token found |
+
+### Property Shortcuts
+
+Use these properties as dependencies:
+
+```python
+from authx import RequestToken
+
+# Get access token (optional)
+@app.get("/info")
+def get_info(token: RequestToken = auth.ACCESS_TOKEN):
+    if token:
+        return {"token_location": token.location}
+    return {"message": "No token"}
+
+# Get refresh token (optional)
+@app.post("/refresh-info")
+def refresh_info(token: RequestToken = auth.REFRESH_TOKEN):
+    if token:
+        return {"has_refresh": True}
+    return {"has_refresh": False}
+```
+
+## RequestToken vs TokenPayload
+
+| Type | What It Is | Validated? |
+|------|------------|------------|
+| `RequestToken` | Raw token from request | No |
+| `TokenPayload` | Decoded and validated token | Yes |
+
+**RequestToken fields:**
+
+- `token` - The raw JWT string
+- `location` - Where it was found ("headers", "cookies", etc.)
+- `csrf` - CSRF token (if from cookies)
+- `type` - Expected type ("access" or "refresh")
+
+**TokenPayload fields:**
+
+- `sub` - Subject (user ID)
+- `exp` - Expiration timestamp
+- `iat` - Issued at timestamp
+- `type` - Token type
+- `fresh` - Whether token is fresh
+
+## Complete Example
+
+```python
+from fastapi import FastAPI, Depends, HTTPException
+from authx import AuthX, AuthXConfig, TokenPayload, RequestToken
 
 app = FastAPI()
-security = AuthX()
 
-access_token_required = security.token_required(
-    type: str = "access",
-    verify_type: bool = True,
-    verify_fresh: bool = False,
-    verify_csrf: Optional[bool] = None
-)
-fresh_token_required = security.token_required(
-    type: str = "access",
-    verify_type: bool = True,
-    verify_fresh: bool = True,
-    verify_csrf: Optional[bool] = None
-)
-refresh_token_required = security.token_required(
-    type: str = "refresh",
-    verify_type: bool = True,
-    verify_fresh: bool = False,
-    verify_csrf: Optional[bool] = None
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["headers"],
 )
 
-no_csrf_required = security.token_required(
-    type: str = "access",
-    verify_type: bool = True,
-    verify_fresh: bool = False,
-    verify_csrf: Optional[bool] = False
-)
+auth = AuthX(config=config)
+auth.handle_errors(app)
 
-@app.post('/no_csrf')
-def post_no_csrf(payload: TokenPayload = Depends(no_csrf_required)):
-    # This function is protected but does not require
-    # CSRF double submit token in case of authentication via Cookies
-    # This is useful for API calls that are not protected by CSRF
-    # but are protected by other means
-    ...
+
+@app.post("/login")
+def login(username: str, password: str):
+    if username == "test" and password == "test":
+        return {"access_token": auth.create_access_token(uid=username, fresh=True)}
+    raise HTTPException(401, detail="Invalid credentials")
+
+
+# Route level dependency - just protects the route
+@app.get("/protected", dependencies=[Depends(auth.access_token_required)])
+def protected():
+    return {"message": "Access granted"}
+
+
+# Get payload in function
+@app.get("/me")
+def get_me(payload: TokenPayload = Depends(auth.access_token_required)):
+    return {"user_id": payload.sub, "token_type": payload.type}
+
+
+# Fresh token for sensitive operations
+@app.post("/delete-account", dependencies=[Depends(auth.fresh_token_required)])
+def delete_account():
+    return {"message": "Account deleted"}
+
+
+# Optional token - doesn't require authentication
+@app.get("/greeting")
+async def greeting(request):
+    token = await auth.get_token_from_request(request, optional=True)
+    if token:
+        try:
+            payload = auth.verify_token(token)
+            return {"message": f"Hello, {payload.sub}!"}
+        except Exception:
+            pass
+    return {"message": "Hello, guest!"}
 ```
-
-We have regenerated the main token dependencies from the `AuthX.token_required` method in the highlighted section. `AuthX.token_required` returns a Callable to be used as a dependency.
-
-`(str, bool, bool, Optional[bool]) -> Callable[[Request], TokenPayload]`
-
-As a custom token validation dependency, we have created `no_csrf_required`. This dependency requires a valid `access` token in the request, but it will not execute CSRF validation if the token is located in cookies.
-
-!!! note "Work in progress"
-    The `verify_csrf` argument is an optional boolean to enable/disable CSRF protection. If `None`, it uses the default `AuthXConfig.JWT_COOKIE_CSRF_PROTECT` settings to determine if CSRF protection is enabled or not.

@@ -5,7 +5,7 @@ site_name: Authx
 site_description: Ready to use and customizable Authentications and Oauth2 management for FastAPI
 site_url: https://authx.yezz.me/
 site_author: dev@yezz.me (Yasser Tahiri)
-copyright: "Copyright (c) 2021 to present Yezz LLC. and individual contributors."
+copyright: "Copyright (c) 2026 to present Yezz LLC. and individual contributors."
 
 # Repository
 repo_name: yezz123/authx
@@ -27,7 +27,7 @@ extra:
     link: https://github.com/yezz123/authx
     name: "Follow me on Github"
   - icon: fontawesome/brands/x-twitter
-    link: https://x.com/THyasser1
+    link: https://x.com/0xyezzz
     name: "Follow me on X(Formerly Twitter)"
   - icon: "fontawesome/solid/hand-holding-dollar"
     link: https://github.com/sponsors/yezz123

@@ -1,115 +1,200 @@
 # Dependency Injection
 
-In line with FastAPI's dependency injection syntax, AuthX dependencies can be utilized in multiple scenarios.
+AuthX integrates with FastAPI's dependency injection system. You can apply authentication at different levels.
 
-## Route Protection
+## Route-Level Protection
 
-A straightforward application involves protecting a specific route, such as `GET /protected`.
-
-If you don't require context about the user/recipient/subject - for instance, when displaying the same data to all authenticated users:
+Protect individual routes:
 
 ```python
 from fastapi import FastAPI, Depends
-from authx import AuthX
+from authx import AuthX, AuthXConfig, TokenPayload
 
 app = FastAPI()
-security = AuthX()
 
-@app.get('/protected', dependencies=[Depends(security.access_token_required)])
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["headers"],
+)
+
+auth = AuthX(config=config)
+auth.handle_errors(app)
+
+
+# Option 1: Just protect the route (no payload access)
+@app.get("/protected", dependencies=[Depends(auth.access_token_required)])
 def protected():
-    ...
+    return {"message": "Access granted"}
+
+
+# Option 2: Protect and get payload
+@app.get("/me")
+def get_me(payload: TokenPayload = Depends(auth.access_token_required)):
+    return {"user_id": payload.sub}
 ```
 
-Here, the AuthX dependency is used at the route level solely for authentication enforcement.
+## Application-Level Protection
 
-If recipient context is necessary in the route logic, you can pass the dependency to the function to retrieve a `TokenPayload` or a custom ORM object:
+Protect all routes in the app:
 
 ```python
 from fastapi import FastAPI, Depends
-from authx import AuthX, TokenPayload
+from authx import AuthX, AuthXConfig, TokenPayload
+
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["headers"],
+)
+
+auth = AuthX(config=config)
+
+# All routes require authentication
+app = FastAPI(dependencies=[Depends(auth.access_token_required)])
+auth.handle_errors(app)
+
+
+@app.get("/")
+def home():
+    return {"message": "Authenticated"}
+
+
+@app.get("/me")
+def get_me(payload: TokenPayload = Depends(auth.access_token_required)):
+    return {"user_id": payload.sub}
+```
+
+## Router-Level Protection
+
+Protect a group of routes using `APIRouter`:
+
+```python
+# main.py
+from fastapi import FastAPI
+from authx import AuthX, AuthXConfig
 
 app = FastAPI()
-security = AuthX()
 
-@app.get('/protected')
-def protected(payload: TokenPayload = Depends(security.access_token_required)):
-    ...
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["headers"],
+)
+
+auth = AuthX(config=config)
+auth.handle_errors(app)
+
+
+@app.get("/")
+def home():
+    return {"message": "Public"}
+
+
+@app.get("/login")
+def login():
+    return {"access_token": auth.create_access_token(uid="user")}
 ```
-
-In this scenario, the dependency is used as a function dependency, making the return value available as a function argument.
-
-## Application-wide Application
-
-Applying dependencies at the application level can be useful if your application is only responsible for protecting routes, not providing authentication tokens:
 
 ```python
-from fastapi import FastAPI, Depends
-from authx import AuthX, TokenPayload
+# admin_router.py
+from fastapi import APIRouter, Depends
+from main import auth
 
-app = FastAPI(dependencies=[Depends(security.access_token_required)])
+# All routes in this router require authentication
+router = APIRouter(
+    prefix="/admin",
+    dependencies=[Depends(auth.access_token_required)]
+)
 
-security = AuthX()
 
-@app.get('/protected')
-def protected(payload: TokenPayload = Depends(security.access_token_required)):
-    ...
+@router.get("/dashboard")
+def dashboard():
+    return {"message": "Admin Dashboard"}
 
-@app.get('/protected/nocontext')
-def protected_no_context():
-    ...
+
+@router.get("/users")
+def list_users():
+    return {"users": ["user1", "user2"]}
 ```
 
-Here, dependencies defined at the application level are applied to all routes. If context data is required in the route logic, you must still apply the dependency.
+```python
+# main.py (continued)
+from admin_router import router
 
-All routes in the example above require a valid access token. Note that to access context in route logic, the required dependency must be specified.
+app.include_router(router)
+```
 
-## API Router (FastAPI)
+## Complete Example
 
-For scenarios where global dependencies are too restrictive, `fastapi.APIRouter` can be used to apply AuthX dependencies to a subset of routes.
+```python
+from fastapi import FastAPI, APIRouter, Depends, HTTPException
+from pydantic import BaseModel
+from authx import AuthX, AuthXConfig, TokenPayload
 
-=== "app.py"
+app = FastAPI()
 
-    ```python title="app.py"
-    from fastapi import FastAPI
-    from authx import AuthX
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["headers"],
+)
 
-    app = FastAPI()
-    security = AuthX()
+auth = AuthX(config=config)
+auth.handle_errors(app)
 
-    @app.get('/')
-    def home():
-        return "Hello, World!"
-    ```
-=== "router.py"
 
-    ```python title="router.py"
-    from fastapi import APIRouter, Depends
+class LoginRequest(BaseModel):
+    username: str
+    password: str
 
-    from app import security
 
-    router = APIRouter(dependencies=[Depends(security.access_token_required)])
+# Public routes
+@app.get("/")
+def home():
+    return {"message": "Welcome"}
 
-    @router.get('/protected'):
-    def protected():
-        return "This is a protected endpoint"
-    ```
 
-    Here, the dependency is included in the APIRouter definition.
+@app.post("/login")
+def login(data: LoginRequest):
+    if data.username == "admin" and data.password == "admin":
+        return {"access_token": auth.create_access_token(uid=data.username)}
+    raise HTTPException(401, detail="Invalid credentials")
 
-=== "main.py"
 
-    ```python title="main.py"
-    from app import app
-    from app import security
-    from router import router
+# Protected router
+protected_router = APIRouter(
+    prefix="/api",
+    dependencies=[Depends(auth.access_token_required)]
+)
 
-    app.include_router(
-        router,
-        dependencies=[Depends(security.access_token_required)]
-    )
-    ```
 
-    You can include the dependency when including the router within the application. This syntax takes precedence over the one in `router.py`.
+@protected_router.get("/me")
+def get_me(payload: TokenPayload = Depends(auth.access_token_required)):
+    return {"user_id": payload.sub}
 
-!!! note "Note on Performance"
-    In routes where context is needed, the dependency seems to be called twice. However, FastAPI handles runtime execution efficiently and does not execute the dependency multiple times.
+
+@protected_router.get("/data")
+def get_data():
+    return {"data": [1, 2, 3]}
+
+
+app.include_router(protected_router)
+```
+
+## Testing
+
+```bash
+# Public route - works without token
+curl http://localhost:8000/
+# {"message": "Welcome"}
+
+# Login
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"username":"admin", "password":"admin"}' \
+  http://localhost:8000/login
+# {"access_token": "eyJ..."}
+
+# Protected route - requires token
+curl http://localhost:8000/api/data
+# {"message": "Missing JWT in request", "error_type": "MissingTokenError"}
+
+curl -H "Authorization: Bearer <token>" http://localhost:8000/api/data
+# {"data": [1, 2, 3]}
+```

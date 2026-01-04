@@ -1,121 +1,148 @@
-# Refreshing Tokens
+# Refresh Tokens
 
-JWTs come with a strict `exp` (Expiration Time), which means that a long session might lead to multiple logouts and `401 Authentication` errors. To mitigate such behavior, refresh tokens are employed to facilitate the generation of additional access tokens without requiring the user to log in again.
+Access tokens expire quickly for security. Refresh tokens let users stay logged in without re-entering credentials.
 
-## Implicit refresh with Cookies
+## How It Works
 
-The most common way to refresh tokens is by using cookies. When the access token expires, the client sends a request to the server with the refresh token stored in a cookie. The server then generates a new access token and sends it back to the client in the response.
+1. User logs in → Gets **access token** (short-lived) + **refresh token** (long-lived)
+2. Access token expires → User calls `/refresh` with refresh token
+3. Server returns new access token → User continues without re-login
 
-!!! warning
-    Cookies are not supported in all environments, such as mobile applications, SDKs, or APIs. In such cases, you may need to implement an explicit refresh mechanism.
-
-!!! note
-    Work in progress: This feature needs to be documented.
-
-## Explicit Refresh
-
-In cases where implicit refresh isn't feasible—such as in mobile applications, SDKs, or APIs—you may need to explicitly declare the refresh logic in your application.
-
-To implement an explicit refresh mechanism, you need to create a new route that accepts the refresh token and returns a new access token. This route should be protected by the `refresh_token_required` dependency, which will verify the refresh token and extract the payload.
-
-!!! note
-    The refresh token should be stored securely on the client side, and the route should be protected by HTTPS to prevent tampering.
+## Complete Example
 
 ```python
+from fastapi import FastAPI, Depends, HTTPException
 from pydantic import BaseModel
-from fastapi import FastAPI, Depends, HTTPException, Request
-from authx import AuthX, TokenPayload
+from authx import AuthX, AuthXConfig, TokenPayload
 
 app = FastAPI()
-security = AuthX()
 
-class LoginForm(BaseModel):
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["headers"],
+)
+
+auth = AuthX(config=config)
+auth.handle_errors(app)
+
+
+class LoginRequest(BaseModel):
     username: str
     password: str
 
-class RefreshForm(BaseModel):
-    refresh_token: str
 
-@app.post('/login')
-def login(data: LoginForm):
+@app.post("/login")
+def login(data: LoginRequest):
+    """Returns both access and refresh tokens."""
     if data.username == "test" and data.password == "test":
-        access_token = security.create_access_token(data.username)
-        refresh_token = security.create_refresh_token(data.username)
+        access_token = auth.create_access_token(uid=data.username)
+        refresh_token = auth.create_refresh_token(uid=data.username)
         return {
             "access_token": access_token,
-            "refresh_token": refresh_token
+            "refresh_token": refresh_token,
         }
-    raise HTTPException(401, "Bad username/password")
+    raise HTTPException(401, detail="Invalid credentials")
 
 
-@app.post('/refresh')
-async def refresh(request: Request, refresh_data: RefreshForm = None):
-    """
-    Refresh endpoint - creates a new access token using a refresh token
-
-    Can accept the refresh token either:
-    1. In the Authorization header
-    2. In the request body as JSON
-    """
-    try:
-        # First try to get the refresh token from the Authorization header
-        try:
-            refresh_payload = await security.refresh_token_required(request)
-        except Exception as header_error:
-            if not refresh_data or not refresh_data.refresh_token:
-                # If we don't have a token in either place, raise the original error
-                raise header_error
-
-            # Manually decode and verify the refresh token
-            token = refresh_data.refresh_token
-            refresh_payload = security.verify_token(
-                token,
-                verify_type=True,
-                type="refresh"
-            )
-        # Create a new access token
-        access_token = security.create_access_token(refresh_payload.sub)
-        return {"access_token": access_token}
-    except Exception as e:
-        raise HTTPException(status_code=401, detail=str(e))
+@app.post("/refresh")
+def refresh(payload: TokenPayload = Depends(auth.refresh_token_required)):
+    """Exchange refresh token for new access token."""
+    access_token = auth.create_access_token(uid=payload.sub)
+    return {"access_token": access_token}
 
 
-@app.get('/protected', dependencies=[Depends(security.access_token_required)])
+@app.get("/protected", dependencies=[Depends(auth.access_token_required)])
 def protected():
-    return "You have access to this protected resource"
+    """Requires valid access token."""
+    return {"message": "You have access"}
 ```
 
-In this example, the `/refresh` route accepts a refresh token either from the Authorization header or from the request body. Once verified, it generates a new access token to extend the session.
+## Testing the Flow
 
-This example provides a flexible implementation of an explicit refresh mechanism. In a production scenario, you might want to retrieve the current access token to revoke it, thereby avoiding the generation of an infinite number of valid access tokens.
+```bash
+# 1. Login to get both tokens
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"username":"test", "password":"test"}' \
+  http://localhost:8000/login
+# {"access_token": "eyJ...", "refresh_token": "eyJ..."}
 
-=== "1. Login"
+# 2. Access protected route with access token
+curl -H "Authorization: Bearer <access-token>" \
+  http://localhost:8000/protected
+# {"message": "You have access"}
 
-    ```sh
-    # To obtain tokens, we log in
-    $ curl -s -X POST -H "Content-Type: application/json" -d '{"username":"test", "password":"test"}' http://0.0.0.0:8000/login
-    {"access_token": "$TOKEN", "refresh_token": "$REFRESH_TOKEN"}
-    ```
-=== "2. Performing Sensitive Operations"
+# 3. When access token expires, use refresh token to get a new one
+curl -X POST -H "Authorization: Bearer <refresh-token>" \
+  http://localhost:8000/refresh
+# {"access_token": "eyJ..."}  (new access token)
 
-    ```sh
-    # We request access to the protected route with the token
-    $ curl -s -H "Authorization: Bearer $TOKEN" http://0.0.0.0:8000/protected
-    "You have access to this protected resource"
-    ```
-=== "3. Refreshing Access Token (Using Header)"
+# 4. Use new access token
+curl -H "Authorization: Bearer <new-access-token>" \
+  http://localhost:8000/protected
+# {"message": "You have access"}
+```
 
-    ```sh
-    # To obtain a new access token using the Authorization header
-    $ curl -s -X POST -H "Authorization: Bearer $REFRESH_TOKEN" -H "Content-Type: application/json" http://0.0.0.0:8000/refresh
-    {"access_token": "$NEW_TOKEN"}
-    ```
-=== "4. Refreshing Access Token (Using JSON)"
+## Token Expiration
 
-    ```sh
-    # To obtain a new access token using the request body
-    $ curl -s -X POST -H "Content-Type: application/json" -d '{"refresh_token":"$REFRESH_TOKEN"}' http://0.0.0.0:8000/refresh
-    {"access_token": "$NEW_TOKEN"}
-    ```
+Configure expiration times in `AuthXConfig`:
 
-As demonstrated in the final steps, the refreshing mechanism enables the acquisition of new tokens without the need for re-authentication, using either the Authorization header or the request body.
+```python
+from datetime import timedelta
+
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_ACCESS_TOKEN_EXPIRES=timedelta(minutes=15),   # Short-lived
+    JWT_REFRESH_TOKEN_EXPIRES=timedelta(days=30),     # Long-lived
+)
+```
+
+## Important Notes
+
+!!! warning "Protect Your Refresh Tokens"
+    Refresh tokens are powerful - they can generate new access tokens. Store them securely:
+
+    - Use HttpOnly cookies when possible
+    - Never expose in URLs or logs
+    - Implement token revocation for logout
+
+!!! tip "Token Revocation"
+    When a user logs out, revoke both tokens. See [Token Callbacks](../callbacks/token.md) for implementing a blocklist.
+
+## Cookie-Based Refresh (Web Apps)
+
+For web applications, store tokens in cookies:
+
+```python
+from fastapi import Response
+
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["cookies"],
+    JWT_COOKIE_CSRF_PROTECT=True,  # Important for security!
+)
+
+auth = AuthX(config=config)
+auth.handle_errors(app)
+
+
+@app.post("/login")
+def login(data: LoginRequest, response: Response):
+    if data.username == "test" and data.password == "test":
+        access_token = auth.create_access_token(uid=data.username)
+        refresh_token = auth.create_refresh_token(uid=data.username)
+
+        # Set cookies (includes CSRF tokens automatically)
+        auth.set_access_cookies(access_token, response)
+        auth.set_refresh_cookies(refresh_token, response)
+
+        return {"message": "Logged in"}
+    raise HTTPException(401, detail="Invalid credentials")
+
+
+@app.post("/logout")
+def logout(response: Response):
+    auth.unset_cookies(response)
+    return {"message": "Logged out"}
+```
+
+See [JWT Locations](./location.md) for more details on cookie authentication.

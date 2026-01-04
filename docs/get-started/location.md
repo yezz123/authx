@@ -1,231 +1,266 @@
 # JWT Locations
 
-JWT can be provided with requests in different locations. AuthX allows you to control and configure the JWT locations via the `JWT_TOKEN_LOCATION` setting.
+AuthX can read tokens from multiple locations: headers, cookies, query parameters, or JSON body.
+
+## Quick Reference
+
+| Location | Best For | CSRF Protection |
+|----------|----------|-----------------|
+| Headers | APIs, Mobile apps | Not needed |
+| Cookies | Web apps | Required |
+| Query | Special cases | Not recommended |
+| JSON Body | APIs | Not needed |
+
+## Configuration
 
 ```python
-from fastapi import FastAPI, Depends
+from authx import AuthX, AuthXConfig
+
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["headers"],  # Default: only headers
+)
+
+# Or accept multiple locations:
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["headers", "cookies"],
+)
+
+auth = AuthX(config=config)
+auth.handle_errors(app)
+```
+
+---
+
+## Headers (Recommended for APIs)
+
+The default and most common method. Token is sent in the `Authorization` header.
+
+**Configuration:**
+
+```python
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["headers"],
+    JWT_HEADER_NAME="Authorization",  # Default
+    JWT_HEADER_TYPE="Bearer",         # Default
+)
+```
+
+**Usage:**
+
+=== "cURL"
+    ```bash
+    curl -H "Authorization: Bearer <token>" http://localhost:8000/protected
+    ```
+
+=== "JavaScript"
+    ```javascript
+    fetch("http://localhost:8000/protected", {
+      headers: { "Authorization": `Bearer ${token}` }
+    });
+    ```
+
+=== "Python"
+    ```python
+    import requests
+
+    requests.get(
+        "http://localhost:8000/protected",
+        headers={"Authorization": f"Bearer {token}"}
+    )
+    ```
+
+---
+
+## Cookies (Recommended for Web Apps)
+
+Best for browser-based applications. Tokens are stored in HttpOnly cookies.
+
+!!! warning "CSRF Protection Required"
+    When using cookies, you **must** handle CSRF protection. AuthX enables this by default.
+
+### Complete Cookie Example
+
+```python
+from fastapi import FastAPI, Depends, HTTPException, Response
+from pydantic import BaseModel
 from authx import AuthX, AuthXConfig
 
 app = FastAPI()
 
-config = AuthXConfig()
-config.JWT_TOKEN_LOCATION = ["headers", "query", "cookies", "json"]
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["cookies"],
+    JWT_COOKIE_CSRF_PROTECT=True,        # Enabled by default
+    JWT_COOKIE_SECURE=False,             # Set True in production (HTTPS)
+)
 
-security = AuthX(config=config)
+auth = AuthX(config=config)
+auth.handle_errors(app)
 
-@app.get('/protected', dependencies=[Depends(security.access_token_required)])
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+
+@app.post("/login")
+def login(data: LoginRequest, response: Response):
+    if data.username == "test" and data.password == "test":
+        token = auth.create_access_token(uid=data.username)
+
+        # IMPORTANT: Use set_access_cookies() - this sets BOTH the JWT cookie AND the CSRF cookie
+        auth.set_access_cookies(token, response)
+
+        return {"message": "Logged in"}
+    raise HTTPException(401, detail="Invalid credentials")
+
+
+@app.post("/logout")
+def logout(response: Response):
+    auth.unset_cookies(response)
+    return {"message": "Logged out"}
+
+
+@app.get("/protected", dependencies=[Depends(auth.access_token_required)])
 def protected():
-    return "OK"
+    return {"message": "Access granted"}
 ```
 
-## Headers
+!!! danger "Common Mistake"
+    **Do NOT** manually set cookies like this:
+    ```python
+    # WRONG - Missing CSRF cookie!
+    response.set_cookie("access_token_cookie", token)
+    ```
 
-JWT via headers is controlled by two settings:
+    **Always use** `auth.set_access_cookies()` which sets both the JWT cookie and CSRF cookie.
 
-- `JWT_HEADER_NAME`: The header name. By default, it's `'Authorization'`.
-- `JWT_HEADER_TYPE`: The header value type/prefix. By default, it's `'Bearer'`.
+### Making Requests with Cookies
 
-The AuthX instance will check this specific header whenever it needs to retrieve a token if the `"headers"` location is in `JWT_TOKEN_LOCATION`.
+For POST/PUT/PATCH/DELETE requests, include the CSRF token in the header:
 
-Authentication is based solely on the presence of the `JWT_HEADER_NAME` header in the headers. To log out your user, remove the authorization header.
+=== "JavaScript"
+    ```javascript
+    // Get CSRF token from cookie
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Make authenticated request
+    fetch("http://localhost:8000/protected", {
+      method: "POST",
+      credentials: "include",  // Include cookies
+      headers: {
+        "X-CSRF-TOKEN": getCookie("csrf_access_token")
+      }
+    });
+    ```
 
 === "cURL"
+    ```bash
+    curl -X POST \
+      --cookie "access_token_cookie=<token>" \
+      -H "X-CSRF-TOKEN: <csrf-token>" \
+      http://localhost:8000/protected
+    ```
 
-     ```shell
-     $ curl --oauth2-bearer $TOKEN http://0.0.0.0:8000/protected
-     "OK"
-     # OR
-     $ curl -H 'Authorization: Bearer $TOKEN' http://0.0.0.0:8000/protected
-     "OK"
-     ```
-=== "JavaScript"
+### Disabling CSRF (Not Recommended)
 
-     ```js
-     async function requestProtectedRoute(TOKEN){
-       const response = await fetch("http://0.0.0.0:8000/protected", {
-         method: "GET",
-         headers: {
-           "Authorization": `Bearer ${TOKEN}`
-         }
-       });
-       return response;
-     }
-     ```
-=== "Python"
+If you're building an API that won't be accessed from browsers:
 
-     ```python
-     import requests
+```python
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["cookies"],
+    JWT_COOKIE_CSRF_PROTECT=False,  # Disable CSRF
+)
+```
 
-     response = requests.get(
-       "http://0.0.0.0:8000/protected",
-       headers={
-         "Authorization": f"Bearer {TOKEN}"
-       }
-     )
-     ```
+---
 
-## Query Parameters
+## Query Parameters (Use Sparingly)
 
-JWT via query parameters is controlled by a single setting:
+Token in URL query string. **Not recommended** - URLs are logged and visible in browser history.
 
-- `JWT_QUERY_STRING_NAME`: The key used in the query string to identify the token. By default, it's `'token'`.
+```python
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["query"],
+    JWT_QUERY_STRING_NAME="token",  # Default
+)
+```
 
-It's important to note that using JWT in query strings is not advised. Even with HTTPS protocol, the request URL is not protected, hence the token is visible. Such requests will be saved in plain text in browsers and could be easily compromised.
+**Usage:**
 
-JWTs in query strings can be used by suffixing the URL with `?token=$TOKEN`.
+```bash
+curl "http://localhost:8000/protected?token=<token>"
+```
 
-=== "cURL"
+!!! warning
+    Query strings are visible in logs, browser history, and referrer headers. Use only when necessary.
 
-     ```shell
-     $ curl http://0.0.0.0:8000/protected?token=$TOKEN
-     "OK"
-     ```
-=== "JavaScript"
-
-     ```js
-     async function requestProtectedRoute(TOKEN){
-       const response = await fetch(`http://0.0.0.0:8000/protected?token=${TOKEN}`);
-       return response;
-     }
-     ```
-=== "Python"
-
-     ```python
-     import requests
-
-     response = requests.get(f"http://0.0.0.0:8000/protected?token={TOKEN}")
-     ```
+---
 
 ## JSON Body
 
-JWT via JSON Body is controlled by the following parameters:
+Token in request body. Requires `Content-Type: application/json`.
 
-- `JWT_JSON_KEY`: The JSON key for the access token. By default, it's `'access_token'`.
-- `JWT_REFRESH_JSON_KEY`: The JSON key for the refresh token. By default, it's `'refresh_token'`.
+```python
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["json"],
+    JWT_JSON_KEY="access_token",        # Default
+    JWT_REFRESH_JSON_KEY="refresh_token",  # Default
+)
+```
 
-Sending JWT via JSON Body cannot be accomplished with GET requests and requires the `Content-Type: application/json` header.
-
-=== "cURL"
-
-     ```shell
-     $ curl -X POST -s -H "Content-Type: application/json" -d '{"access_token":"$TOKEN"}' http://0.0.0.0:8000/protected
-     "OK"
-     ```
-=== "JavaScript"
-
-     ```js
-     async function requestProtectedRoute(TOKEN){
-       const response = await fetch("http://0.0.0.0:8000/protected", {
-         method: "POST",
-         headers: {
-           "Content-Type": "application/json"
-         },
-         body: JSON.stringify({
-           "access_token": TOKEN
-         })
-       });
-       return response;
-     }
-     ```
-=== "Python"
-
-     ```python
-     import requests
-
-     response = requests.post(
-       "http://0.0.0.0:8000/protected",
-       json={
-         "access_token": TOKEN
-       }
-     )
-     ```
-
-## Cookies
-
-JWT via Cookies is controlled by various parameters:
-
-- `JWT_ACCESS_COOKIE_NAME`: Cookie name containing the access token. By default, it's `access_token_cookie`.
-- `JWT_ACCESS_COOKIE_PATH`: Path of the access token cookie. By default, it's `/`.
-- `JWT_COOKIE_CSRF_PROTECT`: Enable CSRF protection for cookie authentication. By default, it's `True`.
-- `JWT_COOKIE_DOMAIN`: The domain for cookies set by AuthX. By default, it's `None`.
-- `JWT_COOKIE_MAX_AGE`: Max age for cookies set by AuthX. By default, it's `None`.
-- `JWT_COOKIE_SAMESITE`: The SameSite property for cookies set by AuthX. By default, it's `Lax`.
-- `JWT_COOKIE_SECURE`: Enable Cookie Secure property. By default, it's `True`.
-- `JWT_REFRESH_COOKIE_NAME`: Cookie name containing the refresh token. By default, it's `refresh_token_cookie`.
-- `JWT_REFRESH_COOKIE_PATH`: Path of the refresh token cookie. By default, it's `/`.
-- `JWT_ACCESS_CSRF_COOKIE_NAME`: Cookie name containing the access CSRF token. By default, it's `csrf_access_token`.
-- `JWT_ACCESS_CSRF_COOKIE_PATH`: Path of the access CSRF token cookie. By default, it's `/`.
-- `JWT_CSRF_IN_COOKIES`: Add CSRF tokens when cookies are set by AuthX. By default, it's `True`.
-- `JWT_REFRESH_CSRF_COOKIE_NAME`: Cookie name containing the refresh CSRF token. By default, it's `csrf_refresh_cookie`.
-- `JWT_REFRESH_CSRF_COOKIE_PATH`: Path of the refresh CSRF token cookie. By default, it's `/`.
-
-Using JWTs in cookies is suitable for web application authentication, but it requires additional work to prevent attacks, such as Cross-Site Request Forgery (CSRF).
+**Usage:**
 
 === "cURL"
+    ```bash
+    curl -X POST \
+      -H "Content-Type: application/json" \
+      -d '{"access_token": "<token>"}' \
+      http://localhost:8000/protected
+    ```
 
-     ```shell
-     curl -X POST -s --cookie "access_token_cookie=$TOKEN" -H 'X-CSRF-TOKEN: "$CSRF_TOKEN"' http://0.0.0.0:8000/protected
-     "OK"
-     ```
 === "JavaScript"
+    ```javascript
+    fetch("http://localhost:8000/protected", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ access_token: token })
+    });
+    ```
 
-     ```js
-     function getCookie(cname) {
-     const name = cname + "=";
-     const decodedCookie = decodeURIComponent(document.cookie);
-     const cookieArray = decodedCookie.split(';');
+---
 
-     for (let i = 0; i < cookieArray.length; i++) {
-          let cookie = cookieArray[i];
-          while (cookie.charAt(0) === ' ') {
-               cookie = cookie.substring(1);
-          }
-          if (cookie.indexOf(name) === 0) {
-               return cookie.substring(name.length, cookie.length);
-          }
-     }
-     return "";
-     }
+## Multiple Locations
 
-     // Function to get CSRF token from cookie
-     function getCSRFCookie() {
-     return getCookie("csrf_access_token");
-     }
+Accept tokens from multiple locations (AuthX checks in order):
 
-     // Function to make a request to a protected route
-     async function requestProtectedRoute() {
-     const csrfToken = getCSRFCookie();
-     const requestOptions = {
-          method: "POST",
-          credentials: 'include',
-          headers: {
-               "Content-Type": "application/json", // Assuming you're sending JSON data
-               "X-CSRF-TOKEN": csrfToken
-          }
-     };
+```python
+config = AuthXConfig(
+    JWT_SECRET_KEY="your-secret-key",
+    JWT_TOKEN_LOCATION=["headers", "cookies", "json", "query"],
+)
+```
 
-     try {
-          const response = await fetch("http://0.0.0.0:8000/protected", requestOptions);
-          return response;
-     } catch (error) {
-          console.error("Error occurred while making the request:", error);
-          throw error;
-     }
-     }
+AuthX will check each location in order until it finds a token.
 
-     ```
-=== "Python"
+## Cookie Configuration Reference
 
-     ```python
-     import requests
-
-     r = request.post(
-     "http://0.0.0.0:8000/protected",
-     headers= {
-          "X-CSRF-TOKEN": CSRF_TOKEN
-     },
-     cookies={
-          "access_token_cookie": TOKEN,
-     }
-     )
-     ```
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `JWT_ACCESS_COOKIE_NAME` | `access_token_cookie` | Cookie name for access token |
+| `JWT_REFRESH_COOKIE_NAME` | `refresh_token_cookie` | Cookie name for refresh token |
+| `JWT_COOKIE_SECURE` | `True` | Only send over HTTPS |
+| `JWT_COOKIE_SAMESITE` | `lax` | SameSite policy |
+| `JWT_COOKIE_CSRF_PROTECT` | `True` | Enable CSRF protection |
+| `JWT_ACCESS_CSRF_COOKIE_NAME` | `csrf_access_token` | CSRF cookie name |
+| `JWT_ACCESS_CSRF_HEADER_NAME` | `X-CSRF-TOKEN` | CSRF header name |
