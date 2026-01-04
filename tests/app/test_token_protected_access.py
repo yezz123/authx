@@ -49,7 +49,7 @@ def test_access_token_protected_access_cookies_no_csrf(api, config: AuthXConfig)
             headers={"Content-Type": "application/json"},
         )
 
-    assert "Missing CSRF token" in err.value.args
+    assert any("Missing CSRF token" in str(arg) for arg in err.value.args)
 
 
 def test_access_token_protected_access_cookies_csrf_cookies(

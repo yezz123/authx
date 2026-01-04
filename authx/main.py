@@ -267,10 +267,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         refresh: bool = False,
         optional: bool = False,
     ) -> Optional[RequestToken]:
-        # Simplify the setting of locations based on refresh status
+        # Use configured token locations if not explicitly provided
         if locations is None:
-            default_locations = set(self.config.JWT_TOKEN_LOCATION)
-            locations = list(default_locations.intersection(["cookies", "json"]) if refresh else default_locations)
+            locations = list(self.config.JWT_TOKEN_LOCATION)
         try:
             # Directly call the internal function to get the token
             return await _get_token_from_request(

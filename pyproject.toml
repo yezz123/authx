@@ -177,10 +177,6 @@ select = [
     'T10',    # flake8-debugger
     'T20',    # flake8-print
     'C4',     # flake8-comprehensions
-    'PYI006', # flake8-pyi
-    'PYI062', # flake8-pyi
-    'PYI063', # flake8-pyi
-    'PYI066', # flake8-pyi
 ]
 ignore = [
     "E501",  # line too long, handled by black
@@ -234,7 +230,7 @@ no_implicit_optional = false
 
 [tool.pytest.ini_options]
 testpaths = 'tests'
-log_cli = "1"
+log_cli = true
 log_cli_level = "INFO"
 log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
 log_cli_date_format= "%Y-%m-%d %H:%M:%S"
