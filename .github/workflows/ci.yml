@@ -32,51 +32,9 @@ jobs:
       - name: Typecheck with mypy
         run: bash scripts/mypy.sh
 
-  tests-pydantic-v2:
+  tests:
 
-    name: test py${{ matrix.python-version }} on ${{ matrix.os }} with pydantic v2
-
-    runs-on: ${{ matrix.os }}-latest
-
-
-    strategy:
-
-      matrix:
-
-        python-version: [ "3.9", "3.10", "3.11", "3.12", "3.13"]
-
-        os: [ubuntu]
-
-    steps:
-      - uses: actions/checkout@v6
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: setup UV
-        uses: yezz123/setup-uv@v4.1
-        with:
-          uv-venv: ".venv"
-
-      - name: Install Dependencies
-        run: uv sync --group test --all-extras
-
-      - name: Test with pytest - ${{ matrix.os }} - py${{ matrix.python-version }}
-        run: bash scripts/test.sh
-        env:
-          CONTEXT: ${{ runner.os }}-py${{ matrix.python-version }}-with-deps
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage.xml
-
-  tests-pydantic-v1:
-
-    name: test py${{ matrix.python-version }} on ${{ matrix.os }} with pydantic v1
+    name: test py${{ matrix.python-version }} on ${{ matrix.os }}
 
     runs-on: ${{ matrix.os }}-latest
 
@@ -104,9 +62,6 @@ jobs:
 
       - name: Install Dependencies
         run: uv sync --group test --all-extras
-
-      - name: Install pydantic v1
-        run: uv pip install pydantic==1.10.17
 
       - name: Test with pytest - ${{ matrix.os }} - py${{ matrix.python-version }}
         run: bash scripts/test.sh
@@ -166,7 +121,7 @@ jobs:
   check:
     if: always()
 
-    needs: [mypy, tests-pydantic-v2, tests-pydantic-v1, test-extra]
+    needs: [mypy, tests, test-extra]
     runs-on: ubuntu-latest
     steps:
       - name: Decide whether the needed jobs succeeded or failed
