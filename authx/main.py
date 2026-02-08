@@ -348,7 +348,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             locations=locations,
         )
 
-        if self.is_token_in_blocklist(request_token.token):
+        if await self.is_token_in_blocklist(request_token.token):
             raise RevokedTokenError("Token has been revoked")
 
         return self.verify_token(
@@ -750,7 +750,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         """
         token: TokenPayload = await self._auth_required(request=request)
         uid = token.sub
-        return self._get_current_subject(uid=uid)
+        return await self._get_current_subject(uid=uid)
 
     @overload
     async def get_token_from_request(
