@@ -155,6 +155,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "Antareske",
+      "name": "Antareske",
+      "avatar_url": "https://avatars.githubusercontent.com/u/171327898?v=4",
+      "profile": "https://github.com/Antareske",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
