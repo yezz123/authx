@@ -1,7 +1,8 @@
 import sys
+from inspect import iscoroutinefunction
 
 if sys.version_info >= (3, 10):  # pragma: no cover
-    from typing import ParamSpecKwargs  # pragma: no cover
+    from typing import ParamSpecKwargs
 else:
     from typing_extensions import ParamSpecKwargs  # pragma: no cover
 
@@ -80,16 +81,22 @@ class _CallbackHandler(Generic[T]):
         """Set the callback to run for validation of revoked tokens."""
         self.set_callback_token_blocklist(callback)
 
-    def _get_current_subject(self, uid: str, **kwargs: ParamSpecKwargs) -> Optional[T]:
+    async def _get_current_subject(self, uid: str, **kwargs: ParamSpecKwargs) -> Optional[T]:
         """Get current model instance from callback."""
         self._check_model_callback_is_set()
         callback: Optional[ModelCallback[T]] = self.callback_get_model_instance
-        return callback(uid, **kwargs) if callback is not None else None  # type: ignore
+        if callback is None:
+            return None
+        if iscoroutinefunction(callback):
+            return await callback(uid, **kwargs)  # type: ignore
+        return callback(uid, **kwargs)
 
-    def is_token_in_blocklist(self, token: Optional[str], **kwargs: ParamSpecKwargs) -> bool:
+    async def is_token_in_blocklist(self, token: Optional[str], **kwargs: ParamSpecKwargs) -> bool:
         """Check if token is in blocklist."""
         if self._check_token_callback_is_set(ignore_errors=True):
             callback: Optional[TokenCallback] = self.callback_is_token_in_blocklist
             if callback is not None and token is not None:
-                return callback(token, **kwargs)  # type: ignore
+                if iscoroutinefunction(callback):
+                    return await callback(token, **kwargs)  # type: ignore
+                return callback(token, **kwargs)
         return False

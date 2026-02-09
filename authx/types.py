@@ -2,7 +2,7 @@
 
 import datetime
 import sys
-from collections.abc import Sequence
+from collections.abc import Awaitable, Sequence
 from typing import Callable, Literal, Optional, TypeVar, Union
 
 if sys.version_info >= (3, 10):  # pragma: no cover
@@ -46,5 +46,5 @@ TokenType = Literal["access", "refresh"]
 TokenLocation = Literal["headers", "cookies", "json", "query"]
 TokenLocations = Sequence[TokenLocation]
 
-TokenCallback = Callable[[str, ParamSpecKwargs], bool]
-ModelCallback = Callable[[str, ParamSpecKwargs], Optional[T]]
+TokenCallback = Callable[[str, ParamSpecKwargs], Union[bool, Awaitable[bool]]]
+ModelCallback = Callable[[str, ParamSpecKwargs], Union[Optional[T], Awaitable[Optional[T]]]]
