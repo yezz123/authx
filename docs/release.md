@@ -1,5 +1,7 @@
 ## Latest Changes
 
+* :sparkles: feat: support Async/sync Callbacks. PR [#793](https://github.com/yezz123/authx/pull/793) by [@Antareske](https://github.com/Antareske).
+
 ### Upgrades
 
 * ⬆️ Bump `ruff-pre-commit` from v0.14.11 to v0.14.12. PR [#790](https://github.com/yezz123/authx/pull/790) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
