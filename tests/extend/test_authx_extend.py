@@ -40,8 +40,10 @@ def mock_response():
 @pytest.mark.asyncio
 async def test_auth_required_revoked_token(authx, mock_request):
     token = authx.create_access_token(uid="test_user")
+
     async def is_token(t: str) -> bool:  # Mock blocklist check
         return t == token
+
     authx.is_token_in_blocklist = is_token
 
     mock_request._headers = MutableHeaders(headers=Headers(raw=[]))

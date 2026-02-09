@@ -2,7 +2,7 @@ import sys
 from inspect import iscoroutinefunction
 
 if sys.version_info >= (3, 10):  # pragma: no cover
-    from typing import ParamSpecKwargs, Awaitable  # pragma: no cover
+    from typing import ParamSpecKwargs
 else:
     from typing_extensions import ParamSpecKwargs  # pragma: no cover
 
@@ -85,11 +85,10 @@ class _CallbackHandler(Generic[T]):
         """Get current model instance from callback."""
         self._check_model_callback_is_set()
         callback: Optional[ModelCallback[T]] = self.callback_get_model_instance
-        # return await callback(uid, **kwargs) if callback is not None else None  # type: ignore
         if callback is None:
             return None
         if iscoroutinefunction(callback):
-            return await callback(uid, **kwargs)
+            return await callback(uid, **kwargs)  # type: ignore
         return callback(uid, **kwargs)
 
     async def is_token_in_blocklist(self, token: Optional[str], **kwargs: ParamSpecKwargs) -> bool:

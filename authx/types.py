@@ -2,8 +2,8 @@
 
 import datetime
 import sys
-from collections.abc import Sequence
-from typing import Callable, Literal, Optional, TypeVar, Union, Awaitable
+from collections.abc import Awaitable, Sequence
+from typing import Callable, Literal, Optional, TypeVar, Union
 
 if sys.version_info >= (3, 10):  # pragma: no cover
     from typing import ParamSpecKwargs  # pragma: no cover
