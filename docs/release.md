@@ -12,6 +12,10 @@
 
 * :memo: docs: add @Antareske as a contributor for code. PR [#794](https://github.com/yezz123/authx/pull/794) by [@allcontributors[bot]](https://github.com/apps/allcontributors).
 
+### Internal
+
+* :bug: improve type annotations to fix mypy issues. PR [#796](https://github.com/yezz123/authx/pull/796) by [@yezz123](https://github.com/yezz123).
+
 ## 1.5.0
 
 ### Breaking Changes
