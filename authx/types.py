@@ -3,15 +3,16 @@
 import datetime
 import sys
 from collections.abc import Awaitable, Sequence
-from typing import Callable, Literal, Optional, TypeVar, Union
+from typing import Any, Literal, Optional, Protocol, TypeVar, Union
 
 if sys.version_info >= (3, 10):  # pragma: no cover
-    from typing import ParamSpecKwargs  # pragma: no cover
+    pass  # pragma: no cover
 else:
-    from typing_extensions import ParamSpecKwargs  # pragma: no cover
+    pass  # pragma: no cover
 
 
 T = TypeVar("T")
+T_co = TypeVar("T_co", covariant=True)
 Numeric = Union[float, int]
 ObjectOrSequence = Union[T, Sequence[T]]
 StringOrSequence = ObjectOrSequence[str]
@@ -46,5 +47,18 @@ TokenType = Literal["access", "refresh"]
 TokenLocation = Literal["headers", "cookies", "json", "query"]
 TokenLocations = Sequence[TokenLocation]
 
-TokenCallback = Callable[[str, ParamSpecKwargs], Union[bool, Awaitable[bool]]]
-ModelCallback = Callable[[str, ParamSpecKwargs], Union[Optional[T], Awaitable[Optional[T]]]]
+
+class TokenCallback(Protocol):
+    """Protocol for token blocklist check callbacks (sync or async)."""
+
+    def __call__(self, token: str, **kwargs: Any) -> Union[bool, Awaitable[bool]]:
+        """Check if token is in blocklist."""
+        ...
+
+
+class ModelCallback(Protocol[T_co]):
+    """Protocol for model/subject retrieval callbacks (sync or async)."""
+
+    def __call__(self, uid: str, **kwargs: Any) -> Union[Optional[T_co], Awaitable[Optional[T_co]]]:
+        """Retrieve model/subject from UID."""
+        ...

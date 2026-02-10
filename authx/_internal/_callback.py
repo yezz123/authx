@@ -6,7 +6,7 @@ if sys.version_info >= (3, 10):  # pragma: no cover
 else:
     from typing_extensions import ParamSpecKwargs  # pragma: no cover
 
-from typing import Generic, Optional
+from typing import Generic, Optional, cast
 
 from authx.types import ModelCallback, T, TokenCallback
 
@@ -88,8 +88,8 @@ class _CallbackHandler(Generic[T]):
         if callback is None:
             return None
         if iscoroutinefunction(callback):
-            return await callback(uid, **kwargs)  # type: ignore
-        return callback(uid, **kwargs)
+            return await callback(uid, **kwargs)
+        return cast(Optional[T], callback(uid, **kwargs))
 
     async def is_token_in_blocklist(self, token: Optional[str], **kwargs: ParamSpecKwargs) -> bool:
         """Check if token is in blocklist."""
@@ -97,6 +97,6 @@ class _CallbackHandler(Generic[T]):
             callback: Optional[TokenCallback] = self.callback_is_token_in_blocklist
             if callback is not None and token is not None:
                 if iscoroutinefunction(callback):
-                    return await callback(token, **kwargs)  # type: ignore
-                return callback(token, **kwargs)
+                    return await callback(token, **kwargs)
+                return cast(bool, callback(token, **kwargs))
         return False
