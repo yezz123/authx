@@ -4,6 +4,7 @@
 
 ### Upgrades
 
+* ⬆ Bump virtualenv from 20.33.1 to 20.36.1. PR [#797](https://github.com/yezz123/authx/pull/797) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Bump `ruff-pre-commit` from v0.14.14 to v0.15.0. PR [#795](https://github.com/yezz123/authx/pull/795) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump `ruff-pre-commit` from v0.14.13 to v0.14.14. PR [#791](https://github.com/yezz123/authx/pull/791) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆️ Bump `ruff-pre-commit` from v0.14.11 to v0.14.12. PR [#790](https://github.com/yezz123/authx/pull/790) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
