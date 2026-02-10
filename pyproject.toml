@@ -113,7 +113,7 @@ docs = [
     "mkdocs-rss-plugin>=1.16.0",
     "termynal>=0.12.0",
     "griffe-typingdoc>=0.2.7",
-    "urllib3==1.26.15",
+    "urllib3==2.6.3",
     "authx-extra @ git+https://github.com/yezz123/authx-extra.git@main"
 ]
 
