@@ -4,6 +4,7 @@
 
 ### Upgrades
 
+* ⬆ Bump python-jose from 3.3.0 to 3.4.0. PR [#801](https://github.com/yezz123/authx/pull/801) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * Bump starlette from 0.46.0 to 0.49.1 in /examples. PR [#803](https://github.com/yezz123/authx/pull/803) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump cryptography from 44.0.0 to 44.0.1. PR [#804](https://github.com/yezz123/authx/pull/804) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * Bump h11 from 0.14.0 to 0.16.0 in /examples. PR [#802](https://github.com/yezz123/authx/pull/802) by [@dependabot[bot]](https://github.com/apps/dependabot).
