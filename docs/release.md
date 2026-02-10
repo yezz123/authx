@@ -4,6 +4,7 @@
 
 ### Upgrades
 
+* ⬆ Bump starlette from 0.41.3 to 0.49.1. PR [#799](https://github.com/yezz123/authx/pull/799) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump pyasn1 from 0.6.1 to 0.6.2. PR [#798](https://github.com/yezz123/authx/pull/798) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump virtualenv from 20.33.1 to 20.36.1. PR [#797](https://github.com/yezz123/authx/pull/797) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Bump `ruff-pre-commit` from v0.14.14 to v0.15.0. PR [#795](https://github.com/yezz123/authx/pull/795) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
