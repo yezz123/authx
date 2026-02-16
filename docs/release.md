@@ -1,5 +1,7 @@
 ## Latest Changes
 
+## 1.5.1
+
 * :sparkles: feat: support Async/sync Callbacks. PR [#793](https://github.com/yezz123/authx/pull/793) by [@Antareske](https://github.com/Antareske).
 
 ### Upgrades
