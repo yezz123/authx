@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Upgrades
+
+* ⬆ Bump the python-packages group with 3 updates. PR [#809](https://github.com/yezz123/authx/pull/809) by [@dependabot[bot]](https://github.com/apps/dependabot).
+
 ## 1.5.1
 
 * :sparkles: feat: support Async/sync Callbacks. PR [#793](https://github.com/yezz123/authx/pull/793) by [@Antareske](https://github.com/Antareske).
