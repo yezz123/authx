@@ -1,3 +1,4 @@
+from datetime import timedelta
 from unittest.mock import Mock, patch
 
 import pytest
@@ -66,7 +67,7 @@ async def test_implicit_refresh_middleware_with_refresh_once(authx, app):
     client = TestClient(app)
 
     mock_token = Mock()
-    mock_payload = Mock(time_until_expiry=100, sub="user123", extra_dict={})
+    mock_payload = Mock(time_until_expiry=timedelta(seconds=100), sub="user123", extra_dict={})
 
     with (
         patch.object(authx, "_get_token_from_request", return_value=mock_token),
@@ -94,7 +95,7 @@ async def test_implicit_refresh_middleware_with_refresh(authx, app):
     client = TestClient(app)
 
     mock_token = Mock()
-    mock_payload = Mock(time_until_expiry=100, sub="user123", extra_dict={})
+    mock_payload = Mock(time_until_expiry=timedelta(seconds=100), sub="user123", extra_dict={})
 
     with (
         patch.object(authx, "_get_token_from_request", return_value=mock_token),
@@ -121,7 +122,7 @@ async def test_implicit_refresh_middleware_no_refresh_needed(authx, app):
     client = TestClient(app)
 
     mock_token = Mock()
-    mock_payload = Mock(time_until_expiry=1000, sub="user123", extra_dict={})
+    mock_payload = Mock(time_until_expiry=timedelta(seconds=1000), sub="user123", extra_dict={})
 
     with (
         patch.object(authx, "_get_token_from_request", return_value=mock_token),
