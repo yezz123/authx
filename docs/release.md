@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* Bump pyasn1 from 0.4.8 to 0.6.3 in /examples. PR [#817](https://github.com/yezz123/authx/pull/817) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump pyasn1 from 0.6.2 to 0.6.3. PR [#818](https://github.com/yezz123/authx/pull/818) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Bump `ruff-pre-commit` from v0.15.0 to v0.15.5. PR [#811](https://github.com/yezz123/authx/pull/811) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump the python-packages group with 5 updates. PR [#812](https://github.com/yezz123/authx/pull/812) by [@dependabot[bot]](https://github.com/apps/dependabot).
