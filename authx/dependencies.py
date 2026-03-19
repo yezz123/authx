@@ -193,7 +193,7 @@ class AuthXDependency(Generic[T]):
         Returns:
         None
         """
-        self._security.unset_access_cookies(response=(response or self._response))
+        self._security.unset_refresh_cookies(response=(response or self._response))
 
     def unset_cookies(self, response: Optional[Response] = None) -> None:
         """Remove all authentication-related cookies from the HTTP response.
