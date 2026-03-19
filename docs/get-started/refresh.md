@@ -8,6 +8,9 @@ Access tokens expire quickly for security. Refresh tokens let users stay logged 
 2. Access token expires → User calls `/refresh` with refresh token
 3. Server returns new access token → User continues without re-login
 
+!!! tip "Simpler Alternative"
+    Use `create_token_pair()` to generate both tokens in one call. See [Token Pairs](./token-pair.md) for the streamlined approach.
+
 ## Complete Example
 
 ```python
