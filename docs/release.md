@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Features
+
+* ✨ Add TokenResponse model and `create_token_pair` method. PR [#821](https://github.com/yezz123/authx/pull/821) by [@yezz123](https://github.com/yezz123).
+
 ### Fixes
 
 * ✨ Fix cookie management methods and enhance SignatureSerializer tests. PR [#820](https://github.com/yezz123/authx/pull/820) by [@yezz123](https://github.com/yezz123).
