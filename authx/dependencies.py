@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, Any, Generic, Optional
 
 from fastapi import Request, Response
 
+from authx.schema import TokenResponse
 from authx.types import DateTimeExpression, StringOrSequence, T
 
 if TYPE_CHECKING:
@@ -128,6 +129,48 @@ class AuthXDependency(Generic[T]):
         A string representing the generated refresh token.
         """
         return self._security.create_refresh_token(uid, headers, expiry, data, audience, *args, **kwargs)
+
+    def create_token_pair(
+        self,
+        uid: str,
+        fresh: bool = False,
+        headers: Optional[dict[str, Any]] = None,
+        access_expiry: Optional[DateTimeExpression] = None,
+        refresh_expiry: Optional[DateTimeExpression] = None,
+        data: Optional[dict[str, Any]] = None,
+        audience: Optional[StringOrSequence] = None,
+        access_scopes: Optional[list[str]] = None,
+        refresh_scopes: Optional[list[str]] = None,
+    ) -> TokenResponse:
+        """Generate an access and refresh token pair.
+
+        Delegates to the underlying AuthX instance to create both tokens.
+
+        Args:
+            uid: Unique identifier of the user.
+            fresh: Whether the access token should be marked as fresh.
+            headers: Optional custom JWT headers.
+            access_expiry: Optional access token expiry override.
+            refresh_expiry: Optional refresh token expiry override.
+            data: Optional additional data for both tokens.
+            audience: Optional audience claim.
+            access_scopes: Optional scopes for the access token.
+            refresh_scopes: Optional scopes for the refresh token.
+
+        Returns:
+            TokenResponse with access_token, refresh_token, and token_type.
+        """
+        return self._security.create_token_pair(
+            uid=uid,
+            fresh=fresh,
+            headers=headers,
+            access_expiry=access_expiry,
+            refresh_expiry=refresh_expiry,
+            data=data,
+            audience=audience,
+            access_scopes=access_scopes,
+            refresh_scopes=refresh_scopes,
+        )
 
     def set_access_cookies(
         self,
