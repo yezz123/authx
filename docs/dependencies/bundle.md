@@ -70,6 +70,7 @@ The bundle provides all AuthX methods with automatic request/response context:
 |--------|-------------|
 | `create_access_token(uid, ...)` | Create access token |
 | `create_refresh_token(uid, ...)` | Create refresh token |
+| `create_token_pair(uid, ...)` | Create access + refresh tokens as a [`TokenResponse`](../get-started/token-pair.md) |
 | `set_access_cookies(token)` | Set access token cookie |
 | `set_refresh_cookies(token)` | Set refresh token cookie |
 | `unset_cookies()` | Remove all auth cookies |
@@ -103,10 +104,9 @@ class LoginRequest(BaseModel):
 @app.post("/login")
 def login(data: LoginRequest, deps: AuthXDependency = auth.BUNDLE):
     if data.username == "test" and data.password == "test":
-        access_token = deps.create_access_token(uid=data.username)
-        refresh_token = deps.create_refresh_token(uid=data.username)
-        deps.set_access_cookies(access_token)
-        deps.set_refresh_cookies(refresh_token)
+        tokens = deps.create_token_pair(uid=data.username)
+        deps.set_access_cookies(tokens.access_token)
+        deps.set_refresh_cookies(tokens.refresh_token)
         return {"message": "Logged in"}
     raise HTTPException(401, detail="Invalid credentials")
 

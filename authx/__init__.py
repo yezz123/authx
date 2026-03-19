@@ -6,12 +6,13 @@ from authx.config import AuthXConfig
 from authx.dependencies import AuthXDependency
 from authx.exceptions import InsufficientScopeError
 from authx.main import AuthX
-from authx.schema import RequestToken, TokenPayload
+from authx.schema import RequestToken, TokenPayload, TokenResponse
 
 __all__ = (
     "AuthXConfig",
     "RequestToken",
     "TokenPayload",
+    "TokenResponse",
     "AuthX",
     "AuthXDependency",
     "InsufficientScopeError",

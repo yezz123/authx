@@ -1,7 +1,6 @@
 """Main module for AuthX."""
 
 import contextlib
-import datetime
 from collections.abc import Awaitable, Coroutine
 from typing import (
     Any,
@@ -22,7 +21,7 @@ from authx.config import AuthXConfig
 from authx.core import _get_token_from_request
 from authx.dependencies import AuthXDependency
 from authx.exceptions import AuthXException, InsufficientScopeError, MissingTokenError, RevokedTokenError
-from authx.schema import RequestToken, TokenPayload
+from authx.schema import RequestToken, TokenPayload, TokenResponse
 from authx.types import (
     DateTimeExpression,
     StringOrSequence,
@@ -466,6 +465,62 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             scopes=scopes,
         )
 
+    def create_token_pair(
+        self,
+        uid: str,
+        fresh: bool = False,
+        headers: Optional[dict[str, Any]] = None,
+        access_expiry: Optional[DateTimeExpression] = None,
+        refresh_expiry: Optional[DateTimeExpression] = None,
+        data: Optional[dict[str, Any]] = None,
+        audience: Optional[StringOrSequence] = None,
+        access_scopes: Optional[list[str]] = None,
+        refresh_scopes: Optional[list[str]] = None,
+    ) -> TokenResponse:
+        """Generate an access and refresh token pair.
+
+        Convenience method that creates both tokens at once and returns them
+        in a standardized ``TokenResponse`` model.
+
+        Args:
+            uid: Unique identifier of the user.
+            fresh: Whether the access token should be marked as fresh. Defaults to False.
+            headers: Optional custom JWT headers applied to both tokens.
+            access_expiry: Optional expiry override for the access token.
+            refresh_expiry: Optional expiry override for the refresh token.
+            data: Optional additional data stored in both tokens.
+            audience: Optional audience claim for both tokens.
+            access_scopes: Optional scopes for the access token.
+            refresh_scopes: Optional scopes for the refresh token.
+
+        Returns:
+            TokenResponse: A model containing ``access_token``, ``refresh_token``, and ``token_type``.
+
+        Example:
+            ```python
+            tokens = auth.create_token_pair(uid="user123", fresh=True)
+            return tokens  # {"access_token": "...", "refresh_token": "...", "token_type": "bearer"}
+            ```
+        """
+        access_token = self.create_access_token(
+            uid=uid,
+            fresh=fresh,
+            headers=headers,
+            expiry=access_expiry,
+            data=data,
+            audience=audience,
+            scopes=access_scopes,
+        )
+        refresh_token = self.create_refresh_token(
+            uid=uid,
+            headers=headers,
+            expiry=refresh_expiry,
+            data=data,
+            audience=audience,
+            scopes=refresh_scopes,
+        )
+        return TokenResponse(access_token=access_token, refresh_token=refresh_token)
+
     def set_access_cookies(
         self,
         token: str,
@@ -877,11 +932,8 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
                     refresh=False,
                     optional=False,
                 )
-                payload = self.verify_token(token, verify_fresh=False)
-                if (
-                    datetime.timedelta(payload.time_until_expiry)  # type: ignore
-                    < self.config.JWT_IMPLICIT_REFRESH_DELTATIME
-                ):
+                payload = self.verify_token(token, verify_fresh=False, verify_csrf=False)
+                if payload.time_until_expiry < self.config.JWT_IMPLICIT_REFRESH_DELTATIME:
                     new_token = self.create_access_token(uid=payload.sub, fresh=False, data=payload.extra_dict)
                     self.set_access_cookies(new_token, response=response)
         return response

@@ -286,6 +286,23 @@ class TokenPayload(BaseModel):
         return cls.model_validate(payload)
 
 
+class TokenResponse(BaseModel):
+    """Response model for token pair endpoints.
+
+    Provides a standardized response shape for login/refresh endpoints
+    that return both access and refresh tokens.
+
+    Attributes:
+        access_token: The JWT access token string.
+        refresh_token: The JWT refresh token string.
+        token_type: The token type, always "bearer".
+    """
+
+    access_token: str
+    refresh_token: str
+    token_type: str = "bearer"
+
+
 class RequestToken(BaseModel):
     """Verify and validate a token with comprehensive security checks.
 

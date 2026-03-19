@@ -205,6 +205,7 @@ nav:
     - JWT Locations: get-started/location.md
     - Scope Management: get-started/scopes.md
     - Refreshing Tokens: get-started/refresh.md
+    - Token Pairs: get-started/token-pair.md
     - Freshness Tokens: get-started/token.md
   - Callbacks:
     - User Serialization: callbacks/user.md
