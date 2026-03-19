@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* Bump pyjwt from 2.10.1 to 2.12.0 in /examples. PR [#813](https://github.com/yezz123/authx/pull/813) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump the python-packages group with 2 updates. PR [#815](https://github.com/yezz123/authx/pull/815) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * Bump pyasn1 from 0.4.8 to 0.6.3 in /examples. PR [#817](https://github.com/yezz123/authx/pull/817) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump pyasn1 from 0.6.2 to 0.6.3. PR [#818](https://github.com/yezz123/authx/pull/818) by [@dependabot[bot]](https://github.com/apps/dependabot).
