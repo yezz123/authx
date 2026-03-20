@@ -207,6 +207,8 @@ nav:
     - Refreshing Tokens: get-started/refresh.md
     - Token Pairs: get-started/token-pair.md
     - Freshness Tokens: get-started/token.md
+    - Key Rotation: get-started/key-rotation.md
+    - WebSocket Auth: get-started/websocket.md
   - Callbacks:
     - User Serialization: callbacks/user.md
     - Token Serialization: callbacks/token.md
