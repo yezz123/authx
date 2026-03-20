@@ -4,47 +4,13 @@ from datetime import timedelta
 
 import pytest
 from cryptography.hazmat.primitives import serialization
-from cryptography.hazmat.primitives.asymmetric import ec, rsa
+from cryptography.hazmat.primitives.asymmetric import ec
 
 from authx import AuthX, AuthXConfig
 from authx.exceptions import JWTDecodeError
 from authx.token import create_token, decode_token
-
-
-def _rsa_keypair() -> tuple[str, str]:
-    private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
-    private_pem = private_key.private_bytes(
-        encoding=serialization.Encoding.PEM,
-        format=serialization.PrivateFormat.PKCS8,
-        encryption_algorithm=serialization.NoEncryption(),
-    ).decode()
-    public_pem = (
-        private_key.public_key()
-        .public_bytes(
-            encoding=serialization.Encoding.PEM,
-            format=serialization.PublicFormat.SubjectPublicKeyInfo,
-        )
-        .decode()
-    )
-    return private_pem, public_pem
-
-
-def _ec_keypair() -> tuple[str, str]:
-    private_key = ec.generate_private_key(ec.SECP256R1())
-    private_pem = private_key.private_bytes(
-        encoding=serialization.Encoding.PEM,
-        format=serialization.PrivateFormat.PKCS8,
-        encryption_algorithm=serialization.NoEncryption(),
-    ).decode()
-    public_pem = (
-        private_key.public_key()
-        .public_bytes(
-            encoding=serialization.Encoding.PEM,
-            format=serialization.PublicFormat.SubjectPublicKeyInfo,
-        )
-        .decode()
-    )
-    return private_pem, public_pem
+from tests.utils import generate_ec_keypair as _ec_keypair
+from tests.utils import generate_rsa_keypair as _rsa_keypair
 
 
 class TestLowLevelAsymmetric:

@@ -1,8 +1,48 @@
 from typing import NamedTuple, Optional
 
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric import ec, rsa
 from fastapi import Depends, FastAPI, Request
 
 from authx import AuthX, AuthXConfig, AuthXDependency, RequestToken, TokenPayload
+
+
+def generate_rsa_keypair() -> tuple[str, str]:
+    """Generate a fresh RSA private/public PEM key pair for testing."""
+    private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+    private_pem = private_key.private_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PrivateFormat.PKCS8,
+        encryption_algorithm=serialization.NoEncryption(),
+    ).decode()
+    public_pem = (
+        private_key.public_key()
+        .public_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PublicFormat.SubjectPublicKeyInfo,
+        )
+        .decode()
+    )
+    return private_pem, public_pem
+
+
+def generate_ec_keypair(curve: Optional[ec.EllipticCurve] = None) -> tuple[str, str]:
+    """Generate a fresh EC private/public PEM key pair for testing."""
+    private_key = ec.generate_private_key(curve or ec.SECP256R1())
+    private_pem = private_key.private_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PrivateFormat.PKCS8,
+        encryption_algorithm=serialization.NoEncryption(),
+    ).decode()
+    public_pem = (
+        private_key.public_key()
+        .public_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PublicFormat.SubjectPublicKeyInfo,
+        )
+        .decode()
+    )
+    return private_pem, public_pem
 
 
 class SecuritiesTuple(NamedTuple):
