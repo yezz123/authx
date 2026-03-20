@@ -4,7 +4,6 @@ import pytest
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 from fastapi import Request
-from starlette.datastructures import Headers, MutableHeaders
 
 from authx import AuthX, AuthXConfig
 from authx.exceptions import JWTDecodeError
@@ -110,15 +109,13 @@ class TestSymmetricKeyRotation:
         request = Request(
             scope={
                 "type": "http",
-                "headers": [],
+                "headers": [(b"authorization", f"Bearer {token}".encode())],
                 "method": "GET",
                 "path": "/",
                 "scheme": "http",
                 "server": ("testserver", 80),
             }
         )
-        request._headers = MutableHeaders(headers=Headers(raw=[]))
-        request._headers["Authorization"] = f"Bearer {token}"
 
         payload = await new_auth._auth_required(request)
         assert payload.sub == "user1"
