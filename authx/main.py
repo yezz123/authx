@@ -11,7 +11,7 @@ from typing import (
     overload,
 )
 
-from fastapi import Depends, Request, Response
+from fastapi import Depends, Request, Response, WebSocket
 
 from authx._internal._callback import _CallbackHandler
 from authx._internal._error import _ErrorHandler
@@ -20,7 +20,13 @@ from authx._internal._utils import get_uuid
 from authx.config import AuthXConfig
 from authx.core import _get_token_from_request
 from authx.dependencies import AuthXDependency
-from authx.exceptions import AuthXException, InsufficientScopeError, MissingTokenError, RevokedTokenError
+from authx.exceptions import (
+    AuthXException,
+    InsufficientScopeError,
+    JWTDecodeError,
+    MissingTokenError,
+    RevokedTokenError,
+)
 from authx.schema import RequestToken, TokenPayload, TokenResponse
 from authx.types import (
     DateTimeExpression,
@@ -158,14 +164,27 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         audience: Optional[StringOrSequence] = None,
         issuer: Optional[str] = None,
     ) -> TokenPayload:
-        return TokenPayload.decode(
-            token=token,
-            key=self.config.public_key,
-            algorithms=[self.config.JWT_ALGORITHM],
-            verify=verify,
-            audience=audience or self.config.JWT_DECODE_AUDIENCE,
-            issuer=issuer or self.config.JWT_DECODE_ISSUER,
-        )
+        try:
+            return TokenPayload.decode(
+                token=token,
+                key=self.config.public_key,
+                algorithms=[self.config.JWT_ALGORITHM],
+                verify=verify,
+                audience=audience or self.config.JWT_DECODE_AUDIENCE,
+                issuer=issuer or self.config.JWT_DECODE_ISSUER,
+            )
+        except JWTDecodeError:
+            previous_key = self.config.previous_public_key
+            if previous_key is None:
+                raise
+            return TokenPayload.decode(
+                token=token,
+                key=previous_key,
+                algorithms=[self.config.JWT_ALGORITHM],
+                verify=verify,
+                audience=audience or self.config.JWT_DECODE_AUDIENCE,
+                issuer=issuer or self.config.JWT_DECODE_ISSUER,
+            )
 
     def _set_cookies(
         self,
@@ -366,6 +385,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
     ) -> TokenPayload:
         """Verify a request token.
 
+        Attempts verification with the current key first, then falls back
+        to the previous key if key rotation is configured.
+
         Args:
             token (RequestToken): RequestToken instance
             verify_type (bool, optional): Apply token type verification. Defaults to True.
@@ -373,17 +395,31 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             verify_csrf (bool, optional): Apply token CSRF verification. Defaults to True.
 
         Returns:
-            TokenPayload: _description_
+            TokenPayload: Verified token payload
         """
-        return token.verify(
-            key=self.config.public_key,
-            algorithms=[self.config.JWT_ALGORITHM],
-            verify_fresh=verify_fresh,
-            verify_type=verify_type,
-            verify_csrf=verify_csrf,
-            audience=self.config.JWT_DECODE_AUDIENCE,
-            issuer=self.config.JWT_DECODE_ISSUER,
-        )
+        try:
+            return token.verify(
+                key=self.config.public_key,
+                algorithms=[self.config.JWT_ALGORITHM],
+                verify_fresh=verify_fresh,
+                verify_type=verify_type,
+                verify_csrf=verify_csrf,
+                audience=self.config.JWT_DECODE_AUDIENCE,
+                issuer=self.config.JWT_DECODE_ISSUER,
+            )
+        except JWTDecodeError:
+            previous_key = self.config.previous_public_key
+            if previous_key is None:
+                raise
+            return token.verify(
+                key=previous_key,
+                algorithms=[self.config.JWT_ALGORITHM],
+                verify_fresh=verify_fresh,
+                verify_type=verify_type,
+                verify_csrf=verify_csrf,
+                audience=self.config.JWT_DECODE_AUDIENCE,
+                issuer=self.config.JWT_DECODE_ISSUER,
+            )
 
     def create_access_token(
         self,
@@ -640,6 +676,44 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
     def CURRENT_SUBJECT(self) -> T:
         """FastAPI Dependency to retrieve the current subject from request."""
         return Depends(self.get_current_subject)
+
+    @property
+    def WS_AUTH_REQUIRED(self) -> TokenPayload:
+        """FastAPI Dependency to enforce valid access token on a WebSocket connection.
+
+        Extracts the token from the ``token`` query parameter or the ``Authorization``
+        header of the WebSocket handshake request.
+        """
+        return Depends(self._ws_auth_required)
+
+    async def _ws_auth_required(self, websocket: WebSocket) -> TokenPayload:
+        """Verify an access token from a WebSocket connection.
+
+        Looks for the token in the query string (``?token=...``) first,
+        then falls back to the ``Authorization`` header.
+
+        Raises:
+            MissingTokenError: When no token is found.
+            JWTDecodeError: When the token is invalid.
+        """
+        token_str: Optional[str] = websocket.query_params.get(self.config.JWT_QUERY_STRING_NAME)
+        if token_str is None:
+            auth_header = websocket.headers.get(self.config.JWT_HEADER_NAME)
+            if auth_header is not None and self.config.JWT_HEADER_TYPE:
+                token_str = auth_header.removeprefix(f"{self.config.JWT_HEADER_TYPE} ")
+            elif auth_header is not None:
+                token_str = auth_header
+
+        if token_str is None:
+            raise MissingTokenError(
+                f"Missing token in WebSocket query parameter '{self.config.JWT_QUERY_STRING_NAME}' "
+                f"or '{self.config.JWT_HEADER_NAME}' header"
+            )
+
+        request_token = RequestToken(token=token_str, csrf=None, type="access", location="query")
+        if await self.is_token_in_blocklist(request_token.token):
+            raise RevokedTokenError("Token has been revoked")
+        return self.verify_token(request_token, verify_type=True, verify_fresh=False, verify_csrf=False)
 
     def get_dependency(self, request: Request, response: Response) -> AuthXDependency[Any]:
         """FastAPI Dependency to return a AuthX sub-object within the route context.

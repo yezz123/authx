@@ -4,10 +4,22 @@ from typing import Optional
 import pytest
 from fastapi import Request
 from fastapi.responses import JSONResponse
-from starlette.datastructures import Headers, MutableHeaders
 
 from authx import AuthX, AuthXConfig
 from authx.exceptions import AuthXException
+
+
+def _make_request(token: str) -> Request:
+    return Request(
+        scope={
+            "type": "http",
+            "headers": [(b"authorization", f"Bearer {token}".encode())],
+            "method": "GET",
+            "path": "/",
+            "scheme": "http",
+            "server": ("testserver", 80),
+        }
+    )
 
 
 @pytest.fixture(scope="function")
@@ -20,26 +32,12 @@ def authx():
 
 
 @pytest.fixture(scope="function")
-def mock_request():
-    return Request(
-        scope={
-            "type": "http",
-            "headers": [],
-            "method": "GET",
-            "path": "/",
-            "scheme": "http",
-            "server": ("testserver", 80),
-        }
-    )
-
-
-@pytest.fixture(scope="function")
 def mock_response():
     return JSONResponse(content={})
 
 
 @pytest.mark.asyncio
-async def test_auth_required_revoked_token(authx, mock_request):
+async def test_auth_required_revoked_token(authx):
     token = authx.create_access_token(uid="test_user")
 
     async def is_token(t: str) -> bool:
@@ -47,54 +45,42 @@ async def test_auth_required_revoked_token(authx, mock_request):
 
     authx.is_token_in_blocklist = is_token
 
-    mock_request._headers = MutableHeaders(headers=Headers(raw=[]))
-    mock_request._headers["Authorization"] = f"Bearer {token}"
-
     with pytest.raises(AuthXException):
-        await authx._auth_required(mock_request)
+        await authx._auth_required(_make_request(token))
 
 
 @pytest.mark.asyncio
-async def test_get_current_subject(authx, mock_request):
+async def test_get_current_subject(authx):
     token = authx.create_access_token(uid="test_user")
-
-    mock_request._headers = MutableHeaders(headers=Headers(raw=[]))
-    mock_request._headers["Authorization"] = f"Bearer {token}"
 
     async def get_user(uid: str) -> Optional[dict]:
         return {"id": uid, "username": f"user_{uid}"}
 
     authx.set_subject_getter(get_user)
 
-    subject = await authx.get_current_subject(mock_request)
+    subject = await authx.get_current_subject(_make_request(token))
     assert subject == {"id": "test_user", "username": "user_test_user"}
 
 
 @pytest.mark.asyncio
-async def test_get_current_subject_sync_callback(authx, mock_request):
+async def test_get_current_subject_sync_callback(authx):
     token = authx.create_access_token(uid="admin")
-
-    mock_request._headers = MutableHeaders(headers=Headers(raw=[]))
-    mock_request._headers["Authorization"] = f"Bearer {token}"
 
     def get_user_sync(uid: str) -> Optional[dict]:
         return {"id": uid, "role": "admin"}
 
     authx.set_subject_getter(get_user_sync)
 
-    subject = await authx.get_current_subject(mock_request)
+    subject = await authx.get_current_subject(_make_request(token))
     assert subject == {"id": "admin", "role": "admin"}
 
 
 @pytest.mark.asyncio
-async def test_get_current_subject_no_callback_raises(authx, mock_request):
+async def test_get_current_subject_no_callback_raises(authx):
     token = authx.create_access_token(uid="test_user")
 
-    mock_request._headers = MutableHeaders(headers=Headers(raw=[]))
-    mock_request._headers["Authorization"] = f"Bearer {token}"
-
     with pytest.raises(AttributeError, match="Model callback not set"):
-        await authx.get_current_subject(mock_request)
+        await authx.get_current_subject(_make_request(token))
 
 
 @pytest.mark.asyncio
