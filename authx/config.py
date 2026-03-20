@@ -45,6 +45,8 @@ class AuthXConfig(BaseSettings):
     JWT_IDENTITY_CLAIM: str = "sub"
     JWT_PRIVATE_KEY: Optional[str] = None
     JWT_PUBLIC_KEY: Optional[str] = None
+    JWT_PREVIOUS_SECRET_KEY: Optional[str] = None
+    JWT_PREVIOUS_PUBLIC_KEY: Optional[str] = None
     JWT_REFRESH_TOKEN_EXPIRES: Optional[timedelta] = timedelta(days=20)
     JWT_SECRET_KEY: Optional[str] = None
     JWT_TOKEN_LOCATION: TokenLocations = Field(default_factory=lambda: ["headers"])  # type: ignore
@@ -128,3 +130,15 @@ class AuthXConfig(BaseSettings):
     def public_key(self) -> str:
         """Public key to decode token."""
         return self._get_key(self.JWT_PUBLIC_KEY)
+
+    @property
+    def previous_public_key(self) -> Optional[str]:
+        """Previous public key for key rotation fallback during decode.
+
+        Returns None when no previous key is configured.
+        """
+        if self.is_algo_symmetric:
+            return self.JWT_PREVIOUS_SECRET_KEY
+        elif self.is_algo_asymmetric:
+            return self.JWT_PREVIOUS_PUBLIC_KEY
+        return None
