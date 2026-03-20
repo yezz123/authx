@@ -1,6 +1,6 @@
 """Tests for WebSocket authentication support."""
 
-from typing import Any
+from typing import Any, Optional
 
 import pytest
 from fastapi import WebSocket
@@ -22,7 +22,7 @@ def auth():
     return AuthX(config=AuthXConfig(JWT_SECRET_KEY="ws-secret"))
 
 
-def _ws(query_string: bytes = b"", headers: list[tuple[bytes, bytes]] | None = None) -> WebSocket:
+def _ws(query_string: bytes = b"", headers: Optional[list[tuple[bytes, bytes]]] = None) -> WebSocket:
     return WebSocket(
         scope={
             "type": "websocket",
