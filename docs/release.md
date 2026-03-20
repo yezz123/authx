@@ -8,6 +8,10 @@
 
 * ✨ Fix cookie management methods and enhance SignatureSerializer tests. PR [#820](https://github.com/yezz123/authx/pull/820) by [@yezz123](https://github.com/yezz123).
 
+### Refactors
+
+* ♻️ Refactor JWT key management and enhance authentication tests. PR [#822](https://github.com/yezz123/authx/pull/822) by [@yezz123](https://github.com/yezz123).
+
 ### Upgrades
 
 * ⬆️ Bump `ruff-pre-commit` from v0.15.5 to v0.15.6. PR [#816](https://github.com/yezz123/authx/pull/816) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
