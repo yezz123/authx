@@ -24,6 +24,10 @@
 * ⬆ Bump the python-packages group with 3 updates. PR [#810](https://github.com/yezz123/authx/pull/810) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump the python-packages group with 3 updates. PR [#809](https://github.com/yezz123/authx/pull/809) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
+### Docs
+
+* 📝 Add documentation for key rotation and WebSocket authentication. PR [#823](https://github.com/yezz123/authx/pull/823) by [@yezz123](https://github.com/yezz123).
+
 ## 1.5.1
 
 * :sparkles: feat: support Async/sync Callbacks. PR [#793](https://github.com/yezz123/authx/pull/793) by [@Antareske](https://github.com/Antareske).
