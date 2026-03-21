@@ -1,5 +1,7 @@
 ## Latest Changes
 
+## 1.5.2
+
 ### Features
 
 * ✨ Add TokenResponse model and `create_token_pair` method. PR [#821](https://github.com/yezz123/authx/pull/821) by [@yezz123](https://github.com/yezz123).
