@@ -14,6 +14,7 @@
 
 ### Upgrades
 
+* ⬆ Bump pyjwt from 2.10.1 to 2.12.0. PR [#814](https://github.com/yezz123/authx/pull/814) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Bump `ruff-pre-commit` from v0.15.5 to v0.15.6. PR [#816](https://github.com/yezz123/authx/pull/816) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * Bump pyjwt from 2.10.1 to 2.12.0 in /examples. PR [#813](https://github.com/yezz123/authx/pull/813) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump the python-packages group with 2 updates. PR [#815](https://github.com/yezz123/authx/pull/815) by [@dependabot[bot]](https://github.com/apps/dependabot).
