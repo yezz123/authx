@@ -56,6 +56,42 @@ class TokenCallback(Protocol):
         ...
 
 
+class RateLimitKeyFunc(Protocol):
+    """Protocol for rate limit key extraction functions."""
+
+    def __call__(self, request: Any) -> str:
+        """Extract a rate limit key from the request."""
+        ...
+
+
+class SessionStoreProtocol(Protocol):
+    """Protocol for session storage backends."""
+
+    async def create(self, session: Any) -> None:
+        """Persist a new session."""
+        ...
+
+    async def get(self, session_id: str) -> Any:
+        """Retrieve a session by ID."""
+        ...
+
+    async def update(self, session_id: str, **kwargs: Any) -> None:
+        """Update session fields."""
+        ...
+
+    async def delete(self, session_id: str) -> None:
+        """Delete a session."""
+        ...
+
+    async def list_by_user(self, uid: str) -> list[Any]:
+        """List all sessions for a user."""
+        ...
+
+    async def delete_all_by_user(self, uid: str) -> None:
+        """Delete all sessions for a user."""
+        ...
+
+
 class ModelCallback(Protocol[T_co]):
     """Protocol for model/subject retrieval callbacks (sync or async)."""
 
