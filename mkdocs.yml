@@ -209,6 +209,8 @@ nav:
     - Freshness Tokens: get-started/token.md
     - Key Rotation: get-started/key-rotation.md
     - WebSocket Auth: get-started/websocket.md
+    - Rate Limiting: get-started/rate-limiting.md
+    - Session Management: get-started/sessions.md
   - Callbacks:
     - User Serialization: callbacks/user.md
     - Token Serialization: callbacks/token.md
