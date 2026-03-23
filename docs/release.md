@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Upgrades
+
+* ⬆ Bump the python-packages group with 4 updates. PR [#824](https://github.com/yezz123/authx/pull/824) by [@dependabot[bot]](https://github.com/apps/dependabot).
+
 ## 1.5.2
 
 ### Features
