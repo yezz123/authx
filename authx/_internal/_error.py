@@ -22,6 +22,21 @@ class _ErrorHandler:
     MSG_JWTDecodeError = "Invalid Token"
     MSG_InsufficientScopeError = None  # Use detailed exception message showing required vs provided scopes
 
+    async def _rate_limit_handler(
+        self,
+        request: Request,
+        exc: exceptions.RateLimitExceeded,
+    ) -> JSONResponse:
+        return JSONResponse(
+            status_code=429,
+            content={
+                "message": str(exc),
+                "error_type": "RateLimitExceeded",
+                "retry_after": exc.retry_after,
+            },
+            headers={"Retry-After": str(exc.retry_after)},
+        )
+
     async def _error_handler(
         self,
         request: Request,
@@ -137,3 +152,14 @@ class _ErrorHandler:
             status_code=403,
             message=None,  # Use detailed exception message showing required vs provided scopes
         )
+        self._set_app_exception_handler(
+            app,
+            exception=exceptions.SessionRevoked,
+            status_code=401,
+            message="Session has been revoked",
+        )
+
+        async def rate_limit_wrapper(request: Request, exc: exceptions.RateLimitExceeded) -> JSONResponse:
+            return await self._rate_limit_handler(request, exc)
+
+        app.exception_handler(exceptions.RateLimitExceeded)(rate_limit_wrapper)
