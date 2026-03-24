@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Breaking Changes
+
+* ✨ Implement rate limiting and session management. PR [#826](https://github.com/yezz123/authx/pull/826) by [@yezz123](https://github.com/yezz123).
+
 ### Upgrades
 
 * ⬆️ Bump `ruff-pre-commit` from v0.15.6 to v0.15.7. PR [#825](https://github.com/yezz123/authx/pull/825) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
