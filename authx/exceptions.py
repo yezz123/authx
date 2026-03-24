@@ -115,6 +115,35 @@ class InsufficientScopeError(TokenError):
         super().__init__(message)
 
 
+class RateLimitExceeded(AuthXException):
+    """Exception raised when a rate limit is exceeded.
+
+    Attributes:
+        retry_after: Seconds until the client may retry.
+    """
+
+    def __init__(self, retry_after: int = 60, message: Optional[str] = None) -> None:
+        """Initialize RateLimitExceeded.
+
+        Args:
+            retry_after: Seconds until the client may retry.
+            message: Optional custom error message.
+        """
+        self.retry_after = retry_after
+        if message is None:
+            message = f"Rate limit exceeded. Retry after {retry_after} seconds."
+        super().__init__(message)
+
+
+class SessionRevoked(AuthXException):
+    """Exception raised when an operation uses a revoked session.
+
+    Indicates the session associated with a token has been explicitly revoked.
+    """
+
+    pass
+
+
 class InvalidToken(Exception):
     """When a token is invalid for all identity providers."""
 

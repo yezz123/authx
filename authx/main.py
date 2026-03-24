@@ -15,7 +15,9 @@ from fastapi import Depends, Request, Response, WebSocket
 
 from authx._internal._callback import _CallbackHandler
 from authx._internal._error import _ErrorHandler
+from authx._internal._ratelimit import RateLimiter
 from authx._internal._scopes import has_required_scopes
+from authx._internal._session import SessionInfo
 from authx._internal._utils import get_uuid
 from authx.config import AuthXConfig
 from authx.core import _get_token_from_request
@@ -65,6 +67,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         super().__init__(model=model)
         super(_CallbackHandler, self).__init__()
         self._config = config
+        self._session_store: Optional[Any] = None
 
     def load_config(self, config: AuthXConfig) -> None:
         """Load and store the configuration for the authentication system.
@@ -1011,3 +1014,122 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
                     new_token = self.create_access_token(uid=payload.sub, fresh=False, data=payload.extra_dict)
                     self.set_access_cookies(new_token, response=response)
         return response
+
+    def rate_limited(
+        self,
+        max_requests: int = 10,
+        window: int = 60,
+        key_func: Optional[Callable[[Request], str]] = None,
+    ) -> Callable[[Request], Awaitable[TokenPayload]]:
+        """Dependency combining rate limiting with access token verification.
+
+        Args:
+            max_requests: Maximum requests allowed within the window.
+            window: Time window in seconds.
+            key_func: Callable to extract rate limit key from request. Defaults to client IP.
+
+        Returns:
+            A FastAPI dependency that enforces both rate limiting and token auth.
+
+        Example:
+            ```python
+            @app.get("/api", dependencies=[Depends(auth.rate_limited(max_requests=5, window=60))])
+            async def api_route(): ...
+            ```
+        """
+        limiter = RateLimiter(max_requests=max_requests, window=window, key_func=key_func)
+
+        async def _rate_limited_auth(request: Request) -> TokenPayload:
+            await limiter(request)
+            return await self._auth_required(request=request)
+
+        return _rate_limited_auth
+
+    # --- Session Management ---
+
+    def set_session_store(self, store: Any) -> None:
+        """Register a session storage backend.
+
+        Args:
+            store: An object implementing the ``SessionStoreProtocol``.
+        """
+        self._session_store = store
+
+    async def create_session(
+        self,
+        uid: str,
+        request: Optional[Request] = None,
+        device_info: Optional[dict[str, Any]] = None,
+    ) -> SessionInfo:
+        """Create a new session and persist it via the session store.
+
+        Args:
+            uid: User identifier.
+            request: Optional HTTP request for IP/User-Agent extraction.
+            device_info: Optional additional device metadata.
+
+        Returns:
+            The created ``SessionInfo`` instance.
+        """
+        ip_address: Optional[str] = None
+        user_agent: Optional[str] = None
+        if request is not None:
+            if request.client is not None:
+                ip_address = request.client.host
+            user_agent = request.headers.get("user-agent")
+
+        session = SessionInfo(
+            uid=uid,
+            ip_address=ip_address,
+            user_agent=user_agent,
+            device_info=device_info,
+        )
+
+        if self._session_store is not None:
+            await self._session_store.create(session)
+
+        return session
+
+    async def list_sessions(self, uid: str) -> list[SessionInfo]:
+        """List all active sessions for a user.
+
+        Args:
+            uid: User identifier.
+
+        Returns:
+            List of active ``SessionInfo`` objects.
+        """
+        if self._session_store is None:
+            return []
+        return await self._session_store.list_by_user(uid)
+
+    async def revoke_session(self, session_id: str) -> None:
+        """Revoke a single session by ID.
+
+        Args:
+            session_id: The session to revoke.
+        """
+        if self._session_store is not None:
+            await self._session_store.delete(session_id)
+
+    async def revoke_all_sessions(self, uid: str) -> None:
+        """Revoke all sessions for a user.
+
+        Args:
+            uid: User identifier.
+        """
+        if self._session_store is not None:
+            await self._session_store.delete_all_by_user(uid)
+
+    async def get_session(self, session_id: str) -> Optional[SessionInfo]:
+        """Retrieve a session by ID.
+
+        Args:
+            session_id: The session to look up.
+
+        Returns:
+            The ``SessionInfo`` if found and active, otherwise None.
+        """
+        if self._session_store is None:
+            return None
+        return await self._session_store.get(session_id)

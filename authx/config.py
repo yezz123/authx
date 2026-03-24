@@ -83,6 +83,10 @@ class AuthXConfig(BaseSettings):
     JWT_JSON_KEY: str = "access_token"
     JWT_REFRESH_JSON_KEY: str = "refresh_token"
 
+    # Session Tracking Options
+    JWT_SESSION_TRACKING: bool = False
+    JWT_SESSION_UPDATE_LAST_ACTIVE: bool = True
+
     # Implicit Refresh Options
     JWT_IMPLICIT_REFRESH_ROUTE_EXCLUDE: list[str] = Field(default_factory=list)
     JWT_IMPLICIT_REFRESH_ROUTE_INCLUDE: list[str] = Field(default_factory=list)
