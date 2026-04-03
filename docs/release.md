@@ -6,6 +6,7 @@
 
 ### Upgrades
 
+* ⬆ Bump codecov/codecov-action from 5 to 6. PR [#829](https://github.com/yezz123/authx/pull/829) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump the python-packages group with 2 updates. PR [#830](https://github.com/yezz123/authx/pull/830) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump cryptography from 46.0.5 to 46.0.6. PR [#828](https://github.com/yezz123/authx/pull/828) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump cryptography from 46.0.5 to 46.0.6 in `/examples`. PR [#827](https://github.com/yezz123/authx/pull/827) by [@dependabot[bot]](https://github.com/apps/dependabot).
