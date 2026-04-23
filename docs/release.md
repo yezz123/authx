@@ -6,6 +6,7 @@
 
 ### Upgrades
 
+* ⬆️ Bump `ruff-pre-commit` from v0.15.8 to v0.15.11. PR [#834](https://github.com/yezz123/authx/pull/834) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * Bump cryptography from 46.0.6 to 46.0.7 in /examples. PR [#835](https://github.com/yezz123/authx/pull/835) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump cryptography from 46.0.6 to 46.0.7. PR [#836](https://github.com/yezz123/authx/pull/836) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump the python-packages group with 2 updates. PR [#833](https://github.com/yezz123/authx/pull/833) by [@dependabot[bot]](https://github.com/apps/dependabot).
