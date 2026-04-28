@@ -4,6 +4,10 @@
 
 * ✨ Implement rate limiting and session management. PR [#826](https://github.com/yezz123/authx/pull/826) by [@yezz123](https://github.com/yezz123).
 
+### Fixes
+
+* feat: Granular JWT exception types in `decode_token()`. PR [#843](https://github.com/yezz123/authx/pull/843) by [@Copilot](https://github.com/apps/copilot-swe-agent).
+
 ### Upgrades
 
 * ⬆ Bump gitpython from 3.1.46 to 3.1.47. PR [#840](https://github.com/yezz123/authx/pull/840) by [@dependabot[bot]](https://github.com/apps/dependabot).
