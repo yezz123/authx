@@ -6,9 +6,23 @@ from collections.abc import Sequence
 from typing import Any, Optional, Union
 
 import jwt
+from jwt.exceptions import (
+    ExpiredSignatureError,
+    InvalidAudienceError,
+    InvalidIssuerError,
+    InvalidSignatureError,
+    InvalidTokenError,
+)
 
 from authx._internal._utils import RESERVED_CLAIMS, get_now, get_now_ts, get_uuid
-from authx.exceptions import AuthxArgumentDeprecationWarning, JWTDecodeError
+from authx.exceptions import (
+    AuthxArgumentDeprecationWarning,
+    JWTDecodeError,
+    TokenExpiredError,
+    TokenInvalidAudienceError,
+    TokenInvalidIssuerError,
+    TokenInvalidSignatureError,
+)
 from authx.types import (
     AlgorithmType,
     DateTimeExpression,
@@ -104,6 +118,9 @@ def decode_token(
     data: Optional[dict[str, Any]] = None,
 ) -> dict[str, Any]:
     """Decode a token."""
+    if not token:
+        raise JWTDecodeError("Token must not be empty")
+
     if data is not None:
         warnings.warn(
             "passing data keyword argument to decode_token() is deprecated and will be removed in authx version 2.",
@@ -126,5 +143,13 @@ def decode_token(
             issuer=issuer,
             options={"verify_signature": verify},
         )
-    except Exception as e:
-        raise JWTDecodeError(*e.args) from e
+    except ExpiredSignatureError as e:
+        raise TokenExpiredError("Token has expired") from e
+    except InvalidSignatureError as e:
+        raise TokenInvalidSignatureError("Signature verification failed") from e
+    except InvalidAudienceError as e:
+        raise TokenInvalidAudienceError("Invalid audience") from e
+    except InvalidIssuerError as e:
+        raise TokenInvalidIssuerError("Invalid issuer") from e
+    except InvalidTokenError as e:
+        raise JWTDecodeError(f"Invalid token: {e}") from e
