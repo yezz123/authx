@@ -3,7 +3,14 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from authx.exceptions import AuthxArgumentDeprecationWarning, JWTDecodeError
+from authx.exceptions import (
+    AuthxArgumentDeprecationWarning,
+    JWTDecodeError,
+    TokenExpiredError,
+    TokenInvalidAudienceError,
+    TokenInvalidIssuerError,
+    TokenInvalidSignatureError,
+)
 from authx.token import create_token, decode_token
 
 
@@ -310,3 +317,88 @@ def test_decode_token_raise_data_argument_deprecated():
 
     with pytest.warns(AuthxArgumentDeprecationWarning, match=expected_warning_message):
         decode_token(token, key=KEY, data={})
+
+
+def test_decode_token_empty_raises_jwt_decode_error():
+    with pytest.raises(JWTDecodeError, match="Token must not be empty"):
+        decode_token("", key="SECRET")
+
+
+def test_decode_token_expired_raises_token_expired_error():
+    KEY = "SECRET"
+    ALGO = "HS256"
+
+    # Create a token that expires immediately (in the past)
+    past = datetime.now(tz=timezone.utc) - timedelta(seconds=10)
+    token = create_token(
+        uid="TEST",
+        key=KEY,
+        algorithm=ALGO,
+        type="access",
+        csrf=False,
+        expiry=past,
+    )
+
+    with pytest.raises(TokenExpiredError):
+        decode_token(token, key=KEY, algorithms=[ALGO], verify=True)
+
+    # TokenExpiredError is a subclass of JWTDecodeError for backward compatibility
+    with pytest.raises(JWTDecodeError):
+        decode_token(token, key=KEY, algorithms=[ALGO], verify=True)
+
+
+def test_decode_token_invalid_signature_raises_token_invalid_signature_error():
+    KEY = "SECRET"
+    WRONG_KEY = "WRONG_SECRET"
+    ALGO = "HS256"
+
+    token = create_token(uid="TEST", key=KEY, algorithm=ALGO, type="access", csrf=False)
+
+    with pytest.raises(TokenInvalidSignatureError):
+        decode_token(token, key=WRONG_KEY, algorithms=[ALGO], verify=True)
+
+    # TokenInvalidSignatureError is a subclass of JWTDecodeError for backward compatibility
+    with pytest.raises(JWTDecodeError):
+        decode_token(token, key=WRONG_KEY, algorithms=[ALGO], verify=True)
+
+
+def test_decode_token_invalid_issuer_raises_token_invalid_issuer_error():
+    KEY = "SECRET"
+    ALGO = "HS256"
+
+    token = create_token(
+        uid="TEST",
+        key=KEY,
+        algorithm=ALGO,
+        type="access",
+        csrf=False,
+        issuer="VALID_ISSUER",
+    )
+
+    with pytest.raises(TokenInvalidIssuerError):
+        decode_token(token, key=KEY, algorithms=[ALGO], verify=True, issuer="BAD_ISSUER")
+
+    # TokenInvalidIssuerError is a subclass of JWTDecodeError for backward compatibility
+    with pytest.raises(JWTDecodeError):
+        decode_token(token, key=KEY, algorithms=[ALGO], verify=True, issuer="BAD_ISSUER")
+
+
+def test_decode_token_invalid_audience_raises_token_invalid_audience_error():
+    KEY = "SECRET"
+    ALGO = "HS256"
+
+    token = create_token(
+        uid="TEST",
+        key=KEY,
+        algorithm=ALGO,
+        type="access",
+        csrf=False,
+        audience=["VALID_AUDIENCE"],
+    )
+
+    with pytest.raises(TokenInvalidAudienceError):
+        decode_token(token, key=KEY, algorithms=[ALGO], verify=True, audience="BAD_AUDIENCE")
+
+    # TokenInvalidAudienceError is a subclass of JWTDecodeError for backward compatibility
+    with pytest.raises(JWTDecodeError):
+        decode_token(token, key=KEY, algorithms=[ALGO], verify=True, audience="BAD_AUDIENCE")

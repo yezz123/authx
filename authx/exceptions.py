@@ -21,6 +21,30 @@ class JWTDecodeError(AuthXException):
     pass
 
 
+class TokenExpiredError(JWTDecodeError):
+    """Exception raised when a JSON Web Token has expired."""
+
+    pass
+
+
+class TokenInvalidSignatureError(JWTDecodeError):
+    """Exception raised when a JSON Web Token has an invalid signature."""
+
+    pass
+
+
+class TokenInvalidAudienceError(JWTDecodeError):
+    """Exception raised when a JSON Web Token has an invalid audience."""
+
+    pass
+
+
+class TokenInvalidIssuerError(JWTDecodeError):
+    """Exception raised when a JSON Web Token has an invalid issuer."""
+
+    pass
+
+
 class NoAuthorizationError(AuthXException):
     """Exception raised when no token can be parsed from request."""
 
