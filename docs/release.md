@@ -1,5 +1,7 @@
 ## Latest Changes
 
+## 1.6.0
+
 ### Breaking Changes
 
 * ✨ Implement rate limiting and session management. PR [#826](https://github.com/yezz123/authx/pull/826) by [@yezz123](https://github.com/yezz123).
@@ -10,21 +12,21 @@
 
 ### Upgrades
 
-* ⬆️ Bump `ruff-pre-commit` from v0.15.11 to v0.15.12. PR [#842](https://github.com/yezz123/authx/pull/842) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆ Bump the python-packages group with 2 updates. PR [#841](https://github.com/yezz123/authx/pull/841) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump gitpython from 3.1.46 to 3.1.47. PR [#840](https://github.com/yezz123/authx/pull/840) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️ Bump `ruff-pre-commit` from v0.15.8 to v0.15.11. PR [#834](https://github.com/yezz123/authx/pull/834) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.15.11 to v0.15.12. PR [#842](https://github.com/yezz123/authx/pull/842) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Bump the python-packages group with 2 updates. PR [#841](https://github.com/yezz123/authx/pull/841) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump gitpython from 3.1.46 to 3.1.47. PR [#840](https://github.com/yezz123/authx/pull/840) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️ Bump `ruff-pre-commit` from v0.15.8 to v0.15.11. PR [#834](https://github.com/yezz123/authx/pull/834) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * Bump cryptography from 46.0.6 to 46.0.7 in /examples. PR [#835](https://github.com/yezz123/authx/pull/835) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump cryptography from 46.0.6 to 46.0.7. PR [#836](https://github.com/yezz123/authx/pull/836) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump the python-packages group with 2 updates. PR [#833](https://github.com/yezz123/authx/pull/833) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️ Bump `ruff-pre-commit` from v0.15.7 to v0.15.8. PR [#832](https://github.com/yezz123/authx/pull/832) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆ Bump pygments from 2.19.2 to 2.20.0. PR [#831](https://github.com/yezz123/authx/pull/831) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump codecov/codecov-action from 5 to 6. PR [#829](https://github.com/yezz123/authx/pull/829) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump the python-packages group with 2 updates. PR [#830](https://github.com/yezz123/authx/pull/830) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump cryptography from 46.0.5 to 46.0.6. PR [#828](https://github.com/yezz123/authx/pull/828) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump cryptography from 46.0.5 to 46.0.6 in `/examples`. PR [#827](https://github.com/yezz123/authx/pull/827) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️ Bump `ruff-pre-commit` from v0.15.6 to v0.15.7. PR [#825](https://github.com/yezz123/authx/pull/825) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆ Bump the python-packages group with 4 updates. PR [#824](https://github.com/yezz123/authx/pull/824) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump cryptography from 46.0.6 to 46.0.7. PR [#836](https://github.com/yezz123/authx/pull/836) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump the python-packages group with 2 updates. PR [#833](https://github.com/yezz123/authx/pull/833) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️ Bump `ruff-pre-commit` from v0.15.7 to v0.15.8. PR [#832](https://github.com/yezz123/authx/pull/832) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Bump pygments from 2.19.2 to 2.20.0. PR [#831](https://github.com/yezz123/authx/pull/831) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump codecov/codecov-action from 5 to 6. PR [#829](https://github.com/yezz123/authx/pull/829) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump the python-packages group with 2 updates. PR [#830](https://github.com/yezz123/authx/pull/830) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump cryptography from 46.0.5 to 46.0.6. PR [#828](https://github.com/yezz123/authx/pull/828) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump cryptography from 46.0.5 to 46.0.6 in `/examples`. PR [#827](https://github.com/yezz123/authx/pull/827) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️ Bump `ruff-pre-commit` from v0.15.6 to v0.15.7. PR [#825](https://github.com/yezz123/authx/pull/825) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Bump the python-packages group with 4 updates. PR [#824](https://github.com/yezz123/authx/pull/824) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
 ## 1.5.2
 
@@ -42,16 +44,16 @@
 
 ### Upgrades
 
-* ⬆ Bump pyjwt from 2.10.1 to 2.12.0. PR [#814](https://github.com/yezz123/authx/pull/814) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️ Bump `ruff-pre-commit` from v0.15.5 to v0.15.6. PR [#816](https://github.com/yezz123/authx/pull/816) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Bump pyjwt from 2.10.1 to 2.12.0. PR [#814](https://github.com/yezz123/authx/pull/814) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️ Bump `ruff-pre-commit` from v0.15.5 to v0.15.6. PR [#816](https://github.com/yezz123/authx/pull/816) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * Bump pyjwt from 2.10.1 to 2.12.0 in /examples. PR [#813](https://github.com/yezz123/authx/pull/813) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump the python-packages group with 2 updates. PR [#815](https://github.com/yezz123/authx/pull/815) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump the python-packages group with 2 updates. PR [#815](https://github.com/yezz123/authx/pull/815) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * Bump pyasn1 from 0.4.8 to 0.6.3 in /examples. PR [#817](https://github.com/yezz123/authx/pull/817) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump pyasn1 from 0.6.2 to 0.6.3. PR [#818](https://github.com/yezz123/authx/pull/818) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️ Bump `ruff-pre-commit` from v0.15.0 to v0.15.5. PR [#811](https://github.com/yezz123/authx/pull/811) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆ Bump the python-packages group with 5 updates. PR [#812](https://github.com/yezz123/authx/pull/812) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump the python-packages group with 3 updates. PR [#810](https://github.com/yezz123/authx/pull/810) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump the python-packages group with 3 updates. PR [#809](https://github.com/yezz123/authx/pull/809) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump pyasn1 from 0.6.2 to 0.6.3. PR [#818](https://github.com/yezz123/authx/pull/818) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️ Bump `ruff-pre-commit` from v0.15.0 to v0.15.5. PR [#811](https://github.com/yezz123/authx/pull/811) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Bump the python-packages group with 5 updates. PR [#812](https://github.com/yezz123/authx/pull/812) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump the python-packages group with 3 updates. PR [#810](https://github.com/yezz123/authx/pull/810) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump the python-packages group with 3 updates. PR [#809](https://github.com/yezz123/authx/pull/809) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
 ### Docs
 
@@ -63,21 +65,21 @@
 
 ### Upgrades
 
-* ⬆ Bump the python-packages group with 9 updates. PR [#807](https://github.com/yezz123/authx/pull/807) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump cryptography from 44.0.2 to 46.0.5 in /examples. PR [#806](https://github.com/yezz123/authx/pull/806) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump cryptography from 44.0.1 to 46.0.5. PR [#805](https://github.com/yezz123/authx/pull/805) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump python-jose from 3.3.0 to 3.4.0. PR [#801](https://github.com/yezz123/authx/pull/801) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump the python-packages group with 9 updates. PR [#807](https://github.com/yezz123/authx/pull/807) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump cryptography from 44.0.2 to 46.0.5 in /examples. PR [#806](https://github.com/yezz123/authx/pull/806) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump cryptography from 44.0.1 to 46.0.5. PR [#805](https://github.com/yezz123/authx/pull/805) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump python-jose from 3.3.0 to 3.4.0. PR [#801](https://github.com/yezz123/authx/pull/801) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * Bump starlette from 0.46.0 to 0.49.1 in /examples. PR [#803](https://github.com/yezz123/authx/pull/803) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump cryptography from 44.0.0 to 44.0.1. PR [#804](https://github.com/yezz123/authx/pull/804) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump cryptography from 44.0.0 to 44.0.1. PR [#804](https://github.com/yezz123/authx/pull/804) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * Bump h11 from 0.14.0 to 0.16.0 in /examples. PR [#802](https://github.com/yezz123/authx/pull/802) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump urllib3 from 1.26.15 to 2.6.3. PR [#800](https://github.com/yezz123/authx/pull/800) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump starlette from 0.41.3 to 0.49.1. PR [#799](https://github.com/yezz123/authx/pull/799) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump pyasn1 from 0.6.1 to 0.6.2. PR [#798](https://github.com/yezz123/authx/pull/798) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump virtualenv from 20.33.1 to 20.36.1. PR [#797](https://github.com/yezz123/authx/pull/797) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️ Bump `ruff-pre-commit` from v0.14.14 to v0.15.0. PR [#795](https://github.com/yezz123/authx/pull/795) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.14.13 to v0.14.14. PR [#791](https://github.com/yezz123/authx/pull/791) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.14.11 to v0.14.12. PR [#790](https://github.com/yezz123/authx/pull/790) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.14.10 to v0.14.11. PR [#789](https://github.com/yezz123/authx/pull/789) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Bump urllib3 from 1.26.15 to 2.6.3. PR [#800](https://github.com/yezz123/authx/pull/800) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump starlette from 0.41.3 to 0.49.1. PR [#799](https://github.com/yezz123/authx/pull/799) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump pyasn1 from 0.6.1 to 0.6.2. PR [#798](https://github.com/yezz123/authx/pull/798) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump virtualenv from 20.33.1 to 20.36.1. PR [#797](https://github.com/yezz123/authx/pull/797) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️ Bump `ruff-pre-commit` from v0.14.14 to v0.15.0. PR [#795](https://github.com/yezz123/authx/pull/795) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.14.13 to v0.14.14. PR [#791](https://github.com/yezz123/authx/pull/791) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.14.11 to v0.14.12. PR [#790](https://github.com/yezz123/authx/pull/790) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.14.10 to v0.14.11. PR [#789](https://github.com/yezz123/authx/pull/789) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 
 ### Docs
 
@@ -107,22 +109,22 @@
 
 ### Upgrades
 
-* ⬆️ Bump ruff-pre-commit from v0.14.6 to v0.14.10. PR [#777](https://github.com/yezz123/authx/pull/777) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.14.1 to v0.14.6. PR [#773](https://github.com/yezz123/authx/pull/773) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆ Bump actions/checkout from 5 to 6. PR [#774](https://github.com/yezz123/authx/pull/774) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️ Bump `ruff-pre-commit` from v0.12.11 to v0.14.1. PR [#770](https://github.com/yezz123/authx/pull/770) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆ Bump astral-sh/setup-uv from 6 to 7. PR [#772](https://github.com/yezz123/authx/pull/772) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump actions/setup-python from 5 to 6. PR [#769](https://github.com/yezz123/authx/pull/769) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️ Bump `ruff-pre-commit` from v0.12.10 to v0.12.11. PR [#768](https://github.com/yezz123/authx/pull/768) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.12.9 to v0.12.10. PR [#767](https://github.com/yezz123/authx/pull/767) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.12.3 to v0.12.9. PR [#764](https://github.com/yezz123/authx/pull/764) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆ Bump actions/checkout from 4 to 5. PR [#766](https://github.com/yezz123/authx/pull/766) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump samuelcolvin/check-python-version from 4.1 to 5. PR [#765](https://github.com/yezz123/authx/pull/765) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️ Bump `ruff-pre-commit` from v0.12.2 to v0.12.3. PR [#762](https://github.com/yezz123/authx/pull/762) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.12.1 to v0.12.2. PR [#761](https://github.com/yezz123/authx/pull/761) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.11.13 to v0.12.1. PR [#760](https://github.com/yezz123/authx/pull/760) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.11.12 to v0.11.13. PR [#759](https://github.com/yezz123/authx/pull/759) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.11.11 to v0.11.12. PR [#757](https://github.com/yezz123/authx/pull/757) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump ruff-pre-commit from v0.14.6 to v0.14.10. PR [#777](https://github.com/yezz123/authx/pull/777) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.14.1 to v0.14.6. PR [#773](https://github.com/yezz123/authx/pull/773) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Bump actions/checkout from 5 to 6. PR [#774](https://github.com/yezz123/authx/pull/774) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️ Bump `ruff-pre-commit` from v0.12.11 to v0.14.1. PR [#770](https://github.com/yezz123/authx/pull/770) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Bump astral-sh/setup-uv from 6 to 7. PR [#772](https://github.com/yezz123/authx/pull/772) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump actions/setup-python from 5 to 6. PR [#769](https://github.com/yezz123/authx/pull/769) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️ Bump `ruff-pre-commit` from v0.12.10 to v0.12.11. PR [#768](https://github.com/yezz123/authx/pull/768) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.12.9 to v0.12.10. PR [#767](https://github.com/yezz123/authx/pull/767) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.12.3 to v0.12.9. PR [#764](https://github.com/yezz123/authx/pull/764) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Bump actions/checkout from 4 to 5. PR [#766](https://github.com/yezz123/authx/pull/766) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️ Bump samuelcolvin/check-python-version from 4.1 to 5. PR [#765](https://github.com/yezz123/authx/pull/765) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️ Bump `ruff-pre-commit` from v0.12.2 to v0.12.3. PR [#762](https://github.com/yezz123/authx/pull/762) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.12.1 to v0.12.2. PR [#761](https://github.com/yezz123/authx/pull/761) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.11.13 to v0.12.1. PR [#760](https://github.com/yezz123/authx/pull/760) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.11.12 to v0.11.13. PR [#759](https://github.com/yezz123/authx/pull/759) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.11.11 to v0.11.12. PR [#757](https://github.com/yezz123/authx/pull/757) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 
 ### Docs
 
@@ -147,11 +149,11 @@
 
 ### Upgrades
 
-* ⬆️ Bump `ruff-pre-commit` from v0.11.9 to v0.11.11. PR [#751](https://github.com/yezz123/authx/pull/751) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.11.6 to v0.11.9. PR [#750](https://github.com/yezz123/authx/pull/750) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆ Bump astral-sh/setup-uv from 5 to 6. PR [#749](https://github.com/yezz123/authx/pull/749) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️ Bump `ruff-pre-commit` from v0.11.5 to v0.11.6. PR [#748](https://github.com/yezz123/authx/pull/748) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.11.2 to v0.11.5. PR [#747](https://github.com/yezz123/authx/pull/747) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.11.9 to v0.11.11. PR [#751](https://github.com/yezz123/authx/pull/751) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.11.6 to v0.11.9. PR [#750](https://github.com/yezz123/authx/pull/750) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️ Bump astral-sh/setup-uv from 5 to 6. PR [#749](https://github.com/yezz123/authx/pull/749) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️ Bump `ruff-pre-commit` from v0.11.5 to v0.11.6. PR [#748](https://github.com/yezz123/authx/pull/748) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.11.2 to v0.11.5. PR [#747](https://github.com/yezz123/authx/pull/747) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 
 ### Docs
 
@@ -169,18 +171,18 @@
 
 ### Upgrades
 
-* ⬆️ Bump `ruff-pre-commit` from v0.9.10 to v0.11.2. PR [#743](https://github.com/yezz123/authx/pull/743) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.9.9 to v0.9.10. PR [#740](https://github.com/yezz123/authx/pull/740) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.9.7 to v0.9.9. PR [#739](https://github.com/yezz123/authx/pull/739) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.9.6 to v0.9.7. PR [#735](https://github.com/yezz123/authx/pull/735) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.9.4 to v0.9.6. PR [#733](https://github.com/yezz123/authx/pull/733) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ [pre-commit.ci] pre-commit autoupdate. PR [#732](https://github.com/yezz123/authx/pull/732) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Update pytz requirement in the python-packages group. PR [#731](https://github.com/yezz123/authx/pull/731) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️ [pre-commit.ci] pre-commit autoupdate. PR [#730](https://github.com/yezz123/authx/pull/730) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.9.1 to v0.9.2. PR [#729](https://github.com/yezz123/authx/pull/729) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.8.6 to v0.9.1. PR [#728](https://github.com/yezz123/authx/pull/728) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump `ruff-pre-commit` from v0.8.4 to v0.8.6 . PR [#727](https://github.com/yezz123/authx/pull/727) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump astral-sh/setup-uv from 4 to 5. PR [#724](https://github.com/yezz123/authx/pull/724) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️ Bump `ruff-pre-commit` from v0.9.10 to v0.11.2. PR [#743](https://github.com/yezz123/authx/pull/743) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.9.9 to v0.9.10. PR [#740](https://github.com/yezz123/authx/pull/740) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.9.7 to v0.9.9. PR [#739](https://github.com/yezz123/authx/pull/739) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.9.6 to v0.9.7. PR [#735](https://github.com/yezz123/authx/pull/735) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.9.4 to v0.9.6. PR [#733](https://github.com/yezz123/authx/pull/733) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ [pre-commit.ci] pre-commit autoupdate. PR [#732](https://github.com/yezz123/authx/pull/732) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Update pytz requirement in the python-packages group. PR [#731](https://github.com/yezz123/authx/pull/731) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️ [pre-commit.ci] pre-commit autoupdate. PR [#730](https://github.com/yezz123/authx/pull/730) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.9.1 to v0.9.2. PR [#729](https://github.com/yezz123/authx/pull/729) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.8.6 to v0.9.1. PR [#728](https://github.com/yezz123/authx/pull/728) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump `ruff-pre-commit` from v0.8.4 to v0.8.6 . PR [#727](https://github.com/yezz123/authx/pull/727) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump astral-sh/setup-uv from 4 to 5. PR [#724](https://github.com/yezz123/authx/pull/724) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
 ### Docs
 
@@ -213,22 +215,22 @@
 
 ### Upgrades
 
-* ⬆️️ Bump `ruff-pre-commit` from v0.8.1 to v0.8.4. PR [#719](https://github.com/yezz123/authx/pull/719) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️ Bump ruff-pre-commit from v0.8.0 to v0.8.1. PR [#707](https://github.com/yezz123/authx/pull/707) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump the python-packages group with 17 updates. PR [#706](https://github.com/yezz123/authx/pull/706) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️ Bump `ruff-pre-commit` from v0.7.4 to v0.8.0. PR [#705](https://github.com/yezz123/authx/pull/705) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️ Bump `ruff-pre-commit` from v0.7.3 to v0.7.4. PR [#703](https://github.com/yezz123/authx/pull/703) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump codecov/codecov-action from 4 to 5. PR [#701](https://github.com/yezz123/authx/pull/701) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️ Bump `ruff-pre-commit` from v0.7.2 to v0.7.3. PR [#699](https://github.com/yezz123/authx/pull/699) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump pypa/gh-action-pypi-publish from 1.11.0 to 1.12.2. PR [#697](https://github.com/yezz123/authx/pull/697) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️ Upgrade the uv setup package to 4.1. PR [#700](https://github.com/yezz123/authx/pull/700) by [@yezz123](https://github.com/yezz123).
-* ⬆️️ Bump `ruff-pre-commit` from v0.7.1 to v0.7.2. PR [#696](https://github.com/yezz123/authx/pull/696) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump the python-packages group with 8 updates. PR [#694](https://github.com/yezz123/authx/pull/694) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️ Bump pypa/gh-action-pypi-publish from 1.10.3 to 1.11.0. PR [#695](https://github.com/yezz123/authx/pull/695) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️ Bump `ruff-pre-commit` from v0.7.0 to v0.7.1. PR [#693](https://github.com/yezz123/authx/pull/693) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump the python-packages group with 7 updates. PR [#692](https://github.com/yezz123/authx/pull/692) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️ Bump `ruff-pre-commit` from v0.6.9 to v0.7.0. PR [#690](https://github.com/yezz123/authx/pull/690) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️ Bump the python-packages group with 12 updates. PR [#689](https://github.com/yezz123/authx/pull/689) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️ Bump `ruff-pre-commit` from v0.8.1 to v0.8.4. PR [#719](https://github.com/yezz123/authx/pull/719) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️ Bump ruff-pre-commit from v0.8.0 to v0.8.1. PR [#707](https://github.com/yezz123/authx/pull/707) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump the python-packages group with 17 updates. PR [#706](https://github.com/yezz123/authx/pull/706) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️ Bump `ruff-pre-commit` from v0.7.4 to v0.8.0. PR [#705](https://github.com/yezz123/authx/pull/705) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️ Bump `ruff-pre-commit` from v0.7.3 to v0.7.4. PR [#703](https://github.com/yezz123/authx/pull/703) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump codecov/codecov-action from 4 to 5. PR [#701](https://github.com/yezz123/authx/pull/701) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️ Bump `ruff-pre-commit` from v0.7.2 to v0.7.3. PR [#699](https://github.com/yezz123/authx/pull/699) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump pypa/gh-action-pypi-publish from 1.11.0 to 1.12.2. PR [#697](https://github.com/yezz123/authx/pull/697) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️ Upgrade the uv setup package to 4.1. PR [#700](https://github.com/yezz123/authx/pull/700) by [@yezz123](https://github.com/yezz123).
+* ⬆️️️ Bump `ruff-pre-commit` from v0.7.1 to v0.7.2. PR [#696](https://github.com/yezz123/authx/pull/696) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump the python-packages group with 8 updates. PR [#694](https://github.com/yezz123/authx/pull/694) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️ Bump pypa/gh-action-pypi-publish from 1.10.3 to 1.11.0. PR [#695](https://github.com/yezz123/authx/pull/695) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️ Bump `ruff-pre-commit` from v0.7.0 to v0.7.1. PR [#693](https://github.com/yezz123/authx/pull/693) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump the python-packages group with 7 updates. PR [#692](https://github.com/yezz123/authx/pull/692) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️ Bump `ruff-pre-commit` from v0.6.9 to v0.7.0. PR [#690](https://github.com/yezz123/authx/pull/690) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️ Bump the python-packages group with 12 updates. PR [#689](https://github.com/yezz123/authx/pull/689) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
 ## 1.4.0
 
@@ -244,12 +246,12 @@ __Note:__ This release contains breaking changes, Dropping support for Python 3.
 
 ### Upgrades
 
-* ⬆️️ Bump starlette from 0.39.2 to 0.40.0. PR [#688](https://github.com/yezz123/authx/pull/688) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️ Bump the python-packages group with 16 updates. PR [#685](https://github.com/yezz123/authx/pull/685) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️ Bump the Pre-commit Dependencies Version. PR [#684](https://github.com/yezz123/authx/pull/684) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️ Bump pypa/gh-action-pypi-publish from 1.10.2 to 1.10.3. PR [#681](https://github.com/yezz123/authx/pull/681) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️️ Update dependencies in `uv.lock`. PR [#680](https://github.com/yezz123/authx/pull/680) by [@yezz123](https://github.com/yezz123).
-* ⬆️️ Bump `ruff-pre-commit` from v0.6.7 to v0.6.8. PR [#678](https://github.com/yezz123/authx/pull/678) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️ Bump starlette from 0.39.2 to 0.40.0. PR [#688](https://github.com/yezz123/authx/pull/688) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️ Bump the python-packages group with 16 updates. PR [#685](https://github.com/yezz123/authx/pull/685) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️ Bump the Pre-commit Dependencies Version. PR [#684](https://github.com/yezz123/authx/pull/684) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️ Bump pypa/gh-action-pypi-publish from 1.10.2 to 1.10.3. PR [#681](https://github.com/yezz123/authx/pull/681) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️️ Update dependencies in `uv.lock`. PR [#680](https://github.com/yezz123/authx/pull/680) by [@yezz123](https://github.com/yezz123).
+* ⬆️️️ Bump `ruff-pre-commit` from v0.6.7 to v0.6.8. PR [#678](https://github.com/yezz123/authx/pull/678) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 
 ### Docs
 
@@ -263,22 +265,22 @@ __Note:__ This release contains breaking changes, Dropping support for Python 3.
 
 ### Upgrades
 
-* ⬆️️️ Bump `ruff-pre-commit` from v0.6.5 to v0.6.7. PR [#673](https://github.com/yezz123/authx/pull/673) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️ Bump pypa/gh-action-pypi-publish from 1.10.1 to 1.10.2. PR [#672](https://github.com/yezz123/authx/pull/672) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️️ Bump ruff-pre-commit from v0.6.4 to v0.6.5. PR [#671](https://github.com/yezz123/authx/pull/671) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️ Bump ruff-pre-commit from v0.6.3 to v0.6.4. PR [#670](https://github.com/yezz123/authx/pull/670) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️ Bump pypa/gh-action-pypi-publish from 1.10.0 to 1.10.1. PR [#669](https://github.com/yezz123/authx/pull/669) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️️️ Bump cryptography from 43.0.0 to 43.0.1. PR [#668](https://github.com/yezz123/authx/pull/668) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️️ Bump ruff-pre-commit from v0.6.2 to v0.6.3. PR [#667](https://github.com/yezz123/authx/pull/667) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️ Bump ruff-pre-commit from v0.6.1 to v0.6.2. PR [#662](https://github.com/yezz123/authx/pull/662) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️ Bump pypa/gh-action-pypi-publish from 1.9.0 to 1.10.0. PR [#665](https://github.com/yezz123/authx/pull/665) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️️ Bump ruff-pre-commit from v0.5.7 to v0.6.1. PR [#659](https://github.com/yezz123/authx/pull/659) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️ Bump ruff-pre-commit from v0.5.6 to v0.5.7. PR [#656](https://github.com/yezz123/authx/pull/656) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️ Bump ruff-pre-commit from v0.5.5 to v0.5.6. PR [#654](https://github.com/yezz123/authx/pull/654) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️ Bump the python-packages group with 5 updates. PR [#652](https://github.com/yezz123/authx/pull/652) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️️ Bump ruff-pre-commit from v0.5.4 to v0.5.5. PR [#653](https://github.com/yezz123/authx/pull/653) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️️ Update uv version to `0.2.30`. PR [#650](https://github.com/yezz123/authx/pull/650) by [@pinchXOXO](https://github.com/pinchXOXO).
-* ⬆️️️ Bump ruff-pre-commit from v0.5.2 to v0.5.4. PR [#648](https://github.com/yezz123/authx/pull/648) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️ Bump `ruff-pre-commit` from v0.6.5 to v0.6.7. PR [#673](https://github.com/yezz123/authx/pull/673) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️ Bump pypa/gh-action-pypi-publish from 1.10.1 to 1.10.2. PR [#672](https://github.com/yezz123/authx/pull/672) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️️ Bump ruff-pre-commit from v0.6.4 to v0.6.5. PR [#671](https://github.com/yezz123/authx/pull/671) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️ Bump ruff-pre-commit from v0.6.3 to v0.6.4. PR [#670](https://github.com/yezz123/authx/pull/670) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️ Bump pypa/gh-action-pypi-publish from 1.10.0 to 1.10.1. PR [#669](https://github.com/yezz123/authx/pull/669) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️️️ Bump cryptography from 43.0.0 to 43.0.1. PR [#668](https://github.com/yezz123/authx/pull/668) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️️ Bump ruff-pre-commit from v0.6.2 to v0.6.3. PR [#667](https://github.com/yezz123/authx/pull/667) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️ Bump ruff-pre-commit from v0.6.1 to v0.6.2. PR [#662](https://github.com/yezz123/authx/pull/662) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️ Bump pypa/gh-action-pypi-publish from 1.9.0 to 1.10.0. PR [#665](https://github.com/yezz123/authx/pull/665) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️️ Bump ruff-pre-commit from v0.5.7 to v0.6.1. PR [#659](https://github.com/yezz123/authx/pull/659) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️ Bump ruff-pre-commit from v0.5.6 to v0.5.7. PR [#656](https://github.com/yezz123/authx/pull/656) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️ Bump ruff-pre-commit from v0.5.5 to v0.5.6. PR [#654](https://github.com/yezz123/authx/pull/654) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️ Bump the python-packages group with 5 updates. PR [#652](https://github.com/yezz123/authx/pull/652) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️️ Bump ruff-pre-commit from v0.5.4 to v0.5.5. PR [#653](https://github.com/yezz123/authx/pull/653) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️️ Update uv version to `0.2.30`. PR [#650](https://github.com/yezz123/authx/pull/650) by [@pinchXOXO](https://github.com/pinchXOXO).
+* ⬆️️️️ Bump ruff-pre-commit from v0.5.2 to v0.5.4. PR [#648](https://github.com/yezz123/authx/pull/648) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 
 ### Docs
 
@@ -310,19 +312,19 @@ __Note:__ This release contains breaking changes, Dropping support for Python 3.
 
 ### Upgrades
 
-* ⬆️️️ Bump ruff-pre-commit from v0.5.1 to v0.5.2. PR [#644](https://github.com/yezz123/authx/pull/644) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️️ Update uv version to `0.2.24`. PR [#642](https://github.com/yezz123/authx/pull/642) by [@pinchXOXO](https://github.com/pinchXOXO).
-* ⬆️️️ Bump `ruff-pre-commit` from v0.5.0 to v0.5.1. PR [#639](https://github.com/yezz123/authx/pull/639) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️ Bump ruff-pre-commit from v0.5.1 to v0.5.2. PR [#644](https://github.com/yezz123/authx/pull/644) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️️ Update uv version to `0.2.24`. PR [#642](https://github.com/yezz123/authx/pull/642) by [@pinchXOXO](https://github.com/pinchXOXO).
+* ⬆️️️️ Bump `ruff-pre-commit` from v0.5.0 to v0.5.1. PR [#639](https://github.com/yezz123/authx/pull/639) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 
 ## 1.2.1
 
 ### Upgrades
 
-* ⬆️️️️ Bump certifi from `2024.6.2` to `2024.7.4`. PR [#637](https://github.com/yezz123/authx/pull/637) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️️️ Update pydantic and pydantic-core versions to 2.8.0 and 2.20.0. PR [#635](https://github.com/yezz123/authx/pull/635) by [@yezz123](https://github.com/yezz123).
-* ⬆️️️️ Bump `ruff-pre-commit` from v0.4.10 to v0.5.0. PR [#634](https://github.com/yezz123/authx/pull/634) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️️ Bump `uv` version to `0.2.18`. PR [#632](https://github.com/yezz123/authx/pull/632) by [@pg365](https://github.com/pg365).
-* ⬆️️️️ Bump `ruff-pre-commit` from v0.4.9 to v0.4.10. PR [#627](https://github.com/yezz123/authx/pull/627) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️️ Bump certifi from `2024.6.2` to `2024.7.4`. PR [#637](https://github.com/yezz123/authx/pull/637) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️️️ Update pydantic and pydantic-core versions to 2.8.0 and 2.20.0. PR [#635](https://github.com/yezz123/authx/pull/635) by [@yezz123](https://github.com/yezz123).
+* ⬆️️️️️ Bump `ruff-pre-commit` from v0.4.10 to v0.5.0. PR [#634](https://github.com/yezz123/authx/pull/634) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️️ Bump `uv` version to `0.2.18`. PR [#632](https://github.com/yezz123/authx/pull/632) by [@pg365](https://github.com/pg365).
+* ⬆️️️️️ Bump `ruff-pre-commit` from v0.4.9 to v0.4.10. PR [#627](https://github.com/yezz123/authx/pull/627) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 
 ### Docs
 
@@ -354,15 +356,15 @@ __Note:__ This release contains breaking changes, Dropping support for Python 3.
 
 ### Upgrades
 
-* ⬆️️️️ Bump urllib3 from 2.2.1 to 2.2.2 in /requirements. PR [#622](https://github.com/yezz123/authx/pull/622) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️️️ Bump `ruff-pre-commit` from v0.4.8 to v0.4.9. PR [#623](https://github.com/yezz123/authx/pull/623) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️️ Bump pypa/gh-action-pypi-publish from 1.8.14 to 1.9.0. PR [#620](https://github.com/yezz123/authx/pull/620) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️️️ Bump `ruff-pre-commit` from v0.4.7 to v0.4.8. PR [#601](https://github.com/yezz123/authx/pull/601) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️️ Bump the python-packages group with 2 updates. PR [#600](https://github.com/yezz123/authx/pull/600) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️️️ Bump `ruff-pre-commit` from v0.4.5 to v0.4.7. PR [#598](https://github.com/yezz123/authx/pull/598) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️️ [pre-commit.ci] pre-commit autoupdate. PR [#597](https://github.com/yezz123/authx/pull/597) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️️ Bump the python-packages group with 4 updates. PR [#596](https://github.com/yezz123/authx/pull/596) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆️️️️ Update uv version to `0.2.3`. PR [#595](https://github.com/yezz123/authx/pull/595) by [@pinchXOXO](https://github.com/pinchXOXO).
+* ⬆️️️️️ Bump urllib3 from 2.2.1 to 2.2.2 in /requirements. PR [#622](https://github.com/yezz123/authx/pull/622) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️️️ Bump `ruff-pre-commit` from v0.4.8 to v0.4.9. PR [#623](https://github.com/yezz123/authx/pull/623) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️️ Bump pypa/gh-action-pypi-publish from 1.8.14 to 1.9.0. PR [#620](https://github.com/yezz123/authx/pull/620) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️️️ Bump `ruff-pre-commit` from v0.4.7 to v0.4.8. PR [#601](https://github.com/yezz123/authx/pull/601) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️️ Bump the python-packages group with 2 updates. PR [#600](https://github.com/yezz123/authx/pull/600) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️️️ Bump `ruff-pre-commit` from v0.4.5 to v0.4.7. PR [#598](https://github.com/yezz123/authx/pull/598) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️️ [pre-commit.ci] pre-commit autoupdate. PR [#597](https://github.com/yezz123/authx/pull/597) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+* ⬆️️️️️ Bump the python-packages group with 4 updates. PR [#596](https://github.com/yezz123/authx/pull/596) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️️️ Update uv version to `0.2.3`. PR [#595](https://github.com/yezz123/authx/pull/595) by [@pinchXOXO](https://github.com/pinchXOXO).
 
 ### Docs
 
@@ -384,7 +386,7 @@ __Note:__ This release contains breaking changes, Dropping support for Python 3.
 * Bump requests from 2.31.0 to 2.32.2 in /requirements. PR [#592](https://github.com/yezz123/authx/pull/592) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ☔ [pre-commit.ci] pre-commit autoupdate. PR [#590](https://github.com/yezz123/authx/pull/590) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ☔ [pre-commit.ci] pre-commit autoupdate. PR [#585](https://github.com/yezz123/authx/pull/585) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
-* ⬆️️️️ Bump jinja2 from 3.1.3 to 3.1.4 in /requirements. PR [#584](https://github.com/yezz123/authx/pull/584) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️️️ Bump jinja2 from 3.1.3 to 3.1.4 in /requirements. PR [#584](https://github.com/yezz123/authx/pull/584) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
 ### Internal
 
@@ -407,7 +409,7 @@ __Note:__ This release contains breaking changes, Dropping support for Python 3.
 
 ### Dependencies
 
-* ⬆️️️️ Update `uv` version in CI. PR [#582](https://github.com/yezz123/authx/pull/582) by [@pinchXOXO](https://github.com/pinchXOXO).
+* ⬆️️️️️ Update `uv` version in CI. PR [#582](https://github.com/yezz123/authx/pull/582) by [@pinchXOXO](https://github.com/pinchXOXO).
 * [pre-commit.ci] pre-commit autoupdate. PR [#579](https://github.com/yezz123/authx/pull/579) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 
 ## 1.1.1
@@ -419,8 +421,8 @@ __Note:__ This release contains breaking changes, Dropping support for Python 3.
 
 ### Dependencies
 
-* ⬆️️️️ Upgrade Pydantic version. PR [#574](https://github.com/yezz123/authx/pull/574) by [@yezz123](https://github.com/yezz123).
-* ⬆️️️️  Bump `idna` from 3.6 to 3.7. PR [#573](https://github.com/yezz123/authx/pull/573) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️️️ Upgrade Pydantic version. PR [#574](https://github.com/yezz123/authx/pull/574) by [@yezz123](https://github.com/yezz123).
+* ⬆️️️️️  Bump `idna` from 3.6 to 3.7. PR [#573](https://github.com/yezz123/authx/pull/573) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
 ### Documentation
 
@@ -440,8 +442,8 @@ __Note:__ This release contains breaking changes, Dropping support for Python 3.
 
 ### Dependencies
 
-* ⬆️️️️ Bump dependencies in requirements files. PR [#567](https://github.com/yezz123/authx/pull/567) by [@yezz123](https://github.com/yezz123).
-* ⬆️️️️ Bump pillow from 10.2.0 to 10.3.0 in /requirements. PR [#564](https://github.com/yezz123/authx/pull/564) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆️️️️️ Bump dependencies in requirements files. PR [#567](https://github.com/yezz123/authx/pull/567) by [@yezz123](https://github.com/yezz123).
+* ⬆️️️️️ Bump pillow from 10.2.0 to 10.3.0 in /requirements. PR [#564](https://github.com/yezz123/authx/pull/564) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
 ## 1.0.0
 
@@ -484,61 +486,61 @@ __Note:__ This release contains breaking changes, Dropping support for Python 3.
 
 ### Dependencies
 
-* ⬆️️️️ Update typing-extensions requirement from <4.6.0,>=3.7.4 to >=3.7.4,<4.7.0. PR [#458](https://github.com/yezz123/authx/pull/458) by @dependabot
-* ⬆️️️️ Bump itsdangerous from 2.0.1 to 2.1.2. PR [#457](https://github.com/yezz123/authx/pull/457) by @dependabot
-* ⬆️️️️ Bump sqlalchemy from 1.4.37 to 2.0.15. PR [#456](https://github.com/yezz123/authx/pull/456) by @dependabot
-* ⬆️️️️ Update fastapi requirement from <0.96.0,>=0.65.2 to >=0.65.2,<0.97.0. PR [#463](https://github.com/yezz123/authx/pull/463) by @dependabot
-* ⬆️️️️ Update starlette requirement from <0.27.1,>=0.14.02 to >=0.14.02,<0.28.1. PR [#468](https://github.com/yezz123/authx/pull/468) by @dependabot
-* ⬆️️️️ Update pyinstrument requirement from <4.5.0,>=4.1.1 to >=4.1.1,<4.6.0. PR [#466](https://github.com/yezz123/authx/pull/466) by @dependabot
-* ⬆️️️️ Bump pytest from 7.3.1 to 7.3.2. PR [#464](https://github.com/yezz123/authx/pull/464) by @dependabot
-* ⬆️️️️ Bump sqlalchemy from 2.0.15 to 2.0.16. PR [#465](https://github.com/yezz123/authx/pull/465) by @dependabot
-* ⬆️️️️ Update fastapi requirement from <0.97.0,>=0.65.2 to >=0.65.2,<0.98.0. PR [#467](https://github.com/yezz123/authx/pull/467) by @dependabot
-* ⬆️️️️ Bump pre-commit from 3.3.2 to 3.3.3. PR [#469](https://github.com/yezz123/authx/pull/469) by @dependabot
-* ⬆️️️️ Bump sqlalchemy from 2.0.16 to 2.0.17. PR [#471](https://github.com/yezz123/authx/pull/471) by @dependabot
-* ⬆️️️️ Bump mypy from 1.3.0 to 1.4.0. PR [#472](https://github.com/yezz123/authx/pull/472) by @dependabot
-* ⬆️️️️ Bump pytest from 7.3.2 to 7.4.0. PR [#473](https://github.com/yezz123/authx/pull/473) by @dependabot
-* ⬆️️️️ Update fastapi requirement from <0.98.0,>=0.65.2 to >=0.65.2,<0.99.0. PR [#474](https://github.com/yezz123/authx/pull/474) by @dependabot
-* ⬆️️️️ Update redis requirement from <4.5.6,>=4.3.3 to >=4.3.3,<4.6.1. PR [#477](https://github.com/yezz123/authx/pull/477) by @dependabot
-* ⬆️️️️ Bump mypy from 1.4.0 to 1.4.1. PR [#476](https://github.com/yezz123/authx/pull/476) by @dependabot
-* ⬆️️️️ Bump pypa/gh-action-pypi-publish from 1.8.6 to 1.8.7. PR [#479](https://github.com/yezz123/authx/pull/479) by @dependabot
-* ⬆️️️️️ Bump cryptography from 41.0.1 to 41.0.2. PR [#485](https://github.com/yezz123/authx/pull/485) by @dependabot
-* ⬆️️️️ Bump pypa/gh-action-pypi-publish from 1.8.7 to 1.8.8. PR [#486](https://github.com/yezz123/authx/pull/486) by @dependabot
-* ⬆️️️️️ Bump certifi from 2023.5.7 to 2023.7.22. PR [#487](https://github.com/yezz123/authx/pull/487) by @dependabot
-* ⬆️️️️️ Bump cryptography from 41.0.2 to 41.0.3. PR [#488](https://github.com/yezz123/authx/pull/488) by @dependabot
-* ⬆️️️️ Bump pypa/gh-action-pypi-publish from 1.8.8 to 1.8.10. PR [#489](https://github.com/yezz123/authx/pull/489) by @dependabot
-* ⬆️️️️ Bump actions/checkout from 3 to 4. PR [#491](https://github.com/yezz123/authx/pull/491) by @dependabot
-* ⬆️️️️️ Upgrade Dependencies. PR [#492](https://github.com/yezz123/authx/pull/492) by [@yezz123](https://github.com/yezz123)
-* ⬆️️️️️ Bump urllib3 from 2.0.5 to 2.0.6. PR [#493](https://github.com/yezz123/authx/pull/493) by @dependabot
-* ⬆️️️️️ Include Python 3.12. PR [#494](https://github.com/yezz123/authx/pull/494) by [@yezz123](https://github.com/yezz123)
-* ⬆️️️️️ Bump urllib3 from 2.0.6 to 2.0.7. PR [#495](https://github.com/yezz123/authx/pull/495) by @dependabot
-* ⬆️️️️️ Bump cryptography from 41.0.4 to 41.0.6. PR [#498](https://github.com/yezz123/authx/pull/498) by @dependabot
-* ⬆️️️️ Bump pypa/gh-action-pypi-publish from 1.8.10 to 1.8.11. PR [#499](https://github.com/yezz123/authx/pull/499) by @dependabot
-* ⬆️️️️ Upgrade Dependencies. PR [#500](https://github.com/yezz123/authx/pull/500) by [@yezz123](https://github.com/yezz123)
-* ⬆️️️️ Bump actions/setup-python from 4 to 5. PR [#503](https://github.com/yezz123/authx/pull/503) by @dependabot
-* ⬆️️️️️ Bump jinja2 from 3.1.2 to 3.1.3. PR [#505](https://github.com/yezz123/authx/pull/505) by @dependabot
-* ⬆️️️️ Bump ruff from 0.1.8 to 0.1.13. PR [#510](https://github.com/yezz123/authx/pull/510) by @dependabot
-* ⬆️️️️ Bump fastapi from 0.98.0 to 0.109.0. PR [#509](https://github.com/yezz123/authx/pull/509) by @dependabot
-* ⬆️️️️ Bump black from 23.12.0 to 23.12.1. PR [#508](https://github.com/yezz123/authx/pull/508) by @dependabot
-* ⬆️️️️ Bump ruff from 0.1.13 to 0.1.14. PR [#515](https://github.com/yezz123/authx/pull/515) by @dependabot
-* ⬆️️️️ Bump mkdocs-material from 9.5.3 to 9.5.4. PR [#517](https://github.com/yezz123/authx/pull/517) by @dependabot
-* ⬆️️️️ Bump mypy from 1.7.1 to 1.8.0. PR [#516](https://github.com/yezz123/authx/pull/516) by @dependabot
-* ⬆️️️️ Bump black from 23.12.1 to 24.1.1. PR [#519](https://github.com/yezz123/authx/pull/519) by @dependabot
-* ⬆️️️️ Bump mkdocs-material from 9.5.4 to 9.5.6. PR [#521](https://github.com/yezz123/authx/pull/521) by @dependabot
-* ⬆️️️️ Bump pytest-asyncio from 0.23.3 to 0.23.4. PR [#520](https://github.com/yezz123/authx/pull/520) by @dependabot
-* ⬆️️️️ Bump codecov/codecov-action from 3 to 4. PR [#524](https://github.com/yezz123/authx/pull/524) by @dependabot
-* ⬆️️️️ Bump the python-packages group with 3 updates. PR [#525](https://github.com/yezz123/authx/pull/525) by @dependabot
-* ⬆️️️️️ Upgrade configuration for Ruff v0.2.0. PR [#526](https://github.com/yezz123/authx/pull/526) by [@yezz123](https://github.com/yezz123)
-* ⬆️️️️ Bump the python-packages group with 3 updates. PR [#527](https://github.com/yezz123/authx/pull/527) by @dependabot
-* ⬆️️️️️ Bump fastapi from 0.98.0 to 0.109.2. PR [#529](https://github.com/yezz123/authx/pull/529) by @dependabot
-* ⬆️️️️️ Bump cryptography from 41.0.7 to 42.0.0. PR [#530](https://github.com/yezz123/authx/pull/530) by @dependabot
-* ⬆️️️️ Bump the python-packages group with 3 updates. PR [#535](https://github.com/yezz123/authx/pull/535) by @dependabot
-* ⬆️️️️ Bump pre-commit/action from 3.0.0 to 3.0.1. PR [#534](https://github.com/yezz123/authx/pull/534) by @dependabot
-* ⬆️️️️ Bump the python-packages group with 6 updates. PR [#541](https://github.com/yezz123/authx/pull/541) by @dependabot
-* ⬆️️️️️ Update version for uv. PR [#546](https://github.com/yezz123/authx/pull/546) by [@yezz123](https://github.com/yezz123)
-* ⬆️️️️ Bump the python-packages group with 5 updates. PR [#548](https://github.com/yezz123/authx/pull/548) by @dependabot
-* ⬆️️️️ Bump pypa/gh-action-pypi-publish from 1.8.11 to 1.8.12. PR [#550](https://github.com/yezz123/authx/pull/550) by @dependabot
-* ⬆️️️️ Bump uv version to 0.1.17. PR [#554](https://github.com/yezz123/authx/pull/554) by [@pinchXOXO](https://github.com/pinchXOXO)
-* ⬆️️️️ Bump pypa/gh-action-pypi-publish from 1.8.12 to 1.8.14. PR [#556](https://github.com/yezz123/authx/pull/556) by @dependabot
+* ⬆️️️️️ Update typing-extensions requirement from <4.6.0,>=3.7.4 to >=3.7.4,<4.7.0. PR [#458](https://github.com/yezz123/authx/pull/458) by @dependabot
+* ⬆️️️️️ Bump itsdangerous from 2.0.1 to 2.1.2. PR [#457](https://github.com/yezz123/authx/pull/457) by @dependabot
+* ⬆️️️️️ Bump sqlalchemy from 1.4.37 to 2.0.15. PR [#456](https://github.com/yezz123/authx/pull/456) by @dependabot
+* ⬆️️️️️ Update fastapi requirement from <0.96.0,>=0.65.2 to >=0.65.2,<0.97.0. PR [#463](https://github.com/yezz123/authx/pull/463) by @dependabot
+* ⬆️️️️️ Update starlette requirement from <0.27.1,>=0.14.02 to >=0.14.02,<0.28.1. PR [#468](https://github.com/yezz123/authx/pull/468) by @dependabot
+* ⬆️️️️️ Update pyinstrument requirement from <4.5.0,>=4.1.1 to >=4.1.1,<4.6.0. PR [#466](https://github.com/yezz123/authx/pull/466) by @dependabot
+* ⬆️️️️️ Bump pytest from 7.3.1 to 7.3.2. PR [#464](https://github.com/yezz123/authx/pull/464) by @dependabot
+* ⬆️️️️️ Bump sqlalchemy from 2.0.15 to 2.0.16. PR [#465](https://github.com/yezz123/authx/pull/465) by @dependabot
+* ⬆️️️️️ Update fastapi requirement from <0.97.0,>=0.65.2 to >=0.65.2,<0.98.0. PR [#467](https://github.com/yezz123/authx/pull/467) by @dependabot
+* ⬆️️️️️ Bump pre-commit from 3.3.2 to 3.3.3. PR [#469](https://github.com/yezz123/authx/pull/469) by @dependabot
+* ⬆️️️️️ Bump sqlalchemy from 2.0.16 to 2.0.17. PR [#471](https://github.com/yezz123/authx/pull/471) by @dependabot
+* ⬆️️️️️ Bump mypy from 1.3.0 to 1.4.0. PR [#472](https://github.com/yezz123/authx/pull/472) by @dependabot
+* ⬆️️️️️ Bump pytest from 7.3.2 to 7.4.0. PR [#473](https://github.com/yezz123/authx/pull/473) by @dependabot
+* ⬆️️️️️ Update fastapi requirement from <0.98.0,>=0.65.2 to >=0.65.2,<0.99.0. PR [#474](https://github.com/yezz123/authx/pull/474) by @dependabot
+* ⬆️️️️️ Update redis requirement from <4.5.6,>=4.3.3 to >=4.3.3,<4.6.1. PR [#477](https://github.com/yezz123/authx/pull/477) by @dependabot
+* ⬆️️️️️ Bump mypy from 1.4.0 to 1.4.1. PR [#476](https://github.com/yezz123/authx/pull/476) by @dependabot
+* ⬆️️️️️ Bump pypa/gh-action-pypi-publish from 1.8.6 to 1.8.7. PR [#479](https://github.com/yezz123/authx/pull/479) by @dependabot
+* ⬆️️️️️️ Bump cryptography from 41.0.1 to 41.0.2. PR [#485](https://github.com/yezz123/authx/pull/485) by @dependabot
+* ⬆️️️️️ Bump pypa/gh-action-pypi-publish from 1.8.7 to 1.8.8. PR [#486](https://github.com/yezz123/authx/pull/486) by @dependabot
+* ⬆️️️️️️ Bump certifi from 2023.5.7 to 2023.7.22. PR [#487](https://github.com/yezz123/authx/pull/487) by @dependabot
+* ⬆️️️️️️ Bump cryptography from 41.0.2 to 41.0.3. PR [#488](https://github.com/yezz123/authx/pull/488) by @dependabot
+* ⬆️️️️️ Bump pypa/gh-action-pypi-publish from 1.8.8 to 1.8.10. PR [#489](https://github.com/yezz123/authx/pull/489) by @dependabot
+* ⬆️️️️️ Bump actions/checkout from 3 to 4. PR [#491](https://github.com/yezz123/authx/pull/491) by @dependabot
+* ⬆️️️️️️ Upgrade Dependencies. PR [#492](https://github.com/yezz123/authx/pull/492) by [@yezz123](https://github.com/yezz123)
+* ⬆️️️️️️ Bump urllib3 from 2.0.5 to 2.0.6. PR [#493](https://github.com/yezz123/authx/pull/493) by @dependabot
+* ⬆️️️️️️ Include Python 3.12. PR [#494](https://github.com/yezz123/authx/pull/494) by [@yezz123](https://github.com/yezz123)
+* ⬆️️️️️️ Bump urllib3 from 2.0.6 to 2.0.7. PR [#495](https://github.com/yezz123/authx/pull/495) by @dependabot
+* ⬆️️️️️️ Bump cryptography from 41.0.4 to 41.0.6. PR [#498](https://github.com/yezz123/authx/pull/498) by @dependabot
+* ⬆️️️️️ Bump pypa/gh-action-pypi-publish from 1.8.10 to 1.8.11. PR [#499](https://github.com/yezz123/authx/pull/499) by @dependabot
+* ⬆️️️️️ Upgrade Dependencies. PR [#500](https://github.com/yezz123/authx/pull/500) by [@yezz123](https://github.com/yezz123)
+* ⬆️️️️️ Bump actions/setup-python from 4 to 5. PR [#503](https://github.com/yezz123/authx/pull/503) by @dependabot
+* ⬆️️️️️️ Bump jinja2 from 3.1.2 to 3.1.3. PR [#505](https://github.com/yezz123/authx/pull/505) by @dependabot
+* ⬆️️️️️ Bump ruff from 0.1.8 to 0.1.13. PR [#510](https://github.com/yezz123/authx/pull/510) by @dependabot
+* ⬆️️️️️ Bump fastapi from 0.98.0 to 0.109.0. PR [#509](https://github.com/yezz123/authx/pull/509) by @dependabot
+* ⬆️️️️️ Bump black from 23.12.0 to 23.12.1. PR [#508](https://github.com/yezz123/authx/pull/508) by @dependabot
+* ⬆️️️️️ Bump ruff from 0.1.13 to 0.1.14. PR [#515](https://github.com/yezz123/authx/pull/515) by @dependabot
+* ⬆️️️️️ Bump mkdocs-material from 9.5.3 to 9.5.4. PR [#517](https://github.com/yezz123/authx/pull/517) by @dependabot
+* ⬆️️️️️ Bump mypy from 1.7.1 to 1.8.0. PR [#516](https://github.com/yezz123/authx/pull/516) by @dependabot
+* ⬆️️️️️ Bump black from 23.12.1 to 24.1.1. PR [#519](https://github.com/yezz123/authx/pull/519) by @dependabot
+* ⬆️️️️️ Bump mkdocs-material from 9.5.4 to 9.5.6. PR [#521](https://github.com/yezz123/authx/pull/521) by @dependabot
+* ⬆️️️️️ Bump pytest-asyncio from 0.23.3 to 0.23.4. PR [#520](https://github.com/yezz123/authx/pull/520) by @dependabot
+* ⬆️️️️️ Bump codecov/codecov-action from 3 to 4. PR [#524](https://github.com/yezz123/authx/pull/524) by @dependabot
+* ⬆️️️️️ Bump the python-packages group with 3 updates. PR [#525](https://github.com/yezz123/authx/pull/525) by @dependabot
+* ⬆️️️️️️ Upgrade configuration for Ruff v0.2.0. PR [#526](https://github.com/yezz123/authx/pull/526) by [@yezz123](https://github.com/yezz123)
+* ⬆️️️️️ Bump the python-packages group with 3 updates. PR [#527](https://github.com/yezz123/authx/pull/527) by @dependabot
+* ⬆️️️️️️ Bump fastapi from 0.98.0 to 0.109.2. PR [#529](https://github.com/yezz123/authx/pull/529) by @dependabot
+* ⬆️️️️️️ Bump cryptography from 41.0.7 to 42.0.0. PR [#530](https://github.com/yezz123/authx/pull/530) by @dependabot
+* ⬆️️️️️ Bump the python-packages group with 3 updates. PR [#535](https://github.com/yezz123/authx/pull/535) by @dependabot
+* ⬆️️️️️ Bump pre-commit/action from 3.0.0 to 3.0.1. PR [#534](https://github.com/yezz123/authx/pull/534) by @dependabot
+* ⬆️️️️️ Bump the python-packages group with 6 updates. PR [#541](https://github.com/yezz123/authx/pull/541) by @dependabot
+* ⬆️️️️️️ Update version for uv. PR [#546](https://github.com/yezz123/authx/pull/546) by [@yezz123](https://github.com/yezz123)
+* ⬆️️️️️ Bump the python-packages group with 5 updates. PR [#548](https://github.com/yezz123/authx/pull/548) by @dependabot
+* ⬆️️️️️ Bump pypa/gh-action-pypi-publish from 1.8.11 to 1.8.12. PR [#550](https://github.com/yezz123/authx/pull/550) by @dependabot
+* ⬆️️️️️ Bump uv version to 0.1.17. PR [#554](https://github.com/yezz123/authx/pull/554) by [@pinchXOXO](https://github.com/pinchXOXO)
+* ⬆️️️️️ Bump pypa/gh-action-pypi-publish from 1.8.12 to 1.8.14. PR [#556](https://github.com/yezz123/authx/pull/556) by @dependabot
 
 ## 1.0.1b1
 
@@ -565,9 +567,9 @@ __Note:__ This release contains breaking changes, Dropping support for Python 3.
 
 ### Dependencies
 
-* ⬆️️️ Bump the python-packages group with 3 updates. PR [#535](https://github.com/yezz123/authx/pull/535) by @dependabot.
-* ⬆️️️ Bump pre-commit/action from 3.0.0 to 3.0.1. PR [#534](https://github.com/yezz123/authx/pull/534) by @dependabot.
-* ⬆️️️ Bump the python-packages group with 6 updates. PR [#541](https://github.com/yezz123/authx/pull/541) by @dependabot.
+* ⬆️️️️ Bump the python-packages group with 3 updates. PR [#535](https://github.com/yezz123/authx/pull/535) by @dependabot.
+* ⬆️️️️ Bump pre-commit/action from 3.0.0 to 3.0.1. PR [#534](https://github.com/yezz123/authx/pull/534) by @dependabot.
+* ⬆️️️️ Bump the python-packages group with 6 updates. PR [#541](https://github.com/yezz123/authx/pull/541) by @dependabot.
 
 ## 1.0.0b0
 
@@ -922,7 +924,7 @@ __Note:__ This release contains breaking changes, Dropping support for Python 3.
 * CI: Fix Workflows ✨. [PR #92](https://github.com/yezz123/authx/pull/92)
 * chore: Provide all requirements relate to `Setup.py` ✨ by @yezz123 in
   [PR #93](https://github.com/yezz123/authx/pull/93)
-* ⬆️️️️ Bump from 0.0.9 to 0.1.0 by @yezz123 in
+* ⬆️️️️️ Bump from 0.0.9 to 0.1.0 by @yezz123 in
   [PR #94](https://github.com/yezz123/authx/pull/94)
 
 ## 0.0.9
@@ -941,7 +943,7 @@ __Note:__ This release contains breaking changes, Dropping support for Python 3.
   [PR #86](https://github.com/yezz123/authx/pull/86)
 * Docs: Add Coverage Badge ✨ by @yezz123 in
   [PR #87](https://github.com/yezz123/authx/pull/87)
-* ⬆️️️️ Bump Version from 0.0.8 to 0.0.9 by @yezz123 in
+* ⬆️️️️️ Bump Version from 0.0.8 to 0.0.9 by @yezz123 in
   [PR #88](https://github.com/yezz123/authx/pull/88)
 
 ## 0.0.8
@@ -956,7 +958,7 @@ __Note:__ This release contains breaking changes, Dropping support for Python 3.
   [PR #73](https://github.com/yezz123/authx/pull/73)
 * Test Documentation Build ✨ by @yezz123 in
   [PR #74](https://github.com/yezz123/authx/pull/74)
-* ⬆️️️️ Bump from 0.0.7 to 0.0.8 ✨ by @yezz123 in
+* ⬆️️️️️ Bump from 0.0.7 to 0.0.8 ✨ by @yezz123 in
   [PR #75](https://github.com/yezz123/authx/pull/75)
 
 ## 0.0.7

@@ -1,6 +1,6 @@
 """Ready to use and customizable Authentications and Oauth2 management for FastAPI and Starlette."""
 
-__version__ = "1.5.2"
+__version__ = "1.6.0"
 
 from authx._internal._ratelimit import RateLimiter
 from authx._internal._session import SessionInfo
