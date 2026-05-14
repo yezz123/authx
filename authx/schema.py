@@ -379,8 +379,6 @@ class RequestToken(BaseModel):
                 issuer=issuer,
             )
             payload = TokenPayload.model_validate(decoded_token)
-        except JWTDecodeError as e:
-            raise JWTDecodeError(*e.args) from e
         except ValidationError as e:
             raise JWTDecodeError(*e.args) from e
 
