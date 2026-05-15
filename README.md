@@ -101,7 +101,7 @@ pip install authx-extra
 ## Contributors and Sponsors
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-17-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-18-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people
@@ -134,6 +134,7 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="14.28%"><a href="https://evergreenies.github.io"><img src="https://avatars.githubusercontent.com/u/33820365?v=4?s=100" width="100px;" alt="Suyog Shimpi"/><br /><sub><b>Suyog Shimpi</b></sub></a><br /><a href="https://github.com/yezz123/authx/commits?author=Evergreenies" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/NeViNez"><img src="https://avatars.githubusercontent.com/u/91369880?v=4?s=100" width="100px;" alt="NeViNez"/><br /><sub><b>NeViNez</b></sub></a><br /><a href="https://github.com/yezz123/authx/issues?q=author%3ANeViNez" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Antareske"><img src="https://avatars.githubusercontent.com/u/171327898?v=4?s=100" width="100px;" alt="Antareske"/><br /><sub><b>Antareske</b></sub></a><br /><a href="https://github.com/yezz123/authx/commits?author=Antareske" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/YuexiaW"><img src="https://avatars.githubusercontent.com/u/119724459?v=4?s=100" width="100px;" alt="YuexiaW"/><br /><sub><b>YuexiaW</b></sub></a><br /><a href="https://github.com/yezz123/authx/issues?q=author%3AYuexiaW" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
