@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Fixes
+
+* fix: propagate specific JWT exceptions instead of raising generic JWT…. PR [#850](https://github.com/yezz123/authx/pull/850) by [@YuexiaW](https://github.com/YuexiaW).
+
 ### Upgrades
 
 * ⬆ Bump pydantic from 2.13.3 to 2.13.4 in the python-packages group. PR [#849](https://github.com/yezz123/authx/pull/849) by [@dependabot[bot]](https://github.com/apps/dependabot).
