@@ -10,6 +10,10 @@
 * ⬆ Bump gitpython from 3.1.47 to 3.1.50. PR [#847](https://github.com/yezz123/authx/pull/847) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump pytz from 2026.1.post1 to 2026.2 in the python-packages group. PR [#844](https://github.com/yezz123/authx/pull/844) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
+### Docs
+
+* docs: add YuexiaW as a contributor for bug. PR [#851](https://github.com/yezz123/authx/pull/851) by [@allcontributors[bot]](https://github.com/apps/allcontributors).
+
 ## 1.6.0
 
 ### Breaking Changes
