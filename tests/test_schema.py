@@ -8,9 +8,14 @@ from authx.exceptions import (
     FreshTokenRequiredError,
     JWTDecodeError,
     RefreshTokenRequiredError,
+    TokenExpiredError,
+    TokenInvalidAudienceError,
+    TokenInvalidIssuerError,
+    TokenInvalidSignatureError,
     TokenTypeError,
 )
 from authx.schema import RequestToken, TokenPayload
+from authx.token import create_token
 
 
 @pytest.fixture(scope="function")
@@ -429,3 +434,109 @@ def test_token_payload_nbf_validator():
     payload = TokenPayload(sub="1234567890", nbf=future_time)
     assert isinstance(payload.nbf, float)
     assert payload.nbf == pytest.approx(future_time.timestamp(), abs=1)
+
+
+# ---------------------------------------------------------------------------
+# Tests: RequestToken._verify propagates specific JWT exception subtypes
+# ---------------------------------------------------------------------------
+
+
+def test_verify_propagates_token_expired_error():
+    """Expired tokens should raise TokenExpiredError, not generic JWTDecodeError."""
+    KEY = "SECRET"
+    ALGO = "HS256"
+
+    past = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(seconds=10)
+    token = create_token(
+        uid="TEST",
+        key=KEY,
+        algorithm=ALGO,
+        type="access",
+        csrf=False,
+        expiry=past,
+    )
+    rqt = RequestToken(token=token, type="access", location="headers", csrf=None)
+
+    with pytest.raises(TokenExpiredError):
+        rqt.verify(
+            key=KEY,
+            algorithms=[ALGO],
+            verify_jwt=True,
+            verify_type=False,
+            verify_fresh=False,
+            verify_csrf=False,
+        )
+
+
+def test_verify_propagates_token_invalid_signature_error():
+    """Tokens signed with wrong key should raise TokenInvalidSignatureError."""
+    KEY = "SECRET"
+    WRONG_KEY = "WRONG_SECRET"
+    ALGO = "HS256"
+
+    token = create_token(uid="TEST", key=KEY, algorithm=ALGO, type="access", csrf=False)
+    rqt = RequestToken(token=token, type="access", location="headers", csrf=None)
+
+    with pytest.raises(TokenInvalidSignatureError):
+        rqt.verify(
+            key=WRONG_KEY,
+            algorithms=[ALGO],
+            verify_jwt=True,
+            verify_type=False,
+            verify_fresh=False,
+            verify_csrf=False,
+        )
+
+
+def test_verify_propagates_token_invalid_issuer_error():
+    """Tokens with wrong issuer should raise TokenInvalidIssuerError."""
+    KEY = "SECRET"
+    ALGO = "HS256"
+
+    token = create_token(
+        uid="TEST",
+        key=KEY,
+        algorithm=ALGO,
+        type="access",
+        csrf=False,
+        issuer="VALID_ISSUER",
+    )
+    rqt = RequestToken(token=token, type="access", location="headers", csrf=None)
+
+    with pytest.raises(TokenInvalidIssuerError):
+        rqt.verify(
+            key=KEY,
+            algorithms=[ALGO],
+            issuer="BAD_ISSUER",
+            verify_jwt=True,
+            verify_type=False,
+            verify_fresh=False,
+            verify_csrf=False,
+        )
+
+
+def test_verify_propagates_token_invalid_audience_error():
+    """Tokens with wrong audience should raise TokenInvalidAudienceError."""
+    KEY = "SECRET"
+    ALGO = "HS256"
+
+    token = create_token(
+        uid="TEST",
+        key=KEY,
+        algorithm=ALGO,
+        type="access",
+        csrf=False,
+        audience=["VALID_AUDIENCE"],
+    )
+    rqt = RequestToken(token=token, type="access", location="headers", csrf=None)
+
+    with pytest.raises(TokenInvalidAudienceError):
+        rqt.verify(
+            key=KEY,
+            algorithms=[ALGO],
+            audience="BAD_AUDIENCE",
+            verify_jwt=True,
+            verify_type=False,
+            verify_fresh=False,
+            verify_csrf=False,
+        )
