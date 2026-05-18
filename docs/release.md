@@ -6,6 +6,7 @@
 
 ### Upgrades
 
+* ⬆ Bump the python-packages group with 2 updates. PR [#853](https://github.com/yezz123/authx/pull/853) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump pydantic from 2.13.3 to 2.13.4 in the python-packages group. PR [#849](https://github.com/yezz123/authx/pull/849) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump gitpython from 3.1.47 to 3.1.50. PR [#847](https://github.com/yezz123/authx/pull/847) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump pytz from 2026.1.post1 to 2026.2 in the python-packages group. PR [#844](https://github.com/yezz123/authx/pull/844) by [@dependabot[bot]](https://github.com/apps/dependabot).
