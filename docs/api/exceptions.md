@@ -36,6 +36,10 @@ Raised when no CSRF token can be parsed from request.
 
 Raised when token type is invalid.
 
+::: authx.exceptions.LoginTypeMismatchError
+
+Raised when a token belongs to a different login type than the protected endpoint expects.
+
 ::: authx.exceptions.RevokedTokenError
 
 Raised when token is invalid.
@@ -55,6 +59,14 @@ Raised when access token is required.
 ::: authx.exceptions.RefreshTokenRequiredError
 
 Raised when refresh token is required.
+
+::: authx.exceptions.PolicyDeniedError
+
+Raised when policy evaluation denies access.
+
+::: authx.exceptions.PolicyEvaluationError
+
+Raised when a policy evaluator cannot be evaluated.
 
 ::: authx.exceptions.InvalidToken
 

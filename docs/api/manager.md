@@ -1,0 +1,3 @@
+# AuthManager
+
+::: authx.manager.AuthManager
