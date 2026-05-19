@@ -79,6 +79,9 @@ def test_handle_app_errors(app: FastAPI, authx: AuthX):
     assert exc.AccessTokenRequiredError in app.exception_handlers
     assert exc.RefreshTokenRequiredError in app.exception_handlers
     assert exc.CSRFError in app.exception_handlers
+    assert exc.LoginTypeMismatchError in app.exception_handlers
+    assert exc.PolicyDeniedError in app.exception_handlers
+    assert exc.PolicyEvaluationError in app.exception_handlers
 
 
 def test_invalid_token_init():
@@ -185,3 +188,22 @@ async def test_missing_csrf_token_error_shows_detailed_message(app, client, erro
     assert response_json["message"] == detailed_message
     assert "set_access_cookies" in response_json["message"]
     assert "JWT_COOKIE_CSRF_PROTECT=False" in response_json["message"]
+
+
+@pytest.mark.asyncio
+async def test_login_type_mismatch_error_response_has_context(app, client, error_handler):
+    @app.get("/login-type-error")
+    async def login_type_error_route():
+        raise exc.LoginTypeMismatchError(expected_type="admin", actual_type="user")
+
+    error_handler._set_app_exception_handler(app, exc.LoginTypeMismatchError, 401, None)
+
+    response = client.get("/login-type-error")
+
+    assert response.status_code == 401
+    assert response.json() == {
+        "message": "Token type mismatch: expected 'admin', got 'user'",
+        "error_type": "LoginTypeMismatchError",
+        "expected_type": "admin",
+        "actual_type": "user",
+    }
