@@ -76,6 +76,7 @@ class TokenPayload(BaseModel):
     csrf: Optional[str] = ""
     scopes: Optional[list[str]] = None
     fresh: bool = False
+    login_type: Optional[str] = None
 
     @property
     def _additional_fields(self) -> set[str]:
