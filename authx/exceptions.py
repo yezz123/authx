@@ -81,6 +81,30 @@ class TokenTypeError(TokenError):
     pass
 
 
+class LoginTypeMismatchError(TokenTypeError):
+    """Exception raised when a token belongs to a different login type."""
+
+    def __init__(
+        self,
+        expected_type: str,
+        actual_type: Optional[str] = None,
+        message: Optional[str] = None,
+    ) -> None:
+        """Initialize LoginTypeMismatchError.
+
+        Args:
+            expected_type: Login type required by the protected endpoint.
+            actual_type: Login type found in the token, if it could be determined.
+            message: Optional custom error message.
+        """
+        self.expected_type = expected_type
+        self.actual_type = actual_type
+        actual = actual_type if actual_type is not None else "unknown"
+        if message is None:
+            message = f"Token type mismatch: expected '{expected_type}', got '{actual}'"
+        super().__init__(message)
+
+
 class RevokedTokenError(TokenError):
     """Exception raised when a revoked token has been used."""
 
@@ -137,6 +161,25 @@ class InsufficientScopeError(TokenError):
         if message is None:
             message = f"Missing required scopes: {required}. Provided: {self.provided}"
         super().__init__(message)
+
+
+class PolicyDeniedError(TokenError):
+    """Exception raised when a policy evaluation denies access."""
+
+    def __init__(self, reason: str = "Policy denied access") -> None:
+        """Initialize PolicyDeniedError.
+
+        Args:
+            reason: Human-readable reason for the denial.
+        """
+        self.reason = reason
+        super().__init__(reason)
+
+
+class PolicyEvaluationError(AuthXException):
+    """Exception raised when a policy evaluator cannot be evaluated."""
+
+    pass
 
 
 class RateLimitExceeded(AuthXException):
