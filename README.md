@@ -81,6 +81,8 @@ curl -H "Authorization: Bearer <your-token>" http://localhost:8000/protected
 - Access and refresh token support
 - Token freshness for sensitive operations
 - Token blocklist/revocation
+- Built-in `AuthManager` for isolated multi-login-type applications
+- Pluggable policy engine for scopes, attributes, environment checks, and custom evaluators
 - Extensible error handling
 
 ### Extra Features
