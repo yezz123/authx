@@ -56,18 +56,25 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
 
     """
 
-    def __init__(self, config: AuthXConfig = AuthXConfig(), model: Optional[T] = None) -> None:
+    def __init__(
+        self,
+        config: AuthXConfig = AuthXConfig(),
+        model: Optional[T] = None,
+        login_type: Optional[str] = None,
+    ) -> None:
         """AuthX base object.
 
         Args:
             config (AuthXConfig, optional): Configuration instance to use. Defaults to AuthXConfig().
             model (Optional[T], optional): Model type hint. Defaults to dict[str, Any].
+            login_type (Optional[str], optional): Explicit login type for manager-based auth contexts.
         """
         self.model: Union[T, dict[str, Any]] = model if model is not None else {}
         super().__init__(model=model)
         super(_CallbackHandler, self).__init__()
         self._config = config
         self._session_store: Optional[Any] = None
+        self.login_type = login_type
 
     def load_config(self, config: AuthXConfig) -> None:
         """Load and store the configuration for the authentication system.
@@ -105,6 +112,10 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         # Handle additional data
         if data is None:
             data = {}
+        elif self.login_type is not None:
+            data = data.copy()
+        if self.login_type is not None:
+            data["login_type"] = self.login_type
         # Handle expiry date
         exp = expiry
         if exp is None:
@@ -143,6 +154,9 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         scopes: Optional[list[str]] = None,
         **kwargs: Any,
     ) -> str:
+        if self.login_type is not None:
+            data = data.copy() if data is not None else {}
+            data["login_type"] = self.login_type
         payload = self._create_payload(
             uid=uid,
             type=type,
