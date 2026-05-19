@@ -5,6 +5,7 @@ from typing import Any, Optional
 
 from fastapi import FastAPI, Request
 
+from authx._internal._error import _ErrorHandler
 from authx.config import AuthXConfig
 from authx.exceptions import (
     BadConfigurationError,
@@ -26,7 +27,7 @@ from authx.schema import RequestToken, TokenPayload, TokenResponse
 from authx.types import DateTimeExpression, StringOrSequence, TokenLocations
 
 
-class AuthManager:
+class AuthManager(_ErrorHandler):
     """Manage multiple isolated AuthX instances by login type."""
 
     def __init__(
@@ -63,12 +64,6 @@ class AuthManager:
         except KeyError as e:
             raise BadConfigurationError(f"Unknown login_type '{login_type}'") from e
 
-    def handle_errors(self, app: FastAPI) -> None:
-        """Register AuthX error handlers on a FastAPI application."""
-        if self._auth_by_type:
-            next(iter(self._auth_by_type.values())).handle_errors(app)
-        else:
-            AuthX(config=AuthXConfig(JWT_SECRET_KEY="authmanager-error-handler")).handle_errors(app)
 
     def add_policy_rule(self, rule: PolicyRule) -> None:
         """Register a policy rule."""
@@ -201,7 +196,7 @@ class AuthManager:
                 locations=locations,
             )
             if mismatch is not None:
-                raise LoginTypeMismatchError(expected_type=login_type, actual_type=mismatch) from None
+                raise LoginTypeMismatchError(expected_type=login_type, actual_type=mismatch, login_type=login_type) from None
             raise
 
         self._verify_login_type(payload, login_type)
@@ -238,7 +233,11 @@ class AuthManager:
     def _verify_login_type(self, payload: TokenPayload, expected_login_type: str) -> None:
         actual_login_type = self._payload_login_type(payload)
         if actual_login_type != expected_login_type:
-            raise LoginTypeMismatchError(expected_type=expected_login_type, actual_type=actual_login_type)
+            raise LoginTypeMismatchError(
+                expected_type=expected_login_type,
+                actual_type=actual_login_type,
+                login_type=expected_login_type,
+            )
 
     def _payload_login_type(self, payload: TokenPayload) -> Optional[str]:
         login_type = payload.login_type
@@ -259,7 +258,10 @@ class AuthManager:
         """Authorize a token payload against the policy engine."""
         if payload is None:
             if request is None:
-                raise PolicyDeniedError("A request or token payload is required for policy authorization")
+                raise PolicyDeniedError(
+                    "A request or token payload is required for policy authorization",
+                    login_type=login_type,
+                )
             payload = await self._auth_required(login_type=login_type, request=request)
         else:
             self._verify_login_type(payload, login_type)
@@ -276,7 +278,7 @@ class AuthManager:
         )
         decision = await self.policy_engine.evaluate(context)
         if not decision.allowed:
-            raise PolicyDeniedError(decision.reason)
+            raise PolicyDeniedError(decision.reason, login_type=login_type)
         return payload
 
     def policy_required(

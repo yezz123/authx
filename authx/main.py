@@ -182,26 +182,31 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         issuer: Optional[str] = None,
     ) -> TokenPayload:
         try:
-            return TokenPayload.decode(
-                token=token,
-                key=self.config.public_key,
-                algorithms=[self.config.JWT_ALGORITHM],
-                verify=verify,
-                audience=audience or self.config.JWT_DECODE_AUDIENCE,
-                issuer=issuer or self.config.JWT_DECODE_ISSUER,
-            )
-        except JWTDecodeError:
-            previous_key = self.config.previous_public_key
-            if previous_key is None:
-                raise
-            return TokenPayload.decode(
-                token=token,
-                key=previous_key,
-                algorithms=[self.config.JWT_ALGORITHM],
-                verify=verify,
-                audience=audience or self.config.JWT_DECODE_AUDIENCE,
-                issuer=issuer or self.config.JWT_DECODE_ISSUER,
-            )
+            try:
+                return TokenPayload.decode(
+                    token=token,
+                    key=self.config.public_key,
+                    algorithms=[self.config.JWT_ALGORITHM],
+                    verify=verify,
+                    audience=audience or self.config.JWT_DECODE_AUDIENCE,
+                    issuer=issuer or self.config.JWT_DECODE_ISSUER,
+                )
+            except JWTDecodeError:
+                previous_key = self.config.previous_public_key
+                if previous_key is None:
+                    raise
+                return TokenPayload.decode(
+                    token=token,
+                    key=previous_key,
+                    algorithms=[self.config.JWT_ALGORITHM],
+                    verify=verify,
+                    audience=audience or self.config.JWT_DECODE_AUDIENCE,
+                    issuer=issuer or self.config.JWT_DECODE_ISSUER,
+                )
+        except AuthXException as e:
+            if e.login_type is None:
+                e.login_type = self.login_type
+            raise
 
     def _set_cookies(
         self,
@@ -384,7 +389,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         )
 
         if await self.is_token_in_blocklist(request_token.token):
-            raise RevokedTokenError("Token has been revoked")
+            raise RevokedTokenError("Token has been revoked", login_type=self.login_type)
 
         return self.verify_token(
             request_token,
@@ -415,28 +420,33 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             TokenPayload: Verified token payload
         """
         try:
-            return token.verify(
-                key=self.config.public_key,
-                algorithms=[self.config.JWT_ALGORITHM],
-                verify_fresh=verify_fresh,
-                verify_type=verify_type,
-                verify_csrf=verify_csrf,
-                audience=self.config.JWT_DECODE_AUDIENCE,
-                issuer=self.config.JWT_DECODE_ISSUER,
-            )
-        except JWTDecodeError:
-            previous_key = self.config.previous_public_key
-            if previous_key is None:
-                raise
-            return token.verify(
-                key=previous_key,
-                algorithms=[self.config.JWT_ALGORITHM],
-                verify_fresh=verify_fresh,
-                verify_type=verify_type,
-                verify_csrf=verify_csrf,
-                audience=self.config.JWT_DECODE_AUDIENCE,
-                issuer=self.config.JWT_DECODE_ISSUER,
-            )
+            try:
+                return token.verify(
+                    key=self.config.public_key,
+                    algorithms=[self.config.JWT_ALGORITHM],
+                    verify_fresh=verify_fresh,
+                    verify_type=verify_type,
+                    verify_csrf=verify_csrf,
+                    audience=self.config.JWT_DECODE_AUDIENCE,
+                    issuer=self.config.JWT_DECODE_ISSUER,
+                )
+            except JWTDecodeError:
+                previous_key = self.config.previous_public_key
+                if previous_key is None:
+                    raise
+                return token.verify(
+                    key=previous_key,
+                    algorithms=[self.config.JWT_ALGORITHM],
+                    verify_fresh=verify_fresh,
+                    verify_type=verify_type,
+                    verify_csrf=verify_csrf,
+                    audience=self.config.JWT_DECODE_AUDIENCE,
+                    issuer=self.config.JWT_DECODE_ISSUER,
+                )
+        except AuthXException as e:
+            if e.login_type is None:
+                e.login_type = self.login_type
+            raise
 
     def create_access_token(
         self,
@@ -724,12 +734,13 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         if token_str is None:
             raise MissingTokenError(
                 f"Missing token in WebSocket query parameter '{self.config.JWT_QUERY_STRING_NAME}' "
-                f"or '{self.config.JWT_HEADER_NAME}' header"
+                f"or '{self.config.JWT_HEADER_NAME}' header",
+                login_type=self.login_type,
             )
 
         request_token = RequestToken(token=token_str, csrf=None, type="access", location="query")
         if await self.is_token_in_blocklist(request_token.token):
-            raise RevokedTokenError("Token has been revoked")
+            raise RevokedTokenError("Token has been revoked", login_type=self.login_type)
         return self.verify_token(request_token, verify_type=True, verify_fresh=False, verify_csrf=False)
 
     def get_dependency(self, request: Request, response: Response) -> AuthXDependency[Any]:
@@ -877,7 +888,11 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             )
 
             if not has_required_scopes(required_scopes, payload.scopes, all_required=all_required):
-                raise InsufficientScopeError(required=required_scopes, provided=payload.scopes)
+                raise InsufficientScopeError(
+                    required=required_scopes,
+                    provided=payload.scopes,
+                    login_type=self.login_type,
+                )
 
             return payload
 
