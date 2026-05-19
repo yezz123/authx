@@ -3,10 +3,9 @@
 from collections.abc import Awaitable, Callable, Mapping, Sequence
 from typing import Any, Optional
 
-from fastapi import FastAPI, Request
+from fastapi import Request
 
 from authx._internal._error import _ErrorHandler
-from authx.config import AuthXConfig
 from authx.exceptions import (
     BadConfigurationError,
     JWTDecodeError,
@@ -63,7 +62,6 @@ class AuthManager(_ErrorHandler):
             return self._auth_by_type[login_type]
         except KeyError as e:
             raise BadConfigurationError(f"Unknown login_type '{login_type}'") from e
-
 
     def add_policy_rule(self, rule: PolicyRule) -> None:
         """Register a policy rule."""
@@ -196,7 +194,9 @@ class AuthManager(_ErrorHandler):
                 locations=locations,
             )
             if mismatch is not None:
-                raise LoginTypeMismatchError(expected_type=login_type, actual_type=mismatch, login_type=login_type) from None
+                raise LoginTypeMismatchError(
+                    expected_type=login_type, actual_type=mismatch, login_type=login_type
+                ) from None
             raise
 
         self._verify_login_type(payload, login_type)

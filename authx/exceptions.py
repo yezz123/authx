@@ -87,11 +87,11 @@ class LoginTypeMismatchError(TokenTypeError):
     """Exception raised when a token belongs to a different login type."""
 
     def __init__(
-            self,
-            expected_type: str,
-            actual_type: Optional[str] = None,
-            message: Optional[str] = None,
-            login_type: Optional[str] = None,
+        self,
+        expected_type: str,
+        actual_type: Optional[str] = None,
+        message: Optional[str] = None,
+        login_type: Optional[str] = None,
     ) -> None:
         """Initialize LoginTypeMismatchError.
 
@@ -148,11 +148,11 @@ class InsufficientScopeError(TokenError):
     """
 
     def __init__(
-            self,
-            required: list[str],
-            provided: Optional[list[str]] = None,
-            message: Optional[str] = None,
-            login_type: Optional[str] = None,
+        self,
+        required: list[str],
+        provided: Optional[list[str]] = None,
+        message: Optional[str] = None,
+        login_type: Optional[str] = None,
     ) -> None:
         """Initialize InsufficientScopeError.
 
