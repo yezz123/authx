@@ -9,6 +9,9 @@ from authx.dependencies import AuthXDependency
 from authx.exceptions import (
     InsufficientScopeError,
     JWTDecodeError,
+    LoginTypeMismatchError,
+    PolicyDeniedError,
+    PolicyEvaluationError,
     RateLimitExceeded,
     TokenExpiredError,
     TokenInvalidAudienceError,
@@ -16,6 +19,14 @@ from authx.exceptions import (
     TokenInvalidSignatureError,
 )
 from authx.main import AuthX
+from authx.manager import AuthManager
+from authx.policy import (
+    PolicyCondition,
+    PolicyContext,
+    PolicyDecision,
+    PolicyEngine,
+    PolicyRule,
+)
 from authx.schema import RequestToken, TokenPayload, TokenResponse
 
 __all__ = (
@@ -24,9 +35,18 @@ __all__ = (
     "TokenPayload",
     "TokenResponse",
     "AuthX",
+    "AuthManager",
     "AuthXDependency",
     "InsufficientScopeError",
     "JWTDecodeError",
+    "LoginTypeMismatchError",
+    "PolicyDeniedError",
+    "PolicyEvaluationError",
+    "PolicyCondition",
+    "PolicyContext",
+    "PolicyDecision",
+    "PolicyEngine",
+    "PolicyRule",
     "TokenExpiredError",
     "TokenInvalidAudienceError",
     "TokenInvalidIssuerError",

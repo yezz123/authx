@@ -21,6 +21,9 @@ class _ErrorHandler:
     MSG_CSRFError = "CSRF double submit does not match"
     MSG_JWTDecodeError = "Invalid Token"
     MSG_InsufficientScopeError = None  # Use detailed exception message showing required vs provided scopes
+    MSG_LoginTypeMismatchError = None  # Use detailed exception message showing expected vs actual type
+    MSG_PolicyDeniedError = None  # Use detailed exception message
+    MSG_PolicyEvaluationError = "Policy evaluation failed"
 
     async def _rate_limit_handler(
         self,
@@ -62,13 +65,15 @@ class _ErrorHandler:
             # Use attribute message if available, otherwise use exception message
             message = attr_message if attr_message is not None else default_message
 
-        return JSONResponse(
-            status_code=status_code,
-            content={
-                "message": message,
-                "error_type": exc.__class__.__name__,
-            },
-        )
+        content = {
+            "message": message,
+            "error_type": exc.__class__.__name__,
+        }
+        if isinstance(exc, exceptions.LoginTypeMismatchError):
+            content["expected_type"] = exc.expected_type
+            content["actual_type"] = exc.actual_type
+
+        return JSONResponse(status_code=status_code, content=content)
 
     def _set_app_exception_handler(
         self,
@@ -112,6 +117,12 @@ class _ErrorHandler:
         )
         self._set_app_exception_handler(
             app,
+            exception=exceptions.LoginTypeMismatchError,
+            status_code=401,
+            message=None,
+        )
+        self._set_app_exception_handler(
+            app,
             exception=exceptions.RevokedTokenError,
             status_code=401,
             message=self.MSG_RevokedTokenError,
@@ -151,6 +162,18 @@ class _ErrorHandler:
             exception=exceptions.InsufficientScopeError,
             status_code=403,
             message=None,  # Use detailed exception message showing required vs provided scopes
+        )
+        self._set_app_exception_handler(
+            app,
+            exception=exceptions.PolicyDeniedError,
+            status_code=403,
+            message=None,
+        )
+        self._set_app_exception_handler(
+            app,
+            exception=exceptions.PolicyEvaluationError,
+            status_code=500,
+            message=self.MSG_PolicyEvaluationError,
         )
         self._set_app_exception_handler(
             app,

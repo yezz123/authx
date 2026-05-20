@@ -1,12 +1,14 @@
 """Exceptions for AuthX."""
 
-from typing import Optional
+from typing import Any, Optional
 
 
 class AuthXException(Exception):
     """Base AuthXException Exception."""
 
-    pass
+    def __init__(self, *args: Any, login_type: Optional[str] = None, **kwargs: Any) -> None:
+        self.login_type = login_type
+        super().__init__(*args)
 
 
 class BadConfigurationError(AuthXException):
@@ -81,6 +83,32 @@ class TokenTypeError(TokenError):
     pass
 
 
+class LoginTypeMismatchError(TokenTypeError):
+    """Exception raised when a token belongs to a different login type."""
+
+    def __init__(
+        self,
+        expected_type: str,
+        actual_type: Optional[str] = None,
+        message: Optional[str] = None,
+        login_type: Optional[str] = None,
+    ) -> None:
+        """Initialize LoginTypeMismatchError.
+
+        Args:
+            expected_type: Login type required by the protected endpoint.
+            actual_type: Login type found in the token, if it could be determined.
+            message: Optional custom error message.
+            login_type: The login_type to set on the base exception.
+        """
+        self.expected_type = expected_type
+        self.actual_type = actual_type
+        actual = actual_type if actual_type is not None else "unknown"
+        if message is None:
+            message = f"Token type mismatch: expected '{expected_type}', got '{actual}'"
+        super().__init__(message, login_type=login_type)
+
+
 class RevokedTokenError(TokenError):
     """Exception raised when a revoked token has been used."""
 
@@ -124,6 +152,7 @@ class InsufficientScopeError(TokenError):
         required: list[str],
         provided: Optional[list[str]] = None,
         message: Optional[str] = None,
+        login_type: Optional[str] = None,
     ) -> None:
         """Initialize InsufficientScopeError.
 
@@ -131,12 +160,33 @@ class InsufficientScopeError(TokenError):
             required: List of scopes that were required.
             provided: List of scopes that were provided in the token.
             message: Optional custom error message.
+            login_type: The login_type to set on the base exception.
         """
         self.required = required
         self.provided = provided or []
         if message is None:
             message = f"Missing required scopes: {required}. Provided: {self.provided}"
-        super().__init__(message)
+        super().__init__(message, login_type=login_type)
+
+
+class PolicyDeniedError(TokenError):
+    """Exception raised when a policy evaluation denies access."""
+
+    def __init__(self, reason: str = "Policy denied access", login_type: Optional[str] = None) -> None:
+        """Initialize PolicyDeniedError.
+
+        Args:
+            reason: Human-readable reason for the denial.
+            login_type: The login_type to set on the base exception.
+        """
+        self.reason = reason
+        super().__init__(reason, login_type=login_type)
+
+
+class PolicyEvaluationError(AuthXException):
+    """Exception raised when a policy evaluator cannot be evaluated."""
+
+    pass
 
 
 class RateLimitExceeded(AuthXException):

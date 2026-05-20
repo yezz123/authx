@@ -204,6 +204,7 @@ nav:
     - Payload Data: get-started/payload.md
     - JWT Locations: get-started/location.md
     - Scope Management: get-started/scopes.md
+    - AuthManager and Policies: get-started/auth-manager.md
     - Refreshing Tokens: get-started/refresh.md
     - Token Pairs: get-started/token-pair.md
     - Freshness Tokens: get-started/token.md
@@ -229,6 +230,8 @@ nav:
   - Reference - API:
     - api/reference.md
     - api/main.md
+    - api/policy.md
+    - api/manager.md
     - api/config.md
     - api/request.md
     - api/token.md
