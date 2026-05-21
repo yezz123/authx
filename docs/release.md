@@ -21,6 +21,10 @@
 
 * docs: add YuexiaW as a contributor for bug. PR [#851](https://github.com/yezz123/authx/pull/851) by [@allcontributors[bot]](https://github.com/apps/allcontributors).
 
+### Internal
+
+* ✨ Add focused edge case tests for AuthX internals . PR [#859](https://github.com/yezz123/authx/pull/859) by [@yezz123](https://github.com/yezz123).
+
 ## 1.6.0
 
 ### Breaking Changes
