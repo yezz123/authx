@@ -7,6 +7,13 @@ class AuthXException(Exception):
     """Base AuthXException Exception."""
 
     def __init__(self, *args: Any, login_type: Optional[str] = None, **kwargs: Any) -> None:
+        """Initialize AuthXException.
+
+        Args:
+            *args: Arguments for the exception.
+            login_type: The login type associated with the exception.
+            **kwargs: Keyword arguments for the exception.
+        """
         self.login_type = login_type
         super().__init__(*args)
 
