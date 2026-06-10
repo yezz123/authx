@@ -10,6 +10,7 @@
 
 ### Upgrades
 
+* ⬆ Bump codecov/codecov-action from 6 to 7. PR [#863](https://github.com/yezz123/authx/pull/863) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump the python-packages group with 2 updates. PR [#860](https://github.com/yezz123/authx/pull/860) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump idna from 3.10 to 3.15. PR [#857](https://github.com/yezz123/authx/pull/857) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Bump `ruff-pre-commit` from v0.15.12 to v0.15.13. PR [#854](https://github.com/yezz123/authx/pull/854) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
