@@ -1,5 +1,7 @@
 ## Latest Changes
 
+## 1.7.0
+
 ### Features
 
 * ✨ Implemented AuthManager + Policy Engine. PR [#856](https://github.com/yezz123/authx/pull/856) by [@YuexiaW](https://github.com/YuexiaW).
