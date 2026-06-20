@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Upgrades
+
+* ⬆ Bump pyjwt from 2.12.0 to 2.13.0. PR [#868](https://github.com/yezz123/authx/pull/868) by [@dependabot[bot]](https://github.com/apps/dependabot).
+
 ## 1.7.0
 
 ### Features
