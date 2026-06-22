@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* ⬆ Bump the python-packages group with 2 updates. PR [#870](https://github.com/yezz123/authx/pull/870) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * Bump pyjwt from 2.12.0 to 2.13.0 in /examples. PR [#867](https://github.com/yezz123/authx/pull/867) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump pyjwt from 2.12.0 to 2.13.0. PR [#868](https://github.com/yezz123/authx/pull/868) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
