@@ -90,6 +90,141 @@ class _ErrorHandler:
         # The exception handler will return a JSONResponse with the specified status code and message
         app.exception_handler(exception)(exception_handler_wrapper)
 
+    def _has_request_exception_handler(
+        self,
+        request: Request,
+        exception: type[exceptions.AuthXException],
+    ) -> bool:
+        handlers_scope = request.scope.get("starlette.exception_handlers")
+        if handlers_scope is None:
+            return False
+        exception_handlers, _ = handlers_scope
+        return any(cls in exception_handlers for cls in exception.__mro__)
+
+    def _set_request_exception_handler(
+        self,
+        request: Request,
+        exception: type[exceptions.AuthXException],
+        status_code: int,
+        message: Optional[str],
+    ) -> None:
+        handlers_scope = request.scope.get("starlette.exception_handlers")
+        if handlers_scope is None or self._has_request_exception_handler(request, exception):
+            return
+        exception_handlers, _ = handlers_scope
+
+        async def exception_handler_wrapper(request: Request, exc: exceptions.AuthXException) -> JSONResponse:
+            return await self._error_handler(request, exc, status_code, message)
+
+        exception_handlers[exception] = exception_handler_wrapper
+
+    def _set_request_rate_limit_handler(self, request: Request) -> None:
+        handlers_scope = request.scope.get("starlette.exception_handlers")
+        if handlers_scope is None or self._has_request_exception_handler(request, exceptions.RateLimitExceeded):
+            return
+        exception_handlers, _ = handlers_scope
+
+        async def rate_limit_wrapper(request: Request, exc: exceptions.RateLimitExceeded) -> JSONResponse:
+            return await self._rate_limit_handler(request, exc)
+
+        exception_handlers[exceptions.RateLimitExceeded] = rate_limit_wrapper
+
+    def ensure_request_exception_handlers(self, request: Request) -> None:
+        """Install default AuthX handlers for the active request if the app has none.
+
+        FastAPI exception handlers are normally registered with ``handle_errors(app)``.
+        Minimal apps that omit it should still return HTTP auth errors instead of
+        leaking AuthX exceptions as 500 responses.
+        """
+        # Register subclasses before their parent classes so detailed handlers win
+        # during Starlette's MRO-based exception lookup.
+        self._set_request_exception_handler(
+            request,
+            exception=exceptions.MissingCSRFTokenError,
+            status_code=401,
+            message=None,
+        )
+        self._set_request_exception_handler(
+            request,
+            exception=exceptions.LoginTypeMismatchError,
+            status_code=401,
+            message=None,
+        )
+        self._set_request_exception_handler(request, exception=exceptions.JWTDecodeError, status_code=422, message=None)
+        self._set_request_exception_handler(
+            request,
+            exception=exceptions.MissingTokenError,
+            status_code=401,
+            message=self.MSG_TokenError,
+        )
+        self._set_request_exception_handler(
+            request,
+            exception=exceptions.RevokedTokenError,
+            status_code=401,
+            message=self.MSG_RevokedTokenError,
+        )
+        self._set_request_exception_handler(
+            request,
+            exception=exceptions.TokenRequiredError,
+            status_code=401,
+            message=self.MSG_TokenRequiredError,
+        )
+        self._set_request_exception_handler(
+            request,
+            exception=exceptions.FreshTokenRequiredError,
+            status_code=401,
+            message=self.MSG_FreshTokenRequiredError,
+        )
+        self._set_request_exception_handler(
+            request,
+            exception=exceptions.AccessTokenRequiredError,
+            status_code=401,
+            message=self.MSG_AccessTokenRequiredError,
+        )
+        self._set_request_exception_handler(
+            request,
+            exception=exceptions.RefreshTokenRequiredError,
+            status_code=401,
+            message=self.MSG_RefreshTokenRequiredError,
+        )
+        self._set_request_exception_handler(
+            request,
+            exception=exceptions.TokenTypeError,
+            status_code=401,
+            message=self.MSG_TokenTypeError,
+        )
+        self._set_request_exception_handler(
+            request,
+            exception=exceptions.CSRFError,
+            status_code=401,
+            message=self.MSG_CSRFError,
+        )
+        self._set_request_exception_handler(
+            request,
+            exception=exceptions.InsufficientScopeError,
+            status_code=403,
+            message=None,
+        )
+        self._set_request_exception_handler(
+            request,
+            exception=exceptions.PolicyDeniedError,
+            status_code=403,
+            message=None,
+        )
+        self._set_request_exception_handler(
+            request,
+            exception=exceptions.PolicyEvaluationError,
+            status_code=500,
+            message=self.MSG_PolicyEvaluationError,
+        )
+        self._set_request_exception_handler(
+            request,
+            exception=exceptions.SessionRevoked,
+            status_code=401,
+            message="Session has been revoked",
+        )
+        self._set_request_rate_limit_handler(request)
+
     def handle_errors(self, app: FastAPI) -> None:
         """Add the `FastAPI.exception_handlers` relative to AuthX exceptions.
 
