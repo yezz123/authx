@@ -1,11 +1,11 @@
-import pytest
-
-import authx.exceptions as exc
+def assert_auth_error(response, error_type: str, message: str):
+    assert response.status_code == 401
+    assert response.json() == {"message": message, "error_type": error_type}
 
 
 def test_no_authorization_get_subject(api):
-    with pytest.raises(exc.MissingTokenError):
-        api.get("/entity/subject")
+    response = api.get("/entity/subject")
+    assert_auth_error(response, "MissingTokenError", "Token Error")
 
 
 def test_get_subject_access_token(api, access_token: str):
@@ -14,8 +14,8 @@ def test_get_subject_access_token(api, access_token: str):
 
 
 def test_get_subject_refresh_token(api, refresh_token: str):
-    with pytest.raises(exc.AccessTokenRequiredError):
-        api.get("/entity/subject", headers={"Authorization": f"Bearer {refresh_token}"})
+    response = api.get("/entity/subject", headers={"Authorization": f"Bearer {refresh_token}"})
+    assert_auth_error(response, "AccessTokenRequiredError", "Access token required")
 
 
 def test_get_subject(api, access_token: str):
