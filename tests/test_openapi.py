@@ -9,6 +9,7 @@ OPENAPI_BEARER_DESCRIPTION = (
     "Paste an AuthX JWT from create_access_token/create_refresh_token, not JWT_SECRET_KEY. "
     "The Bearer prefix is optional in Swagger UI."
 )
+OPENAPI_HEADER_DESCRIPTION = "Provide an AuthX JWT in this header, not JWT_SECRET_KEY."
 
 
 def test_access_token_required_adds_openapi_bearer_security_metadata():
@@ -44,6 +45,31 @@ def test_route_level_access_token_required_adds_openapi_security_metadata():
 
     assert openapi["components"]["securitySchemes"]["AuthXBearer"]["scheme"] == "bearer"
     assert openapi["paths"]["/protected"]["get"]["security"] == [{"AuthXBearer": []}]
+
+
+def test_custom_header_token_location_adds_api_key_header_security_metadata():
+    auth = AuthX(
+        config=AuthXConfig(
+            JWT_SECRET_KEY="secret",
+            JWT_HEADER_NAME="X-Auth-Token",
+            JWT_HEADER_TYPE="Token",
+        )
+    )
+    app = FastAPI()
+
+    @app.get("/protected", dependencies=[Depends(auth.access_token_required)])
+    async def protected():
+        return {"ok": True}
+
+    openapi = app.openapi()
+
+    assert openapi["components"]["securitySchemes"]["AuthXHeader"] == {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Auth-Token",
+        "description": OPENAPI_HEADER_DESCRIPTION,
+    }
+    assert openapi["paths"]["/protected"]["get"]["security"] == [{"AuthXHeader": []}]
 
 
 def test_token_locations_add_matching_openapi_security_schemes():
@@ -196,4 +222,23 @@ def test_manager_access_token_required_adds_openapi_security_metadata():
     openapi = app.openapi()
 
     assert openapi["components"]["securitySchemes"]["AuthXBearer"]["scheme"] == "bearer"
+    assert openapi["paths"]["/admin"]["get"]["security"] == [{"AuthXBearer": []}]
+
+
+def test_manager_unknown_login_type_still_adds_default_openapi_security_metadata():
+    manager = AuthManager()
+    app = FastAPI()
+
+    @app.get("/admin", dependencies=[Depends(manager.access_token_required("admin"))])
+    async def admin():
+        return {"ok": True}
+
+    openapi = app.openapi()
+
+    assert openapi["components"]["securitySchemes"]["AuthXBearer"] == {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": OPENAPI_BEARER_DESCRIPTION,
+    }
     assert openapi["paths"]["/admin"]["get"]["security"] == [{"AuthXBearer": []}]

@@ -157,6 +157,114 @@ async def test_set_app_exception_handler(app, client, error_handler, exception, 
     }
 
 
+def test_request_exception_handler_checks_starlette_scope_and_parent_handlers(error_handler):
+    request_without_handlers = Request(scope={"type": "http", "method": "GET"})
+
+    assert error_handler._has_request_exception_handler(request_without_handlers, exc.MissingTokenError) is False
+
+    existing_handler = object()
+    exception_handlers = {exc.TokenError: existing_handler}
+    request = Request(
+        scope={
+            "type": "http",
+            "method": "GET",
+            "starlette.exception_handlers": (exception_handlers, {}),
+        }
+    )
+
+    assert error_handler._has_request_exception_handler(request, exc.MissingTokenError) is True
+
+    error_handler._set_request_exception_handler(
+        request,
+        exception=exc.MissingTokenError,
+        status_code=401,
+        message="Missing",
+    )
+
+    assert exception_handlers == {exc.TokenError: existing_handler}
+
+
+@pytest.mark.asyncio
+async def test_set_request_exception_handler_adds_request_local_handler(error_handler):
+    exception_handlers = {}
+    request = Request(
+        scope={
+            "type": "http",
+            "method": "GET",
+            "starlette.exception_handlers": (exception_handlers, {}),
+        }
+    )
+
+    error_handler._set_request_exception_handler(
+        request,
+        exception=exc.MissingTokenError,
+        status_code=401,
+        message="Missing",
+    )
+    handler = exception_handlers[exc.MissingTokenError]
+    response = await handler(request, exc.MissingTokenError("Raw missing token"))
+
+    assert response.status_code == 401
+    assert json.loads(response.body.decode()) == {
+        "message": "Missing",
+        "error_type": "MissingTokenError",
+    }
+
+
+def test_set_request_exception_handler_ignores_requests_without_starlette_scope(error_handler):
+    request = Request(scope={"type": "http", "method": "GET"})
+
+    error_handler._set_request_exception_handler(
+        request,
+        exception=exc.MissingTokenError,
+        status_code=401,
+        message="Missing",
+    )
+    error_handler._set_request_rate_limit_handler(request)
+
+    assert "starlette.exception_handlers" not in request.scope
+
+
+@pytest.mark.asyncio
+async def test_set_request_rate_limit_handler_adds_request_local_handler(error_handler):
+    exception_handlers = {}
+    request = Request(
+        scope={
+            "type": "http",
+            "method": "GET",
+            "starlette.exception_handlers": (exception_handlers, {}),
+        }
+    )
+
+    error_handler._set_request_rate_limit_handler(request)
+    handler = exception_handlers[exc.RateLimitExceeded]
+    response = await handler(request, exc.RateLimitExceeded(retry_after=7))
+
+    assert response.status_code == 429
+    assert response.headers["Retry-After"] == "7"
+    assert json.loads(response.body.decode()) == {
+        "message": "Rate limit exceeded. Retry after 7 seconds.",
+        "error_type": "RateLimitExceeded",
+        "retry_after": 7,
+    }
+
+
+def test_set_request_rate_limit_handler_preserves_existing_parent_handler(error_handler):
+    existing_handler = object()
+    exception_handlers = {exc.AuthXException: existing_handler}
+    request = Request(
+        scope={
+            "type": "http",
+            "method": "GET",
+            "starlette.exception_handlers": (exception_handlers, {}),
+        }
+    )
+
+    error_handler._set_request_rate_limit_handler(request)
+
+    assert exception_handlers == {exc.AuthXException: existing_handler}
+
+
 @pytest.mark.asyncio
 async def test_missing_csrf_token_error_shows_detailed_message(app, client, error_handler):
     """Test that MissingCSRFTokenError shows detailed exception message (fixes #720).
