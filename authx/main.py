@@ -12,6 +12,7 @@ from typing import (
 )
 
 from fastapi import Depends, Request, Response, WebSocket
+from fastapi.security import APIKeyCookie, APIKeyHeader, APIKeyQuery, HTTPBearer
 
 from authx._internal._callback import _CallbackHandler
 from authx._internal._error import _ErrorHandler
@@ -37,6 +38,21 @@ from authx.types import (
     TokenLocations,
     TokenType,
 )
+
+
+def _noop_openapi_security() -> None:
+    """Placeholder dependency for token locations that OpenAPI cannot represent."""
+    return None
+
+
+_OPENAPI_BEARER_DESCRIPTION = (
+    "Paste an AuthX JWT from create_access_token/create_refresh_token, not JWT_SECRET_KEY. "
+    "The Bearer prefix is optional in Swagger UI."
+)
+_OPENAPI_HEADER_DESCRIPTION = "Provide an AuthX JWT in this header, not JWT_SECRET_KEY."
+_OPENAPI_ACCESS_COOKIE_DESCRIPTION = "Provide an AuthX access token in this cookie."
+_OPENAPI_REFRESH_COOKIE_DESCRIPTION = "Provide an AuthX refresh token in this cookie."
+_OPENAPI_QUERY_DESCRIPTION = "Provide an AuthX JWT in this query parameter."
 
 
 class AuthX(_CallbackHandler[T], _ErrorHandler):
@@ -763,6 +779,56 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         """
         return AuthXDependency(self, request=request, response=response)
 
+    def _openapi_header_security_scheme(self) -> Callable[..., Any]:
+        if self.config.JWT_HEADER_NAME.lower() == "authorization" and self.config.JWT_HEADER_TYPE.lower() == "bearer":
+            return HTTPBearer(
+                scheme_name="AuthXBearer",
+                bearerFormat="JWT",
+                description=_OPENAPI_BEARER_DESCRIPTION,
+                auto_error=False,
+            )
+        return APIKeyHeader(
+            name=self.config.JWT_HEADER_NAME,
+            scheme_name="AuthXHeader",
+            description=_OPENAPI_HEADER_DESCRIPTION,
+            auto_error=False,
+        )
+
+    def _openapi_cookie_security_scheme(self, type: str) -> Callable[..., Any]:
+        if type == "refresh":
+            return APIKeyCookie(
+                name=self.config.JWT_REFRESH_COOKIE_NAME,
+                scheme_name="AuthXRefreshCookie",
+                description=_OPENAPI_REFRESH_COOKIE_DESCRIPTION,
+                auto_error=False,
+            )
+        return APIKeyCookie(
+            name=self.config.JWT_ACCESS_COOKIE_NAME,
+            scheme_name="AuthXAccessCookie",
+            description=_OPENAPI_ACCESS_COOKIE_DESCRIPTION,
+            auto_error=False,
+        )
+
+    def _openapi_query_security_scheme(self) -> Callable[..., Any]:
+        return APIKeyQuery(
+            name=self.config.JWT_QUERY_STRING_NAME,
+            scheme_name="AuthXQuery",
+            description=_OPENAPI_QUERY_DESCRIPTION,
+            auto_error=False,
+        )
+
+    def _openapi_security_dependencies(
+        self,
+        type: str = "access",
+        locations: Optional[TokenLocations] = None,
+    ) -> tuple[Callable[..., Any], Callable[..., Any], Callable[..., Any]]:
+        effective_locations = locations if locations is not None else self.config.JWT_TOKEN_LOCATION
+        return (
+            self._openapi_header_security_scheme() if "headers" in effective_locations else _noop_openapi_security,
+            self._openapi_cookie_security_scheme(type) if "cookies" in effective_locations else _noop_openapi_security,
+            self._openapi_query_security_scheme() if "query" in effective_locations else _noop_openapi_security,
+        )
+
     def token_required(
         self,
         type: str = "access",
@@ -783,8 +849,21 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         Returns:
             Callable[[Request], TokenPayload]: Dependency for Valid token Payload retrieval
         """
+        header_scheme, cookie_scheme, query_scheme = self._openapi_security_dependencies(
+            type=type,
+            locations=locations,
+        )
+        header_dependency = Depends(header_scheme)
+        cookie_dependency = Depends(cookie_scheme)
+        query_dependency = Depends(query_scheme)
 
-        async def _auth_required(request: Request) -> Any:
+        async def _auth_required(
+            request: Request,
+            _authx_openapi_header: Any = header_dependency,
+            _authx_openapi_cookie: Any = cookie_dependency,
+            _authx_openapi_query: Any = query_dependency,
+        ) -> Any:
+            self.ensure_request_exception_handlers(request)
             return await self._auth_required(
                 request=request,
                 type=type,
@@ -876,8 +955,21 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
             ```
         """
         required_scopes = list(scopes)
+        header_scheme, cookie_scheme, query_scheme = self._openapi_security_dependencies(
+            type="access",
+            locations=locations,
+        )
+        header_dependency = Depends(header_scheme)
+        cookie_dependency = Depends(cookie_scheme)
+        query_dependency = Depends(query_scheme)
 
-        async def _scopes_required(request: Request) -> TokenPayload:
+        async def _scopes_required(
+            request: Request,
+            _authx_openapi_header: Any = header_dependency,
+            _authx_openapi_cookie: Any = cookie_dependency,
+            _authx_openapi_query: Any = query_dependency,
+        ) -> TokenPayload:
+            self.ensure_request_exception_handlers(request)
             payload = await self._auth_required(
                 request=request,
                 type="access",
@@ -909,6 +1001,7 @@ class AuthX(_CallbackHandler[T], _ErrorHandler):
         Returns:
             The authenticated subject if present, otherwise None.
         """
+        self.ensure_request_exception_handlers(request)
         token: TokenPayload = await self._auth_required(request=request)
         uid = token.sub
         return await self._get_current_subject(uid=uid)

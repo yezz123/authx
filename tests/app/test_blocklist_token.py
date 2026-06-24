@@ -1,7 +1,12 @@
-import pytest
-
-import authx.exceptions as exc
 from authx.config import AuthXConfig
+
+
+def assert_revoked_token_error(response):
+    assert response.status_code == 401
+    assert response.json() == {
+        "message": "Invalid token",
+        "error_type": "RevokedTokenError",
+    }
 
 
 def test_blocklist_access_token(api, access_token: str):
@@ -22,8 +27,8 @@ def test_blocklist_access_token(api, access_token: str):
     assert access_token in blocklist
 
     # Check token no longer works
-    with pytest.raises(exc.RevokedTokenError):
-        api.post("/protected/access", headers={"Authorization": f"Bearer {access_token}"})
+    response = api.post("/protected/access", headers={"Authorization": f"Bearer {access_token}"})
+    assert_revoked_token_error(response)
 
 
 def test_blocklist_refresh_token(api, config: AuthXConfig, refresh_token: str, refresh_csrf_token: str):
@@ -45,11 +50,11 @@ def test_blocklist_refresh_token(api, config: AuthXConfig, refresh_token: str, r
     blocklist = api.get("/blocklist").json()["blocklist"]
     assert refresh_token in blocklist
 
-    with pytest.raises(exc.RevokedTokenError):
-        api.post(
-            "/protected/refresh",
-            cookies={
-                config.JWT_REFRESH_COOKIE_NAME: refresh_token,
-            },
-            headers={config.JWT_REFRESH_CSRF_HEADER_NAME: refresh_csrf_token},
-        )
+    response = api.post(
+        "/protected/refresh",
+        cookies={
+            config.JWT_REFRESH_COOKIE_NAME: refresh_token,
+        },
+        headers={config.JWT_REFRESH_CSRF_HEADER_NAME: refresh_csrf_token},
+    )
+    assert_revoked_token_error(response)

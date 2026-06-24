@@ -3,7 +3,8 @@
 from collections.abc import Awaitable, Callable, Mapping, Sequence
 from typing import Any, Optional
 
-from fastapi import Request
+from fastapi import Depends, Request
+from fastapi.security import HTTPBearer
 
 from authx._internal._error import _ErrorHandler
 from authx.exceptions import (
@@ -13,7 +14,7 @@ from authx.exceptions import (
     PolicyDeniedError,
     RevokedTokenError,
 )
-from authx.main import AuthX
+from authx.main import _OPENAPI_BEARER_DESCRIPTION, AuthX, _noop_openapi_security
 from authx.policy import (
     PolicyContext,
     PolicyEngine,
@@ -140,8 +141,22 @@ class AuthManager(_ErrorHandler):
         locations: Optional[TokenLocations] = None,
     ) -> Callable[[Request], Awaitable[TokenPayload]]:
         """Dependency factory requiring a token for a specific login type."""
+        header_scheme, cookie_scheme, query_scheme = self._openapi_security_dependencies(
+            login_type=login_type,
+            type=type,
+            locations=locations,
+        )
+        header_dependency = Depends(header_scheme)
+        cookie_dependency = Depends(cookie_scheme)
+        query_dependency = Depends(query_scheme)
 
-        async def _auth_required(request: Request) -> TokenPayload:
+        async def _auth_required(
+            request: Request,
+            _authx_openapi_header: Any = header_dependency,
+            _authx_openapi_cookie: Any = cookie_dependency,
+            _authx_openapi_query: Any = query_dependency,
+        ) -> TokenPayload:
+            self.ensure_request_exception_handlers(request)
             return await self._auth_required(
                 login_type=login_type,
                 request=request,
@@ -153,6 +168,26 @@ class AuthManager(_ErrorHandler):
             )
 
         return _auth_required
+
+    def _openapi_security_dependencies(
+        self,
+        login_type: str,
+        type: str = "access",
+        locations: Optional[TokenLocations] = None,
+    ) -> tuple[Callable[..., Any], Callable[..., Any], Callable[..., Any]]:
+        try:
+            return self.get(login_type)._openapi_security_dependencies(type=type, locations=locations)
+        except BadConfigurationError:
+            return (
+                HTTPBearer(
+                    scheme_name="AuthXBearer",
+                    bearerFormat="JWT",
+                    description=_OPENAPI_BEARER_DESCRIPTION,
+                    auto_error=False,
+                ),
+                _noop_openapi_security,
+                _noop_openapi_security,
+            )
 
     def access_token_required(self, login_type: str) -> Callable[[Request], Awaitable[TokenPayload]]:
         """Dependency factory requiring an access token for a login type."""
@@ -292,8 +327,18 @@ class AuthManager(_ErrorHandler):
         env: Optional[Mapping[str, Any]] = None,
     ) -> Callable[[Request], Awaitable[TokenPayload]]:
         """Dependency factory requiring policy authorization."""
+        header_scheme, cookie_scheme, query_scheme = self._openapi_security_dependencies(login_type=login_type)
+        header_dependency = Depends(header_scheme)
+        cookie_dependency = Depends(cookie_scheme)
+        query_dependency = Depends(query_scheme)
 
-        async def _policy_required(request: Request) -> TokenPayload:
+        async def _policy_required(
+            request: Request,
+            _authx_openapi_header: Any = header_dependency,
+            _authx_openapi_cookie: Any = cookie_dependency,
+            _authx_openapi_query: Any = query_dependency,
+        ) -> TokenPayload:
+            self.ensure_request_exception_handlers(request)
             return await self.authorize(
                 login_type=login_type,
                 action=action,
