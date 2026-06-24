@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Fixes
+
+* 🐛 Add custom exception handlers and enhance OpenAPI security in AuthX. PR [#873](https://github.com/yezz123/authx/pull/873) by [@yezz123](https://github.com/yezz123).
+
 ### Upgrades
 
 * ⬆️ Bump `ruff-pre-commit` from v0.15.17 to v0.15.18. PR [#871](https://github.com/yezz123/authx/pull/871) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
