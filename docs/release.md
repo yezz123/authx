@@ -1,5 +1,7 @@
 ## Latest Changes
 
+## 1.7.1
+
 ### Fixes
 
 * 🐛 Add custom exception handlers and enhance OpenAPI security in AuthX. PR [#873](https://github.com/yezz123/authx/pull/873) by [@yezz123](https://github.com/yezz123).
