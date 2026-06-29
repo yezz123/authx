@@ -1,5 +1,9 @@
 ## Latest Changes
 
+### Upgrades
+
+* ⬆ Bump ruff from 0.15.18 to 0.15.20 in the python-packages group. PR [#874](https://github.com/yezz123/authx/pull/874) by [@dependabot[bot]](https://github.com/apps/dependabot).
+
 ## 1.7.1
 
 ### Fixes
