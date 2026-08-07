@@ -47,7 +47,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install tweepy==4.14.0
+        run: pip install --only-binary :all: tweepy==4.14.0
 
       - name: Send tweet
         shell: python
