@@ -2,6 +2,7 @@
 
 ### Upgrades
 
+* ⬆ Bump gitpython from 3.1.57 to 3.1.58. PR [#888](https://github.com/yezz123/authx/pull/888) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump the python-packages group with 2 updates. PR [#889](https://github.com/yezz123/authx/pull/889) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump gitpython from 3.1.54 to 3.1.57. PR [#887](https://github.com/yezz123/authx/pull/887) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump ruff from 0.16.0 to 0.16.1 in the python-packages group. PR [#885](https://github.com/yezz123/authx/pull/885) by [@dependabot[bot]](https://github.com/apps/dependabot).
