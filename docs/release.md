@@ -1,5 +1,7 @@
 ## Latest Changes
 
+* ⬆️ Bump `ruff-pre-commit` from v0.16.3 to v0.16.4. PR [#891](https://github.com/yezz123/authx/pull/891) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
+
 ### Upgrades
 
 * ⬆ Bump ruff from 0.16.3 to 0.16.4 in the python-packages group. PR [#890](https://github.com/yezz123/authx/pull/890) by [@dependabot[bot]](https://github.com/apps/dependabot).
