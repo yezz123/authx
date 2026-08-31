@@ -66,12 +66,14 @@ config = AuthXConfig(
 auth = AuthX(config=config)
 auth.handle_errors(app)  # Register error handlers for proper responses
 
+
 @app.post("/login")
 def login(username: str, password: str):
     if username == "test" and password == "test":
         token = auth.create_access_token(uid=username)
         return {"access_token": token}
     raise HTTPException(401, detail="Invalid credentials")
+
 
 @app.get("/protected", dependencies=[Depends(auth.access_token_required)])
 def protected():

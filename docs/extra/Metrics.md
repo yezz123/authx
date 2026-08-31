@@ -9,7 +9,6 @@ The `MetricsMiddleware` class is a middleware that collects Prometheus metrics f
 
 ```python
 class MetricsMiddleware(BaseHTTPMiddleware):
-
     def __init__(
         self,
         app: FastAPI,
@@ -20,8 +19,7 @@ class MetricsMiddleware(BaseHTTPMiddleware):
             0.1,
             prometheus_client.utils.INF,
         ),
-    ) -> None:
-        ...
+    ) -> None: ...
 ```
 
 ## Exposing and scraping metrics

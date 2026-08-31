@@ -13,6 +13,7 @@ AuthX provides shorthand properties to reduce verbosity when using dependencies.
     auth = AuthX(config=AuthXConfig(JWT_SECRET_KEY="secret"))
     auth.handle_errors(app)
 
+
     @app.get("/", dependencies=[Depends(auth.access_token_required)])
     def root(payload=Depends(auth.access_token_required)):
         return {"user": payload.sub}
@@ -26,6 +27,7 @@ AuthX provides shorthand properties to reduce verbosity when using dependencies.
     app = FastAPI()
     auth = AuthX(config=AuthXConfig(JWT_SECRET_KEY="secret"))
     auth.handle_errors(app)
+
 
     @app.get("/", dependencies=[auth.ACCESS_REQUIRED])
     def root(payload=auth.ACCESS_REQUIRED):
@@ -93,6 +95,7 @@ Gets the current user via subject getter. Requires `@auth.set_subject_getter`.
 @auth.set_subject_getter
 def get_user(uid: str):
     return {"id": uid, "name": "User"}
+
 
 @app.get("/me")
 def get_me(user=auth.CURRENT_SUBJECT):

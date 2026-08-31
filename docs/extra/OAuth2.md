@@ -35,15 +35,16 @@ app = FastAPI()
 3. Add the `MiddlewareOauth2` middleware to your application, specifying the configuration parameters:
 
 ```python
-app.add_middleware(MiddlewareOauth2,
+app.add_middleware(
+    MiddlewareOauth2,
     providers={
-        'google': {
-            'keys': 'https://www.googleapis.com/oauth2/v3/certs',
-            'issuer': 'https://accounts.google.com',
-            'audience': '852159111111-xxxxxx.apps.googleusercontent.com',
+        "google": {
+            "keys": "https://www.googleapis.com/oauth2/v3/certs",
+            "issuer": "https://accounts.google.com",
+            "audience": "852159111111-xxxxxx.apps.googleusercontent.com",
         }
     },
-    public_paths={'/'},
+    public_paths={"/"},
 )
 ```
 
@@ -69,9 +70,11 @@ When a valid request is received, the middleware extracts all the claims from th
 
 ```python
 ...
+
+
 def home(request):
     ...
-    claims = request.scope['oauth2-claims']
+    claims = request.scope["oauth2-claims"]
     ...
 ```
 
@@ -90,10 +93,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # app.add_middleware(AuthenticateMiddleware, ...)
 
-app.add_middleware(CORSMiddleware,
+app.add_middleware(
+    CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
     allow_methods=settings.CORS_METHODS,
-    allow_headers=['authorization'],
+    allow_headers=["authorization"],
 )
 ```
 

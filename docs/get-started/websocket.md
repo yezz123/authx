@@ -82,12 +82,14 @@ The simplest approach -- pass the token in the URL:
     import asyncio
     import websockets
 
+
     async def main():
         token = "eyJ..."
         async with websockets.connect(f"ws://localhost:8000/ws?token={token}") as ws:
             print(await ws.recv())
             await ws.send("Hello server!")
             print(await ws.recv())
+
 
     asyncio.run(main())
     ```
@@ -100,11 +102,13 @@ Some WebSocket clients support sending headers during the handshake:
 import asyncio
 import websockets
 
+
 async def main():
     token = "eyJ..."
     headers = {"Authorization": f"Bearer {token}"}
     async with websockets.connect("ws://localhost:8000/ws", extra_headers=headers) as ws:
         print(await ws.recv())
+
 
 asyncio.run(main())
 ```
@@ -136,6 +140,7 @@ If authentication fails, you should close the WebSocket with an appropriate code
 
 ```python
 from authx.exceptions import AuthXException
+
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
@@ -191,6 +196,7 @@ Revoked tokens are automatically rejected. If you have a blocklist callback regi
 
 ```python
 auth.set_token_blocklist(lambda token: token in REVOKED_TOKENS)
+
 
 @app.websocket("/ws")
 async def websocket_endpoint(

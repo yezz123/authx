@@ -81,6 +81,7 @@ no_csrf_required = auth.token_required(
     verify_csrf=False,  # Disable CSRF
 )
 
+
 @app.post("/api-only")
 def api_only(payload: TokenPayload = Depends(no_csrf_required)):
     return {"user_id": payload.sub}
@@ -135,12 +136,14 @@ Use these properties as dependencies:
 ```python
 from authx import RequestToken
 
+
 # Get access token (optional)
 @app.get("/info")
 def get_info(token: RequestToken = auth.ACCESS_TOKEN):
     if token:
         return {"token_location": token.location}
     return {"message": "No token"}
+
 
 # Get refresh token (optional)
 @app.post("/refresh-info")
