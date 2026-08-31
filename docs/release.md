@@ -4,6 +4,7 @@
 
 ### Upgrades
 
+* ⬆ Bump ruff from 0.16.4 to 0.16.5 in the python-packages group. PR [#893](https://github.com/yezz123/authx/pull/893) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump ruff from 0.16.3 to 0.16.4 in the python-packages group. PR [#890](https://github.com/yezz123/authx/pull/890) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Bump `ruff-pre-commit` from v0.16.0 to v0.16.3. PR [#886](https://github.com/yezz123/authx/pull/886) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump gitpython from 3.1.57 to 3.1.58. PR [#888](https://github.com/yezz123/authx/pull/888) by [@dependabot[bot]](https://github.com/apps/dependabot).
