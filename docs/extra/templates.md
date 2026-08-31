@@ -24,11 +24,11 @@ config = AuthXConfig(
     JWT_SECRET_KEY="your-secret-key",
     # Cookie-based auth for SSR
     JWT_TOKEN_LOCATION=["cookies"],
-    JWT_COOKIE_SECURE=False,      # True in production (HTTPS)
-    JWT_COOKIE_HTTP_ONLY=True,    # Prevent JS access to token
+    JWT_COOKIE_SECURE=False,  # True in production (HTTPS)
+    JWT_COOKIE_HTTP_ONLY=True,  # Prevent JS access to token
     # CSRF protection for forms
     JWT_COOKIE_CSRF_PROTECT=True,
-    JWT_CSRF_CHECK_FORM=True,     # Check CSRF in form data
+    JWT_CSRF_CHECK_FORM=True,  # Check CSRF in form data
     JWT_ACCESS_CSRF_FIELD_NAME="csrf_token",
 )
 
@@ -56,10 +56,7 @@ Render the login form:
 ```python
 @app.get("/login", response_class=HTMLResponse)
 async def login_page(request: Request, error: str = None):
-    return templates.TemplateResponse(
-        "login.html",
-        {"request": request, "error": error}
-    )
+    return templates.TemplateResponse("login.html", {"request": request, "error": error})
 ```
 
 ### Login Submit (POST)
@@ -70,6 +67,7 @@ Handle form submission, set cookies, redirect:
 from fastapi import Form
 from fastapi.responses import RedirectResponse
 
+
 @app.post("/login")
 async def login_submit(
     response: Response,
@@ -79,9 +77,7 @@ async def login_submit(
     # Validate credentials
     if not validate_user(username, password):
         return templates.TemplateResponse(
-            "login.html",
-            {"request": request, "error": "Invalid credentials"},
-            status_code=401
+            "login.html", {"request": request, "error": "Invalid credentials"}, status_code=401
         )
 
     # Create token and set cookie
@@ -116,13 +112,16 @@ Create a dependency that redirects to login instead of returning 401:
 ```python
 from authx.exceptions import AuthXException
 
+
 class RedirectToLogin(Exception):
     def __init__(self, url: str = "/login"):
         self.url = url
 
+
 @app.exception_handler(RedirectToLogin)
 async def redirect_handler(request: Request, exc: RedirectToLogin):
     return RedirectResponse(url=exc.url, status_code=303)
+
 
 async def require_auth(request: Request) -> dict:
     """Dependency that redirects to login if not authenticated."""
@@ -140,11 +139,9 @@ async def require_auth(request: Request) -> dict:
 ```python
 from fastapi import Depends
 
+
 @app.get("/dashboard", response_class=HTMLResponse)
-async def dashboard(
-    request: Request,
-    user: dict = Depends(require_auth)
-):
+async def dashboard(request: Request, user: dict = Depends(require_auth)):
     csrf_token = request.cookies.get("csrf_access_token", "")
 
     return templates.TemplateResponse(
@@ -153,7 +150,7 @@ async def dashboard(
             "request": request,
             "user": user,
             "csrf_token": csrf_token,  # Pass to template for forms
-        }
+        },
     )
 ```
 
@@ -278,10 +275,7 @@ async def login(username: str = Form(...), password: str = Form(...)):
 @app.get("/dashboard", response_class=HTMLResponse)
 async def dashboard(request: Request, user=Depends(require_auth)):
     csrf = request.cookies.get("csrf_access_token", "")
-    return templates.TemplateResponse(
-        "dashboard.html",
-        {"request": request, "user": user.sub, "csrf_token": csrf}
-    )
+    return templates.TemplateResponse("dashboard.html", {"request": request, "user": user.sub, "csrf_token": csrf})
 
 
 @app.post("/logout")

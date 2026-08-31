@@ -44,7 +44,7 @@ config = AuthXConfig(
     JWT_SECRET_KEY="your-secret-key",
     JWT_TOKEN_LOCATION=["headers"],
     JWT_HEADER_NAME="Authorization",  # Default
-    JWT_HEADER_TYPE="Bearer",         # Default
+    JWT_HEADER_TYPE="Bearer",  # Default
 )
 ```
 
@@ -66,10 +66,7 @@ config = AuthXConfig(
     ```python
     import requests
 
-    requests.get(
-        "http://localhost:8000/protected",
-        headers={"Authorization": f"Bearer {token}"}
-    )
+    requests.get("http://localhost:8000/protected", headers={"Authorization": f"Bearer {token}"})
     ```
 
 ---
@@ -93,8 +90,8 @@ app = FastAPI()
 config = AuthXConfig(
     JWT_SECRET_KEY="your-secret-key",
     JWT_TOKEN_LOCATION=["cookies"],
-    JWT_COOKIE_CSRF_PROTECT=True,        # Enabled by default
-    JWT_COOKIE_SECURE=False,             # Set True in production (HTTPS)
+    JWT_COOKIE_CSRF_PROTECT=True,  # Enabled by default
+    JWT_COOKIE_SECURE=False,  # Set True in production (HTTPS)
 )
 
 auth = AuthX(config=config)
@@ -214,7 +211,7 @@ Token in request body. Requires `Content-Type: application/json`.
 config = AuthXConfig(
     JWT_SECRET_KEY="your-secret-key",
     JWT_TOKEN_LOCATION=["json"],
-    JWT_JSON_KEY="access_token",        # Default
+    JWT_JSON_KEY="access_token",  # Default
     JWT_REFRESH_JSON_KEY="refresh_token",  # Default
 )
 ```
@@ -276,9 +273,9 @@ config = AuthXConfig(
     JWT_SECRET_KEY="your-secret-key",
     JWT_TOKEN_LOCATION=["headers", "cookies"],  # Enable both
     # Cookie settings for refresh token security
-    JWT_COOKIE_SECURE=True,         # HTTPS only (set False for local dev)
-    JWT_COOKIE_HTTP_ONLY=True,      # Prevent JS access
-    JWT_COOKIE_CSRF_PROTECT=True,   # CSRF protection for refresh
+    JWT_COOKIE_SECURE=True,  # HTTPS only (set False for local dev)
+    JWT_COOKIE_HTTP_ONLY=True,  # Prevent JS access
+    JWT_COOKIE_CSRF_PROTECT=True,  # CSRF protection for refresh
 )
 auth = AuthX(config=config)
 ```

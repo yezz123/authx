@@ -14,6 +14,7 @@ app = FastAPI()
 
 limiter = RateLimiter(max_requests=10, window=60)
 
+
 @app.get("/api", dependencies=[Depends(limiter)])
 async def api_route():
     return {"message": "You're within the limit"}
@@ -96,6 +97,7 @@ By default, rate limiting is keyed by client IP. You can customize this:
 def by_api_key(request: Request) -> str:
     return f"apikey:{request.headers.get('X-API-Key', 'anonymous')}"
 
+
 limiter = RateLimiter(max_requests=100, window=3600, key_func=by_api_key)
 ```
 
@@ -119,6 +121,7 @@ class RedisBackend:
 
     async def reset(self, key: str) -> None:
         await self.redis.delete(key)
+
 
 limiter = RateLimiter(max_requests=100, window=60, backend=RedisBackend(redis))
 ```

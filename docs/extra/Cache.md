@@ -66,9 +66,9 @@ from pytz import timezone
 REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/3")
 redis_client = redis.Redis.from_url(REDIS_URL)
 
-africa_Casablanca = timezone('Africa/Casablanca')
+africa_Casablanca = timezone("Africa/Casablanca")
 
-HTTPCache.init(redis_url=REDIS_URL, namespace='test_namespace', tz=africa_Casablanca)
+HTTPCache.init(redis_url=REDIS_URL, namespace="test_namespace", tz=africa_Casablanca)
 ```
 
 The `tz` attribute becomes import when the `cache` decorator relies on the
@@ -86,10 +86,12 @@ from fastapi import FastAPI, Request, Response
 from fastapi.responses import JSONResponse
 from authx_extra.cache import HTTPCache, cache
 
+
 @app.get("/b/home")
 @cache(key="b.home", ttl_in_seconds=180)
 async def home(request: Request, response: Response):
     return JSONResponse({"page": "home", "datetime": str(datetime.utcnow())})
+
 
 @app.get("/b/welcome")
 @cache(key="b.home", end_of_week=True)
@@ -108,14 +110,14 @@ the `user_id` is fetched as a controller `Depends` argument.
 class User:
     id: str = "112358"
 
+
 user = User()
+
 
 @app.get("/b/logged-in")
 @cache(key="b.logged_in.{}", obj="user", obj_attr="id")
 async def logged_in(request: Request, response: Response, user=user):
-    return JSONResponse(
-        {"page": "home", "user": user.id, "datetime": str(datetime.utcnow())}
-    )
+    return JSONResponse({"page": "home", "user": user.id, "datetime": str(datetime.utcnow())})
 ```
 
 In the example above, the key allows room for a dynamic attribute fetched from
@@ -130,16 +132,14 @@ The cache invalidation can be managed using the `@invalidate_cache` decorator.
 class User:
     id: str = "112358"
 
+
 user = User()
 
+
 @app.post("/b/logged-in")
-@invalidate_cache(
-    key="b.logged_in.{}", obj="user", obj_attr="id", namespace="test_namespace"
-)
+@invalidate_cache(key="b.logged_in.{}", obj="user", obj_attr="id", namespace="test_namespace")
 async def post_logged_in(request: Request, response: Response, user=user):
-    return JSONResponse(
-        {"page": "home", "user": user.id, "datetime": str(datetime.utcnow())}
-    )
+    return JSONResponse({"page": "home", "user": user.id, "datetime": str(datetime.utcnow())})
 ```
 
 ### Invalidating more than one key at a time
@@ -152,16 +152,14 @@ apply all keys.
 class User:
     id: str = "112358"
 
+
 user = User()
 
+
 @app.post("/b/logged-in")
-@invalidate_cache(
-    keys=["b.logged_in.{}", "b.profile.{}"], obj="user", obj_attr="id", namespace="test_namespace"
-)
+@invalidate_cache(keys=["b.logged_in.{}", "b.profile.{}"], obj="user", obj_attr="id", namespace="test_namespace")
 async def post_logged_in(request: Request, response: Response, user=user):
-    return JSONResponse(
-        {"page": "home", "user": user.id, "datetime": str(datetime.utcnow())}
-    )
+    return JSONResponse({"page": "home", "user": user.id, "datetime": str(datetime.utcnow())})
 ```
 
 ## Computing `ttl` dynamically for cache keys using a `Callable`
@@ -173,12 +171,11 @@ the ttl for a cache key should be. For example
 async def my_ttl_callable() -> int:
     return 3600
 
-@app.get('/b/ttl_callable')
-@cache(key='b.ttl_callable_expiry', ttl_func=my_ttl_callable)
+
+@app.get("/b/ttl_callable")
+@cache(key="b.ttl_callable_expiry", ttl_func=my_ttl_callable)
 async def path_with_ttl_callable(request: Request, response: Response):
-    return JSONResponse(
-        {"page": "path_with_ttl_callable", "datetime": str(datetime.utcnow())}
-    )
+    return JSONResponse({"page": "path_with_ttl_callable", "datetime": str(datetime.utcnow())})
 ```
 
 The `ttl_func` is always assumed to be an **async** method
@@ -196,17 +193,19 @@ from authx_extra.cache import HTTPCache, cache, invalidate_cache
 REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/3")
 redis_client = redis.Redis.from_url(REDIS_URL)
 
+
 class User:
     id: str = "112358"
+
 
 user = User()
 
 
-HTTPCache.init(redis_url=REDIS_URL, namespace='test_namespace')
+HTTPCache.init(redis_url=REDIS_URL, namespace="test_namespace")
 
 
-@cache(key='cache.me', ttl_in_seconds=360)
-async def cache_me(x:int, invoke_count:int):
+@cache(key="cache.me", ttl_in_seconds=360)
+async def cache_me(x: int, invoke_count: int):
     invoke_count = invoke_count + 1
     result = x * 2
     return [result, invoke_count]

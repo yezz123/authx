@@ -27,15 +27,16 @@ every 1 ms.
 ```python
 import random
 
+
 def add(a, b):
-    return a+b
+    return a + b
 
 
 def get_sum_of_list():
     final_list = []
     for i in range(1000000):
-        rand1 = random.randint(1,100)
-        rand2 = random.randint(1,100)
+        rand1 = random.randint(1, 100)
+        rand2 = random.randint(1, 100)
         out = add(rand1, rand2)
         final_list.append(out)
     return final_list
@@ -125,7 +126,7 @@ async def normal_request():
     return JSONResponse({"retMsg": "Hello World!"})
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app_name = os.path.basename(__file__).replace(".py", "")
     uvicorn.run(app=f"{app_name}:app", host="0.0.0.0", port=8080, workers=1)
 ```
@@ -135,5 +136,10 @@ if __name__ == '__main__':
 This class to have 3 functions that expose the profiling information, one is to get the profiling information, one is to get the profiling information in a JSON format and one is to get the profiling information in a HTML format.
 
 ```python
-app.add_middleware(PyInstrumentProfilerMiddleware, profiler_output_type="html", is_print_each_request=False, html_file_name="profiling.html")
+app.add_middleware(
+    PyInstrumentProfilerMiddleware,
+    profiler_output_type="html",
+    is_print_each_request=False,
+    html_file_name="profiling.html",
+)
 ```
