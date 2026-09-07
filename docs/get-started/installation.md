@@ -21,6 +21,7 @@
 
 ```python
 import authx
+
 print(authx.__version__)
 ```
 

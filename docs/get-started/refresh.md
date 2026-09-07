@@ -94,8 +94,8 @@ from datetime import timedelta
 
 config = AuthXConfig(
     JWT_SECRET_KEY="your-secret-key",
-    JWT_ACCESS_TOKEN_EXPIRES=timedelta(minutes=15),   # Short-lived
-    JWT_REFRESH_TOKEN_EXPIRES=timedelta(days=30),     # Long-lived
+    JWT_ACCESS_TOKEN_EXPIRES=timedelta(minutes=15),  # Short-lived
+    JWT_REFRESH_TOKEN_EXPIRES=timedelta(days=30),  # Long-lived
 )
 ```
 
