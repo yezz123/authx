@@ -64,7 +64,7 @@ async def session(request: Request):
 
     session["test_counter"] += 1
 
-    return {"test_counter": session['test_counter']}
+    return {"test_counter": session["test_counter"]}
 ```
 
 It provides functionality for storing and retrieving session data during HTTP requests.
