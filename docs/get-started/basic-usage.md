@@ -15,7 +15,7 @@ app = FastAPI()
 # Step 1: Configure AuthX
 config = AuthXConfig(
     JWT_SECRET_KEY="your-secret-key",  # Required: use env variable in production
-    JWT_TOKEN_LOCATION=["headers"],    # Where to look for tokens
+    JWT_TOKEN_LOCATION=["headers"],  # Where to look for tokens
 )
 
 # Step 2: Create AuthX instance
@@ -24,6 +24,7 @@ auth = AuthX(config=config)
 # Step 3: Register error handlers (important!)
 auth.handle_errors(app)
 
+
 # Step 4: Create login endpoint
 @app.post("/login")
 def login(username: str, password: str):
@@ -31,6 +32,7 @@ def login(username: str, password: str):
         token = auth.create_access_token(uid=username)
         return {"access_token": token}
     raise HTTPException(401, detail="Invalid credentials")
+
 
 # Step 5: Protect your routes
 @app.get("/protected", dependencies=[Depends(auth.access_token_required)])
@@ -65,8 +67,8 @@ from authx import AuthXConfig
 
 config = AuthXConfig(
     JWT_SECRET_KEY="your-secret-key",  # Required for signing tokens
-    JWT_ALGORITHM="HS256",             # Default algorithm
-    JWT_TOKEN_LOCATION=["headers"],    # Accept tokens in headers
+    JWT_ALGORITHM="HS256",  # Default algorithm
+    JWT_TOKEN_LOCATION=["headers"],  # Accept tokens in headers
 )
 ```
 
@@ -127,9 +129,11 @@ The `uid` parameter identifies the user. Use a user ID or UUID, not personal inf
     ```python
     from pydantic import BaseModel
 
+
     class LoginRequest(BaseModel):
         username: str
         password: str
+
 
     @app.post("/login")
     def login(data: LoginRequest):
@@ -160,6 +164,7 @@ To access the token payload in your route:
 
 ```python
 from authx import TokenPayload
+
 
 @app.get("/me")
 def get_me(payload: TokenPayload = Depends(auth.access_token_required)):
