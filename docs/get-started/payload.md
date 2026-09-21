@@ -59,7 +59,7 @@ def login():
         data={
             "role": "admin",
             "permissions": ["read", "write"],
-        }
+        },
     )
     return {"access_token": token}
 
@@ -107,10 +107,7 @@ USERS = {
 def login(data: LoginRequest):
     user = USERS.get(data.username)
     if user and user["password"] == data.password:
-        token = auth.create_access_token(
-            uid=data.username,
-            data={"role": user["role"]}
-        )
+        token = auth.create_access_token(uid=data.username, data={"role": user["role"]})
         return {"access_token": token}
     raise HTTPException(401, detail="Invalid credentials")
 
