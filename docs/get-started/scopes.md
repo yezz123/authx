@@ -23,21 +23,15 @@ config = AuthXConfig(JWT_SECRET_KEY="your-secret-key")
 auth = AuthX(config=config)
 
 # Create token with simple scopes
-token = auth.create_access_token(
-    uid="user123",
-    scopes=["read", "write"]
-)
+token = auth.create_access_token(uid="user123", scopes=["read", "write"])
 
 # Create token with hierarchical scopes
-token = auth.create_access_token(
-    uid="user123",
-    scopes=["users:read", "posts:write", "posts:delete"]
-)
+token = auth.create_access_token(uid="user123", scopes=["users:read", "posts:write", "posts:delete"])
 
 # Create token with wildcard scopes (grants all permissions in namespace)
 admin_token = auth.create_access_token(
     uid="admin",
-    scopes=["admin:*"]  # Access to admin:users, admin:settings, etc.
+    scopes=["admin:*"],  # Access to admin:users, admin:settings, etc.
 )
 ```
 
@@ -57,16 +51,15 @@ app = FastAPI()
 config = AuthXConfig(JWT_SECRET_KEY="your-secret-key")
 auth = AuthX(config=config)
 
+
 # Single scope required
 @app.get("/users", dependencies=[Depends(auth.scopes_required("users:read"))])
 async def list_users():
     return {"users": [...]}
 
+
 # Multiple scopes required (AND - all must be present)
-@app.delete(
-    "/users/{id}",
-    dependencies=[Depends(auth.scopes_required("users:read", "users:delete"))]
-)
+@app.delete("/users/{id}", dependencies=[Depends(auth.scopes_required("users:read", "users:delete"))])
 async def delete_user(id: int):
     return {"message": f"User {id} deleted"}
 ```
@@ -79,10 +72,9 @@ If you need access to the token payload (to get user info or scopes):
 from typing import Annotated
 from authx.schema import TokenPayload
 
+
 @app.get("/profile")
-async def get_profile(
-    payload: Annotated[TokenPayload, Depends(auth.scopes_required("profile:read"))]
-):
+async def get_profile(payload: Annotated[TokenPayload, Depends(auth.scopes_required("profile:read"))]):
     return {
         "user": payload.sub,
         "scopes": payload.scopes,
@@ -99,26 +91,16 @@ By default, all specified scopes must be present (AND logic). Use `all_required=
 
 ```python
 # User must have BOTH scopes
-@app.post(
-    "/posts",
-    dependencies=[Depends(auth.scopes_required("posts:read", "posts:write"))]
-)
-async def create_post():
-    ...
+@app.post("/posts", dependencies=[Depends(auth.scopes_required("posts:read", "posts:write"))])
+async def create_post(): ...
 ```
 
 ### OR Logic
 
 ```python
 # User needs at least ONE of these scopes
-@app.get(
-    "/moderate",
-    dependencies=[Depends(
-        auth.scopes_required("admin:*", "moderator", all_required=False)
-    )]
-)
-async def moderate_content():
-    ...
+@app.get("/moderate", dependencies=[Depends(auth.scopes_required("admin:*", "moderator", all_required=False))])
+async def moderate_content(): ...
 ```
 
 ---
@@ -129,20 +111,17 @@ Wildcards allow granting access to entire namespaces:
 
 ```python
 # Token with wildcard scope
-token = auth.create_access_token(
-    uid="admin",
-    scopes=["admin:*"]
-)
+token = auth.create_access_token(uid="admin", scopes=["admin:*"])
+
 
 # This route requires "admin:users"
 @app.get("/admin/users", dependencies=[Depends(auth.scopes_required("admin:users"))])
-async def admin_users():
-    ...  # User with "admin:*" can access this!
+async def admin_users(): ...  # User with "admin:*" can access this!
+
 
 # This route requires "admin:settings"
 @app.get("/admin/settings", dependencies=[Depends(auth.scopes_required("admin:settings"))])
-async def admin_settings():
-    ...  # User with "admin:*" can access this too!
+async def admin_settings(): ...  # User with "admin:*" can access this too!
 ```
 
 **Wildcard Matching Rules:**
@@ -189,6 +168,7 @@ When a user lacks required scopes, `InsufficientScopeError` is raised:
 ```python
 from authx import InsufficientScopeError
 
+
 @app.exception_handler(InsufficientScopeError)
 async def scope_error_handler(request: Request, exc: InsufficientScopeError):
     return JSONResponse(
@@ -198,7 +178,7 @@ async def scope_error_handler(request: Request, exc: InsufficientScopeError):
             "message": str(exc),
             "required": exc.required,
             "provided": exc.provided,
-        }
+        },
     )
 ```
 
@@ -308,10 +288,9 @@ Use FastAPI's OpenAPI features to document scope requirements:
     "/users",
     summary="List Users",
     description="Requires `users:read` scope",
-    dependencies=[Depends(auth.scopes_required("users:read"))]
+    dependencies=[Depends(auth.scopes_required("users:read"))],
 )
-async def list_users():
-    ...
+async def list_users(): ...
 ```
 
 ---
