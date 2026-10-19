@@ -99,10 +99,7 @@ from fastapi import APIRouter, Depends
 from main import auth
 
 # All routes in this router require authentication
-router = APIRouter(
-    prefix="/admin",
-    dependencies=[Depends(auth.access_token_required)]
-)
+router = APIRouter(prefix="/admin", dependencies=[Depends(auth.access_token_required)])
 
 
 @router.get("/dashboard")
@@ -159,10 +156,7 @@ def login(data: LoginRequest):
 
 
 # Protected router
-protected_router = APIRouter(
-    prefix="/api",
-    dependencies=[Depends(auth.access_token_required)]
-)
+protected_router = APIRouter(prefix="/api", dependencies=[Depends(auth.access_token_required)])
 
 
 @protected_router.get("/me")
