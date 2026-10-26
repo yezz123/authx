@@ -22,11 +22,13 @@ When setting cookies, you need access to the response object. The bundle provide
     auth = AuthX(config=config)
     auth.handle_errors(app)
 
+
     @app.post("/login")
     def login(deps: AuthXDependency = auth.BUNDLE):
         token = deps.create_access_token(uid="user")
         deps.set_access_cookies(token)  # No response object needed!
         return {"message": "Logged in"}
+
 
     @app.post("/logout", dependencies=[auth.ACCESS_REQUIRED])
     def logout(deps: AuthXDependency = auth.BUNDLE):
@@ -50,11 +52,13 @@ When setting cookies, you need access to the response object. The bundle provide
     auth = AuthX(config=config)
     auth.handle_errors(app)
 
+
     @app.post("/login")
     def login(response: Response):
         token = auth.create_access_token(uid="user")
         auth.set_access_cookies(token, response)  # Must pass response
         return {"message": "Logged in"}
+
 
     @app.post("/logout", dependencies=[auth.ACCESS_REQUIRED])
     def logout(response: Response):
