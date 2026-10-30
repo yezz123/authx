@@ -4,6 +4,7 @@
 
 ### Upgrades
 
+* ⬆ Bump pyjwt from 2.13.0 to 2.15.0. PR [#903](https://github.com/yezz123/authx/pull/903) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump virtualenv from 21.5.1 to 21.14.13. PR [#904](https://github.com/yezz123/authx/pull/904) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump the python-packages group across 1 directory with 4 updates. PR [#905](https://github.com/yezz123/authx/pull/905) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump gitpython from 3.1.59 to 3.1.62. PR [#902](https://github.com/yezz123/authx/pull/902) by [@dependabot[bot]](https://github.com/apps/dependabot).
