@@ -4,6 +4,7 @@
 
 ### Upgrades
 
+* ⬆ Bump gitpython from 3.1.59 to 3.1.62. PR [#902](https://github.com/yezz123/authx/pull/902) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump soupsieve from 2.8.4 to 2.9. PR [#898](https://github.com/yezz123/authx/pull/898) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Bump `ruff-pre-commit` from v0.16.4 to v0.17.2. PR [#894](https://github.com/yezz123/authx/pull/894) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump the python-packages group with 2 updates. PR [#895](https://github.com/yezz123/authx/pull/895) by [@dependabot[bot]](https://github.com/apps/dependabot).
