@@ -120,8 +120,8 @@ def login(data: LoginRequest):
     user = get_user(data.username)
     return auth.create_token_pair(
         uid=user.id,
-        access_scopes=user.permissions,    # e.g. ["users:read", "posts:write"]
-        refresh_scopes=["token:refresh"],   # Limited scope for refresh token
+        access_scopes=user.permissions,  # e.g. ["users:read", "posts:write"]
+        refresh_scopes=["token:refresh"],  # Limited scope for refresh token
     )
 ```
 
@@ -171,6 +171,7 @@ See [Token Freshness](./token.md) for more on fresh vs non-fresh tokens.
 ```python
 from authx import AuthXDependency
 
+
 @app.post("/login", response_model=TokenResponse)
 def login(data: LoginRequest, deps: AuthXDependency = auth.BUNDLE):
     """Use the bundle for cookie-based flows."""
@@ -196,10 +197,10 @@ from authx import TokenResponse
 # - refresh_token: str
 # - token_type: str = "bearer"
 
+
 # Use as response_model for OpenAPI documentation
 @app.post("/login", response_model=TokenResponse)
-def login():
-    ...
+def login(): ...
 ```
 
 This generates proper OpenAPI/Swagger documentation for your login endpoints automatically.
